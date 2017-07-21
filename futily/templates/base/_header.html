@@ -1,0 +1,13 @@
+<header class="hd-Header">
+  <div class="hd-Header_Inner">
+    <a class="hd-Header_Logo" href="{{ pages.homepage.get_absolute_url() }}"></a>
+
+    <nav class="hd-Header_Nav">
+      {{ render_navigation(pages.homepage.navigation, section=pages.homepage) }}
+    </nav>
+
+    <div class="hd-Header_MobileNav">
+      <mobile-nav :items="{{ get_navigation_json(pages.homepage.navigation) }}"></mobile-nav>
+    </div>
+  </div>
+</header>

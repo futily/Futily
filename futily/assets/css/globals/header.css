@@ -1,0 +1,13 @@
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+| The global site header that appears at the top of every page
+|
+| @namespace: hd-
+|
+*/
+.hd-Header {
+  position: relative;
+  z-index: 10;
+}

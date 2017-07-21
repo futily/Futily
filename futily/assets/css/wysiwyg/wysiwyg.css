@@ -1,0 +1,94 @@
+/*
+|--------------------------------------------------------------------------
+| Wysiwyg
+|--------------------------------------------------------------------------
+| Styles for when a wysiwyg appears on a page. Here we can use global font-sizes
+| because it's not viable to expect all wysiwyg content to have a class. Make
+| sure all styles are nested inside the wys-Outer so they don't leak.
+|
+| @namespace: wys-
+*/
+
+/* We are styling root elements so we need access to type */
+/* stylelint-disable selector-no-type */
+p {
+  margin-bottom: 1vr;
+}
+
+ul {
+  list-style: disc;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Buttons
+|--------------------------------------------------------------------------
+|
+*/
+.wys-Button-primary {
+  @include Button-primary();
+}
+
+.wys-Button-secondary {
+  @include Button-secondary();
+}
+
+/*
+|--------------------------------------------------------------------------
+| Intrinsic
+|--------------------------------------------------------------------------
+|
+*/
+.wys-Intrinsic {
+  @include Intrinsic();
+}
+
+/*
+|--------------------------------------------------------------------------
+| Titles
+|--------------------------------------------------------------------------
+|
+*/
+.wys-Title-small {
+  margin-top: 1vr;
+  margin-bottom: 0.5vr;
+}
+
+.wys-Title-medium {
+  margin-top: 1vr;
+  margin-bottom: 0.5vr;
+
+  + .wys-Title-small {
+    margin-top: -0.25vr;
+  }
+}
+
+.wys-Title-large {
+  margin-top: 1vr;
+  margin-bottom: 0.5vr;
+
+  + .wys-Title-medium {
+    margin-top: -0.25vr;
+  }
+}
+
+/* We want every first and last item to never have their relative margin */
+/* stylelint-disable selector-no-universal, declaration-no-important */
+> *:first-child {
+  margin-top: 0 !important;
+
+  /* This covers cases like images */
+  > *:first-child {
+    margin-top: 0 !important;
+  }
+}
+
+> *:last-child {
+  margin-bottom: 0 !important;
+
+  /* This covers cases like images */
+  > *:last-child {
+    margin-bottom: 0 !important;
+  }
+}
+/* stylelint-enable */

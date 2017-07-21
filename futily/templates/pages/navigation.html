@@ -1,0 +1,23 @@
+<ul class="nav-Items">
+  {% for entry in navigation %}
+    <li class="nav-Item{% if entry.children %} nav-Item-hasDropdown{% endif %}" aria-current="{% if entry.here %}true{% else %}false{% endif %}">
+      <a class="nav-Action" href="{{ entry.url }}">
+        <span>{{ entry.page }}</span>
+
+        {% if entry.children %}
+          <span class="nav-DropdownIndicator"></span>
+        {% endif %}
+      </a>
+
+      {% if entry.children %}
+        <ul class="nav-Dropdown">
+          {% for sub_entry in entry.children %}
+            <li class="nav-Dropdown_Item">
+              <a class="nav-Dropdown_Action" href="{{ sub_entry.url }}">{{ sub_entry.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
