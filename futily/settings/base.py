@@ -192,7 +192,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 
 # Dispatch settings.
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'cms.middleware.LocalisationMiddleware',
@@ -206,7 +206,7 @@ MIDDLEWARE_CLASSES = (
     'historylinks.middleware.HistoryLinkFallbackMiddleware',
     'cms.middleware.PublicationMiddleware',
     'cms.apps.pages.middleware.PageMiddleware',
-)
+]
 
 PASSWORD_HASHERS = (
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -448,7 +448,7 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_GOOGLE_PLUS_KEY = '589992011980-13s86jclt0lr3meptkspk2jtafa4hnv2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_PLUS_SECRET = 'tfkHbGLXBUDRaU-Pwz6kqLkq'
 
-WHITELISTED_DOMAINS = ['onespacemedia.com']
+WHITELISTED_DOMAINS = ['futily.com']
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'

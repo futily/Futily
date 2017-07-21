@@ -7,11 +7,11 @@
     "remotes": {
         "staging": {
             "server": {
-                "ip": "",
+                "ip": "188.166.172.71",
                 "identity_file": "",
                 "initial_user": "root",
                 "build_system": "npm",
-                "python_version": "3"
+                "python_version": "3.6"
             },
             "database": {
                 "name": "futily",
