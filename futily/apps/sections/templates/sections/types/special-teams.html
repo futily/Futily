@@ -1,0 +1,37 @@
+{% extends "sections/types/_base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block section_class %}sec-Section{% endblock %}
+
+{% block section_content %}
+{#  {% set specials_teams = section.get_special_teams() %}#}
+
+{#  <div class="sec-Section_Inner">#}
+{#    <header class="sec-Section_Header">#}
+{#      <a href="{{ specials_teams.totw.link.get_absolute_url() }}"#}
+{#         class="sec-Section_Text">{{ specials_teams.totw.link.title }}</a>#}
+{#    </header>#}
+{##}
+{#    <div class="sec-Section_Body">#}
+{#      {{ player_macros.card_list(specials_teams.totw.players) }}#}
+{#    </div>#}
+{##}
+{#    <header class="sec-Section_Header">#}
+{#      <a href="{{ specials_teams.tots.link.get_absolute_url() }}"#}
+{#         class="sec-Section_Text">{{ specials_teams.tots.link.title }}</a>#}
+{#    </header>#}
+{##}
+{#    <div class="sec-Section_Body">#}
+{#      {{ player_macros.card_list(specials_teams.tots.players) }}#}
+{#    </div>#}
+{##}
+{#    <header class="sec-Section_Header">#}
+{#      <a href="{{ specials_teams.latest.link }}"#}
+{#         class="sec-Section_Text">Latest players</a>#}
+{#    </header>#}
+{##}
+{#    <div class="sec-Section_Body">#}
+{#      {{ player_macros.card_list(specials_teams.latest.players) }}#}
+{#    </div>#}
+{#  </div>#}
+{% endblock %}

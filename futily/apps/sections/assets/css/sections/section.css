@@ -1,0 +1,53 @@
+/*
+|--------------------------------------------------------------------------
+| Section
+|--------------------------------------------------------------------------
+| @namespace: sec-
+|
+*/
+.sec-Section {
+  @media (--lg) {
+    margin-top: 4vr;
+    margin-bottom: @margin-top;
+  }
+}
+
+.sec-Section-centered {
+  text-align: center;
+}
+
+.sec-Section_Inner {
+  @apply --GridContainer;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.sec-Section_Header {
+  margin-bottom: 1.5vr;
+
+  text-align: center;
+
+  @media (--lg) {
+    width: percentage(8, 12);
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.sec-Section_Title {
+  @apply --Font-36;
+
+  font-weight: 300;
+}
+
+.sec-Section_Text {
+  color: #a1b1bc;
+
+  .sec-Section_Header & {
+    margin-top: 0.5vr;
+  }
+}

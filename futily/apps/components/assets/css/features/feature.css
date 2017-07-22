@@ -1,0 +1,43 @@
+/*
+|--------------------------------------------------------------------------
+| Feature
+|--------------------------------------------------------------------------
+| @namespace: ftr-
+|
+*/
+.ftr-Feature {
+  align-items: flex-start;
+
+  display: flex;
+  padding: 1vr calc(var(--Grid_Gutter) * 2);
+
+  background-color: var(--Color_Grey-light);
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+}
+
+.ftr-Feature_ImageContainer {
+  flex-shrink: 0;
+
+  margin-right: 20px;
+
+  border: 4px solid #fff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.ftr-Feature_Image {
+  border-radius: 50%;
+}
+
+.ftr-Feature_Title {
+  @apply --Font-18;
+
+  margin-bottom: 0.5vr;
+
+  color: var(--Color_Body);
+}
+
+.ftr-Feature_Text {
+  color: #a1b1bc;
+}

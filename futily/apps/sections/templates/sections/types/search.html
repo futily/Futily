@@ -1,0 +1,25 @@
+{% extends "sections/types/_base.html" %}
+
+{% block section_class %}sec-Search{% endblock %}
+
+{% block section_content %}
+  <div class="sec-Search_Inner">
+    {% if section.title or section.text %}
+      <header class="sec-Search_Header">
+        {% if section.title %}
+          <h2 class="sec-Search_Title">{{ section.title }}</h2>
+        {% endif %}
+
+        {% if section.text %}
+          <p class="sec-Search_Text">{{ section.text }}</p>
+        {% endif %}
+      </header>
+    {% endif %}
+
+    <div class="sec-Search_Body">
+      <form class="sec-Search_Form">
+        <input class="sec-Search_Input" placeholder="Search for a Player, Club, League, or Nation" type="search">
+      </form>
+    </div>
+  </div>
+{% endblock %}

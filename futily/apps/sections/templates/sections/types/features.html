@@ -1,0 +1,24 @@
+{% extends "sections/types/_base.html" %}
+{% import "components/macros/components.html" as components %}
+
+{% block section_class %}sec-Section{% endblock %}
+
+{% block section_content %}
+  <div class="sec-Section_Inner">
+    {% if section.title or section.text %}
+      <header class="sec-Section_Header">
+        {% if section.title %}
+          <h2 class="sec-Section_Title">{{ section.title }}</h2>
+        {% endif %}
+
+        {% if section.text %}
+          <p class="sec-Section_Text">{{ section.text | linebreaksbr() }}</p>
+        {% endif %}
+      </header>
+    {% endif %}
+
+    <div class="sec-Section_Body">
+      {{ components.features(section.features.feature_set.all()) }}
+    </div>
+  </div>
+{% endblock %}

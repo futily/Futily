@@ -1,0 +1,26 @@
+{% macro features(features) %}
+  <div class="ftr-Features">
+    <ul class="ftr-Features_Items">
+      {% for feature_obj in features %}
+        <li class="ftr-Features_Item">
+          {{ feature(feature_obj) }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}
+
+{% macro feature(feature) %}
+  <a href="{{ feature.link_location }}" class="ftr-Feature">
+    <div class="ftr-Feature_ImageContainer">
+      <img alt=""
+           src="{{ thumbnail(feature.image.file, '100x100', crop='center').url }}"
+           class="ftr-Feature_Image">
+    </div>
+
+    <div class="ftr-Feature_Content">
+      <h4 class="ftr-Feature_Title">{{ feature.title }}</h4>
+      <p class="ftr-Feature_Text">{{ feature.text | linebreaksbr() }}</p>
+    </div>
+  </a>
+{% endmacro %}

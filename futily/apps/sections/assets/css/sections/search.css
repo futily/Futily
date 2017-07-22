@@ -1,0 +1,97 @@
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+| @namespace: sec-
+|
+*/
+.sec-Search {
+  text-align: center;
+
+  background-image: radial-gradient(circle, #1f292e, #1a1c27);
+  color: #fff;
+
+  @media (--lg) {
+    padding-top: 6vr;
+    padding-bottom: @padding-top;
+  }
+}
+
+.sec-Search_Inner {
+  @apply --GridContainer;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.sec-Search_Header {
+  margin-bottom: 1.5vr;
+
+  @media (--lg) {
+    width: percentage(8, 12);
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.sec-Search_Title {
+  @apply --Font-40;
+
+  font-weight: 900;
+  letter-spacing: calc(100em / 1000);
+  text-transform: uppercase;
+}
+
+.sec-Search_Text {
+  @apply --Font-18;
+
+  margin-top: 0.5vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Body
+|--------------------------------------------------------------------------
+|
+*/
+.sec-Search_Body {
+  @media (--lg) {
+    width: percentage(8, 12);
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.sec-Search_Input {
+  @apply --Font-22;
+
+  display: block;
+  width: 100%;
+  padding: 13px var(--Grid_Gutter);
+
+  font-family: inherit;
+
+  background-color: #fff;
+  background-image: svg-load('search.svg', fill=#a1b1bc);
+  background-position: right var(--Grid_Gutter) top 50%;
+  background-size: 24px 24px;
+  border-radius: 3px;
+  color: var(--Color_Dark);
+
+  transition: background-image 0.3s;
+
+  &:focus {
+    background-image: svg-load('search.svg', fill=#222533);
+    outline: 0;
+  }
+
+  &::placeholder {
+    font-weight: 300;
+
+    color: #a1b1bc;
+    opacity: 1;
+  }
+}

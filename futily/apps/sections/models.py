@@ -7,31 +7,29 @@ from django.db import models
 from django.shortcuts import render_to_response
 from django.utils.text import slugify
 
+from ..players.models import Player, Source
+
 SECTION_TYPES = (
-    ('Heroes', {
+    ('Adverts', {
         'sections': [
-            ('homepage-hero', {
-                'fields': ['title', 'text', 'button_text', 'button_url'],
-            }),
-            ('landing-hero', {
-                'fields': ['title', 'text', 'image', 'button_text', 'button_url'],
+            ('728x90', {
+                'fields': [],
             }),
         ]
     }),
-    ('Text', {
+    ('Content', {
         'sections': [
-            ('dual-column', {
-                'fields': ['title', 'text', 'button_text', 'button_url'],
+            ('features', {
+                'fields': ['title', 'text', 'features'],
+            }),
+            ('search', {
+                'fields': ['title', 'text'],
+            }),
+            ('special-teams', {
+                'fields': [],
             }),
         ]
     }),
-    ('Misc', {
-        'sections': [
-            ('keyline', {
-                'fields': []
-            })
-        ]
-    })
 )
 
 
@@ -91,71 +89,54 @@ def get_section_type_choices(types):
 
 
 class SectionBase(models.Model):
+    page = models.ForeignKey(Page)
+    type = models.CharField(choices=get_section_type_choices(SECTION_TYPES), max_length=100)
 
-    page = models.ForeignKey(
-        Page,
-    )
+    title = models.CharField(max_length=140, blank=True, null=True)
+    text = models.TextField(blank=True, null=True)
+    content = HtmlField(blank=True, null=True)
+    image = ImageRefField(blank=True, null=True)
 
-    type = models.CharField(
-        choices=get_section_type_choices(SECTION_TYPES),
-        max_length=100,
-    )
+    features = models.ForeignKey('components.Features', blank=True, null=True)
 
-    title = models.CharField(
-        max_length=140,
-        blank=True,
-        null=True,
-    )
-
-    text = models.TextField(
-        blank=True,
-        null=True,
-    )
-
-    content = HtmlField(
-        blank=True,
-        null=True,
-    )
-
-    image = ImageRefField(
-        blank=True,
-        null=True,
-    )
-
-    button_text = models.CharField(
-        max_length=100,
-        blank=True,
-        null=True,
-    )
-
-    button_url = models.CharField(
-        'button URL',
-        max_length=200,
-        blank=True,
-        null=True,
-    )
-
-    order = models.PositiveIntegerField(
-        default=0,
-        help_text='Order which the section will be displayed',
-    )
+    order = models.PositiveIntegerField(default=0, help_text='Order which the section will be displayed')
 
     class Meta:
         abstract = True
-        ordering = ['order']
+        ordering = ('order',)
 
     def __str__(self):
         return dict(SECTION_TYPES)[self.type]['name']
 
     @property
     def template(self):
-        return f'{self.type}.html'
+        return self.type + '.html'
+
+    @staticmethod
+    def get_special_teams():
+        latest_totw = Source.objects.filter(short_title__contains='34')[0]
+        latest_tots = Source.objects.filter(short_title__contains='TOTS Gold')[0]
+
+        return {
+            'latest': {
+                'players': Player.objects.order_by('-created')[:8],
+                'link': '#'
+            },
+            'tots': {
+                'players': Player.objects.filter(source=latest_tots)[:8],
+                # 'link': Squad.objects.get(title=latest_tots.title, is_special=True)
+            },
+            'totw': {
+                'players': Player.objects.filter(source=latest_totw)[:8],
+                # 'link': Squad.objects.get(title=latest_totw.title, is_special=True)
+            },
+        }
 
 
 class ContentSection(SectionBase):
 
     def __str__(self):
-        return self.title
+        return self.type.capitalize()
 
 
 class Content(ContentBase):

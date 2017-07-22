@@ -1,0 +1,29 @@
+/*
+|--------------------------------------------------------------------------
+| Features
+|--------------------------------------------------------------------------
+| @namespace: ftr-
+|
+*/
+.ftr-Features_Items {
+  @media (--sm) {
+    @apply --GridRow;
+
+    flex-wrap: wrap;
+  }
+}
+
+.ftr-Features_Item {
+  @media (--sm) {
+    @apply --GridColumn;
+
+    width: calc(percentage(1, 2) - (var(--Grid_Gutter) * 2));
+    margin-top: calc(var(--Grid_Gutter) * 2);
+  }
+
+  &:nth-child(-n + 2) {
+    @media (--sm) {
+      margin-top: 0;
+    }
+  }
+}
