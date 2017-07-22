@@ -141,6 +141,7 @@ INSTALLED_APPS = [
     'cms.apps.media',
 
     'futily.apps.components',
+    'futily.apps.leagues',
     'futily.apps.news',
     'futily.apps.nations',
     'futily.apps.redirects',
