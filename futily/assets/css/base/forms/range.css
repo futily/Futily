@@ -93,6 +93,8 @@
 
 .frm-Range_Value {
   width: 20px;
+
+  font-weight: 500;
 }
 
 .frm-Range_Value-min {

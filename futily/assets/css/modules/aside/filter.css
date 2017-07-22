@@ -143,3 +143,8 @@
 .asi-Filter_LinkRadio {
   display: none;
 }
+
+.asi-Filter_LinkGroupLink {
+  color: var(--Color_Green);
+  cursor: pointer;
+}

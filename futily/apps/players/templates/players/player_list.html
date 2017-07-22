@@ -148,9 +148,11 @@
 
           <span class="asi-Filter_ButtonCurrent">
             {% if field.value() %}
-              {% for value in field.value() %}
-                {{ value }}{% if not loop.last %}, {% endif %}
-              {% endfor %}
+              {% if field.value() | length() > 1 %}
+                Multiple
+              {% else %}
+                {{ field.value()[0] }}
+              {% endif %}
             {% else %}
               Any
             {% endif %}
