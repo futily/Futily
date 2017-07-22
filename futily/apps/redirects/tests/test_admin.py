@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 from django.test import RequestFactory
 
 from ...redirects import admin
-from ..admin import RedirectModelForm
 from ..models import Redirect
 from .base import BaseRedirectTestCase
 
@@ -66,4 +65,3 @@ class RedirectAdminTestCase(BaseRedirectTestCase):
             column,
             '<a target="_blank" href="{}">Test</a>'.format(self.normal_redirect.old_path)
         )
-

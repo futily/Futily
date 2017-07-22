@@ -91,17 +91,17 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
     }
 
 
-@library.global_function
-def get_header_content():
-    try:
-        return Header.objects.first()
-    except IndexError:
-        return None
-
-
-@library.global_function
-def get_footer_content():
-    try:
-        return Footer.objects.first()
-    except IndexError:
-        return None
+# @library.global_function
+# def get_header_content():
+#     try:
+#         return Header.objects.first()
+#     except IndexError:
+#         return None
+#
+#
+# @library.global_function
+# def get_footer_content():
+#     try:
+#         return Footer.objects.first()
+#     except IndexError:
+#         return None
