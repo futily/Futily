@@ -140,6 +140,7 @@ INSTALLED_APPS = [
     'cms.apps.links',
     'cms.apps.media',
 
+    'futily.apps.clubs',
     'futily.apps.components',
     'futily.apps.leagues',
     'futily.apps.news',
