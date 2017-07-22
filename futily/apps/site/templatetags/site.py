@@ -1,9 +1,11 @@
 import json
 import os
+from urllib.parse import urlencode
 
 import jinja2
 from cms.apps.pages.templatetags.pages import _navigation_entries
 from django.conf import settings
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
@@ -105,3 +107,55 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
 #         return Footer.objects.first()
 #     except IndexError:
 #         return None
+
+
+@jinja2.contextfunction
+@library.global_function
+def url(context, *args, **kwargs):
+    request = context['request']
+    get = kwargs.pop('get', {})
+    remove = kwargs.pop('remove', '')
+    return_url = f'{request.path}'
+
+    # Sometimes no 'viewname' is passed i.e. building pagination links
+    if args or kwargs:
+        return_url = reverse(*args, **kwargs)
+
+    if hasattr(request.GET, 'dict'):
+        params = request.GET.dict()
+
+        # If we want to change something more than likely we want to
+        # reset the current page, so remove the page param
+        if 'page' in params and get:
+            params.pop('page')
+
+        if remove:
+            for item in remove:
+                params.pop(item, None)
+
+        params.update(**get)
+
+        return_url += '?{}'.format(urlencode(params))
+
+    if return_url == f'{request.path}?':
+        return request.path
+
+    return return_url
+
+
+@library.global_function
+@library.render_with('pagination/pagination.html')
+@jinja2.contextfunction
+def render_pagination(context, page_obj, offset=2, pagination_key=None):
+    """Renders the pagination for the given page of items."""
+    current_page = page_obj.number
+    offset_indexes = [x for x in range(current_page - offset, current_page + (offset + 1)) if x >= 1]
+
+    return {
+        "request": context["request"],
+        "offset_indexes": offset_indexes,
+        "offset": offset,
+        "page_obj": page_obj,
+        "paginator": page_obj.paginator,
+        "pagination_key": pagination_key or getattr(page_obj, "_pagination_key", "page")
+    }

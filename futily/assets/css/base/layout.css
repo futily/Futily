@@ -9,17 +9,6 @@
 |
 */
 .lyt-Site {
-  max-width: var(--Grid_Constrained);
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-
-  /* var(--Grid_Constrained) + (1px * 2) for each border */
-  @media (width >= 1602px) {
-    border-right: 1px solid var(--Color_Border);
-    border-left: @border-right;
-  }
-
   /* Prefer to use the actual term for it (iOS) */
   /* stylelint-disable selector-class-pattern */
   .is-iOS.nav-IsOpen & {
@@ -28,4 +17,61 @@
     overflow: hidden;
   }
   /* stylelint-enable */
+}
+
+.lyt-Content-mainAside {
+  margin-top: 2vr;
+  margin-bottom: @margin-top;
+}
+
+.lyt-Content_Inner {
+  .lyt-Content-mainAside & {
+    @apply --GridContainer;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+|
+*/
+.lyt-Content_Body {
+  .lyt-Content-mainAside & {
+    @apply --GridRow;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Main
+|--------------------------------------------------------------------------
+|
+*/
+.lyt-Main {
+  .lyt-Content-mainAside & {
+    @apply --GridColumn;
+
+    flex: 1;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Aside
+|--------------------------------------------------------------------------
+|
+*/
+.lyt-Aside {
+  .lyt-Content-mainAside & {
+    @apply --GridColumn;
+
+    flex-shrink: 0;
+
+    width: 300px;
+  }
+
+  .lyt-Content-asideSwap & {
+    order: -1;
+  }
 }

@@ -1,0 +1,50 @@
+/*
+|--------------------------------------------------------------------------
+| Breadcrumb
+|--------------------------------------------------------------------------
+| @namespace: bdc-
+|
+*/
+.bdc-Breadcrumb {
+  @apply --Font-14;
+
+  color: #a1b1bc;
+}
+
+.bdc-Breadcrumb_Items {
+  align-items: center;
+
+  display: flex;
+}
+
+.bdc-Breadcrumb_Link {
+  color: currentColor;
+
+  &:hover {
+    color: var(--Color_Green);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Divider
+|--------------------------------------------------------------------------
+|
+*/
+.bdc-Breadcrumb_Divider {
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  margin-right: var(--Grid_Gutter);
+  margin-left: @margin-right;
+
+  /* stylelint-disable */
+  svg {
+    width: 8px;
+    height: @width;
+
+    transform: rotate(-90deg);
+  }
+  /* stylelint-enable */
+}

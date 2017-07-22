@@ -8,8 +8,106 @@
   |
   */
   --Color_Anchor: #702670;
-  --Color_Body: #5c748c;
-  --Color_Border: #d0d5d8;
+  --Color_Body: #2c3e50;
+  --Color_Dark: #222533;
+  --Color_Green: #16a287;
+  --Color_Grey: #ecf0f1;
+  --Color_Grey-light: #f9fafb;
+
+  --Color_Border: #e4e7e9;
+  --Color_Border-dark: #343b48;
+
+  --Color_Poor: hsl(0, 60%, 47%);
+  --Color_Fair: hsl(35, 100%, 42%);
+  --Color_Average: hsl(45, 100%, 47%);
+  --Color_Good: hsl(81, 54%, 49%);
+  --Color_Great: hsl(96, 72%, 38%);
+
+  --Card_Color: hsl(31, 100%, 7%);
+
+  --Color_Card-bronze: #36221b;
+  --Color_CardMeta-bronze: var(--Color_Card-bronze);
+
+  --Color_Card-silver: #10192f;
+  --Color_CardMeta-silver: var(--Color_Card-silver);
+
+  --Color_Card-gold: #201200;
+  --Color_CardMeta-gold: var(--Color_Card-gold);
+
+  --Color_Card-rare_bronze: #412418;
+  --Color_CardMeta-rare_bronze: var(--Color_Card-rare_bronze);
+
+  --Color_Card-rare_silver: #081027;
+  --Color_CardMeta-rare_silver: var(--Color_Card-rare_silver);
+
+  --Color_Card-rare_gold: #251300;
+  --Color_CardMeta-rare_gold: var(--Color_Card-rare_gold);
+
+  --Color_Card-totw_bronze: #b78553;
+  --Color_CardMeta-totw_bronze: #412418;
+
+  --Color_Card-totw_silver: #bdbdbd;
+  --Color_CardMeta-totw_silver: #081027;
+
+  --Color_Card-totw_gold: #ffeb7e;
+  --Color_CardMeta-totw_gold: #251300;
+
+  --Color_Card-tots_bronze: #ffcfa0;
+  --Color_CardMeta-tots_bronze: #412418;
+
+  --Color_Card-tots_silver: #dce5eb;
+  --Color_CardMeta-tots_silver: #081027;
+
+  --Color_Card-tots_gold: #f5db66;
+  --Color_CardMeta-tots_gold: #251300;
+
+  --Color_Card-toty: #fbffff;
+  --Color_CardMeta-toty: var(--Color_Card-toty);
+
+  --Color_Card-legend: #6c4b17;
+  --Color_CardMeta-legend: var(--Color_Card-legend);
+
+  --Color_Card-motm: #fff;
+  --Color_CardMeta-motm: #fff;
+
+  --Color_Card-teal: #67d0cf;
+  --Color_CardMeta-teal: var(--Color_Card-teal);
+
+  --Color_Card-purple: #b187ff;
+  --Color_CardMeta-purple: var(--Color_Card-purple);
+
+  --Color_Card-pink: #e575a0;
+  --Color_CardMeta-pink: var(--Color_Card-pink);
+
+  --Color_Card-record_breaker: #f7f5f2;
+  --Color_CardMeta-record_breaker: var(--Color_Card-record_breaker);
+
+  --Color_Card-imotm: #fff;
+  --Color_CardMeta-imotm: #7a0600;
+
+  --Color_Card-futties_winner: #be6286;
+  --Color_CardMeta-futties_winner: #450632;
+
+  --Color_Card-ones_to_watch: #c7cfdb;
+  --Color_CardMeta-ones_to_watch: #999da3;
+
+  --Color_Card-sbc_base: #f5f5f5;
+  --Color_CardMeta-sbc_base: #d7d7d7;
+
+  --Color_Card-halloween: #d36c12;
+  --Color_CardMeta-halloween: var(--Color_Card-halloween);
+
+  --Color_Card-movember: #aea590;
+  --Color_CardMeta-movember: #3c2313;
+
+  --Color_Card-award_winner: #fff;
+  --Color_CardMeta-award_winner: var(--Color_Card-award_winner);
+
+  --Color_Card-award_motm: #fff;
+  --Color_CardMeta-award_motm: #003482;
+
+  --Color_Card-gotm: #1a1381;
+  --Color_CardMeta-gotm: var(--Color_Card-gotm);
 
   /*
   |--------------------------------------------------------------------------
@@ -21,13 +119,24 @@
   * Font - Families
   */
   --Font_Family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-  --Font_Family-body: var(--Font_Family);
+  --Font_Family-brandon: 'BrandonText', var(--Font_Family);
+  --Font_Family-dinCond: 'DIN Pro Condensed', var(--Font_Family);
+  --Font_Family-din: 'DIN Pro', var(--Font_Family);
+  --Font_Family-body: var(--Font_Family-brandon);
 
   /**
   * Font - Sizes
   */
   /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
-  --Font-16: { font-size: 16px; letter-spacing: 0; line-height: 1vr; };
+  --Font-12: { font-size: 12px; line-height: 20px; };
+  --Font-14: { font-size: 14px; line-height: 20px; };
+  --Font-16: { font-size: 16px; line-height: 1 vr; };
+  --Font-18: { font-size: 18px; line-height: 1 vr; };
+  --Font-22: { font-size: 22px; line-height: 1.33333 vr; };
+  --Font-26: { font-size: 26px; line-height: 1.25 vr; };
+  --Font-30: { font-size: 30px; line-height: 1.5 vr; };
+  --Font-36: { font-size: 36px; line-height: 44px; };
+  --Font-40: { font-size: 40px; line-height: 40px; };
 
   /*
   |--------------------------------------------------------------------------
@@ -105,7 +214,7 @@
   |--------------------------------------------------------------------------
   |
   */
-  font: 16px / 1.5 var(--Font_Family);
+  font: 16px / 1.5 var(--Font_Family-body);
 
   cursor: auto;
 }

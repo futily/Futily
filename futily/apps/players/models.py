@@ -187,6 +187,7 @@ class Player(PageBase):
 
     def _get_permalink_for_page(self, page):
         return page.reverse('player', kwargs={
+            'pk': self.pk,
             'slug': self.slug,
         })
 

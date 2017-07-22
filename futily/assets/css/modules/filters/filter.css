@@ -1,0 +1,155 @@
+/*
+|--------------------------------------------------------------------------
+| Filter
+|--------------------------------------------------------------------------
+| @namespace: fltr-
+|
+*/
+.fltr-Filter {
+  position: relative;
+
+  display: flex;
+  min-width: 200px;
+
+  border: 1px solid var(--Color_Border);
+  color: #a1b1bc;
+  cursor: pointer;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Label
+|--------------------------------------------------------------------------
+|
+*/
+.fltr-Filter_Label {
+  @apply --Font-14;
+
+  flex: 1;
+
+  padding: 10px var(--Grid_Gutter);
+
+  font-weight: 400;
+
+  color: #a1b1bc;
+}
+
+.fltr-Filter_LabelChoice {
+  margin-left: 5px;
+
+  font-weight: 500;
+
+  color: var(--Color_Body);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Dropdown
+|--------------------------------------------------------------------------
+|
+*/
+.fltr-Filter_DropdownIndicator {
+  align-items: center;
+  flex-shrink: 0;
+  justify-content: center;
+
+  display: flex;
+  width: 40px;
+
+  border-left: 1px solid var(--Color_Border);
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 13px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.fltr-Filter_Dropdown {
+  position: absolute;
+  top: 100%;
+  right: -1px;
+  left: @right;
+  z-index: 1;
+
+  min-width: 200px;
+
+  background-color: #fff;
+  border: 1px solid var(--Color_Border);
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s, visibility 0.3s;
+
+  .fltr-Filter:hover > &,
+  .fltr-Filter_Item:hover > & {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .fltr-Filter_Item & {
+    top: -1px;
+    right: auto;
+    left: 100%;
+  }
+}
+
+.fltr-Filter_Item {
+  position: relative;
+
+  border-bottom: 1px solid var(--Color_Border);
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.fltr-Filter_ItemLabel {
+  @apply --Font-14;
+
+  align-items: center;
+  justify-content: space-between;
+
+  display: flex;
+  padding: 9px var(--Grid_Gutter);
+}
+
+.fltr-Filter_ItemLabelIcon {
+  transform: rotate(-90deg);
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 10px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.fltr-Filter_Link {
+  @apply --Font-14;
+
+  justify-content: space-between;
+
+  display: flex;
+  padding: 9px var(--Grid_Gutter);
+
+  color: var(--Color_Body);
+
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--Color_Green);
+  }
+}
+
+.fltr-Filter_LinkIcon {
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 13px;
+    height: @width;
+
+    color: #21c2f8;
+  }
+  /* stylelint-enable */
+}

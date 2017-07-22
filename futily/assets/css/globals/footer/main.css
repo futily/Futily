@@ -1,0 +1,129 @@
+/*
+|--------------------------------------------------------------------------
+| Main
+|--------------------------------------------------------------------------
+| @namespace: ft-
+|
+*/
+.ft-Main {
+  background-color: var(--Color_Dark);
+  color: #fff;
+
+  @media (--lg) {
+    padding-top: 4vr;
+    padding-bottom: @padding-top;
+  }
+}
+
+.ft-Main_Inner {
+  @apply --GridContainer;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Columns
+|--------------------------------------------------------------------------
+|
+*/
+.ft-Main_Columns {
+  @media (--sm) {
+    @apply --GridRow;
+  }
+}
+
+.ft-Main_Column {
+  @media (--sm) {
+    @apply --GridColumn;
+
+    flex: 1;
+  }
+}
+
+.ft-Main_Title {
+  position: relative;
+
+  padding-bottom: 7px;
+
+  font-weight: 900;
+  letter-spacing: calc(300em / 1000);
+  text-transform: uppercase;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+    max-width: 70px;
+    height: 3px;
+
+    background-color: var(--Color_Green);
+  }
+}
+
+.ft-Main_ColumnBody {
+  margin-top: 1vr;
+}
+
+.ft-Main_Text {
+  @apply --Font-14;
+
+  color: #a1b1bc;
+}
+
+.ft-Main_SecondaryLink {
+  @apply --Font-14;
+
+  display: inline-block;
+  margin-top: 0.33333vr;
+
+  font-weight: 900;
+  text-transform: uppercase;
+
+  color: var(--Color_Green);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Links
+|--------------------------------------------------------------------------
+|
+*/
+.ft-Main_LinksItem {
+  padding: 0.5vr 0;
+
+  border-bottom: 1px solid var(--Color_Border-dark);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom-color: transparent;
+  }
+}
+
+.ft-Main_Link {
+  display: block;
+
+  font-weight: 700;
+
+  color: currentColor;
+
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--Color_Green);
+  }
+}
+
+.ft-Main_LinkMeta {
+  @apply --Font-14;
+
+  font-weight: 400;
+
+  color: #a1b1bc;
+}

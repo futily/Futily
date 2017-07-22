@@ -30,6 +30,52 @@ COLOR_CHOICES = [
     ('futties_winner', 'Futties winner'),
 ]
 
+LEVEL_FILTER_MAP = {
+    'TOTW': ['totw_bronze', 'totw_silver', 'totw_gold'],
+    'GOLD': ['gold', 'rare_gold', 'totw_gold'],
+    'SILVER': ['silver', 'rare_silver', 'totw_silver'],
+    'BRONZE': ['bronze', 'rare_bronze', 'totw_bronze'],
+    'TOTW_GOLD': ['totw_gold'],
+    'TOTW_SILVER': ['totw_silver'],
+    'TOTW_BRONZE': ['totw_bronze'],
+    'RARE_GOLD': ['rare_gold'],
+    'RARE_SILVER': ['rare_silver'],
+    'RARE_BRONZE': ['rare_bronze'],
+    'NONRARE_GOLD': ['gold'],
+    'NONRARE_SILVER': ['silver'],
+    'NONRARE_BRONZE': ['bronze'],
+    'LEGEND': ['legend'],
+    'TOTY': ['toty'],
+    'MOTM': ['motm', 'imotm'],
+    'TRANSFERS': [''],
+    'SPECIAL': ['ones_to_watch', 'fut_champions_bronze', 'fut_champions_silver', 'fut_champions_gold',
+                'sbc_base', 'halloween', 'movember', 'award_winner', 'confederation_champions_motm',
+                'gotm', 'st_patricks', 'fut_birthday', 'tots_bronze', 'tots_silver', 'tots_gold', 'pink',
+                'futties_winner'],
+}
+
+LEVELS_GET_TO_LABEL = {
+    'all': 'All',
+    'totw': 'TOTW',
+    'gold': 'Gold',
+    'silver': 'Silver',
+    'bronze': 'Bronze',
+    'totw-gold': 'TOTW Gold',
+    'totw-silver': 'TOTW Silver',
+    'totw-bronze': 'TOTW Bronze',
+    'rare-gold': 'Rare Gold',
+    'rare-silver': 'Rare Silver',
+    'rare-bronze': 'Rare Bronze',
+    'nonrare-gold': 'Gold',
+    'nonrare-silver': 'Silver',
+    'nonrare-bronze': 'Bronze',
+    'legend': 'Legends',
+    'toty': 'TOTY',
+    'motm': 'MOTM',
+    'transfers': 'Transfers',
+    'special': 'Special',
+}
+
 POSITION_CHOICES = [
     ('GK', 'GK'),
     ('RWB', 'RWB'),
@@ -50,6 +96,37 @@ POSITION_CHOICES = [
     ('ST', 'ST'),
 ]
 
+POSITION_GET_TO_LABEL = {
+    'all': 'All positions',
+    'gk': 'Goalkeepers',
+    'def': 'Defenders',
+    'mid': 'Midfielders',
+    'att': 'Attackers',
+    'rwb': 'RWB',
+    'rb': 'RB',
+    'cb': 'CB',
+    'lb': 'LB',
+    'lwb': 'LWB',
+    'cdm': 'CDM',
+    'cm': 'CM',
+    'cam': 'CAM',
+    'rm': 'RM',
+    'rw': 'RW',
+    'rf': 'RF',
+    'lm': 'LM',
+    'lw': 'LW',
+    'lf': 'LF',
+    'cf': 'CF',
+    'st': 'ST',
+    'cbs': 'Center backs',
+    'rbs': 'Right backs',
+    'lbs': 'Left backs',
+    'cms': 'Central midfielders',
+    'rms': 'Right wingers',
+    'lms': 'Left wingers',
+    'sts': 'Strikers',
+}
+
 POSITION_LINE_CHOICES = [
     ('GK', 'GK'),
     ('DEF', 'DEF'),
@@ -64,11 +141,51 @@ POSITION_LINE_MAP = {
     'ATT': ['CF', 'ST', 'RF', 'LF']
 }
 
+POSITION_FILTER_MAP = {
+    'DEF': POSITION_LINE_MAP['DEF'],
+    'MID': POSITION_LINE_MAP['MID'],
+    'ATT': POSITION_LINE_MAP['ATT'],
+    'GK': ['GK'],
+    'RWB': ['RWB'],
+    'RB': ['RB'],
+    'CB': ['CB'],
+    'LB': ['LB'],
+    'LWB': ['LWB'],
+    'CDM': ['CDM'],
+    'CM': ['CM'],
+    'CAM': ['CAM'],
+    'RM': ['RM'],
+    'RW': ['RW'],
+    'RF': ['RF'],
+    'LM': ['LM'],
+    'LW': ['LW'],
+    'LF': ['LF'],
+    'CF': ['CF'],
+    'ST': ['ST'],
+    'CBS': ['CB'],
+    'RBS': ['RB', 'RWB'],
+    'LBS': ['LB', 'LWB'],
+    'CMS': ['CDM', 'CM', 'CAM'],
+    'RMS': ['RM', 'RW', 'CF'],
+    'LMS': ['LM', 'LW', 'LF'],
+    'STS': ['CF', 'ST'],
+}
+
 QUALITY_CHOICES = [
     ('bronze', 'bronze'),
     ('silver', 'silver'),
     ('gold', 'gold'),
 ]
+
+QUALITY_TYPES = {
+    'normal': ['bronze', 'silver', 'gold', 'rare_bronze', 'rare_silver', 'rare_gold'],
+    'totw': ['totw_bronze', 'totw_silver', 'totw_gold'],
+    'legend': ['legend'],
+    'special': ['ones_to_watch', 'fut_champions_bronze', 'fut_champions_silver', 'fut_champions_gold',
+                'sbc_base', 'halloween', 'movember', 'award_winner', 'confederation_champions_motm',
+                'gotm', 'toty', 'imotm', 'st_patricks', 'fut_birthday', 'tots_bronze', 'tots_silver',
+                'tots_gold', 'pink', 'futties_winner']
+}
 
 WORKRATE_CHOICES = [
     ('Low', 'Low'),

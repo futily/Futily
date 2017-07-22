@@ -1,0 +1,17 @@
+/*
+|--------------------------------------------------------------------------
+| Bar
+|--------------------------------------------------------------------------
+| @namespace: pg-
+|
+*/
+.pg-Bar {
+  padding-top: 1.25vr;
+  padding-bottom: @padding-top;
+
+  border-bottom: 1px solid var(--Color_Border);
+}
+
+.pg-Bar_Inner {
+  @apply --GridContainer;
+}

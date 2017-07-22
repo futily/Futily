@@ -1,0 +1,55 @@
+/*
+|--------------------------------------------------------------------------
+| Links
+|--------------------------------------------------------------------------
+| @namespace: asi-
+|
+*/
+.asi-Links_Item {
+  padding-top: 0.5vr;
+  padding-bottom: @padding-top;
+
+  border-bottom: 1px solid var(--Color_Border);
+  color: var(--Color_Body);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.asi-Links_Link {
+  align-items: center;
+
+  display: flex;
+
+  color: currentColor;
+
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--Color_Green);
+
+    &::before {
+      background-image: svg-load('angle-down.svg', fill=#16a287);
+    }
+  }
+
+  &::before {
+    content: '';
+
+    display: block;
+    width: 10px;
+    height: @width;
+    margin-right: 5px;
+
+    background-image: svg-load('angle-down.svg');
+    background-size: @width @height;
+
+    transform: rotate(-90deg);
+    transition: background-image 0.2s;
+  }
+}

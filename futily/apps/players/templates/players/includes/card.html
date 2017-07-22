@@ -1,0 +1,32 @@
+<a class="plyr-Card plyr-Card-{{ size }} plyr-Card-{{ player.color }}"
+   href="{{ player.get_absolute_url() }}">
+  <header class="plyr-Card_Header">
+    <div class="plyr-Card_Meta">
+      <span class="plyr-Card_Rating">{{ player.rating }}</span>
+      <span class="plyr-Card_Position">{{ player.position }}</span>
+      <img alt=""
+           src="{{ static('ea-images/clubs/{}.png'.format(player.club.ea_id)) }}"
+           class="plyr-Card_Club"
+           width="25">
+      <img alt=""
+           src="{{ static('ea-images/nations/{}.png'.format(player.nation.ea_id)) }}"
+           class="plyr-Card_Nation"
+           width="25">
+    </div>
+
+    <img alt=""
+         src="{{ static('ea-images/players/{}.png'.format(player.ea_id)) }}"
+         class="plyr-Card_Image">
+  </header>
+
+  <p class="plyr-Card_Name">{{ player.name }}</p>
+
+  <div class="plyr-Card_Body">
+    {% for key, value in player.card_stats %}
+      <div class="plyr-Card_Stat">
+        <span class="plyr-Card_StatValue">{{ value }}</span>
+        <span class="plyr-Card_StatKey">{{ key }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</a>

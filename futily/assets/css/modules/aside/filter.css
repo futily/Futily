@@ -1,0 +1,145 @@
+/*
+|--------------------------------------------------------------------------
+| Filter
+|--------------------------------------------------------------------------
+| @namespace: asi-
+|
+*/
+.asi-Filter-flyout {
+  position: relative;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.asi-Filter_Button {
+  position: relative;
+
+  justify-content: space-between;
+
+  display: flex;
+  width: 100%;
+  padding: 8px calc(var(--Grid_Gutter) * 2) 8px 0;
+
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &:hover {
+    background-color: var(--Color_Grey-light);
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    right: 0;
+
+    display: block;
+    width: 10px;
+    height: @width;
+
+    background-image: svg-load('angle-down.svg');
+    background-size: @width @height;
+
+    transform: translateY(-50%);
+    transition: transform 0.3s;
+
+    .asi-Filter-collapse[aria-expanded='true'] & {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .asi-Filter-flyout[aria-expanded='true'] & {
+      transform: translateY(-50%) rotate(-90deg);
+    }
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Body
+|--------------------------------------------------------------------------
+|
+*/
+.asi-Filter_Body {
+  padding: 0.5vr 0;
+
+  [aria-expanded='false'] & {
+    display: none;
+  }
+}
+
+.asi-Filter_Links {
+  display: flex;
+}
+
+.asi-Filter_LinkLabel {
+  align-items: center;
+
+  display: flex;
+  margin-right: var(--Grid_Gutter);
+
+  color: var(--Color_Green);
+  cursor: pointer;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &[aria-current='true'] {
+    .asi-Filter_Links-stars & {
+      &::after {
+        background-image: svg-load(
+          'star.svg',
+          fill=#16a287,
+          stroke=#16a287,
+          stroke-width=3
+        );
+      }
+    }
+  }
+
+  &:hover {
+    .asi-Filter_Links-stars & {
+      &::after {
+        background-image: svg-load(
+          'star.svg',
+          fill=#16a287,
+          stroke=#16a287,
+          stroke-width=3
+        );
+      }
+    }
+  }
+
+  &::after {
+    .asi-Filter_Links-stars & {
+      content: '';
+
+      display: block;
+      width: 14px;
+      height: @width;
+      margin-left: 5px;
+
+      background-image: svg-load(
+        'star.svg',
+        fill=#fff,
+        stroke=#16a287,
+        stroke-width=3
+      );
+      background-size: @width @height;
+
+      transition: background-image 0.2s;
+    }
+  }
+}
+
+.asi-Filter_LinkRadio {
+  display: none;
+}

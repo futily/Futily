@@ -1,0 +1,11 @@
+{% macro card_list(players) %}
+  <div class="plyr-CardList">
+    <ul class="plyr-CardList_Items">
+      {% for player in players %}
+        <li class="plyr-CardList_Item">
+          {{ player.render_card() }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}

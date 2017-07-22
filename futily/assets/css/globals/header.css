@@ -10,4 +10,65 @@
 .hd-Header {
   position: relative;
   z-index: 10;
+
+  padding-top: 12px;
+  padding-bottom: @padding-top;
+
+  background-color: var(--Color_Dark);
+  border-top: 2px solid var(--Color_Green);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+.hd-Header_Inner {
+  @apply --GridContainer;
+}
+
+.hd-Header_Body {
+  align-items: center;
+
+  display: flex;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Logo
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Header_Logo {
+  display: block;
+  width: width('temp/logo.png');
+  height: height('temp/logo.png');
+
+  background-image: resolve('temp/logo.png');
+  background-size: @width @height;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Nav
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Header_Nav {
+  margin-left: auto;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+|
+*/
+.hd-Header_Search {
+  margin-left: calc(46px - (var(--Grid_Gutter) + 8px));
+
+  /* SVG has no class */
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 21px;
+    height: @width;
+  }
+  /* stylelint-enable */
 }

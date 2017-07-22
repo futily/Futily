@@ -1,0 +1,127 @@
+/*
+|--------------------------------------------------------------------------
+| Objects table
+|--------------------------------------------------------------------------
+| @namespace: ea-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Row
+|--------------------------------------------------------------------------
+|
+*/
+.ea-ObjectsTable_Row {
+  justify-content: space-between;
+
+  display: flex;
+
+  color: var(--Color_Body);
+
+  .ea-ObjectsTable_Header & {
+    background-color: #ecf0f1;
+  }
+
+  &:nth-child(even) {
+    background-color: #f9fafb;
+  }
+
+  .ea-ObjectsTable_Body & {
+    &:hover {
+      background-color: var(--Color_Dark);
+      color: #fff;
+    }
+  }
+}
+
+.ea-ObjectsTable_RowLeft,
+.ea-ObjectsTable_RowRight {
+  align-items: center;
+
+  display: flex;
+}
+
+.ea-ObjectsTable_RowLeft {
+  flex-basis: 330px;
+  flex-shrink: 0;
+
+  display: flex;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Cell
+|--------------------------------------------------------------------------
+|
+*/
+.ea-ObjectsTable_Cell {
+  padding-top: 0.5vr;
+  padding-bottom: @padding-top;
+
+  text-align: center;
+
+  .ea-ObjectsTable_Header & {
+    @apply --Font-12;
+
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+.ea-ObjectsTable_Cell-left {
+  text-align: left;
+}
+
+.ea-ObjectsTable_Cell-80 {
+  flex-basis: 80px;
+  flex-grow: 0;
+  flex-shrink: 0;
+
+  width: 80px;
+}
+
+.ea-ObjectsTable_Cell-flex {
+  flex: 1;
+}
+
+.ea-ObjectsTable_CellTitle {
+  position: relative;
+
+  font-weight: inherit;
+
+  color: currentColor;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 5px);
+
+    display: none;
+    width: 8px;
+    height: @width;
+
+    background-image: svg-load('angle-down.svg');
+    background-size: @width @height;
+
+    transform: translateY(-50%);
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &[aria-current='true'] {
+    &::after {
+      display: block;
+    }
+  }
+}
+
+.ea-ObjectsTable_CellTitle-up {
+  &::after {
+    transform: translateY(-50%) rotate(180deg);
+  }
+}

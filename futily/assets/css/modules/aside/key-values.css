@@ -1,0 +1,29 @@
+/*
+|--------------------------------------------------------------------------
+| Key values
+|--------------------------------------------------------------------------
+| @namespace: asi-
+|
+*/
+.asi-KeyValues_Item {
+  justify-content: space-between;
+
+  display: flex;
+  padding-top: 0.5vr;
+  padding-bottom: @padding-top;
+
+  border-bottom: 1px solid var(--Color_Border);
+  color: var(--Color_Body);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.asi-KeyValues_Value {
+  font-weight: 500;
+}

@@ -1,0 +1,110 @@
+/*
+|--------------------------------------------------------------------------
+| Under
+|--------------------------------------------------------------------------
+| @namespace: ft-
+|
+*/
+.ft-Under {
+  padding-top: 1.66666vr;
+  padding-bottom: @padding-top;
+
+  background-color: #171d22;
+  border-top: 1px solid var(--Color_Border-dark);
+}
+
+.ft-Under_Inner {
+  @apply --GridContainer;
+}
+
+.ft-Under_Body {
+  @apply --Font-14;
+
+  align-items: center;
+  justify-content: space-between;
+
+  display: flex;
+
+  color: #a1b1bc;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Socials
+|--------------------------------------------------------------------------
+|
+*/
+.ft-Under_Socials {
+  display: flex;
+  margin-right: -10px;
+  margin-left: @margin-right;
+}
+
+.ft-Under_SocialsItem {
+  margin-right: 10px;
+  margin-left: @margin-right;
+}
+
+.ft-Under_Social {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  color: #a1b1bc;
+
+  &:hover {
+    &::after {
+      opacity: 1;
+
+      transform: scale(2);
+    }
+
+    /* SVG has no class */
+    /* stylelint-disable selector-max-type */
+    svg {
+      color: #fff;
+    }
+    /* stylelint-enable */
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    display: block;
+
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  /* SVG has no class */
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: 20px;
+    height: @width;
+
+    color: #a1b1bc;
+  }
+  /* stylelint-enable */
+}
+
+.ft-Under_Social-twitter {
+  color: twitter-color;
+}
+.ft-Under_Social-facebook {
+  color: facebook-color;
+}
+.ft-Under_Social-twitch {
+  color: twitch-tv-color;
+}

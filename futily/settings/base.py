@@ -237,6 +237,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
+            os.path.join(SITE_ROOT, 'assets/svg'),
             os.path.join(SITE_ROOT, 'templates'),
         ],
         'APP_DIRS': True,
@@ -249,6 +250,9 @@ TEMPLATES = [
                 'webpack_loader.contrib.jinja2ext.WebpackExtension',
                 'compressor.contrib.jinja2ext.CompressorExtension'
             ],
+            'globals': {
+                'getattr': getattr
+            },
             'bytecode_cache': {
                 'name': 'default',
                 'backend': 'django_jinja.cache.BytecodeCache',

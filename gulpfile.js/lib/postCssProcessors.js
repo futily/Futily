@@ -1,4 +1,4 @@
-var path = require('path')
+const path = require('path')
 
 module.exports = [
   require('postcss-easy-import'),
@@ -7,7 +7,15 @@ module.exports = [
   require('postcss-apply'),
   require('postcss-nested'),
   require('postcss-functions')({
-    glob: path.join(__dirname, '../../futily', 'assets', 'css', 'helpers', 'functions', '*.js')
+    glob: path.join(
+      __dirname,
+      '../../futily',
+      'assets',
+      'css',
+      'helpers',
+      'functions',
+      '*.js'
+    )
   }),
 
   require('postcss-custom-properties'),
@@ -17,11 +25,11 @@ module.exports = [
   // Niceties
   require('postcss-assets')({
     basePath: 'futily/assets/',
-    loadPaths: ['img/'],
+    loadPaths: ['fonts/', 'img/'],
     baseUrl: '/static/'
   }),
   require('postcss-inline-svg')({
-    path: 'futily/assets/img/'
+    path: 'futily/assets/svg/'
   }),
   require('postcss-brand-colors'),
   require('postcss-property-lookup'),
@@ -34,5 +42,5 @@ module.exports = [
   require('postcss-round-subpixels'),
   require('postcss-calc'),
   require('postcss-hexrgba'),
-  require('autoprefixer'),
-];
+  require('autoprefixer')
+]

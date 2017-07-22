@@ -51,6 +51,9 @@ class Nation(PageBase):
     def players(self):
         return self.player_set.all().select_related('club', 'league', 'nation')
 
+    def list_informs(self):
+        return self.total_special + self.total_totw
+
 
 def get_default_nations_page():
     """Returns the default nations page."""

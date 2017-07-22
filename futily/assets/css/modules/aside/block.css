@@ -1,0 +1,31 @@
+/*
+|--------------------------------------------------------------------------
+| Block
+|--------------------------------------------------------------------------
+| @namespace: asi-
+|
+*/
+.asi-Block {
+  & + & {
+    margin-top: 1.5vr;
+  }
+}
+
+.asi-Block_Title {
+  @apply --Font-18;
+
+  margin-bottom: 0.5vr;
+
+  font-weight: 700;
+
+  &::before {
+    content: '';
+
+    display: inline-block;
+    width: 14px;
+    margin-right: 5px;
+
+    border-top: 7px solid var(--Color_Green);
+    border-bottom: 7px solid #46d1ff;
+  }
+}

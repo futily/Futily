@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 300;
+
+  src: resolve('2F3E50_2_0.eot');
+  src: resolve('2F3E50_2_0.eot?#iefix') format('embedded-opentype'),
+    resolve('2F3E50_2_0.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-style: italic;
+  font-weight: 300;
+
+  src: resolve('2F3E50_1_0.eot');
+  src: resolve('2F3E50_1_0.eot?#iefix') format('embedded-opentype'),
+    resolve('2F3E50_1_0.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 400;
+
+  src: resolve('2F3E50_4_0.eot');
+  src: resolve('2F3E50_4_0.eot?#iefix') format('embedded-opentype'),
+    resolve('2F3E50_4_0.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-style: italic;
+  font-weight: 400;
+
+  src: resolve('2F3E50_3_0.eot');
+  src: resolve('2F3E50_3_0.eot?#iefix') format('embedded-opentype'),
+    resolve('2F3E50_3_0.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 500;
+
+  src: resolve('2F3E50_5_0.eot');
+  src: resolve('2F3E50_5_0.eot?#iefix') format('embedded-opentype'),
+    resolve('2F3E50_5_0.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-style: italic;
+  font-weight: 500;
+
+  src: resolve('2F3E50_6_0.eot');
+  src: resolve('2F3E50_6_0.eot?#iefix') format('embedded-opentype'),
+    resolve('2F3E50_6_0.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 700;
+
+  src: resolve('2F3E50_0_0.eot');
+  src: resolve('2F3E50_0_0.eot?#iefix') format('embedded-opentype'),
+    resolve('2F3E50_0_0.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: DIN Pro;
+  font-style: normal;
+  font-weight: 700;
+  src: resolve('DINPro-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: DIN Pro Condensed;
+  font-style: normal;
+  font-weight: 400;
+  src: resolve('DINPro-Cond.woff') format('woff');
+}
+
+@font-face {
+  font-family: DIN Pro Condensed;
+  font-style: normal;
+  font-weight: 500;
+  src: resolve('DINPro-CondMedium.woff') format('woff');
+}
+
+@font-face {
+  font-family: DIN Pro Condensed;
+  font-style: normal;
+  font-weight: 700;
+  src: resolve('DINPro-CondBold.woff') format('woff');
+}

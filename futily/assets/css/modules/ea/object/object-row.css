@@ -1,0 +1,38 @@
+/*
+|--------------------------------------------------------------------------
+| Object row
+|--------------------------------------------------------------------------
+| @namespace: ea-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Cell
+|--------------------------------------------------------------------------
+|
+*/
+.ea-ObjectRow_Cell {
+  position: relative;
+}
+
+.ea-ObjectRow_CellTitle {
+  @apply --Font-12;
+
+  position: absolute;
+  top: calc(50% + 3px);
+  left: 50%;
+
+  font-weight: 700;
+  text-transform: uppercase;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transform: translateX(-50%);
+
+  .ea-ObjectsTable_Row:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
+}

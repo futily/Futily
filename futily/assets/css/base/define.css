@@ -1,5 +1,5 @@
 /* This is used for multiple base styles so we need selector types */
-/* stylelint-disable selector-no-type, selector-no-universal */
+/* stylelint-disable selector-max-type, selector-max-universal */
 /*
 |--------------------------------------------------------------------------
 | Redefine
@@ -8,7 +8,9 @@
 |
 */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -43,7 +45,7 @@ body {
   text-rendering: optimizeLegibility;
 
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
-  background-color: #ececec;
+  background-color: #fff;
   color: var(--Color_Body);
 
   -moz-osx-font-smoothing: grayscale;
@@ -59,6 +61,8 @@ body {
 :--headings {
   margin-top: 0;
   margin-bottom: 0;
+
+  font-size: 1em;
 }
 
 /*
@@ -93,6 +97,10 @@ p {
   margin-bottom: @margin-top;
 }
 
+strong {
+  font-weight: 600;
+}
+
 /*
 |--------------------------------------------------------------------------
 | Typography - Anchors
@@ -100,11 +108,12 @@ p {
 |
 */
 a {
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
 
   color: var(--Color_Anchor);
 }
+
 /*
 |--------------------------------------------------------------------------
 | Images
@@ -126,4 +135,5 @@ table {
 
   table-layout: fixed;
 }
+
 /* stylelint-enable */

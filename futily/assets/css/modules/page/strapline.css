@@ -1,0 +1,37 @@
+/*
+|--------------------------------------------------------------------------
+| Strapline
+|--------------------------------------------------------------------------
+| @namespace: pg-
+|
+*/
+.pg-Strapline {
+  padding-top: 1.25vr;
+  padding-bottom: @padding-top;
+
+  background-color: var(--Color_Grey-light);
+  border-bottom: 1px solid var(--Color_Border);
+}
+
+.pg-Strapline_Inner {
+  @apply --GridContainer;
+}
+
+.pg-Strapline_Body {
+  align-items: center;
+  justify-content: space-between;
+
+  display: flex;
+}
+
+.pg-Strapline_Title {
+  @apply --Font-30;
+
+  font-weight: 500;
+}
+
+.pg-Strapline_Text {
+  @apply --Font-18;
+
+  margin-top: 0.25vr;
+}

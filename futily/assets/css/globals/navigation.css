@@ -1,0 +1,105 @@
+/*
+|--------------------------------------------------------------------------
+| Navigation
+|--------------------------------------------------------------------------
+| @namespace: nav-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Navigation_Items {
+  display: flex;
+}
+
+.nav-Navigation_Item {
+  position: relative;
+
+  margin-right: var(--Grid_Gutter);
+  margin-left: @margin-right;
+}
+
+.nav-Navigation_Link {
+  display: block;
+  padding: 8px;
+
+  line-height: 20px;
+
+  color: currentColor;
+
+  transition: color 0.2s;
+
+  &[aria-current='true'],
+  &:hover {
+    color: var(--Color_Green);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Dropdown
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Navigation_Dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: calc(-30px + 8px);
+
+  background-color: var(--Color_Dark);
+  border-top: 2px solid var(--Color_Green);
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.2s, visiblity 0.2s;
+
+  .nav-Navigation_Item:hover > & {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -15px;
+    right: 0;
+    bottom: 100%;
+    left: 0;
+
+    display: block;
+  }
+}
+
+.nav-Navigation_DropdownItem {
+  border-top: 1px solid var(--Color_Border-dark);
+
+  &:first-child {
+    border-top-color: transparent;
+
+    &:hover {
+      border-top-color: #2f3341;
+    }
+  }
+}
+
+.nav-Navigation_DropdownLink {
+  @apply --Font-14;
+
+  display: block;
+  padding: 0.66666vr calc(var(--Grid_Gutter) * 2);
+
+  white-space: nowrap;
+
+  color: currentColor;
+
+  transition: background-color 0.2s;
+
+  .nav-Navigation_DropdownItem:hover & {
+    background-color: #2f3341;
+  }
+}

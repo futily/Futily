@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% macro filter_item(choice, get_param) %}
+  {% set current = request.GET.get(get_param, None) %}
+
+  <li class="fltr-Filter_Item">
+    {% if not choice.group %}
+      {% if choice.key == 'all' %}
+        <a href="{{ url(remove=[get_param]) }}" class="fltr-Filter_Link">
+          {{ choice.label }}
+        </a>
+      {% else %}
+        <a href="{{ url(get={get_param: choice.key}) }}" class="fltr-Filter_Link">
+          {{ choice.label }}
+
+          {% if current == choice.key %}
+            <span class="fltr-Filter_LinkIcon">
+              {% include 'tick.svg' %}
+            </span>
+          {% endif %}
+        </a>
+      {% endif %}
+    {% else %}
+      <span class="fltr-Filter_ItemLabel">
+        {{ choice.label }}
+
+        <span class="fltr-Filter_ItemLabelIcon">
+          {% include 'angle-down.svg' %}
+        </span>
+      </span>
+
+      <ul class="fltr-Filter_Dropdown">
+        {% for option in choice.options %}
+          <li class="fltr-Filter_Item">
+            <a class="fltr-Filter_Link" href="{{ url(get={get_param: option.key}) }}">
+              {{ option.label }}
+
+              {% if current == option.key %}
+                <span class="fltr-Filter_LinkIcon">
+                  {% include 'tick.svg' %}
+                </span>
+              {% endif %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </li>
+{% endmacro %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">{{ object }}</h1>
+          <p class="pg-Strapline_Text">Highest rated Fifa 17 {{ object }} players</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-Bar">
+    <div class="pg-Bar_Inner">
+      <div class="pb-Bar_Body">
+        <div class="fltr-Filters">
+          <div class="fltr-Filters_Left">
+            <ul class="fltr-Filters_Items">
+              <li class="fltr-Filters_Item">
+                <div class="fltr-Filter">
+                  <p class="fltr-Filter_Label">
+                    Position:
+                    <strong class="fltr-Filter_LabelChoice">{{ filters.positions.label }}</strong>
+                  </p>
+
+                  <span class="fltr-Filter_DropdownIndicator">
+                    {% include 'angle-down.svg' %}
+                  </span>
+
+                  <ul class="fltr-Filter_Dropdown">
+                    {% for choice in filters.positions.choices %}
+                      {{ filter_item(choice, 'position') }}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+
+              <li class="fltr-Filters_Item">
+                <div class="fltr-Filter">
+                  <p class="fltr-Filter_Label">
+                    Level:
+                    <strong class="fltr-Filter_LabelChoice">{{ filters.levels.label }}</strong>
+                  </p>
+
+                  <span class="fltr-Filter_DropdownIndicator">
+                    {% include 'angle-down.svg' %}
+                  </span>
+
+                  <ul class="fltr-Filter_Dropdown">
+                    {% for choice in filters.levels.choices %}
+                      {{ filter_item(choice, 'level') }}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+
+              <li class="fltr-Filters_Item">
+                <div class="fltr-Filter">
+                  <p class="fltr-Filter_Label">
+                    Sort: <strong class="fltr-Filter_LabelChoice">Sort thing</strong>
+                  </p>
+
+                  <span class="fltr-Filter_DropdownIndicator">
+                    {% include 'angle-down.svg' %}
+                  </span>
+
+                  <ul class="fltr-Filter_Dropdown">
+                    {% for sort in sorts %}
+                      {{ filter_item(sort, 'level') }}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-Breadcrumbs">
+    <div class="pg-Breadcrumbs_Inner">
+      <div class="pg-Breadcrumbs_Body">
+        <nav class="bdc-Breadcrumb">
+          <div class="bdc-Breadcrumb_Items"
+               itemscope=""
+               itemtype="http://schema.org/BreadcrumbList">
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                <span itemprop="name">
+                  Home
+                </span>
+                <meta itemprop="position" content="1">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ pages.current.get_absolute_url() }}">
+                <span itemprop="name">
+                  {{ object._meta.app_label | capitalize() }}
+                </span>
+                <meta itemprop="position" content="2">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <span itemprop="name">
+                {{ object }}
+              </span>
+              <meta itemprop="position" content="3">
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  {{ player_macros.card_list(players) }}
+
+  {{ render_pagination(players) }}
+{% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+
+    <div class="asi-Block">
+      <h4 class="asi-Block_Title">{{ object }} Summary</h4>
+
+      <ul class="asi-KeyValues">
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Average rating</p>
+          <p class="asi-KeyValues_Value">{{ object.average_rating }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Total players</p>
+          <p class="asi-KeyValues_Value">{{ object.total_players }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Total special</p>
+          <p class="asi-KeyValues_Value">{{ object.total_special }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Total TOTW</p>
+          <p class="asi-KeyValues_Value">{{ object.total_totw }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Total legends</p>
+          <p class="asi-KeyValues_Value">{{ object.total_legends }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Total gold</p>
+          <p class="asi-KeyValues_Value">{{ object.total_gold }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Total silver</p>
+          <p class="asi-KeyValues_Value">{{ object.total_silver }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Total bronze</p>
+          <p class="asi-KeyValues_Value">{{ object.total_bronze }}</p>
+        </li>
+      </ul>
+    </div>
+
+    {% block aside_blocks %}{% endblock %}
+  </div>
+{% endblock %}
