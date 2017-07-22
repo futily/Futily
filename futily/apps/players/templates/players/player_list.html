@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Fifa 17 Player Database</h1>
+          <p class="pg-Strapline_Text">Top Fifa 17 players</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content_class %}{{ super() }} lyt-Content-asideSwap{% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <form class="asi-Filters js-PlayerFilter" method="GET">
+        <ul class="asi-Filters_Items">
+          {{ range_item() }}
+          {{ flyout_item(form.position) }}
+          {{ flyout_item(form.level, True) }}
+          {{ flyout_item(form.nation) }}
+          {{ flyout_item(form.league) }}
+          {{ link_item(form.skills, True) }}
+          {{ link_item(form.weak_foot, True) }}
+          {{ workrate_item() }}
+          {{ link_item(form.strong_foot) }}
+        </ul>
+
+        <footer class="asi-Filters_Footer">
+          <div class="asi-Filter_Actions">
+            <div class="asi-Filter_Action">
+              <button class="asi-Filters_Submit" type="submit">Search</button>
+            </div>
+
+            <div class="asi-Filter_Action">
+              <a class="asi-Filters_Clear js-PlayerFilter_Clear" href="{{ request.path }}">Clear</a>
+            </div>
+          </div>
+        </footer>
+      </form>
+    </div>
+
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  {{ player_macros.card_list(player_list) }}
+
+  {{ render_pagination(page_obj) }}
+{% endblock %}
+
+{% macro range_item() %}
+  <li class="asi-Filters_Item">
+    <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse" aria-expanded="true">
+      <header class="asi-Filter_Header js-PlayerFilter_CollapseToggle">
+        <button type="button" class="asi-Filter_Button">
+          <span class="asi-Filter_ButtonLabel">Rating</span>
+          <span class="asi-Filter_ButtonCurrent">
+            {{ form.min_rating.value()[0] | default(form.min_rating.field.min_value) }} - {{ form.max_rating.value()[0] | default(form.max_rating.field.max_value) }}
+          </span>
+        </button>
+      </header>
+
+      <div class="asi-Filter_Body js-PlayerFilter_CollapseBody">
+        <div class="frm-Range">
+          <div class="frm-Range_Ranges">
+            <div class="frm-Range_RangesItem">
+              <span class="frm-Range_Value frm-Range_Value-min" data-slide-value="min">
+                {{ form.min_rating.value()[0] | default(form.min_rating.field.initial) }}
+              </span>
+
+              <div class="frm-Range_InputWrapper">
+                <div class="frm-Slide frm-Slide-loading frm-Slide-min js-Slide" data-color="bronze" data-slide="min">
+                  <div class="frm-Slide_Track">
+                    <div class="frm-Slide_Groove">
+                      <div class="frm-Slide_Slider">
+                        <div class="frm-Slide_Handle"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <input type="hidden"
+                       min="{{ form.min_rating.field.min_value }}"
+                       max="{{ form.min_rating.field.max_value }}"
+                       value="{{ form.min_rating.value()[0] | default(form.min_rating.field.initial) }}"
+                       step="1"
+                       id="{{ form.min_rating.id_for_label }}"
+                       name="{{ form.min_rating.html_name }}"
+                       data-slide-input="min">
+              </div>
+            </div>
+
+            <div class="frm-Range_RangesItem">
+              <div class="frm-Range_InputWrapper">
+                <div class="frm-Slide frm-Slide-loading frm-Slide-max js-Slide" data-color="gold" data-slide="max">
+                  <div class="frm-Slide_Track">
+                    <div class="frm-Slide_Groove">
+                      <div class="frm-Slide_Slider">
+                        <div class="frm-Slide_Handle"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <input type="hidden"
+                       min="{{ form.max_rating.field.min_value }}"
+                       max="{{ form.max_rating.field.max_value }}"
+                       value="{{ form.max_rating.value()[0] | default(form.max_rating.field.initial) }}"
+                       step="1"
+                       id="{{ form.max_rating.id_for_label }}"
+                       name="{{ form.max_rating.html_name }}"
+                       data-slide-input="max">
+              </div>
+
+              <span class="frm-Range_Value frm-Range_Value-max" data-slide-value="max">
+                {{ form.max_rating.value()[0] | default(form.max_rating.field.initial) }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+{% endmacro %}
+
+{% macro flyout_item(field, nested_choices=False) %}
+  <li class="asi-Filters_Item">
+    <div class="asi-Filter asi-Filter-flyout js-PlayerFilter_Flyout"
+         aria-expanded="false"
+         data-form-name="{{ field.html_name }}">
+      <header class="asi-Filter_Header js-PlayerFilter_FlyoutToggle">
+        <button type="button" class="asi-Filter_Button">
+          <span class="asi-Filter_ButtonLabel">{{ field.label }}</span>
+
+          <span class="asi-Filter_ButtonCurrent">
+            {% if field.value() %}
+              {% for value in field.value() %}
+                {{ value }}{% if not loop.last %}, {% endif %}
+              {% endfor %}
+            {% else %}
+              Any
+            {% endif %}
+          </span>
+        </button>
+      </header>
+
+      <div class="asi-FilterFlyout">
+        <header class="asi-FilterFlyout_Header">
+          <h3 class="asi-FilterFlyout_Title">Select {{ field.label }}</h3>
+
+          <button type="button" class="asi-FilterFlyout_Close js-PlayerFilter_Close">Close</button>
+        </header>
+
+        <div class="asi-FilterFlyout_Body">
+          <ul class="asi-FilterFlyout_Groups{% if nested_choices %} asi-FilterFlyout_Groups-columned{% endif %}">
+            {% for group_label, choices in field.field.choices %}
+              <li class="asi-FilterFlyout_Group">
+                <header class="asi-FilterFlyout_GroupHeader">
+                  <h4 class="asi-FilterFlyout_GroupTitle">{{ group_label }}</h4>
+                </header>
+
+                <div class="asi-FilterFlyout_GroupBody">
+                  <div class="asi-FilterFlyout_Options">
+                    {% set per_column = choices | length() / 3 | round(0, 'ceil') | int() %}
+                    {% for chunk in choices | batch(per_column | round(0, 'ceil') | int()) %}
+                      <div class="asi-FilterFlyout_OptionsColumn">
+                        {% for value, label in chunk %}
+                          <div class="asi-FilterFlyout_Option">
+                            {% if label is string %}
+                              <label class="frm-InlineLabel">
+                                <input type="checkbox"
+                                       class="frm-Inline{% if value == 'all' %} js-PlayerFilter_ResetName{% endif %}"
+                                       value="{{ value }}"
+                                       id="{{ '{}_{}'.format(field.id_for_label, value) }}"
+                                       name="{{ field.html_name }}"
+                                       {% if field.value() and value in field.value() %}checked{% endif %}>
+
+                                {{ label }}
+                              </label>
+                            {% else %}
+                              <h4 class="asi-FilterFlyout_GroupTitle">{{ value }}</h4>
+
+                              <ul class="asi-FilterFlyout_Options">
+                                {% for nested_value, nested_label in label %}
+                                  <li class="asi-FilterFlyout_Option">
+                                    <label class="frm-InlineLabel">
+                                      <input type="checkbox"
+                                             class="frm-Inline"
+                                             value="{{ nested_value }}"
+                                             id="{{ '{}_{}'.format(field.id_for_label, nested_value) }}"
+                                             name="{{ field.html_name }}"
+                                             {% if field.value() and nested_value in field.value() %}checked{% endif %}>
+
+                                      {{ nested_label }}
+                                    </label>
+                                  </li>
+                                {% endfor %}
+                              </ul>
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <footer class="asi-FilterFlyout_Footer">
+          <button class="asi-Filters_Submit" type="submit">Search</button>
+          <button class="asi-Filters_Clear js-PlayerFilter_Clear" type="button">Clear</button>
+        </footer>
+      </div>
+    </div>
+  </li>
+{% endmacro %}
+
+{% macro link_item(field, stars=False) %}
+  <li class="asi-Filters_Item">
+    <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse" aria-expanded="false">
+      <header class="asi-Filter_Header js-PlayerFilter_CollapseToggle">
+        <button type="button" class="asi-Filter_Button">
+          <span class="asi-Filter_ButtonLabel">{{ field.label }}</span>
+          <span class="asi-Filter_ButtonCurrent">{{ field.value()[0] | default('All') }}</span>
+        </button>
+      </header>
+
+      <div class="asi-Filter_Body js-PlayerFilter_CollapseBody">
+        <div class="asi-Filter_Links{% if stars %} asi-Filter_Links-stars{% endif %}">
+          {% for value, label in field.field.choices %}
+            <label class="asi-Filter_LinkLabel" onclick="this.closest('form').submit()" aria-current="{{ 'true' if field.value()[0] == value else 'false' }}">
+              <input type="radio"
+                     class="asi-Filter_LinkRadio"
+                     name="{{ field.html_name }}"
+                     id="{{ field.id_for_label }}"
+                     value="{{ value }}"
+                     {% if field.value() and value in field.value() %}checked{% endif %}>
+
+              {{ label }}
+            </label>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </li>
+{% endmacro %}
+
+{% macro workrate_item() %}
+  <li class="asi-Filters_Item">
+    <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse" aria-expanded="false">
+      <header class="asi-Filter_Header js-PlayerFilter_CollapseToggle">
+        <button type="button" class="asi-Filter_Button">
+          <span class="asi-Filter_ButtonLabel">Workrates</span>
+          <span class="asi-Filter_ButtonCurrent">{{ form.def_workrate.value()[0] | default('All') }} / {{ form.att_workrate.value()[0] | default('All') }}</span>
+        </button>
+      </header>
+
+      <div class="asi-Filter_Body js-PlayerFilter_CollapseBody">
+        <div class="asi-Filter_LinkGroups">
+          <div class="asi-Filter_LinkGroupsItem">
+            <h4 class="asi-Filter_LinkGroupsTitle">Defensive</h4>
+
+            <div class="asi-Filter_LinkGroup">
+              {% for value, label in form.def_workrate.field.choices %}
+                {# This is needed so the form can track the state as well. If we don't have a form input that tracks the current value, when the form is submitted the "link" based items will get removed from the GET parameters #}
+                <label class="asi-Filter_LinkGroupLink"
+                       onclick="this.closest('form').submit()"
+                       aria-current="{{ 'true' if form.def_workrate.value() and value in form.def_workrate.value() else 'false' }}">
+                  <input type="radio"
+                         class="asi-Filter_LinkRadio"
+                         name="{{ form.def_workrate.html_name }}"
+                         id="{{ form.def_workrate.id_for_label }}"
+                         value="{{ value }}"
+                         {% if form.def_workrate.value() and value in form.def_workrate.value() %}checked{% endif %}>
+
+                  {{ label }}
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="asi-Filter_LinkGroupsItem">
+            <h4 class="asi-Filter_LinkGroupsTitle">Attacking</h4>
+
+            <div class="asi-Filter_LinkGroup">
+              {% for value, label in form.att_workrate.field.choices %}
+                <label class="asi-Filter_LinkGroupLink"
+                       onclick="this.closest('form').submit()"
+                       aria-current="{{ 'true' if form.att_workrate.value() and value in form.att_workrate.value() else 'false' }}">
+                  <input type="radio"
+                         class="asi-Filter_LinkRadio"
+                         name="{{ form.att_workrate.html_name }}"
+                         id="{{ form.att_workrate.id_for_label }}"
+                         value="{{ value }}"
+                         {% if form.att_workrate.value() and value in form.att_workrate.value() %}checked{% endif %}>
+
+                  {{ label }}
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </li>
+{% endmacro %}

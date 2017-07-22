@@ -1,15 +1,23 @@
 import 'babel-polyfill'
+import 'pepjs'
 import 'utils/class-list-polyfill'
 
 import Vue from 'vue'
+
 import App from './vue/App'
 
 import { externalLinks, iframeFix } from './utils'
+import { PlayerFilterForm } from './players/list'
 
 new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
+
+  if (document.querySelector('.js-PlayerFilter')) {
+    const playerFilter = Object.create(PlayerFilterForm)
+    playerFilter.init({ el: document.querySelector('.js-PlayerFilter') })
+  }
 
   // If the browser isn't Safari, don't do anything
   if (

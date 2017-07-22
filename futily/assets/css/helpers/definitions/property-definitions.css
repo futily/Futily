@@ -17,6 +17,10 @@
   --Color_Border: #e4e7e9;
   --Color_Border-dark: #343b48;
 
+  --Color_Bronze: #b78553;
+  --Color_Silver: #bdbdbd;
+  --Color_Gold: #f5db66;
+
   --Color_Poor: hsl(0, 60%, 47%);
   --Color_Fair: hsl(35, 100%, 42%);
   --Color_Average: hsl(45, 100%, 47%);
@@ -197,17 +201,26 @@
   |
   */
   --Button-base: {
+    @apply --Font-14;
+
     display: inline-block;
-    padding: 0.5vr var(--Grid_Gutter);
+    padding: 0.25vr var(--Grid_Gutter);
+
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
 
     background-color: transparent;
     border: 1px solid transparent;
+    border-radius: 4px;
     color: #fff;
+    cursor: pointer;
 
     /* Style reasons */
     transition: background-color var(--Global_Transition),
                 border var(--Global_Transition),
                 color var(--Global_Transition);
+    /* stylelint-enable */
   };
 
   /*

@@ -10,10 +10,15 @@
 
 @mixin Button-primary {
   @include Button;
+
+  background-color: var(--Color_Green);
 }
 
 @mixin Button-secondary {
   @include Button;
+
+  background-color: var(--Color_Grey);
+  color: var(--Color_Body);
 }
 
 /*
