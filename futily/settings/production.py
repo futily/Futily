@@ -10,8 +10,8 @@ INSTALLED_APPS += [
 ]
 
 OPBEAT = {
-    'ORGANIZATION_ID': 'dde034beb33d4b77bb9937c39f0c158f',
-    'APP_ID': 'f6b78f2bdc4d44a79b2310477d02d3a7',
+    'ORGANIZATION_ID': 'f6b78f2bdc4d44a79b2310477d02d3a7',
+    'APP_ID': '3b5fe8a8af',
     'SECRET_TOKEN': 'c124cd945f999ccd4c33b558666a87e99ddc5635'
 }
 
