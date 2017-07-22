@@ -26,7 +26,7 @@ deployment:
   staging:
     branch: develop
     commands:
-      - python manage.py update --remote=staging
+      - python manage.py update --remote=staging --debug
 #  production:
 #    branch: master
 #    commands:
