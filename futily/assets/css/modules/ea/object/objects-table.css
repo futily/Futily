@@ -74,9 +74,7 @@
 }
 
 .ea-ObjectsTable_Cell-80 {
-  flex-basis: 80px;
-  flex-grow: 0;
-  flex-shrink: 0;
+  flex: 0 0 80px;
 
   width: 80px;
 }
