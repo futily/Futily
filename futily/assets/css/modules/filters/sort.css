@@ -1,0 +1,23 @@
+/*
+|--------------------------------------------------------------------------
+| Sort
+|--------------------------------------------------------------------------
+| @namespace: fltr-
+|
+*/
+.fltr-Sort {
+  display: block;
+  padding: 10px var(--Grid_Gutter);
+
+  border: 1px solid var(--Color_Border);
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: 20px;
+    height: @width;
+
+    color: var(--Color_Body);
+  }
+  /* stylelint-enable */
+}

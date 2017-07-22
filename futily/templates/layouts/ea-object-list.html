@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">{{ object_list[0]._meta.model_name | capitalize() }}s</h1>
+          <p class="pg-Strapline_Text">Fifa 17 {{ object_list[0]._meta.model_name | capitalize() }}s</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="ea-ObjectsTable">
+    <header class="ea-ObjectsTable_Header">
+      <div class="ea-ObjectsTable_Row">
+        <div class="ea-ObjectsTable_RowLeft">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">&nbsp;</div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">{{ object_list[0]._meta.model_name }}</div>
+        </div>
+
+        <div class="ea-ObjectsTable_RowRight">
+          {% for title in titles %}
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <a class="ea-ObjectsTable_CellTitle{% if title.current and title.key[0] == '-' %} ea-ObjectsTable_CellTitle-up{% endif %}"
+                 aria-current="{{ 'true' if title.current else 'false' }}"
+                 href="{{ url(get={'sort': title.key}) }}">{{ title.label | capitalize() }}</a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </header>
+
+    <div class="ea-ObjectsTable_Body">
+      {% for object in object_list %}
+        <a href="{{ object.get_absolute_url() }}" class="ea-ObjectsTable_Row">
+          <div class="ea-ObjectsTable_RowLeft">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <img alt=""
+                   src="{{ static('ea-images/{}s/{}.png'.format(object_list[0]._meta.model_name, object.ea_id)) }}"
+                   width="40"
+                   class="ea-ObjectRow">
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">
+              <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
+            </div>
+          </div>
+
+          <div class="ea-ObjectsTable_RowRight">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.average_rating }}</span>
+                <span class="ea-ObjectRow_CellTitle">Avg</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.total_players }}</span>
+                <span class="ea-ObjectRow_CellTitle">Total</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.total_gold }}</span>
+                <span class="ea-ObjectRow_CellTitle">Golds</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.total_silver }}</span>
+                <span class="ea-ObjectRow_CellTitle">Silvers</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.total_bronze }}</span>
+                <span class="ea-ObjectRow_CellTitle">Bronzes</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.list_informs() }}</span>
+                <span class="ea-ObjectRow_CellTitle">IFS</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

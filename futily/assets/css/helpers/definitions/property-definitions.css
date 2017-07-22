@@ -88,6 +88,9 @@
   --Color_Card-fut_birthday: #fff;
   --Color_CardMeta-fut_birthday: #145c9c;
 
+  --Color_Card-confederation_champions_motm: #fff;
+  --Color_CardMeta-confederation_champions_motm: #003482;
+
   --Color_Card-futties_winner: #be6286;
   --Color_CardMeta-futties_winner: #450632;
 
@@ -96,6 +99,9 @@
 
   --Color_Card-sbc_base: #f5f5f5;
   --Color_CardMeta-sbc_base: #d7d7d7;
+
+  --Color_Card-st_patricks: #218540;
+  --Color_CardMeta-st_patricks: #1b6a34;
 
   --Color_Card-halloween: #d36c12;
   --Color_CardMeta-halloween: var(--Color_Card-halloween);

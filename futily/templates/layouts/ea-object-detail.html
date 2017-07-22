@@ -116,15 +116,23 @@
                   </p>
 
                   <span class="fltr-Filter_DropdownIndicator">
-                    {% include 'angle-down.svg' %}
+                    {% include "angle-down.svg" %}
                   </span>
 
                   <ul class="fltr-Filter_Dropdown">
                     {% for sort in sorts %}
-                      {{ filter_item(sort, 'level') }}
+                      {{ filter_item(sort, 'sort') }}
                     {% endfor %}
                   </ul>
                 </div>
+              </li>
+
+              <li class="fltr-Filters_Item">
+                {% set current_order = request.GET.get('order') %}
+                <a class="fltr-Sort"
+                   href="{{ url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">
+                  {% include "sort.svg" %}
+                </a>
               </li>
             </ul>
           </div>

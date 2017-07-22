@@ -1,12 +1,11 @@
-from django.views.generic import DetailView, ListView
-
+from ..views import EaObjectDetail, EaObjectList
 from .models import League
 
 
-class LeagueList(ListView):
+class LeagueList(EaObjectList):
     model = League
     paginate_by = 50
 
 
-class LeagueDetail(DetailView):
+class LeagueDetail(EaObjectDetail):
     model = League

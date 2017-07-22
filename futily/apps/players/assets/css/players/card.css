@@ -144,6 +144,12 @@
   background-image: resolve('ea/cards/special/imotm.png');
   color: var(--Color_Card-imotm);
 }
+.plyr-Card-confederation_champions_motm {
+  background-image: resolve(
+    'ea/cards/special/confederation-champions-motm.png'
+  );
+  color: var(--Color_Card-confederation_champions_motm);
+}
 .plyr-Card-fut_birthday {
   background-image: resolve('ea/cards/special/fut-birthday.png');
   color: var(--Color_Card-fut_birthday);
@@ -159,6 +165,10 @@
 .plyr-Card-sbc_base {
   background-image: resolve('ea/cards/special/sbc-base.png');
   color: var(--Color_Card-sbc_base);
+}
+.plyr-Card-st_patricks {
+  background-image: resolve('ea/cards/special/st-patricks.png');
+  color: var(--Color_Card-st_patricks);
 }
 .plyr-Card-halloween {
   background-image: resolve('ea/cards/special/halloween.png');
@@ -276,6 +286,9 @@
   .plyr-Card-imotm & {
     color: var(--Color_CardMeta-imotm);
   }
+  .plyr-Card-confederation_champions_motm & {
+    color: var(--Color_CardMeta-confederation_champions_motm);
+  }
   .plyr-Card-fut_birthday & {
     color: var(--Color_CardMeta-fut_birthday);
   }
@@ -287,6 +300,9 @@
   }
   .plyr-Card-sbc_base & {
     color: var(--Color_CardMeta-sbc_base);
+  }
+  .plyr-Card-st_patricks & {
+    color: var(--Color_CardMeta-st_patricks);
   }
   .plyr-Card-halloween & {
     color: var(--Color_CardMeta-halloween);
