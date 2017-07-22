@@ -57,6 +57,13 @@ POSITION_LINE_CHOICES = [
     ('ATT', 'ATT'),
 ]
 
+POSITION_LINE_MAP = {
+    'GK': ['GK'],
+    'DEF': ['RB', 'RWB', 'CB', 'LB', 'LWB'],
+    'MID': ['CDM', 'CM', 'CAM', 'RM', 'RW', 'LM', 'LW'],
+    'ATT': ['CF', 'ST', 'RF', 'LF']
+}
+
 QUALITY_CHOICES = [
     ('bronze', 'bronze'),
     ('silver', 'silver'),

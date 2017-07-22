@@ -62,6 +62,7 @@ class Player(PageBase):
     ea_id_base = models.PositiveIntegerField(unique=True, db_index=True)
     ea_id = models.PositiveIntegerField(db_index=True)
 
+    name = models.CharField(max_length=100, db_index=True)
     first_name = models.CharField(max_length=100, db_index=True)
     last_name = models.CharField(max_length=100, db_index=True)
     common_name = models.CharField(max_length=200, db_index=True)
@@ -159,7 +160,7 @@ class Player(PageBase):
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-rating', 'common_name']
+        ordering = ['-rating', 'name']
         verbose_name = 'Player'
         verbose_name_plural = 'Players'
 
@@ -168,7 +169,7 @@ class Player(PageBase):
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not self.slug:
-            self.slug = slugify(self.common_name)
+            self.slug = f'{self.pk}-{slugify(self.name)}'
 
         self.total_stats = (self.card_att_1 + self.card_att_2 + self.card_att_3 + self.card_att_4 +
                             self.card_att_5 + self.card_att_6)

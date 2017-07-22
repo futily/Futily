@@ -2,7 +2,6 @@ from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.utils.text import slugify
 
 
 class Leagues(ContentBase):
@@ -52,12 +51,6 @@ class League(PageBase):
 
     def __str__(self):
         return self.name
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if not self.slug:
-            self.slug = slugify(self.name)
-
-        super().save(force_insert, force_update, using, update_fields)
 
     def _get_permalink_for_page(self, page):
         return page.reverse('league', kwargs={
