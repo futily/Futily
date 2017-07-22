@@ -1,8 +1,8 @@
-from ..constants import POSITION_LINE_MAP
-from ..models import get_default_player_page
 from ...clubs.models import Club
 from ...leagues.models import League
 from ...nations.models import Nation
+from ..constants import POSITION_LINE_MAP
+from ..models import get_default_player_page
 
 
 def serialize_player(player):

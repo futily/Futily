@@ -2,6 +2,7 @@ from django.core.management import BaseCommand
 from django.utils.text import slugify
 
 from futily.utils.list import filter_unique_dict
+
 from ....commands import EaAssetCreatorCommand
 from ...models import Nation, get_default_nation_page
 
