@@ -166,6 +166,10 @@
   background-image: resolve('ea/cards/special/sbc-base.png');
   color: var(--Color_Card-sbc_base);
 }
+.plyr-Card-sbc_premium {
+  background-image: resolve('ea/cards/special/sbc-premium.png');
+  color: var(--Color_Card-sbc_premium);
+}
 .plyr-Card-st_patricks {
   background-image: resolve('ea/cards/special/st-patricks.png');
   color: var(--Color_Card-st_patricks);
@@ -300,6 +304,9 @@
   }
   .plyr-Card-sbc_base & {
     color: var(--Color_CardMeta-sbc_base);
+  }
+  .plyr-Card-sbc_premium & {
+    color: var(--Color_CardMeta-sbc_premium);
   }
   .plyr-Card-st_patricks & {
     color: var(--Color_CardMeta-st_patricks);

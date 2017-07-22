@@ -75,6 +75,9 @@ class Club(PageBase):
     def goalkeepers(self):
         return self.players().filter(position_line='GK')
 
+    def list_informs(self):
+        return self.total_special + self.total_totw
+
 
 def get_default_clubs_page():
     """Returns the default clubs page."""

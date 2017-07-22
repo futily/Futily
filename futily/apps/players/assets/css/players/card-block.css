@@ -1,0 +1,41 @@
+/*
+|--------------------------------------------------------------------------
+| Card block
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-CardBlock {
+  margin-bottom: 2vr;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.plyr-CardBlock_Title {
+  @apply --Font-26;
+
+  position: relative;
+
+  margin-bottom: 1vr;
+  padding-bottom: 10px;
+
+  font-weight: 400;
+  letter-spacing: calc(100em / 1000);
+
+  text-transform: uppercase;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100px;
+    height: 5px;
+
+    background-color: var(--Color_Green);
+  }
+}

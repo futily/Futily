@@ -1,12 +1,11 @@
-from django.views.generic import DetailView, ListView
-
+from ..views import EaObjectDetail, EaObjectList
 from .models import Club
 
 
-class ClubList(ListView):
+class ClubList(EaObjectList):
     model = Club
     paginate_by = 50
 
 
-class ClubDetail(DetailView):
+class ClubDetail(EaObjectDetail):
     model = Club

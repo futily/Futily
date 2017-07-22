@@ -1,0 +1,116 @@
+{% extends "layouts/ea-object-detail.html" %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">{{ object }}</h1>
+          <p class="pg-Strapline_Text">Highest rated Fifa 17 {{ object }} players</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-Breadcrumbs">
+    <div class="pg-Breadcrumbs_Inner">
+      <div class="pg-Breadcrumbs_Body">
+        <nav class="bdc-Breadcrumb">
+          <div class="bdc-Breadcrumb_Items"
+               itemscope=""
+               itemtype="http://schema.org/BreadcrumbList">
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                <span itemprop="name">
+                  Home
+                </span>
+                <meta itemprop="position" content="1">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ pages.current.get_absolute_url() }}">
+                <span itemprop="name">
+                  {{ object._meta.app_label | capitalize() }}
+                </span>
+                <meta itemprop="position" content="2">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <span itemprop="name">
+                {{ object }}
+              </span>
+              <meta itemprop="position" content="3">
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="plyr-CardBlock">
+    <header class="plyr-CardBlock_Header">
+      <h2 class="plyr-CardBlock_Title">Attackers</h2>
+    </header>
+
+    <div class="plyr-CardBlock_Body">
+      {{ player_macros.card_list(club.attackers()) }}
+    </div>
+  </div>
+
+  <div class="plyr-CardBlock">
+    <header class="plyr-CardBlock_Header">
+      <h2 class="plyr-CardBlock_Title">Midfielders</h2>
+    </header>
+
+    <div class="plyr-CardBlock_Body">
+      {{ player_macros.card_list(club.midfielders()) }}
+    </div>
+  </div>
+
+  <div class="plyr-CardBlock">
+    <header class="plyr-CardBlock_Header">
+      <h2 class="plyr-CardBlock_Title">Defenders</h2>
+    </header>
+
+    <div class="plyr-CardBlock_Body">
+      {{ player_macros.card_list(club.defenders()) }}
+    </div>
+  </div>
+
+  <div class="plyr-CardBlock">
+    <header class="plyr-CardBlock_Header">
+      <h2 class="plyr-CardBlock_Title">Goalkeepers</h2>
+    </header>
+
+    <div class="plyr-CardBlock_Body">
+      {{ player_macros.card_list(club.goalkeepers()) }}
+    </div>
+  </div>
+{% endblock %}
