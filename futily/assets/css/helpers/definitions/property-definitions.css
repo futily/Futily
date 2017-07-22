@@ -59,7 +59,7 @@
   --Color_CardMeta-tots_silver: #081027;
 
   --Color_Card-tots_gold: #f5db66;
-  --Color_CardMeta-tots_gold: #251300;
+  --Color_CardMeta-tots_gold: #f5db66;
 
   --Color_Card-toty: #fbffff;
   --Color_CardMeta-toty: var(--Color_Card-toty);
@@ -76,14 +76,17 @@
   --Color_Card-purple: #b187ff;
   --Color_CardMeta-purple: var(--Color_Card-purple);
 
-  --Color_Card-pink: #e575a0;
-  --Color_CardMeta-pink: var(--Color_Card-pink);
+  --Color_Card-pink: #be6286;
+  --Color_CardMeta-pink: #450632;
 
   --Color_Card-record_breaker: #f7f5f2;
   --Color_CardMeta-record_breaker: var(--Color_Card-record_breaker);
 
   --Color_Card-imotm: #fff;
   --Color_CardMeta-imotm: #7a0600;
+
+  --Color_Card-fut_birthday: #fff;
+  --Color_CardMeta-fut_birthday: #145c9c;
 
   --Color_Card-futties_winner: #be6286;
   --Color_CardMeta-futties_winner: #450632;

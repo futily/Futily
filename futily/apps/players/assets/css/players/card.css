@@ -144,6 +144,10 @@
   background-image: resolve('ea/cards/special/imotm.png');
   color: var(--Color_Card-imotm);
 }
+.plyr-Card-fut_birthday {
+  background-image: resolve('ea/cards/special/fut-birthday.png');
+  color: var(--Color_Card-fut_birthday);
+}
 .plyr-Card-futties_winner {
   background-image: resolve('ea/cards/special/futties-winner.png');
   color: var(--Color_Card-futties_winner);
@@ -272,6 +276,9 @@
   .plyr-Card-imotm & {
     color: var(--Color_CardMeta-imotm);
   }
+  .plyr-Card-fut_birthday & {
+    color: var(--Color_CardMeta-fut_birthday);
+  }
   .plyr-Card-futties_winner & {
     color: var(--Color_CardMeta-futties_winner);
   }
@@ -390,7 +397,8 @@
   .plyr-Card-award_winner & {
     color: hsl(276, 66%, 31%);
   }
-  .plyr-Card-halloween & {
+  .plyr-Card-halloween &,
+  .plyr-Card-tots_gold & {
     color: hsl(0, 0%, 0%);
   }
   .plyr-Card-gotm & {
