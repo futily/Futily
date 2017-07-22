@@ -2,7 +2,7 @@ machine:
   node:
     version: 6.11.1
   python:
-    version: 3.6.2
+    version: 3.6.1
 
 dependencies:
   cache_directories:
@@ -22,12 +22,12 @@ test:
     - yarn run lint:js  # CI
     - python manage.py test
 
-# deployment:
-#   staging:
-#     branch: develop
-#     commands:
-#       - python manage.py update --remote=staging
-#   production:
-#     branch: master
-#     commands:
-#       - python manage.py update --remote=production
+deployment:
+  staging:
+    branch: develop
+    commands:
+      - python manage.py update --remote=staging
+#  production:
+#    branch: master
+#    commands:
+#      - python manage.py update --remote=production

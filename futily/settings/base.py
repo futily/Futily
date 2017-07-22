@@ -23,7 +23,6 @@ PREPEND_WWW = True
 ALLOWED_HOSTS = [
     SITE_DOMAIN,
     'www.{}'.format(SITE_DOMAIN),
-    'www.example.onespace.media',
 ]
 
 SUIT_CONFIG = {
