@@ -1,0 +1,123 @@
+/*
+|--------------------------------------------------------------------------
+| Stat group
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-StatGroup_Header {
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  display: flex;
+  margin-bottom: 0.5vr;
+}
+
+.plyr-StatGroup_Header-great {
+  --GradeColour: var(--Color_Great);
+}
+.plyr-StatGroup_Header-good {
+  --GradeColour: var(--Color_Good);
+}
+.plyr-StatGroup_Header-average {
+  --GradeColour: var(--Color_Average);
+}
+.plyr-StatGroup_Header-fair {
+  --GradeColour: var(--Color_Fair);
+}
+.plyr-StatGroup_Header-poor {
+  --GradeColour: var(--Color_Poor);
+}
+
+.plyr-StatGroup_Title {
+  @apply --Font-22;
+
+  font-weight: 500;
+}
+
+.plyr-StatGroup_GroupValue {
+  @apply --Font-30;
+
+  font-weight: 700;
+
+  color: var(--GradeColour);
+}
+
+.plyr-StatGroup_Bar {
+  width: 100%;
+  height: 7px;
+  margin-top: 0.25vr;
+
+  background-color: #eaeaea;
+  color: var(--GradeColour);
+}
+
+.plyr-StatGroup_BarOverlay {
+  transform: skew(-45deg);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-StatGroup_Item {
+  align-items: baseline;
+  justify-content: space-between;
+
+  display: flex;
+  margin-bottom: 0.25vr;
+  padding: 8px 0;
+
+  border-bottom: 1px solid var(--Color_Border);
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+}
+
+.plyr-StatGroup_Item-great {
+  --GradeColour: var(--Color_Great);
+}
+.plyr-StatGroup_Item-good {
+  --GradeColour: var(--Color_Good);
+}
+.plyr-StatGroup_Item-average {
+  --GradeColour: var(--Color_Average);
+}
+.plyr-StatGroup_Item-fair {
+  --GradeColour: var(--Color_Fair);
+}
+.plyr-StatGroup_Item-poor {
+  --GradeColour: var(--Color_Poor);
+}
+
+.plyr-StatGroup_Key {
+  @apply --Font-18;
+
+  font-weight: 400;
+}
+
+.plyr-StatGroup_Value {
+  @apply --Font-20;
+
+  font-weight: 500;
+
+  color: var(--GradeColour);
+}

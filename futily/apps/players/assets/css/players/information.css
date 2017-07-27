@@ -1,0 +1,69 @@
+/*
+|--------------------------------------------------------------------------
+| Information
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Columns
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-Information_Columns {
+  grid-column-gap: calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(3, 1fr);
+
+  display: grid;
+}
+
+.plyr-Information_Title {
+  @apply --Font-24;
+
+  margin-bottom: 0.5vr;
+
+  font-weight: 500;
+}
+
+.plyr-Information_Item {
+  @apply --Font-16;
+
+  justify-content: space-between;
+
+  display: flex;
+  padding: 10px 0;
+
+  font-weight: 500;
+
+  border-bottom: 1px solid var(--Color_Border);
+  color: #82919c;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+}
+
+.plyr-Information_Value {
+  display: flex;
+
+  color: var(--Color_Body);
+}
+
+.plyr-Information_Icon {
+  margin-left: 3px;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 14px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}

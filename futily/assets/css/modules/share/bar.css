@@ -1,0 +1,43 @@
+/*
+|--------------------------------------------------------------------------
+| Bar
+|--------------------------------------------------------------------------
+| @namespace: shr-
+|
+*/
+.shr-Bar {
+  width: 30px;
+}
+
+.shr-Bar_Item {
+  margin-top: 5px;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.shr-Bar_Share {
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  width: 30px;
+  height: @width;
+
+  background-color: var(--Color_Grey);
+  border: 1px solid var(--Color_Border);
+  border-radius: 2px;
+  color: #a1b1bc;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 15px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.shr-Bar_ShareText {
+  @include HideForAllButScreenReader;
+}

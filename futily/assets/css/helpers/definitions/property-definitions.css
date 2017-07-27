@@ -7,7 +7,6 @@
   |--------------------------------------------------------------------------
   |
   */
-  --Color_Anchor: #702670;
   --Color_Body: #2c3e50;
   --Color_Dark: #222533;
   --Color_Green: #16a287;
@@ -21,11 +20,13 @@
   --Color_Silver: #bdbdbd;
   --Color_Gold: #f5db66;
 
-  --Color_Poor: hsl(0, 60%, 47%);
-  --Color_Fair: hsl(35, 100%, 42%);
-  --Color_Average: hsl(45, 100%, 47%);
-  --Color_Good: hsl(81, 54%, 49%);
-  --Color_Great: hsl(96, 72%, 38%);
+  --Color_Poor: #bf3030;
+  --Color_Fair: #d47c00;
+  --Color_Average: #f2b600;
+  --Color_Good: #90c039;
+  --Color_Great: #54a71b;
+
+  --Color_Anchor: var(--Color_Green);
 
   --Card_Color: hsl(31, 100%, 7%);
 
@@ -146,11 +147,13 @@
   /* letter-spacing: calc(${100}em / 1000) ${} = number in photoshop */
   --Font-12: { font-size: 12px; line-height: 20px; };
   --Font-14: { font-size: 14px; line-height: 20px; };
-  --Font-16: { font-size: 16px; line-height: 1 vr; };
-  --Font-18: { font-size: 18px; line-height: 1 vr; };
-  --Font-22: { font-size: 22px; line-height: 1.33333 vr; };
-  --Font-26: { font-size: 26px; line-height: 1.25 vr; };
-  --Font-30: { font-size: 30px; line-height: 1.5 vr; };
+  --Font-16: { font-size: 16px; line-height: 1vr; };
+  --Font-18: { font-size: 18px; line-height: 1vr; };
+  --Font-20: { font-size: 20px; line-height: 1.4; };
+  --Font-22: { font-size: 22px; line-height: 1.33333vr; };
+  --Font-24: { font-size: 24px; line-height: 1.25; };
+  --Font-26: { font-size: 26px; line-height: 1.25vr; };
+  --Font-30: { font-size: 30px; line-height: 1.5vr; };
   --Font-36: { font-size: 36px; line-height: 44px; };
   --Font-40: { font-size: 40px; line-height: 40px; };
 

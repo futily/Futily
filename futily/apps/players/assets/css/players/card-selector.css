@@ -1,0 +1,102 @@
+/*
+|--------------------------------------------------------------------------
+| Card selector
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-CardSelector {
+  justify-content: space-between;
+
+  display: flex;
+  max-height: 400px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Variants
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-CardSelector_Variants {
+  position: relative;
+
+  flex-direction: column;
+
+  display: flex;
+  width: 90px;
+  margin-right: 10px;
+  padding: 34px 0;
+
+  overflow: hidden;
+}
+
+.plyr-CardSelector_Action {
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  flex-shrink: 0;
+
+  width: 100%;
+  padding: 0;
+
+  background-color: var(--Color_Grey);
+  color: #a1b1bc;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 9px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.plyr-CardSelector_Action-up {
+  top: 0;
+
+  margin-bottom: 10px;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    transform: rotate(180deg);
+  }
+  /* stylelint-enable */
+}
+
+.plyr-CardSelector_Action-down {
+  bottom: 0;
+
+  border-top: 10px solid #fff;
+  box-shadow: 0 0 0 1px var(--Color_Border);
+}
+
+.plyr-CardSelector_Variant {
+  flex-shrink: 0;
+
+  height: 110px;
+  margin-bottom: 10px;
+
+  border: 1px solid var(--Color_Border);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Card
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-CardSelector_Card {
+  flex: 1 1 auto;
+  justify-content: center;
+
+  display: flex;
+  padding-top: 30px;
+
+  border: 1px solid var(--Color_Border);
+}

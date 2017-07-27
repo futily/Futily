@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block og_image %}{% endblock %}
+{% block twitter_image %}{% endblock %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">{{ player.first_name }} {{ player.last_name }}</h1>
+          <p class="pg-Strapline_Text">{{ player.player_type | capitalize() }}</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-Breadcrumbs">
+    <div class="pg-Breadcrumbs_Inner">
+      <div class="pg-Breadcrumbs_Body">
+        <nav class="bdc-Breadcrumb">
+          <div class="bdc-Breadcrumb_Items"
+               itemscope=""
+               itemtype="http://schema.org/BreadcrumbList">
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                <span itemprop="name">
+                  Home
+                </span>
+                <meta itemprop="position" content="1">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ pages.current.get_absolute_url() }}">
+                <span itemprop="name">
+                  {{ object._meta.app_label | capitalize() }}
+                </span>
+                <meta itemprop="position" content="2">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <span itemprop="name">
+                {{ object }}
+              </span>
+              <meta itemprop="position" content="3">
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <article class="plyr-Detail">
+    <div class="plyr-Detail_Share">
+      <div class="shr-Bar">
+        <ul class="shr-Bar_Items">
+          <li class="shr-Bar_Item shr-Bar_Item-twitter">
+            <a class="shr-Bar_Share" href="#">
+              {% include "twitter.svg" %}
+
+              <span class="shr-Bar_ShareText">Share {{ player.name }} on Twitter</span>
+            </a>
+          </li>
+
+          <li class="shr-Bar_Item shr-Bar_Item-facebook">
+            <a class="shr-Bar_Share" href="#">
+              {% include "facebook.svg" %}
+
+              <span class="shr-Bar_ShareText">Share {{ player.name }} on Facebook</span>
+            </a>
+          </li>
+
+          <li class="shr-Bar_Item shr-Bar_Item-link"></li>
+        </ul>
+      </div>
+    </div>
+
+    <header class="plyr-Detail_Header">
+      <div class="plyr-Detail_Cards">
+        <div class="plyr-CardSelector">
+          <div class="plyr-CardSelector_Variants">
+            <button class="plyr-CardSelector_Action plyr-CardSelector_Action-up"
+                    type="button">
+              {% include "angle-down.svg" %}
+            </button>
+            <div class="plyr-CardSelector_Variant"></div>
+            <div class="plyr-CardSelector_Variant"></div>
+            <div class="plyr-CardSelector_Variant"></div>
+            <div class="plyr-CardSelector_Variant"></div>
+            <div class="plyr-CardSelector_Variant"></div>
+            <button class="plyr-CardSelector_Action plyr-CardSelector_Action-down"
+                    type="button">
+              {% include "angle-down.svg" %}
+            </button>
+          </div>
+
+          <div class="plyr-CardSelector_Card">
+            {{ player.render_card('lg') }}
+          </div>
+        </div>
+      </div>
+
+      <div class="plyr-Detail_HeaderContent">
+        <h2 class="plyr-Detail_HeaderTitle">{{ player.name }}</h2>
+        <p class="plyr-Detail_Type">{{ player.player_type | capitalize() }}</p>
+
+        <div class="plyr-Detail_Ratings">
+          <div class="plyr-FutilyRatings">
+            <h3 class="plyr-FutilyRatings_Title">Futily Ratings</h3>
+
+            <ul class="plyr-FutilyRatings_Items">
+              <li class="plyr-FutilyRatings_Item">
+                <p class="plyr-FutilyRatings_Key">Key:</p>
+                <p class="plyr-FutilyRatings_Value">1234</p>
+              </li>
+
+              <li class="plyr-FutilyRatings_Item">
+                <p class="plyr-FutilyRatings_Key">Key:</p>
+                <p class="plyr-FutilyRatings_Value">1234</p>
+              </li>
+
+              <li class="plyr-FutilyRatings_Item">
+                <p class="plyr-FutilyRatings_Key">Key:</p>
+                <p class="plyr-FutilyRatings_Value">1234</p>
+              </li>
+
+              <li class="plyr-FutilyRatings_Item">
+                <p class="plyr-FutilyRatings_Key">Key:</p>
+                <p class="plyr-FutilyRatings_Value">1234</p>
+              </li>
+
+              <li class="plyr-FutilyRatings_Item">
+                <p class="plyr-FutilyRatings_Key">Total stats:</p>
+                <p class="plyr-FutilyRatings_Value">{{ player.total_stats }}</p>
+              </li>
+
+              <li class="plyr-FutilyRatings_Item">
+                <p class="plyr-FutilyRatings_Key">Total IGS:</p>
+                <p class="plyr-FutilyRatings_Value">{{ player.total_ingame_stats }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="plyr-Detail_Body">
+      <div class="plyr-Detail_Section">
+        <header class="plyr-Detail_SectionHeader">
+          <h3 class="plyr-Detail_Title">
+            <strong class="plyr-Detail_Emphasis">Ingame</strong> stats
+          </h3>
+        </header>
+
+        <div class="plyr-Detail_SectionBody">
+          <div class="plyr-IngameStats">
+            <div class="plyr-IngameStats_Items">
+              {% set instance = player.__class__ %}
+              {% for group in player.ingame_stat_groups() %}
+                {% set group_value = getattr(player, group.field) %}
+                <div class="plyr-IngameStats_Item">
+                  <div class="plyr-StatGroup">
+                    <header class="plyr-StatGroup_Header plyr-StatGroup_Header-{{ stat_grade(group_value) }}">
+                      <h4 class="plyr-StatGroup_Title">{{ group.label.title() }}</h4>
+                      <p class="plyr-StatGroup_GroupValue">{{ group_value }}</p>
+
+                      <svg class="plyr-StatGroup_Bar">
+                        <rect class="plyr-StatGroup_BarOverlay"
+                              height="100%"
+                              width="{{ group_value }}%"></rect>
+                      </svg>
+                    </header>
+
+                    <div class="plyr-StatGroup_Body">
+                      <ul class="plyr-StatGroup_Items">
+                        {% for item in group['items'] %}
+                          {% set value = getattr(player, item) %}
+                          <li class="plyr-StatGroup_Item plyr-StatGroup_Item-{{ stat_grade(value) }}">
+                            <p class="plyr-StatGroup_Key">{{ instance._meta.get_field(item).verbose_name.title() }}</p>
+                            <p class="plyr-StatGroup_Value">{{ value }}</p>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plyr-Detail_Section">
+        <header class="plyr-Detail_SectionHeader">
+          <h3 class="plyr-Detail_Title">
+            <strong class="plyr-Detail_Emphasis">Ingame</strong> information
+          </h3>
+        </header>
+
+        <div class="plyr-Detail_SectionBody">
+          <div class="plyr-Information">
+            <div class="plyr-Information_Columns">
+              <div class="plyr-Information_Column">
+                <h4 class="plyr-Information_Title">Traits</h4>
+
+                <ul class="plyr-Information_Items">
+                  {% for trait in player.traits %}
+                    <li class="plyr-Information_Item">
+                      {{ trait }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+              <div class="plyr-Information_Column">
+                <h4 class="plyr-Information_Title">Specialties</h4>
+
+                <ul class="plyr-Information_Items">
+                  {% for specialty in player.specialities %}
+                    <li class="plyr-Information_Item">
+                      {{ specialty }}
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+              <div class="plyr-Information_Column">
+                <h4 class="plyr-Information_Title">Characteristics</h4>
+
+                <ul class="plyr-Information_Items">
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Key">Foot</p>
+                    <p class="plyr-Information_Value">{{ player.foot }}</p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Key">Attack Workrate</p>
+                    <p class="plyr-Information_Value">{{ player.work_rate_att }}</p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Key">Defensive Workrate</p>
+                    <p class="plyr-Information_Value">{{ player.work_rate_def }}</p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Key">Weak Foot</p>
+                    <p class="plyr-Information_Value">{{ player.weak_foot }}
+                      <span class="plyr-Information_Icon">{% include "star.svg" %}</span>
+                    </p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Key">Skill Moves</p>
+                    <p class="plyr-Information_Value">{{ player.skill_moves }}
+                      <span class="plyr-Information_Icon">{% include "star.svg" %}</span>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plyr-Detail_Section">
+        <header class="plyr-Detail_SectionHeader">
+          <h3 class="plyr-Detail_Title">
+            <strong class="plyr-Detail_Emphasis">Similar</strong> players
+          </h3>
+
+          <a class="plyr-Detail_Link" href="#">View all similar players</a>
+        </header>
+
+        <div class="plyr-Detail_SectionBody">
+          {{ player_macros.card_list(player.get_initial_related_players()) }}
+        </div>
+      </div>
+    </div>
+  </article>
+{% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+
+    <div class="asi-Block">
+      <h4 class="asi-Block_Title">{{ object }} Summary</h4>
+
+      <ul class="asi-KeyValues">
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Club</p>
+          <a class="asi-KeyValues_Value" href="{{ player.club.get_absolute_url() }}">
+            {{ player.club }}
+          </a>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">League</p>
+          <a class="asi-KeyValues_Value" href="{{ player.league.get_absolute_url() }}">
+            {{ player.league }}
+          </a>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Nation</p>
+          <a class="asi-KeyValues_Value" href="{{ player.nation.get_absolute_url() }}">
+            {{ player.nation }}
+          </a>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Age</p>
+          <p class="asi-KeyValues_Value">{{ player.age }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Height</p>
+          <p class="asi-KeyValues_Value">{{ player.height }}cm</p>
+        </li>
+      </ul>
+    </div>
+
+    {% block aside_blocks %}{% endblock %}
+  </div>
+{% endblock %}

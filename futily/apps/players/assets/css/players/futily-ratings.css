@@ -1,0 +1,43 @@
+/*
+|--------------------------------------------------------------------------
+| Futily ratings
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-FutilyRatings_Title {
+  @apply --Font-22;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-FutilyRatings_Items {
+  grid-gap: 0.5vr calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(2, 1fr);
+
+  display: grid;
+  margin-top: 0.5vr;
+}
+
+.plyr-FutilyRatings_Item {
+  align-items: baseline;
+  justify-content: space-between;
+
+  display: flex;
+}
+
+.plyr-FutilyRatings_Key {
+  @apply --Font-18;
+
+  font-weight: 400;
+}
+
+.plyr-FutilyRatings_Value {
+  @apply --Font-18;
+
+  font-weight: 700;
+}

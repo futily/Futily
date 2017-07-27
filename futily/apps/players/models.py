@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import date
 from django.utils.text import slugify
@@ -229,6 +230,61 @@ class Player(PageBase):
         }
 
         return schema[group]
+
+    def ingame_stat_groups(self):
+        return [
+            {'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']},
+            {'label': 'shooting', 'field': 'card_att_3', 'items': ['finishing', 'long_shots', 'penalties',
+                                                                   'positioning', 'shot_power', 'volleys']},
+            {'label': 'passing', 'field': 'card_att_5', 'items': ['crossing', 'curve', 'free_kick_accuracy',
+                                                                  'long_passing', 'short_passing', 'vision']},
+            {'label': 'dribbling', 'field': 'card_att_2', 'items': ['agility', 'balance', 'ball_control', 'reactions',
+                                                                    'dribbling']},
+            {'label': 'defending', 'field': 'card_att_4', 'items': ['heading_accuracy', 'interceptions', 'marking',
+                                                                    'sliding_tackle', 'standing_tackle']},
+            {'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']},
+        ]
+
+    @staticmethod
+    def get_similar_positions(position):
+        schema = {
+            'GK': ['GK'],
+            'RWB': ['RWB', 'RB'],
+            'RB': ['RWB', 'RB'],
+            'CB': ['CB'],
+            'LB': ['LWB', 'LB'],
+            'LWB': ['LWB', 'LB'],
+            'CDM': ['CDM', 'CM', 'CAM'],
+            'CM': ['CDM', 'CM', 'CAM'],
+            'CAM': ['CDM', 'CM', 'CAM'],
+            'RM': ['RM', 'RW', 'RF'],
+            'RW': ['RM', 'RW', 'RF'],
+            'RF': ['RM', 'RW', 'RF'],
+            'LM': ['LM', 'LW', 'LF'],
+            'LW': ['LM', 'LW', 'LF'],
+            'LF': ['LM', 'LW', 'LF'],
+            'CF': ['CAM', 'CF', 'ST'],
+            'ST': ['CF', 'ST'],
+        }
+
+        return schema[position]
+
+    def get_initial_related_players(self):
+        # This needs to build the Q objects conditionally based on the players position
+        # This is currently working for http://localhost:3000/players/1-cristiano-ronaldo/
+        return Player.objects.filter(
+            Q(card_att_1__range=[self.card_att_1 - 5, self.card_att_1 + 5]) &
+            Q(card_att_2__range=[self.card_att_2 - 5, self.card_att_2 + 5]) &
+            Q(card_att_3__range=[self.card_att_3 - 5, self.card_att_3 + 5]) &
+            Q(card_att_4__range=[self.card_att_4 - 5, self.card_att_4 + 5]),
+            position__in=self.get_similar_positions(self.position),
+        ).exclude(
+            ea_id=self.ea_id
+        ).order_by(
+            'ea_id'
+        ).distinct(
+            'ea_id'
+        )[:4]
 
 
 def get_default_players_page():
