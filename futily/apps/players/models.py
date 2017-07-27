@@ -1,3 +1,7 @@
+import operator
+import random
+from functools import reduce
+
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
@@ -269,14 +273,128 @@ class Player(PageBase):
 
         return schema[position]
 
-    def get_initial_related_players(self):
+    def get_related_players(self, amount):
+        variance = self.total_ingame_stats / 100 / 2
+        schema = {
+            'GK': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'RWB': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'RB': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'CB': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'LB': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'LWB': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'CDM': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'CM': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_5__range': [self.card_att_5 - variance, self.card_att_5 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'CAM': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'RM': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'RW': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'RF': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'LM': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'LW': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'LF': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'CF': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+            'ST': {
+                'card_att_1__range': [self.card_att_1 - variance, self.card_att_1 + variance],
+                'card_att_2__range': [self.card_att_2 - variance, self.card_att_2 + variance],
+                'card_att_3__range': [self.card_att_3 - variance, self.card_att_3 + variance],
+                'card_att_4__range': [self.card_att_4 - variance, self.card_att_4 + variance],
+                'card_att_6__range': [self.card_att_6 - variance, self.card_att_6 + variance],
+            },
+        }
+
+        q_obj = [Q((key, val)) for (key, val) in schema[self.position].items()]
+
         # This needs to build the Q objects conditionally based on the players position
         # This is currently working for http://localhost:3000/players/1-cristiano-ronaldo/
-        return Player.objects.filter(
-            Q(card_att_1__range=[self.card_att_1 - 5, self.card_att_1 + 5]) &
-            Q(card_att_2__range=[self.card_att_2 - 5, self.card_att_2 + 5]) &
-            Q(card_att_3__range=[self.card_att_3 - 5, self.card_att_3 + 5]) &
-            Q(card_att_4__range=[self.card_att_4 - 5, self.card_att_4 + 5]),
+        players = Player.objects.filter(
+            reduce(operator.and_, q_obj),
             position__in=self.get_similar_positions(self.position),
         ).exclude(
             ea_id=self.ea_id
@@ -284,7 +402,20 @@ class Player(PageBase):
             'ea_id'
         ).distinct(
             'ea_id'
-        )[:4]
+        )
+
+        if amount:
+            players = players[:amount]
+
+        return players
+
+    def get_initial_related_players(self):
+        players = self.get_related_players(20)
+
+        if len(players) > 4:
+            return random.sample(list(players), 4)
+
+        return players
 
 
 def get_default_players_page():
