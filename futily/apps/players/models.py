@@ -389,12 +389,10 @@ class Player(PageBase):
             },
         }
 
-        q_obj = [Q((key, val)) for (key, val) in schema[self.position].items()]
+        q_objs = [Q((key, val)) for (key, val) in schema[self.position].items()]
 
-        # This needs to build the Q objects conditionally based on the players position
-        # This is currently working for http://localhost:3000/players/1-cristiano-ronaldo/
         players = Player.objects.filter(
-            reduce(operator.and_, q_obj),
+            reduce(operator.and_, q_objs),
             position__in=self.get_similar_positions(self.position),
         ).exclude(
             ea_id=self.ea_id
