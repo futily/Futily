@@ -41,3 +41,28 @@
 
   font-weight: 700;
 }
+
+.plyr-FutilyRatings_ValueDifference {
+  @apply --Font-14;
+
+  font-weight: 500;
+}
+
+.plyr-FutilyRatings_ValueDifference-positive,
+.plyr-FutilyRatings_ValueDifference-negative {
+  &::before {
+    content: '(';
+  }
+
+  &::after {
+    content: ')';
+  }
+}
+
+.plyr-FutilyRatings_ValueDifference-positive {
+  color: var(--Color_Great);
+}
+
+.plyr-FutilyRatings_ValueDifference-negative {
+  color: var(--Color_Poor);
+}

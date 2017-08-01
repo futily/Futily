@@ -1,3 +1,4 @@
+import json
 import operator
 import random
 from functools import reduce
@@ -213,6 +214,20 @@ class Player(PageBase):
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
     @property
+    def card_json_data(self):
+        return json.dumps({
+            'rating': self.rating,
+            'color': self.color,
+            'position': self.position,
+            'card_att_1': self.card_att_1,
+            'card_att_2': self.card_att_2,
+            'card_att_3': self.card_att_3,
+            'card_att_4': self.card_att_4,
+            'card_att_5': self.card_att_5,
+            'card_att_6': self.card_att_6,
+        })
+
+    @property
     def card_stats(self):
         return [
             ('PAC' if not self.is_gk else 'DIV', self.card_att_1),
@@ -221,6 +236,17 @@ class Player(PageBase):
             ('DEF' if not self.is_gk else 'SPD', self.card_att_5),
             ('PAS' if not self.is_gk else 'KIC', self.card_att_3),
             ('PHY' if not self.is_gk else 'POS', self.card_att_6)
+        ]
+
+    @property
+    def card_stats_full(self):
+        return [
+            ('Pace' if not self.is_gk else 'Diving', self.card_att_1),
+            ('Dribbling' if not self.is_gk else 'Reflexes', self.card_att_4),
+            ('Shooting' if not self.is_gk else 'Handling', self.card_att_2),
+            ('Defending' if not self.is_gk else 'Speed', self.card_att_5),
+            ('Passing' if not self.is_gk else 'Kicking', self.card_att_3),
+            ('Physical' if not self.is_gk else 'Positioning', self.card_att_6)
         ]
 
     def ingame_stat_group_average(self, group):
@@ -272,6 +298,9 @@ class Player(PageBase):
         }
 
         return schema[position]
+
+    def get_variants(self):
+        return Player.objects.filter(ea_id=self.ea_id).exclude(id=self.id)
 
     def get_related_players(self, amount):
         variance = self.total_ingame_stats / 100 / 2

@@ -1,5 +1,6 @@
 <a class="plyr-Card plyr-Card-{{ size }} plyr-Card-{{ player.color }}"
-   href="{{ player.get_absolute_url() }}">
+   href="{{ player.get_absolute_url() }}"
+   data-card-data="{{ player.card_json_data }}">
   <header class="plyr-Card_Header">
     <div class="plyr-Card_Meta">
       <span class="plyr-Card_Rating">{{ player.rating }}</span>
@@ -23,7 +24,7 @@
 
   <div class="plyr-Card_Body">
     {% for key, value in player.card_stats %}
-      <div class="plyr-Card_Stat">
+      <div class="plyr-Card_Stat plyr-Card_Stat-{{ loop.cycle(1, 4, 2, 5, 3, 6) }}">
         <span class="plyr-Card_StatValue">{{ value }}</span>
         <span class="plyr-Card_StatKey">{{ key }}</span>
       </div>

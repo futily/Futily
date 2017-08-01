@@ -7,6 +7,7 @@ import Vue from 'vue'
 import App from './vue/App'
 
 import { externalLinks, iframeFix } from './utils'
+import { CardSelector } from './players/detail'
 import { PlayerFilterForm } from './players/list'
 
 new Vue(App).$mount('#app')
@@ -17,6 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.js-PlayerFilter')) {
     const playerFilter = Object.create(PlayerFilterForm)
     playerFilter.init({ el: document.querySelector('.js-PlayerFilter') })
+  }
+
+  if (document.querySelector('.plyr-CardSelector')) {
+    new CardSelector()
   }
 
   // If the browser isn't Safari, don't do anything

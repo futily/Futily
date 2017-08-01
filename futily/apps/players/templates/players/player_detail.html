@@ -106,16 +106,20 @@
     <header class="plyr-Detail_Header">
       <div class="plyr-Detail_Cards">
         <div class="plyr-CardSelector">
-          <div class="plyr-CardSelector_Variants">
+          <div class="plyr-CardSelector_VariantsContainer">
             <button class="plyr-CardSelector_Action plyr-CardSelector_Action-up"
                     type="button">
               {% include "angle-down.svg" %}
             </button>
-            <div class="plyr-CardSelector_Variant"></div>
-            <div class="plyr-CardSelector_Variant"></div>
-            <div class="plyr-CardSelector_Variant"></div>
-            <div class="plyr-CardSelector_Variant"></div>
-            <div class="plyr-CardSelector_Variant"></div>
+
+            <div class="plyr-CardSelector_Variants">
+              {% for variant in player.get_variants() %}
+                <a class="plyr-CardSelector_Variant plyr-CardSelector_Variant-{{ variant.color }}"
+                   data-card-data="{{ variant.card_json_data }}"
+                   href="{{ variant.get_absolute_url() }}"></a>
+              {% endfor %}
+            </div>
+
             <button class="plyr-CardSelector_Action plyr-CardSelector_Action-down"
                     type="button">
               {% include "angle-down.svg" %}
@@ -131,6 +135,24 @@
       <div class="plyr-Detail_HeaderContent">
         <h2 class="plyr-Detail_HeaderTitle">{{ player.name }}</h2>
         <p class="plyr-Detail_Type">{{ player.player_type | capitalize() }}</p>
+
+        <div class="plyr-Detail_Ratings">
+          <div class="plyr-FutilyRatings">
+            <h3 class="plyr-FutilyRatings_Title">Fifa Ratings</h3>
+
+            <ul class="plyr-FutilyRatings_Items">
+              {% for key, stat in player.card_stats_full %}
+                <li class="plyr-FutilyRatings_Item plyr-FutilyRatings_Item-{{ loop.cycle(1, 4, 2, 5, 3, 6) }}">
+                  <p class="plyr-FutilyRatings_Key">{{ key }}:</p>
+                  <p class="plyr-FutilyRatings_Value">
+                    <span class="plyr-FutilyRatings_ValueDifference"></span>
+                    {{ stat }}
+                  </p>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
 
         <div class="plyr-Detail_Ratings">
           <div class="plyr-FutilyRatings">
@@ -342,6 +364,11 @@
         <li class="asi-KeyValues_Item">
           <p class="asi-KeyValues_Key">Age</p>
           <p class="asi-KeyValues_Value">{{ player.age }}</p>
+        </li>
+
+        <li class="asi-KeyValues_Item">
+          <p class="asi-KeyValues_Key">Source</p>
+          <p class="asi-KeyValues_Value">{{ player.source }}</p>
         </li>
 
         <li class="asi-KeyValues_Item">

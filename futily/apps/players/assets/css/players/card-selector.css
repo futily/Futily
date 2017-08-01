@@ -18,17 +18,25 @@
 |--------------------------------------------------------------------------
 |
 */
-.plyr-CardSelector_Variants {
+.plyr-CardSelector_VariantsContainer {
   position: relative;
 
-  flex-direction: column;
-
-  display: flex;
   width: 90px;
   margin-right: 10px;
   padding: 34px 0;
 
   overflow: hidden;
+}
+
+.plyr-CardSelector_Variants {
+  flex: 1;
+  flex-direction: column;
+
+  display: flex;
+  max-height: 100%;
+
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .plyr-CardSelector_Action {
@@ -62,6 +70,9 @@
 
   margin-bottom: 10px;
 
+  border-bottom: 10px solid #fff;
+  box-shadow: 0 0 0 1px var(--Color_Border);
+
   /* stylelint-disable selector-max-type */
   svg {
     transform: rotate(180deg);
@@ -82,7 +93,114 @@
   height: 110px;
   margin-bottom: 10px;
 
+  background-position: center;
+  background-size: 50px 78px;
   border: 1px solid var(--Color_Border);
+  cursor: pointer;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* stylelint-disable selector-class-pattern */
+.plyr-CardSelector_Variant-bronze {
+  background-image: resolve('ea/cards/large/bronze.png');
+}
+.plyr-CardSelector_Variant-silver {
+  background-image: resolve('ea/cards/large/silver.png');
+}
+.plyr-CardSelector_Variant-gold {
+  background-image: resolve('ea/cards/large/gold.png');
+}
+.plyr-CardSelector_Variant-rare_bronze {
+  background-image: resolve('ea/cards/large/rare-bronze.png');
+}
+.plyr-CardSelector_Variant-rare_silver {
+  background-image: resolve('ea/cards/large/rare-silver.png');
+}
+.plyr-CardSelector_Variant-rare_gold {
+  background-image: resolve('ea/cards/large/rare-gold.png');
+}
+.plyr-CardSelector_Variant-totw_bronze {
+  background-image: resolve('ea/cards/special/totw-bronze.png');
+}
+.plyr-CardSelector_Variant-totw_silver {
+  background-image: resolve('ea/cards/special/totw-silver.png');
+}
+.plyr-CardSelector_Variant-totw_gold {
+  background-image: resolve('ea/cards/special/totw-gold.png');
+}
+.plyr-CardSelector_Variant-tots_bronze {
+  background-image: resolve('ea/cards/special/tots-bronze.png');
+}
+.plyr-CardSelector_Variant-tots_silver {
+  background-image: resolve('ea/cards/special/tots-silver.png');
+}
+.plyr-CardSelector_Variant-tots_gold {
+  background-image: resolve('ea/cards/special/tots-gold.png');
+}
+.plyr-CardSelector_Variant-toty {
+  background-image: resolve('ea/cards/special/toty.png');
+}
+.plyr-CardSelector_Variant-legend {
+  background-image: resolve('ea/cards/large/legend.png');
+}
+.plyr-CardSelector_Variant-motm {
+  background-image: resolve('ea/cards/special/motm.png');
+}
+.plyr-CardSelector_Variant-teal {
+  background-image: resolve('ea/cards/special/teal.png');
+}
+.plyr-CardSelector_Variant-purple {
+  background-image: resolve('ea/cards/special/purple.png');
+}
+.plyr-CardSelector_Variant-pink {
+  background-image: resolve('ea/cards/special/pink.png');
+}
+.plyr-CardSelector_Variant-record_breaker {
+  background-image: resolve('ea/cards/special/record-breaker.png');
+}
+.plyr-CardSelector_Variant-imotm {
+  background-image: resolve('ea/cards/special/imotm.png');
+}
+.plyr-CardSelector_Variant-confederation_champions_motm {
+  background-image: resolve(
+    'ea/cards/special/confederation-champions-motm.png'
+  );
+}
+.plyr-CardSelector_Variant-fut_birthday {
+  background-image: resolve('ea/cards/special/fut-birthday.png');
+}
+.plyr-CardSelector_Variant-futties_winner {
+  background-image: resolve('ea/cards/special/futties-winner.png');
+}
+.plyr-CardSelector_Variant-ones_to_watch {
+  background-image: resolve('ea/cards/special/ones-to-watch.png');
+}
+.plyr-CardSelector_Variant-sbc_base {
+  background-image: resolve('ea/cards/special/sbc-base.png');
+}
+.plyr-CardSelector_Variant-sbc_premium {
+  background-image: resolve('ea/cards/special/sbc-premium.png');
+}
+.plyr-CardSelector_Variant-st_patricks {
+  background-image: resolve('ea/cards/special/st-patricks.png');
+}
+.plyr-CardSelector_Variant-halloween {
+  background-image: resolve('ea/cards/special/halloween.png');
+}
+.plyr-CardSelector_Variant-movember {
+  background-image: resolve('ea/cards/special/movember.png');
+}
+.plyr-CardSelector_Variant-award_winner {
+  background-image: resolve('ea/cards/special/award-winner.png');
+}
+.plyr-CardSelector_Variant-award_motm {
+  background-image: resolve('ea/cards/special/motm.png');
+}
+.plyr-CardSelector_Variant-gotm {
+  background-image: resolve('ea/cards/special/gotm.png');
 }
 
 /*
