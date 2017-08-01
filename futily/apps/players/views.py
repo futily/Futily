@@ -1,3 +1,4 @@
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
@@ -139,6 +140,31 @@ class PlayerList(FormMixin, ListView):
 
 class PlayerDetail(DetailView):
     model = Player
+
+
+class PlayerDetailSimilar(DetailView):
+    model = Player
+    template_name = 'players/player_detail_similar.html'
+
+    def player_pagination(self):
+        paginator = Paginator(self.object.get_similar_players(), 36)
+
+        try:
+            # Deliver the requested page
+            return paginator.page(self.request.GET.get('page'))
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            return paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            return paginator.page(paginator.num_pages)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['similar_players'] = self.player_pagination()
+
+        return context
 
 
 def construct_query_dict(current, schema):

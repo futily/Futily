@@ -1,0 +1,18 @@
+{% extends "players/_base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block body %}
+  <div class="plyr-Detail_Section">
+    <header class="plyr-Detail_SectionHeader">
+      <h3 class="plyr-Detail_Title">
+        <strong class="plyr-Detail_Emphasis">Similar</strong> players
+      </h3>
+    </header>
+
+    <div class="plyr-Detail_SectionBody">
+      {{ player_macros.card_list(similar_players) }}
+
+      {{ render_pagination(similar_players) }}
+    </div>
+  </div>
+{% endblock %}

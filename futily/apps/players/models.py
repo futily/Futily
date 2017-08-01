@@ -191,14 +191,17 @@ class Player(PageBase):
 
         super().save(force_insert, force_update, using, update_fields)
 
-    def _get_permalink_for_page(self, page):
-        return page.reverse('player', kwargs={
+    def _get_permalink_for_page(self, page, name='player'):
+        return page.reverse(name, kwargs={
             'pk': self.pk,
             'slug': self.slug,
         })
 
     def get_absolute_url(self):
         return self._get_permalink_for_page(self.page.page)
+
+    def get_similar_absolute_url(self):
+        return self._get_permalink_for_page(self.page.page, name='player_similar')
 
     def render_card(self, size='sm'):
         return render_to_string('players/includes/card.html', {
@@ -302,7 +305,7 @@ class Player(PageBase):
     def get_variants(self):
         return Player.objects.filter(ea_id=self.ea_id).exclude(id=self.id)
 
-    def get_related_players(self, amount):
+    def get_similar_players(self, amount=None):
         variance = self.total_ingame_stats / 100 / 2
         schema = {
             'GK': [1, 2, 3, 4, 5, 6],
@@ -349,8 +352,8 @@ class Player(PageBase):
 
         return players
 
-    def get_initial_related_players(self):
-        players = self.get_related_players(20)
+    def get_initial_similar_players(self):
+        players = self.get_similar_players(20)
 
         if len(players) > 4:
             return random.sample(list(players), 4)
