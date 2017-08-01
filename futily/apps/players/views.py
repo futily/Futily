@@ -162,6 +162,7 @@ class PlayerDetailSimilar(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        context['similar_coefficient'] = self.object.similar_coefficient
         context['similar_players'] = self.player_pagination()
 
         return context

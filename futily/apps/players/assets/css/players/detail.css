@@ -91,6 +91,12 @@
 
   color: var(--Color_Body);
 
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--Color_Green);
+  }
+
   [aria-current='true'] & {
     font-weight: 700;
   }
@@ -129,6 +135,14 @@
 
 .plyr-Detail_Emphasis {
   font-weight: 500;
+}
+
+.plyr-Detail_TitleSmall {
+  @apply --Font-16;
+
+  margin-left: 10px;
+
+  font-weight: 400;
 }
 
 .plyr-Detail_Link {

@@ -252,6 +252,10 @@ class Player(PageBase):
             ('Physical' if not self.is_gk else 'Positioning', self.card_att_6)
         ]
 
+    @property
+    def similar_coefficient(self):
+        return self.total_ingame_stats / 100 / 2
+
     def ingame_stat_group_average(self, group):
         schema = {
             'pace': self.card_att_1,
@@ -306,7 +310,7 @@ class Player(PageBase):
         return Player.objects.filter(ea_id=self.ea_id).exclude(id=self.id)
 
     def get_similar_players(self, amount=None):
-        variance = self.total_ingame_stats / 100 / 2
+        coefficient = self.similar_coefficient
         schema = {
             'GK': [1, 2, 3, 4, 5, 6],
             'RWB': [1, 5, 6],
@@ -331,7 +335,7 @@ class Player(PageBase):
             Q(
                 (
                     f'card_att_{val}__range',
-                    [getattr(self, f'card_att_{val}') - variance, getattr(self, f'card_att_{val}') + variance]
+                    [getattr(self, f'card_att_{val}') - coefficient, getattr(self, f'card_att_{val}') + coefficient]
                 )
             ) for val in schema[self.position]
         ]
