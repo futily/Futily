@@ -251,7 +251,8 @@ TEMPLATES = [
                 'compressor.contrib.jinja2ext.CompressorExtension'
             ],
             'globals': {
-                'getattr': getattr
+                'getattr': getattr,
+                'set': set,
             },
             'bytecode_cache': {
                 'name': 'default',

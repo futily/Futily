@@ -451,18 +451,27 @@
 |
 */
 .plyr-Card_Body {
-  flex-wrap: wrap;
-  justify-content: space-between;
+  --RowHeight: 24px;
 
-  display: flex;
+  grid-auto-flow: column;
+  grid-column-gap: 4%;
+  grid-template: repeat(3, var(--RowHeight)) / repeat(2, 1fr);
+
+  display: grid;
+  margin-top: 3px;
+
+  .plyr-Card-small & {
+    --RowHeight: 16px;
+
+    margin-top: 1px;
+  }
 }
 
 .plyr-Card_Stat {
-  align-items: center;
+  align-items: baseline;
+  justify-content: center;
 
   display: flex;
-  width: 50%;
-  height: 19px;
 
   background-image: linear-gradient(
     to bottom,
@@ -470,30 +479,8 @@
     hsla(0, 0%, 0%, 0.07) 95%
   );
 
-  .plyr-Card-small & {
-    height: 16px;
-  }
-
-  .plyr-Card-large & {
-    height: 24px;
-  }
-
   .plyr-Card-movember & {
     color: hsl(42, 16%, 62%);
-  }
-
-  &:nth-child(odd) {
-    padding-right: 4%;
-    padding-left: @padding-right;
-  }
-
-  &:nth-child(even) {
-    justify-content: flex-end;
-
-    display: flex;
-
-    padding-right: 4%;
-    padding-left: 4%;
   }
 
   &:nth-last-child(-n + 2) {
@@ -503,44 +490,42 @@
 
 .plyr-Card_StatValue {
   width: 27px;
-  padding: 1px;
 
   font-family: var(--Font_Family-din);
   font-size: 14px;
   font-weight: 700;
-  line-height: 1;
 
   .plyr-Card-small & {
     width: auto;
-    padding: 1px 6px 1px 1px;
+    padding: 0 6px 0 1px;
 
     font-size: 12px;
+    line-height: 16px;
   }
 
   .plyr-Card-large & {
     font-size: 20px;
-    line-height: 14px;
+    line-height: 20px;
   }
 }
 
 .plyr-Card_StatKey {
   min-width: 30px;
-  padding: 1px;
 
   font-family: var(--Font_Family-dinCond);
   font-size: 14px;
   font-weight: 500;
-  line-height: 1;
 
   .plyr-Card-small & {
     min-width: 0;
 
     font-size: 12px;
+    line-height: 16px;
   }
 
   .plyr-Card-large & {
     font-size: 20px;
-    line-height: 14px;
+    line-height: 20px;
   }
 }
 

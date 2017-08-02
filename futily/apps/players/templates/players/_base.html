@@ -218,9 +218,9 @@
           </a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="false">
+        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_compare_absolute_url()) else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
-             href="#">
+             href="{{ player.get_compare_absolute_url() }}">
             Compare
           </a>
         </li>

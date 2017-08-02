@@ -198,6 +198,21 @@ class PlayerDetailSimilar(DetailView):
         return context
 
 
+class PlayerDetailCompare(DetailView):
+    model = Player
+    template_name = 'players/player_detail_compare.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if self.kwargs.get('other_pk'):
+            context['other_player'] = Player.objects.get(pk=self.kwargs.get('other_pk'))
+        else:
+            context['other_player'] = Player.objects.last()
+
+        return context
+
+
 def construct_query_dict(current, schema):
     filter_dict = {}
     wanted = []

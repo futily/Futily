@@ -234,6 +234,9 @@ class Player(PageBase):
     def get_similar_absolute_url(self):
         return self._get_permalink_for_page(self.page.page, name='player_similar')
 
+    def get_compare_absolute_url(self):
+        return self._get_permalink_for_page(self.page.page, name='player_compare')
+
     def render_card(self, size='sm'):
         return render_to_string('players/includes/card.html', {
             'player': self,
@@ -265,10 +268,10 @@ class Player(PageBase):
     def card_stats(self):
         return [
             ('PAC' if not self.is_gk else 'DIV', self.card_att_1),
-            ('DRI' if not self.is_gk else 'REF', self.card_att_4),
             ('SHO' if not self.is_gk else 'HAN', self.card_att_2),
-            ('DEF' if not self.is_gk else 'SPD', self.card_att_5),
             ('PAS' if not self.is_gk else 'KIC', self.card_att_3),
+            ('DRI' if not self.is_gk else 'REF', self.card_att_4),
+            ('DEF' if not self.is_gk else 'SPD', self.card_att_5),
             ('PHY' if not self.is_gk else 'POS', self.card_att_6)
         ]
 
@@ -276,10 +279,10 @@ class Player(PageBase):
     def card_stats_full(self):
         return [
             ('Pace' if not self.is_gk else 'Diving', self.card_att_1),
-            ('Dribbling' if not self.is_gk else 'Reflexes', self.card_att_4),
             ('Shooting' if not self.is_gk else 'Handling', self.card_att_2),
-            ('Defending' if not self.is_gk else 'Speed', self.card_att_5),
             ('Passing' if not self.is_gk else 'Kicking', self.card_att_3),
+            ('Dribbling' if not self.is_gk else 'Reflexes', self.card_att_4),
+            ('Defending' if not self.is_gk else 'Speed', self.card_att_5),
             ('Physical' if not self.is_gk else 'Positioning', self.card_att_6)
         ]
 
@@ -302,13 +305,13 @@ class Player(PageBase):
     def ingame_stat_groups(self):
         return [
             {'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']},
-            {'label': 'shooting', 'field': 'card_att_3', 'items': ['finishing', 'long_shots', 'penalties',
+            {'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
                                                                    'positioning', 'shot_power', 'volleys']},
-            {'label': 'passing', 'field': 'card_att_5', 'items': ['crossing', 'curve', 'free_kick_accuracy',
+            {'label': 'passing', 'field': 'card_att_3', 'items': ['crossing', 'curve', 'free_kick_accuracy',
                                                                   'long_passing', 'short_passing', 'vision']},
-            {'label': 'dribbling', 'field': 'card_att_2', 'items': ['agility', 'balance', 'ball_control', 'reactions',
+            {'label': 'dribbling', 'field': 'card_att_4', 'items': ['agility', 'balance', 'ball_control', 'reactions',
                                                                     'dribbling']},
-            {'label': 'defending', 'field': 'card_att_4', 'items': ['heading_accuracy', 'interceptions', 'marking',
+            {'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
                                                                     'sliding_tackle', 'standing_tackle']},
             {'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']},
         ]

@@ -29,6 +29,10 @@
   margin-bottom: 1vr;
 }
 
+.plyr-Detail_Header-full {
+  display: block;
+}
+
 .plyr-Detail_HeaderTitle {
   @apply --Font-24;
 }
@@ -134,6 +138,12 @@
   @apply --Font-30;
 
   font-weight: 400;
+}
+
+.plyr-Detail_Name {
+  @apply --Font-18;
+
+  font-weight: 500;
 }
 
 .plyr-Detail_Emphasis {

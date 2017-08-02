@@ -24,7 +24,7 @@
 
   <div class="plyr-Card_Body">
     {% for key, value in player.card_stats %}
-      <div class="plyr-Card_Stat plyr-Card_Stat-{{ loop.cycle(1, 4, 2, 5, 3, 6) }}">
+      <div class="plyr-Card_Stat plyr-Card_Stat-{{ loop.index }}">
         <span class="plyr-Card_StatValue">{{ value }}</span>
         <span class="plyr-Card_StatKey">{{ key }}</span>
       </div>

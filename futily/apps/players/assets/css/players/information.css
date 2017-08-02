@@ -30,6 +30,7 @@
 .plyr-Information_Item {
   @apply --Font-16;
 
+  flex-wrap: wrap;
   justify-content: space-between;
 
   display: flex;
@@ -51,10 +52,28 @@
   }
 }
 
-.plyr-Information_Value {
-  display: flex;
+.plyr-Information_ItemIdentifier {
+  @apply --Font-14;
+
+  width: 100%;
+
+  font-weight: 500;
 
   color: var(--Color_Body);
+}
+
+.plyr-Information_Value {
+  display: flex;
+  /* This is for alignment on the compare page */
+  min-width: 57px;
+
+  color: var(--Color_Body);
+
+  &:last-child {
+    justify-content: flex-end;
+
+    display: flex;
+  }
 }
 
 .plyr-Information_Icon {

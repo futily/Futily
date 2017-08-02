@@ -16,12 +16,12 @@
             {% set group_value = getattr(player, group.field) %}
             <div class="plyr-IngameStats_Item">
               <div class="plyr-StatGroup">
-                <header class="plyr-StatGroup_Header plyr-StatGroup_Header-{{ stat_grade(group_value) }}">
+                <header class="plyr-StatGroup_Header">
                   <h4 class="plyr-StatGroup_Title">{{ group.label.title() }}</h4>
-                  <p class="plyr-StatGroup_GroupValue">{{ group_value }}</p>
+                  <p class="plyr-StatGroup_GroupValue plyr-StatGroup_GroupValue-{{ stat_grade(group_value) }}">{{ group_value }}</p>
 
                   <svg class="plyr-StatGroup_Bar">
-                    <rect class="plyr-StatGroup_BarOverlay"
+                    <rect class="plyr-StatGroup_BarOverlay plyr-StatGroup_BarOverlay-{{ stat_grade(group_value) }}"
                           height="100%"
                           width="{{ group_value }}%"></rect>
                   </svg>
@@ -31,9 +31,9 @@
                   <ul class="plyr-StatGroup_Items">
                     {% for item in group['items'] %}
                       {% set value = getattr(player, item) %}
-                      <li class="plyr-StatGroup_Item plyr-StatGroup_Item-{{ stat_grade(value) }}">
+                      <li class="plyr-StatGroup_Item">
                         <p class="plyr-StatGroup_Key">{{ instance._meta.get_field(item).verbose_name.title() }}</p>
-                        <p class="plyr-StatGroup_Value">{{ value }}</p>
+                        <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value) }}">{{ value }}</p>
                       </li>
                     {% endfor %}
                   </ul>

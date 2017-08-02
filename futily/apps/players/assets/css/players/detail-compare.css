@@ -1,0 +1,29 @@
+/*
+|--------------------------------------------------------------------------
+| Detail compare
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-DetailCompare {
+  grid-column-gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+
+  display: grid;
+}
+
+.plyr-DetailCompare_Player {
+  padding: 30px;
+
+  text-align: center;
+
+  border: 1px solid var(--Color_Border);
+}
+
+.plyr-DetailCompare_Card {
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  margin-top: 1vr;
+}

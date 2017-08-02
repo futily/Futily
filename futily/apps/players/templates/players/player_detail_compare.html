@@ -1,0 +1,328 @@
+{% extends "players/_base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block breadcrumbs %}
+  <div class="pg-Breadcrumbs">
+    <div class="pg-Breadcrumbs_Inner">
+      <div class="pg-Breadcrumbs_Body">
+        <nav class="bdc-Breadcrumb">
+          <div class="bdc-Breadcrumb_Items"
+               itemscope=""
+               itemtype="http://schema.org/BreadcrumbList">
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                <span itemprop="name">
+                  Home
+                </span>
+                <meta itemprop="position" content="1">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ pages.current.get_absolute_url() }}">
+                <span itemprop="name">
+                  {{ object._meta.app_label | capitalize() }}
+                </span>
+                <meta itemprop="position" content="2">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ player.get_absolute_url() }}">
+                <span itemprop="name">
+                  {{ object }}
+                </span>
+                <meta itemprop="position" content="3">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ player.get_compare_absolute_url() }}">
+                <span itemprop="name">
+                  Compare
+                </span>
+                <meta itemprop="position" content="4">
+              </a>
+            </div>
+
+            {% if view.kwargs.other_pk %}
+              <div class="bdc-Breadcrumb_Divider">
+                {% include 'angle-down.svg' %}
+              </div>
+
+              <div class="bdc-Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <span itemprop="name">
+                  With {{ other_player }}
+                </span>
+                <meta itemprop="position" content="5">
+              </div>
+            {% endif %}
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <article class="plyr-Detail">
+    <div class="plyr-Detail_Share">
+      <div class="shr-Bar">
+        <ul class="shr-Bar_Items">
+          <li class="shr-Bar_Item shr-Bar_Item-twitter">
+            <a class="shr-Bar_Share" href="#">
+              {% include "twitter.svg" %}
+
+              <span class="shr-Bar_ShareText">Share {{ player.name }} on Twitter</span>
+            </a>
+          </li>
+
+          <li class="shr-Bar_Item shr-Bar_Item-facebook">
+            <a class="shr-Bar_Share" href="#">
+              {% include "facebook.svg" %}
+
+              <span class="shr-Bar_ShareText">Share {{ player.name }} on Facebook</span>
+            </a>
+          </li>
+
+          <li class="shr-Bar_Item shr-Bar_Item-link"></li>
+        </ul>
+      </div>
+    </div>
+
+    <header class="plyr-Detail_Header plyr-Detail_Header-full">
+      <div class="plyr-Detail_Compare">
+        <div class="plyr-DetailCompare">
+          <div class="plyr-DetailCompare_Player plyr-DetailCompare_Player-fixed">
+            <h2 class="plyr-Detail_HeaderTitle">{{ player.name }}</h2>
+            <p class="plyr-Detail_Type">{{ player.player_type | capitalize() }}</p>
+
+            <div class="plyr-DetailCompare_Card">
+              {{ player.render_card('lg') }}
+            </div>
+          </div>
+
+          <div class="plyr-DetailCompare_Player plyr-DetailCompare_Player-search">
+            <h2 class="plyr-Detail_HeaderTitle">{{ other_player.name }}</h2>
+            <p class="plyr-Detail_Type">{{ other_player.player_type | capitalize() }}</p>
+
+            <div class="plyr-DetailCompare_Card">
+              {{ other_player.render_card('lg') }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="plyr-Detail_Navigation">
+      <ul class="plyr-Detail_NavigationItems">
+        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path == player.get_absolute_url() else 'false' }}">
+          <a class="plyr-Detail_NavigationLink" href="{{ player.get_absolute_url() }}">Stats</a>
+        </li>
+
+        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path == player.get_similar_absolute_url() else 'false' }}">
+          <a class="plyr-Detail_NavigationLink"
+             href="{{ player.get_similar_absolute_url() }}">
+            Similar players
+          </a>
+        </li>
+
+        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_chemistry_absolute_url()) else 'false' }}">
+          <a class="plyr-Detail_NavigationLink"
+             href="{{ player.get_chemistry_absolute_url() }}">
+            Chemistry
+          </a>
+        </li>
+
+        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_compare_absolute_url()) else 'false' }}">
+          <a class="plyr-Detail_NavigationLink"
+             href="{{ player.get_compare_absolute_url() }}">
+            Compare
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="plyr-Detail_Body">
+      <div class="plyr-Detail_Section">
+        <header class="plyr-Detail_SectionHeader">
+          <p class="plyr-Detail_Name">{{ player }}</p>
+
+          <h3 class="plyr-Detail_Title">
+            <strong class="plyr-Detail_Emphasis">Ingame</strong> stats
+          </h3>
+
+          <p class="plyr-Detail_Name">{{ other_player }}</p>
+        </header>
+
+        <div class="plyr-Detail_SectionBody">
+          <div class="plyr-IngameStats">
+            <div class="plyr-IngameStats_Items">
+              {% set instance = player.__class__ %}
+              {% for group in player.ingame_stat_groups() %}
+                {% set group_value_1 = getattr(player, group.field) %}
+                {% set group_value_2 = getattr(other_player, group.field) %}
+                <div class="plyr-IngameStats_Item">
+                  <div class="plyr-StatGroup">
+                    <header class="plyr-StatGroup_Header">
+                      <p class="plyr-StatGroup_GroupValue plyr-StatGroup_GroupValue-{{ stat_grade(group_value_1) }}">{{ group_value_1 }}</p>
+                      <h4 class="plyr-StatGroup_Title">{{ group.label.title() }}</h4>
+                      <p class="plyr-StatGroup_GroupValue plyr-StatGroup_GroupValue-{{ stat_grade(group_value_2) }}">{{ group_value_2 }}</p>
+
+                      <svg class="plyr-StatGroup_Bar">
+                        <rect class="plyr-StatGroup_BarOverlay plyr-StatGroup_BarOverlay-1 plyr-StatGroup_BarOverlay-{{ stat_grade(group_value_1) }}"
+                              height="100%"
+                              width="{{ group_value_1 / 2 }}%"></rect>
+                        <rect class="plyr-StatGroup_BarOverlay plyr-StatGroup_BarOverlay-2 plyr-StatGroup_BarOverlay-{{ stat_grade(group_value_2) }}"
+                              height="100%"
+                              x="{{ 100 - (group_value_2 / 2) }}%"
+                              width="{{ group_value_2 / 2 }}%"></rect>
+                      </svg>
+                    </header>
+
+                    <div class="plyr-StatGroup_Body">
+                      <ul class="plyr-StatGroup_Items">
+                        {% for item in group['items'] %}
+                          {% set value_1 = getattr(player, item) %}
+                          {% set value_2 = getattr(other_player, item) %}
+                          <li class="plyr-StatGroup_Item">
+                            <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value_1) }}">{{ value_1 }}</p>
+                            <p class="plyr-StatGroup_Key">{{ instance._meta.get_field(item).verbose_name.title() }}</p>
+                            <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value_2) }}">{{ value_2 }}</p>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plyr-Detail_Section">
+        <header class="plyr-Detail_SectionHeader">
+          <h3 class="plyr-Detail_Title">
+            <strong class="plyr-Detail_Emphasis">Ingame</strong> information
+          </h3>
+        </header>
+
+        <div class="plyr-Detail_SectionBody">
+          <div class="plyr-Information">
+            <div class="plyr-Information_Columns">
+              <div class="plyr-Information_Column">
+                <h4 class="plyr-Information_Title">Traits</h4>
+
+                <ul class="plyr-Information_Items">
+                  {% set player_traits = player.traits %}
+                  {% set other_player_traits = other_player.traits %}
+                  {% set traits = player_traits + other_player_traits %}
+
+                  {% for trait in traits %}
+                    <li class="plyr-Information_Item">
+                      {{ trait }} <span class="plyr-Information_ItemIdentifier">{% if trait in player_traits %}{{ player }}{% if trait in player_traits and trait in other_player_traits %}, {% endif %}{% endif %}{% if trait in other_player_traits %}{{ other_player }}{% endif %}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+              <div class="plyr-Information_Column">
+                <h4 class="plyr-Information_Title">Specialties</h4>
+
+                <ul class="plyr-Information_Items">
+                  {% set player_specialities = player.specialities %}
+                  {% set other_player_specialities = other_player.specialities %}
+                  {% set specialities = player_specialities + other_player_specialities %}
+
+                  {% for specialty in specialities %}
+                    <li class="plyr-Information_Item">
+                      {{ specialty }} <span class="plyr-Information_ItemIdentifier">{% if specialty in player_specialities %}{{ player }}{% if specialty in player_specialities and specialty in other_player_specialities %}, {% endif %}{% endif %}{% if specialty in other_player_specialities %}{{ other_player }}{% endif %}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+              <div class="plyr-Information_Column">
+                <h4 class="plyr-Information_Title">Characteristics</h4>
+
+                <ul class="plyr-Information_Items">
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Value">{{ player.foot }}</p>
+                    <p class="plyr-Information_Key">Foot</p>
+                    <p class="plyr-Information_Value">{{ other_player.foot }}</p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Value">{{ player.work_rate_att }}</p>
+                    <p class="plyr-Information_Key">Att. Workrate</p>
+                    <p class="plyr-Information_Value">{{ other_player.work_rate_att }}</p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Value">{{ player.work_rate_def }}</p>
+                    <p class="plyr-Information_Key">Def. Workrate</p>
+                    <p class="plyr-Information_Value">{{ other_player.work_rate_def }}</p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Value">{{ other_player.weak_foot }}
+                      <span class="plyr-Information_Icon">{% include "star.svg" %}</span>
+                    </p>
+                    <p class="plyr-Information_Key">Weak Foot</p>
+                    <p class="plyr-Information_Value">{{ player.weak_foot }}
+                      <span class="plyr-Information_Icon">{% include "star.svg" %}</span>
+                    </p>
+                  </li>
+
+                  <li class="plyr-Information_Item">
+                    <p class="plyr-Information_Value">{{ player.skill_moves }}
+                      <span class="plyr-Information_Icon">{% include "star.svg" %}</span>
+                    </p>
+                    <p class="plyr-Information_Key">Skill Moves</p>
+                    <p class="plyr-Information_Value">{{ other_player.skill_moves }}
+                      <span class="plyr-Information_Icon">{% include "star.svg" %}</span>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+{% endblock %}
