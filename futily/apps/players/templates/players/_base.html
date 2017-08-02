@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% import "players/macros/players.html" as player_macros %}
 
+{% block og_title %}{% endblock %}
 {% block og_image %}{% endblock %}
+{% block twitter_title %}{% endblock %}
 {% block twitter_image %}{% endblock %}
 
 {% block content_above %}
@@ -20,61 +22,63 @@
     </div>
   </div>
 
-  <div class="pg-Breadcrumbs">
-    <div class="pg-Breadcrumbs_Inner">
-      <div class="pg-Breadcrumbs_Body">
-        <nav class="bdc-Breadcrumb">
-          <div class="bdc-Breadcrumb_Items"
-               itemscope=""
-               itemtype="http://schema.org/BreadcrumbList">
-            <div class="bdc-Breadcrumb_Item"
-                 itemprop="itemListElement"
+  {% block breadcrumbs %}
+    <div class="pg-Breadcrumbs">
+      <div class="pg-Breadcrumbs_Inner">
+        <div class="pg-Breadcrumbs_Body">
+          <nav class="bdc-Breadcrumb">
+            <div class="bdc-Breadcrumb_Items"
                  itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                 itemtype="http://schema.org/BreadcrumbList">
+              <div class="bdc-Breadcrumb_Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                  <span itemprop="name">
+                    Home
+                  </span>
+                  <meta itemprop="position" content="1">
+                </a>
+              </div>
+
+              <div class="bdc-Breadcrumb_Divider">
+                {% include 'angle-down.svg' %}
+              </div>
+
+              <div class="bdc-Breadcrumb_Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <a itemprop="item"
+                   class="bdc-Breadcrumb_Link"
+                   href="{{ pages.current.get_absolute_url() }}">
+                  <span itemprop="name">
+                    {{ object._meta.app_label | capitalize() }}
+                  </span>
+                  <meta itemprop="position" content="2">
+                </a>
+              </div>
+
+              <div class="bdc-Breadcrumb_Divider">
+                {% include 'angle-down.svg' %}
+              </div>
+
+              <div class="bdc-Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
                 <span itemprop="name">
-                  Home
+                  {{ object }}
                 </span>
-                <meta itemprop="position" content="1">
-              </a>
+                <meta itemprop="position" content="3">
+              </div>
             </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            <div class="bdc-Breadcrumb_Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item"
-                 class="bdc-Breadcrumb_Link"
-                 href="{{ pages.current.get_absolute_url() }}">
-                <span itemprop="name">
-                  {{ object._meta.app_label | capitalize() }}
-                </span>
-                <meta itemprop="position" content="2">
-              </a>
-            </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            <div class="bdc-Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <span itemprop="name">
-                {{ object }}
-              </span>
-              <meta itemprop="position" content="3">
-            </div>
-          </div>
-        </nav>
+          </nav>
+        </div>
       </div>
     </div>
-  </div>
+  {% endblock %}
 {% endblock %}
 
 {% block main %}
@@ -207,9 +211,9 @@
           </a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="false">
+        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_chemistry_absolute_url()) else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
-             href="#">
+             href="{{ player.get_chemistry_absolute_url() }}">
             Chemistry
           </a>
         </li>

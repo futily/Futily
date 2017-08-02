@@ -142,6 +142,36 @@ class PlayerDetail(DetailView):
     model = Player
 
 
+class PlayerDetailChemistry(DetailView):
+    model = Player
+    template_name = 'players/player_detail_chemistry.html'
+
+
+class PlayerDetailChemistryType(DetailView):
+    model = Player
+    template_name = 'players/player_detail_chemistry_type.html'
+
+    def player_pagination(self, qs):
+        paginator = Paginator(qs, 36)
+
+        try:
+            # Deliver the requested page
+            return paginator.page(self.request.GET.get('page'))
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            return paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            return paginator.page(paginator.num_pages)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['players'] = self.player_pagination(self.object.get_chemistry_players()[self.kwargs['chem_type']])
+
+        return context
+
+
 class PlayerDetailSimilar(DetailView):
     model = Player
     template_name = 'players/player_detail_similar.html'

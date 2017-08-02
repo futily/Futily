@@ -65,10 +65,28 @@
                  itemprop="itemListElement"
                  itemscope=""
                  itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ player.get_chemistry_absolute_url() }}">
+                <span itemprop="name">
+                  Chemistry
+                </span>
+                <meta itemprop="position" content="4">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
               <span itemprop="name">
-                Similar players
+                {{ view.kwargs.chem_type | title() }}
               </span>
-              <meta itemprop="position" content="4">
+              <meta itemprop="position" content="5">
             </div>
           </div>
         </nav>
@@ -81,16 +99,16 @@
   <div class="plyr-Detail_Section">
     <header class="plyr-Detail_SectionHeader">
       <h3 class="plyr-Detail_Title">
-        <strong class="plyr-Detail_Emphasis">Similar</strong> players
+        <strong class="plyr-Detail_Emphasis">{{ view.kwargs.chem_type | title() }}</strong> players
 
-        <span class="plyr-Detail_TitleSmall">{{ similar_players.paginator.count }} players</span>
+        <span class="plyr-Detail_TitleSmall">{{ players.paginator.count }} players</span>
       </h3>
     </header>
 
     <div class="plyr-Detail_SectionBody">
-      {{ player_macros.card_list(similar_players) }}
+      {{ player_macros.card_list(players) }}
 
-      {{ render_pagination(similar_players) }}
+      {{ render_pagination(players) }}
     </div>
   </div>
 {% endblock %}

@@ -1,9 +1,13 @@
 from django.conf.urls import url
 
-from .views import PlayerDetail, PlayerDetailSimilar, PlayerList
+from .views import (PlayerDetail, PlayerDetailChemistry,
+                    PlayerDetailChemistryType, PlayerDetailSimilar, PlayerList)
 
 urlpatterns = [
     url(r'^$', PlayerList.as_view(), name='players'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/$', PlayerDetail.as_view(), name='player'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/similar/$', PlayerDetailSimilar.as_view(), name='player_similar'),
+    url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/chemistry/$', PlayerDetailChemistry.as_view(), name='player_chemistry'),
+    url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/chemistry/(?P<chem_type>perfect|strong|weak)/$',
+        PlayerDetailChemistryType.as_view(), name='player_chemistry_type'),
 ]

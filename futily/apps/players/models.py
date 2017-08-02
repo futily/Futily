@@ -26,13 +26,6 @@ class Players(ContentBase):
         return self.page.title
 
 
-class PlayerManager(models.Manager):
-    def get_queryset(self):
-        qs = super(PlayerManager, self).get_queryset().select_related('club', 'league', 'nation')
-
-        return qs
-
-
 class Source(models.Model):
     title = models.CharField(max_length=255)
     short_title = models.CharField(max_length=255)
@@ -56,7 +49,30 @@ class Source(models.Model):
 STAT_VALIDATOR = [MinValueValidator(0), MaxValueValidator(99)]
 
 
+class PlayerManager(models.Manager):
+    def get_queryset(self):
+        qs = super(PlayerManager, self).get_queryset().select_related('club', 'league', 'nation')
+
+        return qs
+
+
+class PlayerCardManager(models.Manager):
+    def get_queryset(self):
+        qs = super(PlayerCardManager, self)\
+            .get_queryset()\
+            .select_related('club', 'nation')\
+            # .only('page', 'club', 'nation', 'ea_id', 'name', 'position', 'total_ingame_stats',
+            #       'card_att_1', 'card_att_2', 'card_att_3', 'card_att_4', 'card_att_5', 'card_att_6',
+            #       'color')
+            # .defer('league', 'first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image',
+            #        'image_sm', 'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw',
+            #        'position_full', 'position_line', 'created', 'modified')
+
+        return qs
+
+
 class Player(PageBase):
+    cards = PlayerCardManager()
     objects = PlayerManager()
 
     page = models.ForeignKey('Players', null=True, blank=False)
@@ -191,14 +207,29 @@ class Player(PageBase):
 
         super().save(force_insert, force_update, using, update_fields)
 
-    def _get_permalink_for_page(self, page, name='player'):
-        return page.reverse(name, kwargs={
+    def _get_permalink_for_page(self, page, name='player', extra_kwargs=None):
+        url_kwargs = {
             'pk': self.pk,
             'slug': self.slug,
-        })
+        }
+
+        if extra_kwargs and isinstance(extra_kwargs, dict):
+            url_kwargs = {**url_kwargs, **extra_kwargs}
+
+        return page.reverse(name, kwargs=url_kwargs)
 
     def get_absolute_url(self):
         return self._get_permalink_for_page(self.page.page)
+
+    def get_chemistry_absolute_url(self):
+        return self._get_permalink_for_page(self.page.page, name='player_chemistry')
+
+    def get_chemistry_type_absolute_url(self, chem_type):
+        if not chem_type:
+            raise Exception('Please supply a chem_type')
+
+        return self._get_permalink_for_page(self.page.page, name='player_chemistry_type',
+                                            extra_kwargs={'chem_type': chem_type})
 
     def get_similar_absolute_url(self):
         return self._get_permalink_for_page(self.page.page, name='player_similar')
@@ -307,7 +338,38 @@ class Player(PageBase):
         return schema[position]
 
     def get_variants(self):
+        # Get all the different versions of the base card
         return Player.objects.filter(ea_id=self.ea_id).exclude(id=self.id)
+
+    def get_chemistry_players(self, amount=None):
+        perfect_chem = Player.objects.filter(club=self.club, nation=self.nation).exclude(ea_id=self.ea_id)
+        strong_chem = Player.objects.filter(
+            Q(Q(league=self.league), Q(nation=self.nation), ~Q(club=self.club)) |
+            Q(club=self.club)
+        ).exclude(ea_id=self.ea_id)
+        weak_chem = Player.objects.filter(
+            Q(Q(league=self.league), ~Q(nation=self.nation), ~Q(club=self.club)) |
+            Q(Q(nation=self.nation), ~Q(league=self.league))
+        ).exclude(ea_id=self.ea_id)
+
+        if amount:
+            perfect_chem = perfect_chem[:amount]
+            strong_chem = strong_chem[:amount]
+            weak_chem = weak_chem[:amount]
+
+        return {
+            'perfect': perfect_chem,
+            'strong': strong_chem,
+            'weak': weak_chem,
+        }
+
+    def get_initial_chemistry_players(self, chem_type='perfect'):
+        players = self.get_chemistry_players(18)
+
+        if len(players[chem_type]) > 6:
+            return random.sample(list(players[chem_type]), 6)
+
+        return players[chem_type]
 
     def get_similar_players(self, amount=None):
         coefficient = self.similar_coefficient
@@ -340,16 +402,11 @@ class Player(PageBase):
             ) for val in schema[self.position]
         ]
 
-        players = Player.objects.filter(
-            reduce(operator.and_, q_objs),
-            position__in=self.get_similar_positions(self.position),
-        ).exclude(
-            ea_id=self.ea_id
-        ).order_by(
-            'ea_id'
-        ).distinct(
-            'ea_id'
-        )
+        players = Player.cards\
+            .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position))\
+            .exclude(ea_id=self.ea_id)\
+            .order_by('ea_id')\
+            .distinct('ea_id')
 
         if amount:
             players = players[:amount]
@@ -357,10 +414,10 @@ class Player(PageBase):
         return players
 
     def get_initial_similar_players(self):
-        players = self.get_similar_players(20)
+        players = self.get_similar_players(18)
 
-        if len(players) > 4:
-            return random.sample(list(players), 4)
+        if len(players) > 6:
+            return random.sample(list(players), 6)
 
         return players
 

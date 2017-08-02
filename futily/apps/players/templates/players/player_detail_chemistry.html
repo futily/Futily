@@ -66,7 +66,7 @@
                  itemscope=""
                  itemtype="http://schema.org/ListItem">
               <span itemprop="name">
-                Similar players
+                Chemistry
               </span>
               <meta itemprop="position" content="4">
             </div>
@@ -78,19 +78,61 @@
 {% endblock %}
 
 {% block body %}
-  <div class="plyr-Detail_Section">
-    <header class="plyr-Detail_SectionHeader">
-      <h3 class="plyr-Detail_Title">
-        <strong class="plyr-Detail_Emphasis">Similar</strong> players
+  {% set perfect_players = player.get_initial_chemistry_players('perfect') %}
+  {% set strong_players = player.get_initial_chemistry_players('strong') %}
+  {% set weak_players = player.get_initial_chemistry_players('weak') %}
 
-        <span class="plyr-Detail_TitleSmall">{{ similar_players.paginator.count }} players</span>
-      </h3>
-    </header>
+  {% if perfect_players %}
+    <div class="plyr-Detail_Section">
+      <header class="plyr-Detail_SectionHeader">
+        <h3 class="plyr-Detail_Title">
+          <strong class="plyr-Detail_Emphasis">Perfect</strong> players
+        </h3>
 
-    <div class="plyr-Detail_SectionBody">
-      {{ player_macros.card_list(similar_players) }}
+        <a class="plyr-Detail_Link"
+           href="{{ player.get_chemistry_type_absolute_url('perfect') }}">View all perfect players
+        </a>
+      </header>
 
-      {{ render_pagination(similar_players) }}
+      <div class="plyr-Detail_SectionBody">
+        {{ player_macros.card_list(perfect_players) }}
+      </div>
     </div>
-  </div>
+  {% endif %}
+
+  {% if strong_players %}
+    <div class="plyr-Detail_Section">
+      <header class="plyr-Detail_SectionHeader">
+        <h3 class="plyr-Detail_Title">
+          <strong class="plyr-Detail_Emphasis">Strong</strong> players
+        </h3>
+
+        <a class="plyr-Detail_Link"
+           href="{{ player.get_chemistry_type_absolute_url('strong') }}">View all strong players
+        </a>
+      </header>
+
+      <div class="plyr-Detail_SectionBody">
+        {{ player_macros.card_list(strong_players) }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if weak_players %}
+    <div class="plyr-Detail_Section">
+      <header class="plyr-Detail_SectionHeader">
+        <h3 class="plyr-Detail_Title">
+          <strong class="plyr-Detail_Emphasis">Weak</strong> players
+        </h3>
+
+        <a class="plyr-Detail_Link"
+           href="{{ player.get_chemistry_type_absolute_url('weak') }}">View all weak players
+        </a>
+      </header>
+
+      <div class="plyr-Detail_SectionBody">
+        {{ player_macros.card_list(weak_players) }}
+      </div>
+    </div>
+  {% endif %}
 {% endblock %}

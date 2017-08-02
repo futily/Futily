@@ -17,6 +17,22 @@ STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 NODE_MODULES_ROOT = os.path.expanduser(os.path.join('~/Workspace/futily', 'node_modules'))
 
 
+# INSTALLED_APPS += [
+#     'debug_toolbar'
+# ]
+
+# MIDDLEWARE_CLASSES = [
+#     'debug_toolbar.middleware.DebugToolbarMiddleware',
+# ] + MIDDLEWARE_CLASSES
+
+
+# def show_toolbar(request):
+#     return True
+# DEBUG_TOOLBAR_CONFIG = {
+#     "SHOW_TOOLBAR_CALLBACK" : show_toolbar,
+# }
+
+
 # Use local server.
 
 SITE_DOMAIN = 'localhost:8000'

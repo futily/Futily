@@ -15,10 +15,7 @@ from .utils.views import FrontendView
 
 admin.autodiscover()
 
-
 urlpatterns = [
-
-    # Admin URLs.
     url(r'^admin/password_change/$', auth_views.password_change,
         {'password_change_form': CMSPasswordChangeForm}, name='password_change'),
     url(r'^admin/password_change/done/$', auth_views.password_change_done, name='password_change_done'),
@@ -42,7 +39,6 @@ urlpatterns = [
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
 
-
 if settings.DEBUG:
     urlpatterns += [
         url(r'^404/$', generic.TemplateView.as_view(template_name='404.html')),
@@ -50,6 +46,5 @@ if settings.DEBUG:
         url(r'^frontend/$', FrontendView.as_view()),
         url(r'^frontend/(?P<slug>[\w-]+)/$', FrontendView.as_view())
     ]
-
 
 handler500 = 'cms.views.handler500'
