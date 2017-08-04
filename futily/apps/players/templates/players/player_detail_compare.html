@@ -248,15 +248,27 @@
                 <h4 class="plyr-Information_Title">Traits</h4>
 
                 <ul class="plyr-Information_Items">
-                  {% set player_traits = player.traits %}
-                  {% set other_player_traits = other_player.traits %}
-                  {% set traits = player_traits + other_player_traits %}
+                  {% if player.traits and other_player.traits %}
+                    {% set player_traits = player.traits %}
+                    {% set other_player_traits = other_player.traits %}
+                    {% set traits = player_traits + other_player_traits %}
+                  {% elif player.traits and not other_player.traits %}
+                    {% set player_traits = player.traits %}
+                    {% set traits = player.traits %}
+                  {% elif not player.traits and other_player.traits %}
+                    {% set other_player_traits = other_player.traits %}
+                    {% set traits = other_player.traits %}
+                  {% endif %}
 
-                  {% for trait in traits %}
-                    <li class="plyr-Information_Item">
-                      {{ trait }} <span class="plyr-Information_ItemIdentifier">{% if trait in player_traits %}{{ player }}{% if trait in player_traits and trait in other_player_traits %}, {% endif %}{% endif %}{% if trait in other_player_traits %}{{ other_player }}{% endif %}</span>
-                    </li>
-                  {% endfor %}
+                  {% if traits %}
+                    {% for trait in traits %}
+                      <li class="plyr-Information_Item">
+                        {{ trait }} <span class="plyr-Information_ItemIdentifier">{% if trait in player_traits %}{{ player }}{% if trait in player_traits and trait in other_player_traits %}, {% endif %}{% endif %}{% if trait in other_player_traits %}{{ other_player }}{% endif %}</span>
+                      </li>
+                    {% endfor %}
+                  {% else %}
+                    <li class="plyr-Information_Item">Weirdly enough, neither of these players have any traits.</li>
+                  {% endif %}
                 </ul>
               </div>
 
@@ -264,15 +276,27 @@
                 <h4 class="plyr-Information_Title">Specialties</h4>
 
                 <ul class="plyr-Information_Items">
-                  {% set player_specialities = player.specialities %}
-                  {% set other_player_specialities = other_player.specialities %}
-                  {% set specialities = player_specialities + other_player_specialities %}
+                  {% if player.specialities and other_player.specialities %}
+                    {% set player_specialties = player.specialities %}
+                    {% set other_player_specialties = other_player.specialities %}
+                    {% set specialties = player_specialties + other_player_specialties %}
+                  {% elif player.specialities and not other_player.specialities %}
+                    {% set player_specialties = player.specialities %}
+                    {% set specialties = player.specialities %}
+                  {% elif not player.specialities and other_player.specialities %}
+                    {% set other_player_specialties = other_player.specialities %}
+                    {% set specialties = other_player.specialities %}
+                  {% endif %}
 
-                  {% for specialty in specialities %}
-                    <li class="plyr-Information_Item">
-                      {{ specialty }} <span class="plyr-Information_ItemIdentifier">{% if specialty in player_specialities %}{{ player }}{% if specialty in player_specialities and specialty in other_player_specialities %}, {% endif %}{% endif %}{% if specialty in other_player_specialities %}{{ other_player }}{% endif %}</span>
-                    </li>
-                  {% endfor %}
+                  {% if specialties %}
+                    {% for specialty in specialties %}
+                      <li class="plyr-Information_Item">
+                        {{ specialty }} <span class="plyr-Information_ItemIdentifier">{% if specialty in player_specialties %}{{ player }}{% if specialty in player_specialties and specialty in other_player_specialties %}, {% endif %}{% endif %}{% if specialty in other_player_specialties %}{{ other_player }}{% endif %}</span>
+                      </li>
+                    {% endfor %}
+                  {% else %}
+                    <li class="plyr-Information_Item">Weirdly enough, neither of these players have any specialties.</li>
+                  {% endif %}
                 </ul>
               </div>
 

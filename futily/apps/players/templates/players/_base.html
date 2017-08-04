@@ -107,96 +107,11 @@
       </div>
     </div>
 
-    <header class="plyr-Detail_Header">
-      <div class="plyr-Detail_Cards">
-        <div class="plyr-CardSelector">
-          <div class="plyr-CardSelector_VariantsContainer">
-            <button class="plyr-CardSelector_Action plyr-CardSelector_Action-up"
-                    type="button">
-              {% include "angle-down.svg" %}
-            </button>
-
-            <div class="plyr-CardSelector_Variants">
-              {% for variant in player.get_variants() %}
-                <a class="plyr-CardSelector_Variant plyr-CardSelector_Variant-{{ variant.color }}"
-                   data-card-data="{{ variant.card_json_data }}"
-                   href="{{ variant.get_absolute_url() }}"></a>
-              {% endfor %}
-            </div>
-
-            <button class="plyr-CardSelector_Action plyr-CardSelector_Action-down"
-                    type="button">
-              {% include "angle-down.svg" %}
-            </button>
-          </div>
-
-          <div class="plyr-CardSelector_Card">
-            {{ player.render_card('lg') }}
-          </div>
-        </div>
-      </div>
-
-      <div class="plyr-Detail_HeaderContent">
-        <h2 class="plyr-Detail_HeaderTitle">{{ player.name }}</h2>
-        <p class="plyr-Detail_Type">{{ player.player_type | capitalize() }}</p>
-
-        <div class="plyr-Detail_Ratings">
-          <div class="plyr-FutilyRatings">
-            <h3 class="plyr-FutilyRatings_Title">Fifa Ratings</h3>
-
-            <ul class="plyr-FutilyRatings_Items">
-              {% for key, stat in player.card_stats_full %}
-                <li class="plyr-FutilyRatings_Item plyr-FutilyRatings_Item-{{ loop.cycle(1, 4, 2, 5, 3, 6) }}">
-                  <p class="plyr-FutilyRatings_Key">{{ key }}:</p>
-                  <p class="plyr-FutilyRatings_Value">
-                    <span class="plyr-FutilyRatings_ValueDifference"></span>
-                    {{ stat }}
-                  </p>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-
-        <div class="plyr-Detail_Ratings">
-          <div class="plyr-FutilyRatings">
-            <h3 class="plyr-FutilyRatings_Title">Futily Ratings</h3>
-
-            <ul class="plyr-FutilyRatings_Items">
-              <li class="plyr-FutilyRatings_Item">
-                <p class="plyr-FutilyRatings_Key">Key:</p>
-                <p class="plyr-FutilyRatings_Value">1234</p>
-              </li>
-
-              <li class="plyr-FutilyRatings_Item">
-                <p class="plyr-FutilyRatings_Key">Key:</p>
-                <p class="plyr-FutilyRatings_Value">1234</p>
-              </li>
-
-              <li class="plyr-FutilyRatings_Item">
-                <p class="plyr-FutilyRatings_Key">Key:</p>
-                <p class="plyr-FutilyRatings_Value">1234</p>
-              </li>
-
-              <li class="plyr-FutilyRatings_Item">
-                <p class="plyr-FutilyRatings_Key">Key:</p>
-                <p class="plyr-FutilyRatings_Value">1234</p>
-              </li>
-
-              <li class="plyr-FutilyRatings_Item">
-                <p class="plyr-FutilyRatings_Key">Total stats:</p>
-                <p class="plyr-FutilyRatings_Value">{{ player.total_stats }}</p>
-              </li>
-
-              <li class="plyr-FutilyRatings_Item">
-                <p class="plyr-FutilyRatings_Key">Total IGS:</p>
-                <p class="plyr-FutilyRatings_Value">{{ player.total_ingame_stats }}</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </header>
+    {% if self.header() %}
+      <header class="plyr-Detail_Header">
+        {% block header %}{% endblock %}
+      </header>
+    {% endif %}
 
     <nav class="plyr-Detail_Navigation">
       <ul class="plyr-Detail_NavigationItems">
