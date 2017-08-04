@@ -1,0 +1,77 @@
+/*
+|--------------------------------------------------------------------------
+| Players
+|--------------------------------------------------------------------------
+| @namespace: sch-
+|
+*/
+/* stylelint-disable selector-class-pattern */
+.ais-index {
+  position: relative;
+}
+
+.ais-input {
+  .sec-Search & {
+    @apply --Font-22;
+
+    display: block;
+    width: 100%;
+    padding: 13px var(--Grid_Gutter);
+
+    font-family: inherit;
+
+    background-color: #fff;
+    background-image: svg-load('search.svg', fill=#a1b1bc);
+    background-position: right var(--Grid_Gutter) top 50%;
+    background-size: 24px 24px;
+    border: 2px solid var(--Color_Border);
+    border-radius: 3px;
+    color: var(--Color_Dark);
+
+    transition: background-image 0.3s;
+
+    &:focus {
+      background-image: svg-load('search.svg', fill=#222533);
+      outline: 0;
+    }
+
+    &::placeholder {
+      font-weight: 300;
+
+      color: #a1b1bc;
+      opacity: 1;
+    }
+  }
+}
+
+.ais-search-box__submit {
+  .sec-Search & {
+    display: none;
+  }
+}
+
+.ais-results {
+  position: absolute;
+  right: 0;
+  left: 0;
+
+  border: 2px solid var(--Color_Border);
+  color: var(--Color_Body);
+}
+
+.ais-result {
+  display: block;
+
+  background-color: #fff;
+
+  &:hover {
+    background-color: #ececec;
+  }
+
+  /* stylelint-disable selector-max-type */
+  em {
+    background-color: rgba(#ffd934, 0.5);
+  }
+  /* stylelint-enable */
+}
+/* stylelint-enable */

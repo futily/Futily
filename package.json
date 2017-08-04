@@ -2,11 +2,14 @@
   "name": "futily",
   "main": "gulpfile.js",
   "dependencies": {
+    "@types/algoliasearch": "^3.18.1",
+    "algoliasearch": "^3.24.3",
     "babel-polyfill": "6.23.0",
     "es6-promise": "^4.1.0",
     "lodash": "^4.17.4",
     "pepjs": "^0.4.3",
     "vue": "^2.3.4",
+    "vue-instantsearch": "^0.4.0",
     "vuex": "^2.3.1"
   },
   "devDependencies": {

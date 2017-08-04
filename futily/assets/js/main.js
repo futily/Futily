@@ -3,12 +3,16 @@ import 'pepjs'
 import 'utils/class-list-polyfill'
 
 import Vue from 'vue'
+import InstantSearch from 'vue-instantsearch'
 
 import App from './vue/App'
 
 import { externalLinks, iframeFix } from './utils'
 import { CardSelector } from './players/detail'
 import { PlayerFilterForm } from './players/list'
+// import { PlayerSearch } from 'search'
+
+Vue.use(InstantSearch)
 
 new Vue(App).$mount('#app')
 
@@ -23,6 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.plyr-CardSelector')) {
     new CardSelector()
   }
+
+  // if (document.querySelector('.js-PlayerSearch')) {
+  //   new PlayerSearch({ el: document.querySelector('.js-PlayerSearch') })
+  // }
 
   // If the browser isn't Safari, don't do anything
   if (

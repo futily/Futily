@@ -128,6 +128,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'compressor',
 
+    'algoliasearch_django',
     'django_jinja',
 
     'cms',
@@ -466,6 +467,11 @@ TYPEKIT_KIT_ID = ''
 SILENCED_SYSTEM_CHECKS = []
 
 THUMBNAIL_QUALITY = 60
+
+ALGOLIA = {
+    'APPLICATION_ID': 'Z68B2CP55T',
+    'API_KEY': '05ccc5a235753aa5bd178663cb2df447',
+}
 
 # GEOIP_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../geoip/'))
 

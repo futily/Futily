@@ -288,7 +288,7 @@ class Player(PageBase):
 
     @property
     def similar_coefficient(self):
-        return self.total_ingame_stats / 100 / 2
+        return self.total_ingame_stats / 100 / 4
 
     def ingame_stat_group_average(self, group):
         schema = {
