@@ -1,0 +1,97 @@
+/*
+|--------------------------------------------------------------------------
+| Side
+|--------------------------------------------------------------------------
+| @namespace: nav-
+|
+*/
+.nav-Side {
+  display: flex;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Aside
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Side_Aside {
+  align-self: flex-start;
+  flex-basis: 270px;
+  flex-shrink: 0;
+
+  margin-right: 30px;
+
+  border: 1px solid var(--Color_Border);
+}
+
+.nav-Side_Item {
+  display: block;
+
+  padding: 13px 30px;
+
+  font-weight: 700;
+
+  background-color: var(--Color_Grey-light);
+  color: var(--Color_Body);
+
+  transition: color 0.2s;
+
+  @media (--xlg) {
+    padding: 13px 40px;
+  }
+
+  &:hover {
+    color: var(--Color_Green);
+  }
+
+  &[aria-current='true'] {
+    position: relative;
+
+    background-color: #fff;
+    color: var(--Color_Green);
+
+    &::before,
+    &::after {
+      content: '';
+
+      position: absolute;
+
+      display: block;
+    }
+
+    &::before {
+      top: -1px;
+      bottom: -1px;
+      left: -1px;
+
+      width: 5px;
+
+      background-color: var(--Color_Green);
+    }
+
+    &::after {
+      top: 0;
+      right: -1px;
+      bottom: 0;
+
+      width: 1px;
+
+      background-color: #fff;
+    }
+  }
+
+  & + & {
+    border-top: 1px solid var(--Color_Border);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Panel
+|--------------------------------------------------------------------------
+|
+*/
+.nav-Side_Panel {
+  flex: 1;
+}

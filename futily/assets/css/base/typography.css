@@ -1,0 +1,25 @@
+/*
+|--------------------------------------------------------------------------
+| Typography
+|--------------------------------------------------------------------------
+| @namespace: typ-
+|
+*/
+.typ-Title {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+
+  font-weight: 500;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.typ-Title-medium {
+  @apply --Font-24;
+}
+
+.typ-Title-small {
+  @apply --Font-18;
+}

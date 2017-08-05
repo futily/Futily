@@ -1,0 +1,128 @@
+{% extends "users/_base.html" %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">{{ user }}</h1>
+          <p class="pg-Strapline_Text">Profile</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="nav-Side">
+    <aside class="nav-Side_Aside">
+      <nav class="nav-Side_Items">
+        <a class="nav-Side_Item" href="#1" aria-current="true">Profile</a>
+        <a class="nav-Side_Item" href="#1" aria-current="false">Squads</a>
+        <a class="nav-Side_Item" href="#1" aria-current="false">Packs</a>
+        <a class="nav-Side_Item" href="#1" aria-current="false">Collection</a>
+      </nav>
+    </aside>
+
+    <div class="nav-Side_Panel">
+      {% if user.about_me %}
+        <h3 class="typ-Title typ-Title-medium">About {{ user }}</h3>
+        <p class="typ-Text">{{ user.about_me }}</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block aside_blocks %}
+  <div class="asi-Block">
+    <h3 class="typ-Title typ-Title-small">{{ user }}'s details</h3>
+
+    <p class="typ-Text"><strong>User #</strong>: {{ user.id }}</p>
+    <p class="typ-Text"><strong>Joined</strong>: {{ user.created | date('jS F Y') }}</p>
+    <p class="typ-Text"><strong>Last login</strong>: {{ user.last_login | date('jS F Y') }}</p>
+  </div>
+
+  {% if user.psn or user.xbox or user.origin %}
+    <div class="asi-Block">
+      <h3 class="typ-Title typ-Title-small">{{ user }}'s platform names</h3>
+
+      <ul class="soc-Socials">
+        {% if user.psn %}
+          <li class="soc-Socials_Item">
+            <div class="soc-Social soc-Social-psn">
+              {% include 'playstation.svg' %}
+
+              <p class="soc-Social_Overlay">{{ user.psn }}</p>
+            </div>
+          </li>
+        {% endif %}
+
+        {% if user.xbox %}
+          <li class="soc-Socials_Item">
+            <div class="soc-Social soc-Social-xbox">
+              {% include 'xbox.svg' %}
+
+              <p class="soc-Social_Overlay">{{ user.xbox }}</p>
+            </div>
+          </li>
+        {% endif %}
+
+        {% if user.origin %}
+          <li class="soc-Socials_Item">
+            <div class="soc-Social soc-Social-origin">
+              {% include 'pc.svg' %}
+
+              <p class="soc-Social_Overlay">{{ user.origin }}</p>
+            </div>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if user.twitter or user.youtube or user.twitch or user.facebook %}
+    <div class="asi-Block">
+      <h3 class="typ-Title typ-Title-small">{{ user }}'s social channels</h3>
+
+      <ul class="soc-Socials">
+        {% if user.twitter %}
+          <li class="soc-Socials_Item">
+            <a class="soc-Social soc-Social-twitter" href="#1">{% include 'twitter.svg' %}</a>
+          </li>
+        {% endif %}
+
+        {% if user.youtube %}
+          <li class="soc-Socials_Item">
+            <a class="soc-Social soc-Social-youtube" href="#1">{% include 'youtube.svg' %}</a>
+          </li>
+        {% endif %}
+
+        {% if user.twitch %}
+          <li class="soc-Socials_Item">
+            <a class="soc-Social soc-Social-twitch" href="#1">{% include 'twitch.svg' %}</a>
+          </li>
+        {% endif %}
+
+        {% if user.facebook %}
+          <li class="soc-Socials_Item">
+            <a class="soc-Social soc-Social-facebook" href="#1">{% include 'facebook.svg' %}</a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  {% endif %}
+
+  {% if user.favourite_player or user.favourite_club or user.favourite_nation %}
+    <div class="asi-Block">
+      <h3 class="typ-Title typ-Title-small">{{ user }}'s favourites</h3>
+
+      <p>{{ user.favourite_player }}</p>
+      <p>{{ user.favourite_club }}</p>
+      <p>{{ user.favourite_nation }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,87 @@
+/*
+|--------------------------------------------------------------------------
+| Social
+|--------------------------------------------------------------------------
+| @namespace: soc-
+|
+*/
+.soc-Social {
+  position: relative;
+
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  width: 38px;
+  height: @width;
+
+  background-color: var(--Background);
+  border-radius: 4px;
+  color: #fff;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 20px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.soc-Social-twitter {
+  --Background: twitter-color;
+}
+.soc-Social-youtube {
+  --Background: youtube-color;
+}
+.soc-Social-twitch {
+  --Background: #6441a5;
+}
+.soc-Social-facebook {
+  --Background: facebook-color;
+}
+.soc-Social-psn {
+  --Background: playstation-color;
+}
+.soc-Social-xbox {
+  --Background: xbox-color;
+}
+.soc-Social-origin {
+  --Background: #f56c2d;
+}
+
+.soc-Social_Overlay {
+  @apply --Font-14;
+
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+
+  padding: 3px 8px;
+
+  font-weight: 500;
+
+  background-color: var(--Background);
+  border-radius: 4px;
+  color: currentColor;
+  opacity: 0;
+
+  transform: translateX(-50%);
+
+  .soc-Social:hover & {
+    z-index: 1;
+
+    opacity: 1;
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -5px;
+    right: 0;
+    left: 0;
+
+    display: block;
+    height: 5px;
+  }
+}

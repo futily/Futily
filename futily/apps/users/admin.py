@@ -12,7 +12,7 @@ class UserAdmin(BaseUserAdmin):
 
     fieldsets = [
         (None, {
-            'fields': ['email', 'username', 'is_active', 'is_staff'],
+            'fields': ['email', 'username', 'password', 'is_active', 'is_staff'],
         }),
         ('About', {
             'fields': ['about_me', 'preferred_platform'],
