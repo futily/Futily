@@ -1,0 +1,18 @@
+/*
+|--------------------------------------------------------------------------
+| Buttons
+|--------------------------------------------------------------------------
+| @namespace: btn-
+|
+*/
+.btn-Primary {
+  @include Button-primary;
+}
+
+.btn-Secondary {
+  @include Button-secondary;
+}
+
+.btn-Large {
+  @include Button-large;
+}

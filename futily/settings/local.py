@@ -60,9 +60,11 @@ DATABASES = {
 
 # Mailtrip SMTP
 EMAIL_HOST = 'mailtrap.io'
-EMAIL_HOST_USER = '178288370161874a6'
-EMAIL_HOST_PASSWORD = '5033a6d5bca3f0'
+EMAIL_HOST_USER = '94a4b4d4e3b0ee'
+EMAIL_HOST_PASSWORD = '96c5a97f3f6cfa'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
+
+SESSION_COOKIE_SECURE = False
 
 CACHES['default']['BACKEND'] = 'django.core.cache.backends.dummy.DummyCache'

@@ -7,11 +7,11 @@
   <li class="fltr-Filter_Item">
     {% if not choice.group %}
       {% if choice.key == 'all' %}
-        <a href="{{ url(remove=[get_param]) }}" class="fltr-Filter_Link">
+        <a href="{{ build_url(remove=[get_param]) }}" class="fltr-Filter_Link">
           {{ choice.label }}
         </a>
       {% else %}
-        <a href="{{ url(get={get_param: choice.key}) }}" class="fltr-Filter_Link">
+        <a href="{{ build_url(get={get_param: choice.key}) }}" class="fltr-Filter_Link">
           {{ choice.label }}
 
           {% if current == choice.key %}
@@ -33,7 +33,7 @@
       <ul class="fltr-Filter_Dropdown">
         {% for option in choice.options %}
           <li class="fltr-Filter_Item">
-            <a class="fltr-Filter_Link" href="{{ url(get={get_param: option.key}) }}">
+            <a class="fltr-Filter_Link" href="{{ build_url(get={get_param: option.key}) }}">
               {{ option.label }}
 
               {% if current == option.key %}
@@ -130,7 +130,7 @@
               <li class="fltr-Filters_Item">
                 {% set current_order = request.GET.get('order') %}
                 <a class="fltr-Sort"
-                   href="{{ url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">
+                   href="{{ build_url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">
                   {% include "sort.svg" %}
                 </a>
               </li>

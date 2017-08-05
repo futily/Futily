@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Login</h1>
+          <p class="pg-Strapline_Text">Login to your {{ settings.SITE_NAME }} account</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content_class %}{{ super() }} lyt-Content-mainTight{% endblock %}
+
+{% block main %}
+  <div class="usr-Entry">
+    <div class="usr-Entry_Columns usr-Entry_Columns-swapped">
+      <div class="usr-Entry_Column usr-Entry_Column-one">
+        <div class="usr-EntryForm">
+          <form class="usr-EntryForm_Form frm-Form">
+            {% csrf_token %}
+
+            {% for field in form %}
+              <div class="frm-Form_Item frm-Form_Item-floatingLabel js-FloatingLabel">
+                <label class="frm-Form_Label js-FloatingLabel_Label"
+                       for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                {% if field.field.__class__.__name__ == 'EmailField' or field.field.__class__.__name__ == 'UsernameField' %}
+                  <input type="email"
+                         class="frm-Form_Input js-FloatingLabel_Input"
+                         name="{{ field.name }}"
+                         id="{{ field.id_for_label }}">
+                {% elif field.field.__class__.__name__ == 'CharField' %}
+                  <input class="frm-Form_Input js-FloatingLabel_Input"
+                         name="{{ field.name }}"
+                         id="{{ field.id_for_label }}">
+                {% elif field.field.__class__.__name__ == 'TypedChoiceField' %}
+                  <select class="frm-Form_Select js-FloatingLabel_Input"
+                          name="{{ field.name }}"
+                          id="{{ field.id_for_label }}">
+                    <option value="">{{ field.label }}</option>
+                    {% for value, label in field.field.choices %}
+                      <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                  </select>
+                {% endif %}
+              </div>
+            {% endfor %}
+
+            <button type="submit" class="frm-Form_Submit btn-Primary btn-Large">Log in</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="usr-Entry_Column usr-Entry_Column-two">
+        <div class="usr-EntryList">
+          <ul class="usr-EntryList_Items">
+            <li class="usr-EntryList_Item">
+              <h4 class="usr-EntryList_Title">Don't have an account?</h4>
+              <a class="usr-EntryList_Link" href="{{ build_url('users:register') }}">Register</a>
+            </li>
+
+            <li class="usr-EntryList_Item">
+              <h4 class="usr-EntryList_Title">Forgot your account details?</h4>
+              <a class="usr-EntryList_Link" href="#resetUsername">Username</a> / <a class="usr-EntryList_Link" href="#resetPassword">Password</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

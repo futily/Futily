@@ -49,7 +49,7 @@ class Command(EaAssetCreatorCommand, BaseCommand):
                         'ea_id': nation_id,
                         'slug': 'legends',
                     }
-                    nation = Nation.objects.get_or_create(**self.legend_nation)
+                    nation, created = Nation.objects.get_or_create(**self.legend_nation)  # pylint: disable=unused-variable
 
             league['nation'] = nation
 

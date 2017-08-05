@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+  <p>{% trans %}Thanks for spending some quality time with the Web site today.{% endtrans %}</p>
+
+  <p><a href="{{ build_url('users:login') }}">{% trans %}Log in again{% endtrans %}</a></p>
+
+{% endblock %}

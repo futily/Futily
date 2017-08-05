@@ -3,6 +3,8 @@
     <div class="hd-Header_Body">
       <a class="hd-Header_Logo" href="/"></a>
 
+      {{ request.user }}
+
       <div class="hd-Header_Nav">
         {{ render_navigation(pages.homepage.navigation) }}
       </div>

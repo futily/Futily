@@ -32,7 +32,7 @@
             <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
               <a class="ea-ObjectsTable_CellTitle{% if title.current and title.key[0] == '-' %} ea-ObjectsTable_CellTitle-up{% endif %}"
                  aria-current="{{ 'true' if title.current else 'false' }}"
-                 href="{{ url(get={'sort': title.key}) }}">{{ title.label | capitalize() }}</a>
+                 href="{{ build_url(get={'sort': title.key}) }}">{{ title.label | capitalize() }}</a>
             </div>
           {% endfor %}
         </div>

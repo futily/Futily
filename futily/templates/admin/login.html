@@ -108,7 +108,9 @@
         });
 
         var signInCallback = function (result) {
-            if (result['error']) {
+          console.log(result)
+
+          if (result['error']) {
 
             } else {
                 $('#code').attr('value', result['code']);

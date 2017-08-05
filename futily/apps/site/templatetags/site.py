@@ -111,7 +111,7 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
 
 @jinja2.contextfunction
 @library.global_function
-def url(context, *args, **kwargs):
+def build_url(context, *args, **kwargs):
     request = context['request']
     get = kwargs.pop('get', {})
     remove = kwargs.pop('remove', '')

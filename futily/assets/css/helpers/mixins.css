@@ -11,6 +11,8 @@
 @mixin Button-primary {
   @include Button;
 
+  position: relative;
+
   background-color: var(--Color_Green);
 }
 
@@ -19,6 +21,15 @@
 
   background-color: var(--Color_Grey);
   color: var(--Color_Body);
+}
+
+@mixin Button-large {
+  @apply --Font-16;
+
+  padding-top: 12px;
+  padding-bottom: @padding-top;
+
+  font-weight: 700;
 }
 
 /*

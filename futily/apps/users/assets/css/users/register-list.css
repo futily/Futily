@@ -1,0 +1,24 @@
+/*
+|--------------------------------------------------------------------------
+| Register list
+|--------------------------------------------------------------------------
+| @namespace: usr-
+|
+*/
+.usr-EntryList {
+  @apply --Font-14;
+}
+
+.usr-EntryList_Item {
+  & + & {
+    margin-top: 1vr;
+  }
+}
+
+.usr-EntryList_Title {
+  font-weight: 500;
+}
+
+.usr-EntryList_Link {
+  font-weight: 500;
+}

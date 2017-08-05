@@ -184,10 +184,12 @@
           <p class="asi-KeyValues_Value">{{ player.age }}</p>
         </li>
 
-        <li class="asi-KeyValues_Item">
-          <p class="asi-KeyValues_Key">Source</p>
-          <p class="asi-KeyValues_Value">{{ player.source }}</p>
-        </li>
+        {% if player.source %}
+          <li class="asi-KeyValues_Item">
+            <p class="asi-KeyValues_Key">Source</p>
+            <p class="asi-KeyValues_Value">{{ player.source }}</p>
+          </li>
+        {% endif %}
 
         <li class="asi-KeyValues_Item">
           <p class="asi-KeyValues_Key">Height</p>

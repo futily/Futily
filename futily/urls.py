@@ -20,8 +20,12 @@ urlpatterns = [
         {'password_change_form': CMSPasswordChangeForm}, name='password_change'),
     url(r'^admin/password_change/done/$', auth_views.password_change_done, name='password_change_done'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/', include('social_django.urls', namespace='social')),
     url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
+
+    url(r'social/', include('social_django.urls', namespace='social')),
+
+    # Special cases
+    url(r'users/', include('futily.apps.users.urls', namespace='users')),
 
     # Permalink redirection service.
     url(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),

@@ -151,6 +151,7 @@ INSTALLED_APPS = [
     'futily.apps.sections',
     'futily.apps.settings',
     'futily.apps.site',
+    'futily.apps.users',
 
     'suit',
     'django.contrib.admin',
@@ -203,6 +204,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'watson.middleware.SearchContextMiddleware',
     'historylinks.middleware.HistoryLinkFallbackMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
     'cms.middleware.PublicationMiddleware',
     'cms.apps.pages.middleware.PageMiddleware',
 ]
@@ -449,6 +451,8 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend'
 )
 
+AUTH_USER_MODEL = 'users.User'
+
 SOCIAL_AUTH_GOOGLE_PLUS_KEY = '589992011980-13s86jclt0lr3meptkspk2jtafa4hnv2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_PLUS_SECRET = 'tfkHbGLXBUDRaU-Pwz6kqLkq'
 
@@ -461,7 +465,7 @@ SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
 )
 
 # Typekit
-TYPEKIT_USED = True
+TYPEKIT_USED = False
 TYPEKIT_KIT_ID = ''
 
 SILENCED_SYSTEM_CHECKS = []

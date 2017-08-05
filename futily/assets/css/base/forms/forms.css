@@ -1,0 +1,97 @@
+/*
+|--------------------------------------------------------------------------
+| Forms
+|--------------------------------------------------------------------------
+| @namespace: frm-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Item
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Item {
+  --InputHoriPadding: 20px;
+
+  & + & {
+    margin-top: 0.75vr;
+  }
+}
+
+.frm-Form_Item-floatingLabel {
+  position: relative;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Label
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Label {
+  @apply --Font-14;
+
+  display: block;
+
+  font-weight: 500;
+
+  .frm-Form_Item-floatingLabel & {
+    position: absolute;
+    top: 50%;
+    left: calc(var(--InputHoriPadding) - 10px);
+
+    padding: 2px 10px;
+
+    background-color: #fff;
+    color: #a1b1bc;
+    pointer-events: none;
+
+    transform: translateY(-50%);
+    transition: transform 0.2s;
+  }
+
+  .js-FloatingLabel-active & {
+    transform: translateY(calc(-100% - 9px));
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Inputs
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Input,
+.frm-Form_Select {
+  @apply --Font-14;
+
+  display: block;
+  width: 100%;
+  padding: 9px var(--InputHoriPadding);
+
+  appearance: none;
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: #bec1c3;
+    outline: 0;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Submit
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Submit {
+  .usr-EntryForm & {
+    width: 100%;
+    margin-top: 1vr;
+  }
+}
