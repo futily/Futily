@@ -1,16 +1,57 @@
+<div class="hd-UserBar">
+  <div class="hd-UserBar_Inner">
+    <div class="hd-UserBar_Body">
+      <div class="hd-UserBar_Item hd-UserBar_Item-pushed">
+        <div class="hd-UserBar_Search">
+          <form class="sch-Header">
+            <input type="search" class="sch-Header_Input" placeholder="Search...">
+            <span class="sch-Header_Icon">
+              {% include 'search.svg' %}
+            </span>
+          </form>
+        </div>
+      </div>
+
+      <div class="hd-UserBar_Item">
+        <div class="hd-UserBar_Account">
+          {% if request.user.is_authenticated %}
+            <div class="hd-UserBar_SignedIn">
+              <p class="hd-UserBar_SignedInName">Welcome,
+                <a class="hd-UserBar_SignedInNameLink"
+                   href="{{ request.user.get_absolute_url() }}">
+                  {{ request.user }}
+                </a>
+              </p>
+
+              <div class="hd-UserBar_AccountActions">
+                <a class="hd-UserBar_AccountAction hd-UserBar_AccountAction-settings"
+                   href="{{ request.user.get_settings_url() }}">
+                  {% include 'settings.svg' %}
+
+                  <p class="hd-UserBar_AccountActionOverlay">Change settings</p>
+                </a>
+              </div>
+            </div>
+          {% else %}
+            <p class="hd-UserBar_AccountText">
+              <a class="hd-UserBar_AccountSignIn" href="{{ url('users:login') }}">Sign in</a>
+              or
+              <a class="hd-UserBar_AccountRegister" href="{{ url('users:register') }}">Join now</a>
+            </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <header class="hd-Header">
   <div class="hd-Header_Inner">
     <div class="hd-Header_Body">
       <a class="hd-Header_Logo" href="/"></a>
 
-      {{ request.user }}
-
       <div class="hd-Header_Nav">
         {{ render_navigation(pages.homepage.navigation) }}
-      </div>
-
-      <div class="hd-Header_Search">
-        {% include 'search.svg' %}
       </div>
     </div>
   </div>

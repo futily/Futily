@@ -1,0 +1,156 @@
+/*
+|--------------------------------------------------------------------------
+| User bar
+|--------------------------------------------------------------------------
+| @namespace: hd-
+|
+*/
+.hd-UserBar {
+  @apply --Font-14;
+
+  --BorderColor: #3f5060;
+
+  position: relative;
+  z-index: 11;
+
+  background-color: var(--Color_Body);
+  border-top: 2px solid var(--Color_Green);
+  border-bottom: 1px solid var(--BorderColor);
+  color: #fff;
+}
+
+.hd-UserBar_Inner {
+  @apply --GridContainer;
+}
+
+.hd-UserBar_Body {
+  display: flex;
+
+  border-right: 1px solid var(--BorderColor);
+  border-left: @border-right;
+}
+
+.hd-UserBar_Item {
+  align-items: center;
+
+  display: flex;
+  padding-right: 20px;
+  padding-left: @padding-right;
+
+  border-left: 1px solid var(--BorderColor);
+}
+
+.hd-UserBar_Item-pushed {
+  margin-left: auto;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Account
+|--------------------------------------------------------------------------
+|
+*/
+.hd-UserBar_SignedIn {
+  align-items: center;
+
+  display: flex;
+}
+
+.hd-UserBar_SignedInNameLink {
+  font-weight: 500;
+
+  color: inherit;
+}
+
+.hd-UserBar_AccountActions {
+  display: flex;
+  margin-left: 15px;
+
+  transform: translateY(-3px);
+}
+
+.hd-UserBar_AccountAction {
+  height: 16px;
+
+  color: inherit;
+}
+
+.hd-UserBar_AccountAction-settings {
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 16px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.hd-UserBar_AccountActionOverlay {
+  @apply --Font-14;
+
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+
+  padding: 3px 8px;
+
+  font-weight: 500;
+  white-space: nowrap;
+
+  background-color: #000;
+  border-radius: 4px;
+  color: currentColor;
+  opacity: 0;
+
+  transform: translateX(-50%);
+
+  .hd-UserBar_AccountAction:hover & {
+    z-index: 1;
+
+    opacity: 1;
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -5px;
+    right: 0;
+    left: 0;
+
+    display: block;
+    height: 5px;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: -3px;
+    left: 50%;
+
+    display: block;
+    width: 5px;
+    height: @width;
+
+    background-color: inherit;
+
+    transform: translate(-50%, 0) rotate(45deg);
+  }
+}
+
+.hd-UserBar_AccountSignIn {
+  font-weight: 600;
+
+  color: inherit;
+}
+
+.hd-UserBar_AccountRegister {
+  margin-left: 5px;
+  padding: 2px 10px;
+
+  font-weight: 500;
+
+  background-color: #fff;
+  border-radius: 3px;
+  color: var(--Color_Body);
+}

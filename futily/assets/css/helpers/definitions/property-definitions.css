@@ -26,6 +26,14 @@
   --Color_Good: #90c039;
   --Color_Great: #54a71b;
 
+  --Color_Psn: playstation-color;
+  --Color_Xbox: xbox-color;
+  --Color_Orgin: #f56c2d;
+  --Color_Twitter: twitter-color;
+  --Color_Youtube: youtube-color;
+  --Color_Twitch: #6441a5;
+  --Color_Facebook: facebook-color;
+
   --Color_Anchor: var(--Color_Green);
 
   --Card_Color: hsl(31, 100%, 7%);

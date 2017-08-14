@@ -79,6 +79,11 @@ class User(AbstractBaseUser, PermissionsMixin):
             'username': self.username
         })
 
+    def get_settings_url(self):
+        return reverse('users:settings', kwargs={
+            'username': self.username
+        })
+
     def get_username(self):
         return getattr(self, self.USERNAME_FIELD)
 

@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">{{ user }}</h1>
+          <p class="pg-Strapline_Text">{% block content_above_text %}Profile{% endblock %}</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
 {% block aside %}
   <div class="asi-Blocks">
     <div class="asi-Block">

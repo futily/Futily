@@ -15,7 +15,6 @@
   padding-bottom: @padding-top;
 
   background-color: var(--Color_Dark);
-  border-top: 2px solid var(--Color_Green);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   color: #fff;
 }

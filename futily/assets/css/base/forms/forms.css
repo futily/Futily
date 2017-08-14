@@ -8,16 +8,76 @@
 
 /*
 |--------------------------------------------------------------------------
+| Fieldset
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Fieldset {
+  margin: 0 0 2vr;
+  padding: 0;
+
+  border: 0;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.frm-Form_FieldsetHeader {
+  margin-bottom: 0.5vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Legend
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Legend {
+  @apply --Font-24;
+
+  display: block;
+
+  font-weight: 500;
+}
+
+.frm-Form_LegendHelp {
+  @apply --Font-14;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Items {
+  grid-gap: 1vr calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(2, 1fr);
+
+  display: grid;
+}
+
+.frm-Form_Items-3col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/*
+|--------------------------------------------------------------------------
 | Item
 |--------------------------------------------------------------------------
 |
 */
 .frm-Form_Item {
-  --InputHoriPadding: 20px;
+  --InputHoriPadding: 15px;
 
-  & + & {
-    margin-top: 0.75vr;
-  }
+  position: relative;
+
+  flex: 1;
+}
+
+.frm-Form_Item-full {
+  grid-column: 1 / -1;
 }
 
 .frm-Form_Item-floatingLabel {
@@ -34,6 +94,7 @@
   @apply --Font-14;
 
   display: block;
+  margin-bottom: 5px;
 
   font-weight: 500;
 
@@ -42,6 +103,7 @@
     top: 50%;
     left: calc(var(--InputHoriPadding) - 10px);
 
+    margin-bottom: 0;
     padding: 2px 10px;
 
     background-color: #fff;
@@ -64,7 +126,8 @@
 |
 */
 .frm-Form_Input,
-.frm-Form_Select {
+.frm-Form_Select,
+.frm-Form_Textarea {
   @apply --Font-14;
 
   display: block;
@@ -77,10 +140,63 @@
 
   transition: border-color 0.2s;
 
+  .frm-Form_Item-hasIcon & {
+    padding-left: calc(var(--InputHoriPadding) + 23px);
+  }
+
   &:focus {
     border-color: #bec1c3;
     outline: 0;
   }
+}
+
+.frm-Form_InputIcon {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+
+  color: var(--Color);
+
+  .frm-Form_Item-twitter & {
+    --Color: var(--Color_Twitter);
+  }
+  .frm-Form_Item-youtube & {
+    --Color: var(--Color_Youtube);
+  }
+  .frm-Form_Item-twitch & {
+    --Color: var(--Color_Twitch);
+  }
+  .frm-Form_Item-facebook & {
+    --Color: var(--Color_Facebook);
+  }
+  .frm-Form_Item-psn & {
+    --Color: var(--Color_Psn);
+  }
+  .frm-Form_Item-xbox & {
+    --Color: var(--Color_Xbox);
+  }
+  .frm-Form_Item-origin & {
+    --Color: var(--Color_Orgin);
+  }
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 20px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Select
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Select {
+  background-image: svg-load('angle-down.svg');
+  background-position: right 15px center;
+  background-size: 15px 15px;
 }
 
 /*

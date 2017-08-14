@@ -131,6 +131,8 @@ INSTALLED_APPS = [
     'algoliasearch_django',
     'django_jinja',
 
+    'django.forms',
+
     'cms',
 
     'reversion',
@@ -236,12 +238,15 @@ SITE_ID = 1
 
 # Absolute path to the directory where templates are stored.
 
+FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
+
 TEMPLATES = [
     {
         'BACKEND': 'django_jinja.backend.Jinja2',
         'DIRS': [
             os.path.join(SITE_ROOT, 'assets/svg'),
             os.path.join(SITE_ROOT, 'templates'),
+            os.path.join(SITE_ROOT, 'templates/forms/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -1,0 +1,103 @@
+{% extends "users/_base.html" %}
+
+{% block content_above_text %}
+  Settings
+{% endblock %}
+
+{% block main %}
+  <form class="frm-Form" method="POST">
+    {% csrf_token %}
+
+    {% for group in form.groups %}
+      <fieldset class="frm-Form_Fieldset">
+        <header class="frm-Form_FieldsetHeader">
+          <legend class="frm-Form_Legend">{{ group.legend }}</legend>
+          {% if group.help_text %}
+            <p class="frm-Form_LegendHelp">{{ group.help_text }}</p>
+          {% endif %}
+        </header>
+
+        <div class="frm-Form_FieldsetBody">
+          <div class="frm-Form_Items{% if group.legend == 'Platforms' or group.legend == 'Favourites' %} frm-Form_Items-3col{% endif %}">
+            {% for field in group.fields %}
+              {% if field.label == 'Favourite player' or field.label == 'Favourite club' or field.label == 'Favourite nation' %}
+                <div class="frm-Form_Item">
+                  <select class="frm-Form_Select"
+                          name="{{ field.name }}_select"
+                          id="{{ field.id_for_label }}_select">
+                    <option value="">{{ field.label }}</option>
+                  </select>
+
+                  <input type="hidden"
+                         name="{{ field.name }}"
+                         id="{{ field.id_for_label }}">
+                </div>
+              {% else %}
+                <div class="frm-Form_Item
+                      {% if field.field.widget.__class__.__name__ == 'Textarea' %} frm-Form_Item-full{% endif %}
+                      {% if field.label == 'Psn' %}
+                        frm-Form_Item-hasIcon frm-Form_Item-psn
+                      {% elif field.label == 'Xbox' %}
+                        frm-Form_Item-hasIcon frm-Form_Item-xbox
+                      {% elif field.label == 'Origin' %}
+                        frm-Form_Item-hasIcon frm-Form_Item-origin
+                      {% elif field.label == 'Twitter' %}
+                        frm-Form_Item-hasIcon frm-Form_Item-twitter
+                      {% elif field.label == 'Youtube' %}
+                        frm-Form_Item-hasIcon frm-Form_Item-youtube
+                      {% elif field.label == 'Twitch' %}
+                        frm-Form_Item-hasIcon frm-Form_Item-twitch
+                      {% elif field.label == 'Facebook' %}
+                        frm-Form_Item-hasIcon frm-Form_Item-facebook
+                      {% endif %}">
+                  <label class="frm-Form_Label"
+                         for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  {{ field }}
+
+                  {% if field.label == 'Psn' %}
+                    <span class="frm-Form_InputIcon">
+                      {% include 'playstation.svg' %}
+                    </span>
+                  {% elif field.label == 'Xbox' %}
+                    <span class="frm-Form_InputIcon">
+                      {% include 'xbox.svg' %}
+                    </span>
+                  {% elif field.label == 'Origin' %}
+                    <span class="frm-Form_InputIcon">
+                      {% include 'pc.svg' %}
+                    </span>
+                  {% elif field.label == 'Twitter' %}
+                    <span class="frm-Form_InputIcon">
+                      {% include 'twitter.svg' %}
+                    </span>
+                  {% elif field.label == 'Youtube' %}
+                    <span class="frm-Form_InputIcon">
+                      {% include 'youtube.svg' %}
+                    </span>
+                  {% elif field.label == 'Twitch' %}
+                    <span class="frm-Form_InputIcon">
+                      {% include 'twitch.svg' %}
+                    </span>
+                  {% elif field.label == 'Facebook' %}
+                    <span class="frm-Form_InputIcon">
+                      {% include 'facebook.svg' %}
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </fieldset>
+    {% endfor %}
+
+    <div class="frm-Form_Actions">
+      <button class="frm-Form_Submit btn-Primary">Save</button>
+    </div>
+  </form>
+
+  {#  <form action="" method="post">{% csrf_token %}#}
+  {#    {{ form.as_p() }}#}
+  {#    <input type="submit" value="Update" />#}
+  {#  </form>#}
+{% endblock %}

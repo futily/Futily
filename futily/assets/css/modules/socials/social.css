@@ -28,25 +28,25 @@
 }
 
 .soc-Social-twitter {
-  --Background: twitter-color;
+  --Background: var(--Color_Twitter);
 }
 .soc-Social-youtube {
-  --Background: youtube-color;
+  --Background: var(--Color_Youtube);
 }
 .soc-Social-twitch {
-  --Background: #6441a5;
+  --Background: var(--Color_Twitch);
 }
 .soc-Social-facebook {
-  --Background: facebook-color;
+  --Background: var(--Color_Facebook);
 }
 .soc-Social-psn {
-  --Background: playstation-color;
+  --Background: var(--Color_Psn);
 }
 .soc-Social-xbox {
-  --Background: xbox-color;
+  --Background: var(--Color_Xbox);
 }
 .soc-Social-origin {
-  --Background: #f56c2d;
+  --Background: var(--Color_Orgin);
 }
 
 .soc-Social_Overlay {

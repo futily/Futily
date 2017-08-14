@@ -1,9 +1,10 @@
 from braces.views import AnonymousRequiredMixin
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.views.generic import DetailView, FormView
+from django.views.generic import DetailView, FormView, UpdateView
 
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserSettingsForm
 from .models import User
 
 
@@ -30,3 +31,20 @@ class ProfileView(DetailView):
     model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
+
+
+class SettingsView(LoginRequiredMixin, UpdateView):
+    form_class = UserSettingsForm
+    model = User
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    template_name_suffix = '_update_form'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+
+        return kwargs
+
+    def get_object(self, queryset=None):
+        return self.request.user
