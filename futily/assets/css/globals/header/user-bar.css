@@ -70,12 +70,14 @@
 }
 
 .hd-UserBar_AccountAction {
-  height: 16px;
+  position: relative;
 
   color: inherit;
-}
 
-.hd-UserBar_AccountAction-settings {
+  & + & {
+    margin-left: 10px;
+  }
+
   /* stylelint-disable selector-max-type */
   svg {
     width: 16px;

@@ -30,6 +30,13 @@
 
                   <p class="hd-UserBar_AccountActionOverlay">Change settings</p>
                 </a>
+
+                <a class="hd-UserBar_AccountAction hd-UserBar_AccountAction-logout"
+                   href="{{ request.user.get_settings_url() }}">
+                  {% include 'logout.svg' %}
+
+                  <p class="hd-UserBar_AccountActionOverlay">Log out</p>
+                </a>
               </div>
             </div>
           {% else %}
