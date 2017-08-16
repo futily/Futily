@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from ..fields import ChoiceArrayField
-from ..players.models import Player
+from .utils import color_choices
 
 
 class Packs(ContentBase):
@@ -15,14 +15,6 @@ class Packs(ContentBase):
 
     def __str__(self):
         return self.page.title
-
-
-def color_choices():
-    colors = Player.objects.values_list('color', flat=True).order_by('color').distinct()
-
-    return [
-        (x, x.capitalize().replace('_', ' ')) for x in colors
-    ]
 
 
 class Type(PageBase):
