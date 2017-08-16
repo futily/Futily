@@ -79,10 +79,24 @@ class User(AbstractBaseUser, PermissionsMixin):
             'username': self.username
         })
 
+    def get_collection_url(self):
+        return self.get_absolute_url()
+
+    def get_profile_url(self):
+        return self.get_absolute_url()
+
+    def get_packs_url(self):
+        return reverse('users:packs', kwargs={
+            'username': self.username
+        })
+
     def get_settings_url(self):
         return reverse('users:settings', kwargs={
             'username': self.username
         })
+
+    def get_squads_url(self):
+        return self.get_absolute_url()
 
     def get_username(self):
         return getattr(self, self.USERNAME_FIELD)

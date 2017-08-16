@@ -210,10 +210,14 @@
       <img alt="" src="http://placehold.it/300x250">
     </div>
 
+    {% block aside_blocks_above %}{% endblock %}
+
     <div class="asi-Block">
       <h4 class="asi-Block_Title">{{ object }} Summary</h4>
 
       <ul class="asi-KeyValues">
+        {% block aside_key_values_above %}{% endblock %}
+
         <li class="asi-KeyValues_Item">
           <p class="asi-KeyValues_Key">Average rating</p>
           <p class="asi-KeyValues_Value">{{ object.average_rating }}</p>

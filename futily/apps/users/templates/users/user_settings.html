@@ -4,7 +4,7 @@
   Settings
 {% endblock %}
 
-{% block main %}
+{% block side_panel %}
   <form class="frm-Form" method="POST">
     {% csrf_token %}
 
@@ -95,9 +95,4 @@
       <button class="frm-Form_Submit btn-Primary">Save</button>
     </div>
   </form>
-
-  {#  <form action="" method="post">{% csrf_token %}#}
-  {#    {{ form.as_p() }}#}
-  {#    <input type="submit" value="Update" />#}
-  {#  </form>#}
 {% endblock %}

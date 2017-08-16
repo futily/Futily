@@ -58,15 +58,20 @@ class PlayerManager(models.Manager):
 
 class PlayerCardManager(models.Manager):
     def get_queryset(self):
-        qs = super(PlayerCardManager, self)\
-            .get_queryset()\
-            .select_related('club', 'nation')\
-            # .only('page', 'club', 'nation', 'ea_id', 'name', 'position', 'total_ingame_stats',
-            #       'card_att_1', 'card_att_2', 'card_att_3', 'card_att_4', 'card_att_5', 'card_att_6',
-            #       'color')
-            # .defer('league', 'first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image',
-            #        'image_sm', 'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw',
-            #        'position_full', 'position_line', 'created', 'modified')
+        qs = super(PlayerCardManager, self) \
+            .get_queryset() \
+            .select_related('club', 'nation') \
+            .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image',
+                   'image_sm', 'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw',
+                   'position_full', 'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date',
+                   'acceleration', 'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve',
+                   'dribbling', 'finishing', 'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping',
+                   'long_passing', 'long_shots', 'marking', 'penalties', 'positioning', 'potential', 'reactions',
+                   'short_passing', 'shot_power', 'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina',
+                   'strength', 'vision', 'volleys', 'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning',
+                   'gk_reflexes', 'total_stats', 'total_ingame_stats', 'foot', 'skill_moves', 'weak_foot',
+                   'specialities', 'traits', 'work_rate_att', 'work_rate_def', 'player_type', 'item_type', 'model_name',
+                   'source', 'is_special_type', 'pack_weight', 'created', 'modified')
 
         return qs
 
@@ -177,6 +182,8 @@ class Player(PageBase):
 
     is_gk = models.BooleanField(default=False)
     is_special_type = models.BooleanField(default=False)
+
+    pack_weight = models.PositiveIntegerField(blank=True, null=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -305,14 +312,24 @@ class Player(PageBase):
     def ingame_stat_groups(self):
         return [
             {'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']},
-            {'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
-                                                                   'positioning', 'shot_power', 'volleys']},
-            {'label': 'passing', 'field': 'card_att_3', 'items': ['crossing', 'curve', 'free_kick_accuracy',
-                                                                  'long_passing', 'short_passing', 'vision']},
-            {'label': 'dribbling', 'field': 'card_att_4', 'items': ['agility', 'balance', 'ball_control', 'reactions',
-                                                                    'dribbling']},
-            {'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
-                                                                    'sliding_tackle', 'standing_tackle']},
+            {
+                'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
+                                                                      'positioning', 'shot_power', 'volleys']
+            },
+            {
+                'label': 'passing', 'field': 'card_att_3', 'items': ['crossing', 'curve', 'free_kick_accuracy',
+                                                                     'long_passing', 'short_passing', 'vision']
+            },
+            {
+                'label': 'dribbling',
+                'field': 'card_att_4',
+                'items': ['agility', 'balance', 'ball_control', 'reactions',
+                          'dribbling']
+            },
+            {
+                'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
+                                                                       'sliding_tackle', 'standing_tackle']
+            },
             {'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']},
         ]
 
@@ -405,10 +422,10 @@ class Player(PageBase):
             ) for val in schema[self.position]
         ]
 
-        players = Player.cards\
-            .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position))\
-            .exclude(ea_id=self.ea_id)\
-            .order_by('ea_id')\
+        players = Player.cards \
+            .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position)) \
+            .exclude(ea_id=self.ea_id) \
+            .order_by('ea_id') \
             .distinct('ea_id')
 
         if amount:

@@ -148,6 +148,7 @@ INSTALLED_APPS = [
     'futily.apps.leagues',
     'futily.apps.news',
     'futily.apps.nations',
+    'futily.apps.packs',
     'futily.apps.players',
     'futily.apps.redirects',
     'futily.apps.sections',

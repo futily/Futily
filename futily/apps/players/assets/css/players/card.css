@@ -258,7 +258,7 @@
     color: var(--Color_CardMeta-totw_gold);
   }
   .plyr-Card-tots_bronze & {
-    color: var(--Color_CardMeta-tots_bronze);
+    color: var(--Color_Card-tots_bronze);
   }
   .plyr-Card-tots_silver & {
     color: var(--Color_CardMeta-tots_silver);
@@ -422,6 +422,10 @@
   overflow: hidden;
 
   /* stylelint-disable selector-class-pattern */
+  .plyr-Card-tots_bronze & {
+    color: var(--Color_CardMeta-tots_bronze);
+  }
+
   .plyr-Card-award_winner & {
     color: hsl(276, 66%, 31%);
   }

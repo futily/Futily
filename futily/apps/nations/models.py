@@ -29,6 +29,8 @@ class Nation(PageBase):
     total_totw = models.PositiveIntegerField(default=0)
     total_special = models.PositiveIntegerField(default=0)
 
+    pack_weight = models.PositiveIntegerField(blank=True, null=True)
+
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

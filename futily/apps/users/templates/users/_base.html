@@ -17,11 +17,119 @@
   </div>
 {% endblock %}
 
+{% block main %}
+  <div class="nav-Side">
+    <aside class="nav-Side_Aside">
+      <nav class="nav-Side_Items">
+        {% for link in side_nav %}
+          <a class="nav-Side_Item" href="{{ link.url }}" aria-current="{{ link.current }}">{{ link.label }}</a>
+        {% endfor %}
+
+        {% if user == request.user %}
+          <a class="nav-Side_Item" href="{{ user.get_settings_url() }}" aria-current="{{ 'true' if user.get_settings_url() == request.path else 'false' }}">Settings</a>
+        {% endif %}
+      </nav>
+    </aside>
+
+    <div class="nav-Side_Panel">
+      {% block side_panel %}{% endblock %}
+    </div>
+  </div>
+{% endblock %}
+
 {% block aside %}
   <div class="asi-Blocks">
     <div class="asi-Block">
       <img alt="" src="http://placehold.it/300x250">
     </div>
+
+    <div class="asi-Block">
+      <h3 class="typ-Title typ-Title-small">{{ user }}'s details</h3>
+
+      <p class="typ-Text"><strong>User #</strong>: {{ user.id }}</p>
+      <p class="typ-Text"><strong>Joined</strong>: {{ user.created | date('jS F Y') }}</p>
+      <p class="typ-Text"><strong>Last login</strong>: {{ user.last_login | date('jS F Y') }}</p>
+    </div>
+
+    {% if user.psn or user.xbox or user.origin %}
+      <div class="asi-Block">
+        <h3 class="typ-Title typ-Title-small">{{ user }}'s platform names</h3>
+
+        <ul class="soc-Socials">
+          {% if user.psn %}
+            <li class="soc-Socials_Item">
+              <div class="soc-Social soc-Social-psn">
+                {% include 'playstation.svg' %}
+
+                <p class="soc-Social_Overlay">{{ user.psn }}</p>
+              </div>
+            </li>
+          {% endif %}
+
+          {% if user.xbox %}
+            <li class="soc-Socials_Item">
+              <div class="soc-Social soc-Social-xbox">
+                {% include 'xbox.svg' %}
+
+                <p class="soc-Social_Overlay">{{ user.xbox }}</p>
+              </div>
+            </li>
+          {% endif %}
+
+          {% if user.origin %}
+            <li class="soc-Socials_Item">
+              <div class="soc-Social soc-Social-origin">
+                {% include 'pc.svg' %}
+
+                <p class="soc-Social_Overlay">{{ user.origin }}</p>
+              </div>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if user.twitter or user.youtube or user.twitch or user.facebook %}
+      <div class="asi-Block">
+        <h3 class="typ-Title typ-Title-small">{{ user }}'s social channels</h3>
+
+        <ul class="soc-Socials">
+          {% if user.twitter %}
+            <li class="soc-Socials_Item">
+              <a class="soc-Social soc-Social-twitter" href="#1">{% include 'twitter.svg' %}</a>
+            </li>
+          {% endif %}
+
+          {% if user.youtube %}
+            <li class="soc-Socials_Item">
+              <a class="soc-Social soc-Social-youtube" href="#1">{% include 'youtube.svg' %}</a>
+            </li>
+          {% endif %}
+
+          {% if user.twitch %}
+            <li class="soc-Socials_Item">
+              <a class="soc-Social soc-Social-twitch" href="#1">{% include 'twitch.svg' %}</a>
+            </li>
+          {% endif %}
+
+          {% if user.facebook %}
+            <li class="soc-Socials_Item">
+              <a class="soc-Social soc-Social-facebook" href="#1">{% include 'facebook.svg' %}</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if user.favourite_player or user.favourite_club or user.favourite_nation %}
+      <div class="asi-Block">
+        <h3 class="typ-Title typ-Title-small">{{ user }}'s favourites</h3>
+
+        <p>{{ user.favourite_player }}</p>
+        <p>{{ user.favourite_club }}</p>
+        <p>{{ user.favourite_nation }}</p>
+      </div>
+    {% endif %}
 
     {% block aside_blocks %}{% endblock %}
   </div>

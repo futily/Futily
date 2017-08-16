@@ -1,12 +1,13 @@
-{% extends "layouts/ea-object-detail.html" %}
+{% extends "base.html" %}
+{% import "players/macros/players.html" as player_macros %}
 
 {% block content_above %}
   <div class="pg-Strapline">
     <div class="pg-Strapline_Inner">
       <div class="pg-Strapline_Body">
         <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">{{ object }}</h1>
-          <p class="pg-Strapline_Text">Highest rated Fifa 17 {{ object }} players</p>
+          <h1 class="pg-Strapline_Title">Fifa 17 {{ pages.current }}</h1>
+          <p class="pg-Strapline_Text">{{ object }}</p>
         </div>
 
         <div class="pg-Strapline_Advert">
@@ -47,7 +48,7 @@
                  class="bdc-Breadcrumb_Link"
                  href="{{ pages.current.get_absolute_url() }}">
                 <span itemprop="name">
-                  {{ object._meta.app_label | capitalize() }}
+                  {{ pages.current }}
                 </span>
                 <meta itemprop="position" content="2">
               </a>
@@ -74,52 +75,13 @@
 {% endblock %}
 
 {% block main %}
-  <div class="plyr-CardBlock">
-    <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Attackers</h2>
-    </header>
-
-    <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.attackers()) }}
-    </div>
-  </div>
-
-  <div class="plyr-CardBlock">
-    <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Midfielders</h2>
-    </header>
-
-    <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.midfielders()) }}
-    </div>
-  </div>
-
-  <div class="plyr-CardBlock">
-    <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Defenders</h2>
-    </header>
-
-    <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.defenders()) }}
-    </div>
-  </div>
-
-  <div class="plyr-CardBlock">
-    <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Goalkeepers</h2>
-    </header>
-
-    <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.goalkeepers()) }}
-    </div>
-  </div>
+  {{ player_macros.card_list(pack.players.all()) }}
 {% endblock %}
 
-{% block aside_key_values_above %}
-  <li class="asi-KeyValues_Item">
-    <p class="asi-KeyValues_Key">League</p>
-    <p class="asi-KeyValues_Value">
-      <a href="{{ object.league.get_absolute_url() }}">{{ object.league }}</a>
-    </p>
-  </li>
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+  </div>
 {% endblock %}

@@ -2,6 +2,7 @@ from braces.views import AnonymousRequiredMixin
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.views import View
 from django.views.generic import DetailView, FormView, UpdateView
 
 from .forms import UserRegistrationForm, UserSettingsForm
@@ -27,18 +28,36 @@ class RegisterView(AnonymousRequiredMixin, FormView):
         return redirect(auth_user.get_absolute_url())
 
 
-class ProfileView(DetailView):
+class UserMixin(View):
     model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-class SettingsView(LoginRequiredMixin, UpdateView):
+        context['side_nav'] = [
+            {
+                'label': x,
+                'url': getattr(self.object, f'get_{x.lower()}_url')(),
+                'current': str(self.request.path == getattr(self.object, f'get_{x.lower()}_url')()).lower(),
+            } for x in ['Profile', 'Squads', 'Packs', 'Collection']
+        ]
+
+        return context
+
+
+class UserPackView(UserMixin, DetailView):
+    template_name = 'users/user_detail_packs.html'
+
+
+class UserProfileView(UserMixin, DetailView):
+    pass
+
+
+class UserSettingsView(LoginRequiredMixin, UserMixin, UpdateView):
     form_class = UserSettingsForm
-    model = User
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    template_name_suffix = '_update_form'
+    template_name = 'users/user_settings.html'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

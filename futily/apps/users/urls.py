@@ -1,7 +1,8 @@
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 
-from .views import ProfileView, RegisterView, SettingsView
+from .views import (RegisterView, UserPackView, UserProfileView,
+                    UserSettingsView)
 
 urlpatterns = [
     # Login
@@ -23,6 +24,7 @@ urlpatterns = [
     # ), name='register-complete'),
 
     # Profile
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/$', ProfileView.as_view(), name='profile'),
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/settings/$', SettingsView.as_view(), name='settings'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/$', UserProfileView.as_view(), name='profile'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/packs/$', UserPackView.as_view(), name='packs'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/settings/$', UserSettingsView.as_view(), name='settings'),
 ]
