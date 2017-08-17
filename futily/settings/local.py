@@ -58,8 +58,8 @@ DATABASES = {
     },
 }
 
-# Mailtrip SMTP
-EMAIL_HOST = 'mailtrap.io'
+# Mailtrap SMTP
+EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '94a4b4d4e3b0ee'
 EMAIL_HOST_PASSWORD = '96c5a97f3f6cfa'
 EMAIL_PORT = '2525'

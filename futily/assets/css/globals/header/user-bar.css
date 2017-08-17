@@ -72,10 +72,12 @@
 .hd-UserBar_AccountAction {
   position: relative;
 
+  margin-left: 10px;
+
   color: inherit;
 
-  & + & {
-    margin-left: 10px;
+  &:first-child {
+    margin-left: 0;
   }
 
   /* stylelint-disable selector-max-type */
@@ -84,6 +86,28 @@
     height: @width;
   }
   /* stylelint-enable */
+}
+
+.hd-UserBar_AccountAction-logout {
+  position: relative;
+
+  margin-left: 15px;
+  padding-left: 10px;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: 4px;
+    bottom: 0;
+    left: 0;
+
+    display: block;
+    width: 1px;
+
+    background-color: #fff;
+    opacity: 0.6;
+  }
 }
 
 .hd-UserBar_AccountActionOverlay {

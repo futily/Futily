@@ -53,6 +53,12 @@
   <div class="pg-Strapline">
     <div class="pg-Strapline_Inner">
       <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_ImageContainer">
+          <img class="pg-Strapline_Image"
+               alt=""
+               src="{{ static('ea-images/{}/{}.png'.format(object._meta.app_label, object.ea_id)) }}">
+        </div>
+
         <div class="pg-Strapline_Content">
           <h1 class="pg-Strapline_Title">{{ object }}</h1>
           <p class="pg-Strapline_Text">Highest rated Fifa 17 {{ object }} players</p>
