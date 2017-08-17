@@ -17,10 +17,14 @@
 */
 .nav-Side_Aside {
   align-self: flex-start;
-  flex-basis: 270px;
+  flex-basis: 300px;
   flex-shrink: 0;
 
   margin-right: 30px;
+}
+
+.nav-Side_Items {
+  margin-bottom: 1vr;
 
   border: 1px solid var(--Color_Border);
 }

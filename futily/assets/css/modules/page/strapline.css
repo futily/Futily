@@ -19,9 +19,31 @@
 
 .pg-Strapline_Body {
   align-items: center;
-  justify-content: space-between;
 
   display: flex;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Image
+|--------------------------------------------------------------------------
+|
+*/
+.pg-Strapline_ImageContainer {
+  flex-basis: 80px;
+  flex-shrink: 0;
+
+  margin-right: var(--Grid_Gutter);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+|
+*/
+.pg-Strapline_Content {
+  margin-right: auto;
 }
 
 .pg-Strapline_Title {

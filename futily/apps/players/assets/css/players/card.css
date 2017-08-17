@@ -45,6 +45,16 @@
   }
 }
 
+.plyr-Card-faded {
+  opacity: 0.5;
+
+  transition: opacity 0.3s, transform 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
 .plyr-Card-small {
   width: 140px;
   height: 219px;

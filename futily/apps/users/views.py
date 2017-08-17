@@ -5,6 +5,9 @@ from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import DetailView, FormView, UpdateView
 
+from futily.apps.clubs.models import Club
+
+from ..leagues.models import League
 from .forms import UserRegistrationForm, UserSettingsForm
 from .models import User
 
@@ -36,13 +39,69 @@ class UserMixin(View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        print(self.request.path, self.request.user.get_collection_url(), self.request.path.startswith(self.request.user.get_collection_url()))
+
         context['side_nav'] = [
             {
-                'label': x,
-                'url': getattr(self.object, f'get_{x.lower()}_url')(),
-                'current': str(self.request.path == getattr(self.object, f'get_{x.lower()}_url')()).lower(),
-            } for x in ['Profile', 'Squads', 'Packs', 'Collection']
+                'label': 'Profile',
+                'url': self.object.get_absolute_url(),
+                'current': str(self.request.path == self.object.get_absolute_url()).lower(),
+            },
+            {
+                'label': 'Squads',
+                'url': self.object.get_squads_url(),
+                'current': str(self.request.path == self.object.get_squads_url()).lower(),
+            },
+            {
+                'label': 'Packs',
+                'url': self.object.get_packs_url(),
+                'current': str(self.request.path == self.object.get_packs_url()).lower(),
+            },
+            {
+                'label': 'Collection',
+                'url': self.object.get_collection_url(),
+                'current': str(self.request.path.startswith(self.object.get_collection_url())).lower(),
+            },
         ]
+
+        return context
+
+
+class UserCollectionView(UserMixin, DetailView):
+    template_name = 'users/user_detail_collection.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['leagues'] = League.objects.all()
+
+        return context
+
+
+class UserCollectionClubView(UserMixin, DetailView):
+    template_name = 'users/user_detail_collection_club.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['club'] = Club.objects.prefetch_related('player_set').get(slug=self.kwargs['club_slug'])
+        context['league'] = League.objects.get(slug=self.kwargs['league_slug'])
+        context['collected_players'] = [
+            x for x in self.request.user.cardcollection.players.filter(
+                club=context['club'])]
+        context['uncollected_players'] = context['club'].player_set(manager='cards').exclude(
+            id__in=[x.id for x in context['collected_players']])
+
+        return context
+
+
+class UserCollectionLeagueView(UserMixin, DetailView):
+    template_name = 'users/user_detail_collection_league.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['league'] = League.objects.get(slug=self.kwargs['league_slug'])
 
         return context
 

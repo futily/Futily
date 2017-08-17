@@ -80,7 +80,22 @@ class User(AbstractBaseUser, PermissionsMixin):
         })
 
     def get_collection_url(self):
-        return self.get_absolute_url()
+        return reverse('users:collection', kwargs={
+            'username': self.username
+        })
+
+    def get_collection_club_url(self, league, club):
+        return reverse('users:collection-club', kwargs={
+            'username': self.username,
+            'league_slug': league.slug,
+            'club_slug': club.slug,
+        })
+
+    def get_collection_league_url(self, league):
+        return reverse('users:collection-league', kwargs={
+            'username': self.username,
+            'league_slug': league.slug,
+        })
 
     def get_profile_url(self):
         return self.get_absolute_url()
@@ -106,3 +121,20 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         return self.get_username()
+
+
+class CollectionPlayer(models.Model):
+    collection = models.ForeignKey('users.CardCollection', on_delete=models.CASCADE)
+    player = models.ForeignKey('players.Player', on_delete=models.CASCADE)
+    count = models.PositiveIntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.collection.user}'s {self.player} ({self.player.rating})"
+
+
+class CardCollection(models.Model):
+    user = models.OneToOneField('users.User', on_delete=models.CASCADE)
+    players = models.ManyToManyField('players.Player', blank=True, through=CollectionPlayer)
+
+    def __str__(self):
+        return f"{self.user}'s card collection"

@@ -44,11 +44,12 @@ urlpatterns = [
 )
 
 if settings.DEBUG:
-    # import debug_toolbar
-    #
-    # urlpatterns = [
-    #     url(r'^__debug__/', include(debug_toolbar.urls)),
-    # ] + urlpatterns
+    if 'debug_toolbar' in settings.INSTALLED_APPS:
+        import debug_toolbar
+
+        urlpatterns = [
+            url(r'^__debug__/', include(debug_toolbar.urls)),
+        ] + urlpatterns
 
     urlpatterns += [
         url(r'^404/$', generic.TemplateView.as_view(template_name='404.html')),

@@ -1,0 +1,89 @@
+{% extends "users/_collection_base.html" %}
+
+{% block content_above %}
+  {{ super() }}
+
+  <div class="pg-Breadcrumbs">
+    <div class="pg-Breadcrumbs_Inner">
+      <div class="pg-Breadcrumbs_Body">
+        <nav class="bdc-Breadcrumb">
+          <div class="bdc-Breadcrumb_Items"
+               itemscope=""
+               itemtype="http://schema.org/BreadcrumbList">
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                <span itemprop="name">
+                  Home
+                </span>
+                <meta itemprop="position" content="1">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ user.get_absolute_url() }}">
+                <span itemprop="name">
+                  {{ user }}
+                </span>
+                <meta itemprop="position" content="2">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <span itemprop="name">
+                Collection
+              </span>
+              <meta itemprop="position" content="3">
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block side_panel %}
+  <div class="clc-Objects">
+    <div class="clc-Objects_Items">
+      {% for league in leagues %}
+        <div class="clc-Objects_Item">
+          <a class="clc-Object"
+             href="{{ user.get_collection_league_url(league) }}">
+            <div class="clc-Object_ImageContainer">
+              <img class="clc-Object_Image"
+                   alt=""
+                   src="{{ static('ea-images/leagues/{}.png'.format(league.ea_id)) }}">
+            </div>
+
+            <h3 class="clc-Object_Title">{{ league }}</h3>
+
+            <p class="clc-Object_SubTitle">Collection</p>
+            <p class="clc-Object_Collection">
+              <span class="clc-Object_Collected">{{ request.user.cardcollection.players.filter(league=league).count() }}</span> / <span class="clc-Object_ToCollect">{{ league.total_players }}</span>
+            </p>
+
+            <span class="clc-Object_Link btn-Primary">View League</span>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

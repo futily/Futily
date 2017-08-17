@@ -1,9 +1,9 @@
-{% macro card_list(players) %}
+{% macro card_list(players, card_collection=False) %}
   <div class="plyr-CardList">
     <ul class="plyr-CardList_Items">
       {% for player in players %}
         <li class="plyr-CardList_Item">
-          {{ player.render_card() }}
+          {{ player.render_card(faded=card_collection) }}
         </li>
       {% endfor %}
     </ul>

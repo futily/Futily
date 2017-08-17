@@ -1,0 +1,91 @@
+/*
+|--------------------------------------------------------------------------
+| Object
+|--------------------------------------------------------------------------
+| @namespace: clc-
+|
+*/
+.clc-Object {
+  position: relative;
+
+  flex-direction: column;
+
+  display: flex;
+  width: 100%;
+  padding: 60px 20px 1vr;
+
+  text-align: center;
+
+  background-color: #fff;
+  border: 1px solid var(--Color_Border);
+  color: var(--Color_Body);
+
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    border-color: var(--Color_Green);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Image
+|--------------------------------------------------------------------------
+|
+*/
+.clc-Object_ImageContainer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  align-items: center;
+  justify-content: center;
+
+  display: flex;
+  width: 100px;
+  height: @width;
+  padding: 20px;
+
+  background-color: #fff;
+  border: 1px solid var(--Color_Border);
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+  transition: border-color 0.2s;
+
+  .clc-Object:hover & {
+    border-color: var(--Color_Green);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Content
+|--------------------------------------------------------------------------
+|
+*/
+.clc-Object_Title {
+  @apply --Font-20;
+
+  margin-bottom: 0.5vr;
+
+  font-weight: 500;
+
+  color: var(--Color_Body);
+}
+
+.clc-Object_Collection {
+  border-bottom: 0.5vr solid transparent;
+}
+
+.clc-Object_Collected {
+  font-weight: 500;
+
+  color: var(--Color_Green);
+}
+
+.clc-Object_Link {
+  align-self: center;
+
+  margin-top: auto;
+}

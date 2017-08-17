@@ -244,10 +244,11 @@ class Player(PageBase):
     def get_compare_absolute_url(self):
         return self._get_permalink_for_page(self.page.page, name='player_compare')
 
-    def render_card(self, size='sm'):
+    def render_card(self, size='sm', faded=False):
         return render_to_string('players/includes/card.html', {
             'player': self,
-            'size': 'small' if size == 'sm' else 'large'
+            'size': 'small' if size == 'sm' else 'large',
+            'faded': faded,
         })
 
     @property

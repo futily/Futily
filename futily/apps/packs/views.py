@@ -4,6 +4,8 @@ from collections import Counter
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 
+from futily.apps.users.models import CollectionPlayer
+
 from ..players.models import Player
 from .forms import PackCreationForm
 from .models import Pack, Type
@@ -96,6 +98,15 @@ class TypeDetail(FormMixin, DetailView):
 
         context['form'] = PackCreationForm()
         context['players'] = self.roll_querysets()
+
+        if self.request.user.is_authenticated:
+            for player in context['players']:
+                obj, created = CollectionPlayer.objects.get_or_create(
+                    collection=self.request.user.cardcollection, player=player)
+
+                if not created:
+                    obj.count += 1
+                    obj.save()
 
         return context
 

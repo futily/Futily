@@ -1,26 +1,10 @@
-{% extends "layouts/ea-object-detail.html" %}
+{% extends "users/_base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block content_above_text %}{{ user }}'s card collection - {{ club }}{% endblock %}
 
 {% block content_above %}
-  <div class="pg-Strapline">
-    <div class="pg-Strapline_Inner">
-      <div class="pg-Strapline_Body">
-        <div class="pg-Strapline_ImageContainer">
-          <img class="pg-Strapline_Image"
-               alt=""
-               src="{{ static('ea-images/clubs/{}.png'.format(club.ea_id)) }}">
-        </div>
-
-        <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">{{ object }}</h1>
-          <p class="pg-Strapline_Text">Highest rated Fifa 17 {{ object }} players</p>
-        </div>
-
-        <div class="pg-Strapline_Advert">
-          <img alt="" src="http://placehold.it/728x90">
-        </div>
-      </div>
-    </div>
-  </div>
+  {{ super() }}
 
   <div class="pg-Breadcrumbs">
     <div class="pg-Breadcrumbs_Inner">
@@ -51,11 +35,47 @@
                  itemtype="http://schema.org/ListItem">
               <a itemprop="item"
                  class="bdc-Breadcrumb_Link"
-                 href="{{ pages.current.get_absolute_url() }}">
+                 href="{{ user.get_absolute_url() }}">
                 <span itemprop="name">
-                  {{ object._meta.app_label | capitalize() }}
+                  {{ user }}
                 </span>
                 <meta itemprop="position" content="2">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ user.get_collection_url() }}">
+                <span itemprop="name">
+                  {{ user }}'s card collection
+                </span>
+                <meta itemprop="position" content="3">
+              </a>
+            </div>
+
+            <div class="bdc-Breadcrumb_Divider">
+              {% include 'angle-down.svg' %}
+            </div>
+
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item"
+                 class="bdc-Breadcrumb_Link"
+                 href="{{ user.get_collection_league_url(league) }}">
+                <span itemprop="name">
+                  {{ league }}
+                </span>
+                <meta itemprop="position" content="3">
               </a>
             </div>
 
@@ -68,9 +88,9 @@
                  itemscope=""
                  itemtype="http://schema.org/ListItem">
               <span itemprop="name">
-                {{ object }}
+                {{ club }}
               </span>
-              <meta itemprop="position" content="3">
+              <meta itemprop="position" content="5">
             </div>
           </div>
         </nav>
@@ -79,53 +99,24 @@
   </div>
 {% endblock %}
 
-{% block main %}
+{% block side_panel %}
   <div class="plyr-CardBlock">
     <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Attackers</h2>
+      <h2 class="plyr-CardBlock_Title">Collected</h2>
     </header>
 
     <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.attackers()) }}
+      {{ player_macros.card_list(collected_players) }}
     </div>
   </div>
 
   <div class="plyr-CardBlock">
     <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Midfielders</h2>
+      <h2 class="plyr-CardBlock_Title">Still to collect</h2>
     </header>
 
     <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.midfielders()) }}
+      {{ player_macros.card_list(uncollected_players, True) }}
     </div>
   </div>
-
-  <div class="plyr-CardBlock">
-    <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Defenders</h2>
-    </header>
-
-    <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.defenders()) }}
-    </div>
-  </div>
-
-  <div class="plyr-CardBlock">
-    <header class="plyr-CardBlock_Header">
-      <h2 class="plyr-CardBlock_Title">Goalkeepers</h2>
-    </header>
-
-    <div class="plyr-CardBlock_Body">
-      {{ player_macros.card_list(club.goalkeepers()) }}
-    </div>
-  </div>
-{% endblock %}
-
-{% block aside_key_values_above %}
-  <li class="asi-KeyValues_Item">
-    <p class="asi-KeyValues_Key">League</p>
-    <p class="asi-KeyValues_Value">
-      <a href="{{ object.league.get_absolute_url() }}">{{ object.league }}</a>
-    </p>
-  </li>
 {% endblock %}
