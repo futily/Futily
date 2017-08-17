@@ -24,7 +24,8 @@
 }
 
 .nav-Side_Items {
-  margin-bottom: 1vr;
+  margin-top: 1vr;
+  margin-bottom: @margin-top;
 
   border: 1px solid var(--Color_Border);
 }

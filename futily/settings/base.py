@@ -129,6 +129,7 @@ INSTALLED_APPS = [
     'compressor',
 
     'algoliasearch_django',
+    'annoying',
     'django_jinja',
 
     'django.forms',
@@ -327,7 +328,6 @@ CACHES = {
 
 SECRET_KEY = 'apnHxTgNzNw56I+HwgVeCseY02eu4XE/iphnM24Aui5NIPl3iEleJ196WHZCO/RwTsY='
 CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
 X_FRAME_OPTIONS = 'DENY'
 
 WYSIWYG_OPTIONS = {

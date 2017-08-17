@@ -1,6 +1,7 @@
 from braces.views import AnonymousRequiredMixin
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.shortcuts import redirect
 from django.views import View
 from django.views.generic import DetailView, FormView, UpdateView
@@ -39,8 +40,6 @@ class UserMixin(View):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        print(self.request.path, self.request.user.get_collection_url(), self.request.path.startswith(self.request.user.get_collection_url()))
-
         context['side_nav'] = [
             {
                 'label': 'Profile',
@@ -65,6 +64,25 @@ class UserMixin(View):
         ]
 
         return context
+
+
+class UserFollowView(LoginRequiredMixin, UserMixin):
+
+    def post(self, request, *args, **kwargs):
+        user_to_follow = User.objects.get(username=self.kwargs['username'])
+        following_user = self.request.user
+        is_already_following = following_user.is_following(user_to_follow)
+
+        if is_already_following:
+            user_to_follow.remove_follower(following_user)
+        else:
+            user_to_follow.add_follower(following_user)
+
+        return JsonResponse({
+            'followed': not is_already_following,
+            'followed_user': user_to_follow.id,
+            'followed_by': following_user.id,
+        })
 
 
 class UserCollectionView(UserMixin, DetailView):

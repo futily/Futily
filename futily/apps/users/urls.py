@@ -3,8 +3,9 @@ from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 
 from .views import (RegisterView, UserCollectionClubView,
-                    UserCollectionLeagueView, UserCollectionView, UserPackView,
-                    UserProfileView, UserSettingsView)
+                    UserCollectionLeagueView, UserCollectionView,
+                    UserFollowView, UserPackView, UserProfileView,
+                    UserSettingsView)
 
 urlpatterns = [
     # Login
@@ -65,4 +66,6 @@ urlpatterns = [
     ),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/packs/$', UserPackView.as_view(), name='packs'),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/settings/$', UserSettingsView.as_view(), name='settings'),
+
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/follow/$', UserFollowView.as_view(), name='follow'),
 ]

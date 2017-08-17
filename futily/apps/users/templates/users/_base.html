@@ -5,7 +5,7 @@
     <div class="pg-Strapline_Inner">
       <div class="pg-Strapline_Body">
         <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">{{ user }}</h1>
+          <h1 class="pg-Strapline_Title">{{ object }}</h1>
           <p class="pg-Strapline_Text">{% block content_above_text %}Profile{% endblock %}</p>
         </div>
 
@@ -20,60 +20,85 @@
 {% block main %}
   <div class="nav-Side">
     <aside class="nav-Side_Aside">
+      <div class="asi-Blocks">
+        <div class="asi-Block">
+          <img alt="" src="http://placehold.it/300x250">
+        </div>
+      </div>
+
       <nav class="nav-Side_Items">
         {% for link in side_nav %}
-          <a class="nav-Side_Item" href="{{ link.url }}" aria-current="{{ link.current }}">{{ link.label }}</a>
+          <a class="nav-Side_Item"
+             href="{{ link.url }}"
+             aria-current="{{ link.current }}">{{ link.label }}</a>
         {% endfor %}
 
-        {% if user == request.user %}
-          <a class="nav-Side_Item" href="{{ user.get_settings_url() }}" aria-current="{{ 'true' if user.get_settings_url() == request.path else 'false' }}">Settings</a>
+        {% if object == request.user %}
+          <a class="nav-Side_Item"
+             href="{{ object.get_settings_url() }}"
+             aria-current="{{ 'true' if object.get_settings_url() == request.path else 'false' }}">Settings
+          </a>
         {% endif %}
       </nav>
 
       <div class="asi-Blocks">
         <div class="asi-Block">
-          <img alt="" src="http://placehold.it/300x250">
+          <h3 class="typ-Title typ-Title-small">{{ object }}'s details</h3>
+
+          <p class="typ-Text"><strong>User #</strong>: {{ object.id }}</p>
+          <p class="typ-Text"><strong>Joined</strong>: {{ object.created | date('jS F Y') }}</p>
+          <p class="typ-Text"><strong>Last login</strong>: {{ object.last_login | date('jS F Y') }}
+          </p>
+
+          <hr>
+
+          <p class="typ-Text"><strong>Following:</strong> {{ object.get_following.count() }}</p>
+          <p class="typ-Text"><strong>Followers:</strong> <span class="js-UserFollow_Followers">{{ object.get_followers.count() }}</span></p>
+
+          {% if user %}
+            <button class="btn-Primary js-UserFollow ut-SmallMarginTop"
+                    data-action="{{ url('users:follow', username=object.username) }}"
+                    data-is-following="{{ 'true' if user.is_following(object) else 'false' }}">
+              {% if user.is_following(object) %}
+                <span class="js-UserFollow_Term">Following</span> {{ object }}
+              {% else %}
+                <span class="js-UserFollow_Term">Follow</span> {{ object }}
+              {% endif %}
+            </button>
+          {% endif %}
         </div>
 
-        <div class="asi-Block">
-          <h3 class="typ-Title typ-Title-small">{{ user }}'s details</h3>
-
-          <p class="typ-Text"><strong>User #</strong>: {{ user.id }}</p>
-          <p class="typ-Text"><strong>Joined</strong>: {{ user.created | date('jS F Y') }}</p>
-          <p class="typ-Text"><strong>Last login</strong>: {{ user.last_login | date('jS F Y') }}</p>
-        </div>
-
-        {% if user.psn or user.xbox or user.origin %}
+        {% if object.psn or object.xbox or object.origin %}
           <div class="asi-Block">
-            <h3 class="typ-Title typ-Title-small">{{ user }}'s platform names</h3>
+            <h3 class="typ-Title typ-Title-small">{{ object }}'s platform names</h3>
 
             <ul class="soc-Socials">
-              {% if user.psn %}
+              {% if object.psn %}
                 <li class="soc-Socials_Item">
                   <div class="soc-Social soc-Social-psn">
                     {% include 'playstation.svg' %}
 
-                    <p class="soc-Social_Overlay">{{ user.psn }}</p>
+                    <p class="soc-Social_Overlay">{{ object.psn }}</p>
                   </div>
                 </li>
               {% endif %}
 
-              {% if user.xbox %}
+              {% if object.xbox %}
                 <li class="soc-Socials_Item">
                   <div class="soc-Social soc-Social-xbox">
                     {% include 'xbox.svg' %}
 
-                    <p class="soc-Social_Overlay">{{ user.xbox }}</p>
+                    <p class="soc-Social_Overlay">{{ object.xbox }}</p>
                   </div>
                 </li>
               {% endif %}
 
-              {% if user.origin %}
+              {% if object.origin %}
                 <li class="soc-Socials_Item">
                   <div class="soc-Social soc-Social-origin">
                     {% include 'pc.svg' %}
 
-                    <p class="soc-Social_Overlay">{{ user.origin }}</p>
+                    <p class="soc-Social_Overlay">{{ object.origin }}</p>
                   </div>
                 </li>
               {% endif %}
@@ -81,45 +106,46 @@
           </div>
         {% endif %}
 
-        {% if user.twitter or user.youtube or user.twitch or user.facebook %}
+        {% if object.twitter or object.youtube or object.twitch or object.facebook %}
           <div class="asi-Block">
-            <h3 class="typ-Title typ-Title-small">{{ user }}'s social channels</h3>
+            <h3 class="typ-Title typ-Title-small">{{ object }}'s social channels</h3>
 
             <ul class="soc-Socials">
-              {% if user.twitter %}
+              {% if object.twitter %}
                 <li class="soc-Socials_Item">
                   <a class="soc-Social soc-Social-twitter" href="#1">{% include 'twitter.svg' %}</a>
                 </li>
               {% endif %}
 
-              {% if user.youtube %}
+              {% if object.youtube %}
                 <li class="soc-Socials_Item">
                   <a class="soc-Social soc-Social-youtube" href="#1">{% include 'youtube.svg' %}</a>
                 </li>
               {% endif %}
 
-              {% if user.twitch %}
+              {% if object.twitch %}
                 <li class="soc-Socials_Item">
                   <a class="soc-Social soc-Social-twitch" href="#1">{% include 'twitch.svg' %}</a>
                 </li>
               {% endif %}
 
-              {% if user.facebook %}
+              {% if object.facebook %}
                 <li class="soc-Socials_Item">
-                  <a class="soc-Social soc-Social-facebook" href="#1">{% include 'facebook.svg' %}</a>
+                  <a class="soc-Social soc-Social-facebook"
+                     href="#1">{% include 'facebook.svg' %}</a>
                 </li>
               {% endif %}
             </ul>
           </div>
         {% endif %}
 
-        {% if user.favourite_player or user.favourite_club or user.favourite_nation %}
+        {% if object.favourite_player or object.favourite_club or object.favourite_nation %}
           <div class="asi-Block">
-            <h3 class="typ-Title typ-Title-small">{{ user }}'s favourites</h3>
+            <h3 class="typ-Title typ-Title-small">{{ object }}'s favourites</h3>
 
-            <p>{{ user.favourite_player }}</p>
-            <p>{{ user.favourite_club }}</p>
-            <p>{{ user.favourite_nation }}</p>
+            <p>{{ object.favourite_player }}</p>
+            <p>{{ object.favourite_club }}</p>
+            <p>{{ object.favourite_nation }}</p>
           </div>
         {% endif %}
 

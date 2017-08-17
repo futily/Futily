@@ -1,3 +1,4 @@
+from annoying.fields import AutoOneToOneField
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -63,6 +64,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     favourite_club = models.ForeignKey('clubs.Club', blank=True, null=True)
     favourite_nation = models.ForeignKey('nations.Nation', blank=True, null=True)
 
+    followers = models.ManyToManyField('self', symmetrical=False, through='users.UserFollowers',
+                                       related_name='following')
+
     is_staff = models.BooleanField('staff status', default=False,
                                    help_text='Designates whether the user can log into this admin site.')
     is_active = models.BooleanField('active', default=True,
@@ -73,6 +77,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+    @property
+    def get_followers(self):
+        return self.followers.filter(to_user__from_user=self)
+
+    @property
+    def get_following(self):
+        return self.following.filter(from_user__to_user=self)
+
+    def is_following(self, user):
+        return user.get_followers.filter(id=self.id).exists()
 
     def get_absolute_url(self):
         return reverse('users:profile', kwargs={
@@ -122,6 +137,28 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         return self.get_username()
 
+    def add_follower(self, follower):
+        follower = UserFollowers.objects.get_or_create(
+            from_user=self,
+            to_user=follower)
+
+        return follower[0]
+
+    def remove_follower(self, follower):
+        UserFollowers.objects.filter(
+            from_user=self,
+            to_user=follower).delete()
+
+        return
+
+
+class UserFollowers(models.Model):
+    from_user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='from_user')
+    to_user = models.ForeignKey('users.User', on_delete=models.CASCADE, related_name='to_user')
+
+    def __str__(self):
+        return f"{self.to_user}'s followers"
+
 
 class CollectionPlayer(models.Model):
     collection = models.ForeignKey('users.CardCollection', on_delete=models.CASCADE)
@@ -133,8 +170,8 @@ class CollectionPlayer(models.Model):
 
 
 class CardCollection(models.Model):
-    user = models.OneToOneField('users.User', on_delete=models.CASCADE)
-    players = models.ManyToManyField('players.Player', blank=True, through=CollectionPlayer)
+    user = AutoOneToOneField('users.User', on_delete=models.CASCADE)
+    players = models.ManyToManyField('players.Player', blank=True, through='users.CollectionPlayer')
 
     def __str__(self):
         return f"{self.user}'s card collection"

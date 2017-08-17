@@ -1,6 +1,6 @@
 {% extends "users/_collection_base.html" %}
 
-{% block content_above_text %}{{ user }}'s card collection - {{ league }}{% endblock %}
+{% block content_above_text %}{{ object }}'s card collection - {{ league }}{% endblock %}
 
 {% block content_above %}
   {{ super() }}
@@ -34,9 +34,9 @@
                  itemtype="http://schema.org/ListItem">
               <a itemprop="item"
                  class="bdc-Breadcrumb_Link"
-                 href="{{ user.get_absolute_url() }}">
+                 href="{{ object.get_absolute_url() }}">
                 <span itemprop="name">
-                  {{ user }}
+                  {{ object }}
                 </span>
                 <meta itemprop="position" content="2">
               </a>
@@ -52,9 +52,9 @@
                  itemtype="http://schema.org/ListItem">
               <a itemprop="item"
                  class="bdc-Breadcrumb_Link"
-                 href="{{ user.get_collection_url() }}">
+                 href="{{ object.get_collection_url() }}">
                 <span itemprop="name">
-                  {{ user }}'s card collection
+                  {{ object }}'s card collection
                 </span>
                 <meta itemprop="position" content="3">
               </a>
@@ -86,7 +86,7 @@
       {% for club in league.club_set.all() %}
         <div class="clc-Objects_Item">
           <a class="clc-Object"
-             href="{{ user.get_collection_club_url(league, club) }}">
+             href="{{ object.get_collection_club_url(league, club) }}">
             <div class="clc-Object_ImageContainer">
               <img class="clc-Object_Image"
                    alt=""
@@ -97,7 +97,7 @@
 
             <p class="clc-Object_SubTitle">Collection</p>
             <p class="clc-Object_Collection">
-              <span class="clc-Object_Collected">{{ request.user.cardcollection.players.filter(club=club).count() }}</span> / <span class="clc-Object_ToCollect">{{ club.total_players }}</span>
+              <span class="clc-Object_Collected">{{ object.cardcollection.players.filter(club=club).count() }}</span> / <span class="clc-Object_ToCollect">{{ club.total_players }}</span>
             </p>
 
             <span class="clc-Object_Link btn-Primary">View Club</span>

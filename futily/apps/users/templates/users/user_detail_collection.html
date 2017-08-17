@@ -32,9 +32,9 @@
                  itemtype="http://schema.org/ListItem">
               <a itemprop="item"
                  class="bdc-Breadcrumb_Link"
-                 href="{{ user.get_absolute_url() }}">
+                 href="{{ object.get_absolute_url() }}">
                 <span itemprop="name">
-                  {{ user }}
+                  {{ object }}
                 </span>
                 <meta itemprop="position" content="2">
               </a>
@@ -66,7 +66,7 @@
       {% for league in leagues %}
         <div class="clc-Objects_Item">
           <a class="clc-Object"
-             href="{{ user.get_collection_league_url(league) }}">
+             href="{{ object.get_collection_league_url(league) }}">
             <div class="clc-Object_ImageContainer">
               <img class="clc-Object_Image"
                    alt=""
@@ -77,7 +77,7 @@
 
             <p class="clc-Object_SubTitle">Collection</p>
             <p class="clc-Object_Collection">
-              <span class="clc-Object_Collected">{{ request.user.cardcollection.players.filter(league=league).count() }}</span> / <span class="clc-Object_ToCollect">{{ league.total_players }}</span>
+              <span class="clc-Object_Collected">{{ object.cardcollection.players.filter(league=league).count() }}</span> / <span class="clc-Object_ToCollect">{{ league.total_players }}</span>
             </p>
 
             <span class="clc-Object_Link btn-Primary">View League</span>

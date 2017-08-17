@@ -12,6 +12,7 @@ import { externalLinks, iframeFix } from './utils'
 import { FloatingLabel } from './forms'
 import { CardSelector } from './players/detail'
 import { PlayerFilterForm } from './players/list'
+import { Follow } from './users/follow'
 // import { PlayerSearch } from 'search'
 
 Vue.use(InstantSearch)
@@ -20,6 +21,10 @@ new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
+
+  if (document.querySelector('.js-UserFollow')) {
+    new Follow({ el: document.querySelector('.js-UserFollow') })
+  }
 
   if (document.querySelector('.js-PlayerFilter')) {
     const playerFilter = Object.create(PlayerFilterForm)

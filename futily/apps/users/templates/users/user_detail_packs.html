@@ -1,7 +1,7 @@
 {% extends "users/_base.html" %}
 
 {% block side_panel %}
-  {% for pack in user.pack_set.all() %}
+  {% for pack in object.pack_set.all() %}
     <p>
       <a href="{{ pack.get_absolute_url() }}">{{ pack }}</a>
     </p>

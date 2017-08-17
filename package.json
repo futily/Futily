@@ -4,6 +4,7 @@
   "dependencies": {
     "@types/algoliasearch": "^3.18.1",
     "algoliasearch": "^3.24.3",
+    "axios": "^0.16.2",
     "babel-polyfill": "6.23.0",
     "es6-promise": "^4.1.0",
     "lodash": "^4.17.4",
