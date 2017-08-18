@@ -1,10 +1,14 @@
 from braces.views import AnonymousRequiredMixin
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import (PasswordChangeDoneView,
+                                       PasswordChangeView)
 from django.http import JsonResponse
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import DetailView, FormView, UpdateView
+from django.views.generic.detail import BaseDetailView
 
 from futily.apps.clubs.models import Club
 
@@ -122,6 +126,17 @@ class UserCollectionLeagueView(UserMixin, DetailView):
         context['league'] = League.objects.get(slug=self.kwargs['league_slug'])
 
         return context
+
+
+class UserPasswordChangeView(UserMixin, BaseDetailView, PasswordChangeView):
+    template_name = 'users/user_password_change.html'
+
+    def get_success_url(self):
+        return reverse_lazy('users:password_change_done', kwargs={'username': self.request.user.username})
+
+
+class UserPasswordChangeDoneView(UserMixin, BaseDetailView, PasswordChangeDoneView):
+    template_name = 'users/user_password_change_done.html'
 
 
 class UserPackView(UserMixin, DetailView):

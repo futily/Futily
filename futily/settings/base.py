@@ -458,6 +458,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'users.User'
 
 SOCIAL_AUTH_GOOGLE_PLUS_KEY = '589992011980-13s86jclt0lr3meptkspk2jtafa4hnv2.apps.googleusercontent.com'

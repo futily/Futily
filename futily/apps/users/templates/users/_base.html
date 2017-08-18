@@ -38,6 +38,12 @@
              href="{{ object.get_settings_url() }}"
              aria-current="{{ 'true' if object.get_settings_url() == request.path else 'false' }}">Settings
           </a>
+
+          <a class="nav-Side_Item"
+             href="{{ object.get_password_change_url() }}"
+             aria-current="{{ 'true' if object.get_password_change_url() == request.path else 'false' }}">
+            Change password
+          </a>
         {% endif %}
       </nav>
 

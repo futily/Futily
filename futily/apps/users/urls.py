@@ -2,19 +2,12 @@ from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
 
-from .views import (RegisterView, UserCollectionClubView,
-                    UserCollectionLeagueView, UserCollectionView,
-                    UserFollowView, UserPackView, UserProfileView,
-                    UserSettingsView)
+from . import views
 
 urlpatterns = [
     # Login
     url(r'^login/$', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     url(r'^logout/$', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
-
-    # Password change
-    url(r'^password_change/$', auth_views.PasswordChangeView.as_view(), name='password_change'),
-    url(r'^password_change/done/$', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
 
     # Password reset
     url(
@@ -38,7 +31,7 @@ urlpatterns = [
         name='password_reset_complete'),
 
     # Register
-    url(r'^register/$', RegisterView.as_view(), name='register'),
+    url(r'^register/$', views.RegisterView.as_view(), name='register'),
     # url(r'^register/done/$', auth_views.PasswordResetDoneView.as_view(
     #     template_name='users/register_done.html'
     # ), name='register-done'),
@@ -52,20 +45,31 @@ urlpatterns = [
     # ), name='register-complete'),
 
     # Profile
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/$', UserProfileView.as_view(), name='profile'),
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/collection/$', UserCollectionView.as_view(), name='collection'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/$', views.UserProfileView.as_view(), name='profile'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/collection/$', views.UserCollectionView.as_view(), name='collection'),
     url(
         r'^(?P<username>[0-9A-Za-z_\-]+)/collection/(?P<league_slug>[-\w]+)/$',
-        UserCollectionLeagueView.as_view(),
+        views.UserCollectionLeagueView.as_view(),
         name='collection-league'
     ),
     url(
         r'^(?P<username>[0-9A-Za-z_\-]+)/collection/(?P<league_slug>[-\w]+)/(?P<club_slug>[-\w]+)/$',
-        UserCollectionClubView.as_view(),
+        views.UserCollectionClubView.as_view(),
         name='collection-club'
     ),
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/packs/$', UserPackView.as_view(), name='packs'),
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/settings/$', UserSettingsView.as_view(), name='settings'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/packs/$', views.UserPackView.as_view(), name='packs'),
 
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/follow/$', UserFollowView.as_view(), name='follow'),
+    # Settings
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/settings/$', views.UserSettingsView.as_view(), name='settings'),
+    url(
+        r'^(?P<username>[0-9A-Za-z_\-]+)/settings/password_change/$',
+        views.UserPasswordChangeView.as_view(),
+        name='password_change'),
+    url(
+        r'^(?P<username>[0-9A-Za-z_\-]+)/settings/password_change/done/$',
+        views.UserPasswordChangeDoneView.as_view(),
+        name='password_change_done'),
+
+    # AJAX
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/follow/$', views.UserFollowView.as_view(), name='follow'),
 ]

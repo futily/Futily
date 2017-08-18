@@ -120,6 +120,11 @@ class User(AbstractBaseUser, PermissionsMixin):
             'username': self.username
         })
 
+    def get_password_change_url(self):
+        return reverse('users:password_change', kwargs={
+            'username': self.username
+        })
+
     def get_settings_url(self):
         return reverse('users:settings', kwargs={
             'username': self.username
