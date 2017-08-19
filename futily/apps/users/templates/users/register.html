@@ -20,7 +20,7 @@
     <div class="usr-Entry_Columns">
       <div class="usr-Entry_Column usr-Entry_Column-left">
         <div class="usr-EntryForm">
-          <form class="usr-EntryForm_Form frm-Form">
+          <form class="usr-EntryForm_Form frm-Form" method="POST">
             {% csrf_token %}
 
             {% for field in form %}

@@ -36,6 +36,7 @@
                 {% elif field.field.__class__.__name__ == 'CharField' %}
                   <input class="frm-Form_Input js-FloatingLabel_Input"
                          name="{{ field.name }}"
+                         type="password"
                          id="{{ field.id_for_label }}">
                 {% elif field.field.__class__.__name__ == 'TypedChoiceField' %}
                   <select class="frm-Form_Select js-FloatingLabel_Input"
