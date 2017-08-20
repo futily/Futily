@@ -447,7 +447,7 @@ export class RPP {
       const deltas = this.getDeltas(style)
 
       map(this.ingameRatings, (obj, key) => {
-        obj.rating = obj.base + deltas[key]
+        obj.rating = this.normalize(obj.base + deltas[key])
       })
     } else {
       map(this.ingameRatings, obj => {
