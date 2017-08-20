@@ -13,17 +13,27 @@
 }
 
 .plyr-RPPChemStyles_Style {
+  position: relative;
+
   margin-top: 3px;
   margin-right: 3px;
 }
 
 .plyr-RPPChemStyles_Button {
-  padding-right: 8px;
-  padding-left: @padding-right;
+  @apply --Font-14;
 
+  padding: 4px 8px 5px 24px;
+
+  font-weight: 500;
+
+  background-position: 4px center;
+  background-repeat: no-repeat;
+  background-size: 15px 14px;
   border: 1px solid var(--Color_Border);
   border-radius: 4px;
   cursor: pointer;
+
+  transition: border-color 0.2s, background-color 0.2s;
 
   .plyr-RPPChemStyles_Style[aria-current='true'] & {
     background-color: var(--Color_Green);
@@ -33,5 +43,82 @@
 
   &:focus {
     outline: 0;
+  }
+
+  &:hover {
+    border-color: var(--Color_Green);
+  }
+}
+
+.plyr-RPPChemStyles_Button-basic {
+  background-image: resolve('chemistry-styles/basic.png');
+}
+.plyr-RPPChemStyles_Button-att {
+  background-image: resolve('chemistry-styles/att.png');
+}
+.plyr-RPPChemStyles_Button-mid {
+  background-image: resolve('chemistry-styles/mid.png');
+}
+.plyr-RPPChemStyles_Button-def {
+  background-image: resolve('chemistry-styles/def.png');
+}
+.plyr-RPPChemStyles_Button-skill {
+  background-image: resolve('chemistry-styles/skill.png');
+}
+
+.plyr-RPPChemStyles_Overlay {
+  @apply --Font-14;
+
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+
+  padding: 3px 8px;
+
+  font-weight: 500;
+  white-space: nowrap;
+
+  background-color: var(--Color_Green);
+  border-radius: 4px;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+
+  transform: translateX(-50%);
+  transition: opacity 0.2s;
+
+  .plyr-RPPChemStyles_Style:hover & {
+    z-index: 1;
+
+    opacity: 1;
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -5px;
+    right: 0;
+    left: 0;
+
+    display: block;
+    height: 5px;
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    display: block;
+    width: 8px;
+    height: @width;
+
+    background-color: var(--Color_Green);
+    border-top-left-radius: 2px;
+
+    transform: translate(-50%, -3px) rotate(45deg);
   }
 }

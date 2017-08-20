@@ -22,6 +22,10 @@
 .lyt-Content-mainAside {
   margin-top: 2vr;
   margin-bottom: @margin-top;
+
+  .pg-Breadcrumbs + & {
+    margin-top: 1vr;
+  }
 }
 
 .lyt-Content_Inner {

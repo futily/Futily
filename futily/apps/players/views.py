@@ -141,6 +141,35 @@ class PlayerList(FormMixin, ListView):
 class PlayerDetail(DetailView):
     model = Player
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['chemistry_styles'] = [
+            {'label': 'basic', 'items': [
+                (1, 'PAC'), (1, 'SHO'), (1, 'PAS'), (1, 'DRI'), (1, 'DEF'), (1, 'PHY')],
+             'type': 'basic'},
+            {'label': 'sniper', 'items': [(3, 'SHO'), (3, 'DRI')], 'type': 'att'},
+            {'label': 'finisher', 'items': [(3, 'SHO'), (3, 'PHY')], 'type': 'att'},
+            {'label': 'deadeye', 'items': [(3, 'SHO'), (3, 'PAS')], 'type': 'att'},
+            {'label': 'marksman', 'items': [(2, 'SHO'), (2, 'DRI'), (2, 'PHY')], 'type': 'att'},
+            {'label': 'hawk', 'items': [(2, 'PAC'), (2, 'SHO'), (2, 'PHY')], 'type': 'att'},
+            {'label': 'artist', 'items': [(3, 'PAS'), (3, 'DRI')], 'type': 'mid'},
+            {'label': 'architect', 'items': [(3, 'PAS'), (3, 'PHY')], 'type': 'mid'},
+            {'label': 'powerhouse', 'items': [(3, 'PAS'), (3, 'DEF')], 'type': 'mid'},
+            {'label': 'maestro', 'items': [(2, 'SHO'), (2, 'PAS'), (2, 'DRI')], 'type': 'mid'},
+            {'label': 'engine', 'items': [(2, 'PAC'), (2, 'PAS'), (2, 'DRI')], 'type': 'mid'},
+            {'label': 'sentinel', 'items': [(3, 'DEF'), (3, 'PHY')], 'type': 'def'},
+            {'label': 'guardian', 'items': [(3, 'DRI'), (3, 'DEF')], 'type': 'def'},
+            {'label': 'gladiator', 'items': [(3, 'SHO'), (3, 'DEF')], 'type': 'def'},
+            {'label': 'backbone', 'items': [(2, 'PAS'), (2, 'DEF'), (2, 'PHY')], 'type': 'def'},
+            {'label': 'anchor', 'items': [(2, 'PAC'), (2, 'DEF'), (2, 'PHY')], 'type': 'def'},
+            {'label': 'hunter', 'items': [(3, 'PAC'), (3, 'SHO')], 'type': 'skill'},
+            {'label': 'catalyst', 'items': [(3, 'PAC'), (3, 'PAS')], 'type': 'skill'},
+            {'label': 'shadow', 'items': [(3, 'PAC'), (3, 'DEF')], 'type': 'skill'},
+        ]
+
+        return context
+
 
 class PlayerDetailChemistry(DetailView):
     model = Player

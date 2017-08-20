@@ -259,16 +259,18 @@
   <div class="asi-Block">
     <h4 class="asi-Block_Title">Chemistry styles</h4>
 
-    {% set chem_styles = ['basic', 'sniper', 'finisher', 'deadeye', 'marksman', 'hawk',
-         'artist', 'architect', 'powerhouse', 'maestro', 'engine', 'sentinel', 'guardian',
-          'gladiator', 'backbone', 'anchor', 'hunter', 'catalyst', 'shadow'] %}
     <div class="plyr-RPPChemStyles">
       <ul class="plyr-RPPChemStyles_Styles js-RPP_ChemStyles">
-        {% for chem_style in chem_styles %}
+        {% for chem_style in chemistry_styles %}
           <li class="plyr-RPPChemStyles_Style js-RPP_ChemStyle"
-              data-rpp-chem-style="{{ chem_style.lower() }}">
-            <button class="plyr-RPPChemStyles_Button"
-                    aria-current="false">{{ chem_style.title() }}</button>
+              data-rpp-chem-style="{{ chem_style.label }}">
+            <button class="plyr-RPPChemStyles_Button plyr-RPPChemStyles_Button-{{ chem_style.type }}"
+                    aria-current="false">{{ chem_style.label.title() }}</button>
+            <span class="plyr-RPPChemStyles_Overlay">
+              {% for amount, label in chem_style['items'] %}
+                +{{ amount }} {{ label }}{% if not loop.last %}<br>{% endif %}
+              {% endfor %}
+            </span>
           </li>
         {% endfor %}
       </ul>
