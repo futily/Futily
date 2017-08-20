@@ -10,7 +10,7 @@ import App from './vue/App'
 
 import { externalLinks, iframeFix } from './utils'
 import { FloatingLabel } from './forms'
-import { CardSelector } from './players/detail'
+import { CardSelector, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
 import { Follow } from './users/follow'
 // import { PlayerSearch } from 'search'
@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (document.querySelector('.plyr-CardSelector')) {
     new CardSelector()
+  }
+
+  if (document.querySelector('.js-RPP')) {
+    new RPP()
   }
 
   if (document.querySelector('.js-FloatingLabel')) {

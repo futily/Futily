@@ -24,8 +24,12 @@
 
   <div class="plyr-Card_Body">
     {% for key, value in player.card_stats %}
-      <div class="plyr-Card_Stat plyr-Card_Stat-{{ loop.index }}">
-        <span class="plyr-Card_StatValue">{{ value }}</span>
+      <div class="plyr-Card_Stat plyr-Card_Stat-{{ loop.index }}{% if rpp %} js-RPP_Base js-RPP_Base-card{% endif %}"
+           {% if rpp %}data-rpp-field="cardAtt{{ loop.index }}"{% endif %}>
+        {% if rpp %}
+          <span class="plyr-Card_Difference js-RPP_CardDifference"></span>
+        {% endif %}
+        <span class="plyr-Card_StatValue{% if rpp %} js-RPP_CardValue{% endif %}">{{ value }}</span>
         <span class="plyr-Card_StatKey">{{ key }}</span>
       </div>
     {% endfor %}

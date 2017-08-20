@@ -3,6 +3,7 @@ import os
 from urllib.parse import urlencode
 
 import jinja2
+import stringcase
 from cms.apps.pages.templatetags.pages import _navigation_entries
 from django.conf import settings
 from django.urls import reverse
@@ -159,3 +160,10 @@ def render_pagination(context, page_obj, offset=2, pagination_key=None):
         "paginator": page_obj.paginator,
         "pagination_key": pagination_key or getattr(page_obj, "_pagination_key", "page")
     }
+
+
+@library.filter
+def camel_case(value):
+    camel_case_string = stringcase.camelcase(value).replace('_', '')
+
+    return camel_case_string

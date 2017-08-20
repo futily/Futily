@@ -1,0 +1,94 @@
+/*
+|--------------------------------------------------------------------------
+| RPP Positions
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-RPPPositions {
+  position: relative;
+
+  flex-direction: column;
+  justify-content: space-around;
+
+  display: flex;
+  height: 400px;
+  padding: 0.5vr var(--Grid_Gutter);
+
+  background-image: resolve('rpp-pitch.jpg');
+  background-size: 300px 400px;
+}
+
+.plyr-RPPPositions_Positions {
+  justify-content: space-between;
+
+  display: flex;
+  height: 56px;
+}
+
+.plyr-RPPPositions_Positions-line5 {
+  justify-content: space-around;
+}
+
+.plyr-RPPPositions_Position {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  display: flex;
+  width: 44px;
+  height: @width;
+
+  background-color: var(--RatingColor);
+  border-radius: 50%;
+  color: #fff;
+
+  transition: background-color 0.3s;
+
+  &:only-child {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &[data-rpp-position='CB'] {
+    align-self: flex-end;
+  }
+
+  &[data-rpp-position='RB'] {
+    margin-left: var(--Grid_Gutter);
+  }
+
+  &[data-rpp-position='LB'] {
+    margin-right: var(--Grid_Gutter);
+  }
+
+  &[data-rpp-position='RWB'],
+  &[data-rpp-position='LWB'] {
+    align-self: flex-end;
+  }
+
+  &[data-rpp-position='CF'] {
+    align-self: flex-end;
+  }
+
+  &[data-rpp-position='RW'],
+  &[data-rpp-position='LW'] {
+    align-self: flex-end;
+  }
+}
+
+.plyr-RPPPositions_PositionLabel {
+  @apply --Font-12;
+
+  order: 1;
+
+  font-weight: 500;
+  line-height: 1;
+}
+
+.plyr-RPPPositions_PositionValue {
+  @apply --Font-16;
+
+  font-weight: 700;
+  line-height: 1;
+}

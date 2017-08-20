@@ -1,0 +1,37 @@
+/*
+|--------------------------------------------------------------------------
+| Chem styles
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-RPPChemStyles_Styles {
+  flex-wrap: wrap;
+
+  display: flex;
+  margin-top: -3px;
+}
+
+.plyr-RPPChemStyles_Style {
+  margin-top: 3px;
+  margin-right: 3px;
+}
+
+.plyr-RPPChemStyles_Button {
+  padding-right: 8px;
+  padding-left: @padding-right;
+
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+  cursor: pointer;
+
+  .plyr-RPPChemStyles_Style[aria-current='true'] & {
+    background-color: var(--Color_Green);
+    border-color: var(--Color_Green);
+    color: #fff;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}

@@ -482,6 +482,8 @@
 }
 
 .plyr-Card_Stat {
+  position: relative;
+
   align-items: baseline;
   justify-content: center;
 
@@ -499,6 +501,21 @@
 
   &:nth-last-child(-n + 2) {
     background-image: none;
+  }
+}
+
+.plyr-Card_Difference {
+  @apply --Font-12;
+
+  position: absolute;
+  top: 2px;
+  right: -22px;
+
+  font-weight: 700;
+
+  .plyr-Card_Stat:nth-child(-n + 3) & {
+    right: auto;
+    left: -22px;
   }
 }
 

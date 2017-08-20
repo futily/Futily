@@ -32,23 +32,23 @@
 
   font-weight: 700;
 
-  color: var(--GradeColour);
+  color: var(--RatingColor);
 }
 
 .plyr-StatGroup_GroupValue-great {
-  --GradeColour: var(--Color_Great);
+  --RatingColor: var(--Color_Great);
 }
 .plyr-StatGroup_GroupValue-good {
-  --GradeColour: var(--Color_Good);
+  --RatingColor: var(--Color_Good);
 }
 .plyr-StatGroup_GroupValue-average {
-  --GradeColour: var(--Color_Average);
+  --RatingColor: var(--Color_Average);
 }
 .plyr-StatGroup_GroupValue-fair {
-  --GradeColour: var(--Color_Fair);
+  --RatingColor: var(--Color_Fair);
 }
 .plyr-StatGroup_GroupValue-poor {
-  --GradeColour: var(--Color_Poor);
+  --RatingColor: var(--Color_Poor);
 }
 
 .plyr-StatGroup_Bar {
@@ -60,25 +60,27 @@
 }
 
 .plyr-StatGroup_BarOverlay {
-  fill: var(--GradeColour);
+  fill: var(--RatingColor);
 
   transform: skew(-45deg);
+
+  transition: width 0.3s, fill 0.3s;
 }
 
 .plyr-StatGroup_BarOverlay-great {
-  --GradeColour: var(--Color_Great);
+  --RatingColor: var(--Color_Great);
 }
 .plyr-StatGroup_BarOverlay-good {
-  --GradeColour: var(--Color_Good);
+  --RatingColor: var(--Color_Good);
 }
 .plyr-StatGroup_BarOverlay-average {
-  --GradeColour: var(--Color_Average);
+  --RatingColor: var(--Color_Average);
 }
 .plyr-StatGroup_BarOverlay-fair {
-  --GradeColour: var(--Color_Fair);
+  --RatingColor: var(--Color_Fair);
 }
 .plyr-StatGroup_BarOverlay-poor {
-  --GradeColour: var(--Color_Poor);
+  --RatingColor: var(--Color_Poor);
 }
 
 .plyr-StatGroup_BarOverlay-2 {
@@ -92,7 +94,7 @@
 |
 */
 .plyr-StatGroup_Item {
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 
   display: flex;
@@ -119,26 +121,37 @@
   font-weight: 400;
 }
 
+.plyr-StatGroup_Difference {
+  @apply --Font-14;
+
+  margin-right: 5px;
+  margin-left: auto;
+
+  font-weight: 500;
+
+  color: var(--Color_Great);
+}
+
 .plyr-StatGroup_Value {
   @apply --Font-20;
 
   font-weight: 500;
 
-  color: var(--GradeColour);
+  color: var(--RatingColor);
 }
 
 .plyr-StatGroup_Value-great {
-  --GradeColour: var(--Color_Great);
+  --RatingColor: var(--Color_Great);
 }
 .plyr-StatGroup_Value-good {
-  --GradeColour: var(--Color_Good);
+  --RatingColor: var(--Color_Good);
 }
 .plyr-StatGroup_Value-average {
-  --GradeColour: var(--Color_Average);
+  --RatingColor: var(--Color_Average);
 }
 .plyr-StatGroup_Value-fair {
-  --GradeColour: var(--Color_Fair);
+  --RatingColor: var(--Color_Fair);
 }
 .plyr-StatGroup_Value-poor {
-  --GradeColour: var(--Color_Poor);
+  --RatingColor: var(--Color_Poor);
 }

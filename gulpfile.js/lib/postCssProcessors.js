@@ -18,7 +18,10 @@ module.exports = [
     )
   }),
 
-  require('postcss-custom-properties'),
+  require('postcss-custom-properties')({
+    appendVariables: true,
+    preserve: 'computed'
+  }),
   require('postcss-custom-media'),
   require('postcss-media-minmax'),
   require('postcss-custom-selectors'),

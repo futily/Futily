@@ -244,11 +244,12 @@ class Player(PageBase):
     def get_compare_absolute_url(self):
         return self._get_permalink_for_page(self.page.page, name='player_compare')
 
-    def render_card(self, size='sm', faded=False):
+    def render_card(self, size='sm', faded=False, rpp=False):
         return render_to_string('players/includes/card.html', {
             'player': self,
             'size': 'small' if size == 'sm' else 'large',
             'faded': faded,
+            'rpp': rpp
         })
 
     @property
@@ -312,7 +313,9 @@ class Player(PageBase):
 
     def ingame_stat_groups(self):
         return [
-            {'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']},
+            {
+                'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']
+            },
             {
                 'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
                                                                       'positioning', 'shot_power', 'volleys']
@@ -322,16 +325,16 @@ class Player(PageBase):
                                                                      'long_passing', 'short_passing', 'vision']
             },
             {
-                'label': 'dribbling',
-                'field': 'card_att_4',
-                'items': ['agility', 'balance', 'ball_control', 'reactions',
-                          'dribbling']
+                'label': 'dribbling', 'field': 'card_att_4', 'items': ['agility', 'balance', 'ball_control',
+                                                                       'dribbling', 'reactions']
             },
             {
                 'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
                                                                        'sliding_tackle', 'standing_tackle']
             },
-            {'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']},
+            {
+                'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']
+            },
         ]
 
     @staticmethod

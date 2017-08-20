@@ -5,11 +5,11 @@ from django_jinja import library
 def stat_grade(val):
     if val >= 81:
         return 'great'
-    elif 80 <= val >= 71:
+    elif val >= 71:
         return 'good'
-    elif 70 <= val >= 61:
+    elif val >= 61:
         return 'average'
-    elif 60 <= val >= 51:
+    elif val >= 51:
         return 'fair'
 
     return 'poor'

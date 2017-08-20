@@ -26,7 +26,7 @@
       {% endif %}
 
       <div class="plyr-CardSelector_Card">
-        {{ player.render_card('lg') }}
+        {{ player.render_card('lg', rpp=True) }}
       </div>
     </div>
   </div>
@@ -41,10 +41,12 @@
 
         <ul class="plyr-FutilyRatings_Items">
           {% for key, stat in player.card_stats_full %}
-            <li class="plyr-FutilyRatings_Item plyr-FutilyRatings_Item-{{ loop.cycle(1, 4, 2, 5, 3, 6) }}">
+            <li class="plyr-FutilyRatings_Item plyr-FutilyRatings_Item-{{ loop.index }} js-RPP_Base js-RPP_Base-base"
+                data-rpp-field="cardAtt{{ loop.index }}">
               <p class="plyr-FutilyRatings_Key">{{ key }}:</p>
-              <p class="plyr-FutilyRatings_Value">
-                <span class="plyr-FutilyRatings_ValueDifference"></span>
+              <span class="plyr-FutilyRatings_ValueDifference js-RPP_BaseDifference"></span>
+              <p class="plyr-FutilyRatings_Value js-RPP_BaseValue"
+                 style="--RatingColor: var(--Color_{{ stat_grade(stat).title() }})">
                 {{ stat }}
               </p>
             </li>
@@ -109,12 +111,15 @@
             {% set group_value = getattr(player, group.field) %}
             <div class="plyr-IngameStats_Item">
               <div class="plyr-StatGroup">
-                <header class="plyr-StatGroup_Header">
+                <header class="plyr-StatGroup_Header js-RPP_Base js-RPP_Base-group"
+                        data-rpp-field="{{ group.field | camel_case() }}"
+                        data-rpp-base="{{ group_value }}">
                   <h4 class="plyr-StatGroup_Title">{{ group.label.title() }}</h4>
-                  <p class="plyr-StatGroup_GroupValue plyr-StatGroup_GroupValue-{{ stat_grade(group_value) }}">{{ group_value }}</p>
+                  <p class="plyr-StatGroup_Difference js-RPP_GroupDifference"></p>
+                  <p class="plyr-StatGroup_GroupValue plyr-StatGroup_GroupValue-{{ stat_grade(group_value) }} js-RPP_GroupValue">{{ group_value }}</p>
 
                   <svg class="plyr-StatGroup_Bar">
-                    <rect class="plyr-StatGroup_BarOverlay plyr-StatGroup_BarOverlay-{{ stat_grade(group_value) }}"
+                    <rect class="plyr-StatGroup_BarOverlay plyr-StatGroup_BarOverlay-{{ stat_grade(group_value) }} js-RPP_Bar"
                           height="100%"
                           width="{{ group_value }}%"></rect>
                   </svg>
@@ -124,9 +129,14 @@
                   <ul class="plyr-StatGroup_Items">
                     {% for item in group['items'] %}
                       {% set value = getattr(player, item) %}
-                      <li class="plyr-StatGroup_Item">
+                      <li class="plyr-StatGroup_Item js-RPP_Base js-RPP_Base-ingame"
+                          data-rpp-field="{{ item | camel_case() }}"
+                          data-rpp-base="{{ value }}">
                         <p class="plyr-StatGroup_Key">{{ instance._meta.get_field(item).verbose_name.title() }}</p>
-                        <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value) }}">{{ value }}</p>
+                        <p class="plyr-StatGroup_Difference js-RPP_BaseDifference"></p>
+                        <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value) }} js-RPP_BaseValue">
+                          {{ value }}
+                        </p>
                       </li>
                     {% endfor %}
                   </ul>
@@ -241,6 +251,129 @@
       {% else %}
         <p>There are no similar players to {{ player.name }}, he's just that unique!</p>
       {% endif %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block aside_blocks %}
+  <div class="asi-Block">
+    <h4 class="asi-Block_Title">Chemistry styles</h4>
+
+    {% set chem_styles = ['basic', 'sniper', 'finisher', 'deadeye', 'marksman', 'hawk',
+         'artist', 'architect', 'powerhouse', 'maestro', 'engine', 'sentinel', 'guardian',
+          'gladiator', 'backbone', 'anchor', 'hunter', 'catalyst', 'shadow'] %}
+    <div class="plyr-RPPChemStyles">
+      <ul class="plyr-RPPChemStyles_Styles js-RPP_ChemStyles">
+        {% for chem_style in chem_styles %}
+          <li class="plyr-RPPChemStyles_Style js-RPP_ChemStyle"
+              data-rpp-chem-style="{{ chem_style.lower() }}">
+            <button class="plyr-RPPChemStyles_Button"
+                    aria-current="false">{{ chem_style.title() }}</button>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="asi-Block">
+    <h4 class="asi-Block_Title">Rating per position</h4>
+
+    <div class="plyr-RPP js-RPP">
+      <ul class="plyr-RPPPositions js-RPP_Positions">
+        <li class="plyr-RPPPositions_Line">
+          <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line6">
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LW">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LW</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="ST">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">ST</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RW">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RW</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="plyr-RPPPositions_Line">
+          <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line5">
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RF">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RF</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CF">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CF</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LF">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LF</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="plyr-RPPPositions_Line">
+          <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line4">
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CAM">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CAM</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="plyr-RPPPositions_Line">
+          <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line3">
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RM">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RM</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CM">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CM</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LM">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LM</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="plyr-RPPPositions_Line">
+          <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line2">
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RWB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RWB</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CDM">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CDM</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LWB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LWB</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+          </ul>
+        </li>
+
+        <li class="plyr-RPPPositions_Line">
+          <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line1">
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RB</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CB</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LB</strong>
+              <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 {% endblock %}

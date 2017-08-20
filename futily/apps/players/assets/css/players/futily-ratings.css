@@ -16,8 +16,9 @@
 |
 */
 .plyr-FutilyRatings_Items {
+  grid-auto-flow: column;
   grid-gap: 0.5vr calc(var(--Grid_Gutter) * 2);
-  grid-template-columns: repeat(2, 1fr);
+  grid-template: repeat(3, 1fr) / repeat(2, 1fr);
 
   display: grid;
   margin-top: 0.5vr;
@@ -39,13 +40,22 @@
 .plyr-FutilyRatings_Value {
   @apply --Font-18;
 
+  --RatingColor: var(--Color_Body);
+
   font-weight: 700;
+
+  color: var(--RatingColor);
 }
 
 .plyr-FutilyRatings_ValueDifference {
   @apply --Font-14;
 
+  margin-right: 5px;
+  margin-left: auto;
+
   font-weight: 500;
+
+  color: var(--Color_Great);
 }
 
 .plyr-FutilyRatings_ValueDifference-positive,
