@@ -303,8 +303,8 @@ export default {
       6: 'CM',
       7: 'LCM',
       8: 'CAM',
-      9: 'ST',
-      10: 'ST'
+      9: 'RS',
+      10: 'LS'
     }
   },
   '4321': {
@@ -439,9 +439,9 @@ export default {
       2: 'RCB',
       3: 'LCB',
       4: 'LB',
-      5: 'RM',
+      5: 'RCM',
       6: 'CAM',
-      7: 'LM',
+      7: 'LCM',
       8: 'RW',
       9: 'ST',
       10: 'LW'

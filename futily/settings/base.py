@@ -329,7 +329,6 @@ CACHES = {
 # A secret key used for cryptographic algorithms.
 
 SECRET_KEY = 'apnHxTgNzNw56I+HwgVeCseY02eu4XE/iphnM24Aui5NIPl3iEleJ196WHZCO/RwTsY='
-CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = 'DENY'
 
 WYSIWYG_OPTIONS = {

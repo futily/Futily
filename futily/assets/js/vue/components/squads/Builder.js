@@ -37,6 +37,7 @@ export default {
         defending: 'number',
         physical: 'number'
       },
+      isTransitioning: false,
       searchResults: [],
       webAppLink: ''
     }
@@ -75,6 +76,14 @@ export default {
   },
 
   watch: {
+    getFormation () {
+      this.isTransitioning = true
+
+      setTimeout(() => {
+        this.isTransitioning = false
+      }, 500)
+    },
+
     'getSearch.open' (val) {
       if (val) this.$nextTick(() => this.$refs.searchInput.focus())
     }
@@ -192,7 +201,13 @@ export default {
 
   render (h) {
     return (
-      <div class={['bld-Builder', `bld-Builder-${this.getFormation}`]}>
+      <div
+        class={{
+          'bld-Builder': true,
+          [`bld-Builder-${this.getFormation}`]: true,
+          'bld-Builder-transitioning': this.isTransitioning
+        }}
+      >
         <input
           type='text'
           onInput={e => this.setName({ name: e.target.value })}

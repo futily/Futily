@@ -17,8 +17,11 @@
 }
 
 .bld-Builder_PlayersItem {
+  /* px is needed for the calc() */
+  /* stylelint-disable length-zero-no-unit */
   --PlayerX: 0px;
   --PlayerY: 0px;
+  /* stylelint-enable */
 
   position: absolute;
   top: 50%;
@@ -33,57 +36,628 @@
     calc(-50% - var(--PlayerY))
   );
 
-  transition: transform 0.5s;
+  transition: transform 0.5s var(--Transition_EaseOutBack);
+
+  /* This brings our cards in, the class gets removed 500ms after changing formation */
+  .bld-Builder-transitioning & {
+    /* stylelint-disable */
+    --PlayerX: 0px !important;
+    --PlayerY: 0px !important;
+    /* stylelint-enable */
+  }
 }
 
 .bld-Builder_PlayersItem-gk {
   --PlayerY: -300px;
 }
 
+.bld-Builder_PlayersItem-rwb {
+  --PlayerX: -380px;
+  --PlayerY: -70px;
+}
+
+.bld-Builder_PlayersItem-rb {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerX: -380px;
+    --PlayerY: -150px;
+  }
+}
+
 .bld-Builder_PlayersItem-rcb {
-  --PlayerX: -295px;
-  --PlayerY: -85px;
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
+    --PlayerX: -295px;
+    --PlayerY: -85px;
+  }
+
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerX: -175px;
+    --PlayerY: -175px;
+  }
+
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 &,
+  .bld-Builder-532 & {
+    --PlayerX: -225px;
+    --PlayerY: -140px;
+  }
 }
 
 .bld-Builder_PlayersItem-cb {
-  --PlayerY: -90px;
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
+    --PlayerY: -90px;
+  }
+
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 &,
+  .bld-Builder-532 & {
+    --PlayerY: -90px;
+  }
 }
 
 .bld-Builder_PlayersItem-lcb {
-  --PlayerX: 295px;
-  --PlayerY: -85px;
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
+    --PlayerX: 295px;
+    --PlayerY: -85px;
+  }
+
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerX: 175px;
+    --PlayerY: -175px;
+  }
+
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 &,
+  .bld-Builder-532 & {
+    --PlayerX: 225px;
+    --PlayerY: -140px;
+  }
+}
+
+.bld-Builder_PlayersItem-lb {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerX: 380px;
+    --PlayerY: -150px;
+  }
+}
+
+.bld-Builder_PlayersItem-lwb {
+  --PlayerX: 380px;
+  --PlayerY: -70px;
+}
+
+.bld-Builder_PlayersItem-rdm {
+  .bld-Builder-352 & {
+    --PlayerX: -145px;
+  }
+
+  .bld-Builder-4222 & {
+    --PlayerX: -125px;
+    --PlayerY: 35px;
+  }
+
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 & {
+    --PlayerX: -150px;
+    --PlayerY: 35px;
+  }
+
+  .bld-Builder-433-3 & {
+    --PlayerX: -245px;
+    --PlayerY: 20px;
+  }
+
+  .bld-Builder-442-2 & {
+    --PlayerX: -175px;
+    --PlayerY: 35px;
+  }
+}
+
+.bld-Builder_PlayersItem-cdm {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 & {
+    --PlayerY: -50px;
+  }
+
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-5 & {
+    --PlayerY: -10px;
+  }
+}
+
+.bld-Builder_PlayersItem-ldm {
+  .bld-Builder-352 & {
+    --PlayerX: 145px;
+  }
+
+  .bld-Builder-4222 & {
+    --PlayerX: 125px;
+    --PlayerY: 35px;
+  }
+
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 & {
+    --PlayerX: 150px;
+    --PlayerY: 35px;
+  }
+
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 & {
+    --PlayerX: 245px;
+    --PlayerY: 20px;
+  }
+
+  .bld-Builder-442-2 & {
+    --PlayerX: 175px;
+    --PlayerY: 35px;
+  }
 }
 
 .bld-Builder_PlayersItem-rm {
-  --PlayerX: -400px;
-  --PlayerY: 100px;
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
+    --PlayerX: -400px;
+    --PlayerY: 100px;
+  }
+
+  .bld-Builder-41212 & {
+    --PlayerX: -350px;
+    --PlayerY: 75px;
+  }
+
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerX: -360px;
+    --PlayerY: 80px;
+  }
+}
+
+.bld-Builder_PlayersItem-rw {
+  .bld-Builder-343 & {
+    --PlayerX: -250px;
+    --PlayerY: 250px;
+  }
+
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 & {
+    --PlayerX: -300px;
+    --PlayerY: 250px;
+  }
+}
+
+.bld-Builder_PlayersItem-rf {
+  .bld-Builder-3421 & {
+    --PlayerX: -200px;
+    --PlayerY: 240px;
+  }
+
+  .bld-Builder-4321 & {
+    --PlayerX: -175px;
+    --PlayerY: 240px;
+  }
+
+  .bld-Builder-5221 & {
+    --PlayerX: -225px;
+    --PlayerY: 240px;
+  }
 }
 
 .bld-Builder_PlayersItem-rcm {
-  --PlayerX: -145px;
-  --PlayerY: 40px;
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 & {
+    --PlayerX: -145px;
+    --PlayerY: 40px;
+  }
+
+  .bld-Builder-41212-2 & {
+    --PlayerX: -250px;
+    --PlayerY: 50px;
+  }
+
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 & {
+    --PlayerX: -175px;
+    --PlayerY: 50px;
+  }
+
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-5 & {
+    --PlayerX: -225px;
+    --PlayerY: 40px;
+  }
+
+  .bld-Builder-433-4 & {
+    --PlayerX: -225px;
+    --PlayerY: 40px;
+  }
+
+  .bld-Builder-451-2 & {
+    --PlayerX: -185px;
+    --PlayerY: 35px;
+  }
+
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 & {
+    --PlayerX: -150px;
+    --PlayerY: 50px;
+  }
+
+  .bld-Builder-532 & {
+    --PlayerX: -295px;
+    --PlayerY: 120px;
+  }
+}
+
+.bld-Builder_PlayersItem-cm {
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 & {
+    --PlayerY: -25px;
+  }
+
+  .bld-Builder-433 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerY: 10px;
+  }
+
+  .bld-Builder-433-3 & {
+    --PlayerY: 40px;
+  }
+
+  .bld-Builder-532 & {
+    --PlayerY: 120px;
+  }
 }
 
 .bld-Builder_PlayersItem-lcm {
-  --PlayerX: 145px;
-  --PlayerY: 40px;
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 & {
+    --PlayerX: 145px;
+    --PlayerY: 40px;
+  }
+
+  .bld-Builder-41212-2 & {
+    --PlayerX: 250px;
+    --PlayerY: 50px;
+  }
+
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 & {
+    --PlayerX: 175px;
+    --PlayerY: 50px;
+  }
+
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-5 & {
+    --PlayerX: 225px;
+    --PlayerY: 40px;
+  }
+
+  .bld-Builder-433-4 & {
+    --PlayerX: 225px;
+    --PlayerY: 40px;
+  }
+
+  .bld-Builder-451-2 & {
+    --PlayerX: 185px;
+    --PlayerY: 35px;
+  }
+
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 & {
+    --PlayerX: 150px;
+    --PlayerY: 50px;
+  }
+
+  .bld-Builder-532 & {
+    --PlayerX: 295px;
+    --PlayerY: 120px;
+  }
 }
 
 .bld-Builder_PlayersItem-lm {
-  --PlayerX: 400px;
-  --PlayerY: 100px;
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
+    --PlayerX: 400px;
+    --PlayerY: 100px;
+  }
+
+  .bld-Builder-41212 & {
+    --PlayerX: 350px;
+    --PlayerY: 75px;
+  }
+
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerX: 360px;
+    --PlayerY: 80px;
+  }
+}
+
+.bld-Builder_PlayersItem-lw {
+  .bld-Builder-343 & {
+    --PlayerX: 250px;
+    --PlayerY: 250px;
+  }
+
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 & {
+    --PlayerX: 300px;
+    --PlayerY: 250px;
+  }
+}
+
+.bld-Builder_PlayersItem-lf {
+  .bld-Builder-3421 & {
+    --PlayerX: 200px;
+    --PlayerY: 240px;
+  }
+
+  .bld-Builder-4321 & {
+    --PlayerX: 175px;
+    --PlayerY: 240px;
+  }
+
+  .bld-Builder-5221 & {
+    --PlayerX: 225px;
+    --PlayerY: 240px;
+  }
+}
+
+.bld-Builder_PlayersItem-ram {
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 & {
+    --PlayerX: -295px;
+    --PlayerY: 125px;
+  }
+
+  .bld-Builder-451 & {
+    --PlayerX: -185px;
+    --PlayerY: 125px;
+  }
 }
 
 .bld-Builder_PlayersItem-cam {
-  --PlayerY: 160px;
+  .bld-Builder-3412 &,
+  .bld-Builder-352 & {
+    --PlayerY: 160px;
+  }
+
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 & {
+    --PlayerY: 175px;
+  }
+
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 & {
+    --PlayerY: 60px;
+  }
+
+  .bld-Builder-4312 & {
+    --PlayerY: 195px;
+  }
+
+  .bld-Builder-433-4 & {
+    --PlayerY: 60px;
+  }
+
+  .bld-Builder-5212 & {
+    --PlayerY: 125px;
+  }
+}
+
+.bld-Builder_PlayersItem-lam {
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 & {
+    --PlayerX: 295px;
+    --PlayerY: 125px;
+  }
+
+  .bld-Builder-451 & {
+    --PlayerX: 185px;
+    --PlayerY: 125px;
+  }
+}
+
+.bld-Builder_PlayersItem-cf {
+  .bld-Builder-433-5 & {
+    --PlayerY: 210px;
+  }
+
+  .bld-Builder-4411 & {
+    --PlayerY: 60px;
+  }
+}
+
+.bld-Builder_PlayersItem-st {
+  .bld-Builder-3421 &,
+  .bld-Builder-343 & {
+    --PlayerY: 270px;
+  }
+
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
+    --PlayerY: 270px;
+  }
+
+  .bld-Builder-5221 & {
+    --PlayerY: 260px;
+  }
 }
 
 .bld-Builder_PlayersItem-rs {
-  --PlayerX: -200px;
-  --PlayerY: 260px;
+  .bld-Builder-3412 &,
+  .bld-Builder-352 &,
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4312 & {
+    --PlayerX: -200px;
+    --PlayerY: 260px;
+  }
+
+  .bld-Builder-4222 & {
+    --PlayerX: -150px;
+    --PlayerY: 260px;
+  }
+
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 & {
+    --PlayerX: -150px;
+    --PlayerY: 260px;
+  }
+
+  .bld-Builder-5212 &,
+  .bld-Builder-532 & {
+    --PlayerX: -150px;
+    --PlayerY: 260px;
+  }
 }
 
 .bld-Builder_PlayersItem-ls {
-  --PlayerX: 200px;
-  --PlayerY: 260px;
+  .bld-Builder-3412 &,
+  .bld-Builder-352 &,
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4312 & {
+    --PlayerX: 200px;
+    --PlayerY: 260px;
+  }
+
+  .bld-Builder-4222 & {
+    --PlayerX: 150px;
+    --PlayerY: 260px;
+  }
+
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 & {
+    --PlayerX: 150px;
+    --PlayerY: 260px;
+  }
+
+  .bld-Builder-5212 &,
+  .bld-Builder-532 & {
+    --PlayerX: 150px;
+    --PlayerY: 260px;
+  }
 }
