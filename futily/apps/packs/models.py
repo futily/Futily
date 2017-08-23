@@ -35,42 +35,42 @@ class Type(PageBase):
     ], default='special')
 
     roll_1_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, blank=False, choices=color_choices()),
+        base_field=models.CharField(max_length=100, blank=False),
         default=list, blank=True, help_text='These are part of the "normal" rolls.',
     )
     roll_1_types_rating_min = models.PositiveIntegerField(default=75)
     roll_1_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_2_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices()),
+        base_field=models.CharField(max_length=100),
         default=list, blank=True, help_text='These are part of the "normal" rolls.',
     )
     roll_2_types_rating_min = models.PositiveIntegerField(default=75)
     roll_2_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_3_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices()),
+        base_field=models.CharField(max_length=100),
         default=list, blank=True, help_text='These are part of the "normal" rolls.',
     )
     roll_3_types_rating_min = models.PositiveIntegerField(default=75)
     roll_3_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_4_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices()),
+        base_field=models.CharField(max_length=100),
         default=list, blank=True, help_text='These are part of the "rare" rolls.',
     )
     roll_4_types_rating_min = models.PositiveIntegerField(default=75)
     roll_4_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_5_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices()),
+        base_field=models.CharField(max_length=100),
         default=list, blank=True, help_text='These are part of the "rare" rolls.',
     )
     roll_5_types_rating_min = models.PositiveIntegerField(default=75)
     roll_5_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_6_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices()),
+        base_field=models.CharField(max_length=100),
         default=list, blank=True, help_text='These are part of the "rare" rolls.',
     )
     roll_6_types_rating_min = models.PositiveIntegerField(default=75)
@@ -87,6 +87,15 @@ class Type(PageBase):
 
     def __str__(self):
         return self.title
+
+    def __init__(self, *args, **kwargs):
+        super(Type, self).__init__()
+        self._meta.get_field('roll_1_types').base_field.choices = color_choices()
+        self._meta.get_field('roll_2_types').base_field.choices = color_choices()
+        self._meta.get_field('roll_3_types').base_field.choices = color_choices()
+        self._meta.get_field('roll_4_types').base_field.choices = color_choices()
+        self._meta.get_field('roll_5_types').base_field.choices = color_choices()
+        self._meta.get_field('roll_6_types').base_field.choices = color_choices()
 
     def _get_permalink_for_page(self, page):
         return page.reverse('type', kwargs={
