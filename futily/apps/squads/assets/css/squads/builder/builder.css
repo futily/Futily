@@ -1,0 +1,89 @@
+/*
+|--------------------------------------------------------------------------
+| Builder
+|--------------------------------------------------------------------------
+| @namespace: bld-
+|
+*/
+.bld-Builder_Players {
+  position: relative;
+
+  display: block;
+  width: 945px;
+  height: 750px;
+
+  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/pitch.jpg');
+  background-size: @width @height;
+}
+
+.bld-Builder_PlayersItem {
+  --PlayerX: 0px;
+  --PlayerY: 0px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: block;
+  width: 140px;
+  height: 219px;
+
+  transform: translate(
+    calc(-50% - var(--PlayerX)),
+    calc(-50% - var(--PlayerY))
+  );
+
+  transition: transform 0.5s;
+}
+
+.bld-Builder_PlayersItem-gk {
+  --PlayerY: -300px;
+}
+
+.bld-Builder_PlayersItem-rcb {
+  --PlayerX: -295px;
+  --PlayerY: -85px;
+}
+
+.bld-Builder_PlayersItem-cb {
+  --PlayerY: -90px;
+}
+
+.bld-Builder_PlayersItem-lcb {
+  --PlayerX: 295px;
+  --PlayerY: -85px;
+}
+
+.bld-Builder_PlayersItem-rm {
+  --PlayerX: -400px;
+  --PlayerY: 100px;
+}
+
+.bld-Builder_PlayersItem-rcm {
+  --PlayerX: -145px;
+  --PlayerY: 40px;
+}
+
+.bld-Builder_PlayersItem-lcm {
+  --PlayerX: 145px;
+  --PlayerY: 40px;
+}
+
+.bld-Builder_PlayersItem-lm {
+  --PlayerX: 400px;
+  --PlayerY: 100px;
+}
+
+.bld-Builder_PlayersItem-cam {
+  --PlayerY: 160px;
+}
+
+.bld-Builder_PlayersItem-rs {
+  --PlayerX: -200px;
+  --PlayerY: 260px;
+}
+
+.bld-Builder_PlayersItem-ls {
+  --PlayerX: 200px;
+  --PlayerY: 260px;
+}

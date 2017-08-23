@@ -69,6 +69,11 @@ class UserMixin(View):
 
         return context
 
+    def get_object(self, queryset=None):
+        print('tree')
+
+        return super().get_object(queryset)
+
 
 class UserFollowView(LoginRequiredMixin, UserMixin):
 
@@ -109,7 +114,7 @@ class UserCollectionClubView(UserMixin, DetailView):
         context['club'] = Club.objects.prefetch_related('player_set').get(slug=self.kwargs['club_slug'])
         context['league'] = League.objects.get(slug=self.kwargs['league_slug'])
         context['collected_players'] = [
-            x for x in self.request.user.cardcollection.players.filter(
+            x for x in self.request.user.cardcollection.players(manager='cards').filter(
                 club=context['club'])]
         context['uncollected_players'] = context['club'].player_set(manager='cards').exclude(
             id__in=[x.id for x in context['collected_players']])

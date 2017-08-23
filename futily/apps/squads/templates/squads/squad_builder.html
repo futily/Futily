@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+
+{% block main %}
+  <squad-builder :formation-choices="{{ formations }}" :page="{{ pages.current.id }}"></squad-builder>
+{% endblock %}

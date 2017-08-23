@@ -61,7 +61,7 @@
           <p class="typ-Text"><strong>Following:</strong> {{ object.get_following.count() }}</p>
           <p class="typ-Text"><strong>Followers:</strong> <span class="js-UserFollow_Followers">{{ object.get_followers.count() }}</span></p>
 
-          {% if user %}
+          {% if user.is_authenticated() %}
             <button class="btn-Primary js-UserFollow ut-SmallMarginTop"
                     data-action="{{ url('users:follow', username=object.username) }}"
                     data-is-following="{{ 'true' if user.is_following(object) else 'false' }}">

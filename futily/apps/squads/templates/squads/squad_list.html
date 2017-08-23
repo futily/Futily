@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main %}
+  {{ pages.current.id }}
+  {{ object_list }}
+
+  {% for squad in squad_list %}
+    <div>
+      <a href="{{ squad.get_absolute_url() }}">{{ squad }}</a>
+    </div>
+  {% endfor %}
+{% endblock %}
