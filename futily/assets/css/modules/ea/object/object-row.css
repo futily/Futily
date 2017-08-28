@@ -20,7 +20,7 @@
   @apply --Font-12;
 
   position: absolute;
-  top: calc(50% + 3px);
+  top: calc(50% + 5px);
   left: 50%;
 
   font-weight: 700;

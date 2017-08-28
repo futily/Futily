@@ -10,6 +10,8 @@ import {
 
 export class CardSelector {
   constructor () {
+    if (!document.querySelector('.plyr-CardSelector_Variants')) return
+
     this.els = {
       el: document.querySelector('.plyr-CardSelector'),
       actions: document.querySelectorAll('.plyr-CardSelector_Action'),

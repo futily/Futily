@@ -69,11 +69,6 @@ class UserMixin(View):
 
         return context
 
-    def get_object(self, queryset=None):
-        print('tree')
-
-        return super().get_object(queryset)
-
 
 class UserFollowView(LoginRequiredMixin, UserMixin):
 
