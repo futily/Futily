@@ -15,7 +15,17 @@
 
   color: var(--Card_Color);
 
-  transition: transform 0.2s;
+  transition: opacity 0.2s, transform 0.2s;
+
+  .bld-Builder & {
+    &:hover {
+      transform: none;
+    }
+  }
+
+  .bld-Search_Results-loading & {
+    opacity: 0.5;
+  }
 
   &:hover {
     transform: translateY(-5px);
@@ -567,33 +577,12 @@
 |
 */
 .plyr-Card_Footer {
-  justify-content: space-between;
-
-  display: flex;
-  margin-top: 2px;
-
   font-family: var(--Font_Family-dinCond);
-  font-size: 14px;
-  line-height: 1;
-
-  .plyr-Card-small & {
-    margin-top: 5px;
-
-    font-size: 12px;
-  }
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
 }
 
-.plyr-Card_Workrates,
-.plyr-Card_Chem {
-  width: 50%;
-}
-
-.plyr-Card_Workrates {
-  padding-right: 12%;
-
-  text-align: right;
-}
-
-.plyr-Card_Chem {
-  padding-left: 5%;
+.plyr-Card_ChemistryLabel {
+  text-transform: uppercase;
 }

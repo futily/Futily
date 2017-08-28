@@ -1,6 +1,11 @@
+import axios from 'axios'
+import Vue from 'vue'
 import { createFromAlgoliaCredentials } from 'vue-instantsearch'
 
 import components from './components'
+import store from './store'
+
+Vue.prototype.$http = axios
 
 const searchStore = createFromAlgoliaCredentials(
   'Z68B2CP55T',
@@ -10,6 +15,7 @@ searchStore.indexName = 'player_index'
 
 export default {
   components,
+  store,
 
   data () {
     return {

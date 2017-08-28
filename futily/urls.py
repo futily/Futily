@@ -9,11 +9,16 @@ from django.contrib.auth import views as auth_views
 from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
 from django.views import generic
+from rest_framework.routers import DefaultRouter
 
+from futily.apps.players.views import PlayerViewSet
 from .apps.sections.models import sections_js
 from .utils.views import FrontendView
 
 admin.autodiscover()
+
+router = DefaultRouter()
+router.register(r'players', PlayerViewSet)
 
 urlpatterns = [
     url(r'^admin/password_change/$', auth_views.password_change,
@@ -21,6 +26,9 @@ urlpatterns = [
     url(r'^admin/password_change/done/$', auth_views.password_change_done, name='password_change_done'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^admin/pages/page/sections.js$', sections_js, name='admin_sections_js'),
+
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'social/', include('social_django.urls', namespace='social')),
 

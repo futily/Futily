@@ -1,7 +1,11 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
+from django.utils.text import slugify
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
+from rest_framework import filters, viewsets
+
+from futily.apps.players.serializers import PlayerSerializer
 
 from .forms import PlayerListForm
 from .models import Player
@@ -258,3 +262,33 @@ def construct_query_dict(current, schema):
                 filter_dict[key] = list(set(filter_dict[key]))
 
     return filter_dict
+
+
+class PlayerViewSet(viewsets.ModelViewSet):
+    lookup_field = 'slug'
+    queryset = Player.objects.all()
+    serializer_class = PlayerSerializer
+    filter_backends = [filters.DjangoFilterBackend]
+    filter_fields = ['first_name', 'last_name', 'common_name']
+
+    def get_queryset(self):
+        query = self.request.query_params.get('query')
+        ids = None
+
+        if self.request.query_params.get('ids'):
+            ids = self.request.query_params.get('ids').split(',')[:-1]
+
+        qs = Player.objects.all()
+
+        if ids:
+            qs = qs.filter(ea_id_base__in=ids)
+
+        if query:
+            qs = qs.filter(english_names__icontains=query)
+
+        nation = self.request.query_params.get('nation')
+
+        if nation:
+            qs = qs.filter(nation__slug=slugify(nation))
+
+        return qs

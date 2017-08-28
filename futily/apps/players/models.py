@@ -12,6 +12,7 @@ from django.db import models
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import date
+from django.utils.functional import cached_property
 from django.utils.text import slugify
 
 from .constants import (COLOR_CHOICES, POSITION_CHOICES, POSITION_LINE_CHOICES,
@@ -225,8 +226,12 @@ class Player(PageBase):
 
         return page.reverse(name, kwargs=url_kwargs)
 
-    def get_absolute_url(self):
+    @cached_property
+    def _get_absolute_url(self):
         return self._get_permalink_for_page(self.page.page)
+
+    def get_absolute_url(self):
+        return self._get_absolute_url
 
     def get_chemistry_absolute_url(self):
         return self._get_permalink_for_page(self.page.page, name='player_chemistry')
