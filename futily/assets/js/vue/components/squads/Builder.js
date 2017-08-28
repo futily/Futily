@@ -2,14 +2,10 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { debounce, map, reduce } from 'lodash'
 
 import * as types from './types'
-import Player from './Player'
 import eaFormationMap from './utils/eaFormationMap'
+import Team from './Team'
 
 export default {
-  components: {
-    Player
-  },
-
   props: {
     formationChoices: {
       type: Object,
@@ -38,7 +34,6 @@ export default {
         physical: 'number'
       },
       isTransitioning: false,
-      searchResults: [],
       webAppLink: ''
     }
   },
@@ -64,6 +59,8 @@ export default {
       getDribbling: types.GET_DRIBBLING,
       getDefending: types.GET_DEFENDING,
       getPhysical: types.GET_PHYSICAL,
+      getPlayerChemistry: types.GET_PLAYER_CHEMISTRY,
+      getPlayerFormationLinks: types.GET_PLAYER_FORMATION_LINKS,
       getPlayerObjectIds: types.GET_PLAYER_OBJECT_IDS,
       playersForForm: types.PLAYERS_FOR_FORM
     }),
@@ -82,10 +79,6 @@ export default {
       setTimeout(() => {
         this.isTransitioning = false
       }, 500)
-    },
-
-    'getSearch.open' (val) {
-      if (val) this.$nextTick(() => this.$refs.searchInput.focus())
     }
   },
 
@@ -117,28 +110,6 @@ export default {
         .catch(err => {
           console.log(err.response)
         })
-    },
-
-    handleSearch (e) {
-      const { value } = e.target
-      this.sync('searchTerm', value)
-
-      if (value.length > 2) {
-        this.$http.get(`/api/players?query=${value}`).then(response => {
-          const { data } = response
-          const { results } = data
-
-          this.searchResults = results
-        })
-      }
-    },
-
-    handleSearchResultsClick ($event, player) {
-      this.setPlayer({ group: 'team', index: this.getSearch.position, player })
-      this.$refs.searchInput.value = ''
-      this.setSearch({ open: false })
-
-      this.searchResults = []
     },
 
     async handleWebAppImport () {
@@ -208,6 +179,8 @@ export default {
           'bld-Builder-transitioning': this.isTransitioning
         }}
       >
+        <Team isTransitioning={this.isTransitioning} />
+
         <input
           type='text'
           onInput={e => this.setName({ name: e.target.value })}
@@ -283,42 +256,6 @@ export default {
             Import
           </button>
         </div>
-
-        <ul class='bld-Builder_Players'>
-          {Object.keys(this.getPlayers.team).map((playerKey, index) => {
-            const player = this.getPlayers.team[playerKey]
-
-            return (
-              <li
-                class={{
-                  'bld-Builder_PlayersItem': true,
-                  [`bld-Builder_PlayersItem-${player.positions.formationActual.toLowerCase()}`]:
-                  Object.keys(player.player).length > 0
-                }}
-              >
-                <Player index={index} player={player} />
-              </li>
-            )
-          })}
-        </ul>
-
-        <input
-          type='search'
-          v-show={this.getSearch.open}
-          placeholder='Search'
-          onInput={debounce(this.handleSearch, 300)}
-          ref='searchInput'
-        />
-
-        <ul v-show={this.searchResults.length > 0}>
-          {this.searchResults.map(player => {
-            return (
-              <li onClick={e => this.handleSearchResultsClick(e, player)}>
-                {player.name} ({player.rating})
-              </li>
-            )
-          })}
-        </ul>
 
         <form
           class='bld-Builder_Form'

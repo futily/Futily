@@ -3,9 +3,10 @@ from django.db.models import Q
 from django.utils.text import slugify
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
-from rest_framework import viewsets, filters
+from rest_framework import filters, viewsets
 
 from futily.apps.players.serializers import PlayerSerializer
+
 from .forms import PlayerListForm
 from .models import Player
 
@@ -272,7 +273,10 @@ class PlayerViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         query = self.request.query_params.get('query')
-        ids = self.request.query_params.get('ids').split(',')[:-1]
+        ids = None
+
+        if self.request.query_params.get('ids'):
+            ids = self.request.query_params.get('ids').split(',')[:-1]
 
         qs = Player.objects.all()
 
@@ -280,11 +284,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
             qs = qs.filter(ea_id_base__in=ids)
 
         if query:
-            qs = qs.filter(
-                Q(first_name__icontains=query) |
-                Q(last_name__icontains=query) |
-                Q(common_name__icontains=query)
-            )
+            qs = qs.filter(english_names__icontains=query)
 
         nation = self.request.query_params.get('nation')
 

@@ -1,10 +1,11 @@
-import { cloneDeep } from 'lodash'
+import { cloneDeep, isEmpty } from 'lodash'
 
 import * as types from './types'
 import positionMap from './utils/positionMap'
 import { goodChem, weakChem } from './utils/chemPosition'
 import positionLinks from './utils/positionLinks'
 import { POSITION_LINES } from './utils/constants'
+import allowedPositions from './utils/allowedPositions'
 
 const playerObj = {
   player: {},
@@ -130,8 +131,17 @@ const mutations = {
   [types.SET_PLAYER_OBJECT] (state, { group, index, player, position }) {
     const statePlayer = state[group][index]
 
+    if (position == null) {
+      const formationPosition = state[group][index].positions.formation
+      const playerPosition = player.position
+
+      position = allowedPositions[formationPosition].includes(playerPosition)
+        ? formationPosition
+        : playerPosition
+    }
+
     statePlayer.player = player
-    statePlayer.positions.actual = position || player.position
+    statePlayer.positions.actual = position
 
     if (isTeam(index)) {
       state.filledLinks.push(index)
@@ -177,6 +187,7 @@ const actions = {
       const group = 'team'
       const player = state[group][filledIndex].player
 
+      commit(types.SET_PLAYER_OBJECT, { group, index: filledIndex, player })
       commit(types.SET_PLAYER_CHEMISTRY, { group, index: filledIndex, player })
     })
   },
@@ -228,7 +239,11 @@ const getters = {
     return { team, bench, reserve }
   },
 
-  [types.GET_PLAYER_CHEMISTRY]: state => (group = 'team', index) => {
+  [types.GET_PLAYER]: state => ({ group = 'team', index }) => {
+    return state[group][index]
+  },
+
+  [types.GET_PLAYER_CHEMISTRY]: state => ({ group = 'team', index }) => {
     const player = state[group][index]
     const roundedChem = Math.round(
       player.chemistry.links * player.chemistry.position
@@ -237,11 +252,15 @@ const getters = {
     return Math.min(10, roundedChem + player.chemistry.boost)
   },
 
+  [types.GET_PLAYER_FORMATION_LINKS]: state => index => {
+    return state.team[index].links.formation
+  },
+
   [types.GET_CHEMISTRY] (_, getters) {
     return Math.max(
       0,
       state.filledLinks.reduce(
-        (acc, val) => acc + getters[types.GET_PLAYER_CHEMISTRY]('team', val),
+        (acc, val) => acc + getters[types.GET_PLAYER_CHEMISTRY]({ index: val }),
         0
       )
     )
@@ -296,7 +315,9 @@ export default {
 }
 
 function getAverageLine (state, line) {
-  if (!['DEF', 'MID', 'ATT'].includes(line)) { throw new Error('"line" must be "DEF", "MID" or "ATT"') }
+  if (!['DEF', 'MID', 'ATT'].includes(line)) {
+    throw new Error('"line" must be "DEF", "MID" or "ATT"')
+  }
 
   const players = state.filledLinks.filter(index => {
     const position = state.team[index].positions.formation
@@ -384,6 +405,47 @@ function calculateLinkChemistry (state, player) {
   const chemTotal = chemClub + chemLeague + chemNation
 
   if (chemTotal >= 5) {
+    return 3.5
+  } else if (chemTotal >= 3) {
+    return 3
+  } else if (chemTotal >= 1) {
+    return 2
+  } else {
+    return 0.9
+  }
+}
+
+export function playerToPlayerChemistry (player, linkedPlayer) {
+  if (isEmpty(player.player) || isEmpty(linkedPlayer.player)) return 0.9
+
+  let chem = 0
+  let chemClub = 0
+  let chemLeague = 0
+  let chemNation = 0
+
+  if (player.player.club.title === linkedPlayer.player.club.title) {
+    chem += 2
+    chemClub += 2
+  }
+
+  if (
+    player.player.league.title === linkedPlayer.player.league.title ||
+    [player.player.league.title, linkedPlayer.player.league.title].includes(
+      2118
+    )
+  ) {
+    chem += 1
+    chemLeague += 1
+  }
+
+  if (player.player.nation.title === linkedPlayer.player.nation.title) {
+    chem += 1
+    chemNation += 1
+  }
+
+  const chemTotal = chemClub + chemLeague + chemNation
+
+  if (chemTotal >= 4) {
     return 3.5
   } else if (chemTotal >= 3) {
     return 3

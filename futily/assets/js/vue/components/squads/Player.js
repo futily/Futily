@@ -22,10 +22,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters({
-      getPlayerChemistry: types.GET_PLAYER_CHEMISTRY
-    }),
-
     hasPlayer () {
       return Object.keys(this.player.player).length > 0
     }
@@ -40,24 +36,32 @@ export default {
       setSearch: types.SET_SEARCH
     }),
 
-    handleRemove () {
-      this.removePlayer({ group: 'team', index: this.index })
-    },
+    handleRemove ($evt) {
+      $evt.stopPropagation()
 
-    handleSearch () {
-      this.setSearch({ open: true, position: this.index, term: '' })
+      this.removePlayer({ group: 'team', index: this.index })
     }
   },
 
-  render (h) {
+  render () {
+    /* eslint-disable indent */
     return (
       <div class='bld-Builder_Player'>
-        {this.hasPlayer ? <Card player={this.player.player} /> : ''}
-        {/* <button type="button" onClick={ this.handleSearch }>Search</button> */}
-        {/* <span>{ this.player.positions.actual }</span> */}
-        {/* <span>{ this.player.positions.formation }</span> */}
-        {/* <span>{ this.getPlayerChemistry('team', this.index) }</span> */}
-        {/* <button onClick={ this.handleRemove } type="button" v-show={ this.hasPlayer }>Remove</button> */}
+        {this.hasPlayer
+          ? <Card
+              player={this.player.player}
+              index={this.index}
+              showChemistry={true}
+            />
+          : ''}
+        <button
+          class='bld-Builder_PlayerRemove'
+          onClick={this.handleRemove}
+          type='button'
+          v-show={this.hasPlayer}
+        >
+          Remove
+        </button>
       </div>
     )
   }

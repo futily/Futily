@@ -1,5 +1,62 @@
 {% extends "base.html" %}
 
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Squad Builder</h1>
+          <p class="pg-Strapline_Text">Create your Fifa 17 squad</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block breadcrumbs %}
+    <div class="pg-Breadcrumbs">
+      <div class="pg-Breadcrumbs_Inner">
+        <div class="pg-Breadcrumbs_Body">
+          <nav class="bdc-Breadcrumb">
+            <div class="bdc-Breadcrumb_Items"
+                 itemscope=""
+                 itemtype="http://schema.org/BreadcrumbList">
+              <div class="bdc-Breadcrumb_Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                  <span itemprop="name">
+                    Home
+                  </span>
+                  <meta itemprop="position" content="1">
+                </a>
+              </div>
+
+              <div class="bdc-Breadcrumb_Divider">
+                {% include 'angle-down.svg' %}
+              </div>
+
+              <div class="bdc-Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <span itemprop="name">
+                  Builder
+                </span>
+                <meta itemprop="position" content="2">
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endblock %}
+
 {% block main %}
   <squad-builder :formation-choices="{{ formations }}" :page="{{ pages.current.id }}"></squad-builder>
 {% endblock %}

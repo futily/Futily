@@ -1,23 +1,42 @@
+import { mapGetters } from 'vuex'
+
+import * as types from '../squads/types'
+
 export default {
   name: 'PlayerCard',
 
   props: {
     player: {
-      type: Object,
-      required: true
+      type: Object
     },
     size: {
       type: String,
       default: 'small'
     },
     position: {
-      type: String,
-      required: false
+      type: String
+    },
+    index: {
+      type: Number
+    },
+    showChemistry: {
+      type: Boolean,
+      default: false
     }
   },
 
-  render (h) {
-    const position = this.position || this.player.position
+  computed: {
+    ...mapGetters({
+      getPlayer: types.GET_PLAYER,
+      getPlayerChemistry: types.GET_PLAYER_CHEMISTRY
+    })
+  },
+
+  render () {
+    const position =
+      this.index && this.index >= 0
+        ? this.getPlayer({ index: this.index }).positions.actual
+        : this.player.position
 
     return (
       <a
@@ -76,6 +95,17 @@ export default {
             )
           })}
         </div>
+
+        {this.showChemistry
+          ? <footer class='plyr-Card_Footer'>
+            <div class='plyr-Card_Chemistry'>
+              <span class='plyr-Card_ChemistryLabel'>Chem:</span>
+              <span class='plyr-Card_ChemistryValue'>
+                {this.getPlayerChemistry({ index: this.index })}
+              </span>
+            </div>
+          </footer>
+          : ''}
       </a>
     )
   }
