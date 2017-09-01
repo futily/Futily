@@ -94,6 +94,23 @@ def lazy_image(image, height=None, width=None, blur=True, max_width=1920):
     }
 
 
+@library.global_function
+@jinja2.contextfunction
+def path_to_url(context, path):
+    if path.startswith('http://') or path.startswith('https://'):
+        return path
+
+    if not path.startswith('/'):
+        path = '/' + path
+
+    if context['request'].is_secure():
+        secure_part = 's'
+    else:
+        secure_part = ''
+
+    return 'http{}://{}{}'.format(secure_part, settings.SITE_DOMAIN, path)
+
+
 # @library.global_function
 # def get_header_content():
 #     try:
