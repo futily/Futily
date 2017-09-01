@@ -114,6 +114,7 @@ BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
 
 # A list of additional installed applications.
+SITE_ID = 1
 
 INSTALLED_APPS = [
 
@@ -123,10 +124,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
 
+    'django_comments_xtd',
+    'django_comments',
     'flexible_images',
     'sorl.thumbnail',
     'compressor',
+    'rest_framework',
 
     'algoliasearch_django',
     'annoying',
@@ -145,6 +150,7 @@ INSTALLED_APPS = [
     'cms.apps.media',
 
     'futily.apps.clubs',
+    'futily.apps.comments',
     'futily.apps.components',
     'futily.apps.leagues',
     'futily.apps.news',
@@ -155,6 +161,7 @@ INSTALLED_APPS = [
     'futily.apps.sections',
     'futily.apps.settings',
     'futily.apps.site',
+    'futily.apps.squads',
     'futily.apps.users',
 
     'suit',
@@ -167,6 +174,10 @@ INSTALLED_APPS = [
 
     'social_django'
 ]
+
+COMMENTS_APP = 'django_comments_xtd'
+COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_CONFIRM_EMAIL = False
 
 # Additional static file locations.
 
@@ -253,7 +264,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|debug_toolbar/).*',
+            'match_regex': r'^(?!admin/|django_comments_xtd/|reversion/|registration/|debug_toolbar/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
@@ -327,7 +338,6 @@ CACHES = {
 # A secret key used for cryptographic algorithms.
 
 SECRET_KEY = 'apnHxTgNzNw56I+HwgVeCseY02eu4XE/iphnM24Aui5NIPl3iEleJ196WHZCO/RwTsY='
-CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = 'DENY'
 
 WYSIWYG_OPTIONS = {
@@ -460,6 +470,13 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'futily.drf.CustomPagination',
+    'PAGE_SIZE': 30,
+    'DEFAULT_FILTER_BACKENDS': ['rest_framework.filters.DjangoFilterBackend'],
+    'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer']
+}
 
 SOCIAL_AUTH_GOOGLE_PLUS_KEY = '589992011980-13s86jclt0lr3meptkspk2jtafa4hnv2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_PLUS_SECRET = 'tfkHbGLXBUDRaU-Pwz6kqLkq'

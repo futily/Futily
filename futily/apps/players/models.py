@@ -12,6 +12,7 @@ from django.db import models
 from django.db.models import Q
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import date
+from django.utils.functional import cached_property
 from django.utils.text import slugify
 
 from .constants import (COLOR_CHOICES, POSITION_CHOICES, POSITION_LINE_CHOICES,
@@ -51,7 +52,7 @@ STAT_VALIDATOR = [MinValueValidator(0), MaxValueValidator(99)]
 
 class PlayerManager(models.Manager):
     def get_queryset(self):
-        qs = super(PlayerManager, self).get_queryset().select_related('club', 'league', 'nation')
+        qs = super(PlayerManager, self).get_queryset().select_related('page', 'page__page', 'club', 'league', 'nation')
 
         return qs
 
@@ -60,7 +61,7 @@ class PlayerCardManager(models.Manager):
     def get_queryset(self):
         qs = super(PlayerCardManager, self) \
             .get_queryset() \
-            .select_related('club', 'nation') \
+            .select_related('club', 'nation', 'page', 'page__page') \
             .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image',
                    'image_sm', 'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw',
                    'position_full', 'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date',
@@ -81,6 +82,7 @@ class Player(PageBase):
     objects = PlayerManager()
 
     page = models.ForeignKey('Players', null=True, blank=False)
+    cached_url = models.CharField(max_length=255, blank=True, null=True)
 
     club = models.ForeignKey('clubs.Club', null=True, blank=False, db_index=True)
     league = models.ForeignKey('leagues.League', null=True, blank=False, db_index=True)
@@ -214,7 +216,10 @@ class Player(PageBase):
 
         super().save(force_insert, force_update, using, update_fields)
 
-    def _get_permalink_for_page(self, page, name='player', extra_kwargs=None):
+    def _get_permalink_for_page(self, name='player', extra_kwargs=None, cached=True):
+        if self.cached_url and cached:
+            return self.cached_url
+
         url_kwargs = {
             'pk': self.pk,
             'slug': self.slug,
@@ -223,26 +228,37 @@ class Player(PageBase):
         if extra_kwargs and isinstance(extra_kwargs, dict):
             url_kwargs = {**url_kwargs, **extra_kwargs}
 
-        return page.reverse(name, kwargs=url_kwargs)
+        url = self.page.page.reverse(name, kwargs=url_kwargs)
+
+        if url != self.cached_url and name == 'player':
+            self.cached_url = url
+            self.save()
+
+        return url
+
+    @cached_property
+    def _get_absolute_url(self):
+        return self._get_permalink_for_page()
 
     def get_absolute_url(self):
-        return self._get_permalink_for_page(self.page.page)
+        return self._get_absolute_url
 
     def get_chemistry_absolute_url(self):
-        return self._get_permalink_for_page(self.page.page, name='player_chemistry')
+        return self._get_permalink_for_page(name='player_chemistry', cached=False)
 
     def get_chemistry_type_absolute_url(self, chem_type):
         if not chem_type:
             raise Exception('Please supply a chem_type')
 
-        return self._get_permalink_for_page(self.page.page, name='player_chemistry_type',
-                                            extra_kwargs={'chem_type': chem_type})
+        return self._get_permalink_for_page(name='player_chemistry_type',
+                                            extra_kwargs={'chem_type': chem_type},
+                                            cached=False)
 
     def get_similar_absolute_url(self):
-        return self._get_permalink_for_page(self.page.page, name='player_similar')
+        return self._get_permalink_for_page(name='player_similar', cached=False)
 
     def get_compare_absolute_url(self):
-        return self._get_permalink_for_page(self.page.page, name='player_compare')
+        return self._get_permalink_for_page(name='player_compare', cached=False)
 
     def render_card(self, size='sm', faded=False, rpp=False):
         return render_to_string('players/includes/card.html', {

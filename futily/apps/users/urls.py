@@ -45,7 +45,7 @@ urlpatterns = [
     # ), name='register-complete'),
 
     # Profile
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/$', views.UserProfileView.as_view(), name='profile'),
+    url(r'^(?P<username>[\w_\-]+)/$', views.UserProfileView.as_view(), name='profile'),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/collection/$', views.UserCollectionView.as_view(), name='collection'),
     url(
         r'^(?P<username>[0-9A-Za-z_\-]+)/collection/(?P<league_slug>[-\w]+)/$',

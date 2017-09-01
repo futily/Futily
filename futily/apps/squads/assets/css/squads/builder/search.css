@@ -1,0 +1,62 @@
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+| @namespace: bld-
+|
+*/
+.bld-Search {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: rgba(#000, 0.9);
+  overflow-y: auto;
+}
+
+.bld-Search_Results {
+  display: flex;
+  padding: 0 40px;
+}
+
+.bld-Search_Items {
+  flex: 1;
+}
+
+.bld-Search_Prev {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  padding: 0;
+
+  color: #fff;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 40px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.bld-Search_Next {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 0;
+
+  color: #fff;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 40px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
