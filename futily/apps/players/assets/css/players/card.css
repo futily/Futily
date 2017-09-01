@@ -409,7 +409,7 @@
 .plyr-Card_Image {
   position: absolute;
   top: 33px;
-  right: 5px;
+  right: 6px;
 
   align-self: flex-end;
   flex-shrink: 0;

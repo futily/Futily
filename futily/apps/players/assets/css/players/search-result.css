@@ -1,0 +1,202 @@
+/*
+|--------------------------------------------------------------------------
+| Search result
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-SearchResult {
+  @apply --Font-14;
+
+  position: relative;
+
+  align-items: center;
+
+  display: flex;
+  padding: 5px 10px;
+
+  background-color: var(--Color_Grey-light);
+  border: 1px solid var(--Color_Border);
+  border-top: 0;
+  color: var(--Color_Body);
+
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-bottom-color: var(--Color_Green);
+
+    &::before {
+      transform: none;
+    }
+  }
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -1px;
+    bottom: -1px;
+    left: -1px;
+
+    display: block;
+    width: 3px;
+
+    background-color: var(--Color_Green);
+
+    transform: translateX(-@width);
+    transition: transform 0.2s;
+  }
+}
+
+.plyr-SearchResult_Nation {
+  flex-shrink: 0;
+
+  width: 25px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.plyr-SearchResult_Club {
+  flex-shrink: 0;
+
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+}
+
+.plyr-SearchResult_Name {
+  margin-right: 2px;
+  margin-left: 5px;
+}
+
+.plyr-SearchResult_Position {
+  font-weight: 500;
+}
+
+.plyr-SearchResult_Player {
+  flex-shrink: 0;
+
+  width: 30px;
+  height: @width;
+  margin-left: 5px;
+}
+
+.plyr-SearchResult_Rating {
+  @apply --Font-14;
+
+  margin-right: 5px;
+  margin-left: auto;
+
+  font-weight: 500;
+}
+
+.plyr-SearchResult_RatingIcon {
+  flex-shrink: 0;
+
+  width: 19px;
+  height: 30px;
+
+  background-image: resolve('ea/cards/original/bronze.png');
+  background-size: @width @height;
+
+  /* stylelint-disable selector-class-pattern */
+  .plyr-SearchResult-bronze & {
+    background-image: resolve('ea/cards/large/bronze.png');
+  }
+  .plyr-SearchResult-silver & {
+    background-image: resolve('ea/cards/large/silver.png');
+  }
+  .plyr-SearchResult-gold & {
+    background-image: resolve('ea/cards/large/gold.png');
+  }
+  .plyr-SearchResult-rare_bronze & {
+    background-image: resolve('ea/cards/large/rare-bronze.png');
+  }
+  .plyr-SearchResult-rare_silver & {
+    background-image: resolve('ea/cards/large/rare-silver.png');
+  }
+  .plyr-SearchResult-rare_gold & {
+    background-image: resolve('ea/cards/large/rare-gold.png');
+  }
+  .plyr-SearchResult-totw_bronze & {
+    background-image: resolve('ea/cards/special/totw-bronze.png');
+  }
+  .plyr-SearchResult-totw_silver & {
+    background-image: resolve('ea/cards/special/totw-silver.png');
+  }
+  .plyr-SearchResult-totw_gold & {
+    background-image: resolve('ea/cards/special/totw-gold.png');
+  }
+  .plyr-SearchResult-tots_bronze & {
+    background-image: resolve('ea/cards/special/tots-bronze.png');
+  }
+  .plyr-SearchResult-tots_silver & {
+    background-image: resolve('ea/cards/special/tots-silver.png');
+  }
+  .plyr-SearchResult-tots_gold & {
+    background-image: resolve('ea/cards/special/tots-gold.png');
+  }
+  .plyr-SearchResult-toty & {
+    background-image: resolve('ea/cards/special/toty.png');
+  }
+  .plyr-SearchResult-legend & {
+    background-image: resolve('ea/cards/large/legend.png');
+  }
+  .plyr-SearchResult-motm & {
+    background-image: resolve('ea/cards/special/motm.png');
+  }
+  .plyr-SearchResult-teal & {
+    background-image: resolve('ea/cards/special/teal.png');
+  }
+  .plyr-SearchResult-purple & {
+    background-image: resolve('ea/cards/special/purple.png');
+  }
+  .plyr-SearchResult-pink & {
+    background-image: resolve('ea/cards/special/pink.png');
+  }
+  .plyr-SearchResult-record_breaker & {
+    background-image: resolve('ea/cards/special/record-breaker.png');
+  }
+  .plyr-SearchResult-imotm & {
+    background-image: resolve('ea/cards/special/imotm.png');
+  }
+  .plyr-SearchResult-confederation_champions_motm & {
+    background-image: resolve(
+      'ea/cards/special/confederation-champions-motm.png'
+    );
+  }
+  .plyr-SearchResult-fut_birthday & {
+    background-image: resolve('ea/cards/special/fut-birthday.png');
+  }
+  .plyr-SearchResult-futties_winner & {
+    background-image: resolve('ea/cards/special/futties-winner.png');
+  }
+  .plyr-SearchResult-ones_to_watch & {
+    background-image: resolve('ea/cards/special/ones-to-watch.png');
+  }
+  .plyr-SearchResult-sbc_base & {
+    background-image: resolve('ea/cards/special/sbc-base.png');
+  }
+  .plyr-SearchResult-sbc_premium & {
+    background-image: resolve('ea/cards/special/sbc-premium.png');
+  }
+  .plyr-SearchResult-st_patricks & {
+    background-image: resolve('ea/cards/special/st-patricks.png');
+  }
+  .plyr-SearchResult-halloween & {
+    background-image: resolve('ea/cards/special/halloween.png');
+  }
+  .plyr-SearchResult-movember & {
+    background-image: resolve('ea/cards/special/movember.png');
+  }
+  .plyr-SearchResult-award_winner & {
+    background-image: resolve('ea/cards/special/award-winner.png');
+  }
+  .plyr-SearchResult-award_motm & {
+    background-image: resolve('ea/cards/special/motm.png');
+  }
+  .plyr-SearchResult-gotm & {
+    background-image: resolve('ea/cards/special/gotm.png');
+  }
+  /* stylelint-enable */
+}

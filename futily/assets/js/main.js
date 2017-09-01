@@ -13,11 +13,11 @@ import { FloatingLabel } from './forms'
 import { CardSelector, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
 import { Follow } from './users/follow'
-// import { PlayerSearch } from 'search'
+import { PlayerSearch } from 'search'
 
 Vue.use(InstantSearch)
 
-new Vue(App).$mount('#app')
+// new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // if (document.querySelector('.js-PlayerSearch')) {
-  //   new PlayerSearch({ el: document.querySelector('.js-PlayerSearch') })
-  // }
+  if (document.querySelector('.js-PlayerSearch')) {
+    new PlayerSearch({ el: document.querySelector('.js-PlayerSearch') })
+  }
 
   // If the browser isn't Safari, don't do anything
   if (

@@ -3,11 +3,28 @@
     <div class="hd-UserBar_Body">
       <div class="hd-UserBar_Item hd-UserBar_Item-pushed">
         <div class="hd-UserBar_Search">
-          <form class="sch-Header">
-            <input type="search" class="sch-Header_Input" placeholder="Search...">
+          <form class="sch-Header js-PlayerSearch">
+            <input type="search" class="sch-Header_Input js-PlayerSearch_Input" placeholder="Search...">
             <span class="sch-Header_Icon">
               {% include 'search.svg' %}
             </span>
+
+            <ul class="js-PlayerSearch_Results plyr-SearchResults" aria-hidden="true"></ul>
+
+            <template id="PlayerSearchResult">
+              <li class="plyr-SearchResults_Result">
+                <a class="plyr-SearchResult">
+                  <img class="plyr-SearchResult_Nation">
+                  <img class="plyr-SearchResult_Club">
+                  <p class="plyr-SearchResult_Name"></p>
+                  <span class="plyr-SearchResult_Position"></span>
+                  <img class="plyr-SearchResult_Player">
+
+                  <span class="plyr-SearchResult_Rating"></span>
+                  <span class="plyr-SearchResult_RatingIcon"></span>
+                </a>
+              </li>
+            </template>
           </form>
         </div>
       </div>

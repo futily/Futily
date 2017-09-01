@@ -1,0 +1,24 @@
+/*
+|--------------------------------------------------------------------------
+| Search results
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-SearchResults {
+  position: absolute;
+  top: 100%;
+  left: -20px;
+
+  max-height: 400px;
+  min-width: 310px;
+
+  background-color: var(--Color_Grey-light);
+  border-top: 1px solid var(--Color_Border);
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &[aria-hidden='true'] {
+    display: none;
+  }
+}
