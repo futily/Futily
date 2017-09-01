@@ -287,6 +287,10 @@ class Player(PageBase):
             'card_att_4': self.card_att_4,
             'card_att_5': self.card_att_5,
             'card_att_6': self.card_att_6,
+            'club': {
+                'name': self.club.name,
+                'ea_id': self.club.ea_id,
+            }
         })
 
     @property
