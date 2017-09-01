@@ -12,6 +12,7 @@ from django.views import generic
 from rest_framework.routers import DefaultRouter
 
 from futily.apps.players.views import PlayerViewSet
+
 from .apps.sections.models import sections_js
 from .utils.views import FrontendView
 
@@ -31,6 +32,7 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'social/', include('social_django.urls', namespace='social')),
+    url(r'^comments/', include('django_comments_xtd.urls')),
 
     # Special cases
     url(r'users/', include('futily.apps.users.urls', namespace='users')),

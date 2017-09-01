@@ -114,6 +114,7 @@ BASE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
 
 
 # A list of additional installed applications.
+SITE_ID = 1
 
 INSTALLED_APPS = [
 
@@ -123,7 +124,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
+    'django.contrib.sites',
 
+    'django_comments_xtd',
+    'django_comments',
     'flexible_images',
     'sorl.thumbnail',
     'compressor',
@@ -146,6 +150,7 @@ INSTALLED_APPS = [
     'cms.apps.media',
 
     'futily.apps.clubs',
+    'futily.apps.comments',
     'futily.apps.components',
     'futily.apps.leagues',
     'futily.apps.news',
@@ -169,6 +174,10 @@ INSTALLED_APPS = [
 
     'social_django'
 ]
+
+COMMENTS_APP = 'django_comments_xtd'
+COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_CONFIRM_EMAIL = False
 
 # Additional static file locations.
 
@@ -255,7 +264,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|reversion/|registration/|debug_toolbar/).*',
+            'match_regex': r'^(?!admin/|django_comments_xtd/|reversion/|registration/|debug_toolbar/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
