@@ -1,11 +1,17 @@
+import Vue from 'vue'
+import Component from 'vue-class-component'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import { debounce, map, reduce } from 'lodash'
+import { map, reduce } from 'lodash'
 
 import * as types from './types'
 import eaFormationMap from './utils/eaFormationMap'
-import Team from './Team'
+import { Team } from './Team'
 
-export default {
+@Component({
+  components: {
+    Team
+  },
+
   props: {
     formationChoices: {
       type: Object,
@@ -15,31 +21,6 @@ export default {
       type: Number,
       required: true
     }
-  },
-
-  data () {
-    return {
-      formFields: {
-        formation: 'text',
-        chemistry: 'number',
-        rating: 'number',
-        attack: 'number',
-        midfield: 'number',
-        defence: 'number',
-        pace: 'number',
-        shooting: 'number',
-        passing: 'number',
-        dribbling: 'number',
-        defending: 'number',
-        physical: 'number'
-      },
-      isTransitioning: false,
-      webAppLink: ''
-    }
-  },
-
-  mounted () {
-    this.setFormation({ formation: '442' })
   },
 
   computed: {
@@ -63,13 +44,7 @@ export default {
       getPlayerFormationLinks: types.GET_PLAYER_FORMATION_LINKS,
       getPlayerObjectIds: types.GET_PLAYER_OBJECT_IDS,
       playersForForm: types.PLAYERS_FOR_FORM
-    }),
-
-    formations () {
-      return Object.keys(this.formationChoices).sort().map(e => {
-        return [e, this.formationChoices[e]]
-      })
-    }
+    })
   },
 
   watch: {
@@ -91,86 +66,114 @@ export default {
     ...mapMutations({
       setName: types.SET_NAME,
       setSearch: types.SET_SEARCH
-    }),
+    })
+  }
+})
+export class Builder extends Vue {
+  formFields = {
+    formation: 'text',
+    chemistry: 'number',
+    rating: 'number',
+    attack: 'number',
+    midfield: 'number',
+    defence: 'number',
+    pace: 'number',
+    shooting: 'number',
+    passing: 'number',
+    dribbling: 'number',
+    defending: 'number',
+    physical: 'number'
+  }
+  isTransitioning = false
+  webAppLink = ''
 
-    handleSave (e) {
-      e.preventDefault()
+  mounted () {
+    this.setFormation({ formation: '442' })
+  }
 
-      const form = e.target
-      const formData = new FormData(form)
+  handleSave (e) {
+    e.preventDefault()
 
-      this.$http
-        .post(form.action, formData, {
-          xsrfCookieName: 'csrftoken',
-          xsrfHeaderName: 'X-CSRFToken'
-        })
-        .then(res => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err.response)
-        })
-    },
+    const form = e.target
+    const formData = new FormData(form)
 
-    async handleWebAppImport () {
-      const link = this.webAppLink
+    this.$http
+      .post(form.action, formData, {
+        xsrfCookieName: 'csrftoken',
+        xsrfHeaderName: 'X-CSRFToken'
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
+  }
 
-      if (
-        !link.startsWith(
-          'https://www.easports.com/uk/fifa/ultimate-team/web-app/show-off'
-        )
-      ) {
-        alert('Please provide a valid link')
+  async handleWebAppImport () {
+    const link = this.webAppLink
 
-        return
-      }
+    if (
+      !link.startsWith(
+        'https://www.easports.com/uk/fifa/ultimate-team/web-app/show-off'
+      )
+    ) {
+      alert('Please provide a valid link')
 
-      const id = link
-        .replace(
-          'https://www.easports.com/uk/fifa/ultimate-team/web-app/show-off?showoffId=',
-          ''
-        )
-        .split(':')[0]
+      return
+    }
 
-      const response = await this.$http.get(`/squads/builder/import/${id}`)
-      const { players, squad } = response.data
-
-      this.setFormation({ formation: squad.formation })
-      this.setName({ name: squad.title })
-
-      const playerIds = reduce(
-        players,
-        (ids, player) => {
-          ids += `${player.player.ea_id_base},`
-
-          return ids
-        },
+    const id = link
+      .replace(
+        'https://www.easports.com/uk/fifa/ultimate-team/web-app/show-off?showoffId=',
         ''
       )
-      const { data } = await this.$http.get(`/api/players?ids=${playerIds}`)
-      map(players, player => {
-        player['object'] = data.results.find(
-          obj => obj.ea_id_base === player['player'].ea_id_base
-        )
+      .split(':')[0]
 
-        this.setPlayer({
-          group: player.index <= 10 ? 'team' : 'bench',
-          index:
-            player.index <= 10
-              ? eaFormationMap[squad.formation][player.index]
-              : player.index,
-          player: player['object'],
-          position: player['position']
-        })
+    const response = await this.$http.get(`/squads/builder/import/${id}`)
+    const { players, squad } = response.data
+
+    this.setFormation({ formation: squad.formation })
+    this.setName({ name: squad.title })
+
+    const playerIds = reduce(
+      players,
+      (ids, player) => {
+        ids += `${player.player.ea_id_base},`
+
+        return ids
+      },
+      ''
+    )
+    const { data } = await this.$http.get(`/api/players?ids=${playerIds}`)
+    map(players, player => {
+      player['object'] = data.results.find(
+        obj => obj.ea_id_base === player['player'].ea_id_base
+      )
+
+      this.setPlayer({
+        group: player.index <= 10 ? 'team' : 'bench',
+        index:
+          player.index <= 10
+            ? eaFormationMap[squad.formation][player.index]
+            : player.index,
+        player: player['object'],
+        position: player['position']
       })
-    },
+    })
+  }
 
-    sync (prop, value) {
-      this[prop] = value
-    }
-  },
+  sync (prop, value) {
+    this[prop] = value
+  }
 
-  render (h) {
+  get formations () {
+    return Object.keys(this.formationChoices).sort().map(e => {
+      return [e, this.formationChoices[e]]
+    })
+  }
+
+  render () {
     return (
       <div
         class={{

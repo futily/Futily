@@ -366,17 +366,14 @@ function calculatePositionChemistry (player) {
 
 function calculateLinkChemistry (state, player) {
   const playerLinks = player.links.filled
-  const strength = {}
   let chemClub = 0
   let chemLeague = 0
   let chemNation = 0
 
   for (const index of playerLinks) {
     const linkedPlayer = state.team[index]
-    let chem = 0
 
     if (player.player.club.title === linkedPlayer.player.club.title) {
-      chem++
       chemClub++
     }
 
@@ -386,16 +383,12 @@ function calculateLinkChemistry (state, player) {
         2118
       )
     ) {
-      chem++
       chemLeague++
     }
 
     if (player.player.nation.title === linkedPlayer.player.nation.title) {
-      chem++
       chemNation++
     }
-
-    strength[index] = chem
   }
 
   chemClub = playerLinks.length && chemClub / playerLinks.length * 3
@@ -418,13 +411,11 @@ function calculateLinkChemistry (state, player) {
 export function playerToPlayerChemistry (player, linkedPlayer) {
   if (isEmpty(player.player) || isEmpty(linkedPlayer.player)) return 0.9
 
-  let chem = 0
   let chemClub = 0
   let chemLeague = 0
   let chemNation = 0
 
   if (player.player.club.title === linkedPlayer.player.club.title) {
-    chem += 2
     chemClub += 2
   }
 
@@ -434,12 +425,10 @@ export function playerToPlayerChemistry (player, linkedPlayer) {
       2118
     )
   ) {
-    chem += 1
     chemLeague += 1
   }
 
   if (player.player.nation.title === linkedPlayer.player.nation.title) {
-    chem += 1
     chemNation += 1
   }
 

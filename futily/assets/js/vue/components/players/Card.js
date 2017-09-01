@@ -1,10 +1,10 @@
+import Vue from 'vue'
+import Component from 'vue-class-component'
 import { mapGetters } from 'vuex'
 
 import * as types from '../squads/types'
 
-export default {
-  name: 'PlayerCard',
-
+@Component({
   props: {
     player: {
       type: Object
@@ -30,9 +30,11 @@ export default {
       getPlayer: types.GET_PLAYER,
       getPlayerChemistry: types.GET_PLAYER_CHEMISTRY
     })
-  },
-
+  }
+})
+export class Card extends Vue {
   render () {
+    /* eslint-disable indent */
     const position =
       this.index && this.index >= 0
         ? this.getPlayer({ index: this.index }).positions.actual
@@ -98,13 +100,13 @@ export default {
 
         {this.showChemistry
           ? <footer class='plyr-Card_Footer'>
-            <div class='plyr-Card_Chemistry'>
-              <span class='plyr-Card_ChemistryLabel'>Chem:</span>
-              <span class='plyr-Card_ChemistryValue'>
-                {this.getPlayerChemistry({ index: this.index })}
-              </span>
-            </div>
-          </footer>
+              <div class='plyr-Card_Chemistry'>
+                <span class='plyr-Card_ChemistryLabel'>Chem:</span>
+                <span class='plyr-Card_ChemistryValue'>
+                  {this.getPlayerChemistry({ index: this.index })}
+                </span>
+              </div>
+            </footer>
           : ''}
       </a>
     )

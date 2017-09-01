@@ -1,10 +1,12 @@
+import Vue from 'vue'
+import Component from 'vue-class-component'
 import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { cloneDeep, debounce, isEmpty, map } from 'lodash'
 
-import Player from './Player'
+import { Player } from './Player'
 import * as types from './types'
 import { playerToPlayerChemistry } from './module'
-import Card from '../players/Card'
+import { Card } from '../players/Card'
 
 const baseSearch = {
   count: 0,
@@ -19,25 +21,16 @@ const baseSearch = {
   results: []
 }
 
-export default {
+@Component({
+  components: {
+    Card,
+    Player
+  },
+
   props: {
     isTransitioning: {
       type: Boolean
     }
-  },
-
-  data () {
-    return {
-      search: cloneDeep(baseSearch),
-      searchLoading: false,
-      searchTerm: ''
-    }
-  },
-
-  mounted () {
-    setTimeout(() => {
-      this.initCanvas()
-    }, 500)
   },
 
   computed: {
@@ -71,178 +64,189 @@ export default {
 
     ...mapMutations({
       setSearch: types.SET_SEARCH
-    }),
+    })
+  }
+})
+export class Team extends Vue {
+  search = cloneDeep(baseSearch)
+  searchLoading = false
+  searchTerm = ''
 
-    initCanvas () {
-      const canvas = this.$refs.canvas
-      canvas.setAttribute('width', `${canvas.offsetWidth}`)
-      canvas.setAttribute('height', `${canvas.offsetHeight}`)
-      const ctx = canvas.getContext('2d')
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
-      const teamPlayers = this.getPlayers.team
+  mounted () {
+    setTimeout(() => {
+      this.initCanvas()
+    }, 500)
+  }
 
-      map(this.$refs.players, (el, index) => {
-        const links = this.getPlayerFormationLinks(index)
-        const { x: moveX, y: moveY } = getMoveCoords(el)
+  initCanvas () {
+    const canvas = this.$refs.canvas
+    canvas.setAttribute('width', `${canvas.offsetWidth}`)
+    canvas.setAttribute('height', `${canvas.offsetHeight}`)
+    const ctx = canvas.getContext('2d')
+    ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight)
+    const teamPlayers = this.getPlayers.team
 
-        map(links, link => {
-          const linkedEl = this.$refs.players[link]
-          const { x: lineX, y: lineY } = getMoveCoords(linkedEl)
-          const colour = {
-            3.5: '#54a71b',
-            3: '#90c030',
-            2: '#d47c00',
-            0.9: '#bf3030'
-          }[playerToPlayerChemistry(teamPlayers[index], teamPlayers[link])]
+    map(this.$refs.players, (el, index) => {
+      const links = this.getPlayerFormationLinks(index)
+      const { x: moveX, y: moveY } = getMoveCoords(el)
 
-          ctx.beginPath()
-          ctx.moveTo(moveX, moveY)
-          ctx.lineTo(lineX, lineY)
-          ctx.closePath()
-          ctx.lineWidth = 7
-          ctx.strokeStyle = '#5a5a5a'
-          ctx.stroke()
-
-          ctx.beginPath()
-          ctx.moveTo(moveX, moveY)
-          ctx.lineTo(lineX, lineY)
-          ctx.closePath()
-          ctx.lineWidth = 5
-          ctx.strokeStyle = colour
-          ctx.stroke()
-        })
-      })
-
-      // This runs after so we can ensure the diamond is on top
-      map(this.$refs.players, (el, index) => {
-        const chemistry = this.getPlayerChemistry({ index })
+      map(links, link => {
+        const linkedEl = this.$refs.players[link]
+        const { x: lineX, y: lineY } = getMoveCoords(linkedEl)
         const colour = {
-          10: '#54a71b',
-          9: '#54a71b',
-          8: '#90c030',
-          7: '#90c030',
-          6: '#90c030',
-          5: '#d47c00',
-          4: '#d47c00',
-          3: '#d47c00',
+          3.5: '#54a71b',
+          3: '#90c030',
           2: '#d47c00',
-          1: '#bf3030'
-        }[chemistry]
-        const { x: moveX, y: moveY } = getMoveCoords(el)
+          0.9: '#bf3030'
+        }[playerToPlayerChemistry(teamPlayers[index], teamPlayers[link])]
 
         ctx.beginPath()
-        const numberOfSides = 6
-        const size = 12
-        const Xcenter = moveX
-        const Ycenter = moveY
-        ctx.moveTo(
-          Xcenter + (size + 10) * Math.cos(0),
-          Ycenter + size * Math.sin(0)
-        )
-
-        for (let i = 1; i <= numberOfSides; i += 1) {
-          ctx.lineTo(
-            Xcenter + (size + 10) * Math.cos(i * 2 * Math.PI / numberOfSides),
-            Ycenter + size * Math.sin(i * 2 * Math.PI / numberOfSides)
-          )
-        }
-        ctx.fillStyle = colour
-        ctx.fill()
-        ctx.lineWidth = 1
+        ctx.moveTo(moveX, moveY)
+        ctx.lineTo(lineX, lineY)
+        ctx.closePath()
+        ctx.lineWidth = 7
         ctx.strokeStyle = '#5a5a5a'
         ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(moveX, moveY)
+        ctx.lineTo(lineX, lineY)
+        ctx.closePath()
+        ctx.lineWidth = 5
+        ctx.strokeStyle = colour
+        ctx.stroke()
       })
+    })
 
-      function getMoveCoords (el) {
-        const elStyle = window.getComputedStyle(el)
-        const elX = parseInt(elStyle.getPropertyValue('--PlayerX'), 10)
-        const elY = parseInt(elStyle.getPropertyValue('--PlayerY'), 10)
+    // This runs after so we can ensure the diamond is on top
+    map(this.$refs.players, (el, index) => {
+      const chemistry = this.getPlayerChemistry({ index })
+      const colour = {
+        10: '#54a71b',
+        9: '#54a71b',
+        8: '#90c030',
+        7: '#90c030',
+        6: '#90c030',
+        5: '#d47c00',
+        4: '#d47c00',
+        3: '#d47c00',
+        2: '#d47c00',
+        1: '#bf3030'
+      }[chemistry]
+      const { x: moveX, y: moveY } = getMoveCoords(el)
 
-        return {
-          x: el.offsetLeft - elX,
-          y: el.offsetTop - elY + (el.offsetHeight / 2 - 7)
-        }
-      }
-    },
+      ctx.beginPath()
+      const numberOfSides = 6
+      const size = 12
+      const Xcenter = moveX
+      const Ycenter = moveY
+      ctx.moveTo(
+        Xcenter + (size + 10) * Math.cos(0),
+        Ycenter + size * Math.sin(0)
+      )
 
-    handleSearch ($evt) {
-      const wantedTarget = $evt.target.closest('.bld-Builder_PlayersItem')
-      const index = this.$refs.players.indexOf(wantedTarget)
-
-      if (!isEmpty(this.getPlayer({ index }).player)) return
-
-      this.setSearch({ open: true, position: index, term: '' })
-    },
-
-    async handleSearchInput (e) {
-      const { value } = e.target
-      this.sync('searchTerm', value)
-
-      if (value.length > 2) {
-        const res = await this.$http.get(
-          `/api/players?query=${this.searchTerm}&page=${this.search.pages
-            .current}`
+      for (let i = 1; i <= numberOfSides; i += 1) {
+        ctx.lineTo(
+          Xcenter + (size + 10) * Math.cos(i * 2 * Math.PI / numberOfSides),
+          Ycenter + size * Math.sin(i * 2 * Math.PI / numberOfSides)
         )
-        const { data } = res
-
-        this.setSearchData(data)
       }
-    },
+      ctx.fillStyle = colour
+      ctx.fill()
+      ctx.lineWidth = 1
+      ctx.strokeStyle = '#5a5a5a'
+      ctx.stroke()
+    })
 
-    async handleSearchResultsPrev ($evt) {
-      $evt.stopPropagation()
+    function getMoveCoords (el) {
+      const elStyle = window.getComputedStyle(el)
+      const elX = parseInt(elStyle.getPropertyValue('--PlayerX'), 10)
+      const elY = parseInt(elStyle.getPropertyValue('--PlayerY'), 10)
 
-      this.searchLoading = true
-      const res = await this.$http.get(
-        `/api/players?query=${this.searchTerm}&page=${this.search.pagination
-          .prev}`
-      )
-      this.searchLoading = false
-      const { data } = res
-
-      this.setSearchData(data)
-    },
-
-    async handleSearchResultsNext ($evt) {
-      $evt.stopPropagation()
-
-      this.searchLoading = true
-      const res = await this.$http.get(
-        `/api/players?query=${this.searchTerm}&page=${this.search.pagination
-          .next}`
-      )
-      this.searchLoading = false
-      const { data } = res
-
-      this.setSearchData(data)
-    },
-
-    handleSearchResultsClick ($event, player) {
-      this.setPlayer({ group: 'team', index: this.getSearch.position, player })
-      this.$refs.searchInput.value = ''
-      this.searchTerm = ''
-      this.setSearch({ open: false })
-
-      this.search = cloneDeep(baseSearch)
-      this.initCanvas()
-    },
-
-    setSearchData (data) {
-      this.search = {
-        count: data.count,
-        results: data.results,
-        pages: data.pages,
-        pagination: {
-          next: data.links.next ? data.pages.current + 1 : null,
-          prev: data.links.previous ? data.pages.current - 0 : null
-        }
+      return {
+        x: el.offsetLeft - elX,
+        y: el.offsetTop - elY + (el.offsetHeight / 2 - 7)
       }
-    },
-
-    sync (prop, value) {
-      this[prop] = value
     }
-  },
+  }
+
+  handleSearch ($evt) {
+    const wantedTarget = $evt.target.closest('.bld-Builder_PlayersItem')
+    const index = this.$refs.players.indexOf(wantedTarget)
+
+    if (!isEmpty(this.getPlayer({ index }).player)) return
+
+    this.setSearch({ open: true, position: index, term: '' })
+  }
+
+  async handleSearchInput (e) {
+    const { value } = e.target
+    this.sync('searchTerm', value)
+
+    if (value.length > 2) {
+      const res = await this.$http.get(
+        `/api/players?query=${this.searchTerm}&page=${this.search.pages
+          .current}`
+      )
+      const { data } = res
+
+      this.setSearchData(data)
+    }
+  }
+
+  async handleSearchResultsPrev ($evt) {
+    $evt.stopPropagation()
+
+    this.searchLoading = true
+    const res = await this.$http.get(
+      `/api/players?query=${this.searchTerm}&page=${this.search.pagination
+        .prev}`
+    )
+    this.searchLoading = false
+    const { data } = res
+
+    this.setSearchData(data)
+  }
+
+  async handleSearchResultsNext ($evt) {
+    $evt.stopPropagation()
+
+    this.searchLoading = true
+    const res = await this.$http.get(
+      `/api/players?query=${this.searchTerm}&page=${this.search.pagination
+        .next}`
+    )
+    this.searchLoading = false
+    const { data } = res
+
+    this.setSearchData(data)
+  }
+
+  handleSearchResultsClick ($event, player) {
+    this.setPlayer({ group: 'team', index: this.getSearch.position, player })
+    this.$refs.searchInput.value = ''
+    this.searchTerm = ''
+    this.setSearch({ open: false })
+
+    this.search = cloneDeep(baseSearch)
+    this.initCanvas()
+  }
+
+  setSearchData (data) {
+    this.search = {
+      count: data.count,
+      results: data.results,
+      pages: data.pages,
+      pagination: {
+        next: data.links.next ? data.pages.current + 1 : null,
+        prev: data.links.previous ? data.pages.current - 0 : null
+      }
+    }
+  }
+
+  sync (prop, value) {
+    this[prop] = value
+  }
 
   render () {
     /* eslint-disable indent */

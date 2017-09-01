@@ -424,14 +424,10 @@ export class RPP {
 
   updateCardRatings (style) {
     if (style) {
-      const deltas = this.getDeltas(style)
-
       map(CARD_RATING_BREAKDOWN, (obj, attr) => {
-        let coreDelta = 0
         let coreFinal = 0
 
         map(obj, (weight, field) => {
-          coreDelta += deltas[field]
           coreFinal += this.ingameRatings[field].rating * weight
         })
 

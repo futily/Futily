@@ -1,11 +1,11 @@
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { mapActions, mapMutations } from 'vuex'
 
-import Card from '../players/Card'
+import { Card } from '../players/Card'
 import * as types from './types'
 
-export default {
-  name: 'Player',
-
+@Component({
   components: {
     Card
   },
@@ -21,12 +21,6 @@ export default {
     }
   },
 
-  computed: {
-    hasPlayer () {
-      return Object.keys(this.player.player).length > 0
-    }
-  },
-
   methods: {
     ...mapActions({
       removePlayer: types.REMOVE_PLAYER
@@ -34,14 +28,19 @@ export default {
 
     ...mapMutations({
       setSearch: types.SET_SEARCH
-    }),
+    })
+  }
+})
+export class Player extends Vue {
+  handleRemove ($evt) {
+    $evt.stopPropagation()
 
-    handleRemove ($evt) {
-      $evt.stopPropagation()
+    this.removePlayer({ group: 'team', index: this.index })
+  }
 
-      this.removePlayer({ group: 'team', index: this.index })
-    }
-  },
+  get hasPlayer () {
+    return Object.keys(this.player.player).length > 0
+  }
 
   render () {
     /* eslint-disable indent */
