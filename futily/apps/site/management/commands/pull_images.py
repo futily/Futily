@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import urllib.request
+from urllib.error import HTTPError
 
 from django.conf import settings
 from django.core.management import BaseCommand
@@ -21,7 +22,7 @@ class Command(BaseCommand):
             'clubs': 'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418'
                      '/2017/fut/items/images/clubbadges/web/normal/s',
             'players': 'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418'
-                       '/2017/fut/items/images/players/web/{}.png',
+                       '/2017/fut/items/images/players/html5/120x120/{}.png',
         }
 
         print('Grabbing Nation images')
@@ -53,7 +54,15 @@ class Command(BaseCommand):
         for player in Player.objects.all():
             print(f'Getting Player: {player} ({player.ea_id_base})')
 
-            urllib.request.urlretrieve(
-                urls['players'].format(player.ea_id),
-                f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
-            )
+            try:
+                urllib.request.urlretrieve(
+                    urls['players'].format(player.ea_id),
+                    f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
+                )
+            except HTTPError:
+                urllib.request.urlretrieve(
+                    f'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/web/{player.ea_id}.png',
+                    f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
+                )
+            except Exception as e:  # pylint: disable=broad-except
+                print(e)
