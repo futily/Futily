@@ -1,0 +1,47 @@
+/*
+|--------------------------------------------------------------------------
+| Compare
+|--------------------------------------------------------------------------
+| @namespace: sch-
+|
+*/
+.sch-Compare {
+  position: relative;
+
+  display: block;
+}
+
+.sch-Compare_Input {
+  @apply --Font-14;
+
+  width: 100%;
+  padding: 4px calc(var(--Grid_Gutter) * 2) 4px 10px;
+
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+
+  &:focus {
+    border-color: var(--Color_Green);
+    outline: 0;
+  }
+}
+
+.sch-Compare_Icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+
+  display: block;
+  width: 15px;
+  height: @width;
+
+  transform: translateY(-50%);
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: 15px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}

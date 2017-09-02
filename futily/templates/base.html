@@ -124,6 +124,21 @@
       </div>
     {% endblock %}
 
+    <template id="PlayerSearchResult">
+      <li class="plyr-SearchResults_Result">
+        <a class="plyr-SearchResult">
+          <img class="plyr-SearchResult_Nation">
+          <img class="plyr-SearchResult_Club">
+          <p class="plyr-SearchResult_Name"></p>
+          <span class="plyr-SearchResult_Position"></span>
+          <img class="plyr-SearchResult_Player">
+
+          <span class="plyr-SearchResult_Rating"></span>
+          <span class="plyr-SearchResult_RatingIcon"></span>
+        </a>
+      </li>
+    </template>
+
     {{ render_bundle('vendor', 'js') }}
     {{ render_bundle('app', 'js') }}
 

@@ -1,6 +1,6 @@
 import 'babel-polyfill'
 import 'pepjs'
-import 'utils/class-list-polyfill'
+import './utils/class-list-polyfill'
 
 import Vue from 'vue'
 import InstantSearch from 'vue-instantsearch'
@@ -13,7 +13,7 @@ import { FloatingLabel } from './forms'
 import { CardSelector, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
 import { Follow } from './users/follow'
-import { PlayerSearch } from 'search'
+import { ComparePlayerSearch, HeaderPlayerSearch } from './search'
 
 Vue.use(InstantSearch)
 
@@ -81,8 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  if (document.querySelector('.js-PlayerSearch')) {
-    new PlayerSearch({ el: document.querySelector('.js-PlayerSearch') })
+  if (document.querySelector('.js-HeaderPlayerSearch')) {
+    new HeaderPlayerSearch({ className: '.js-HeaderPlayerSearch' })
+  }
+
+  if (document.querySelector('.js-ComparePlayerSearch')) {
+    new ComparePlayerSearch({ className: '.js-ComparePlayerSearch' })
   }
 
   // If the browser isn't Safari, don't do anything

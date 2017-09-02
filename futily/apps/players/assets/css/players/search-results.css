@@ -7,8 +7,9 @@
 */
 .plyr-SearchResults {
   position: absolute;
-  top: 100%;
-  left: -20px;
+  top: calc(100% - 1px);
+  left: 0;
+  z-index: 10;
 
   max-height: 400px;
   min-width: 310px;
@@ -20,5 +21,9 @@
 
   &[aria-hidden='true'] {
     display: none;
+  }
+
+  .sch-Header & {
+    left: -20px;
   }
 }

@@ -23,7 +23,7 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
         is_search = self.context['request'].query_params.get('is_search')
 
         if is_search:
-            return ['ea_id', 'name', 'rating', 'position', 'color', 'absolute_url', 'club', 'nation']
+            return ['id', 'ea_id', 'name', 'rating', 'position', 'color', 'absolute_url', 'club', 'nation']
 
         return super().get_field_names(declared_fields, info)
 

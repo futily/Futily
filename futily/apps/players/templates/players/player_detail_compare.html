@@ -139,6 +139,19 @@
             <h2 class="plyr-Detail_HeaderTitle">{{ other_player.name }}</h2>
             <p class="plyr-Detail_Type">{{ other_player.player_type | capitalize() }}</p>
 
+            <div class="plyr-DetailCompare_Search">
+              <div class="sch-Compare js-ComparePlayerSearch" data-base-url="{{ player.get_compare_absolute_url() }}">
+                <input type="search"
+                       class="sch-Compare_Input js-ComparePlayerSearch_Input"
+                       placeholder="Compare with">
+                <span class="sch-Compare_Icon">
+                  {% include 'search.svg' %}
+                </span>
+
+                <ul class="js-ComparePlayerSearch_Results plyr-SearchResults" aria-hidden="true"></ul>
+              </div>
+            </div>
+
             <div class="plyr-DetailCompare_Card">
               {{ other_player.render_card('lg') }}
             </div>
@@ -149,25 +162,29 @@
 
     <nav class="plyr-Detail_Navigation">
       <ul class="plyr-Detail_NavigationItems">
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path == player.get_absolute_url() else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path == player.get_absolute_url() else 'false' }}">
           <a class="plyr-Detail_NavigationLink" href="{{ player.get_absolute_url() }}">Stats</a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path == player.get_similar_absolute_url() else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path == player.get_similar_absolute_url() else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
              href="{{ player.get_similar_absolute_url() }}">
             Similar players
           </a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_chemistry_absolute_url()) else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path.startswith(player.get_chemistry_absolute_url()) else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
              href="{{ player.get_chemistry_absolute_url() }}">
             Chemistry
           </a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_compare_absolute_url()) else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path.startswith(player.get_compare_absolute_url()) else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
              href="{{ player.get_compare_absolute_url() }}">
             Compare
@@ -263,7 +280,10 @@
                   {% if traits %}
                     {% for trait in traits %}
                       <li class="plyr-Information_Item">
-                        {{ trait }} <span class="plyr-Information_ItemIdentifier">{% if trait in player_traits %}{{ player }}{% if trait in player_traits and trait in other_player_traits %}, {% endif %}{% endif %}{% if trait in other_player_traits %}{{ other_player }}{% endif %}</span>
+                        {{ trait }}
+                        <span class="plyr-Information_ItemIdentifier">
+                          {% if trait in player_traits %}{{ player }}{% if trait in player_traits and trait in other_player_traits %}, {% endif %}{% endif %}
+                          {% if trait in other_player_traits %}{{ other_player }}{% endif %}</span>
                       </li>
                     {% endfor %}
                   {% else %}
@@ -291,7 +311,10 @@
                   {% if specialties %}
                     {% for specialty in specialties %}
                       <li class="plyr-Information_Item">
-                        {{ specialty }} <span class="plyr-Information_ItemIdentifier">{% if specialty in player_specialties %}{{ player }}{% if specialty in player_specialties and specialty in other_player_specialties %}, {% endif %}{% endif %}{% if specialty in other_player_specialties %}{{ other_player }}{% endif %}</span>
+                        {{ specialty }}
+                        <span class="plyr-Information_ItemIdentifier">
+                          {% if specialty in player_specialties %}{{ player }}{% if specialty in player_specialties and specialty in other_player_specialties %}, {% endif %}{% endif %}
+                          {% if specialty in other_player_specialties %}{{ other_player }}{% endif %}</span>
                       </li>
                     {% endfor %}
                   {% else %}

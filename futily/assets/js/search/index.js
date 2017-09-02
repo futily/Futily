@@ -1,14 +1,16 @@
 import axios from 'axios'
 import { debounce, map } from 'lodash'
 
-export class PlayerSearch {
-  constructor ({ el }) {
+class PlayerSearch {
+  constructor ({ className }) {
+    this.className = className
     const template = document.getElementById('PlayerSearchResult')
+    const el = document.querySelector(className)
 
     this.els = {
       el,
-      input: el.querySelector('.js-PlayerSearch_Input'),
-      results: el.querySelector('.js-PlayerSearch_Results'),
+      input: el.querySelector(`${className}_Input`),
+      results: el.querySelector(`${className}_Results`),
       template: {
         el: template,
         result: template.content.querySelector('.plyr-SearchResult'),
@@ -56,7 +58,7 @@ export class PlayerSearch {
   handleBodyPointerDown (e) {
     /* If the user has clicked anywhere but the search results, clear it */
     const { target } = e
-    const isASearchResult = target.closest('.js-PlayerSearch')
+    const isASearchResult = target.closest(this.className)
 
     if (!isASearchResult) {
       this.els.input.value = ''
@@ -126,5 +128,34 @@ export class PlayerSearch {
     if (hasResult) {
       this.createResults(val)
     }
+  }
+}
+
+export class HeaderPlayerSearch extends PlayerSearch {}
+
+export class ComparePlayerSearch extends PlayerSearch {
+  constructor ({ className }) {
+    super({ className })
+
+    this.baseUrl = this.els.el.dataset.baseUrl
+  }
+
+  createResult (data) {
+    const className = `plyr-SearchResult plyr-SearchResult-${data.color}`
+
+    this.els.template.nation.src = `/static/ea-images/nations/${data.nation
+      .ea_id}.png`
+    this.els.template.club.src = `/static/ea-images/clubs/${data.club
+      .ea_id}.png`
+    this.els.template.player.src = `/static/ea-images/players/${data.ea_id}.png`
+
+    this.els.template.result.href = `${this.baseUrl}${data.id}/`
+    this.els.template.result.className = className
+    this.els.template.name.textContent = data.name
+    this.els.template.position.textContent = `(${data.position})`
+    this.els.template.rating.textContent = data.rating
+    const clone = document.importNode(this.els.template.el.content, true)
+
+    return clone
   }
 }
