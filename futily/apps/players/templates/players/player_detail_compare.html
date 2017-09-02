@@ -232,9 +232,27 @@
                           {% set value_1 = getattr(player, item) %}
                           {% set value_2 = getattr(other_player, item) %}
                           <li class="plyr-StatGroup_Item">
-                            <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value_1) }}">{{ value_1 }}</p>
-                            <p class="plyr-StatGroup_Key">{{ instance._meta.get_field(item).verbose_name.title() }}</p>
-                            <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value_2) }}">{{ value_2 }}</p>
+                            <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value_1) }}">
+                              {{ value_1 }}
+                            </p>
+
+                            {% if value_1 > value_2 %}
+                              {% set direction_class = 'plyr-StatGroup_Key-left' %}
+                            {% elif value_2 > value_1 %}
+                              {% set direction_class = 'plyr-StatGroup_Key-right' %}
+                            {% else %}
+                              {% set direction_class = '' %}
+                            {% endif %}
+                            <p class="plyr-StatGroup_Key {{ direction_class }}">
+                              <span class="plyr-StatGroup_Difference">
+                                {{ '+' if value_1 != value_2 else '' }}{{ abs(value_1 - value_2) }}
+                              </span>
+                              {{ instance._meta.get_field(item).verbose_name.title() }}
+                            </p>
+
+                            <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value_2) }}">
+                              {{ value_2 }}
+                            </p>
                           </li>
                         {% endfor %}
                       </ul>

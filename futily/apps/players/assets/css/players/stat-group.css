@@ -118,6 +118,8 @@
 .plyr-StatGroup_Key {
   @apply --Font-18;
 
+  position: relative;
+
   font-weight: 400;
 }
 
@@ -130,6 +132,31 @@
   font-weight: 500;
 
   color: var(--Color_Great);
+
+  .plyr-StatGroup_Key & {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+
+    margin-right: 0;
+
+    transform: translate(-50%, 0);
+  }
+
+  .plyr-StatGroup_Key-left & {
+    top: 50%;
+    right: calc(100% + 5px);
+    left: auto;
+
+    transform: translateY(-50%);
+  }
+
+  .plyr-StatGroup_Key-right & {
+    top: 50%;
+    left: calc(100% + 5px);
+
+    transform: translateY(-50%);
+  }
 }
 
 .plyr-StatGroup_Value {

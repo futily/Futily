@@ -274,6 +274,7 @@ TEMPLATES = [
             'globals': {
                 'getattr': getattr,
                 'set': set,
+                'abs': abs
             },
             'bytecode_cache': {
                 'name': 'default',
