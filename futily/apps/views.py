@@ -7,7 +7,7 @@ from .players.constants import (LEVEL_FILTER_MAP, LEVELS_GET_TO_LABEL,
 
 
 class EaObjectDetail(DetailView):
-    players_per_page = 36
+    players_per_page = 30
 
     def is_filtered(self):
         return self.request.GET.get('position') or self.request.GET.get('level')

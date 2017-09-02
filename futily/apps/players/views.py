@@ -194,7 +194,7 @@ class PlayerDetailSimilar(DetailView):
     template_name = 'players/player_detail_similar.html'
 
     def player_pagination(self):
-        paginator = Paginator(self.object.get_similar_players(), 36)
+        paginator = Paginator(self.object.get_similar_players(), 30)
 
         try:
             # Deliver the requested page

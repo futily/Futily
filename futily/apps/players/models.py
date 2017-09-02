@@ -333,28 +333,16 @@ class Player(PageBase):
 
     def ingame_stat_groups(self):
         return [
-            {
-                'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']
-            },
-            {
-                'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
-                                                                      'positioning', 'shot_power', 'volleys']
-            },
-            {
-                'label': 'passing', 'field': 'card_att_3', 'items': ['crossing', 'curve', 'free_kick_accuracy',
-                                                                     'long_passing', 'short_passing', 'vision']
-            },
-            {
-                'label': 'dribbling', 'field': 'card_att_4', 'items': ['agility', 'balance', 'ball_control',
-                                                                       'dribbling', 'reactions']
-            },
-            {
-                'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
-                                                                       'sliding_tackle', 'standing_tackle']
-            },
-            {
-                'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']
-            },
+            {'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']},
+            {'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
+                                                                   'positioning', 'shot_power', 'volleys']},
+            {'label': 'passing', 'field': 'card_att_3', 'items': ['crossing', 'curve', 'free_kick_accuracy',
+                                                                  'long_passing', 'short_passing', 'vision']},
+            {'label': 'dribbling', 'field': 'card_att_4', 'items': ['agility', 'balance', 'ball_control',
+                                                                    'dribbling', 'reactions']},
+            {'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
+                                                                    'sliding_tackle', 'standing_tackle']},
+            {'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']},
         ]
 
     @staticmethod

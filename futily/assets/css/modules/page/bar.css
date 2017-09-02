@@ -6,10 +6,11 @@
 |
 */
 .pg-Bar {
-  padding-top: 1.25vr;
-  padding-bottom: @padding-top;
+  margin-bottom: 0.75vr;
 
-  border-bottom: 1px solid var(--Color_Border);
+  .plyr-Detail & {
+    margin-bottom: 0.5vr;
+  }
 }
 
 .pg-Bar_Inner {
