@@ -15,10 +15,13 @@ class EaObjectDetail(DetailView):
     def is_sorted(self):
         return self.request.GET.get('sort')
 
+    def initial_players(self):
+        return self.get_object().players()
+
     def get_context_data(self, **kwargs):
         context = super(EaObjectDetail, self).get_context_data()
 
-        context['players'] = self.player_pagination()
+        context['players'] = self.player_pagination(self.initial_players())
 
         current_position = self.request.GET.get('position')
         current_level = self.request.GET.get('level')
@@ -38,9 +41,7 @@ class EaObjectDetail(DetailView):
 
         return context
 
-    def get_players_queryset(self):
-        players = self.get_object().players()
-
+    def get_players_queryset(self, players):
         if self.is_filtered():
             position = self.request.GET.get('position')
             level = self.request.GET.get('level')
@@ -63,8 +64,8 @@ class EaObjectDetail(DetailView):
 
         return players
 
-    def player_pagination(self):
-        paginator = Paginator(self.get_players_queryset(), self.players_per_page)
+    def player_pagination(self, players):
+        paginator = Paginator(self.get_players_queryset(players), self.players_per_page)
 
         try:
             # Deliver the requested page

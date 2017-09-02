@@ -22,6 +22,8 @@
     </div>
   </div>
 
+  {% block above_breadcrumbs %}{% endblock %}
+
   {% block breadcrumbs %}
     <div class="pg-Breadcrumbs">
       <div class="pg-Breadcrumbs_Inner">
@@ -202,6 +204,12 @@
         </li>
       </ul>
     </div>
+
+    {% if request.path != player.get_absolute_url() %}
+      <div class="asi-Block">
+        {{ player.render_card('lg') }}
+      </div>
+    {% endif %}
 
     {% block aside_blocks %}{% endblock %}
   </div>
