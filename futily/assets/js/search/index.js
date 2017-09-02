@@ -26,9 +26,17 @@ class PlayerSearch {
       }
     }
     this._results = []
+    this._activeResult = -1
+    this.currentEvent = null
+    this.resultEls = []
+    this.resultHeight = 0
+    this.resultsHeight = this.els.results.offsetHeight
 
     this.handleInput = this.handleInput.bind(this)
     this.handleBodyPointerDown = this.handleBodyPointerDown.bind(this)
+    this.handlePointerOver = this.handlePointerOver.bind(this)
+    this.handlePointerLeave = this.handlePointerLeave.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
 
     this.setupListeners()
   }
@@ -38,6 +46,10 @@ class PlayerSearch {
 
     this.els.input.addEventListener('input', debounce(this.handleInput, 300))
     body.addEventListener('pointerdown', this.handleBodyPointerDown)
+
+    this.els.el.addEventListener('pointerover', this.handlePointerOver)
+    this.els.el.addEventListener('pointerleave', this.handlePointerLeave)
+    this.els.el.addEventListener('keydown', this.handleKeyDown)
   }
 
   async handleInput (e) {
@@ -66,8 +78,54 @@ class PlayerSearch {
     }
   }
 
+  handlePointerOver (e) {
+    const item = e.target.closest('.plyr-SearchResults_Result')
+    const index = this.resultEls.indexOf(item)
+    if (index === this.activeResult) return
+
+    this.activeResult = index
+    this.currentEvent = 'pointer'
+  }
+
+  handlePointerLeave (e) {
+    if (e.target !== this.els.el) return
+
+    this.activeResult = -1
+  }
+
+  handleKeyDown (e) {
+    const { keyCode } = e
+    const keyMap = {
+      13: 'enter',
+      38: 'up',
+      40: 'down'
+    }
+    const handleEnterKey = () => {
+      this.resultEls[this.activeResult]
+        .querySelector('.plyr-SearchResult')
+        .click()
+    }
+    const handleArrowKey = () => {
+      this.activeResult =
+        keyMap[keyCode] === 'up' ? this.activeResult - 1 : this.activeResult + 1
+    }
+
+    if (!this.results.length || !Object.keys(keyMap).includes(String(keyCode))) { return }
+
+    this.currentEvent = 'keyboard'
+
+    ;[38, 40].includes(keyCode) ? handleArrowKey() : handleEnterKey()
+  }
+
   handleApiResults ({ results }) {
     this.results = results
+  }
+
+  handleResultOverflow () {
+    this.els.results.scrollTop =
+      this.resultPosition >= this.resultsHeight - this.els.results.scrollTop
+        ? this.resultPosition - this.resultsHeight
+        : 0
   }
 
   getApiUrl (query) {
@@ -83,6 +141,7 @@ class PlayerSearch {
       .ea_id}.png`
     this.els.template.player.src = `/static/ea-images/players/${data.ea_id}.png`
 
+    this.els.template.el.setAttribute('tabindex', '0')
     this.els.template.result.href = data.absolute_url
     this.els.template.result.className = className
     this.els.template.name.textContent = data.name
@@ -101,6 +160,11 @@ class PlayerSearch {
     )
 
     this.els.results.appendChild(resultsFragment)
+    this.resultEls = Array.from(
+      this.els.results.querySelectorAll('.plyr-SearchResults_Result')
+    )
+    this.resultHeight = this.resultEls[0].offsetHeight
+    this.resultsHeight = this.els.results.offsetHeight
   }
 
   destroyResults () {
@@ -111,6 +175,41 @@ class PlayerSearch {
     const cNode = this.els.results.cloneNode(false)
     this.els.results.parentNode.replaceChild(cNode, this.els.results)
     this.els.results = cNode
+    this.els.resultEls = []
+    this.activeResult = -1
+  }
+
+  get resultPosition () {
+    return (this.activeResult + 1) * this.resultHeight
+  }
+
+  get activeResult () {
+    return this._activeResult
+  }
+
+  set activeResult (val) {
+    if (this._activeResult != null && this._activeResult >= 0) {
+      this.resultEls[this._activeResult].classList.remove(
+        'plyr-SearchResults_Result-active'
+      )
+    }
+
+    const wantsToGoBelowMinumum = val => val < -1
+    const wantsToGoAboveMaximum = val => val > this.results.length - 1
+
+    this._activeResult = wantsToGoBelowMinumum(val)
+      ? -1
+      : wantsToGoAboveMaximum(val) ? this.results.length - 1 : val
+
+    if (this.activeResult >= 0) {
+      this.resultEls[this.activeResult].classList.add(
+        'plyr-SearchResults_Result-active'
+      )
+
+      if (this.currentEvent === 'keyboard') {
+        this.handleResultOverflow()
+      }
+    }
   }
 
   get results () {

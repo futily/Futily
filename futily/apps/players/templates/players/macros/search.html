@@ -1,5 +1,5 @@
 {% macro player_search(class, js_class, placeholder, extra) %}
-  <div class="{{ class }} {{ js_class }}"{% if extra %}{% for attr, value in extra.items() %}{{ attr }}={{ value }}{% endfor %}{% endif %}>
+  <div class="{{ class }} {{ js_class }}" tabindex="0" {% if extra %}{% for attr, value in extra.items() %}{{ attr }}={{ value }}{% endfor %}{% endif %}>
     <input type="search"
            class="{{ class }}_Input {{ js_class }}_Input"
            placeholder="{{ placeholder }}">
@@ -7,6 +7,6 @@
       {% include 'search.svg' %}
     </span>
 
-    <ul class="{{ js_class }}_Results plyr-SearchResults" aria-hidden="true"></ul>
+    <ul class="{{ js_class }}_Results plyr-SearchResults" aria-hidden="true" tabindex="-1"></ul>
   </div>
 {% endmacro %}

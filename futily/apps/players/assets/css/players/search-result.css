@@ -22,7 +22,7 @@
 
   transition: border-color 0.2s;
 
-  &:hover {
+  .plyr-SearchResults_Result-active & {
     border-bottom-color: var(--Color_Green);
 
     &::before {
