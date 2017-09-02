@@ -1,4 +1,5 @@
 {% extends "sections/types/_base.html" %}
+{% import "players/macros/search.html" as search %}
 
 {% block section_class %}sec-Search{% endblock %}
 
@@ -17,9 +18,12 @@
     {% endif %}
 
     <div class="sec-Search_Body">
-      <form class="sec-Search_Form">
-        <input class="sec-Search_Input" placeholder="Search for a Player, Club, League, or Nation" type="search">
-      </form>
+      <div class="sec-Search_Search">
+        {{ search.player_search(
+                'sch-Section',
+                'js-SectionPlayerSearch',
+                'Search for Fifa 17 Players') }}
+      </div>
       {#      <div class="sch-Players">#}
 {#        <ais-index :search-store="searchStore">#}
 {#          <ais-input placeholder="Search for a Player, Club, League, or Nation"></ais-input>#}

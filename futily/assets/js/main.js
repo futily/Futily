@@ -13,7 +13,11 @@ import { FloatingLabel } from './forms'
 import { CardSelector, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
 import { Follow } from './users/follow'
-import { ComparePlayerSearch, HeaderPlayerSearch } from './search'
+import {
+  ComparePlayerSearch,
+  HeaderPlayerSearch,
+  SectionPlayerSearch
+} from './search'
 
 Vue.use(InstantSearch)
 
@@ -89,6 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
     new ComparePlayerSearch({ className: '.js-ComparePlayerSearch' })
   }
 
+  if (document.querySelector('.js-SectionPlayerSearch')) {
+    new SectionPlayerSearch({ className: '.js-SectionPlayerSearch' })
+  }
+
   // If the browser isn't Safari, don't do anything
   if (
     document.querySelector('iframe') &&
@@ -97,13 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
     iframeFix()
   }
 
-  // If the device is iOS add a class to the body so we can do specific CSS for it
+  // If the device is iOS add a class to the body so we can do specific CSS for
+  // it
   if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) {
     const body = document.body || document.documentElement
     body.classList.add('is-iOS')
   }
 
-  // This class is used for making the animation duration on CSS animations 0, initially
+  // This class is used for making the animation duration on CSS animations 0,
+  // initially
   setTimeout(() => {
     document.body.classList.remove('util-Preload')
   }, 500)

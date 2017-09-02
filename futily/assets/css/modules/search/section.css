@@ -1,0 +1,60 @@
+/*
+|--------------------------------------------------------------------------
+| Section
+|--------------------------------------------------------------------------
+| @namespace: sch-
+|
+*/
+.sch-Section {
+  position: relative;
+}
+
+.sch-Section_Input {
+  @apply --Font-22;
+
+  display: block;
+  width: 100%;
+  padding: 13px var(--Grid_Gutter);
+
+  font-family: inherit;
+
+  background-color: #fff;
+  border: 0;
+  border-radius: 3px;
+  color: var(--Color_Dark);
+
+  transition: background-image 0.3s;
+
+  &:focus {
+    outline: 0;
+  }
+
+  &::placeholder {
+    font-weight: 300;
+
+    color: #a1b1bc;
+    opacity: 1;
+  }
+}
+
+.sch-Section_Icon {
+  position: absolute;
+  top: 50%;
+  right: var(--Grid_Gutter);
+
+  color: #a1b1bc;
+
+  transform: translateY(-50%);
+  transition: color 0.2s;
+
+  .sch-Section_Input:focus + & {
+    color: var(--Color_Dark);
+  }
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 24px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}

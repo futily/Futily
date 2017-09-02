@@ -133,6 +133,8 @@ class PlayerSearch {
 
 export class HeaderPlayerSearch extends PlayerSearch {}
 
+export class SectionPlayerSearch extends PlayerSearch {}
+
 export class ComparePlayerSearch extends PlayerSearch {
   constructor ({ className }) {
     super({ className })

@@ -26,4 +26,10 @@
   .sch-Header & {
     left: -20px;
   }
+
+  .sch-Section & {
+    top: 100%;
+    right: 50%;
+    left: 5px;
+  }
 }

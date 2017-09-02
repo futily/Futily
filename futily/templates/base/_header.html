@@ -1,18 +1,11 @@
+{% import "players/macros/search.html" as search %}
+
 <div class="hd-UserBar">
   <div class="hd-UserBar_Inner">
     <div class="hd-UserBar_Body">
       <div class="hd-UserBar_Item hd-UserBar_Item-pushed">
         <div class="hd-UserBar_Search">
-          <div class="sch-Header js-HeaderPlayerSearch">
-            <input type="search"
-                   class="sch-Header_Input js-HeaderPlayerSearch_Input"
-                   placeholder="Search...">
-            <span class="sch-Header_Icon">
-              {% include 'search.svg' %}
-            </span>
-
-            <ul class="js-HeaderPlayerSearch_Results plyr-SearchResults" aria-hidden="true"></ul>
-          </div>
+          {{ search.player_search('sch-Header', 'js-HeaderPlayerSearch', 'Search...') }}
         </div>
       </div>
 

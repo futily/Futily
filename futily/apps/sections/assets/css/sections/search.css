@@ -78,6 +78,7 @@
   background-image: svg-load('search.svg', fill=#a1b1bc);
   background-position: right var(--Grid_Gutter) top 50%;
   background-size: 24px 24px;
+  border: 0;
   border-radius: 3px;
   color: var(--Color_Dark);
 

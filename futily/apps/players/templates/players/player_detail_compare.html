@@ -1,5 +1,6 @@
 {% extends "players/_base.html" %}
 {% import "players/macros/players.html" as player_macros %}
+{% import "players/macros/search.html" as search %}
 
 {% block breadcrumbs %}
   <div class="pg-Breadcrumbs">
@@ -140,16 +141,11 @@
             <p class="plyr-Detail_Type">{{ other_player.player_type | capitalize() }}</p>
 
             <div class="plyr-DetailCompare_Search">
-              <div class="sch-Compare js-ComparePlayerSearch" data-base-url="{{ player.get_compare_absolute_url() }}">
-                <input type="search"
-                       class="sch-Compare_Input js-ComparePlayerSearch_Input"
-                       placeholder="Compare with">
-                <span class="sch-Compare_Icon">
-                  {% include 'search.svg' %}
-                </span>
-
-                <ul class="js-ComparePlayerSearch_Results plyr-SearchResults" aria-hidden="true"></ul>
-              </div>
+              {{ search.player_search(
+                'sch-Compare',
+                'js-ComparePlayerSearch',
+                'Compare with',
+                {'data-base-url': player.get_compare_absolute_url() }) }}
             </div>
 
             <div class="plyr-DetailCompare_Card">
