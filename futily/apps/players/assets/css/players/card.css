@@ -22,12 +22,6 @@
     margin-left: auto;
   }
 
-  .bld-Builder & {
-    &:hover {
-      transform: none;
-    }
-  }
-
   .bld-Search_Results-loading & {
     opacity: 0.5;
   }

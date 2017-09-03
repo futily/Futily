@@ -45,11 +45,10 @@ const baseSearch = {
 
   watch: {
     isTransitioning (val) {
-      if (val) return
-
-      setTimeout(() => {
-        this.initCanvas()
-      })
+      // if (val) return
+      // setTimeout(() => {
+      //   this.initCanvas()
+      // })
     },
 
     'getSearch.open' (val) {
@@ -72,11 +71,11 @@ export class Team extends Vue {
   searchLoading = false
   searchTerm = ''
 
-  mounted () {
-    setTimeout(() => {
-      this.initCanvas()
-    }, 500)
-  }
+  // mounted () {
+  //   setTimeout(() => {
+  //     this.initCanvas()
+  //   }, 500)
+  // }
 
   initCanvas () {
     const canvas = this.$refs.canvas
@@ -229,7 +228,7 @@ export class Team extends Vue {
     this.setSearch({ open: false })
 
     this.search = cloneDeep(baseSearch)
-    this.initCanvas()
+    // this.initCanvas()
   }
 
   setSearchData (data) {

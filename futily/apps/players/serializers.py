@@ -13,8 +13,9 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Player
-        fields = ['id', 'stats', 'club', 'league', 'nation', 'ea_id', 'ea_id_base', 'color', 'rating', 'position',
-                  'name', 'card_att_1', 'card_att_2', 'card_att_3', 'card_att_4', 'card_att_5', 'card_att_6']
+        fields = ['id', 'stats', 'club', 'absolute_url', 'league', 'nation', 'ea_id', 'ea_id_base', 'color', 'rating',
+                  'position', 'name', 'card_att_1', 'card_att_2', 'card_att_3', 'card_att_4', 'card_att_5',
+                  'card_att_6']
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }

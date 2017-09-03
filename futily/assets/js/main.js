@@ -21,7 +21,7 @@ import {
 
 Vue.use(InstantSearch)
 
-// new Vue(App).$mount('#app')
+new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
