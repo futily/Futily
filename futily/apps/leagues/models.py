@@ -66,6 +66,9 @@ class League(PageBase):
     def list_informs(self):
         return self.total_special + self.total_totw
 
+    def collected_count(self, user):
+        return user.cardcollection.players.filter(league__id=self.id).count()
+
 
 def get_default_leagues_page():
     """Returns the default leagues page."""

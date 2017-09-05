@@ -78,6 +78,9 @@ class Club(PageBase):
     def list_informs(self):
         return self.total_special + self.total_totw
 
+    def collected_count(self, user):
+        return user.cardcollection.players.filter(club__id=self.id).count()
+
 
 def get_default_clubs_page():
     """Returns the default clubs page."""

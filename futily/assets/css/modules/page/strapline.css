@@ -57,3 +57,9 @@
 
   margin-top: 0.25vr;
 }
+
+.pg-Strapline_Advert {
+  flex-shrink: 0;
+
+  margin-left: calc(var(--Grid_Gutter) * 2);
+}

@@ -83,7 +83,7 @@
 {% block side_panel %}
   <div class="clc-Objects">
     <div class="clc-Objects_Items">
-      {% for club in league.club_set.all() %}
+      {% for club in clubs %}
         <div class="clc-Objects_Item">
           <a class="clc-Object"
              href="{{ object.get_collection_club_url(league, club) }}">

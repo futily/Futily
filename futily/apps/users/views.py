@@ -95,7 +95,7 @@ class UserCollectionView(UserMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['leagues'] = League.objects.all()
+        context['leagues'] = sorted(League.objects.all(), reverse=True, key=lambda x: x.collected_count(self.object))
 
         return context
 
@@ -123,7 +123,9 @@ class UserCollectionLeagueView(UserMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['league'] = League.objects.get(slug=self.kwargs['league_slug'])
+        league = League.objects.get(slug=self.kwargs['league_slug'])
+        context['league'] = league
+        context['clubs'] = sorted(league.club_set.all(), reverse=True, key=lambda x: x.collected_count(self.object))
 
         return context
 
