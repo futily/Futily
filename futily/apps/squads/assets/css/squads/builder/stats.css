@@ -1,0 +1,47 @@
+/*
+|--------------------------------------------------------------------------
+| Stats
+|--------------------------------------------------------------------------
+| @namespace: bld-
+|
+*/
+.bld-Stats_Items {
+  grid-row-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+
+  display: grid;
+}
+
+.bld-Stats_Item {
+  justify-content: space-between;
+
+  display: flex;
+  padding-right: var(--Grid_Gutter);
+  padding-left: @padding-right;
+
+  &:nth-child(-n + 3) {
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid var(--Color_Border);
+  }
+
+  &:nth-child(3n) {
+    padding-right: 0;
+  }
+
+  &:nth-child(3n-2) {
+    padding-left: 0;
+  }
+}
+
+.bld-Stats_Label {
+  margin-right: 10px;
+}
+
+.bld-Stats_Value {
+  @apply --Font-18;
+
+  font-weight: 500;
+
+  color: var(--RatingColor);
+}

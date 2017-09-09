@@ -332,7 +332,7 @@ function getAverageStat (state, players, stat, includeGk = false) {
   // We might not want the goalkeeper when calculating things like 'pace'
   if (!includeGk) players = players.filter(index => index !== 0)
 
-  return (
+  return Math.round(
     players.reduce((acc, val) => acc + state.team[val].player[stat], 0) /
       players.length || 0
   )

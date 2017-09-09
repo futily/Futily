@@ -6,6 +6,10 @@ import { map, reduce } from 'lodash'
 import * as types from './types'
 import eaFormationMap from './utils/eaFormationMap'
 import { Team } from './Team'
+import {
+  getPositionGradeVariable,
+  getRatingGradeVariable
+} from '../../../players/utils'
 
 @Component({
   components: {
@@ -66,7 +70,9 @@ import { Team } from './Team'
     ...mapMutations({
       setName: types.SET_NAME,
       setSearch: types.SET_SEARCH
-    })
+    }),
+
+    getRatingGradeVariable
   }
 })
 export class Builder extends Vue {
@@ -168,9 +174,101 @@ export class Builder extends Vue {
   }
 
   get formations () {
-    return Object.keys(this.formationChoices).sort().map(e => {
-      return [e, this.formationChoices[e]]
-    })
+    return Object.keys(this.formationChoices)
+      .sort()
+      .map(e => {
+        return [e, this.formationChoices[e]]
+      })
+  }
+
+  get stars () {
+    if (this.getRating > 82) {
+      return 5
+    } else if (this.getRating > 78) {
+      return 4.5
+    } else if (this.getRating > 74) {
+      return 4
+    } else if (this.getRating > 70) {
+      return 3.5
+    } else if (this.getRating > 68) {
+      return 3
+    } else if (this.getRating > 66) {
+      return 2.5
+    } else if (this.getRating > 64) {
+      return 2
+    } else if (this.getRating > 62) {
+      return 1.5
+    } else if (this.getRating > 59) {
+      return 1
+    } else if (this.getRating > 1) {
+      return 0.5
+    } else {
+      return 0
+    }
+  }
+
+  get stats () {
+    return [
+      {
+        label: 'Attack',
+        value: this.getAttack,
+        style: { '--RatingColor': getRatingGradeVariable(this.getAttack).value }
+      },
+      {
+        label: 'Midfield',
+        value: this.getMidfield,
+        style: {
+          '--RatingColor': getRatingGradeVariable(this.getMidfield).value
+        }
+      },
+      {
+        label: 'Defence',
+        value: this.getDefence,
+        style: {
+          '--RatingColor': getRatingGradeVariable(this.getDefence).value
+        }
+      },
+      {
+        label: 'Pace',
+        value: this.getPace,
+        style: { '--RatingColor': getRatingGradeVariable(this.getPace).value }
+      },
+      {
+        label: 'Shooting',
+        value: this.getShooting,
+        style: {
+          '--RatingColor': getRatingGradeVariable(this.getShooting).value
+        }
+      },
+      {
+        label: 'Pass',
+        value: this.getPassing,
+        style: {
+          '--RatingColor': getRatingGradeVariable(this.getPassing).value
+        }
+      },
+      {
+        label: 'Dribbling',
+        value: this.getDribbling,
+        style: {
+          '--RatingColor': getRatingGradeVariable(this.getDribbling).value
+        }
+      },
+      {
+        label: 'Defending',
+        value: this.getDefending,
+        style: {
+          '--RatingColor': getRatingGradeVariable(this.getDefending).value
+        }
+      },
+      {
+        label: 'Physical',
+        value: this.getPhysical,
+        style: {
+          '--RatingColor': getRatingGradeVariable(this.getPhysical).value
+        }
+      }
+    ]
   }
 
   render () {
@@ -182,107 +280,168 @@ export class Builder extends Vue {
           'bld-Builder-transitioning': this.isTransitioning
         }}
       >
-        <Team isTransitioning={this.isTransitioning} />
-
-        <input
-          type='text'
-          onInput={e => this.setName({ name: e.target.value })}
-          value={this.getName}
-        />
-        <select
-          onChange={e =>
-            this.setFormation({
-              formation: e.target.options[e.target.selectedIndex].value
-            })}
-          value={this.getFormation}
-          ref='formationSelect'
-        >
-          {this.formations.map(formation => {
-            return (
-              <option value={formation[0]}>
-                {formation[1]}
-              </option>
-            )
-          })}
-        </select>
-
-        <ul>
-          <li>
-            Chemistry: {this.getChemistry}
-          </li>
-          <li>
-            Rating: {this.getRating}
-          </li>
-          <li>
-            Attack: {this.getAttack}
-          </li>
-          <li>
-            Midfield: {this.getMidfield}
-          </li>
-          <li>
-            Defence: {this.getDefence}
-          </li>
-          <li>
-            Pace: {this.getPace}
-          </li>
-          <li>
-            Shooting: {this.getShooting}
-          </li>
-          <li>
-            Pass: {this.getPassing}
-          </li>
-          <li>
-            Dribbling: {this.getDribbling}
-          </li>
-          <li>
-            Defending: {this.getDefending}
-          </li>
-          <li>
-            Physical: {this.getPhysical}
-          </li>
-        </ul>
-
-        <div class='bld-Builder_Import'>
-          <label>
-            Web app
-            <input
-              type='text'
-              placeholder='Web app'
-              onInput={e => this.sync('webAppLink', e.target.value)}
-            />
-          </label>
-          <button
-            type='submit'
-            onClick={this.handleWebAppImport}
-            disabled={!this.webAppLink.length}
-          >
-            Import
-          </button>
+        <div class='bld-Builder_Body'>
+          <Team isTransitioning={this.isTransitioning} />
         </div>
 
-        <form
-          class='bld-Builder_Form'
-          onSubmit={this.handleSave}
-          action='/squads/builder/save/'
-        >
-          <input type='hidden' name='title' value={this.getName} />
-          <input type='hidden' name='page' value={this.page} />
-          <input type='hidden' name='slug' value={this.getName} />
-          <input type='hidden' name='players' value={this.playersForForm} />
-          {Object.keys(this.formFields).map(field => {
-            return (
-              <input
-                type='hidden'
-                name={field}
-                value={
-                  this[`get${field.charAt(0).toUpperCase() + field.slice(1)}`]
-                }
-              />
-            )
-          })}
+        <footer class='bld-Builder_Footer'>
+          <div class='bld-Builder_Columns'>
+            <div class='bld-Builder_Column'>
+              <div class='frm-Form_Items'>
+                <div class='frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel js-FloatingLabel-active'>
+                  <label
+                    class='frm-Form_Label js-FloatingLabel_Label'
+                    for='name'
+                  >
+                    Formation:
+                  </label>
 
-          <button type='submit'>Save</button>
-        </form>
+                  <select
+                    class='frm-Form_Select js-FloatingLabel_Input'
+                    id='formation'
+                    name='formation'
+                    onChange={e =>
+                      this.setFormation({
+                        formation:
+                          e.target.options[e.target.selectedIndex].value
+                      })}
+                    value={this.getFormation}
+                    ref='formationSelect'
+                  >
+                    {this.formations.map(formation => {
+                      return (
+                        <option value={formation[0]}>{formation[1]}</option>
+                      )
+                    })}
+                  </select>
+                </div>
+
+                <div class='frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel'>
+                  <label
+                    class='frm-Form_Label js-FloatingLabel_Label'
+                    for='name'
+                  >
+                    Squad Name:
+                  </label>
+
+                  <input
+                    type='text'
+                    class='frm-Form_Input js-FloatingLabel_Input'
+                    placeholder='Name'
+                    name='name'
+                    id='name'
+                    onInput={e => this.setName({ name: e.target.value })}
+                    value={this.getName}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class='bld-Builder_Column'>
+              <div class='bld-Builder_Stats'>
+                <div class='bld-Stats'>
+                  <ul class='bld-Stats_Items'>
+                    <li class='bld-Stats_Item'>
+                      <span class='bld-Stats_Label'>Rating:</span>
+                      <span
+                        class='bld-Stats_Value'
+                        style={{
+                          '--RatingColor': getRatingGradeVariable(
+                            this.getRating
+                          ).value
+                        }}
+                      >
+                        {this.getRating}
+                      </span>
+                    </li>
+
+                    <li class='bld-Stats_Item'>
+                      <span class='bld-Stats_Label'>Chemistry:</span>
+                      <span
+                        class='bld-Stats_Value'
+                        style={{
+                          '--RatingColor': getPositionGradeVariable(
+                            this.getChemistry
+                          ).value
+                        }}
+                      >
+                        {this.getChemistry}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class='bld-Builder_Import'>
+                <label>
+                  Web app
+                  <input
+                    type='text'
+                    placeholder='Web app'
+                    onInput={e => this.sync('webAppLink', e.target.value)}
+                  />
+                </label>
+                <button
+                  type='submit'
+                  onClick={this.handleWebAppImport}
+                  disabled={!this.webAppLink.length}
+                >
+                  Import
+                </button>
+
+                <form
+                  class='bld-Builder_Form'
+                  onSubmit={this.handleSave}
+                  action='/squads/builder/save/'
+                >
+                  <input type='hidden' name='title' value={this.getName} />
+                  <input type='hidden' name='page' value={this.page} />
+                  <input type='hidden' name='slug' value={this.getName} />
+                  <input
+                    type='hidden'
+                    name='players'
+                    value={this.playersForForm}
+                  />
+                  {Object.keys(this.formFields).map(field => {
+                    return (
+                      <input
+                        type='hidden'
+                        name={field}
+                        value={
+                          this[
+                            `get${field.charAt(0).toUpperCase() +
+                              field.slice(1)}`
+                          ]
+                        }
+                      />
+                    )
+                  })}
+
+                  <button class='btn-Primary' type='submit'>
+                    Save
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <div class='bld-Builder_Column'>
+              <div class='bld-Builder_Stats'>
+                <div class='bld-Stats'>
+                  <ul class='bld-Stats_Items'>
+                    {map(this.stats, stat => {
+                      return (
+                        <li class='bld-Stats_Item' style={stat.style}>
+                          <span class='bld-Stats_Label'>{stat.label}</span>
+                          <span class='bld-Stats_Value'>{stat.value}</span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
     )
   }

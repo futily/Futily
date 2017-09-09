@@ -5,6 +5,61 @@
 | @namespace: bld-
 |
 */
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.bld-Builder_Header {
+  align-items: center;
+
+  display: flex;
+  margin-bottom: 0.5vr;
+}
+
+.bld-Builder_Chemistry {
+  margin-left: auto;
+}
+
+.bld-Builder_ChemistryValue {
+  margin-left: 5px;
+
+  font-weight: 500;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+|
+*/
+.bld-Builder_Footer {
+  display: flex;
+  margin-top: 1vr;
+}
+
+.bld-Builder_Columns {
+  grid-column-gap: calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(3, 1fr);
+
+  display: grid;
+}
+
+.bld-Builder_StatsItem {
+  margin-bottom: 0.5vr;
+  padding-bottom: @margin-bottom;
+
+  border-bottom: 1px solid var(--Color_Border);
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+}
+
 .bld-Builder_Team {
   position: relative;
 
@@ -33,6 +88,7 @@
 .bld-Builder_PlayersItem {
   /* px is needed for the calc() */
   /* stylelint-disable length-zero-no-unit */
+  --PlayerScale: 0.8;
   --PlayerX: 0px;
   --PlayerY: 0px;
   /* stylelint-enable */
@@ -50,10 +106,14 @@
   cursor: pointer;
 
   transform: translate(calc(-50% - var(--PlayerX)), calc(-50% - var(--PlayerY)))
-    scale(0.8);
+    scale(var(--PlayerScale));
   transition: transform 0.5s var(--Transition_EaseOutBack);
 
   perspective: 1;
+
+  @media (--xlg) {
+    --PlayerScale: 0.9;
+  }
 
   /* This brings our cards in, the class gets removed 500ms after changing formation */
   .bld-Builder-transitioning & {

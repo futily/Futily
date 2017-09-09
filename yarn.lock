@@ -6212,9 +6212,9 @@ prettier-eslint@^6.3.0:
     pretty-format "^20.0.3"
     require-relative "^0.8.7"
 
-prettier-standard@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/prettier-standard/-/prettier-standard-5.1.0.tgz#2d851df1b4c180c52933330a42a9d2c4e6946608"
+prettier-standard@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/prettier-standard/-/prettier-standard-6.0.0.tgz#4c55db1401b9a5c09f0547009ea2ed1494a3346c"
   dependencies:
     babel-eslint ">=7.2.3"
     babel-runtime "^6.23.0"
@@ -6233,9 +6233,9 @@ prettier-standard@^5.1.0:
     prettier-eslint "^6.3.0"
     rxjs "^5.4.0"
 
-prettier@^1.4.4, prettier@^1.5.0:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
+prettier@^1.4.4, prettier@^1.5.0, prettier@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.6.1.tgz#850f411a3116226193e32ea5acfc21c0f9a76d7d"
 
 pretty-bytes@^3.0.1:
   version "3.0.1"

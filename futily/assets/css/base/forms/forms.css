@@ -135,7 +135,7 @@
 
   display: block;
   width: 100%;
-  padding: 9px var(--InputHoriPadding);
+  padding: 9px var(--InputHoriPadding, 15px);
 
   appearance: none;
   border: 1px solid var(--Color_Border);
