@@ -1,53 +1,6 @@
 {% extends "players/_base.html" %}
+{% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
-
-{% macro filter_item(choice, get_param) %}
-  {% set current = request.GET.get(get_param, None) %}
-
-  <li class="fltr-Filter_Item">
-    {% if not choice.group %}
-      {% if choice.key == 'all' %}
-        <a href="{{ build_url(remove=[get_param]) }}" class="fltr-Filter_Link">
-          {{ choice.label }}
-        </a>
-      {% else %}
-        <a href="{{ build_url(get={get_param: choice.key}) }}" class="fltr-Filter_Link">
-          {{ choice.label }}
-
-          {% if current == choice.key %}
-            <span class="fltr-Filter_LinkIcon">
-              {% include 'tick.svg' %}
-            </span>
-          {% endif %}
-        </a>
-      {% endif %}
-    {% else %}
-      <span class="fltr-Filter_ItemLabel">
-        {{ choice.label }}
-
-        <span class="fltr-Filter_ItemLabelIcon">
-          {% include 'angle-down.svg' %}
-        </span>
-      </span>
-
-      <ul class="fltr-Filter_Dropdown">
-        {% for option in choice.options %}
-          <li class="fltr-Filter_Item">
-            <a class="fltr-Filter_Link" href="{{ build_url(get={get_param: option.key}) }}">
-              {{ option.label }}
-
-              {% if current == option.key %}
-                <span class="fltr-Filter_LinkIcon">
-                  {% include 'tick.svg' %}
-                </span>
-              {% endif %}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  </li>
-{% endmacro %}
 
 {% block breadcrumbs %}
   <div class="pg-Breadcrumbs">
@@ -144,79 +97,7 @@
 {% endblock %}
 
 {% block body %}
-  <div class="pg-Bar">
-    <div class="pb-Bar_Body">
-      <div class="fltr-Filters">
-        <div class="fltr-Filters_Left">
-          <ul class="fltr-Filters_Items">
-            <li class="fltr-Filters_Item">
-              <div class="fltr-Filter">
-                <p class="fltr-Filter_Label">
-                  Position:
-                  <strong class="fltr-Filter_LabelChoice">{{ filters.positions.label }}</strong>
-                </p>
-
-                <span class="fltr-Filter_DropdownIndicator">
-                  {% include 'angle-down.svg' %}
-                </span>
-
-                <ul class="fltr-Filter_Dropdown">
-                  {% for choice in filters.positions.choices %}
-                    {{ filter_item(choice, 'position') }}
-                  {% endfor %}
-                </ul>
-              </div>
-            </li>
-
-            <li class="fltr-Filters_Item">
-              <div class="fltr-Filter">
-                <p class="fltr-Filter_Label">
-                  Level:
-                  <strong class="fltr-Filter_LabelChoice">{{ filters.levels.label }}</strong>
-                </p>
-
-                <span class="fltr-Filter_DropdownIndicator">
-                  {% include 'angle-down.svg' %}
-                </span>
-
-                <ul class="fltr-Filter_Dropdown">
-                  {% for choice in filters.levels.choices %}
-                    {{ filter_item(choice, 'level') }}
-                  {% endfor %}
-                </ul>
-              </div>
-            </li>
-
-            <li class="fltr-Filters_Item">
-              <div class="fltr-Filter">
-                <p class="fltr-Filter_Label">
-                  Sort: <strong class="fltr-Filter_LabelChoice">Sort thing</strong>
-                </p>
-
-                <span class="fltr-Filter_DropdownIndicator">
-                  {% include "angle-down.svg" %}
-                </span>
-
-                <ul class="fltr-Filter_Dropdown">
-                  {% for sort in sorts %}
-                    {{ filter_item(sort, 'sort') }}
-                  {% endfor %}
-                </ul>
-              </div>
-            </li>
-
-            <li class="fltr-Filters_Item">
-              {% set current_order = request.GET.get('order') %}
-              <a class="fltr-Sort"
-                 href="{{ build_url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">
-                {% include "sort.svg" %}
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+  {{ filters_macros.filters(filters) }}
 
   <div class="plyr-Detail_Section">
     <header class="plyr-Detail_SectionHeader">

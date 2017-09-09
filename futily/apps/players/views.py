@@ -1,4 +1,3 @@
-from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.utils.text import slugify
 from django.views.generic import DetailView, ListView
@@ -189,30 +188,15 @@ class PlayerDetailChemistryType(EaObjectDetail):
         return self.object.get_chemistry_players()[self.kwargs['chem_type']]
 
 
-class PlayerDetailSimilar(DetailView):
+class PlayerDetailSimilar(EaObjectDetail):
     model = Player
     template_name = 'players/player_detail_similar.html'
 
-    def player_pagination(self):
-        paginator = Paginator(self.object.get_similar_players(), 30)
+    def initial_players(self):
+        if self.is_sorted():
+            return self.object.get_similar_players(sort=self.is_sorted())
 
-        try:
-            # Deliver the requested page
-            return paginator.page(self.request.GET.get('page'))
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            return paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            return paginator.page(paginator.num_pages)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        context['similar_coefficient'] = self.object.similar_coefficient
-        context['similar_players'] = self.player_pagination()
-
-        return context
+        return self.object.get_similar_players()
 
 
 class PlayerDetailCompare(DetailView):

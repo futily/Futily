@@ -403,7 +403,9 @@ class Player(PageBase):
 
         return players[chem_type]
 
-    def get_similar_players(self, amount=None):
+    def get_similar_players(self, amount=None, sort=None):
+        sort = sort if sort else 'ea_id'
+        print(sort)
         coefficient = self.similar_coefficient
         schema = {
             'GK': [1, 2, 3, 4, 5, 6],
@@ -437,8 +439,8 @@ class Player(PageBase):
         players = Player.cards \
             .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position)) \
             .exclude(ea_id=self.ea_id) \
-            .order_by('ea_id') \
-            .distinct('ea_id')
+            .order_by(sort) \
+            .distinct(sort)
 
         if amount:
             players = players[:amount]

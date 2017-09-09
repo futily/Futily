@@ -3,7 +3,8 @@ from django.db.models import F
 from django.views.generic import DetailView, ListView
 
 from .players.constants import (LEVEL_FILTER_MAP, LEVELS_GET_TO_LABEL,
-                                POSITION_FILTER_MAP, POSITION_GET_TO_LABEL)
+                                POSITION_FILTER_MAP, POSITION_GET_TO_LABEL,
+                                SORT_GET_TO_LABEL)
 
 
 class EaObjectDetail(DetailView):
@@ -25,6 +26,7 @@ class EaObjectDetail(DetailView):
 
         current_position = self.request.GET.get('position')
         current_level = self.request.GET.get('level')
+        current_sort = self.request.GET.get('sort')
         context['filters'] = {
             'positions': {
                 'choices': self.filters['positions'],
@@ -37,7 +39,11 @@ class EaObjectDetail(DetailView):
                 'label': LEVELS_GET_TO_LABEL[current_level] if current_level else 'All',
             }
         }
-        context['sorts'] = self.sort
+        context['sorts'] = {
+            'choices': self.sort,
+            'current': current_sort,
+            'label': SORT_GET_TO_LABEL[current_sort] if current_sort else 'Rating',
+        }
 
         return context
 

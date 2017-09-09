@@ -408,10 +408,8 @@ export class Builder extends Vue {
                         type='hidden'
                         name={field}
                         value={
-                          this[
-                            `get${field.charAt(0).toUpperCase() +
-                              field.slice(1)}`
-                          ]
+                          // prettier-ignore
+                          this[`get${field.charAt(0).toUpperCase() + field.slice(1)}`]
                         }
                       />
                     )

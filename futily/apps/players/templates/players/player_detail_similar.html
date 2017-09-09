@@ -1,4 +1,5 @@
 {% extends "players/_base.html" %}
+{% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
 
 {% block breadcrumbs %}
@@ -78,19 +79,21 @@
 {% endblock %}
 
 {% block body %}
+  {{ filters_macros.filters(filters) }}
+
   <div class="plyr-Detail_Section">
     <header class="plyr-Detail_SectionHeader">
       <h3 class="plyr-Detail_Title">
         <strong class="plyr-Detail_Emphasis">Similar</strong> players
 
-        <span class="plyr-Detail_TitleSmall">{{ similar_players.paginator.count }} players</span>
+        <span class="plyr-Detail_TitleSmall">{{ players.paginator.count }} players</span>
       </h3>
     </header>
 
     <div class="plyr-Detail_SectionBody">
-      {{ player_macros.card_list(similar_players) }}
+      {{ player_macros.card_list(players) }}
 
-      {{ render_pagination(similar_players) }}
+      {{ render_pagination(players) }}
     </div>
   </div>
 {% endblock %}
