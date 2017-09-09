@@ -82,9 +82,9 @@
 {% endblock %}
 
 {% block main %}
-  {{ filters_macros.filters(filters) }}
+  {{ filters_macros.filters(filters, sorts) }}
 
-  {{ player_macros.card_list(players) }}
+  {{ player_macros.card_list(players, sorts=sorts) }}
 
   {{ render_pagination(players) }}
 {% endblock %}

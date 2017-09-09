@@ -61,7 +61,7 @@ class League(PageBase):
         return self._get_permalink_for_page(self.page.page)
 
     def players(self):
-        return self.player_set.all().select_related('club', 'league', 'nation')
+        return self.player_set(manager='cards').all().select_related('club', 'league', 'nation')
 
     def list_informs(self):
         return self.total_special + self.total_totw

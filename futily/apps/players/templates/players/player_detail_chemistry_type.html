@@ -97,7 +97,7 @@
 {% endblock %}
 
 {% block body %}
-  {{ filters_macros.filters(filters) }}
+  {{ filters_macros.filters(filters, sorts) }}
 
   <div class="plyr-Detail_Section">
     <header class="plyr-Detail_SectionHeader">
@@ -109,7 +109,7 @@
     </header>
 
     <div class="plyr-Detail_SectionBody">
-      {{ player_macros.card_list(players) }}
+      {{ player_macros.card_list(players, sorts=sorts) }}
 
       {{ render_pagination(players) }}
     </div>

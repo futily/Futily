@@ -3,14 +3,14 @@ import 'pepjs'
 import './utils/class-list-polyfill'
 
 import Vue from 'vue'
-import InstantSearch from 'vue-instantsearch'
+// import InstantSearch from 'vue-instantsearch'
 import { map } from 'lodash'
 
 import App from './vue/App'
 
 import { externalLinks, iframeFix } from './utils'
 import { FloatingLabel } from './forms'
-import { CardSelector, RPP } from './players/detail'
+import { CardSelector, Rating, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
 import { Follow } from './users/follow'
 import {
@@ -19,7 +19,7 @@ import {
   SectionPlayerSearch
 } from './search'
 
-Vue.use(InstantSearch)
+// Vue.use(InstantSearch)
 
 new Vue(App).$mount('#app')
 
@@ -37,6 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (document.querySelector('.plyr-CardSelector')) {
     new CardSelector()
+  }
+
+  if (document.querySelector('.js-PlayerRating')) {
+    new Rating({ className: '.js-PlayerRating' })
   }
 
   if (document.querySelector('.js-RPP')) {

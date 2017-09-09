@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { map, reduce } from 'lodash'
 
 import {
@@ -159,6 +160,65 @@ export class CardSelector {
         )
       }
     )
+  }
+}
+
+export class Rating {
+  constructor ({ className }) {
+    const el = document.querySelector(className)
+
+    this.className = className
+    this.els = {
+      el,
+      controls: {
+        down: el.querySelector(`${className}_Control[data-direction='down']`),
+        up: el.querySelector(`${className}_Control[data-direction='up']`)
+      },
+      value: el.querySelector(`${className}_Value`)
+    }
+
+    this.user = this.els.el.dataset.user
+    this.player = this.els.el.dataset.player
+    this.url = `${this.els.el.dataset.url}rate/`
+
+    this.sendVote = this.sendVote.bind(this)
+
+    this.setupListeners()
+
+    console.log(this)
+  }
+
+  setupListeners () {
+    this.els.el.addEventListener('pointerdown', this.sendVote)
+  }
+
+  async sendVote (e) {
+    const target = e.target.closest(`${this.className}_Control`)
+
+    if (Object.values(this.els.controls).includes(target) === false) return
+
+    const { direction } = target.dataset
+    const { player, user } = this
+
+    try {
+      const { data } = await axios.post(
+        this.url,
+        {
+          direction,
+          player,
+          user
+        },
+        {
+          headers: {
+            X_REQUESTED_WITH: 'XMLHttpRequest'
+          }
+        }
+      )
+
+      this.els.value.innerText = data.count
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 

@@ -185,6 +185,8 @@ class Player(PageBase):
     is_gk = models.BooleanField(default=False)
     is_special_type = models.BooleanField(default=False)
 
+    likes = models.IntegerField(default=0)
+
     pack_weight = models.PositiveIntegerField(blank=True, null=True)
 
     created = models.DateTimeField(auto_now_add=True)
@@ -405,7 +407,6 @@ class Player(PageBase):
 
     def get_similar_players(self, amount=None, sort=None):
         sort = sort if sort else 'ea_id'
-        print(sort)
         coefficient = self.similar_coefficient
         schema = {
             'GK': [1, 2, 3, 4, 5, 6],
@@ -454,6 +455,64 @@ class Player(PageBase):
             return random.sample(list(players), 6)
 
         return players
+
+
+class PlayerRatingManager(models.Manager):
+    def rate(self, player, user=None, direction='up'):
+        existing_rating = self.filter(player=player, user=user).first()
+
+        if existing_rating:
+            old_direction = existing_rating.user_direction
+
+            if old_direction == 'up':
+                existing_rating.upvotes -= 1
+            else:
+                existing_rating.downvotes -= 1
+
+            existing_rating.user_direction = direction
+            existing_rating.save()
+
+            return existing_rating
+
+        rating, created = self.get_or_create(player=player, user=user, user_direction=direction)  # pylint: disable=unused-variable
+        player.likes = rating.count
+        player.save()
+
+        return rating
+
+
+class PlayerRating(models.Model):
+
+    objects = PlayerRatingManager()
+
+    player = models.ForeignKey('players.Player')
+    user = models.ForeignKey('users.User')
+    user_direction = models.CharField(max_length=5, choices=[('up', 'Up'), ('down', 'Down')])
+
+    upvotes = models.PositiveIntegerField(default=0)
+    downvotes = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.player}'s rating"
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if self.user_direction == 'up':
+            self.upvotes += 1
+        else:
+            self.downvotes += 1
+
+        super(PlayerRating, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
+
+    @cached_property
+    def count(self):
+        return self.upvotes - self.downvotes
+
+    def to_dict(self):
+        return {
+            'upvotes': self.upvotes,
+            'downvotes': self.downvotes,
+            'count': self.count
+        }
 
 
 def get_default_players_page():

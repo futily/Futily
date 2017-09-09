@@ -1,9 +1,15 @@
-{% macro card_list(players, card_collection=False) %}
+{% macro card_list(players, card_collection=False, sorts=None) %}
   <div class="plyr-CardList">
-    <ul class="plyr-CardList_Items">
+    <ul class="plyr-CardList_Items{% if sorts %} plyr-CardList_Items-withSorted{% endif %}">
       {% for player in players %}
         <li class="plyr-CardList_Item">
           {{ player.render_card(faded=card_collection) }}
+
+          {% if sorts and sorts.current %}
+            <p class="plyr-CardList_Text">
+              {{ sorts.label }}: {{ player[sorts.current] }}
+            </p>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>

@@ -93,7 +93,8 @@
         <div class="shr-Bar">
           <ul class="shr-Bar_Items">
             <li class="shr-Bar_Item shr-Bar_Item-twitter">
-              <a class="shr-Bar_Share" href="https://twitter.com/intent/tweet?url={{ url_e }}&amp;text=Check out {{ player.name }} on Futily! {{ title_e }}">
+              <a class="shr-Bar_Share"
+                 href="https://twitter.com/intent/tweet?url={{ url_e }}&amp;text=Check out {{ player.name }} on Futily! {{ title_e }}">
                 {% include "twitter.svg" %}
 
                 <span class="shr-Bar_ShareText">Share {{ player.name }} on Twitter</span>
@@ -122,25 +123,29 @@
 
     <nav class="plyr-Detail_Navigation">
       <ul class="plyr-Detail_NavigationItems">
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path == player.get_absolute_url() else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path == player.get_absolute_url() else 'false' }}">
           <a class="plyr-Detail_NavigationLink" href="{{ player.get_absolute_url() }}">Stats</a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path == player.get_similar_absolute_url() else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path == player.get_similar_absolute_url() else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
              href="{{ player.get_similar_absolute_url() }}">
             Similar players
           </a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_chemistry_absolute_url()) else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path.startswith(player.get_chemistry_absolute_url()) else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
              href="{{ player.get_chemistry_absolute_url() }}">
             Chemistry
           </a>
         </li>
 
-        <li class="plyr-Detail_NavigationItem" aria-current="{{ 'true' if request.path.startswith(player.get_compare_absolute_url()) else 'false' }}">
+        <li class="plyr-Detail_NavigationItem"
+            aria-current="{{ 'true' if request.path.startswith(player.get_compare_absolute_url()) else 'false' }}">
           <a class="plyr-Detail_NavigationLink"
              href="{{ player.get_compare_absolute_url() }}">
             Compare
@@ -159,6 +164,27 @@
   <div class="asi-Blocks">
     <div class="asi-Block">
       <img alt="" src="http://placehold.it/300x250">
+    </div>
+
+    <div class="asi-Block">
+      <h4 class="asi-Block_Title">{{ object }} Rating</h4>
+
+      <div class="asi-Ratings js-PlayerRating"
+           data-url="{{ player.get_absolute_url() }}"
+           data-user="{{ user.id }}"
+           data-player="{{ player.id }}">
+        <button class="asi-Ratings_Control asi-Ratings_Control-down js-PlayerRating_Control"
+                data-direction="down">
+          <span class="asi-Ratings_Text">Down</span>
+          <span class="asi-Ratings_Icon">{% include 'dislike.svg' %}</span>
+        </button>
+        <p class="asi-Ratings_Value js-PlayerRating_Value">0</p>
+        <button class="asi-Ratings_Control asi-Ratings_Control-up js-PlayerRating_Control"
+                data-direction="up">
+          <span class="asi-Ratings_Text">Up</span>
+          <span class="asi-Ratings_Icon">{% include 'like.svg' %}</span>
+        </button>
+      </div>
     </div>
 
     <div class="asi-Block">

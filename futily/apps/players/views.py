@@ -1,14 +1,21 @@
+import json
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.db.models import Q
+from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.text import slugify
+from django.views import View
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 from rest_framework import filters, viewsets
 
 from futily.apps.players.serializers import PlayerSerializer
+from futily.apps.users.models import User
 from futily.apps.views import EaObjectDetail
 
 from .forms import PlayerListForm
-from .models import Player
+from .models import Player, PlayerRating
 
 
 class PlayerList(FormMixin, ListView):
@@ -173,6 +180,30 @@ class PlayerDetail(DetailView):
         ]
 
         return context
+
+
+class PlayerRate(LoginRequiredMixin, View):
+    model = PlayerRating
+
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body.decode())
+
+        player = Player.objects.get(pk=data.get('player'))
+        user = User.objects.get(pk=data.get('user'))
+        direction = data.get('direction')
+
+        try:
+            rating = self.model.objects.rate(player, user, direction)
+
+            if request.is_ajax():
+                return JsonResponse(rating.to_dict())
+
+            return HttpResponseRedirect('/')
+        except ValidationError as err:
+            if request.is_ajax():
+                return JsonResponse(data={'error': err.message}, status=400)
+
+            return HttpResponseRedirect('/')
 
 
 class PlayerDetailChemistry(DetailView):

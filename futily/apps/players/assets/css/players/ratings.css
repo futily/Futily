@@ -1,0 +1,51 @@
+/*
+|--------------------------------------------------------------------------
+| Ratings
+|--------------------------------------------------------------------------
+| @namespace: asi-
+|
+*/
+.asi-Ratings {
+  display: flex;
+}
+
+.asi-Ratings_Control {
+  padding: 0.25vr 10px;
+
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    width: 20px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}
+
+.asi-Ratings_Control-down {
+  background-color: #e36968;
+}
+
+.asi-Ratings_Control-up {
+  background-color: #a9d260;
+}
+
+.asi-Ratings_Value {
+  align-items: center;
+
+  display: flex;
+  padding-right: var(--Grid_Gutter);
+  padding-left: @padding-right;
+
+  font-weight: 500;
+}
+
+.asi-Ratings_Text {
+  @include HideForAllButScreenReader;
+}
+
+.asi-Ratings_Icon {
+  display: block;
+}
