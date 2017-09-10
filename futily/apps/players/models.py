@@ -441,7 +441,9 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
             .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position)) \
             .exclude(ea_id=self.ea_id) \
             .order_by(sort) \
-            .distinct(sort)
+
+        if not sort:
+            players = players.distinct(sort)
 
         if amount:
             players = players[:amount]
