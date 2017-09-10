@@ -174,13 +174,13 @@
            data-user="{{ user.id }}"
            data-player="{{ player.id }}">
         <button class="asi-Ratings_Control asi-Ratings_Control-down js-PlayerRating_Control"
-                data-direction="down">
+                data-action="down">
           <span class="asi-Ratings_Text">Down</span>
           <span class="asi-Ratings_Icon">{% include 'dislike.svg' %}</span>
         </button>
-        <p class="asi-Ratings_Value js-PlayerRating_Value">0</p>
+        <p class="asi-Ratings_Value js-PlayerRating_Value">{{ player.likes }}</p>
         <button class="asi-Ratings_Control asi-Ratings_Control-up js-PlayerRating_Control"
-                data-direction="up">
+                data-action="up">
           <span class="asi-Ratings_Text">Up</span>
           <span class="asi-Ratings_Icon">{% include 'like.svg' %}</span>
         </button>

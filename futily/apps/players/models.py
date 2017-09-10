@@ -77,7 +77,7 @@ class PlayerCardManager(models.Manager):
         return qs
 
 
-class Player(PageBase):
+class Player(PageBase):  # pylint: disable=too-many-public-methods
     cards = PlayerCardManager()
     objects = PlayerManager()
 
@@ -185,7 +185,7 @@ class Player(PageBase):
     is_gk = models.BooleanField(default=False)
     is_special_type = models.BooleanField(default=False)
 
-    likes = models.IntegerField(default=0)
+    # likes = models.IntegerField(default=0)
 
     pack_weight = models.PositiveIntegerField(blank=True, null=True)
 
@@ -316,6 +316,10 @@ class Player(PageBase):
             ('Defending' if not self.is_gk else 'Speed', self.card_att_5),
             ('Physical' if not self.is_gk else 'Positioning', self.card_att_6)
         ]
+
+    @cached_property
+    def likes(self):
+        return self.playerrating.score
 
     @property
     def similar_coefficient(self):
@@ -457,62 +461,76 @@ class Player(PageBase):
         return players
 
 
-class PlayerRatingManager(models.Manager):
-    def rate(self, player, user=None, direction='up'):
-        existing_rating = self.filter(player=player, user=user).first()
-
-        if existing_rating:
-            old_direction = existing_rating.user_direction
-
-            if old_direction == 'up':
-                existing_rating.upvotes -= 1
-            else:
-                existing_rating.downvotes -= 1
-
-            existing_rating.user_direction = direction
-            existing_rating.save()
-
-            return existing_rating
-
-        rating, created = self.get_or_create(player=player, user=user, user_direction=direction)  # pylint: disable=unused-variable
-        player.likes = rating.count
-        player.save()
-
-        return rating
-
-
 class PlayerRating(models.Model):
 
-    objects = PlayerRatingManager()
+    player = models.OneToOneField('players.Player', db_index=True, on_delete=models.CASCADE)
 
-    player = models.ForeignKey('players.Player')
-    user = models.ForeignKey('users.User')
-    user_direction = models.CharField(max_length=5, choices=[('up', 'Up'), ('down', 'Down')])
-
+    score = models.IntegerField(default=0, db_index=True)
     upvotes = models.PositiveIntegerField(default=0)
     downvotes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.player}'s rating"
 
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if self.user_direction == 'up':
-            self.upvotes += 1
-        else:
-            self.downvotes += 1
-
-        super(PlayerRating, self).save(force_insert=False, force_update=False, using=None, update_fields=None)
-
-    @cached_property
-    def count(self):
-        return self.upvotes - self.downvotes
-
     def to_dict(self):
         return {
             'upvotes': self.upvotes,
             'downvotes': self.downvotes,
-            'count': self.count
+            'score': self.score
         }
+
+
+class VoteManager(models.Manager):
+    def vote(self, player, user, action):
+        rating, created = PlayerRating.objects.get_or_create(player=player)  # pylint: disable=unused-variable
+        existing_vote = self.filter(rating__player=player, user=user).first()
+
+        if existing_vote:
+            old_action = existing_vote.action
+
+            if old_action == 'up':
+                rating.upvotes -= 1
+            else:
+                rating.downvotes -= 1
+
+            existing_vote.action = action
+            existing_vote.save()
+
+        if action == 'up':
+            rating.upvotes += 1
+        else:
+            rating.downvotes += 1
+
+        rating.score = rating.upvotes - rating.downvotes
+        rating.save()
+
+        vote, created = self.get_or_create(rating=rating, user=user, action=action)  # pylint: disable=unused-variable
+
+        return vote
+
+    def up(self, player, user):
+        self.vote(player, user, 'up')
+
+    def down(self, player, user):
+        self.vote(player, user, 'down')
+
+
+class Vote(models.Model):
+
+    votes = VoteManager()
+
+    user = models.ForeignKey('users.User', db_index=True)
+    rating = models.OneToOneField('players.PlayerRating', db_index=True)
+    action = models.CharField(max_length=5, choices=[('up', 'Up'), ('down', 'Down')])
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ['user', 'rating']
+
+    def __str__(self):
+        return f"{self.user}'s rating for {self.rating.player}"
 
 
 def get_default_players_page():

@@ -140,6 +140,7 @@ INSTALLED_APPS = [
     'django.forms',
 
     'cms',
+    'vote',
 
     'reversion',
     'historylinks',

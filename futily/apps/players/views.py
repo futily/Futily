@@ -15,7 +15,7 @@ from futily.apps.users.models import User
 from futily.apps.views import EaObjectDetail
 
 from .forms import PlayerListForm
-from .models import Player, PlayerRating
+from .models import Player, Vote
 
 
 class PlayerList(FormMixin, ListView):
@@ -183,20 +183,23 @@ class PlayerDetail(DetailView):
 
 
 class PlayerRate(LoginRequiredMixin, View):
-    model = PlayerRating
+    model = Vote
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body.decode())
 
         player = Player.objects.get(pk=data.get('player'))
         user = User.objects.get(pk=data.get('user'))
-        direction = data.get('direction')
+        action = data.get('action')
 
         try:
-            rating = self.model.objects.rate(player, user, direction)
+            if action == 'up':
+                self.model.votes.up(player, user)
+            else:
+                self.model.votes.down(player, user)
 
             if request.is_ajax():
-                return JsonResponse(rating.to_dict())
+                return JsonResponse(player.playerrating.to_dict())
 
             return HttpResponseRedirect('/')
         except ValidationError as err:

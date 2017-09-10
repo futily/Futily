@@ -171,8 +171,8 @@ export class Rating {
     this.els = {
       el,
       controls: {
-        down: el.querySelector(`${className}_Control[data-direction='down']`),
-        up: el.querySelector(`${className}_Control[data-direction='up']`)
+        down: el.querySelector(`${className}_Control[data-action='down']`),
+        up: el.querySelector(`${className}_Control[data-action='up']`)
       },
       value: el.querySelector(`${className}_Value`)
     }
@@ -184,8 +184,6 @@ export class Rating {
     this.sendVote = this.sendVote.bind(this)
 
     this.setupListeners()
-
-    console.log(this)
   }
 
   setupListeners () {
@@ -197,14 +195,14 @@ export class Rating {
 
     if (Object.values(this.els.controls).includes(target) === false) return
 
-    const { direction } = target.dataset
+    const { action } = target.dataset
     const { player, user } = this
 
     try {
       const { data } = await axios.post(
         this.url,
         {
-          direction,
+          action,
           player,
           user
         },
@@ -215,7 +213,7 @@ export class Rating {
         }
       )
 
-      this.els.value.innerText = data.count
+      this.els.value.innerText = data.score
     } catch (e) {
       console.log(e)
     }
