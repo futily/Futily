@@ -185,7 +185,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
     is_gk = models.BooleanField(default=False)
     is_special_type = models.BooleanField(default=False)
 
-    # likes = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
 
     pack_weight = models.PositiveIntegerField(blank=True, null=True)
 
@@ -316,10 +316,6 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
             ('Defending' if not self.is_gk else 'Speed', self.card_att_5),
             ('Physical' if not self.is_gk else 'Positioning', self.card_att_6)
         ]
-
-    @cached_property
-    def likes(self):
-        return self.playerrating.score
 
     @property
     def similar_coefficient(self):
@@ -471,6 +467,12 @@ class PlayerRating(models.Model):
 
     def __str__(self):
         return f"{self.player}'s rating"
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.player.likes = self.score
+        self.player.save()
+
+        super().save(force_insert, force_update, using, update_fields)
 
     def to_dict(self):
         return {
