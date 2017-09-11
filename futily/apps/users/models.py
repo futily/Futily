@@ -102,6 +102,11 @@ class User(AbstractBaseUser, PermissionsMixin):
             'username': self.username
         })
 
+    def get_favourite_players_url(self):
+        return reverse('users:favourite-players', kwargs={
+            'username': self.username
+        })
+
     def get_collection_club_url(self, league, club):
         return reverse('users:collection-club', kwargs={
             'username': self.username,
@@ -166,6 +171,14 @@ class UserFollowers(models.Model):
 
     def __str__(self):
         return f"{self.to_user}'s followers"
+
+
+class FavouritePlayers(models.Model):
+    user = AutoOneToOneField('users.User', on_delete=models.CASCADE)
+    players = models.ManyToManyField('players.Player', blank=True)
+
+    def __str__(self):
+        return f"{self.user}'s favourite players"
 
 
 class CollectionPlayer(models.Model):

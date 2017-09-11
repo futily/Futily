@@ -29,3 +29,19 @@
     border-bottom: 7px solid #46d1ff;
   }
 }
+
+.asi-Block_Split {
+  justify-content: space-between;
+
+  display: flex;
+}
+
+.asi-Block_Link {
+  &[aria-current='true'] {
+    padding-right: 30px;
+
+    background-image: svg-load('tick.svg', fill='#fff');
+    background-position: right 10px center;
+    background-size: 12px 12px;
+  }
+}

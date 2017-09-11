@@ -1,0 +1,18 @@
+{% extends "users/_base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block side_panel %}
+  {% if players %}
+    {% call(player) player_macros.card_list(players) %}
+      {% if user == object %}
+        <a class="btn-Primary" href="{{ player.get_favourite_absolute_url() }}">Unfavourite</a>
+      {% endif %}
+    {% endcall %}
+  {% else %}
+    <p class="typ-Title-small">{{ object }} has no favourite players</p>
+  {% endif %}
+{% endblock %}
+
+{% block aside_blocks %}
+
+{% endblock %}

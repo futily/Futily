@@ -11,7 +11,7 @@ from django.views.generic.edit import FormMixin
 from rest_framework import filters, viewsets
 
 from futily.apps.players.serializers import PlayerSerializer
-from futily.apps.users.models import User
+from futily.apps.users.models import FavouritePlayers, User
 from futily.apps.views import EaObjectDetail
 
 from .forms import PlayerListForm
@@ -207,6 +207,21 @@ class PlayerRate(LoginRequiredMixin, View):
                 return JsonResponse(data={'error': err.message}, status=400)
 
             return HttpResponseRedirect('/')
+
+
+class PlayerFavourite(LoginRequiredMixin, View):
+    model = FavouritePlayers
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        player = Player.objects.get(pk=self.kwargs.get('pk'))
+
+        if player in user.favouriteplayers.players.all():
+            user.favouriteplayers.players.remove(player)
+        else:
+            user.favouriteplayers.players.add(player)
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
 class PlayerDetailChemistry(DetailView):

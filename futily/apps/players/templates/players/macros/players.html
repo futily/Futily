@@ -1,14 +1,18 @@
 {% macro card_list(players, card_collection=False, sorts=None) %}
   <div class="plyr-CardList">
-    <ul class="plyr-CardList_Items{% if sorts %} plyr-CardList_Items-withSorted{% endif %}">
+    <ul class="plyr-CardList_Items">
       {% for player in players %}
-        <li class="plyr-CardList_Item">
+        <li class="plyr-CardList_Item{% if sorts or caller %} plyr-CardList_Item-stacked{% endif %}">
           {{ player.render_card(faded=card_collection) }}
 
           {% if sorts and sorts.current %}
             <p class="plyr-CardList_Text">
               {{ sorts.label }}: {{ player[sorts.current] }}
             </p>
+          {% endif %}
+
+          {% if caller %}
+            {{ caller(player) }}
           {% endif %}
         </li>
       {% endfor %}

@@ -199,7 +199,7 @@ export class Rating {
     const { player, user } = this
 
     if (user === 'None') {
-      this.handleAnonUser()
+      Rating.handleAnonUser()
 
       return
     }
@@ -225,7 +225,7 @@ export class Rating {
     }
   }
 
-  handleAnonUser () {
+  static handleAnonUser () {
     alert('Please log in to be able to rate players')
   }
 }

@@ -51,6 +51,11 @@ class UserMixin(View):
                 'current': str(self.request.path == self.object.get_absolute_url()).lower(),
             },
             {
+                'label': 'Players',
+                'url': self.object.get_favourite_players_url(),
+                'current': str(self.request.path == self.object.get_favourite_players_url()).lower(),
+            },
+            {
                 'label': 'Squads',
                 'url': self.object.get_squads_url(),
                 'current': str(self.request.path == self.object.get_squads_url()).lower(),
@@ -87,6 +92,17 @@ class UserFollowView(LoginRequiredMixin, UserMixin):
             'followed_user': user_to_follow.id,
             'followed_by': following_user.id,
         })
+
+
+class UserFavouritePlayers(UserMixin, DetailView):
+    template_name = 'users/user_detail_favourite_players.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['players'] = self.object.favouriteplayers.players.all()
+
+        return context
 
 
 class UserCollectionView(UserMixin, DetailView):

@@ -262,6 +262,9 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
     def get_compare_absolute_url(self):
         return self._get_permalink_for_page(name='player_compare', cached=False)
 
+    def get_favourite_absolute_url(self):
+        return self._get_permalink_for_page(name='player_favourite', cached=False)
+
     def render_card(self, size='sm', faded=False, rpp=False):
         return render_to_string('players/includes/card.html', {
             'player': self,

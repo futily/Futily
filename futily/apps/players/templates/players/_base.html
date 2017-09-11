@@ -169,21 +169,29 @@
     <div class="asi-Block">
       <h4 class="asi-Block_Title">{{ object }} Rating</h4>
 
-      <div class="asi-Ratings js-PlayerRating"
-           data-url="{{ player.get_absolute_url() }}"
-           data-user="{{ user.id }}"
-           data-player="{{ player.id }}">
-        <button class="asi-Ratings_Control asi-Ratings_Control-down js-PlayerRating_Control"
-                data-action="down">
-          <span class="asi-Ratings_Text">Down</span>
-          <span class="asi-Ratings_Icon">{% include 'dislike.svg' %}</span>
-        </button>
-        <p class="asi-Ratings_Value js-PlayerRating_Value">{{ player.likes }}</p>
-        <button class="asi-Ratings_Control asi-Ratings_Control-up js-PlayerRating_Control"
-                data-action="up">
-          <span class="asi-Ratings_Text">Up</span>
-          <span class="asi-Ratings_Icon">{% include 'like.svg' %}</span>
-        </button>
+      <div class="asi-Block_Split">
+        <div class="asi-Ratings js-PlayerRating"
+             data-url="{{ player.get_absolute_url() }}"
+             data-user="{{ user.id }}"
+             data-player="{{ player.id }}">
+          <button class="asi-Ratings_Control asi-Ratings_Control-down js-PlayerRating_Control"
+                  data-action="down">
+            <span class="asi-Ratings_Text">Down</span>
+            <span class="asi-Ratings_Icon">{% include 'dislike.svg' %}</span>
+          </button>
+          <p class="asi-Ratings_Value js-PlayerRating_Value">{{ player.likes }}</p>
+          <button class="asi-Ratings_Control asi-Ratings_Control-up js-PlayerRating_Control"
+                  data-action="up">
+            <span class="asi-Ratings_Text">Up</span>
+            <span class="asi-Ratings_Icon">{% include 'like.svg' %}</span>
+          </button>
+        </div>
+
+        <a class="asi-Block_Link btn-Primary"
+           href="{{ player.get_favourite_absolute_url() }}"
+           aria-current="{{ 'true' if player in user.favouriteplayers.players.all() else 'false' }}">
+          Favourite
+        </a>
       </div>
     </div>
 
