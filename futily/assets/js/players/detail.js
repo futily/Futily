@@ -198,6 +198,12 @@ export class Rating {
     const { action } = target.dataset
     const { player, user } = this
 
+    if (user === 'None') {
+      this.handleAnonUser()
+
+      return
+    }
+
     try {
       const { data } = await axios.post(
         this.url,
@@ -217,6 +223,10 @@ export class Rating {
     } catch (e) {
       console.log(e)
     }
+  }
+
+  handleAnonUser () {
+    alert('Please log in to be able to rate players')
   }
 }
 
