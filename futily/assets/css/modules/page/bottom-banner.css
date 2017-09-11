@@ -1,0 +1,19 @@
+/*
+|--------------------------------------------------------------------------
+| Bottom banner
+|--------------------------------------------------------------------------
+| @namespace: pg-
+|
+*/
+.pg-BottomBanner {
+  margin-top: 2vr;
+  margin-bottom: @margin-top;
+}
+
+.pg-BottomBanner_Inner {
+  @apply --GridContainer;
+}
+
+.pg-BottomBanner_Body {
+  text-align: center;
+}
