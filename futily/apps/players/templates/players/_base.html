@@ -187,11 +187,13 @@
           </button>
         </div>
 
-        <a class="asi-Block_Link btn-Primary"
-           href="{{ player.get_favourite_absolute_url() }}"
-           aria-current="{{ 'true' if player in user.favouriteplayers.players.all() else 'false' }}">
-          Favourite
-        </a>
+        {% if user.is_authenticated() %}
+          <a class="asi-Block_Link btn-Primary"
+             href="{{ player.get_favourite_absolute_url() }}"
+             aria-current="{{ 'true' if player in user.favouriteplayers.players.all() else 'false' }}">
+            Favourite
+          </a>
+        {% endif %}
       </div>
     </div>
 
