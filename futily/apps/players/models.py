@@ -145,6 +145,10 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
     vision = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
     volleys = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
 
+    rating_vidic = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
+    rating_pirlo = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
+    rating_ibra = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
+
     gk_diving = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
     gk_handling = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
     gk_kicking = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
@@ -202,7 +206,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not self.slug:
-            self.slug = f'{self.pk}-{slugify(self.name)}'
+            self.slug = slugify(self.name)
 
         self.total_stats = (self.card_att_1 + self.card_att_2 + self.card_att_3 + self.card_att_4 +
                             self.card_att_5 + self.card_att_6)
@@ -215,6 +219,68 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
             self.short_passing + self.shot_power + self.sliding_tackle + self.sprint_speed +
             self.standing_tackle + self.stamina + self.strength + self.vision + self.volleys
         )
+
+        rating_schemas = {
+            'vidic': {
+                'acceleration': 0.08,
+                'positioning': 0.04,
+                'short_passing': 0.02,
+                'vision': 0.02,
+                'agility': 0.05,
+                'ball_control': 0.02,
+                'heading_accuracy': 0.1,
+                'interceptions': 0.1,
+                'marking': 0.1,
+                'sliding_tackle': 0.1,
+                'standing_tackle': 0.15,
+                'aggression': 0.02,
+                'jumping': 0.1,
+                'strength': 0.1,
+            },
+            'pirlo': {
+                'finishing': 0.05,
+                'long_shots': 0.08,
+                'positioning': 0.1,
+                'shot_power': 0.02,
+                'curve': 0.05,
+                'free_kick_accuracy': 0.08,
+                'long_passing': 0.15,
+                'short_passing': 0.17,
+                'vision': 0.13,
+                'balance': 0.05,
+                'ball_control': 0.1,
+                'dribbling': 0.02,
+            },
+            'ibra': {
+                'acceleration': 0.05,
+                'finishing': 0.15,
+                'long_shots': 0.05,
+                'penalties': 0.02,
+                'positioning': 0.08,
+                'shot_power': 0.07,
+                'volleys': 0.05,
+                'curve': 0.02,
+                'free_kick_accuracy': 0.02,
+                'short_passing': 0.05,
+                'agility': 0.06,
+                'balance': 0.06,
+                'ball_control': 0.1,
+                'reactions': 0.05,
+                'heading_accuracy': 0.05,
+                'aggression': 0.02,
+                'jumping': 0.05,
+                'strength': 0.05,
+            },
+        }
+
+        def reduceSchemas(acc, item):
+            acc += getattr(self, item[0]) * item[1]
+
+            return acc
+
+        self.rating_vidic = reduce(reduceSchemas, rating_schemas['vidic'].items(), 0)
+        self.rating_pirlo = reduce(reduceSchemas, rating_schemas['pirlo'].items(), 0)
+        self.rating_ibra = reduce(reduceSchemas, rating_schemas['ibra'].items(), 0)
 
         super().save(force_insert, force_update, using, update_fields)
 

@@ -47,6 +47,22 @@
   color: var(--RatingColor);
 }
 
+.plyr-FutilyRatings_Value-great {
+  --RatingColor: var(--Color_Great);
+}
+.plyr-FutilyRatings_Value-good {
+  --RatingColor: var(--Color_Good);
+}
+.plyr-FutilyRatings_Value-average {
+  --RatingColor: var(--Color_Average);
+}
+.plyr-FutilyRatings_Value-fair {
+  --RatingColor: var(--Color_Fair);
+}
+.plyr-FutilyRatings_Value-poor {
+  --RatingColor: var(--Color_Poor);
+}
+
 .plyr-FutilyRatings_ValueDifference {
   @apply --Font-14;
 
