@@ -154,11 +154,11 @@ class PlayerList(FormMixin, ListView):
         return [x.html_name for x in form]
 
 
-class PlayerListNew(ListView):
+class PlayerListLatest(ListView):
     model = Player
     paginate_by = 30
     ordering = '-created'
-    template_name = 'players/player_list_new.html'
+    template_name = 'players/player_list_latest.html'
 
     def is_filtered(self):
         return self.request.GET.get('position') or self.request.GET.get('level')
@@ -167,7 +167,7 @@ class PlayerListNew(ListView):
         return self.request.GET.get('sort')
 
     def get_context_data(self, **kwargs):
-        context = super(PlayerListNew, self).get_context_data()
+        context = super(PlayerListLatest, self).get_context_data()
 
         context['players'] = self.player_pagination(self.get_queryset())
 
