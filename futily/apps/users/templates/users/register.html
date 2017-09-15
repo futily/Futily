@@ -23,34 +23,38 @@
           <form class="usr-EntryForm_Form frm-Form" method="POST">
             {% csrf_token %}
 
-            {% for field in form %}
-              <div class="frm-Form_Item frm-Form_Item-floatingLabel js-FloatingLabel">
-                <label class="frm-Form_Label js-FloatingLabel_Label"
-                       for="{{ field.id_for_label }}">{{ field.label }}</label>
+            <div class="frm-Form_Items frm-Form_Items-tight">
+              {% for field in form %}
+                <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">
+                  <label class="frm-Form_Label js-FloatingLabel_Label"
+                         for="{{ field.id_for_label }}">{{ field.label }}</label>
 
-                {% if field.field.__class__.__name__ == 'EmailField' %}
-                  <input type="email"
-                         class="frm-Form_Input js-FloatingLabel_Input"
-                         name="{{ field.name }}"
-                         id="{{ field.id_for_label }}">
-                {% elif field.field.__class__.__name__ == 'CharField' %}
-                  <input class="frm-Form_Input js-FloatingLabel_Input"
-                         name="{{ field.name }}"
-                         id="{{ field.id_for_label }}">
-                {% elif field.field.__class__.__name__ == 'TypedChoiceField' %}
-                  <select class="frm-Form_Select js-FloatingLabel_Input"
-                          name="{{ field.name }}"
-                          id="{{ field.id_for_label }}">
-                    <option value="">{{ field.label }}</option>
-                    {% for value, label in field.field.choices %}
-                      <option value="{{ value }}">{{ label }}</option>
-                    {% endfor %}
-                  </select>
-                {% endif %}
-              </div>
-            {% endfor %}
+                  {% if field.field.__class__.__name__ == 'EmailField' %}
+                    <input type="email"
+                           class="frm-Form_Input js-FloatingLabel_Input"
+                           name="{{ field.name }}"
+                           id="{{ field.id_for_label }}">
+                  {% elif field.field.__class__.__name__ == 'CharField' %}
+                    <input class="frm-Form_Input js-FloatingLabel_Input"
+                           name="{{ field.name }}"
+                           id="{{ field.id_for_label }}">
+                  {% elif field.field.__class__.__name__ == 'TypedChoiceField' %}
+                    <select class="frm-Form_Select js-FloatingLabel_Input"
+                            name="{{ field.name }}"
+                            id="{{ field.id_for_label }}">
+                      <option value="">{{ field.label }}</option>
+                      {% for value, label in field.field.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                      {% endfor %}
+                    </select>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
 
-            <button type="submit" class="frm-Form_Submit btn-Primary btn-Large">Register</button>
+            <div class="frm-Form_Actions">
+              <button type="submit" class="frm-Form_Submit btn-Primary">Register</button>
+            </div>
           </form>
         </div>
       </div>
