@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% import "players/macros/filters.html" as filters_macros with context %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Fifa 17 Player Database</h1>
+          <p class="pg-Strapline_Text">Top Fifa 17 players</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content_class %}{{ super() }} lyt-Content-asideSwap{% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  {{ filters_macros.filters(filters) }}
+
+  {{ player_macros.card_list(players) }}
+
+  {{ render_pagination(players) }}
+{% endblock %}

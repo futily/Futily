@@ -3,10 +3,11 @@ from django.conf.urls import url
 from .views import (PlayerDetail, PlayerDetailChemistry,
                     PlayerDetailChemistryType, PlayerDetailCompare,
                     PlayerDetailSimilar, PlayerFavourite, PlayerList,
-                    PlayerRate)
+                    PlayerListNew, PlayerRate)
 
 urlpatterns = [
     url(r'^$', PlayerList.as_view(), name='players'),
+    url(r'^new/$', PlayerListNew.as_view(), name='new_players'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/$', PlayerDetail.as_view(), name='player'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/rate/$', PlayerRate.as_view(), name='player_rate'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/favourite/$', PlayerFavourite.as_view(), name='player_favourite'),

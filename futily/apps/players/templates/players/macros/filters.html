@@ -1,4 +1,4 @@
-{% macro filters(filters, sorts) %}
+{% macro filters(filters, sorts=None) %}
   <div class="pg-Bar">
     <div class="pb-Bar_Body">
       <div class="fltr-Filters">
@@ -42,31 +42,35 @@
               </div>
             </li>
 
-            <li class="fltr-Filters_Item">
-              <div class="fltr-Filter">
-                <p class="fltr-Filter_Label">
-                  Sort: <strong class="fltr-Filter_LabelChoice">{{ sorts.label }}</strong>
-                </p>
+            {% if sort %}
+              <li class="fltr-Filters_Item">
+                <div class="fltr-Filter">
+                  <p class="fltr-Filter_Label">
+                    Sort: <strong class="fltr-Filter_LabelChoice">{{ sorts.label }}</strong>
+                  </p>
 
-                <span class="fltr-Filter_DropdownIndicator">
-                  {% include "angle-down.svg" %}
-                </span>
+                  <span class="fltr-Filter_DropdownIndicator">
+                    {% include "angle-down.svg" %}
+                  </span>
 
-                <ul class="fltr-Filter_Dropdown">
-                  {% for sort in sorts.choices %}
-                    {{ filter_item(sort, 'sort') }}
-                  {% endfor %}
-                </ul>
-              </div>
-            </li>
+                  <ul class="fltr-Filter_Dropdown">
+                    {% for sort in sorts.choices %}
+                      {{ filter_item(sort, 'sort') }}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+            {% endif %}
 
-            <li class="fltr-Filters_Item">
-              {% set current_order = request.GET.get('order') %}
-              <a class="fltr-Sort"
-                 href="{{ build_url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">
-                {% include "sort.svg" %}
-              </a>
-            </li>
+            {% if sort %}
+              <li class="fltr-Filters_Item">
+                {% set current_order = request.GET.get('order') %}
+                <a class="fltr-Sort"
+                   href="{{ build_url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">
+                  {% include "sort.svg" %}
+                </a>
+              </li>
+            {% endif %}
           </ul>
         </div>
       </div>

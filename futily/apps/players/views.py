@@ -2,6 +2,7 @@ import json
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.text import slugify
@@ -10,6 +11,10 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 from rest_framework import filters, viewsets
 
+from futily.apps.players.constants import (LEVEL_FILTER_MAP,
+                                           LEVELS_GET_TO_LABEL,
+                                           POSITION_FILTER_MAP,
+                                           POSITION_GET_TO_LABEL)
 from futily.apps.players.serializers import PlayerSerializer
 from futily.apps.users.models import FavouritePlayers, User
 from futily.apps.views import EaObjectDetail
@@ -147,6 +152,137 @@ class PlayerList(FormMixin, ListView):
         form = self.get_form()
 
         return [x.html_name for x in form]
+
+
+class PlayerListNew(ListView):
+    model = Player
+    paginate_by = 30
+    ordering = '-created'
+    template_name = 'players/player_list_new.html'
+
+    def is_filtered(self):
+        return self.request.GET.get('position') or self.request.GET.get('level')
+
+    def is_sorted(self):
+        return self.request.GET.get('sort')
+
+    def get_context_data(self, **kwargs):
+        context = super(PlayerListNew, self).get_context_data()
+
+        context['players'] = self.player_pagination(self.get_queryset())
+
+        current_position = self.request.GET.get('position')
+        current_level = self.request.GET.get('level')
+        context['filters'] = {
+            'positions': {
+                'choices': self.filters['positions'],
+                'current': current_position,
+                'label': POSITION_GET_TO_LABEL[current_position] if current_position else 'All',
+            },
+            'levels': {
+                'choices': self.filters['levels'],
+                'current': current_level,
+                'label': LEVELS_GET_TO_LABEL[current_level] if current_level else 'All',
+            }
+        }
+
+        return context
+
+    def get_players_queryset(self, players):
+        if self.is_filtered():
+            position = self.request.GET.get('position')
+            level = self.request.GET.get('level')
+
+            if position:
+                players = players.filter(
+                    position__in=POSITION_FILTER_MAP[position.upper()]
+                )
+
+            if level:
+                players = players.filter(
+                    color__in=LEVEL_FILTER_MAP[level.upper()]
+                )
+
+        return players
+
+    def player_pagination(self, players):
+        paginator = Paginator(self.get_players_queryset(players), self.paginate_by)
+
+        try:
+            # Deliver the requested page
+            return paginator.page(self.request.GET.get('page'))
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            return paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            return paginator.page(paginator.num_pages)
+
+    @property
+    def filters(self):
+        return {
+            'levels': [
+                {'key': 'all', 'label': 'All', 'group': False},
+                {'key': 'totw', 'label': 'TOTW', 'group': False},
+                {'key': 'gold', 'label': 'Gold', 'group': False},
+                {'key': 'silver', 'label': 'Silver', 'group': False},
+                {'key': 'bronze', 'label': 'Bronze', 'group': False},
+                {'key': '', 'label': 'TOTW', 'group': True, 'options': [
+                    {'key': 'totw-gold', 'label': 'TOTW Gold'},
+                    {'key': 'totw-silver', 'label': 'TOTW Silver'},
+                    {'key': 'totw-bronze', 'label': 'TOTW Bronze'},
+                ]},
+                {'key': '', 'label': 'Rares', 'group': True, 'options': [
+                    {'key': 'rare-gold', 'label': 'Rare Gold'},
+                    {'key': 'rare-silver', 'label': 'Rare Silver'},
+                    {'key': 'rare-bronze', 'label': 'Rare Bronze'},
+                ]},
+                {'key': '', 'label': 'Non rares', 'group': True, 'options': [
+                    {'key': 'nonrare-gold', 'label': 'Gold'},
+                    {'key': 'nonrare-silver', 'label': 'Silver'},
+                    {'key': 'nonrare-bronze', 'label': 'Bronze'},
+                ]},
+                {'key': 'legend', 'label': 'Legends'},
+                {'key': 'toty', 'label': 'TOTY'},
+                {'key': 'motm', 'label': 'MOTM'},
+                {'key': 'transfers', 'label': 'Transfers'},
+                {'key': 'special', 'label': 'Special'},
+            ],
+            'positions': [
+                {'key': 'all', 'label': 'All positions'},
+                {'key': 'gk', 'label': 'Goalkeepers'},
+                {'key': 'def', 'label': 'Defenders'},
+                {'key': 'mid', 'label': 'Midfielders'},
+                {'key': 'att', 'label': 'Attackers'},
+                {'key': '', 'label': 'Positions', 'group': True, 'options': [
+                    {'key': 'gk', 'label': 'GK'},
+                    {'key': 'rwb', 'label': 'RWB'},
+                    {'key': 'rb', 'label': 'RB'},
+                    {'key': 'cb', 'label': 'CB'},
+                    {'key': 'lb', 'label': 'LB'},
+                    {'key': 'lwb', 'label': 'LWB'},
+                    {'key': 'cdm', 'label': 'CDM'},
+                    {'key': 'cm', 'label': 'CM'},
+                    {'key': 'cam', 'label': 'CAM'},
+                    {'key': 'rm', 'label': 'RM'},
+                    {'key': 'rw', 'label': 'RW'},
+                    {'key': 'rf', 'label': 'RF'},
+                    {'key': 'lm', 'label': 'LM'},
+                    {'key': 'lw', 'label': 'LW'},
+                    {'key': 'lf', 'label': 'LF'},
+                    {'key': 'cf', 'label': 'CF'},
+                    {'key': 'st', 'label': 'ST'},
+                ]},
+                {'key': 'gk', 'label': 'Goalkeepers'},
+                {'key': 'cbs', 'label': 'Center backs'},
+                {'key': 'rbs', 'label': 'Right backs'},
+                {'key': 'lbs', 'label': 'Left backs'},
+                {'key': 'cms', 'label': 'Central midfielders'},
+                {'key': 'rms', 'label': 'Right wingers'},
+                {'key': 'lms', 'label': 'Left wingers'},
+                {'key': 'sts', 'label': 'Strikers'},
+            ]
+        }
 
 
 class PlayerDetail(DetailView):
