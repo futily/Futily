@@ -11,6 +11,7 @@
   left: calc(100% + (var(--Grid_Gutter) * 2));
   z-index: 1;
 
+  max-width: 650px;
   width: 50vw;
   padding: 0.5vr var(--Grid_Gutter);
 
