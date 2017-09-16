@@ -6,7 +6,6 @@ import sys
 from datetime import datetime
 
 from django_jinja.builtins import DEFAULT_EXTENSIONS
-from social_core.pipeline import DEFAULT_AUTH_PIPELINE
 
 if platform.python_implementation() == 'PyPy':
     from psycopg2cffi import compat  # pylint: disable=import-error
@@ -247,8 +246,6 @@ PUBLICATION_MIDDLEWARE_EXCLUDE_URLS = (
     '^admin/.*',
 )
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 SITE_ID = 1
@@ -470,7 +467,9 @@ TINYPNG_API_KEY = ''
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GooglePlusAuth',
-    'django.contrib.auth.backends.ModelBackend'
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 LOGIN_URL = 'users:login'
@@ -486,13 +485,67 @@ REST_FRAMEWORK = {
 
 SOCIAL_AUTH_GOOGLE_PLUS_KEY = '589992011980-13s86jclt0lr3meptkspk2jtafa4hnv2.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_PLUS_SECRET = 'tfkHbGLXBUDRaU-Pwz6kqLkq'
+SOCIAL_AUTH_GOOGLE_PLUS_SCOPE = ['email']
 
-WHITELISTED_DOMAINS = ['futily.com']
+SOCIAL_AUTH_TWITTER_KEY = '2rVHSoEhdYLl8wU3DvBpdCdS4'
+SOCIAL_AUTH_TWITTER_SECRET = 'L0V5p40f3ASjWRvJVn7aODGCsVEYQjMlLtoinTDP5nNYVPqfjc'
+SOCIAL_AUTH_TWITTER_SCOPE = ['email']
+
+SOCIAL_AUTH_FACEBOOK_KEY = '1901815343476017'
+SOCIAL_AUTH_FACEBOOK_SECRET = 'c44df040f574549a716465301267e796'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id,name,email',
+}
+
+# WHITELISTED_DOMAINS = ['futily.com']
 SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['first_name', 'last_name']
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/admin/'
-SOCIAL_AUTH_PIPELINE = DEFAULT_AUTH_PIPELINE + (
-    'cms.pipeline.make_staff',
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_PIPELINE = (
+    # Get the information we can about the user and return it in a simple
+    # format to create the user instance later. On some cases the details are
+    # already part of the auth response from the provider, but sometimes this
+    # could hit a provider API.
+    'social_core.pipeline.social_auth.social_details',
+
+    # Get the social uid from whichever service we're authing thru. The uid is
+    # the unique identifier of the given user in the provider.
+    'social_core.pipeline.social_auth.social_uid',
+
+    # Verifies that the current auth process is valid within the current
+    # project, this is where emails and domains whitelists are applied (if
+    # defined).
+    'social_core.pipeline.social_auth.auth_allowed',
+
+    # Checks if the current social-account is already associated in the site.
+    'social_core.pipeline.social_auth.social_user',
+
+    # Make up a username for this person, appends a random string at the end if
+    # there's any collision.
+    'social_core.pipeline.user.get_username',
+
+    'futily.pipeline.pick_username',
+
+    # Send a validation email to the user to verify its email address.
+    # 'social_core.pipeline.mail.mail_validation',
+
+    # Associates the current social details with another user account with
+    # a similar email address.
+    # 'social_core.pipeline.social_auth.associate_by_email',
+
+    # Create a user account if we haven't found one yet.
+    'social_core.pipeline.user.create_user',
+
+    # Create the record that associated the social account with this user.
+    'social_core.pipeline.social_auth.associate_user',
+
+    # Populate the extra_data field in the social record with the values
+    # specified by settings (and the default ones like access_token, etc).
+    'social_core.pipeline.social_auth.load_extra_data',
+
+    # Update the user record with any changed info from the auth service.
+    'social_core.pipeline.user.user_details'
 )
 
 # Typekit
