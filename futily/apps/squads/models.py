@@ -1,7 +1,6 @@
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase, PageBaseManager
 from django.contrib.contenttypes.models import ContentType
-from django.core import urlresolvers
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Prefetch
@@ -86,9 +85,6 @@ class Squad(PageBase):
 
     web_app_import = models.BooleanField(default=False)
     web_app_url = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        unique_together = ['title', 'is_special']
 
     def __str__(self):
         return self.title

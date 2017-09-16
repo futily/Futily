@@ -18,10 +18,12 @@ class BuilderForm(forms.ModelForm):
         players = self.data.get('players', None)
         slug = self.data.get('slug', None)
 
-        player_splits = players.split('|')
-        players = list(map(setup_squad_player, player_splits))
+        if players:
+            player_splits = players.split('|')
+            players = list(map(setup_squad_player, player_splits))
 
-        self.cleaned_data['players'] = players
+            self.cleaned_data['players'] = players
+
         self.cleaned_data['slug'] = slugify(slug)
 
         return self.cleaned_data

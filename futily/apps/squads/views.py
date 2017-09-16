@@ -1,6 +1,5 @@
 import json
 import urllib
-
 from collections import OrderedDict
 
 from django.http import JsonResponse
@@ -8,7 +7,9 @@ from django.utils.text import slugify
 from django.views.generic import DetailView, FormView, ListView
 from django.views.generic.base import TemplateView, View
 
+from futily.apps.actions.utils import create_action
 from futily.apps.players.models import Player
+
 from .forms import BuilderForm
 from .models import FORMATION_CHOICES, Squad, SquadPlayer
 
@@ -46,21 +47,30 @@ class BuilderAjax(FormView):
 
             return JsonResponse(response_data, status=400)
         else:
-            players = form.cleaned_data.pop('players')
+            data = form.cleaned_data
+            data['is_online'] = True
+            data['robots_index'] = True
+            data['robots_follow'] = True
+            data['robots_archive'] = True
+            squad = Squad(**form.cleaned_data)
+            squad.save()
 
-            squad = Squad.objects.create(**form.cleaned_data)
+            if form.cleaned_data.get('players'):
+                players = form.cleaned_data.pop('players')
 
-            for player in players:
-                p = SquadPlayer(player=player[0], squad=squad, index=player[1], position=player[2])
-                p.save()
+                for player in players:
+                    p = SquadPlayer(player=player[0], squad=squad, index=player[1], position=player[2])
+                    p.save()
+
+            create_action(request.user, 'created squad', squad)
 
         return JsonResponse(response_data)
 
 
 class BuilderImport(View):
     def get(self, request, *args, **kwargs):
-        id = self.kwargs['id']
-        url = f'https://utas.external.s3.fut.ea.com/ut/showofflink/{id}'
+        web_app_id = self.kwargs['id']
+        url = f'https://utas.external.s3.fut.ea.com/ut/showofflink/{web_app_id}'
         json_data = json.loads(urllib.request.urlopen(url).read())
         squad_data = json_data['data']['squad'][0]
         formation = self.formation_schema(squad_data['formation'])
