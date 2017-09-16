@@ -172,7 +172,8 @@ class UserProfileView(UserMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data()
 
-        context['actions'] = Action.objects.filter(user=self.get_object())[:30]
+        context['actions'] = Action.objects.filter(user=self.object)[:30]
+        context['following_actions'] = Action.objects.filter(user__in=self.object.get_following)[:30]
 
         return context
 
