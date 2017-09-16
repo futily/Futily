@@ -78,7 +78,6 @@ class UserMixin(View):
 
 
 class UserFollowView(LoginRequiredMixin, UserMixin):
-
     def post(self, request, *args, **kwargs):
         user_to_follow = User.objects.get(username=self.kwargs['username'])
         following_user = self.request.user
@@ -168,12 +167,15 @@ class UserPackView(UserMixin, DetailView):
 
 
 class UserProfileView(UserMixin, DetailView):
-
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data()
 
-        context['actions'] = Action.objects.filter(user=self.object)[:30]
-        context['following_actions'] = Action.objects.filter(user__in=self.object.get_following)[:30]
+        context['actions'] = Action.objects.filter(user=self.object)[:30] \
+            .select_related('user') \
+            .prefetch_related('target')
+        context['following_actions'] = Action.objects.filter(user__in=self.object.get_following)[:30] \
+            .select_related('user') \
+            .prefetch_related('target')
 
         return context
 
