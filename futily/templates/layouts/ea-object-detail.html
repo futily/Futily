@@ -82,7 +82,7 @@
 {% endblock %}
 
 {% block main %}
-  {{ filters_macros.filters(filters, sorts) }}
+  {{ filters_macros.filters(filters) }}
 
   {{ player_macros.card_list(players, sorts=sorts) }}
 

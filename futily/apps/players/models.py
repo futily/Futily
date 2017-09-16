@@ -26,6 +26,12 @@ class Players(ContentBase):
     def __str__(self):
         return self.page.title
 
+    @property
+    def navigation_items(self):
+        return [
+            ('Latest', self.page.reverse('latest_players'))
+        ]
+
 
 class Source(models.Model):
     title = models.CharField(max_length=255)
