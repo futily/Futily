@@ -11,6 +11,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 from rest_framework import filters, viewsets
 
+from futily.apps.actions.utils import create_action
 from futily.apps.players.constants import (LEVEL_FILTER_MAP,
                                            LEVELS_GET_TO_LABEL,
                                            POSITION_FILTER_MAP,
@@ -331,8 +332,12 @@ class PlayerRate(LoginRequiredMixin, View):
         try:
             if action == 'up':
                 self.model.votes.up(player, user)
+
+                create_action(request.user, 'liked player', player)
             else:
                 self.model.votes.down(player, user)
+
+                create_action(request.user, 'disliked player', player)
 
             if request.is_ajax():
                 return JsonResponse(player.playerrating.to_dict())
@@ -354,8 +359,12 @@ class PlayerFavourite(LoginRequiredMixin, View):
 
         if player in user.favouriteplayers.players.all():
             user.favouriteplayers.players.remove(player)
+
+            create_action(request.user, 'unfavourited', player)
         else:
             user.favouriteplayers.players.add(player)
+
+            create_action(request.user, 'favourited', player)
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 

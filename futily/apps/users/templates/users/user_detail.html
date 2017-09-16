@@ -1,10 +1,36 @@
 {% extends "users/_base.html" %}
 
 {% block side_panel %}
-  {% if object.about_me %}
-    <h3 class="typ-Title typ-Title-medium">About {{ object }}</h3>
-    <p class="typ-Text">{{ object.about_me }}</p>
-  {% endif %}
+  <div class="usr-Index">
+    <div class="usr-Index_Panel">
+      <header class="usr-Index_PanelHeader">
+        <h3 class="usr-Index_PanelTitle">{{ object }}'s <strong class="usr-Index_Emphasis">activity</strong></h3>
+      </header>
+
+      <div class="usr-Index_PanelBody">
+        <div class="act-Actions">
+          <ul class="act-Actions_Items">
+            {% for action in actions %}
+              <li class="act-Actions_Item">{{ action.html__str__ }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="usr-Index_Right">
+      {% if object.about_me %}
+        <div class="usr-Index_Panel">
+          <header class="usr-Index_PanelHeader">
+            <h3 class="usr-Index_PanelTitle"><strong class="usr-Index_Emphasis">About</strong> {{ object }}</h3>
+          </header>
+          <div class="usr-Index_PanelBody">
+            <p class="typ-Text">{{ object.about_me }}</p>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block aside_blocks %}

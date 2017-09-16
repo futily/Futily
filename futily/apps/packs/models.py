@@ -6,7 +6,6 @@ from django.db import models
 from django.utils.text import slugify
 
 from ..fields import ChoiceArrayField
-from .utils import color_choices
 
 
 class Packs(ContentBase):
@@ -17,8 +16,41 @@ class Packs(ContentBase):
         return self.page.title
 
 
-class Type(PageBase):
-    page = models.ForeignKey('Packs', null=True, blank=False)
+color_choices = [
+    ('award_winner', 'Award winner'),
+    ('bronze', 'Bronze'),
+    ('confederation_champions_motm', 'Confederation champions MOTM'),
+    ('fut_birthday', 'FUT Birthday'),
+    ('futties_winner', 'Futties winner'),
+    ('gold', 'Gold'),
+    ('gotm', 'GOTM'),
+    ('halloween', 'Halloween'),
+    ('imotm', 'iMOTM'),
+    ('legend', 'Legend'),
+    ('motm', 'MOTM'),
+    ('movember', 'Movember'),
+    ('ones_to_watch', 'Ones to watch'),
+    ('pink', 'Pink'),
+    ('purple', 'Purple'),
+    ('rare_bronze', 'Rare Bronze'),
+    ('rare_gold', 'Rare Gold'),
+    ('rare_silver', 'Rare Silver'),
+    ('record_breaker', 'Record breaker'),
+    ('sbc_base', 'SBC base'),
+    ('silver', 'Silver'),
+    ('st_patricks', 'St. Patricks'),
+    ('tots_bronze', 'TOTS Bronze'),
+    ('tots_gold', 'TOTS Gold'),
+    ('tots_silver', 'TOTS Silver'),
+    ('totw_bronze', 'TOTW Bronze'),
+    ('totw_gold', 'TOTW Gold'),
+    ('totw_silver', 'TOTW Silver'),
+    ('toty', 'TOTY'),
+]
+
+
+class PackType(PageBase):
+    page = models.ForeignKey('packs.Packs')
 
     description = models.TextField()
     image = ImageRefField(blank=True, null=True)
@@ -35,43 +67,43 @@ class Type(PageBase):
     ], default='special')
 
     roll_1_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, blank=False),
-        default=list, blank=True, help_text='These are part of the "normal" rolls.',
+        base_field=models.CharField(max_length=100, choices=color_choices),
+        default=list, help_text='These are part of the "normal" rolls.',
     )
     roll_1_types_rating_min = models.PositiveIntegerField(default=75)
     roll_1_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_2_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100),
-        default=list, blank=True, help_text='These are part of the "normal" rolls.',
+        base_field=models.CharField(max_length=100, choices=color_choices),
+        default=list, help_text='These are part of the "normal" rolls.',
     )
     roll_2_types_rating_min = models.PositiveIntegerField(default=75)
     roll_2_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_3_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100),
-        default=list, blank=True, help_text='These are part of the "normal" rolls.',
+        base_field=models.CharField(max_length=100, choices=color_choices),
+        default=list, help_text='These are part of the "normal" rolls.',
     )
     roll_3_types_rating_min = models.PositiveIntegerField(default=75)
     roll_3_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_4_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100),
-        default=list, blank=True, help_text='These are part of the "rare" rolls.',
+        base_field=models.CharField(max_length=100, choices=color_choices),
+        default=list, help_text='These are part of the "rare" rolls.',
     )
     roll_4_types_rating_min = models.PositiveIntegerField(default=75)
     roll_4_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_5_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100),
-        default=list, blank=True, help_text='These are part of the "rare" rolls.',
+        base_field=models.CharField(max_length=100, choices=color_choices),
+        default=list, help_text='These are part of the "rare" rolls.',
     )
     roll_5_types_rating_min = models.PositiveIntegerField(default=75)
     roll_5_types_rating_max = models.PositiveIntegerField(default=99)
 
     roll_6_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100),
-        default=list, blank=True, help_text='These are part of the "rare" rolls.',
+        base_field=models.CharField(max_length=100, choices=color_choices),
+        default=list, help_text='These are part of the "rare" rolls.',
     )
     roll_6_types_rating_min = models.PositiveIntegerField(default=75)
     roll_6_types_rating_max = models.PositiveIntegerField(default=99)
@@ -87,15 +119,6 @@ class Type(PageBase):
 
     def __str__(self):
         return self.title
-
-    def __init__(self, *args, **kwargs):
-        super(Type, self).__init__()
-        self._meta.get_field('roll_1_types').base_field.choices = color_choices()
-        self._meta.get_field('roll_2_types').base_field.choices = color_choices()
-        self._meta.get_field('roll_3_types').base_field.choices = color_choices()
-        self._meta.get_field('roll_4_types').base_field.choices = color_choices()
-        self._meta.get_field('roll_5_types').base_field.choices = color_choices()
-        self._meta.get_field('roll_6_types').base_field.choices = color_choices()
 
     def _get_permalink_for_page(self, page):
         return page.reverse('type', kwargs={
@@ -113,7 +136,7 @@ class Pack(models.Model):
     page = models.ForeignKey('packs.Packs', blank=False, null=True)
     user = models.ForeignKey('users.User')
     players = models.ManyToManyField('players.Player')
-    type = models.ForeignKey('packs.Type')
+    type = models.ForeignKey('packs.PackType')
 
     value = models.PositiveIntegerField(default=0)
 

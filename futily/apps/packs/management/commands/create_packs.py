@@ -5,7 +5,7 @@ from xml.etree import ElementTree
 from django.core.management import BaseCommand
 from django.utils.text import slugify
 
-from ...models import Type
+from ...models import PackType
 
 
 class Command(BaseCommand):
@@ -35,7 +35,7 @@ class Command(BaseCommand):
                                 packs[pack_id]['description'] = child3.find('source').text
 
         pack_types = list(map(create_pack_type, packs.items()))
-        Type.objects.bulk_create(pack_types)
+        PackType.objects.bulk_create(pack_types)
 
         return
 
@@ -73,7 +73,7 @@ def create_pack_type(data):
         name = name.replace('Totw', 'TOTW')
         name = name.replace('totw', 'TOTW')
 
-    return Type(**{
+    return PackType(**{
         'title': name,
         'slug': slugify(name),
         'description': description,

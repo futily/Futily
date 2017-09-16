@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 import os
 import platform
 import sys
+from datetime import datetime
 
 from django_jinja.builtins import DEFAULT_EXTENSIONS
 from social_core.pipeline import DEFAULT_AUTH_PIPELINE
@@ -136,6 +137,7 @@ INSTALLED_APPS = [
     'algoliasearch_django',
     'annoying',
     'django_jinja',
+    'django_jinja.contrib._humanize',
 
     'django.forms',
 
@@ -150,6 +152,7 @@ INSTALLED_APPS = [
     'cms.apps.links',
     'cms.apps.media',
 
+    'futily.apps.actions',
     'futily.apps.clubs',
     'futily.apps.comments',
     'futily.apps.components',
@@ -275,7 +278,8 @@ TEMPLATES = [
             'globals': {
                 'getattr': getattr,
                 'set': set,
-                'abs': abs
+                'abs': abs,
+                'datetime': datetime
             },
             'bytecode_cache': {
                 'name': 'default',

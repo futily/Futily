@@ -44,6 +44,7 @@ ALLOWED_HOSTS = [
     '::1',
     # For compatibility with Browsersync.
     '0.0.0.0',
+    'futily.dev',
 ]
 
 PREPEND_WWW = False

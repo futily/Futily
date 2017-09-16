@@ -78,11 +78,11 @@
   {{ player_macros.card_list(players) }}
 
   {% if request.user.is_authenticated %}
-    <form action="{{ type.get_absolute_url() }}" method="POST">
+    <form action="{{ object.get_absolute_url() }}" method="POST">
       <input name="title" placeholder="title">
       <input type="hidden" name="page" value="{{ pages.current.pk }}">
       <input type="hidden" name="user" value="{{ request.user.pk }}">
-      <input type="hidden" name="type" value="{{ type.pk }}">
+      <input type="hidden" name="type" value="{{ object.pk }}">
       <input type="hidden" name="value" value="0">
 
       {% for player in players %}

@@ -4,15 +4,16 @@ from collections import Counter
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 
+from futily.apps.actions.utils import create_action
 from futily.apps.users.models import CollectionPlayer
 
 from ..players.models import Player
 from .forms import PackCreationForm
-from .models import Pack, Type
+from .models import Pack, PackType
 
 
 class TypeList(ListView):
-    model = Type
+    model = PackType
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -41,7 +42,7 @@ class TypeList(ListView):
 
 
 class TypeDetail(FormMixin, DetailView):
-    model = Type
+    model = PackType
     form_class = PackCreationForm
 
     def __init__(self, **kwargs):
@@ -111,7 +112,6 @@ class TypeDetail(FormMixin, DetailView):
         return context
 
     def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
         form = self.get_form()
 
         if form.is_valid():
@@ -121,6 +121,8 @@ class TypeDetail(FormMixin, DetailView):
 
     def form_valid(self, form):
         self.pack_object = form.save()
+
+        create_action(self.request.user, 'saved a pack', self.pack_object)
 
         return super(TypeDetail, self).form_valid(form)
 

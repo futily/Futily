@@ -2,17 +2,19 @@ from cms.admin import PageBaseAdmin
 from django.contrib import admin
 from suit.admin import SortableModelAdmin
 
-from .models import Type
+from .forms import PackTypeAdmin
+from .models import PackType
 
 
-@admin.register(Type)
+@admin.register(PackType)
 class TypeAdmin(SortableModelAdmin, PageBaseAdmin):
+    form = PackTypeAdmin
     list_display = ['__str__', 'description', 'quality', 'is_online', 'order']
     list_editable = ['quality', 'is_online', 'order']
 
     fieldsets = [
         (None, {
-            'fields': ['title', 'slug', 'page', 'description', 'image'],
+            'fields': ['title', 'slug', 'page', 'description', 'image', 'quality'],
         }),
         ('Counts', {
             'fields': ['normal_count', 'rare_count'],

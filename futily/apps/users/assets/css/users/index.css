@@ -1,0 +1,38 @@
+/*
+|--------------------------------------------------------------------------
+| Index
+|--------------------------------------------------------------------------
+| @namespace: usr-
+|
+*/
+.usr-Index {
+  grid-column-gap: calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: 1fr 300px;
+
+  display: grid;
+}
+
+.usr-Index_Right {
+  grid-column: 2 / -1;
+}
+
+.usr-Index_PanelHeader {
+  align-items: baseline;
+  justify-content: space-between;
+
+  display: flex;
+  margin-bottom: 0.75vr;
+  padding-bottom: 0.5vr;
+
+  border-bottom: 2px solid var(--Color_Border);
+}
+
+.usr-Index_PanelTitle {
+  @apply --Font-30;
+
+  font-weight: 400;
+}
+
+.usr-Index_Emphasis {
+  font-weight: 500;
+}

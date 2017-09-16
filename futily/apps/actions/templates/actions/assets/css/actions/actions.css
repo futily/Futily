@@ -1,0 +1,20 @@
+/*
+|--------------------------------------------------------------------------
+| Actions
+|--------------------------------------------------------------------------
+| @namespace: act-
+|
+*/
+.act-Actions_Item {
+  margin-bottom: 0.5vr;
+  padding-bottom: @margin-bottom;
+
+  border-bottom: 1px solid var(--Color_Border);
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    border-bottom: 0;
+  }
+}

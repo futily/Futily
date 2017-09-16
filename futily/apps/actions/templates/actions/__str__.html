@@ -1,0 +1,9 @@
+<div class="act-Action">
+  <p class="act-Action_Text">
+    <strong class="act-Action_Highlight">{{ action.user }}</strong>
+    {{ action.verb }}
+    <a class="act-Action_Link" href="{{ action.target.get_absolute_url() }}">{{ action.target }}</a>
+  </p>
+
+  <time class="act-Action_Time">{{ action.created | naturaltime() }}</time>
+</div>

@@ -10,6 +10,8 @@ from django.views import View
 from django.views.generic import DetailView, FormView, UpdateView
 from django.views.generic.detail import BaseDetailView
 
+from futily.apps.actions.models import Action
+from futily.apps.actions.utils import create_action
 from futily.apps.clubs.models import Club
 
 from ..leagues.models import League
@@ -84,8 +86,12 @@ class UserFollowView(LoginRequiredMixin, UserMixin):
 
         if is_already_following:
             user_to_follow.remove_follower(following_user)
+
+            create_action(request.user, 'unfollowed', user_to_follow)
         else:
             user_to_follow.add_follower(following_user)
+
+            create_action(request.user, 'followed', user_to_follow)
 
         return JsonResponse({
             'followed': not is_already_following,
@@ -162,7 +168,13 @@ class UserPackView(UserMixin, DetailView):
 
 
 class UserProfileView(UserMixin, DetailView):
-    pass
+
+    def get_context_data(self, **kwargs):
+        context = super(UserProfileView, self).get_context_data()
+
+        context['actions'] = Action.objects.filter(user=self.get_object())[:30]
+
+        return context
 
 
 class UserSettingsView(LoginRequiredMixin, UserMixin, UpdateView):
