@@ -5,7 +5,8 @@ from django.core.management import BaseCommand
 from django.utils.text import slugify
 
 from futily.apps.players.models import Player
-from futily.apps.squads.models import Squad, get_default_squad_page, SquadPlayer
+from futily.apps.squads.models import (Squad, SquadPlayer,
+                                       get_default_squad_page)
 from futily.apps.users.models import User
 
 

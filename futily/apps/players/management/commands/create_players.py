@@ -2,9 +2,10 @@ from __future__ import print_function
 
 from django.core.management import BaseCommand
 
+from futily.apps.players.utils.management import serialize_player
+
 from ....commands import EaAssetCreatorCommand
 from ...models import Player
-from ...utils.management import serialize_player
 
 
 class Command(EaAssetCreatorCommand, BaseCommand):

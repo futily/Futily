@@ -221,7 +221,7 @@ export class Rating {
 
       this.els.value.innerText = data.score
     } catch (e) {
-      console.log(e)
+      console.log(e) // eslint-disable-line no-console
     }
   }
 
