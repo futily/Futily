@@ -42,7 +42,19 @@
 */
 .lyt-Content_Body {
   .lyt-Content-mainAside & {
-    @apply --GridRow;
+    grid-column-gap: calc(var(--Grid_Gutter) * 2);
+    grid-template-columns: 1fr 300px;
+
+    display: grid;
+  }
+
+  .lyt-Content-asideSwap & {
+    grid-template-columns: 300px 1fr;
+  }
+
+  .lyt-Content-mainTight & {
+    grid-column-gap: 0;
+    grid-template-columns: 1fr calc(7 / 12 * 100%) 1fr;
   }
 }
 
@@ -53,18 +65,8 @@
 |
 */
 .lyt-Main {
-  .lyt-Content-mainAside & {
-    @apply --GridColumn;
-
-    flex: 1;
-  }
-
   .lyt-Content-mainTight & {
-    flex-basis: calc(7 / 12 * 100%);
-    flex-grow: 0;
-
-    margin-right: auto;
-    margin-left: auto;
+    grid-column: 2;
   }
 }
 
