@@ -19,6 +19,10 @@
   display: grid;
 }
 
+.plyr-CardList_Items-tight {
+  grid-template-columns: repeat(auto-fit, 170px);
+}
+
 .plyr-CardList_Item {
   justify-content: center;
 

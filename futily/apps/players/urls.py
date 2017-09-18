@@ -1,13 +1,18 @@
 from django.conf.urls import url
 
-from .views import (PlayerDetail, PlayerDetailChemistry,
-                    PlayerDetailChemistryType, PlayerDetailCompare,
-                    PlayerDetailSimilar, PlayerFavourite, PlayerList,
-                    PlayerListLatest, PlayerRate)
+from futily.apps.players.views.detail import (PlayerDetail,
+                                              PlayerDetailChemistry,
+                                              PlayerDetailChemistryType,
+                                              PlayerDetailCompare,
+                                              PlayerDetailSimilar,
+                                              PlayerFavourite, PlayerRate)
+from futily.apps.players.views.list import (PlayerList, PlayerListLatest,
+                                            PlayerPerfectChemistry)
 
 urlpatterns = [
     url(r'^$', PlayerList.as_view(), name='players'),
     url(r'^latest/$', PlayerListLatest.as_view(), name='latest_players'),
+    url(r'^perfect-chemistry/$', PlayerPerfectChemistry.as_view(), name='perfect_chemistry'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/$', PlayerDetail.as_view(), name='player'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/rate/$', PlayerRate.as_view(), name='player_rate'),
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/favourite/$', PlayerFavourite.as_view(), name='player_favourite'),

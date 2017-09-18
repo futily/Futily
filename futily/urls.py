@@ -11,7 +11,7 @@ from django.contrib.sitemaps import views as sitemaps_views
 from django.views import generic
 from rest_framework.routers import DefaultRouter
 
-from futily.apps.players.views import PlayerViewSet
+from futily.apps.players.views.api import PlayerViewSet
 
 from .apps.sections.models import sections_js
 from .utils.views import FrontendView

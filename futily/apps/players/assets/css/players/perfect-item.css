@@ -1,0 +1,17 @@
+/*
+|--------------------------------------------------------------------------
+| Perfect item
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-PerfectItem {
+  grid-template-columns: 140px 60px 1fr;
+
+  display: grid;
+}
+
+.plyr-PerfectItem_Player,
+.plyr-PerfectItem_Options {
+  background-color: hsla(210, 6%, 96%, 1);
+}

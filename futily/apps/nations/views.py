@@ -1,11 +1,16 @@
-from ..views import EaObjectDetail, EaObjectList
+from django.views.generic import DetailView
+
+from ..views import EaObjectList, PlayerFilterSorted
 from .models import Nation
 
 
 class NationList(EaObjectList):
-    model = Nation
     paginate_by = 50
-
-
-class NationDetail(EaObjectDetail):
     model = Nation
+
+
+class NationDetail(DetailView, PlayerFilterSorted):
+    model = Nation
+
+    def initial_players(self):
+        return self.object.players()

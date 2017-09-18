@@ -1,13 +1,16 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import F
-from django.views.generic import DetailView, ListView
+from django.views import View
+from django.views.generic import ListView
+from django.views.generic.base import ContextMixin
 
 from .players.constants import (LEVEL_FILTER_MAP, LEVELS_GET_TO_LABEL,
                                 POSITION_FILTER_MAP, POSITION_GET_TO_LABEL,
                                 SORT_GET_TO_LABEL)
 
 
-class EaObjectDetail(DetailView):
+class PlayerFilterSorted(ContextMixin, View):
+    always_filters = None
     players_per_page = 30
 
     def is_filtered(self):
@@ -17,16 +20,17 @@ class EaObjectDetail(DetailView):
         return self.request.GET.get('sort')
 
     def initial_players(self):
-        return self.get_object().players()
+        raise NotImplementedError
 
     def get_context_data(self, **kwargs):
-        context = super(EaObjectDetail, self).get_context_data()
+        context = super().get_context_data(**kwargs)
 
         context['players'] = self.player_pagination(self.initial_players())
 
         current_position = self.request.GET.get('position')
         current_level = self.request.GET.get('level')
         current_sort = self.request.GET.get('sort')
+
         context['filters'] = {
             'positions': {
                 'choices': self.filters['positions'],
@@ -47,7 +51,23 @@ class EaObjectDetail(DetailView):
 
         return context
 
+    def player_pagination(self, players):
+        paginator = Paginator(self.get_players_queryset(players), self.players_per_page)
+
+        try:
+            # Deliver the requested page
+            return paginator.page(self.request.GET.get('page'))
+        except PageNotAnInteger:
+            # If page is not an integer, deliver first page.
+            return paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g. 9999), deliver last page of results.
+            return paginator.page(paginator.num_pages)
+
     def get_players_queryset(self, players):
+        if self.always_filters:
+            players = players.filter(**self.always_filters)
+
         if self.is_filtered():
             position = self.request.GET.get('position')
             level = self.request.GET.get('level')
@@ -75,19 +95,6 @@ class EaObjectDetail(DetailView):
             players = players.defer(*defer)
 
         return players
-
-    def player_pagination(self, players):
-        paginator = Paginator(self.get_players_queryset(players), self.players_per_page)
-
-        try:
-            # Deliver the requested page
-            return paginator.page(self.request.GET.get('page'))
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            return paginator.page(1)
-        except EmptyPage:
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            return paginator.page(paginator.num_pages)
 
     @property
     def filters(self):

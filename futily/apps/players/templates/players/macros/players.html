@@ -1,6 +1,6 @@
-{% macro card_list(players, card_collection=False, sorts=None) %}
+{% macro card_list(players, card_collection=False, sorts=None, tight=False) %}
   <div class="plyr-CardList">
-    <ul class="plyr-CardList_Items">
+    <ul class="plyr-CardList_Items{% if tight %} plyr-CardList_Items-tight{% endif %}">
       {% for player in players %}
         <li class="plyr-CardList_Item{% if sorts or caller %} plyr-CardList_Item-stacked{% endif %}">
           {{ player.render_card(faded=card_collection) }}

@@ -29,7 +29,8 @@ class Players(ContentBase):
     @property
     def navigation_items(self):
         return [
-            ('Latest', self.page.reverse('latest_players'))
+            ('Latest', self.page.reverse('latest_players')),
+            ('Perfect chemistry', self.page.reverse('perfect_chemistry')),
         ]
 
 
@@ -83,7 +84,7 @@ class PlayerCardManager(models.Manager):
         return qs
 
 
-class Player(PageBase):  # pylint: disable=too-many-public-methods
+class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-instance-attributes
     cards = PlayerCardManager()
     objects = PlayerManager()
 
@@ -196,6 +197,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
     is_special_type = models.BooleanField(default=False)
 
     likes = models.IntegerField(default=0)
+    has_perfect_chem_links = models.PositiveIntegerField(default=False)
 
     pack_weight = models.PositiveIntegerField(blank=True, null=True)
 
@@ -287,6 +289,8 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods
         self.rating_vidic = reduce(reduceSchemas, rating_schemas['vidic'].items(), 0)
         self.rating_pirlo = reduce(reduceSchemas, rating_schemas['pirlo'].items(), 0)
         self.rating_ibra = reduce(reduceSchemas, rating_schemas['ibra'].items(), 0)
+
+        self.has_perfect_chem_links = bool(self.get_chemistry_players(amount=1)['perfect'])
 
         super().save(force_insert, force_update, using, update_fields)
 

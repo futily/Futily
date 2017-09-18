@@ -1,0 +1,13 @@
+/*
+|--------------------------------------------------------------------------
+| Perfect chem
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-PerfectChem_Item {
+  margin-bottom: 1vr;
+  padding-bottom: @margin-bottom;
+
+  border-bottom: 1px dashed var(--Color_Border);
+}
