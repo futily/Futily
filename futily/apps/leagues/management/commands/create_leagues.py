@@ -38,7 +38,7 @@ class Command(EaAssetCreatorCommand, BaseCommand):
                 )['NationId']
                 nation = Nation.objects.get(ea_id=nation_id)
             except Exception:  # pylint: disable=broad-except
-                if league['name'] == 'Legends':
+                if league['name'] == 'Legends' or league['name'] == 'Icons':
                     nation_id = find_dict_by_value(
                         team_config['LegendsLeagues'], 'LeagueId', league['ea_id']
                     )['NationId']

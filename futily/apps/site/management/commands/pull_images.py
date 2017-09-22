@@ -13,22 +13,22 @@ from futily.apps.players.models import Player
 
 
 class Command(BaseCommand):
-    def handle(self, *args, **options):
+    def handle(self, *args, **options):  # pylint: disable=too-complex
         urls = {
-            'nations': 'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418'
-                       '/2017/fut/items/images/flags/web/high/',
-            'leagues': 'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418'
-                       '/2017/fut/items/images/leagueLogos_sm/web/light/l',
-            'clubs': 'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418'
-                     '/2017/fut/items/images/clubbadges/web/normal/s',
-            'players': 'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418'
-                       '/2017/fut/items/images/players/html5/120x120/{}.png',
+            'nations': 'https://www.easports.com/fifa/ultimate-team/web-app/content/'
+                       'B1BA185F-AD7C-4128-8A64-746DE4EC5A82/2018/fut/items/images/mobile/flags/list/',
+            'leagues': 'https://www.easports.com/fifa/ultimate-team/web-app/content/'
+                       'B1BA185F-AD7C-4128-8A64-746DE4EC5A82/2018/fut/items/images/mobile/leagueLogos/light/',
+            'clubs': 'https://www.easports.com/fifa/ultimate-team/web-app/content/'
+                     'B1BA185F-AD7C-4128-8A64-746DE4EC5A82/2018/fut/items/images/mobile/clubs/dark/',
+            'players': 'https://www.easports.com/fifa/ultimate-team/web-app/content/'
+                       'B1BA185F-AD7C-4128-8A64-746DE4EC5A82/2018/fut/items/images/mobile/portraits/',
         }
 
         print('Grabbing Nation images')
 
         for nation in Nation.objects.all():
-            print(f'Getting Nation: {nation}')
+            print(f'Getting Nation: {nation}, {nation.ea_id}')
 
             url = f'{urls["nations"]}{nation.ea_id}.png'
             urllib.request.urlretrieve(url, f'{settings.BASE_ROOT}/futily/static/ea-images/nations/{nation.ea_id}.png')
@@ -52,17 +52,35 @@ class Command(BaseCommand):
         print('Grabbing Player images')
 
         for player in Player.objects.all():
-            print(f'Getting Player: {player} ({player.ea_id_base})')
+            print(f'Getting Player: {player} ({player.ea_id})')
 
             try:
+                url = f'https://www.easports.com/fifa/ultimate-team/web-app/content/B1BA185F-AD7C-4128-8A64' \
+                      f'-746DE4EC5A82/2018/fut/playerheads/mobile/single/p{player.ea_id}.png'
+
                 urllib.request.urlretrieve(
-                    urls['players'].format(player.ea_id),
+                    url,
                     f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
                 )
             except HTTPError:
-                urllib.request.urlretrieve(
-                    f'https://fifa17.content.easports.com/fifa/fltOnlineAssets/CC8267B6-0817-4842-BB6A-A20F88B05418/2017/fut/items/images/players/web/{player.ea_id}.png',
-                    f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
-                )
+                try:
+                    url = f'https://www.easports.com/fifa/ultimate-team/web-app/content/B1BA185F-AD7C-4128-8A64' \
+                          f'-746DE4EC5A82/2018/fut/playerheads/mobile/single/p{player.ea_id_base}.png'
+
+                    urllib.request.urlretrieve(
+                        url,
+                        f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
+                    )
+                except HTTPError:
+                    try:
+                        urllib.request.urlretrieve(
+                            f'{urls["players"]}{player.ea_id}.png',
+                            f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
+                        )
+                    except HTTPError:
+                        urllib.request.urlretrieve(
+                            f'{urls["players"]}{player.ea_id_base}.png',
+                            f'{settings.BASE_ROOT}/futily/static/ea-images/players/{player.ea_id}.png'
+                        )
             except Exception as e:  # pylint: disable=broad-except
                 print(e)

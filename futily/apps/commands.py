@@ -24,9 +24,12 @@ class EaAssetCreatorCommand(object):
         files = os.listdir(self.base_dir)
 
         for json_file in files:
-            with open('{}/{}'.format(self.base_dir, json_file)) as open_file:
-                data = json.load(open_file)
-                items.append(data['items'])
+            with open(f'{self.base_dir}/{json_file}', 'r') as open_file:
+                try:
+                    data = json.load(open_file)
+                    items.append(data['items'])
+                except Exception as e:  # pylint: disable=broad-except
+                    print(e)
 
         return [item for sublist in items for item in sublist]
 

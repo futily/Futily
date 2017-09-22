@@ -95,8 +95,8 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     league = models.ForeignKey('leagues.League', null=True, blank=False, db_index=True)
     nation = models.ForeignKey('nations.Nation', null=True, blank=False, db_index=True)
 
-    ea_id_base = models.PositiveIntegerField(unique=True, db_index=True)
-    ea_id = models.PositiveIntegerField(db_index=True)
+    ea_id_base = models.PositiveIntegerField(db_index=True)
+    ea_id = models.PositiveIntegerField(unique=True, db_index=True)
 
     name = models.CharField(max_length=100, db_index=True)
     first_name = models.CharField(max_length=100, db_index=True)
@@ -561,6 +561,17 @@ class PlayerRating(models.Model):
             'downvotes': self.downvotes,
             'score': self.score
         }
+
+
+class Icon(models.Model):
+    player = models.ForeignKey('players.Player')
+
+    club_team_stats = JSONField(blank=True, null=True)
+    national_team_stats = JSONField(blank=True, null=True)
+    text = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.player
 
 
 class VoteManager(models.Manager):

@@ -34,8 +34,8 @@ def serialize_player(player):
         'league': League.objects.get(ea_id=player['league']['id']),
         'nation': Nation.objects.get(ea_id=player['nation']['id']),
 
-        'ea_id_base': player['id'],
-        'ea_id': player['baseId'],
+        'ea_id_base': player['baseId'],
+        'ea_id': player['id'],
 
         'name': player['name'],
         'first_name': player['firstName'],
