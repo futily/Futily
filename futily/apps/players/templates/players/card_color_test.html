@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block content_class %}{% endblock %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Fifa 17 Player Database</h1>
+          <p class="pg-Strapline_Text">Top Fifa 17 players</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="plyr-CardList">
+    <h2 class="typ-Title-medium">Large</h2>
+    <ul class="plyr-CardList_Items plyr-CardList_Items-large">
+      {% for player in players %}
+        <li class="plyr-CardList_Item{% if sorts or caller %} plyr-CardList_Item-stacked{% endif %}">
+          {{ player.render_card(size='large', color=colors[loop.index0]) }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <h2 class="typ-Title-medium">Medium</h2>
+    <ul class="plyr-CardList_Items">
+      {% for player in players %}
+        <li class="plyr-CardList_Item{% if sorts or caller %} plyr-CardList_Item-stacked{% endif %}">
+          {{ player.render_card(color=colors[loop.index0]) }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <h2 class="typ-Title-medium">Small</h2>
+    <ul class="plyr-CardList_Items">
+      {% for player in players %}
+        <li class="plyr-CardList_Item{% if sorts or caller %} plyr-CardList_Item-stacked{% endif %}">
+          {{ player.render_card(size='small', color=colors[loop.index0]) }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

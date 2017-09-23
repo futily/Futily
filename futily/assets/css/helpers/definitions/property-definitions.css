@@ -172,7 +172,7 @@
   |
   */
   --Grid_Constrained: 1600px;
-  --Grid_Container: 1240px;
+  --Grid_Container: 1310px;
   --Grid_Gutter: 15px;
   /* This differentiates to the Grid_Gutter in that this is used for the inside of panels and
    cards. On all old projects this has been styled by using the Grid_Gutter. This is wrong, it

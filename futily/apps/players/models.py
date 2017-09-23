@@ -1,6 +1,7 @@
 import json
 import operator
 import random
+import unicodedata
 from functools import reduce
 
 from cms.apps.pages.models import ContentBase, Page
@@ -69,16 +70,15 @@ class PlayerCardManager(models.Manager):
         qs = super(PlayerCardManager, self) \
             .get_queryset() \
             .select_related('club', 'nation', 'page', 'page__page') \
-            .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image',
-                   'image_sm', 'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw',
-                   'position_full', 'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date',
-                   'acceleration', 'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve',
-                   'dribbling', 'finishing', 'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping',
-                   'long_passing', 'long_shots', 'marking', 'penalties', 'positioning', 'potential', 'reactions',
-                   'short_passing', 'shot_power', 'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina',
-                   'strength', 'vision', 'volleys', 'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning',
-                   'gk_reflexes', 'total_stats', 'total_ingame_stats', 'foot', 'skill_moves', 'weak_foot',
-                   'specialities', 'traits', 'work_rate_att', 'work_rate_def', 'player_type', 'item_type', 'model_name',
+            .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
+                   'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
+                   'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',
+                   'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve', 'dribbling', 'finishing',
+                   'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping', 'long_passing', 'long_shots',
+                   'marking', 'penalties', 'positioning', 'potential', 'reactions', 'short_passing', 'shot_power',
+                   'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina', 'strength', 'vision', 'volleys',
+                   'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning', 'gk_reflexes', 'total_stats',
+                   'total_ingame_stats', 'foot', 'specialities', 'traits', 'player_type', 'item_type', 'model_name',
                    'source', 'is_special_type', 'pack_weight', 'created', 'modified')
 
         return qs
@@ -216,6 +216,15 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
         if not self.slug:
             self.slug = slugify(self.name)
 
+        self.english_names = [
+            # pylint: disable=bad-continuation
+            unicodedata
+                .normalize('NFKD', getattr(self, x))
+                .encode('ascii', 'ignore')
+                .decode('utf-8')
+            for x in ['name', 'first_name', 'last_name', 'common_name']
+        ]
+
         self.total_stats = (self.card_att_1 + self.card_att_2 + self.card_att_3 + self.card_att_4 +
                             self.card_att_5 + self.card_att_6)
         self.total_ingame_stats = (
@@ -341,12 +350,16 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     def get_favourite_absolute_url(self):
         return self._get_permalink_for_page(name='player_favourite', cached=False)
 
-    def render_card(self, size='sm', faded=False, rpp=False):
+    def render_card(self, size='medium', faded=False, rpp=False, color=None):
+        if size not in ['small', 'medium', 'large']:
+            raise TypeError('size argument should be 1 of "small", "normal" or "large"')
+
         return render_to_string('players/includes/card.html', {
             'player': self,
-            'size': 'small' if size == 'sm' else 'large',
+            'size': size,
             'faded': faded,
-            'rpp': rpp
+            'rpp': rpp,
+            'color': color
         })
 
     @property
@@ -415,14 +428,22 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     def ingame_stat_groups(self):
         return [
             {'label': 'pace', 'field': 'card_att_1', 'items': ['acceleration', 'sprint_speed']},
-            {'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
-                                                                   'positioning', 'shot_power', 'volleys']},
-            {'label': 'passing', 'field': 'card_att_3', 'items': ['crossing', 'curve', 'free_kick_accuracy',
-                                                                  'long_passing', 'short_passing', 'vision']},
-            {'label': 'dribbling', 'field': 'card_att_4', 'items': ['agility', 'balance', 'ball_control',
-                                                                    'dribbling', 'reactions']},
-            {'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
-                                                                    'sliding_tackle', 'standing_tackle']},
+            {
+                'label': 'shooting', 'field': 'card_att_2', 'items': ['finishing', 'long_shots', 'penalties',
+                                                                      'positioning', 'shot_power', 'volleys']
+            },
+            {
+                'label': 'passing', 'field': 'card_att_3', 'items': ['crossing', 'curve', 'free_kick_accuracy',
+                                                                     'long_passing', 'short_passing', 'vision']
+            },
+            {
+                'label': 'dribbling', 'field': 'card_att_4', 'items': ['agility', 'balance', 'ball_control',
+                                                                       'dribbling', 'reactions']
+            },
+            {
+                'label': 'defending', 'field': 'card_att_5', 'items': ['heading_accuracy', 'interceptions', 'marking',
+                                                                       'sliding_tackle', 'standing_tackle']
+            },
             {'label': 'physicality', 'field': 'card_att_6', 'items': ['aggression', 'jumping', 'stamina', 'strength']},
         ]
 
@@ -519,7 +540,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
         players = Player.cards \
             .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position)) \
             .exclude(ea_id=self.ea_id) \
-            .order_by(sort) \
+            .order_by(sort)
 
         if not sort:
             players = players.distinct(sort)
@@ -539,7 +560,6 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
 
 
 class PlayerRating(models.Model):
-
     player = models.OneToOneField('players.Player', db_index=True, on_delete=models.CASCADE)
 
     score = models.IntegerField(default=0, db_index=True)
@@ -610,7 +630,6 @@ class VoteManager(models.Manager):
 
 
 class Vote(models.Model):
-
     votes = VoteManager()
 
     user = models.ForeignKey('users.User', db_index=True)

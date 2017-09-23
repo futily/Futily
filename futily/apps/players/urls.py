@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.conf.urls import url
 
 from futily.apps.players.views.detail import (PlayerDetail,
@@ -6,7 +7,8 @@ from futily.apps.players.views.detail import (PlayerDetail,
                                               PlayerDetailCompare,
                                               PlayerDetailSimilar,
                                               PlayerFavourite, PlayerRate)
-from futily.apps.players.views.list import (PlayerList, PlayerListLatest,
+from futily.apps.players.views.list import (PlayerCardColorTest, PlayerList,
+                                            PlayerListLatest,
                                             PlayerPerfectChemistry)
 
 urlpatterns = [
@@ -25,3 +27,8 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)-(?P<slug>[^/]+)/compare/(?P<other_pk>[0-9]+)/$',
         PlayerDetailCompare.as_view(), name='player_compare'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += [
+        url(r'^card-color-test/$', PlayerCardColorTest.as_view(), name='card_test'),
+    ]

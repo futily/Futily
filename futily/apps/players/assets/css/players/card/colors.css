@@ -1,0 +1,451 @@
+/*
+|--------------------------------------------------------------------------
+| Colors
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+/* stylelint-disable selector-class-pattern */
+.plyr-Card-bronze {
+  --Card_Color-rating: #4d331f;
+  --Card_Color-position: #4d331f;
+  --Card_Color-name: #4d331f;
+  --Card_Color-extra: #4d331f;
+  --Card_Color-extraShadow: rgba(#4d331f, 0.25);
+  --Card_Color-value: #4d331f;
+  --Card_Color-key: #523a27;
+}
+.plyr-Card-silver {
+  --Card_Color-rating: #3b3d41;
+  --Card_Color-position: #3b3d41;
+  --Card_Color-name: #3b3d41;
+  --Card_Color-extra: #3b3d41;
+  --Card_Color-extraShadow: rgba(#3b3d41, 0.25);
+  --Card_Color-value: #424449;
+  --Card_Color-key: #424449;
+}
+.plyr-Card-gold {
+  --Card_Color-rating: #4d331f;
+  --Card_Color-position: #4d331f;
+  --Card_Color-name: #4d331f;
+  --Card_Color-extra: #4d331f;
+  --Card_Color-extraShadow: rgba(#4d331f, 0.25);
+  --Card_Color-value: #593f25;
+  --Card_Color-key: #593f25;
+}
+.plyr-Card-rare_bronze {
+  --Card_Color-rating: #462c17;
+  --Card_Color-position: #462c17;
+  --Card_Color-name: #462c17;
+  --Card_Color-extra: #462c17;
+  --Card_Color-extraShadow: rgba(#462c17, 0.25);
+  --Card_Color-value: #462c17;
+  --Card_Color-key: #583e26;
+}
+.plyr-Card-rare_silver {
+  --Card_Color-rating: #252629;
+  --Card_Color-position: #252629;
+  --Card_Color-name: #252629;
+  --Card_Color-extra: #252629;
+  --Card_Color-extraShadow: rgba(#252629, 0.25);
+  --Card_Color-value: #4c4e52;
+  --Card_Color-key: #3a3b3f;
+}
+.plyr-Card-rare_gold {
+  --Card_Color-rating: #2b180c;
+  --Card_Color-position: #2b180c;
+  --Card_Color-name: #2b180c;
+  --Card_Color-extra: #2b180c;
+  --Card_Color-extraShadow: rgba(#dcc56d, 0.25);
+  --Card_Color-value: #311c0e;
+  --Card_Color-key: #462e1e;
+}
+.plyr-Card-legend {
+  --Card_Color-rating: #172f52;
+  --Card_Color-position: #172f52;
+  --Card_Color-name: #172f52;
+  --Card_Color-extra: #172f52;
+  --Card_Color-extraShadow: rgba(#c8ba94, 0.25);
+  --Card_Color-value: #172f52;
+  --Card_Color-key: #294672;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #c8ba94;
+    --Card_Color-position: #c8ba94;
+  }
+}
+
+.plyr-Card-award_winner {
+  --Card_Color-rating: #111124;
+  --Card_Color-position: #111124;
+  --Card_Color-name: #f1dd7c;
+  --Card_Color-extra: #111124;
+  --Card_Color-extraShadow: rgba(#f1dd7c, 0.5);
+  --Card_Color-value: #f1dd7c;
+  --Card_Color-key: #f1dd7c;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #f1dd7c;
+    --Card_Color-position: #f1dd7c;
+  }
+}
+.plyr-Card-europe_motm {
+  --Card_Color-rating: #003482;
+  --Card_Color-position: #003482;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #003482;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #003482;
+  --Card_Color-key: #1b51a3;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #e6e6e6;
+    --Card_Color-position: #e6e6e6;
+  }
+}
+.plyr-Card-fut_birthday {
+  --Card_Color-rating: #1d3d71;
+  --Card_Color-position: #1d3d71;
+  --Card_Color-name: #33558d;
+  --Card_Color-extra: #1d3d71;
+  --Card_Color-extraShadow: rgba(#33558d, 0.25);
+  --Card_Color-value: #33558d;
+  --Card_Color-key: #5873a0;
+}
+.plyr-Card-fut_champions_bronze {
+  --Card_Color-rating: #6d0e10;
+  --Card_Color-position: #6d0e10;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #6d0e10;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #9b6835;
+  --Card_Color-key: #9b6835;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #fff;
+    --Card_Color-position: #fff;
+  }
+}
+.plyr-Card-fut_champions_gold {
+  --Card_Color-rating: #6d0e10;
+  --Card_Color-position: #6d0e10;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #6d0e10;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #9b8035;
+  --Card_Color-key: #9b8035;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #fff;
+    --Card_Color-position: #fff;
+  }
+}
+.plyr-Card-fut_champions_silver {
+  --Card_Color-rating: #6d0e10;
+  --Card_Color-position: #6d0e10;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #6d0e10;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #83878c;
+  --Card_Color-key: #83878c;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #fff;
+    --Card_Color-position: #fff;
+  }
+}
+.plyr-Card-fut_championship {
+  --Card_Color-rating: #fff;
+  --Card_Color-position: #fff;
+  --Card_Color-name: #000;
+  --Card_Color-extra: #fff;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #000;
+  --Card_Color-key: #000;
+}
+.plyr-Card-fut_mas {
+  --Card_Color-rating: #fff;
+  --Card_Color-position: #fff;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #d52329; /* TODO */
+  --Card_Color-extraShadow: transparent;
+  --Card_Color-value: #fff;
+  --Card_Color-key: #f7d4d5;
+}
+.plyr-Card-fut_united {
+  --Card_Color-rating: #c0ff36;
+  --Card_Color-position: #c0ff36;
+  --Card_Color-name: #201c55;
+  --Card_Color-extra: #c0ff36;
+  --Card_Color-extraShadow: rgba(#201c55, 0.75);
+  --Card_Color-value: #f5f5f5;
+  --Card_Color-key: #f5f5f5;
+}
+.plyr-Card-futties_winner {
+  --Card_Color-rating: #370f1d;
+  --Card_Color-position: #370f1d;
+  --Card_Color-name: #e7d171;
+  --Card_Color-extra: #370f1d;
+  --Card_Color-extraShadow: rgba(#e7d171, 0.25);
+  --Card_Color-value: #e7d171;
+  --Card_Color-key: #af9155;
+}
+.plyr-Card-gotm {
+  --Card_Color-rating: #201c55;
+  --Card_Color-position: #201c55;
+  --Card_Color-name: #201c55;
+  --Card_Color-extra: #ff8901;
+  --Card_Color-extraShadow: rgba(#201c55, 0.25);
+  --Card_Color-value: #003482;
+  --Card_Color-key: #1b51a3;
+}
+.plyr-Card-halloween {
+  --Card_Color-rating: #ce5500;
+  --Card_Color-position: #ce5500;
+  --Card_Color-name: #000;
+  --Card_Color-extra: #ce5500;
+  --Card_Color-extraShadow: rgba(#000, 0.25);
+  --Card_Color-value: #ff6f09;
+  --Card_Color-key: #ce5500;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #000;
+    --Card_Color-position: #000;
+  }
+}
+.plyr-Card-marquee {
+  --Card_Color-rating: #201d55;
+  --Card_Color-position: #201d55;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #201d55;
+  --Card_Color-extraShadow: rgba(#fff, 0.75);
+  --Card_Color-value: #c0ff36;
+  --Card_Color-key: #c0ff36;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #e6e6e6;
+    --Card_Color-position: #e6e6e6;
+  }
+}
+.plyr-Card-motm {
+  --Card_Color-rating: #381a01;
+  --Card_Color-position: #381a01;
+  --Card_Color-name: #ffe2ca;
+  --Card_Color-extra: #381a01;
+  --Card_Color-extraShadow: rgba(#ffe2ca, 0.25);
+  --Card_Color-value: #ffe2ca;
+  --Card_Color-key: #d5ab8e;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #ffe2ca;
+    --Card_Color-position: #ffe2ca;
+  }
+}
+.plyr-Card-ones_to_watch {
+  --Card_Color-rating: #d5b43a;
+  --Card_Color-position: #d5b43a;
+  --Card_Color-name: #d5b43a;
+  --Card_Color-extra: #d5b43a;
+  --Card_Color-extraShadow: rgba(#d5b43a, 0.25);
+  --Card_Color-value: #aeb0b1;
+  --Card_Color-key: #828384;
+}
+.plyr-Card-pink {
+  --Card_Color-rating: #370f1d;
+  --Card_Color-position: #370f1d;
+  --Card_Color-name: #fbc2d9;
+  --Card_Color-extra: #370f1d;
+  --Card_Color-extraShadow: rgba(#fbc2d9, 0.25);
+  --Card_Color-value: #fbc2d9;
+  --Card_Color-key: #d69fb5;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #fff;
+    --Card_Color-position: #fff;
+  }
+}
+.plyr-Card-purple {
+  --Card_Color-rating: #111124;
+  --Card_Color-position: #111124;
+  --Card_Color-name: #d4c0fc;
+  --Card_Color-extra: #111124;
+  --Card_Color-extraShadow: rgba(#d4c0fc, 0.25);
+  --Card_Color-value: #d4c0fc;
+  --Card_Color-key: #af9ed4;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #d4c0fc;
+    --Card_Color-position: #d4c0fc;
+  }
+}
+.plyr-Card-record_breaker {
+  --Card_Color-rating: #fff;
+  --Card_Color-position: #fff;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #fff;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #eaedf4;
+  --Card_Color-key: #b1bdd9;
+}
+.plyr-Card-rtr_contender {
+  --Card_Color-rating: #fff;
+  --Card_Color-position: #fff;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #fff;
+  --Card_Color-extraShadow: rgba(#fff, 0.75);
+  --Card_Color-value: #1c2f6a;
+  --Card_Color-key: #324379;
+}
+.plyr-Card-rtr_gold {
+  --Card_Color-rating: #1e1d1a;
+  --Card_Color-position: #1e1d1a;
+  --Card_Color-name: #f4db8c;
+  --Card_Color-extra: #1e1d1a;
+  --Card_Color-extraShadow: rgba(#f4db8c, 0.75);
+  --Card_Color-value: #f4db8c;
+  --Card_Color-key: #c6ae63;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #fff;
+    --Card_Color-position: #fff;
+  }
+}
+.plyr-Card-sbc_base {
+  --Card_Color-rating: #fff;
+  --Card_Color-position: #fff;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #fff;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #f5f5f5;
+  --Card_Color-key: #d1fdfa;
+}
+.plyr-Card-sbc_premium {
+  --Card_Color-rating: #fff;
+  --Card_Color-position: #fff;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #fff;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #fff;
+  --Card_Color-key: #d1fdfa;
+}
+.plyr-Card-st_patricks {
+  --Card_Color-rating: #1e6434;
+  --Card_Color-position: #1e6434;
+  --Card_Color-name: #fff;
+  --Card_Color-extra: #1e6434;
+  --Card_Color-extraShadow: rgba(#fff, 0.25);
+  --Card_Color-value: #fff;
+  --Card_Color-key: #d3e3d8;
+}
+.plyr-Card-teal {
+  --Card_Color-rating: #031a1a;
+  --Card_Color-position: #031a1a;
+  --Card_Color-name: #c3ffff;
+  --Card_Color-extra: #031a1a;
+  --Card_Color-extraShadow: rgba(#c3ffff, 0.25);
+  --Card_Color-value: #c3ffff;
+  --Card_Color-key: #91ccca;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #c3ffff;
+    --Card_Color-position: #c3ffff;
+  }
+}
+.plyr-Card-tots_bronze {
+  --Card_Color-rating: #071336;
+  --Card_Color-position: #071336;
+  --Card_Color-name: #e7b378;
+  --Card_Color-extra: #071336;
+  --Card_Color-extraShadow: rgba(#e7b378, 0.25);
+  --Card_Color-value: #e7b378;
+  --Card_Color-key: #ca945f;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #e7b378;
+    --Card_Color-position: #e7b378;
+  }
+}
+.plyr-Card-tots_gold {
+  --Card_Color-rating: #071336;
+  --Card_Color-position: #071336;
+  --Card_Color-name: #f2d780;
+  --Card_Color-extra: #071336;
+  --Card_Color-extraShadow: rgba(#f2d780, 0.25);
+  --Card_Color-value: #f2d780;
+  --Card_Color-key: #b4a676;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #f2d780;
+    --Card_Color-position: #f2d780;
+  }
+}
+.plyr-Card-tots_silver {
+  --Card_Color-rating: #071336;
+  --Card_Color-position: #071336;
+  --Card_Color-name: #e4edf1;
+  --Card_Color-extra: #071336;
+  --Card_Color-extraShadow: rgba(#e4edf1, 0.25);
+  --Card_Color-value: #e4edf1;
+  --Card_Color-key: #97abc2;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #e4edf1;
+    --Card_Color-position: #e4edf1;
+  }
+}
+.plyr-Card-totw_bronze {
+  --Card_Color-rating: #301605;
+  --Card_Color-position: #301605;
+  --Card_Color-name: #ca945f;
+  --Card_Color-extra: #301605;
+  --Card_Color-extraShadow: rgba(#ca945f, 0.25);
+  --Card_Color-value: #ca945f;
+  --Card_Color-key: #a77c51;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #ca945f;
+    --Card_Color-position: #ca945f;
+  }
+}
+.plyr-Card-totw_gold {
+  --Card_Color-rating: #1e1d1a;
+  --Card_Color-position: #1e1d1a;
+  --Card_Color-name: #e1c775;
+  --Card_Color-extra: #1e1d1a;
+  --Card_Color-extraShadow: rgba(#e1c775, 0.25);
+  --Card_Color-value: #e1c775;
+  --Card_Color-key: #e1c775;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #e1c775;
+    --Card_Color-position: #e1c775;
+  }
+}
+.plyr-Card-totw_silver {
+  --Card_Color-rating: #1e1d1a;
+  --Card_Color-position: #1e1d1a;
+  --Card_Color-name: #cdd9e1;
+  --Card_Color-extra: #1e1d1a;
+  --Card_Color-extraShadow: rgba(#cdd9e1, 0.25);
+  --Card_Color-value: #cdd9e1;
+  --Card_Color-key: #a9b3b9;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #cdd9e1;
+    --Card_Color-position: #cdd9e1;
+  }
+}
+.plyr-Card-toty {
+  --Card_Color-rating: #d0b361;
+  --Card_Color-position: #d0b361;
+  --Card_Color-name: #d0b361;
+  --Card_Color-extra: #d0b361;
+  --Card_Color-extraShadow: rgba(#d0b361, 0.25);
+  --Card_Color-value: #fff;
+  --Card_Color-key: #ced2dc;
+
+  &.plyr-Card-small {
+    --Card_Color-rating: #ffee9d;
+    --Card_Color-position: #ffee9d;
+  }
+}

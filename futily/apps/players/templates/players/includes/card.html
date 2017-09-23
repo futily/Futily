@@ -1,4 +1,4 @@
-<a class="plyr-Card plyr-Card-{{ size }} plyr-Card-{{ player.color }}{% if faded %} plyr-Card-faded{% endif %}"
+<a class="plyr-Card plyr-Card-{{ size }} plyr-Card-{{ player.color if not color else color }}{% if faded %} plyr-Card-faded{% endif %}"
    href="{{ player.get_absolute_url() }}"
    data-card-data="{{ player.card_json_data }}">
   <header class="plyr-Card_Header">
@@ -7,12 +7,10 @@
       <span class="plyr-Card_Position">{{ player.position }}</span>
       <img alt=""
            src="{{ static('ea-images/clubs/{}.png'.format(player.club.ea_id)) }}"
-           class="plyr-Card_Club"
-           width="25">
+           class="plyr-Card_Club">
       <img alt=""
            src="{{ static('ea-images/nations/{}.png'.format(player.nation.ea_id)) }}"
-           class="plyr-Card_Nation"
-           width="25">
+           class="plyr-Card_Nation">
     </div>
 
     <img alt=""
@@ -20,18 +18,26 @@
          class="plyr-Card_Image">
   </header>
 
-  <p class="plyr-Card_Name">{{ player.name }}</p>
-
   <div class="plyr-Card_Body">
-    {% for key, value in player.card_stats %}
-      <div class="plyr-Card_Stat plyr-Card_Stat-{{ loop.index }}{% if rpp %} js-RPP_Base js-RPP_Base-card{% endif %}"
-           {% if rpp %}data-rpp-field="cardAtt{{ loop.index }}"{% endif %}>
-        {% if rpp %}
-          <span class="plyr-Card_Difference js-RPP_CardDifference"></span>
-        {% endif %}
-        <span class="plyr-Card_StatValue{% if rpp %} js-RPP_CardValue{% endif %}">{{ value }}</span>
-        <span class="plyr-Card_StatKey">{{ key }}</span>
-      </div>
-    {% endfor %}
+    <p class="plyr-Card_Name">{{ player.name }}</p>
+
+    <div class="plyr-Card_Extra">
+      <p class="plyr-Card_Workrates">{{ player.work_rate_att[0] }} / {{ player.work_rate_def[0] }}</p>
+      <p class="plyr-Card_Stars">{{ player.skill_moves }}* SM</p>
+      <p class="plyr-Card_Stars">{{ player.weak_foot }}* WF</p>
+    </div>
+
+    <div class="plyr-Card_Stats">
+      {% for key, value in player.card_stats %}
+        <div class="plyr-Card_Stat plyr-Card_Stat-{{ loop.index }}{% if rpp %} js-RPP_Base js-RPP_Base-card{% endif %}"
+             {% if rpp %}data-rpp-field="cardAtt{{ loop.index }}"{% endif %}>
+          {% if rpp %}
+            <span class="plyr-Card_Difference js-RPP_CardDifference"></span>
+          {% endif %}
+          <span class="plyr-Card_StatValue{% if rpp %} js-RPP_CardValue{% endif %}">{{ value }}</span>
+          <span class="plyr-Card_StatKey">{{ key }}</span>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </a>

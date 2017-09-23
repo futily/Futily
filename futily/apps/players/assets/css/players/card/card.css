@@ -1,0 +1,411 @@
+/*
+|--------------------------------------------------------------------------
+| Card
+|--------------------------------------------------------------------------
+| @namespace: crd-
+|
+*/
+.plyr-Card {
+  position: relative;
+
+  display: block;
+  width: 158px;
+  height: 247px;
+  padding: 21px 23px 23px;
+
+  font-family: var(--Font_Family-dinCond);
+
+  color: var(--Card_Color);
+
+  transition: opacity 0.2s, transform 0.2s;
+
+  .asi-Block & {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .bld-Search_Results-loading & {
+    opacity: 0.5;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+
+    background-image: inherit;
+    background-position: inherit;
+    background-size: inherit;
+    filter: drop-shadow(0 0 10px rgba(#000, 0.3));
+    opacity: 0;
+
+    transition: 0.2s opacity;
+  }
+}
+
+.plyr-Card-faded {
+  opacity: 0.5;
+
+  transition: opacity 0.3s, transform 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-Card_Header {
+  align-items: flex-end;
+
+  display: flex;
+
+  font-family: var(--Font_Family-dinCond);
+  font-weight: 700;
+
+  .plyr-Card-small & {
+    grid-column-gap: 10px;
+    grid-template-columns: 22px 1fr;
+
+    display: grid;
+  }
+
+  .plyr-Card-medium & {
+    grid-template-columns: 33px 1fr;
+
+    display: grid;
+  }
+}
+
+.plyr-Card_Meta {
+  align-items: center;
+  flex-direction: column;
+  flex-shrink: 0;
+
+  display: flex;
+  margin-left: 1px;
+
+  color: var(--Card_Color);
+
+  .plyr-Card-small & {
+    margin-left: 0;
+  }
+}
+
+.plyr-Card_Rating {
+  font-weight: 700;
+
+  color: var(--Card_Color-rating);
+
+  .plyr-Card-small & {
+    margin-bottom: 1px;
+
+    font-size: 18px;
+    letter-spacing: -0.4px;
+    line-height: 16px;
+  }
+
+  .plyr-Card-medium & {
+    font-size: 22px;
+    letter-spacing: -0.55px;
+    line-height: 18px;
+  }
+
+  .plyr-Card-large & {
+    font-size: 33px;
+    letter-spacing: -0.7px;
+    line-height: 22px;
+  }
+}
+
+.plyr-Card_Position {
+  font-weight: 700;
+
+  color: var(--Card_Color-position);
+
+  .plyr-Card-small & {
+    margin-bottom: 1px;
+
+    font-size: 14px;
+    letter-spacing: -0.35px;
+    line-height: 16px;
+  }
+
+  .plyr-Card-medium & {
+    margin-bottom: 1px;
+
+    font-size: 14px;
+    letter-spacing: -0.35px;
+    line-height: 16px;
+  }
+
+  .plyr-Card-large & {
+    margin-top: 2px;
+    margin-bottom: 1px;
+
+    font-size: 15px;
+    letter-spacing: -0.45px;
+    line-height: 18px;
+  }
+}
+
+.plyr-Card_Club {
+  .plyr-Card-small & {
+    width: 22px;
+    margin-bottom: 2px;
+  }
+
+  .plyr-Card-medium & {
+    width: 25px;
+  }
+
+  .plyr-Card-large & {
+    width: 34px;
+    margin-bottom: 2px;
+  }
+}
+
+.plyr-Card_Nation {
+  .plyr-Card-small & {
+    width: 22px;
+    margin-bottom: 3px;
+  }
+
+  .plyr-Card-medium & {
+    width: 25px;
+  }
+
+  .plyr-Card-large & {
+    width: 40px;
+  }
+}
+
+.plyr-Card_Image {
+  .plyr-Card-small & {
+    width: 60px;
+  }
+
+  .plyr-Card-medium & {
+    height: 105px;
+  }
+
+  .plyr-Card-large & {
+    width: 134px;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Body
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-Card_Body {
+  display: grid;
+
+  .plyr-Card-small & {
+    display: none;
+  }
+
+  .plyr-Card-medium & {
+    grid-template-rows: 22px 1fr;
+    grid-template-columns: 33px 1fr;
+  }
+
+  .plyr-Card-large & {
+    grid-template-rows: 28px 1fr;
+    grid-template-columns: 42px 1fr;
+  }
+}
+
+.plyr-Card_Name {
+  grid-column: 2;
+
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  color: var(--Card_Color-name);
+  overflow-x: auto;
+
+  .plyr-Card-medium & {
+    margin-top: 1px;
+    margin-bottom: @margin-top;
+
+    font-size: 16px;
+    letter-spacing: -0.4px;
+    line-height: 20px;
+  }
+
+  .plyr-Card-large & {
+    margin-top: 2px;
+    margin-bottom: @margin-top;
+
+    font-size: 21px;
+    letter-spacing: -0.5px;
+    line-height: 24px;
+  }
+}
+
+.plyr-Card_Extra {
+  grid-column: 1;
+  grid-row: 1 / -1;
+
+  margin-top: 4px;
+
+  font-weight: 500;
+  text-shadow: 1px 1px var(--Card_Color-extraShadow);
+
+  color: var(--Card_Color-extra);
+
+  .plyr-Card-medium & {
+    @apply --Font-14;
+
+    padding-right: 2px;
+    padding-left: 4px;
+
+    letter-spacing: -0.2px;
+  }
+
+  .plyr-Card-large & {
+    margin-top: 4px;
+    padding-right: 4px;
+    padding-left: @padding-right;
+
+    line-height: 20px;
+  }
+}
+
+.plyr-Card_Stats {
+  grid-auto-flow: column;
+  grid-column: 2;
+  grid-row: 2;
+  grid-template-rows: repeat(3, var(--RowHeight));
+  grid-template-columns: repeat(2, 1fr);
+
+  display: grid;
+
+  .plyr-Card-medium & {
+    --RowHeight: 20px;
+
+    grid-column-gap: 10px;
+
+    margin-top: 4px;
+    padding-right: 22px;
+    padding-left: 9px;
+  }
+
+  .plyr-Card-large & {
+    --RowHeight: 24px;
+
+    grid-column-gap: 20px;
+
+    margin-top: 7px;
+    padding-right: 28px;
+    padding-left: 12px;
+  }
+}
+
+.plyr-Card_Stat {
+  position: relative;
+
+  align-items: baseline;
+
+  display: flex;
+
+  background-image: linear-gradient(
+    to bottom,
+    transparent 95%,
+    hsla(0, 0%, 0%, 0.07) 95%
+  );
+
+  &:nth-last-child(-n + 2) {
+    background-image: none;
+  }
+}
+
+.plyr-Card_Difference {
+  @apply --Font-12;
+
+  position: absolute;
+  top: 2px;
+  right: -22px;
+
+  font-weight: 700;
+
+  .plyr-Card_Stat:nth-child(-n + 3) & {
+    right: auto;
+    left: -22px;
+  }
+}
+
+.plyr-Card_StatValue {
+  font-weight: 700;
+
+  color: var(--Card_Color-value);
+
+  .plyr-Card-medium & {
+    margin-right: 5px;
+
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .plyr-Card-large & {
+    margin-right: 5px;
+
+    font-size: 20px;
+    line-height: 16px;
+  }
+}
+
+.plyr-Card_StatKey {
+  font-size: 14px;
+  font-weight: 500;
+
+  color: var(--Card_Color-key);
+
+  .plyr-Card-medium & {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .plyr-Card-large & {
+    font-size: 20px;
+    line-height: 20px;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-Card_Footer {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.plyr-Card_ChemistryLabel {
+  text-transform: uppercase;
+}

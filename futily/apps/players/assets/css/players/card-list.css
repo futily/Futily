@@ -14,9 +14,13 @@
 */
 .plyr-CardList_Items {
   grid-row-gap: 0.5vr;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
 
   display: grid;
+}
+
+.plyr-CardList_Items-large {
+  grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
 }
 
 .plyr-CardList_Items-tight {

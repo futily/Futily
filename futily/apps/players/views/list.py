@@ -1,6 +1,6 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Q
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.generic.edit import FormMixin
 
 from futily.apps.players.constants import (LEVEL_FILTER_MAP,
@@ -282,3 +282,17 @@ class PlayerPerfectChemistry(PlayerFilterSorted):
 
     def initial_players(self):
         return Player.objects.filter(**self.always_filters)
+
+
+class PlayerCardColorTest(TemplateView):
+    template_name = 'players/card_color_test.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['colors'] = ['award_winner', 'europe_motm', 'fut_birthday', 'fut_champions_bronze', 'fut_champions_gold', 'fut_champions_silver', 'fut_championship', 'fut_mas', 'fut_united', 'futties_winner', 'gotm', 'halloween', 'marquee', 'motm', 'ones_to_watch', 'pink', 'purple', 'record_breaker', 'rtr_contender', 'rtr_gold', 'sbc_base', 'sbc_premium', 'st_patricks', 'teal', 'tots_bronze', 'tots_gold', 'tots_silver', 'totw_bronze', 'totw_gold', 'totw_silver', 'toty', 'bronze', 'silver', 'gold', 'rare_bronze', 'rare_silver', 'rare_gold', 'legend']
+        player = Player.objects.get(pk=525)
+
+        context['players'] = [player for x in context['colors']]
+
+        return context

@@ -1,0 +1,169 @@
+/*
+|--------------------------------------------------------------------------
+| Card
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+/* stylelint-disable selector-class-pattern */
+.plyr-Card-large {
+  width: 202px;
+  height: 316px;
+  padding: 16px 6px 29px;
+
+  background-image: resolve('ea/cards/18/large/base.png');
+  color: #f8fcff;
+
+  &.plyr-Card-bronze {
+    background-position: 0 0;
+  }
+  &.plyr-Card-silver {
+    background-position: 0 -2260px;
+  }
+  &.plyr-Card-gold {
+    background-position: 0 -316px;
+  }
+  &.plyr-Card-rare_bronze {
+    background-position: 0 -948px;
+  }
+  &.plyr-Card-rare_silver {
+    background-position: 0 -1580px;
+  }
+  &.plyr-Card-rare_gold {
+    background-position: 0 -1264px;
+  }
+  &.plyr-Card-legend {
+    background-position: 0 -632px;
+  }
+
+  &.plyr-Card-award_winner {
+    background-position: 0 0;
+  }
+  &.plyr-Card-europe_motm {
+    background-position: 0 -632px;
+  }
+  &.plyr-Card-fut_birthday {
+    background-position: 0 -948px;
+  }
+  &.plyr-Card-fut_champions_bronze {
+    background-position: 0 -1264px;
+  }
+  &.plyr-Card-fut_champions_gold {
+    background-position: 0 -1580px;
+  }
+  &.plyr-Card-fut_champions_silver {
+    background-position: 0 -1896px;
+  }
+  &.plyr-Card-fut_championship {
+    background-position: 0 -2212px;
+  }
+  &.plyr-Card-fut_mas {
+    background-position: 0 -2528px;
+  }
+  &.plyr-Card-fut_united {
+    background-position: 0 -2844px;
+  }
+  &.plyr-Card-futties_winner {
+    background-position: 0 -3160px;
+  }
+  &.plyr-Card-gotm {
+    background-position: 0 -3476px;
+  }
+  &.plyr-Card-halloween {
+    background-position: 0 -3792px;
+  }
+  &.plyr-Card-marquee {
+    background-position: 0 -4424px;
+  }
+  &.plyr-Card-motm {
+    background-position: 0 -4740px;
+  }
+  &.plyr-Card-ones_to_watch {
+    background-position: 0 -5372px;
+  }
+  &.plyr-Card-pink {
+    background-position: 0 -5688px;
+  }
+  &.plyr-Card-purple {
+    background-position: 0 -6004px;
+  }
+  &.plyr-Card-record_breaker {
+    background-position: 0 -6320px;
+  }
+  &.plyr-Card-rtr_contender {
+    background-position: 0 -6636px;
+  }
+  &.plyr-Card-rtr_gold {
+    background-position: 0 -6952px;
+  }
+  &.plyr-Card-sbc_base {
+    background-position: 0 -7268px;
+  }
+  &.plyr-Card-sbc_premium {
+    background-position: 0 -7584px;
+  }
+  &.plyr-Card-st_patricks {
+    background-position: 0 -7900px;
+  }
+  &.plyr-Card-teal {
+    background-position: 0 -8216px;
+  }
+  &.plyr-Card-tots_bronze {
+    background-position: 0 -8532px;
+  }
+  &.plyr-Card-tots_gold {
+    background-position: 0 -8848px;
+  }
+  &.plyr-Card-tots_silver {
+    background-position: 0 -9164px;
+  }
+  &.plyr-Card-totw_bronze {
+    background-position: 0 -9480px;
+  }
+  &.plyr-Card-totw_gold {
+    background-position: 0 -9796px;
+  }
+  &.plyr-Card-totw_silver {
+    background-position: 0 -10112px;
+  }
+  &.plyr-Card-toty {
+    background-position: 0 -10428px;
+  }
+
+  &.plyr-Card-award_winner,
+  &.plyr-Card-confederation_champions_motm,
+  &.plyr-Card-europe_motm,
+  &.plyr-Card-fut_birthday,
+  &.plyr-Card-fut_champions_bronze,
+  &.plyr-Card-fut_champions_gold,
+  &.plyr-Card-fut_champions_silver,
+  &.plyr-Card-fut_championship,
+  &.plyr-Card-fut_mas,
+  &.plyr-Card-fut_united,
+  &.plyr-Card-futties_winner,
+  &.plyr-Card-gotm,
+  &.plyr-Card-halloween,
+  &.plyr-Card-imotm,
+  &.plyr-Card-marquee,
+  &.plyr-Card-motm,
+  &.plyr-Card-movember,
+  &.plyr-Card-ones_to_watch,
+  &.plyr-Card-pink,
+  &.plyr-Card-purple,
+  &.plyr-Card-record_breaker,
+  &.plyr-Card-rtr_contender,
+  &.plyr-Card-rtr_gold,
+  &.plyr-Card-sbc_base,
+  &.plyr-Card-sbc_premium,
+  &.plyr-Card-st_patricks,
+  &.plyr-Card-teal,
+  &.plyr-Card-tots_bronze,
+  &.plyr-Card-tots_gold,
+  &.plyr-Card-tots_silver,
+  &.plyr-Card-totw_bronze,
+  &.plyr-Card-totw_gold,
+  &.plyr-Card-totw_silver,
+  &.plyr-Card-toty {
+    background-image: resolve('ea/cards/18/large/special.png');
+  }
+}
