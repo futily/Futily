@@ -375,6 +375,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             'rating': self.rating,
             'color': self.color,
             'position': self.position,
+            'ea_id': self.ea_id,
             'card_att_1': self.card_att_1,
             'card_att_2': self.card_att_2,
             'card_att_3': self.card_att_3,
@@ -411,7 +412,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
 
     @property
     def similar_coefficient(self):
-        return self.total_ingame_stats / 100 / 4
+        return self.total_ingame_stats / 100 / 2
 
     def ingame_stat_group_average(self, group):
         schema = {
@@ -472,8 +473,11 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
         return schema[position]
 
     def get_variants(self):
+        if self.color == 'legend':
+            return Player.objects.filter(color='legend', slug=self.slug)
+
         # Get all the different versions of the base card
-        return Player.objects.filter(ea_id=self.ea_id).exclude(id=self.id)
+        return Player.objects.filter(ea_id_base=self.ea_id_base).exclude(id=self.id)
 
     def get_chemistry_players(self, amount=None):
         perfect_chem = Player.objects.filter(club=self.club, nation=self.nation).exclude(ea_id=self.ea_id)
@@ -536,6 +540,8 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
                 )
             ) for val in schema[self.position]
         ]
+
+        print(q_objs)
 
         players = Player.cards \
             .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position)) \

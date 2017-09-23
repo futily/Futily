@@ -32,7 +32,8 @@ export class CardSelector {
         att4: document.querySelector('.plyr-Card_Stat-4 .plyr-Card_StatValue'),
         att5: document.querySelector('.plyr-Card_Stat-5 .plyr-Card_StatValue'),
         att6: document.querySelector('.plyr-Card_Stat-6 .plyr-Card_StatValue'),
-        club: document.querySelector('.plyr-Card_Club')
+        club: document.querySelector('.plyr-Card_Club'),
+        image: document.querySelector('.plyr-Card_Image')
       },
       ratings: {
         att1: document.querySelector(
@@ -129,6 +130,7 @@ export class CardSelector {
     this.els.card.att5.innerText = json.card_att_5
     this.els.card.att6.innerText = json.card_att_6
     this.els.card.club.src = `/static/ea-images/clubs/${json.club.ea_id}.png`
+    this.els.card.image.src = `/static/ea-images/players/${json.ea_id}.png`
   }
 
   compareRatings (data) {

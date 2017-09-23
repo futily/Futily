@@ -8,6 +8,10 @@
 .asi-Blocks {
   position: sticky;
   top: 1vr;
+
+  .nav-Side_Aside & {
+    position: static;
+  }
 }
 
 .asi-Blocks-noSticky {

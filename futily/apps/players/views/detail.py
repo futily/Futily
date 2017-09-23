@@ -100,7 +100,7 @@ class PlayerDetailChemistry(DetailView):
     template_name = 'players/player_detail_chemistry.html'
 
 
-class PlayerDetailChemistryType(PlayerFilterSorted):
+class PlayerDetailChemistryType(DetailView, PlayerFilterSorted):
     model = Player
     template_name = 'players/player_detail_chemistry_type.html'
 
@@ -108,7 +108,7 @@ class PlayerDetailChemistryType(PlayerFilterSorted):
         return self.object.get_chemistry_players()[self.kwargs['chem_type']]
 
 
-class PlayerDetailSimilar(PlayerFilterSorted):
+class PlayerDetailSimilar(DetailView, PlayerFilterSorted):
     model = Player
     template_name = 'players/player_detail_similar.html'
 

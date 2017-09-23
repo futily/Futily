@@ -16,6 +16,8 @@
 |
 */
 .nav-Side_Aside {
+  position: sticky;
+
   align-self: flex-start;
   flex-basis: 300px;
   flex-shrink: 0;

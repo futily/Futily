@@ -28,7 +28,20 @@
   }
 }
 
+.lyt-Content-full {
+  margin-top: 2vr;
+  margin-bottom: @margin-top;
+
+  .pg-Breadcrumbs + & {
+    margin-top: 0.75vr;
+  }
+}
+
 .lyt-Content_Inner {
+  .lyt-Content-full & {
+    @apply --GridContainer;
+  }
+
   .lyt-Content-mainAside & {
     @apply --GridContainer;
   }

@@ -69,7 +69,7 @@
         <button type="button" class="asi-Filter_Button">
           <span class="asi-Filter_ButtonLabel">Rating</span>
           <span class="asi-Filter_ButtonCurrent">
-            {{ form.min_rating.value()[0] | default(form.min_rating.field.min_value) }} - {{ form.max_rating.value()[0] | default(form.max_rating.field.max_value) }}
+            {{ form.min_rating.value() | default(form.min_rating.field.min_value) }} - {{ form.max_rating.value() | default(form.max_rating.field.max_value) }}
           </span>
         </button>
       </header>
@@ -79,7 +79,7 @@
           <div class="frm-Range_Ranges">
             <div class="frm-Range_RangesItem">
               <span class="frm-Range_Value frm-Range_Value-min" data-slide-value="min">
-                {{ form.min_rating.value()[0] | default(form.min_rating.field.initial) }}
+                {{ form.min_rating.value() | default(form.min_rating.field.initial) }}
               </span>
 
               <div class="frm-Range_InputWrapper">
@@ -96,7 +96,7 @@
                 <input type="hidden"
                        min="{{ form.min_rating.field.min_value }}"
                        max="{{ form.min_rating.field.max_value }}"
-                       value="{{ form.min_rating.value()[0] | default(form.min_rating.field.initial) }}"
+                       value="{{ form.min_rating.value() | default(form.min_rating.field.initial) }}"
                        step="1"
                        id="{{ form.min_rating.id_for_label }}"
                        name="{{ form.min_rating.html_name }}"
@@ -119,7 +119,7 @@
                 <input type="hidden"
                        min="{{ form.max_rating.field.min_value }}"
                        max="{{ form.max_rating.field.max_value }}"
-                       value="{{ form.max_rating.value()[0] | default(form.max_rating.field.initial) }}"
+                       value="{{ form.max_rating.value() | default(form.max_rating.field.initial) }}"
                        step="1"
                        id="{{ form.max_rating.id_for_label }}"
                        name="{{ form.max_rating.html_name }}"
@@ -127,7 +127,7 @@
               </div>
 
               <span class="frm-Range_Value frm-Range_Value-max" data-slide-value="max">
-                {{ form.max_rating.value()[0] | default(form.max_rating.field.initial) }}
+                {{ form.max_rating.value() | default(form.max_rating.field.initial) }}
               </span>
             </div>
           </div>
@@ -148,6 +148,7 @@
 
           <span class="asi-Filter_ButtonCurrent">
             {% if field.value() %}
+              {{ field.value() }}
               {% if field.value() | length() > 1 %}
                 Multiple
               {% else %}

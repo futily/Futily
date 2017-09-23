@@ -19,18 +19,14 @@ class PlayerList(FormMixin, ListView):
     paginate_by = 30
     success_url = '/'
 
-    def get_initial(self):
-        initial = super(PlayerList, self).get_initial()
-
-        initial.update(self.request.GET)
-
-        return initial
-
-    def get_queryset(self):  # pylint: disable=too-complex, too-many-locals
+    def get_queryset(self):  # pylint: disable=too-complex, too-many-locals, too-many-branches
         qs = super(PlayerList, self).get_queryset()
 
-        current_filters = self.request.GET
+        current_filters = self.request.GET.copy()
         allowed_filters = self.allowed_filters()
+
+        if current_filters.get('page'):
+            current_filters.pop('page')
 
         # Check if we have any filterable parameters
         if current_filters and set(current_filters.dict().keys()).issubset(set(allowed_filters)):
@@ -137,6 +133,14 @@ class PlayerList(FormMixin, ListView):
             kwargs['form'] = self.get_form()
 
         return super(PlayerList, self).get_context_data(**kwargs)
+
+    def get_initial(self):
+        current_filters = self.request.GET.copy()
+
+        if current_filters.get('page'):
+            current_filters.pop('page')
+
+        return current_filters
 
     def allowed_filters(self):
         form = self.get_form()
