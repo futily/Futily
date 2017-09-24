@@ -1,0 +1,163 @@
+/*
+|--------------------------------------------------------------------------
+| Pack
+|--------------------------------------------------------------------------
+| @namespace: pck-
+|
+*/
+.pck-Pack {
+  grid-column-gap: var(--Grid_Gutter);
+  grid-template-columns: 160px 1fr;
+
+  display: grid;
+  width: 100%;
+  padding: 13px 30px;
+
+  font-weight: 700;
+
+  background-color: var(--Color_Grey-light);
+  border: 1px solid var(--Color_Border);
+  color: var(--Color_Body);
+
+  transition: color 0.2s;
+
+  @media (--xlg) {
+    padding: 0.5vr 40px 1vr;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Pack
+|--------------------------------------------------------------------------
+|
+*/
+.pck-Pack_Pack {
+  position: relative;
+
+  display: block;
+  width: 160px;
+  height: 249px;
+
+  background-size: 100%;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    background-size: 100%;
+
+    .pck-Pack-bronze & {
+      background-image: resolve('ea/packs/overlays/bronze.png');
+    }
+
+    .pck-Pack-silver & {
+      background-image: resolve('ea/packs/overlays/silver.png');
+    }
+
+    .pck-Pack-gold & {
+      background-image: resolve('ea/packs/overlays/gold.png');
+    }
+  }
+
+  .pck-Pack-bronze & {
+    background-image: resolve('ea/packs/backgrounds/bronze.png');
+  }
+
+  .pck-Pack-silver & {
+    background-image: resolve('ea/packs/backgrounds/silver.png');
+  }
+
+  .pck-Pack-gold & {
+    background-image: resolve('ea/packs/backgrounds/gold.png');
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Summary
+|--------------------------------------------------------------------------
+|
+*/
+.pck-Pack_Summary {
+  flex: 1 1 auto;
+}
+
+.pck-Pack_Title {
+  @apply --Font-20;
+
+  margin-top: 22px;
+
+  font-weight: 500;
+}
+
+.pck-Pack_Shields {
+  display: flex;
+  margin-top: 0.5vr;
+}
+
+.pck-Pack_Shield {
+  width: 40px;
+  height: 53px;
+  margin-right: 8px;
+  padding-top: 13px;
+
+  text-align: center;
+
+  background-image: resolve('ea/packs/shields.png');
+  background-size: 224px;
+  color: #33314e;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.pck-Pack_Shield-count {
+  background-position: 224px;
+}
+
+.pck-Pack_Shield-bronze {
+  background-position: -176px;
+}
+
+.pck-Pack_Shield-silver {
+  background-position: -120px;
+}
+
+.pck-Pack_Shield-gold {
+  background-position: -64px;
+}
+
+.pck-Pack_Shield-rare {
+  background-position: -8px;
+  color: #fff;
+}
+
+.pck-Pack_ShieldValue {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 12px;
+}
+
+.pck-Pack_ShieldKey {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 12px;
+  text-transform: uppercase;
+}
+
+.pck-Pack_Description {
+  margin-top: 0.5vr;
+
+  font-weight: 400;
+}
+
+.pck-Pack_Link {
+  margin-top: 0.5vr;
+}

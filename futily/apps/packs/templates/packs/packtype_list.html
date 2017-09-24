@@ -56,13 +56,60 @@
 {% endblock %}
 
 {% block main %}
-  {% for key, value in type_list.items() %}
-    <h2>{{ value.title }}</h2>
+  <div class="pck-TypeList">
+    <ul class="pck-TypeList_Items">
+      {% for key, value in type_list.items() %}
+        {% if value.types %}
+          <li class="pck-TypeList_Item">
+            <div class="pck-Type">
+              <h2 class="pck-Type_Title">
+                <span class="pck-Type_Emphasis">{{ value.title }}</span> packs
+              </h2>
 
-    {% for type in value.types %}
-      <p><a href="{{ type.get_absolute_url() }}">{{ type }}</a></p>
-    {% endfor %}
-  {% endfor %}
+              <ul class="pck-Type_Items">
+                {% for type in value.types %}
+                  <li class="pck-Type_Item">
+                    <div class="pck-Pack pck-Pack-{{ key }}">
+                      <a class="pck-Pack_Pack" href="{{ type.get_absolute_url() }}">
+                        {% set random_player = ['dele', 'griezemann', 'muller', 'ronaldo'] | random() %}
+                        {% set random_choice = [1, 2, 3] | random() %}
+                        <img class="pck-Pack_Player" src="{{ static('build/img/ea/packs/players/{}/{}.png'.format(random_player, random_choice)) }}">
+                      </a>
+
+                      <div class="pck-Pack_Summary">
+                        <h3 class="pck-Pack_Title">{{ type.title }}</h3>
+
+                        <ul class="pck-Pack_Shields">
+                          <li class="pck-Pack_Shield pck-Pack_Shield-count">
+                            <p class="pck-Pack_ShieldValue">{{ type.total_count }}</p>
+                            <p class="pck-Pack_ShieldKey">Items</p>
+                          </li>
+
+                          <li class="pck-Pack_Shield pck-Pack_Shield-{{ key }}">
+                            <p class="pck-Pack_ShieldValue">{{ getattr(type, '{}_count'.format(key)) }}</p>
+                            <p class="pck-Pack_ShieldKey">{{ value.title }}</p>
+                          </li>
+
+                          <li class="pck-Pack_Shield pck-Pack_Shield-rare">
+                            <p class="pck-Pack_ShieldValue">{{ type.rare_count }}</p>
+                            <p class="pck-Pack_ShieldKey">Rare</p>
+                          </li>
+                        </ul>
+
+                        <p class="pck-Pack_Description">{{ type.description }}</p>
+
+                        <a class="pck-Pack_Link btn-Primary" href="{{ type.get_absolute_url() }}">Open pack</a>
+                      </div>
+                    </div>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}
 
 {% block aside %}

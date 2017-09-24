@@ -41,10 +41,7 @@ class Command(EaAssetCreatorCommand, BaseCommand):
                 league = League.objects.get(ea_id=league_id)
             except Exception:  # pylint: disable=broad-except
                 if club['name'] == 'Legends' or club['name'] == 'Icons':
-                    league_id = find_dict_by_value(
-                        team_config['LegendsTeams'], 'TeamId', club['ea_id']
-                    )['LeagueId']
-                    league = League.objects.get(ea_id=league_id)
+                    league = League.objects.get(slug='icons')
 
             club['league'] = league
 

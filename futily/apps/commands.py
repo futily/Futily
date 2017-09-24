@@ -33,7 +33,7 @@ class EaAssetCreatorCommand(object):
 
         return [item for sublist in items for item in sublist]
 
-    def get_team_config(self, year='2017'):
+    def get_team_config(self, year='2018'):
         with open(self.teamConfig) as json_file:
             data = json.load(json_file)
 

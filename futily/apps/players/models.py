@@ -16,8 +16,9 @@ from django.utils.datetime_safe import date
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 
-from .constants import (COLOR_CHOICES, POSITION_CHOICES, POSITION_LINE_CHOICES,
-                        QUALITY_CHOICES, WORKRATE_CHOICES)
+from .constants import (BASE_COLOR_CHOICES, POSITION_CHOICES,
+                        POSITION_LINE_CHOICES, QUALITY_CHOICES,
+                        SPECIAL_COLOR_CHOICES, WORKRATE_CHOICES)
 
 
 class Players(ContentBase):
@@ -190,7 +191,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     item_type = models.CharField(max_length=100, null=True, blank=False)
     model_name = models.CharField(max_length=100, null=True, blank=False)
     quality = models.CharField(max_length=100, null=True, blank=False, choices=QUALITY_CHOICES)
-    color = models.CharField(max_length=100, null=True, blank=False, choices=COLOR_CHOICES)
+    color = models.CharField(max_length=100, null=True, blank=False, choices=BASE_COLOR_CHOICES + SPECIAL_COLOR_CHOICES)
     source = models.ForeignKey('players.Source', null=True, blank=True)
 
     is_gk = models.BooleanField(default=False)

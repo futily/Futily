@@ -1,11 +1,8 @@
-from cms.apps.media.models import ImageRefField
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.text import slugify
-
-from ..fields import ChoiceArrayField
 
 
 class Packs(ContentBase):
@@ -53,63 +50,23 @@ class PackType(PageBase):
     page = models.ForeignKey('packs.Packs')
 
     description = models.TextField()
-    image = ImageRefField(blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
 
     ea_pack = models.BooleanField(default=True)
     ea_id = models.CharField(max_length=255, blank=True, null=True)
 
-    quality = models.CharField(max_length=255, choices=[
+    type = models.CharField(max_length=255, choices=[
         ('bronze', 'Bronze'),
         ('silver', 'Silver'),
         ('gold', 'Gold'),
         ('special', 'Special'),
     ], default='special')
 
-    roll_1_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices),
-        default=list, help_text='These are part of the "normal" rolls.',
-    )
-    roll_1_types_rating_min = models.PositiveIntegerField(default=75)
-    roll_1_types_rating_max = models.PositiveIntegerField(default=99)
-
-    roll_2_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices),
-        default=list, help_text='These are part of the "normal" rolls.',
-    )
-    roll_2_types_rating_min = models.PositiveIntegerField(default=75)
-    roll_2_types_rating_max = models.PositiveIntegerField(default=99)
-
-    roll_3_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices),
-        default=list, help_text='These are part of the "normal" rolls.',
-    )
-    roll_3_types_rating_min = models.PositiveIntegerField(default=75)
-    roll_3_types_rating_max = models.PositiveIntegerField(default=99)
-
-    roll_4_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices),
-        default=list, help_text='These are part of the "rare" rolls.',
-    )
-    roll_4_types_rating_min = models.PositiveIntegerField(default=75)
-    roll_4_types_rating_max = models.PositiveIntegerField(default=99)
-
-    roll_5_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices),
-        default=list, help_text='These are part of the "rare" rolls.',
-    )
-    roll_5_types_rating_min = models.PositiveIntegerField(default=75)
-    roll_5_types_rating_max = models.PositiveIntegerField(default=99)
-
-    roll_6_types = ChoiceArrayField(
-        base_field=models.CharField(max_length=100, choices=color_choices),
-        default=list, help_text='These are part of the "rare" rolls.',
-    )
-    roll_6_types_rating_min = models.PositiveIntegerField(default=75)
-    roll_6_types_rating_max = models.PositiveIntegerField(default=99)
-
-    normal_count = models.PositiveIntegerField(default=0)
+    bronze_count = models.PositiveIntegerField(default=0)
+    silver_count = models.PositiveIntegerField(default=0)
+    gold_count = models.PositiveIntegerField(default=0)
     rare_count = models.PositiveIntegerField(default=0)
+    total_count = models.PositiveIntegerField(default=0)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)

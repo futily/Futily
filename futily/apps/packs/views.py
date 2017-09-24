@@ -1,10 +1,10 @@
 import random
-from collections import Counter
 
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 
 from futily.apps.actions.utils import create_action
+from futily.apps.players.constants import SPECIAL_COLOR_CHOICES
 from futily.apps.users.models import CollectionPlayer
 
 from ..players.models import Player
@@ -20,20 +20,20 @@ class TypeList(ListView):
 
         context['object_list'] = {
             'bronze': {
-                'title': 'Bronze packs',
-                'types': self.get_queryset().filter(quality='bronze'),
+                'title': 'Bronze',
+                'types': self.get_queryset().filter(type='bronze'),
             },
             'silver': {
-                'title': 'Silver packs',
-                'types': self.get_queryset().filter(quality='silver'),
+                'title': 'Silver',
+                'types': self.get_queryset().filter(type='silver'),
             },
             'gold': {
-                'title': 'Gold packs',
-                'types': self.get_queryset().filter(quality='gold'),
+                'title': 'Gold',
+                'types': self.get_queryset().filter(type='gold'),
             },
             'special': {
-                'title': 'Special packs',
-                'types': self.get_queryset().filter(quality='special'),
+                'title': 'Special',
+                'types': self.get_queryset().filter(type='special'),
             },
         }
         context['type_list'] = context['object_list']
@@ -55,7 +55,7 @@ class TypeDetail(FormMixin, DetailView):
                 '1': (0, 360),
                 '2': (361, 569),
                 '3': (570, 600),
-                '4': (601, 9559),
+                '4': (601, 959),
                 '5': (960, 994),
                 '6': (995, 1000),
             }
@@ -64,32 +64,139 @@ class TypeDetail(FormMixin, DetailView):
                 if v[0] <= roll <= v[1]:
                     return k
 
-        def map_roll_querysets(roll_count):
-            roll, count = roll_count
-            min_rating = getattr(self.object, f'roll_{roll}_types_rating_min')
-            max_rating = getattr(self.object, f'roll_{roll}_types_rating_max')
-            types = getattr(self.object, f'roll_{roll}_types')
+        rare_schema = {
+            'bronze': {
+                '1': {
+                    'color__in': ['rare_bronze'],
+                    'rating__range': (46, 60),
+                },
+                '2': {
+                    'color__in': ['rare_bronze'],
+                    'rating__range': (46, 61),
+                },
+                '3': {
+                    'color__in': ['rare_bronze'],
+                    'rating__range': (46, 62),
+                },
+                '4': {
+                    'color__in': ['rare_bronze'],
+                    'rating__range': (46, 64),
+                },
+                '5': {
+                    'color__in': ['rare_bronze', 'rare_silver', 'totw_bronze'],
+                    'rating__range': (60, 64),
+                },
+                '6': {
+                    'color__in': ['rare_bronze', 'rare_silver', 'totw_bronze', 'totw_silver', 'tots_bronze'],
+                    'rating__range': (63, 64)
+                },
+            },
+            'silver': {
+                '1': {
+                    'color__in': ['rare_silver'],
+                    'rating__range': (65, 70),
+                },
+                '2': {
+                    'color__in': ['rare_silver'],
+                    'rating__range': (65, 71),
+                },
+                '3': {
+                    'color__in': ['rare_silver'],
+                    'rating__range': (65, 72),
+                },
+                '4': {
+                    'color__in': ['rare_silver'],
+                    'rating__range': (65, 74),
+                },
+                '5': {
+                    'color__in': ['rare_silver', 'totw_silver'],
+                    'rating__range': (70, 74),
+                },
+                '6': {
+                    'color__in': ['rare_bronze', 'rare_silver', 'totw_silver', 'tots_silver', 'rare_gold'],
+                    'rating__range': (73, 74),
+                },
+            },
+            'gold': {
+                '1': {
+                    'color__in': ['rare_gold'],
+                    'rating__range': (75, 80),
+                },
+                '2': {
+                    'color__in': ['rare_gold'],
+                    'rating__range': (75, 81),
+                },
+                '3': {
+                    'color__in': ['rare_gold'],
+                    'rating__range': (75, 82),
+                },
+                '4': {
+                    'color__in': ['rare_gold'],
+                    'rating__range': (75, 83),
+                },
+                '5': {
+                    'color__in': ['rare_gold', 'totw_gold'],
+                    'rating__range': (81, 85),
+                },
+                '6': {
+                    'color__in': ['rare_silver', 'rare_gold', 'legend'] + [x[0] for x in SPECIAL_COLOR_CHOICES],
+                    'rating__range': (83, 99),
+                },
+            },
+        }
 
-            qs = Player.cards.filter(
-                rating__range=[min_rating, max_rating]
-            ).filter(
-                color__in=types
-            ).order_by(
-                '?'
-            )[:count]
+        leftover_schema = {
+            'bronze': {
+                '1': (46, 60),
+                '2': (46, 60),
+                '3': (46, 60),
+                '4': (55, 62),
+                '5': (60, 63),
+                '6': (62, 63),
+            },
+            'silver': {
+                '1': (65, 70),
+                '2': (65, 70),
+                '3': (65, 70),
+                '4': (68, 72),
+                '5': (71, 73),
+                '6': (72, 73),
+            },
+            'gold': {
+                '1': (75, 82),
+                '2': (75, 82),
+                '3': (75, 82),
+                '4': (78, 82),
+                '5': (80, 83),
+                '6': (83, 84),
+            },
+        }
 
-            return qs if qs else None
+        rare_rolls = [map_rolls(random.randint(1, 1000)) for _ in range(self.object.rare_count)]
+        rare_players = [Player.objects.order_by('?').filter(
+            **rare_schema[self.object.type][x]
+        ).first() for x in rare_rolls]
 
-        low_rolls = [random.randint(1, 600) for x in range(self.object.normal_count)]
-        high_rolls = [random.randint(601, 1000) for x in range(self.object.rare_count)]
-        rolls = low_rolls + high_rolls
-        mapped_rolls = list(map(map_rolls, rolls))
-        roll_counts = Counter(mapped_rolls)
+        type_left = getattr(self.object, f'{self.object.type}_count') - len([x for x in rare_players if self.object.type in x.color])
+        type_rolls = [map_rolls(random.randint(1, 1000)) for _ in
+                      range(type_left)]
 
-        players = Player.objects.none()
-        querysets = list(x for x in map(map_roll_querysets, roll_counts.items()) if x is not None)
+        type_players = [Player.objects.order_by('?').filter(
+            color=self.object.type,
+            rating__range=[leftover_schema[self.object.type][x][0], leftover_schema[self.object.type][x][1]]
+        ).first() for x in type_rolls]
 
-        return players.union(*querysets)
+        leftover_rolls = [map_rolls(random.randint(1, 1000)) for _ in
+                          range(self.object.total_count - len(rare_players + type_players))]
+        leftover_players = [Player.objects.order_by('?').filter(
+            color=self.object.type,
+            rating__range=[leftover_schema[self.object.type][x][0], leftover_schema[self.object.type][x][1]]
+        ).first() for x in leftover_rolls]
+
+        players = rare_players + type_players + leftover_players
+        random.shuffle(players)
+
+        return players
 
     def get_success_url(self):
         return self.pack_object.get_absolute_url()
