@@ -2,12 +2,6 @@ import 'babel-polyfill'
 import 'pepjs'
 import './utils/class-list-polyfill'
 
-import Vue from 'vue'
-// import InstantSearch from 'vue-instantsearch'
-import { map } from 'lodash'
-
-import App from './vue/App'
-
 import { externalLinks, iframeFix } from './utils'
 import { FloatingLabel } from './forms'
 import { CardSelector, Rating, RPP } from './players/detail'
@@ -18,10 +12,6 @@ import {
   HeaderPlayerSearch,
   SectionPlayerSearch
 } from './search'
-
-// Vue.use(InstantSearch)
-
-new Vue(App).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks()
@@ -50,43 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.js-FloatingLabel')) {
     const labels = document.querySelectorAll('.js-FloatingLabel')
 
-    map(labels, label => {
+    Array.from(labels).map(label => {
       new FloatingLabel({ el: label })
     })
-  }
-
-  if (document.querySelector('.onespacemedia-login')) {
-    let scriptAdded = false
-    const googleLoginButton = document.querySelector('.onespacemedia-login')
-    const formEl = document.getElementById('google-plus')
-    const atEl = document.getElementById('at')
-    const codeEl = document.getElementById('code')
-
-    googleLoginButton.addEventListener('click', () => {
-      if (!scriptAdded) {
-        const po = document.createElement('script')
-        po.type = 'text/javascript'
-        po.async = true
-        po.src = 'https://apis.google.com/js/client:plusone.js'
-
-        const s = document.getElementsByTagName('script')[0]
-        s.parentNode.insertBefore(po, s)
-
-        scriptAdded = true
-      }
-    })
-
-    window.signInCallback = function signInCallback (result) {
-      console.log(result)
-
-      if (result['error']) {
-        console.log(result['error'])
-      } else {
-        codeEl.value = result['code']
-        atEl.value = result['at']
-        formEl.submit()
-      }
-    }
   }
 
   if (document.querySelector('.js-HeaderPlayerSearch')) {

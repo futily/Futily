@@ -279,9 +279,10 @@ class PlayerListLatest(ListView):
         }
 
 
-class PlayerPerfectChemistry(PlayerFilterSorted):
+class PlayerPerfectChemistry(TemplateView, PlayerFilterSorted):
     always_filters = {'has_perfect_chem_links': True}
     model = Player
+    players_per_page = 15
     template_name = 'players/player_perfect_chem.html'
 
     def initial_players(self):

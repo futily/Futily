@@ -70,17 +70,17 @@ class PlayerCardManager(models.Manager):
     def get_queryset(self):
         qs = super(PlayerCardManager, self) \
             .get_queryset() \
-            .select_related('club', 'nation', 'page', 'page__page') \
-            .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
-                   'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
-                   'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',
-                   'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve', 'dribbling', 'finishing',
-                   'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping', 'long_passing', 'long_shots',
-                   'marking', 'penalties', 'positioning', 'potential', 'reactions', 'short_passing', 'shot_power',
-                   'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina', 'strength', 'vision', 'volleys',
-                   'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning', 'gk_reflexes', 'total_stats',
-                   'total_ingame_stats', 'foot', 'specialities', 'traits', 'player_type', 'item_type', 'model_name',
-                   'source', 'is_special_type', 'pack_weight', 'created', 'modified')
+            .select_related('club', 'nation', 'page', 'page__page')
+            # .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
+            #        'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
+            #        'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',
+            #        'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve', 'dribbling', 'finishing',
+            #        'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping', 'long_passing', 'long_shots',
+            #        'marking', 'penalties', 'positioning', 'potential', 'reactions', 'short_passing', 'shot_power',
+            #        'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina', 'strength', 'vision', 'volleys',
+            #        'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning', 'gk_reflexes', 'total_stats',
+            #        'total_ingame_stats', 'foot', 'specialities', 'traits', 'player_type', 'item_type', 'model_name',
+            #        'source', 'is_special_type', 'pack_weight', 'created', 'modified')
 
         return qs
 
@@ -481,15 +481,39 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
         return Player.objects.filter(ea_id_base=self.ea_id_base).exclude(id=self.id)
 
     def get_chemistry_players(self, amount=None):
-        perfect_chem = Player.objects.filter(club=self.club, nation=self.nation).exclude(ea_id=self.ea_id)
-        strong_chem = Player.objects.filter(
+        # We only need to get certain positions as not all positions can link with other positions
+        position_schema = {
+            'GK': ['CB'],
+            'RB': ['CB', 'RM', 'RW', 'RF', 'CDM', 'CM', 'CAM', 'CF', 'ST'],
+            'RWB': ['CB', 'RM', 'RW', 'RF', 'CDM', 'CM', 'CAM', 'CF', 'ST'],
+            'CB': ['GK', 'CB', 'RB', 'RWB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF', 'LM',
+                   'LW', 'LF'],
+            'LB': ['CB', 'RM', 'RW', 'RF', 'CDM', 'CM', 'CAM', 'CF', 'ST'],
+            'LWB': ['CB', 'RM', 'RW', 'RF', 'CDM', 'CM', 'CAM', 'CF', 'ST'],
+            'CDM': ['RB', 'RWB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF', 'LM', 'LW', 'LF'],
+            'CM': ['RB', 'RWB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF', 'LM', 'LW', 'LF'],
+            'CAM': ['RB', 'RWB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF', 'LM', 'LW', 'LF'],
+            'CF': ['RB', 'RWB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF', 'LM', 'LW', 'LF'],
+            'ST': ['RB', 'RWB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF', 'LM', 'LW', 'LF'],
+            'RM': ['CB', 'RB', 'RWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF'],
+            'RW': ['CB', 'RB', 'RWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF'],
+            'RF': ['CB', 'RB', 'RWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'RM', 'RW', 'RF'],
+            'LM': ['CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'LM', 'LW', 'LF'],
+            'LW': ['CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'LM', 'LW', 'LF'],
+            'LF': ['CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'LM', 'LW', 'LF'],
+        }
+
+        initial_qs = Player.objects.filter(position__in=position_schema[self.position])
+
+        perfect_chem = initial_qs.filter(club=self.club, nation=self.nation).exclude(ea_id_base=self.ea_id_base)
+        strong_chem = initial_qs.filter(
             Q(Q(league=self.league), Q(nation=self.nation), ~Q(club=self.club)) |
             Q(club=self.club)
-        ).exclude(ea_id=self.ea_id)
-        weak_chem = Player.objects.filter(
+        ).exclude(ea_id_base=self.ea_id_base)
+        weak_chem = initial_qs.filter(
             Q(Q(league=self.league), ~Q(nation=self.nation), ~Q(club=self.club)) |
             Q(Q(nation=self.nation), ~Q(league=self.league))
-        ).exclude(ea_id=self.ea_id)
+        ).exclude(ea_id_base=self.ea_id_base)
 
         if amount:
             perfect_chem = perfect_chem[:amount]
