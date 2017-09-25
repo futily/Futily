@@ -24,7 +24,7 @@
 }
 
 .plyr-CardList_Items-tight {
-  grid-template-columns: repeat(auto-fit, 170px);
+  grid-template-columns: repeat(auto-fit, 175px);
 }
 
 .plyr-CardList_Item {

@@ -6,7 +6,8 @@
 |
 */
 .plyr-PerfectItem {
-  grid-template-columns: 140px 60px 1fr;
+  grid-column-gap: 30px;
+  grid-template-columns: 158px 1fr;
 
   display: grid;
 }

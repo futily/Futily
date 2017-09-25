@@ -19,7 +19,7 @@ export class FloatingLabel {
     })
 
     this.els.input.addEventListener('blur', e => {
-      this.shouldBeFloated = e.target.value.length
+      this.shouldBeFloated = e.target.value.length > 0
     })
   }
 
