@@ -35,11 +35,14 @@
 |
 */
 .bld-Builder_Footer {
-  display: flex;
+  grid-template-columns: 1fr minmax(auto, var(--Grid_Container)) 1fr;
+
+  display: grid;
   margin-top: 1vr;
 }
 
 .bld-Builder_Columns {
+  grid-column: 2;
   grid-column-gap: calc(var(--Grid_Gutter) * 2);
   grid-template-columns: repeat(3, 1fr);
 
@@ -64,13 +67,13 @@
   position: relative;
 
   display: block;
-  height: 720px;
+  height: 820px;
   margin-right: auto;
   margin-left: auto;
 
-  background-image: resolve('ea/pitch-wide.jpg');
-  background-position: center;
-  background-size: auto 100%;
+  background-image: resolve('ea/pitch/1920x1080.jpg');
+  background-position: center top;
+  background-size: cover;
 }
 
 .bld-Builder_Canvas {
@@ -83,6 +86,8 @@
   display: block;
   width: 100%;
   height: 100%;
+
+  pointer-events: none;
 }
 
 .bld-Builder_PlayersItem {
@@ -97,16 +102,19 @@
   top: 50%;
   left: 50%;
 
-  display: block;
-  width: 140px;
-  height: 219px;
+  flex-direction: column;
+  justify-content: flex-end;
 
-  background-position: center;
-  background-size: 105px 164px;
+  display: flex;
+  width: 127px;
+  height: calc(198px + 29px);
+
   cursor: pointer;
 
-  transform: translate(calc(-50% - var(--PlayerX)), calc(-50% - var(--PlayerY)))
-    scale(var(--PlayerScale));
+  transform: translate(
+    calc(-50% - var(--PlayerX)),
+    calc(-50% - var(--PlayerY))
+  );
   transition: transform 0.5s var(--Transition_EaseOutBack);
 
   perspective: 1;
@@ -125,670 +133,651 @@
 }
 
 .bld-Builder_PlayersItem-gk {
-  --PlayerY: -120%;
-
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-gk.png');
-
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
-    --PlayerY: -265px;
-  }
+  --PlayerY: -125%;
 }
 
 .bld-Builder_PlayersItem-rwb {
   --PlayerX: -360%;
-  --PlayerY: -30%;
-
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-rwb.png');
+  --PlayerY: -10%;
 }
 
 .bld-Builder_PlayersItem-rb {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-rb.png');
-
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] &,
+  .bld-Builder[data-builder-formation='4222'] &,
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] &,
+  .bld-Builder[data-builder-formation='4312'] &,
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] &,
+  .bld-Builder[data-builder-formation='451'] &,
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerX: -340%;
-    --PlayerY: -65%;
+    --PlayerY: -80%;
   }
 }
 
 .bld-Builder_PlayersItem-rcb {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cb.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-3421 &,
-  .bld-Builder-343 &,
-  .bld-Builder-352 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] &,
+  .bld-Builder[data-builder-formation='352'] & {
     --PlayerX: -240%;
-    --PlayerY: -55%;
+    --PlayerY: -45%;
   }
 
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
-    --PlayerX: -165%;
-    --PlayerY: -80%;
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] &,
+  .bld-Builder[data-builder-formation='4222'] &,
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] &,
+  .bld-Builder[data-builder-formation='4312'] &,
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] &,
+  .bld-Builder[data-builder-formation='451'] &,
+  .bld-Builder[data-builder-formation='451-2'] & {
+    --PlayerX: -230%;
+    --PlayerY: -95%;
   }
 
-  .bld-Builder-5212 &,
-  .bld-Builder-5221 &,
-  .bld-Builder-532 & {
-    --PlayerX: -200%;
-    --PlayerY: -50%;
+  .bld-Builder[data-builder-formation='5212'] &,
+  .bld-Builder[data-builder-formation='5221'] &,
+  .bld-Builder[data-builder-formation='532'] & {
+    --PlayerX: -245%;
+    --PlayerY: -35%;
   }
 }
 
 .bld-Builder_PlayersItem-cb {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cb.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-3421 &,
-  .bld-Builder-343 &,
-  .bld-Builder-352 & {
-    --PlayerY: -35%;
-  }
-
-  .bld-Builder-5212 &,
-  .bld-Builder-5221 &,
-  .bld-Builder-532 & {
-    --PlayerY: -35%;
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] &,
+  .bld-Builder[data-builder-formation='352'] &,
+  .bld-Builder[data-builder-formation='5212'] &,
+  .bld-Builder[data-builder-formation='5221'] &,
+  .bld-Builder[data-builder-formation='532'] & {
+    --PlayerY: -25%;
   }
 }
 
 .bld-Builder_PlayersItem-lcb {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cb.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-3421 &,
-  .bld-Builder-343 &,
-  .bld-Builder-352 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] &,
+  .bld-Builder[data-builder-formation='352'] & {
     --PlayerX: 240%;
-    --PlayerY: -55%;
+    --PlayerY: -45%;
   }
 
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] &,
+  .bld-Builder[data-builder-formation='4222'] &,
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] &,
+  .bld-Builder[data-builder-formation='4312'] &,
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] &,
+  .bld-Builder[data-builder-formation='451'] &,
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerX: 165%;
-    --PlayerY: -80%;
+    --PlayerY: -95%;
   }
 
-  .bld-Builder-5212 &,
-  .bld-Builder-5221 &,
-  .bld-Builder-532 & {
-    --PlayerX: 200%;
-    --PlayerY: -50%;
+  .bld-Builder[data-builder-formation='5212'] &,
+  .bld-Builder[data-builder-formation='5221'] &,
+  .bld-Builder[data-builder-formation='532'] & {
+    --PlayerX: 245%;
+    --PlayerY: -35%;
   }
 }
 
 .bld-Builder_PlayersItem-lb {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-lb.png');
-
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] &,
+  .bld-Builder[data-builder-formation='4222'] &,
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] &,
+  .bld-Builder[data-builder-formation='4312'] &,
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] &,
+  .bld-Builder[data-builder-formation='451'] &,
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerX: 340%;
-    --PlayerY: -65%;
+    --PlayerY: -80%;
   }
 }
 
 .bld-Builder_PlayersItem-lwb {
-  --PlayerX: 360%;
-  --PlayerY: -30%;
-
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-lwb.png');
+  --PlayerX: 380%;
+  --PlayerY: -10%;
 }
 
 .bld-Builder_PlayersItem-rdm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cdm.png');
-
-  .bld-Builder-352 & {
+  .bld-Builder[data-builder-formation='352'] & {
     --PlayerX: -115%;
-    --PlayerY: -10%;
   }
 
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 & {
-    --PlayerX: -125%;
-    --PlayerY: 10%;
+  .bld-Builder[data-builder-formation='4222'] & {
+    --PlayerX: -115%;
+    --PlayerY: 15%;
   }
 
-  .bld-Builder-433-3 & {
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] & {
+    --PlayerX: -235%;
+    --PlayerY: 15%;
+  }
+
+  .bld-Builder[data-builder-formation='433-3'] & {
     --PlayerX: -200%;
+    --PlayerY: 5%;
   }
 
-  .bld-Builder-442-2 & {
+  .bld-Builder[data-builder-formation='442-2'] & {
     --PlayerX: -155%;
     --PlayerY: 10%;
   }
 }
 
 .bld-Builder_PlayersItem-cdm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cdm.png');
-
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4141 & {
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4141'] & {
     --PlayerY: -20%;
   }
 
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-5 & {
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-5'] & {
     --PlayerY: -25%;
   }
 }
 
 .bld-Builder_PlayersItem-ldm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cdm.png');
-
-  .bld-Builder-352 & {
+  .bld-Builder[data-builder-formation='352'] & {
     --PlayerX: 115%;
-    --PlayerY: -10%;
   }
 
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 & {
-    --PlayerX: 125%;
+  .bld-Builder[data-builder-formation='4222'] & {
+    --PlayerX: 115%;
+    --PlayerY: 15%;
+  }
+
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] & {
+    --PlayerX: 235%;
+    --PlayerY: 15%;
+  }
+
+  .bld-Builder[data-builder-formation='433-3'] & {
+    --PlayerX: 200%;
     --PlayerY: 5%;
   }
 
-  .bld-Builder-433-3 & {
-    --PlayerX: 200%;
-  }
-
-  .bld-Builder-442-2 & {
+  .bld-Builder[data-builder-formation='442-2'] & {
     --PlayerX: 155%;
     --PlayerY: 10%;
   }
 }
 
 .bld-Builder_PlayersItem-rm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-rm.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-3421 &,
-  .bld-Builder-343 &,
-  .bld-Builder-352 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] &,
+  .bld-Builder[data-builder-formation='352'] & {
     --PlayerX: -350%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder-41212 & {
+  .bld-Builder[data-builder-formation='41212'] & {
     --PlayerX: -270%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] &,
+  .bld-Builder[data-builder-formation='4231-2'] &,
+  .bld-Builder[data-builder-formation='451'] &,
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerX: -320%;
     --PlayerY: 40%;
+  }
+
+  .bld-Builder[data-builder-formation='4231-2'] & {
+    --PlayerX: -350%;
+    --PlayerY: 50%;
   }
 }
 
 .bld-Builder_PlayersItem-rw {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-rw.png');
-
-  .bld-Builder-343 & {
+  .bld-Builder[data-builder-formation='343'] & {
     --PlayerX: -240%;
     --PlayerY: 110%;
   }
 
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 & {
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] & {
     --PlayerX: -250%;
     --PlayerY: 105%;
   }
 }
 
 .bld-Builder_PlayersItem-rf {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-rf.png');
-
-  .bld-Builder-3421 & {
-    --PlayerX: -170%;
-    --PlayerY: 100%;
+  .bld-Builder[data-builder-formation='3421'] & {
+    --PlayerX: -180%;
+    --PlayerY: 105%;
   }
 
-  .bld-Builder-4321 &,
-  .bld-Builder-5221 & {
-    --PlayerX: -155%;
-    --PlayerY: 100%;
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='5221'] & {
+    --PlayerX: -165%;
+    --PlayerY: 115%;
   }
 }
 
 .bld-Builder_PlayersItem-rcm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cm.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-3421 &,
-  .bld-Builder-343 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] & {
     --PlayerX: -125%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder-41212-2 & {
+  .bld-Builder[data-builder-formation='41212-2'] & {
     --PlayerX: -200%;
     --PlayerY: 20%;
   }
 
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 & {
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] & {
     --PlayerX: -155%;
-    --PlayerY: 25%;
+    --PlayerY: 15%;
   }
 
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 & {
+  .bld-Builder[data-builder-formation='4312'] &,
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] & {
     --PlayerX: -200%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerX: -170%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder-5212 &,
-  .bld-Builder-5221 & {
+  .bld-Builder[data-builder-formation='5212'] &,
+  .bld-Builder[data-builder-formation='5221'] & {
     --PlayerX: -130%;
     --PlayerY: 20%;
   }
 
-  .bld-Builder-532 & {
-    --PlayerX: -200%;
-    --PlayerY: 45%;
+  .bld-Builder[data-builder-formation='532'] & {
+    --PlayerX: -250%;
+    --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-cm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cm.png');
-
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 & {
+  .bld-Builder[data-builder-formation='4312'] &,
+  .bld-Builder[data-builder-formation='4321'] & {
     --PlayerY: -15%;
   }
 
-  .bld-Builder-433 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-451 & {
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='451'] & {
     --PlayerY: -15%;
   }
 
-  .bld-Builder-433-3 & {
+  .bld-Builder[data-builder-formation='433-3'] & {
     --PlayerY: 40px;
   }
 
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerY: -5%;
   }
 
-  .bld-Builder-532 & {
-    --PlayerY: 45%;
+  .bld-Builder[data-builder-formation='532'] & {
+    --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-lcm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cm.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-3421 &,
-  .bld-Builder-343 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] & {
     --PlayerX: 125%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder-41212-2 & {
+  .bld-Builder[data-builder-formation='41212-2'] & {
     --PlayerX: 200%;
     --PlayerY: 20%;
   }
 
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 & {
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] & {
     --PlayerX: 155%;
-    --PlayerY: 25%;
+    --PlayerY: 15%;
   }
 
-  .bld-Builder-4312 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 & {
+  .bld-Builder[data-builder-formation='4312'] &,
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] & {
     --PlayerX: 200%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerX: 170%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder-5212 &,
-  .bld-Builder-5221 & {
+  .bld-Builder[data-builder-formation='5212'] &,
+  .bld-Builder[data-builder-formation='5221'] & {
     --PlayerX: 130%;
     --PlayerY: 20%;
   }
 
-  .bld-Builder-532 & {
-    --PlayerX: 200%;
-    --PlayerY: 45%;
+  .bld-Builder[data-builder-formation='532'] & {
+    --PlayerX: 250%;
+    --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-lm {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-lm.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-3421 &,
-  .bld-Builder-343 &,
-  .bld-Builder-352 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] &,
+  .bld-Builder[data-builder-formation='352'] & {
     --PlayerX: 350%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder-41212 & {
+  .bld-Builder[data-builder-formation='41212'] & {
     --PlayerX: 270%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] &,
+  .bld-Builder[data-builder-formation='451'] &,
+  .bld-Builder[data-builder-formation='451-2'] & {
     --PlayerX: 320%;
     --PlayerY: 40%;
+  }
+
+  .bld-Builder[data-builder-formation='4231-2'] & {
+    --PlayerX: 350%;
+    --PlayerY: 50%;
   }
 }
 
 .bld-Builder_PlayersItem-lw {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-lw.png');
-
-  .bld-Builder-343 & {
+  .bld-Builder[data-builder-formation='343'] & {
     --PlayerX: 240%;
     --PlayerY: 110%;
   }
 
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-433-5 & {
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='433-5'] & {
     --PlayerX: 250%;
     --PlayerY: 105%;
   }
 }
 
 .bld-Builder_PlayersItem-lf {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-lf.png');
-
-  .bld-Builder-3421 & {
-    --PlayerX: 170%;
-    --PlayerY: 100%;
+  .bld-Builder[data-builder-formation='3421'] & {
+    --PlayerX: 180%;
+    --PlayerY: 105%;
   }
 
-  .bld-Builder-4321 &,
-  .bld-Builder-5221 & {
-    --PlayerX: 155%;
-    --PlayerY: 100%;
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='5221'] & {
+    --PlayerX: 165%;
+    --PlayerY: 115%;
   }
 }
 
 .bld-Builder_PlayersItem-ram {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cam.png');
-
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 & {
+  .bld-Builder[data-builder-formation='4222'] & {
     --PlayerX: -245%;
     --PlayerY: 60%;
   }
 
-  .bld-Builder-451 & {
+  .bld-Builder[data-builder-formation='4231'] & {
+    --PlayerX: -125%;
+    --PlayerY: 60%;
+  }
+
+  .bld-Builder[data-builder-formation='451'] & {
     --PlayerX: -160%;
     --PlayerY: 70%;
   }
 }
 
 .bld-Builder_PlayersItem-cam {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cam.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-352 &,
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4141 &,
-  .bld-Builder-4312 & {
-    --PlayerY: 70%;
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='352'] &,
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4312'] & {
+    --PlayerY: 85%;
   }
 
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-433-4 & {
-    --PlayerY: 40%;
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] &,
+  .bld-Builder[data-builder-formation='433-4'] & {
+    --PlayerY: 30%;
   }
 
-  .bld-Builder-5212 & {
-    --PlayerY: 60%;
+  .bld-Builder[data-builder-formation='5212'] & {
+    --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-lam {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cam.png');
-
-  .bld-Builder-4222 &,
-  .bld-Builder-4231 & {
+  .bld-Builder[data-builder-formation='4222'] & {
     --PlayerX: 245%;
     --PlayerY: 60%;
   }
 
-  .bld-Builder-451 & {
+  .bld-Builder[data-builder-formation='4231'] & {
+    --PlayerX: 125%;
+    --PlayerY: 60%;
+  }
+
+  .bld-Builder[data-builder-formation='451'] & {
     --PlayerX: 160%;
     --PlayerY: 70%;
   }
 }
 
 .bld-Builder_PlayersItem-cf {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-cf.png');
-
-  .bld-Builder-433-5 & {
+  .bld-Builder[data-builder-formation='433-5'] & {
     --PlayerY: 85%;
   }
 
-  .bld-Builder-4411 & {
-    --PlayerY: 45%;
+  .bld-Builder[data-builder-formation='4411'] & {
+    --PlayerY: 30%;
   }
 }
 
 .bld-Builder_PlayersItem-st {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-st.png');
-
-  .bld-Builder-3421 &,
-  .bld-Builder-343 & {
-    --PlayerY: 270px;
+  .bld-Builder[data-builder-formation='3421'] &,
+  .bld-Builder[data-builder-formation='343'] & {
+    --PlayerY: 295px;
   }
 
-  .bld-Builder-4141 &,
-  .bld-Builder-4411 &,
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 &,
-  .bld-Builder-4231 &,
-  .bld-Builder-4231-2 &,
-  .bld-Builder-4321 &,
-  .bld-Builder-433 &,
-  .bld-Builder-433-2 &,
-  .bld-Builder-433-3 &,
-  .bld-Builder-433-4 &,
-  .bld-Builder-451 &,
-  .bld-Builder-451-2 & {
-    --PlayerY: 270px;
+  .bld-Builder[data-builder-formation='4141'] &,
+  .bld-Builder[data-builder-formation='4411'] &,
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] &,
+  .bld-Builder[data-builder-formation='4231'] &,
+  .bld-Builder[data-builder-formation='4231-2'] &,
+  .bld-Builder[data-builder-formation='4321'] &,
+  .bld-Builder[data-builder-formation='433'] &,
+  .bld-Builder[data-builder-formation='433-2'] &,
+  .bld-Builder[data-builder-formation='433-3'] &,
+  .bld-Builder[data-builder-formation='433-4'] &,
+  .bld-Builder[data-builder-formation='451'] &,
+  .bld-Builder[data-builder-formation='451-2'] & {
+    --PlayerY: 295px;
   }
 
-  .bld-Builder-5221 & {
-    --PlayerY: 260px;
+  .bld-Builder[data-builder-formation='5221'] & {
+    --PlayerY: 295px;
   }
 }
 
 .bld-Builder_PlayersItem-rs {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-st.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-352 &,
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4312 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='352'] &,
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4312'] & {
     --PlayerX: -150%;
+    --PlayerY: 130%;
+  }
+
+  .bld-Builder[data-builder-formation='4222'] & {
+    --PlayerX: -130%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder-4222 & {
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] & {
     --PlayerX: -140%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 & {
-    --PlayerX: -140%;
-    --PlayerY: 120%;
-  }
-
-  .bld-Builder-5212 &,
-  .bld-Builder-532 & {
+  .bld-Builder[data-builder-formation='5212'] &,
+  .bld-Builder[data-builder-formation='532'] & {
     --PlayerX: -140%;
     --PlayerY: 120%;
   }
 }
 
 .bld-Builder_PlayersItem-ls {
-  background-image: url('http://www.futwiz.com/assets/img/fifa17/builder/17-st.png');
-
-  .bld-Builder-3412 &,
-  .bld-Builder-352 &,
-  .bld-Builder-41212 &,
-  .bld-Builder-41212-2 &,
-  .bld-Builder-4312 & {
+  .bld-Builder[data-builder-formation='3412'] &,
+  .bld-Builder[data-builder-formation='352'] &,
+  .bld-Builder[data-builder-formation='41212'] &,
+  .bld-Builder[data-builder-formation='41212-2'] &,
+  .bld-Builder[data-builder-formation='4312'] & {
     --PlayerX: 150%;
+    --PlayerY: 130%;
+  }
+
+  .bld-Builder[data-builder-formation='4222'] & {
+    --PlayerX: 130%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder-4222 & {
+  .bld-Builder[data-builder-formation='442'] &,
+  .bld-Builder[data-builder-formation='442-2'] & {
     --PlayerX: 140%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder-442 &,
-  .bld-Builder-442-2 & {
-    --PlayerX: 140%;
-    --PlayerY: 120%;
-  }
-
-  .bld-Builder-5212 &,
-  .bld-Builder-532 & {
+  .bld-Builder[data-builder-formation='5212'] &,
+  .bld-Builder[data-builder-formation='532'] & {
     --PlayerX: 140%;
     --PlayerY: 120%;
   }
 }
 
 .bld-Builder_Player {
+  position: absolute;
+  top: -25px;
+  right: -16px;
+  bottom: @top;
+  left: @right;
+
+  display: block;
+  width: 158px;
+  height: 247px;
+
   text-align: center;
+
+  background-image: resolve('ea/cards/18/medium/base.png');
+  background-position: 0 -494px;
+
+  transform: scale(0.8);
+}
+
+.bld-Builder_Pedestal {
+  display: block;
+  width: 59px;
+  height: 29px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 16px;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+
+  background-image: resolve('ea/pedestal.png');
+  color: #fff;
 }
 
 .bld-Builder_PlayerRemove {
   @apply --Font-14;
+
+  position: absolute;
 
   display: inline-block;
   margin-right: auto;

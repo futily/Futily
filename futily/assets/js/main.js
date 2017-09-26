@@ -6,6 +6,7 @@ import { externalLinks, iframeFix } from './utils'
 import { FloatingLabel } from './forms'
 import { CardSelector, Rating, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
+import { Builder } from './squads/Builder'
 import { Follow } from './users/follow'
 import {
   ComparePlayerSearch,
@@ -55,6 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (document.querySelector('.js-SectionPlayerSearch')) {
     new SectionPlayerSearch({ className: '.js-SectionPlayerSearch' })
+  }
+
+  if (document.querySelector('.bld-Builder')) {
+    new Builder({ className: 'bld-Builder' })
   }
 
   // If the browser isn't Safari, don't do anything

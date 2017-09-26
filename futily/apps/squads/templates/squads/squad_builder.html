@@ -62,7 +62,52 @@
 {% block main %}
   <div class="bld-Builder" data-builder-formation="442">
     <div class="bld-Builder_Body">
-      <Team isTransitioning={this.isTransitioning} />
+      <div class="bld-Builder_Team">
+        <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
+
+        <ul class="bld-Builder_Players">
+          {% for index in range(0, 11) %}
+            <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ loop.cycle('gk', 'rb', 'rcb', 'lcb', 'lb', 'rm', 'rcm', 'lcm', 'lm', 'rs', 'ls') }}"
+                data-builder-formation-index="{{ index }}">
+              <div class="bld-Builder_Player"></div>
+              <span class="bld-Builder_Pedestal"></span>
+              <button class="bld-Builder_PlayerRemove">
+                Remove
+              </button>
+            </li>
+          {% endfor %}
+        </ul>
+
+        {#        <div class="bld-Search">#}
+        {#          <header class="bld-Search_Header">#}
+        {#            <input class="bld-Search_Input" type="search" placeholder="Search" />#}
+        {#          </header>#}
+        {##}
+        {#          <div class="bld-Search_Body">#}
+        {#            <div class="bld-Search_Results">#}
+        {#              <button rel="prev" class="bld-Search_Prev">#}
+        {#                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">#}
+        {#                  <path d="M88.6 121.3c.8.8 1.8 1.2 2.9 1.2s2.1-.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8 0l-54 53.9c-1.6 1.6-1.6 4.2 0 5.8l54 53.9z" />#}
+        {#                </svg>#}
+        {#              </button>#}
+        {##}
+        {#              <div class="bld-Search_Items">#}
+        {#                <ul class="plyr-CardList_Items">#}
+        {#                  <li class="plyr-CardList_Item">#}
+        {#                    <Card player={player} />#}
+        {#                  </li>#}
+        {#                </ul>#}
+        {#              </div>#}
+        {##}
+        {#              <button rel="next" class="bld-Search_Next">#}
+        {#                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">#}
+        {#                  <path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z" />#}
+        {#                </svg>#}
+        {#              </button>#}
+        {#            </div>#}
+        {#          </div>#}
+        {#        </div>#}
+      </div>
     </div>
 
     <footer class="bld-Builder_Footer">
@@ -78,6 +123,31 @@
                       id="formation"
                       name="formation">
                 <option value="">Formations</option>
+                <option value="3412">3-4-1-2</option>
+                <option value="3421">3-4-2-1</option>
+                <option value="343">3-4-3</option>
+                <option value="352">3-5-2</option>
+                <option value="41212">4-1-2-1-2</option>
+                <option value="41212-2">4-1-2-1-2 (2)</option>
+                <option value="4141">4-1-4-1</option>
+                <option value="4231">4-2-3-1</option>
+                <option value="4231-2">4-2-3-1 (2)</option>
+                <option value="4222">4-2-2-2</option>
+                <option value="4312">4-3-1-2</option>
+                <option value="4321">4-3-2-1</option>
+                <option value="433">4-3-3</option>
+                <option value="433-2">4-3-3 (2)</option>
+                <option value="433-3">4-3-3 (3)</option>
+                <option value="433-4">4-3-3 (4)</option>
+                <option value="433-5">4-3-3 (5)</option>
+                <option value="4411">4-4-1-1</option>
+                <option value="442">4-4-2</option>
+                <option value="442-2">4-4-2 (2)</option>
+                <option value="451">4-5-1</option>
+                <option value="451-2">4-5-1 (2)</option>
+                <option value="5212">5-2-1-2</option>
+                <option value="5221">5-2-2-1</option>
+                <option value="532">5-3-2</option>
               </select>
             </div>
 
@@ -90,7 +160,7 @@
                      class="frm-Form_Input js-FloatingLabel_Input"
                      placeholder="Name"
                      name="name"
-                     id="name"/>
+                     id="name" />
             </div>
           </div>
         </div>
@@ -117,7 +187,7 @@
               Web app
               <input
                 type="text"
-                placeholder="Web app"/>
+                placeholder="Web app" />
             </label>
             <button type="submit">Import</button>
 
@@ -138,6 +208,50 @@
           <div class="bld-Builder_Stats">
             <div class="bld-Stats">
               <ul class="bld-Stats_Items">
+                <li class="bld-Stats_Item" data-builder-stat-name="attack">
+                  <span class="bld-Stats_Label">Attack</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="midfield">
+                  <span class="bld-Stats_Label">Midfield</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="defence">
+                  <span class="bld-Stats_Label">Defence</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="pace">
+                  <span class="bld-Stats_Label">Pace</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="shooting">
+                  <span class="bld-Stats_Label">Shooting</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="passing">
+                  <span class="bld-Stats_Label">Passing</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="dribbling">
+                  <span class="bld-Stats_Label">Dribbling</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="defending">
+                  <span class="bld-Stats_Label">Defending</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="physical">
+                  <span class="bld-Stats_Label">Physical</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                </li>
               </ul>
             </div>
           </div>
@@ -145,4 +259,61 @@
       </div>
     </footer>
   </div>
+
+  <template id="PlayerCard">
+    <div class="plyr-Card plyr-Card-small">
+      <header class="plyr-Card_Header">
+        <div class="plyr-Card_Meta">
+          <span class="plyr-Card_Rating"></span>
+          <span class="plyr-Card_Position"></span>
+          <img alt="" class="plyr-Card_Club">
+          <img alt="" class="plyr-Card_Nation">
+        </div>
+
+        <img alt="" class="plyr-Card_Image">
+      </header>
+
+      <div class="plyr-Card_Body">
+        <p class="plyr-Card_Name"></p>
+
+        <div class="plyr-Card_Extra">
+          <p class="plyr-Card_Workrates"></p>
+          <p class="plyr-Card_Stars"></p>
+          <p class="plyr-Card_Stars"></p>
+        </div>
+
+        <div class="plyr-Card_Stats">
+          <div class="plyr-Card_Stat plyr-Card_Stat-1">
+            <span class="plyr-Card_StatValue"></span>
+            <span class="plyr-Card_StatKey"></span>
+          </div>
+
+          <div class="plyr-Card_Stat plyr-Card_Stat-1">
+            <span class="plyr-Card_StatValue"></span>
+            <span class="plyr-Card_StatKey"></span>
+          </div>
+
+          <div class="plyr-Card_Stat plyr-Card_Stat-1">
+            <span class="plyr-Card_StatValue"></span>
+            <span class="plyr-Card_StatKey"></span>
+          </div>
+
+          <div class="plyr-Card_Stat plyr-Card_Stat-1">
+            <span class="plyr-Card_StatValue"></span>
+            <span class="plyr-Card_StatKey"></span>
+          </div>
+
+          <div class="plyr-Card_Stat plyr-Card_Stat-1">
+            <span class="plyr-Card_StatValue"></span>
+            <span class="plyr-Card_StatKey"></span>
+          </div>
+
+          <div class="plyr-Card_Stat plyr-Card_Stat-1">
+            <span class="plyr-Card_StatValue"></span>
+            <span class="plyr-Card_StatKey"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
 {% endblock %}
