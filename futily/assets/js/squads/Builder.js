@@ -256,8 +256,6 @@ export class Builder {
       .on('drag:start', this.handleDragStart)
       .on('drag:move', this.handleDragMove)
       .on('drag:stop', this.handleDragStop)
-
-    console.log(this)
   }
 
   setupListeners () {
@@ -273,8 +271,6 @@ export class Builder {
         xsrfCookieName: 'csrftoken',
         xsrfHeaderName: 'X-CSRFToken'
       })
-
-      console.log(res)
     })
 
     this.els.form.formation.addEventListener('change', e => {
