@@ -52,19 +52,22 @@ class BuilderAjax(FormView):
             data['robots_index'] = True
             data['robots_follow'] = True
             data['robots_archive'] = True
-            squad = Squad(**form.cleaned_data)
+
+            players = data.pop('players')
+
+            squad = Squad(**data)
+            squad.user = request.user if request.user.is_authenticated else None
             squad.save()
 
-            if form.cleaned_data.get('players'):
-                players = form.cleaned_data.pop('players')
-
+            if players:
                 for player in players:
                     p = SquadPlayer(player=player[0], squad=squad, index=player[1], position=player[2])
                     p.save()
 
-            create_action(request.user, 'created squad', squad)
+            if request.user.is_authenticated:
+                create_action(request.user, 'created squad', squad)
 
-        return JsonResponse(response_data)
+        return JsonResponse(response_data, status=200)
 
 
 class BuilderImport(View):
@@ -146,8 +149,6 @@ class SquadList(ListView):
     model = Squad
 
     def get_queryset(self):
-        print(Squad.objects.all())
-
         return super(SquadList, self).get_queryset().filter(page__page=self.request.pages.current)
 
 

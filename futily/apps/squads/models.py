@@ -1,5 +1,5 @@
 from cms.apps.pages.models import ContentBase, Page
-from cms.models import PageBase, PageBaseManager
+from cms.models import PageBaseManager, SearchMetaBase
 from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
@@ -49,9 +49,11 @@ class SquadManager(PageBaseManager):
         )
 
 
-class Squad(PageBase):
+class Squad(SearchMetaBase):
 
     objects = SquadManager()
+
+    title = models.CharField(max_length=255, blank=True, null=True)
 
     page = models.ForeignKey('Squads', blank=False, null=True)
     user = models.ForeignKey('users.User', blank=True, null=True)
@@ -87,12 +89,11 @@ class Squad(PageBase):
     web_app_url = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return self.title or f'Squad {self.id}'
 
     def _get_permalink_for_page(self, page):
         return page.reverse('squad', kwargs={
             'pk': self.pk,
-            'slug': self.slug,
         })
 
     def get_absolute_url(self):

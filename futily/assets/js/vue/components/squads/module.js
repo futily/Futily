@@ -144,7 +144,7 @@ const mutations = {
     statePlayer.positions.actual = position
 
     if (isTeam(index)) {
-      state.filledLinks.push(index)
+      state.Links.push(index)
     }
   },
 
@@ -161,7 +161,7 @@ const mutations = {
     statePlayer.player = {}
 
     if (isTeam(index)) {
-      state.filledLinks = state.filledLinks.filter(item => item !== index)
+      state.Links = state.Links.filter(item => item !== index)
     }
   },
 
@@ -183,7 +183,7 @@ const actions = {
     commit(types.SET_FORMATION_LINKS, { formation })
 
     // Update player chemistry after formation change
-    state.filledLinks.map(filledIndex => {
+    state.Links.map(filledIndex => {
       const group = 'team'
       const player = state[group][filledIndex].player
 
@@ -259,7 +259,7 @@ const getters = {
   [types.GET_CHEMISTRY] (_, getters) {
     return Math.max(
       0,
-      state.filledLinks.reduce(
+      state.Links.reduce(
         (acc, val) => acc + getters[types.GET_PLAYER_CHEMISTRY]({ index: val }),
         0
       )
@@ -267,13 +267,13 @@ const getters = {
   },
 
   [types.GET_PLAYER_OBJECT_IDS] (state) {
-    return state.filledLinks.map(index => {
+    return state.Links.map(index => {
       return state.team[index].player.id
     })
   },
 
   [types.PLAYERS_FOR_FORM] (state) {
-    return state.filledLinks
+    return state.Links
       .map(index => {
         const player = state.team[index]
 
@@ -282,25 +282,24 @@ const getters = {
       .join('|')
   },
 
-  [types.GET_RATING]: state =>
-    getAverageStat(state, state.filledLinks, 'rating'),
+  [types.GET_RATING]: state => getAverageStat(state, state.Links, 'rating'),
 
   [types.GET_ATTACK]: state => getAverageLine(state, 'ATT'),
   [types.GET_MIDFIELD]: state => getAverageLine(state, 'MID'),
   [types.GET_DEFENCE]: state => getAverageLine(state, 'DEF'),
 
   [types.GET_PACE]: state =>
-    getAverageStat(state, state.filledLinks, 'card_att_1', false),
+    getAverageStat(state, state.Links, 'card_att_1', false),
   [types.GET_SHOOTING]: state =>
-    getAverageStat(state, state.filledLinks, 'card_att_2', false),
+    getAverageStat(state, state.Links, 'card_att_2', false),
   [types.GET_PASSING]: state =>
-    getAverageStat(state, state.filledLinks, 'card_att_3', false),
+    getAverageStat(state, state.Links, 'card_att_3', false),
   [types.GET_DRIBBLING]: state =>
-    getAverageStat(state, state.filledLinks, 'card_att_4', false),
+    getAverageStat(state, state.Links, 'card_att_4', false),
   [types.GET_DEFENDING]: state =>
-    getAverageStat(state, state.filledLinks, 'card_att_5', false),
+    getAverageStat(state, state.Links, 'card_att_5', false),
   [types.GET_PHYSICAL]: state =>
-    getAverageStat(state, state.filledLinks, 'card_att_6', false),
+    getAverageStat(state, state.Links, 'card_att_6', false),
 
   [types.GET_SEARCH]: state => state.search,
   [types.GET_FORMATION]: state => state.formation,
@@ -319,7 +318,7 @@ function getAverageLine (state, line) {
     throw new Error('"line" must be "DEF", "MID" or "ATT"')
   }
 
-  const players = state.filledLinks.filter(index => {
+  const players = state.Links.filter(index => {
     const position = state.team[index].positions.formation
 
     return POSITION_LINES[line].includes(position)

@@ -31,6 +31,10 @@
   &:hover {
     transform: translateY(-5px);
 
+    .bld-Builder & {
+      transform: none;
+    }
+
     &::after {
       opacity: 1;
     }
@@ -198,6 +202,8 @@
 }
 
 .plyr-Card_Image {
+  pointer-events: none;
+
   .plyr-Card-small & {
     width: 60px;
   }
@@ -401,11 +407,43 @@
 |
 */
 .plyr-Card_Footer {
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
+  display: grid;
+
+  .plyr-Card-small & {
+    display: none;
+  }
+
+  .plyr-Card-medium & {
+    grid-template-rows: 22px 1fr;
+    grid-template-columns: 33px 1fr;
+
+    padding-right: 22px;
+    padding-left: 9px;
+  }
+
+  .plyr-Card-large & {
+    grid-template-rows: 28px 1fr;
+    grid-template-columns: 42px 1fr;
+
+    padding-right: 28px;
+    padding-left: 12px;
+  }
 }
 
-.plyr-Card_ChemistryLabel {
+.plyr-Card_Chem {
+  @apply --Font-14;
+
+  grid-column: 2;
+
+  padding-left: 20px;
+
+  font-weight: 500;
+  text-align: left;
   text-transform: uppercase;
+
+  color: var(--Card_Color-value);
+}
+
+.plyr-Card_ChemValue {
+  font-weight: 600;
 }

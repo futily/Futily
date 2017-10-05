@@ -178,9 +178,9 @@ export function scrollToY (
 }
 
 export class Cycler {
-  constructor (items) {
+  constructor ({ items, currentPosition = 0 }) {
     this.items = items
-    this.currentPosition = 0
+    this.currentPosition = currentPosition
   }
 
   current () {
@@ -201,9 +201,8 @@ export class Cycler {
   }
 
   next () {
-    const current = this.current()
     this.currentPosition = (this.currentPosition + 1) % this.items.length
 
-    return current
+    return this.current()
   }
 }

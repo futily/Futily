@@ -15,7 +15,7 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
         model = Player
         fields = ['id', 'stats', 'club', 'absolute_url', 'league', 'nation', 'ea_id', 'ea_id_base', 'color', 'rating',
                   'position', 'name', 'card_att_1', 'card_att_2', 'card_att_3', 'card_att_4', 'card_att_5',
-                  'card_att_6']
+                  'card_att_6', 'work_rate_att', 'work_rate_def', 'skill_moves', 'weak_foot']
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }
