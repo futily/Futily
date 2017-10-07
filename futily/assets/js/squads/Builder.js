@@ -272,8 +272,6 @@ export class Builder extends Squad {
       player.calculatePositionChemistry()
     })
 
-    console.log(this.players.team)
-
     this.initCanvas()
   }
 
