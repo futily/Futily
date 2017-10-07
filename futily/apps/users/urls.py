@@ -47,6 +47,8 @@ urlpatterns = [
     # Profile
     url(r'^(?P<username>[\w_\-]+)/$', views.UserProfileView.as_view(), name='profile'),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/players/$', views.UserFavouritePlayers.as_view(), name='favourite-players'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/squads/$', views.UserSquadsView.as_view(), name='squads'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/packs/$', views.UserPacksView.as_view(), name='packs'),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/collection/$', views.UserCollectionView.as_view(), name='collection'),
     url(
         r'^(?P<username>[0-9A-Za-z_\-]+)/collection/(?P<league_slug>[-\w]+)/$',
@@ -58,7 +60,6 @@ urlpatterns = [
         views.UserCollectionClubView.as_view(),
         name='collection-club'
     ),
-    url(r'^(?P<username>[0-9A-Za-z_\-]+)/packs/$', views.UserPackView.as_view(), name='packs'),
 
     # Settings
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/settings/$', views.UserSettingsView.as_view(), name='settings'),

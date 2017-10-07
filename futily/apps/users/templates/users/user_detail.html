@@ -4,35 +4,18 @@
   <div class="usr-Index">
     <div class="usr-Index_Panel">
       <header class="usr-Index_PanelHeader">
-        {% if  user == object %}
-          <h3 class="usr-Index_PanelTitle">Activity <strong class="usr-Index_Emphasis">stream</strong></h3>
-        {% else %}
-          <h3 class="usr-Index_PanelTitle">{{ object }}'s <strong class="usr-Index_Emphasis">activity</strong></h3>
-        {% endif %}
+        <h3 class="usr-Index_PanelTitle">{{ object }}'s <strong class="usr-Index_Emphasis">activity</strong></h3>
       </header>
 
-      {# If the user is looking at his own profile show his followers activity #}
-      {% if user == object %}
-        <div class="usr-Index_PanelBody">
-          <div class="act-Actions">
-            <ul class="act-Actions_Items">
-              {% for action in following_actions %}
-                <li class="act-Actions_Item">{{ action.html__str__ }}</li>
-              {% endfor %}
-            </ul>
-          </div>
+      <div class="usr-Index_PanelBody">
+        <div class="act-Actions">
+          <ul class="act-Actions_Items">
+            {% for action in actions %}
+              <li class="act-Actions_Item">{{ action.html__str__ }}</li>
+            {% endfor %}
+          </ul>
         </div>
-      {% else %}
-        <div class="usr-Index_PanelBody">
-          <div class="act-Actions">
-            <ul class="act-Actions_Items">
-              {% for action in actions %}
-                <li class="act-Actions_Item">{{ action.html__str__ }}</li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-      {% endif %}
+      </div>
     </div>
 
     <div class="usr-Index_Right">

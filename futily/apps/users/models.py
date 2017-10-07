@@ -139,7 +139,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         })
 
     def get_squads_url(self):
-        return self.get_absolute_url()
+        return reverse('users:squads', kwargs={
+            'username': self.username
+        })
 
     def get_username(self):
         return getattr(self, self.USERNAME_FIELD)

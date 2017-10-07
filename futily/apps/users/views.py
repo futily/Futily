@@ -162,7 +162,11 @@ class UserPasswordChangeDoneView(UserMixin, BaseDetailView, PasswordChangeDoneVi
     template_name = 'users/user_password_change_done.html'
 
 
-class UserPackView(UserMixin, DetailView):
+class UserSquadsView(UserMixin, DetailView):
+    template_name = 'users/user_detail_squads.html'
+
+
+class UserPacksView(UserMixin, DetailView):
     template_name = 'users/user_detail_packs.html'
 
 
@@ -171,9 +175,6 @@ class UserProfileView(UserMixin, DetailView):
         context = super(UserProfileView, self).get_context_data()
 
         context['actions'] = Action.objects.filter(user=self.object)[:30] \
-            .select_related('user') \
-            .prefetch_related('target')
-        context['following_actions'] = Action.objects.filter(user__in=self.object.get_following)[:30] \
             .select_related('user') \
             .prefetch_related('target')
 

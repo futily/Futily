@@ -1,0 +1,13 @@
+{% extends "users/_base.html" %}
+
+{% block side_panel %}
+  {% for squad in object.squad_set.all() %}
+    <p>
+      <a href="{{ squad.get_absolute_url() }}">{{ squad }}</a>
+    </p>
+  {% endfor %}
+{% endblock %}
+
+{% block aside_blocks %}
+
+{% endblock %}
