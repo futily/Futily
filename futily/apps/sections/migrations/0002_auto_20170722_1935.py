@@ -15,25 +15,15 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AlterModelOptions(
-            name='contentsection',
-            options={'ordering': ('order',)},
-        ),
-        migrations.RemoveField(
-            model_name='contentsection',
-            name='button_text',
-        ),
-        migrations.RemoveField(
-            model_name='contentsection',
-            name='button_url',
-        ),
-        migrations.AddField(
-            model_name='contentsection',
-            name='features',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='components.Features'),
-        ),
-        migrations.AlterField(
-            model_name='contentsection',
-            name='type',
-            field=models.CharField(choices=[('Adverts', [('728x90', '728x90')]), ('Content', [('features', 'Features'), ('search', 'Search'), ('special-teams', 'Special teams')])], max_length=100),
-        ),
-    ]
+            name='contentsection', options={
+                'ordering': (
+                    'order',)}, ), migrations.RemoveField(
+            model_name='contentsection', name='button_text', ), migrations.RemoveField(
+                        model_name='contentsection', name='button_url', ), migrations.AddField(
+                            model_name='contentsection', name='features', field=models.ForeignKey(
+                                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='components.Features'), ), migrations.AlterField(
+                                    model_name='contentsection', name='type', field=models.CharField(
+                                        choices=[
+                                            ('Adverts', [
+                                                ('728x90', '728x90')]), ('Content', [
+                                                    ('features', 'Features'), ('search', 'Search'), ('special-teams', 'Special teams')])], max_length=100), ), ]

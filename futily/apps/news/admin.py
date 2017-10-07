@@ -74,12 +74,16 @@ class ArticleAdmin(PageBaseAdmin, VersionAdmin):
         """
         if request:
             choices_list = STATUS_CHOICES
-            if getattr(settings, 'NEWS_APPROVAL_SYSTEM', False) and not request.user.has_perm('news.can_approve_articles'):
+            if getattr(
+                settings,
+                'NEWS_APPROVAL_SYSTEM',
+                    False) and not request.user.has_perm('news.can_approve_articles'):
                 choices_list = [x for x in STATUS_CHOICES if x[0] != 'approved']
 
             if db_field.name == 'status':
                 kwargs['choices'] = choices_list
 
         return super(ArticleAdmin, self).formfield_for_choice_field(db_field, request, **kwargs)
+
 
 admin.site.register(Article, ArticleAdmin)

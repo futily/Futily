@@ -38,7 +38,8 @@ class PlayerList(FormMixin, ListView):
                 # Alternatively remove the 'all' option and just rely on the "clear" to remove it
                 current_positions = current_filters.getlist('position')
                 individual_positions = Player.objects.order_by('position').values_list('position', flat=True).distinct()
-                line_positions = Player.objects.order_by('position_line').values_list('position_line', flat=True).distinct()
+                line_positions = Player.objects.order_by('position_line').values_list(
+                    'position_line', flat=True).distinct()
                 position_schema = {x.lower(): {'position__in': [x.upper()]} for x in individual_positions}
                 position_schema.update({x.lower(): {'position_line__in': [x.upper()]} for x in line_positions})
                 position_schema.update({
@@ -295,7 +296,45 @@ class PlayerCardColorTest(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['colors'] = ['award_winner', 'europe_motm', 'fut_birthday', 'fut_champions_bronze', 'fut_champions_gold', 'fut_champions_silver', 'fut_championship', 'fut_mas', 'fut_united', 'futties_winner', 'gotm', 'halloween', 'marquee', 'motm', 'ones_to_watch', 'pink', 'purple', 'record_breaker', 'rtr_contender', 'rtr_gold', 'sbc_base', 'sbc_premium', 'st_patricks', 'teal', 'tots_bronze', 'tots_gold', 'tots_silver', 'totw_bronze', 'totw_gold', 'totw_silver', 'toty', 'bronze', 'silver', 'gold', 'rare_bronze', 'rare_silver', 'rare_gold', 'legend']
+        context['colors'] = [
+            'award_winner',
+            'europe_motm',
+            'fut_birthday',
+            'fut_champions_bronze',
+            'fut_champions_gold',
+            'fut_champions_silver',
+            'fut_championship',
+            'fut_mas',
+            'fut_united',
+            'futties_winner',
+            'gotm',
+            'halloween',
+            'marquee',
+            'motm',
+            'ones_to_watch',
+            'pink',
+            'purple',
+            'record_breaker',
+            'rtr_contender',
+            'rtr_gold',
+            'sbc_base',
+            'sbc_premium',
+            'st_patricks',
+            'teal',
+            'tots_bronze',
+            'tots_gold',
+            'tots_silver',
+            'totw_bronze',
+            'totw_gold',
+            'totw_silver',
+            'toty',
+            'bronze',
+            'silver',
+            'gold',
+            'rare_bronze',
+            'rare_silver',
+            'rare_gold',
+            'legend']
         player = Player.objects.get(pk=525)
 
         context['players'] = [player for x in context['colors']]

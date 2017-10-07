@@ -16,18 +16,9 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='squad',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
-        ),
-        migrations.AddField(
-            model_name='squad',
-            name='web_app_import',
-            field=models.BooleanField(default=False),
-        ),
-        migrations.AddField(
-            model_name='squad',
-            name='web_app_url',
-            field=models.CharField(blank=True, max_length=100, null=True),
-        ),
-    ]
+            model_name='squad', name='user', field=models.ForeignKey(
+                blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL), ), migrations.AddField(
+            model_name='squad', name='web_app_import', field=models.BooleanField(
+                default=False), ), migrations.AddField(
+            model_name='squad', name='web_app_url', field=models.CharField(
+                blank=True, max_length=100, null=True), ), ]

@@ -56,7 +56,7 @@ class Command(BaseCommand):
 
             try:
                 url = f'https://www.easports.com/fifa/ultimate-team/web-app/content/B1BA185F-AD7C-4128-8A64' \
-                      f'-746DE4EC5A82/2018/fut/playerheads/mobile/single/p{player.ea_id}.png'
+                    f'-746DE4EC5A82/2018/fut/playerheads/mobile/single/p{player.ea_id}.png'
 
                 urllib.request.urlretrieve(
                     url,
@@ -65,7 +65,7 @@ class Command(BaseCommand):
             except HTTPError:
                 try:
                     url = f'https://www.easports.com/fifa/ultimate-team/web-app/content/B1BA185F-AD7C-4128-8A64' \
-                          f'-746DE4EC5A82/2018/fut/playerheads/mobile/single/p{player.ea_id_base}.png'
+                        f'-746DE4EC5A82/2018/fut/playerheads/mobile/single/p{player.ea_id_base}.png'
 
                     urllib.request.urlretrieve(
                         url,

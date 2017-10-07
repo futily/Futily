@@ -14,18 +14,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.AddField(
-            model_name='player',
-            name='rating_futily',
-            field=models.PositiveIntegerField(default=0, null=True, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(99)]),
-        ),
-        migrations.AddField(
-            model_name='player',
-            name='rating_pirlo',
-            field=models.PositiveIntegerField(default=0, null=True, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(99)]),
-        ),
-        migrations.AddField(
-            model_name='player',
-            name='rating_vidic',
-            field=models.PositiveIntegerField(default=0, null=True, validators=[django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(99)]),
-        ),
-    ]
+            model_name='player', name='rating_futily', field=models.PositiveIntegerField(
+                default=0, null=True, validators=[
+                    django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(99)]), ), migrations.AddField(
+            model_name='player', name='rating_pirlo', field=models.PositiveIntegerField(
+                default=0, null=True, validators=[
+                    django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(99)]), ), migrations.AddField(
+            model_name='player', name='rating_vidic', field=models.PositiveIntegerField(
+                default=0, null=True, validators=[
+                    django.core.validators.MinValueValidator(0), django.core.validators.MaxValueValidator(99)]), ), ]

@@ -19,31 +19,24 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Content',
-            fields=[
-                ('page', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, primary_key=True, related_name='+', serialize=False, to='pages.Page')),
-            ],
-            options={
-                'abstract': False,
-            },
-        ),
-        migrations.CreateModel(
-            name='ContentSection',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('type', models.CharField(choices=[('Heroes', [('homepage-hero', 'Homepage hero'), ('landing-hero', 'Landing hero')]), ('Text', [('dual-column', 'Dual column')]), ('Misc', [('keyline', 'Keyline')])], max_length=100)),
-                ('title', models.CharField(blank=True, max_length=140, null=True)),
-                ('text', models.TextField(blank=True, null=True)),
-                ('content', cms.models.fields.HtmlField(blank=True, null=True)),
-                ('button_text', models.CharField(blank=True, max_length=100, null=True)),
-                ('button_url', models.CharField(blank=True, max_length=200, null=True, verbose_name='button URL')),
-                ('order', models.PositiveIntegerField(default=0, help_text='Order which the section will be displayed')),
-                ('image', cms.apps.media.models.ImageRefField(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='+', to='media.File')),
-                ('page', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='pages.Page')),
-            ],
-            options={
-                'ordering': ['order'],
-                'abstract': False,
-            },
-        ),
-    ]
+            name='Content', fields=[
+                ('page', models.OneToOneField(
+                    editable=False, on_delete=django.db.models.deletion.CASCADE, primary_key=True, related_name='+', serialize=False, to='pages.Page')), ], options={
+                'abstract': False, }, ), migrations.CreateModel(
+            name='ContentSection', fields=[
+                ('id', models.AutoField(
+                    auto_created=True, primary_key=True, serialize=False, verbose_name='ID')), ('type', models.CharField(
+                        choices=[
+                            ('Heroes', [
+                                ('homepage-hero', 'Homepage hero'), ('landing-hero', 'Landing hero')]), ('Text', [
+                                    ('dual-column', 'Dual column')]), ('Misc', [
+                                        ('keyline', 'Keyline')])], max_length=100)), ('title', models.CharField(
+                                            blank=True, max_length=140, null=True)), ('text', models.TextField(
+                                                blank=True, null=True)), ('content', cms.models.fields.HtmlField(
+                                                    blank=True, null=True)), ('button_text', models.CharField(
+                                                        blank=True, max_length=100, null=True)), ('button_url', models.CharField(
+                                                            blank=True, max_length=200, null=True, verbose_name='button URL')), ('order', models.PositiveIntegerField(
+                                                                default=0, help_text='Order which the section will be displayed')), ('image', cms.apps.media.models.ImageRefField(
+                                                                    blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, related_name='+', to='media.File')), ('page', models.ForeignKey(
+                                                                        on_delete=django.db.models.deletion.CASCADE, to='pages.Page')), ], options={
+                'ordering': ['order'], 'abstract': False, }, ), ]

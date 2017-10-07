@@ -3,6 +3,7 @@ algoliasearch-django==1.4.1
 appnope==0.1.0
 asn1crypto==0.22.0
 astroid==1.5.3
+autopep8==1.3.2
 bcrypt==3.1.3
 behave==1.2.5
 certifi==2017.4.17
@@ -51,7 +52,7 @@ oauthlib==2.0.2
 olefile==0.44
 onespacemedia-cms==3.0.0
 onespacemedia-cms-redirects==0.0.2
--e git://github.com/dan-gamble/server-management.git#egg=onespacemedia-server-management
+-e git://github.com/dan-gamble/server-management.git@a2a5cfac46a2b26ef406a74987813fe6d904c19e#egg=onespacemedia_server_management
 opbeat==3.5.2
 paramiko==2.3.0
 parse==1.8.2
@@ -64,6 +65,7 @@ prompt-toolkit==1.0.14
 psycopg2==2.7.1
 ptyprocess==0.5.2
 pyasn1==0.2.3
+pycodestyle==2.3.1
 pycparser==2.18
 pycrypto==2.6.1
 Pygments==2.2.0
@@ -94,3 +96,4 @@ urllib3==1.21.1
 wcwidth==0.1.7
 Werkzeug==0.12.2
 wrapt==1.10.10
+yapf==0.18.0

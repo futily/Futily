@@ -67,7 +67,8 @@ class TestArticleAdminBase(TestCase):
         self.request.user = MockSuperUser()
 
         with self.settings(NEWS_APPROVAL_SYSTEM=True):
-            formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
+            formfield = self.article_admin.formfield_for_choice_field(
+                self.article._meta.get_field('status'), self.request)
 
         self.assertListEqual(formfield.choices, [
             ('draft', 'Draft'),
@@ -77,7 +78,8 @@ class TestArticleAdminBase(TestCase):
 
         self.request.user.has_perm = lambda x: False
         with self.settings(NEWS_APPROVAL_SYSTEM=True):
-            formfield = self.article_admin.formfield_for_choice_field(self.article._meta.get_field('status'), self.request)
+            formfield = self.article_admin.formfield_for_choice_field(
+                self.article._meta.get_field('status'), self.request)
 
         self.assertListEqual(formfield.choices, [
             ('draft', 'Draft'),

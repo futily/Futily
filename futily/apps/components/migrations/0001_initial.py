@@ -20,11 +20,27 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Feature',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=60)),
-                ('text', models.TextField(max_length=400)),
-                ('link_url', models.CharField(blank=True, help_text='If you want to link to an external page, please use this.', max_length=200, null=True)),
-                ('order', models.PositiveIntegerField(default=1)),
+                ('id',
+                 models.AutoField(
+                     auto_created=True,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='ID')),
+                ('title',
+                 models.CharField(
+                     max_length=60)),
+                ('text',
+                 models.TextField(
+                     max_length=400)),
+                ('link_url',
+                 models.CharField(
+                     blank=True,
+                     help_text='If you want to link to an external page, please use this.',
+                     max_length=200,
+                     null=True)),
+                ('order',
+                 models.PositiveIntegerField(
+                     default=1)),
             ],
             options={
                 'ordering': ['order'],
@@ -33,8 +49,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Features',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(help_text='This is used to help identify the set in the admin', max_length=255)),
+                ('id',
+                 models.AutoField(
+                     auto_created=True,
+                     primary_key=True,
+                     serialize=False,
+                     verbose_name='ID')),
+                ('title',
+                 models.CharField(
+                     help_text='This is used to help identify the set in the admin',
+                     max_length=255)),
             ],
             options={
                 'verbose_name_plural': 'Features',
@@ -43,16 +67,27 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='feature',
             name='features',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='components.Features'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                to='components.Features'),
         ),
         migrations.AddField(
             model_name='feature',
             name='image',
-            field=cms.apps.media.models.ImageRefField(on_delete=django.db.models.deletion.PROTECT, related_name='+', to='media.File'),
+            field=cms.apps.media.models.ImageRefField(
+                on_delete=django.db.models.deletion.PROTECT,
+                related_name='+',
+                to='media.File'),
         ),
         migrations.AddField(
             model_name='feature',
             name='link_page',
-            field=models.ForeignKey(blank=True, help_text='If you want to link to an internal page, please use this.', null=True, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='pages.Page'),
+            field=models.ForeignKey(
+                blank=True,
+                help_text='If you want to link to an internal page, please use this.',
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name='+',
+                to='pages.Page'),
         ),
     ]

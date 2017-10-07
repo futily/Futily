@@ -140,7 +140,6 @@ class NewsTest(TestCase):
 
         self.article7.categories.add(self.category1)
 
-
     def test_page_context(self):
         def inner_function(context):
             return context
@@ -235,7 +234,7 @@ class NewsTest(TestCase):
 
     def test_related_articles(self):
         self._create_feed_article()
-        articles = get_latest_news_articles({'article':self.article}, count=3)
+        articles = get_latest_news_articles({'article': self.article}, count=3)
         self.assertEqual(len(articles), 3)
-        articles = get_latest_news_articles({'article':self.article}, count=6)
+        articles = get_latest_news_articles({'article': self.article}, count=6)
         self.assertEqual(len(articles), 6)

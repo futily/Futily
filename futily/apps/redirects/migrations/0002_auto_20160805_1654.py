@@ -14,11 +14,17 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='redirect',
             name='regular_expression',
-            field=models.BooleanField(default=False, help_text=b"This will allow using regular expressions to match and replace patterns in URLs. See the <a href='https://docs.python.org/2/library/re.html' target='_blank'>Python regular expression documentation for details."),
+            field=models.BooleanField(
+                default=False,
+                help_text=b"This will allow using regular expressions to match and replace patterns in URLs. See the <a href='https://docs.python.org/2/library/re.html' target='_blank'>Python regular expression documentation for details."),
         ),
         migrations.AddField(
             model_name='redirect',
             name='test_path',
-            field=models.CharField(help_text=b'You will need to specify a test path to ensure your regular expression is valid.', max_length=200, null=True, blank=True),
+            field=models.CharField(
+                help_text=b'You will need to specify a test path to ensure your regular expression is valid.',
+                max_length=200,
+                null=True,
+                blank=True),
         ),
     ]

@@ -71,16 +71,16 @@ class PlayerCardManager(models.Manager):
         qs = super(PlayerCardManager, self) \
             .get_queryset() \
             .select_related('club', 'nation', 'page', 'page__page')
-            # .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
-            #        'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
-            #        'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',
-            #        'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve', 'dribbling', 'finishing',
-            #        'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping', 'long_passing', 'long_shots',
-            #        'marking', 'penalties', 'positioning', 'potential', 'reactions', 'short_passing', 'shot_power',
-            #        'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina', 'strength', 'vision', 'volleys',
-            #        'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning', 'gk_reflexes', 'total_stats',
-            #        'total_ingame_stats', 'foot', 'specialities', 'traits', 'player_type', 'item_type', 'model_name',
-            #        'source', 'is_special_type', 'pack_weight', 'created', 'modified')
+        # .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
+        #        'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
+        #        'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',
+        #        'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve', 'dribbling', 'finishing',
+        #        'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping', 'long_passing', 'long_shots',
+        #        'marking', 'penalties', 'positioning', 'potential', 'reactions', 'short_passing', 'shot_power',
+        #        'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina', 'strength', 'vision', 'volleys',
+        #        'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning', 'gk_reflexes', 'total_stats',
+        #        'total_ingame_stats', 'foot', 'specialities', 'traits', 'player_type', 'item_type', 'model_name',
+        #        'source', 'is_special_type', 'pack_weight', 'created', 'modified')
 
         return qs
 
@@ -220,9 +220,9 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
         self.english_names = [
             # pylint: disable=bad-continuation
             unicodedata
-                .normalize('NFKD', getattr(self, x))
-                .encode('ascii', 'ignore')
-                .decode('utf-8')
+            .normalize('NFKD', getattr(self, x))
+            .encode('ascii', 'ignore')
+            .decode('utf-8')
             for x in ['name', 'first_name', 'last_name', 'common_name']
         ]
 
