@@ -1,5 +1,5 @@
-<a class="plyr-Card plyr-Card-{{ size }} plyr-Card-{{ player.color if not color else color }}{% if faded %} plyr-Card-faded{% endif %}"
-   href="{{ player.get_absolute_url() }}"
+<{{ el }} class="plyr-Card plyr-Card-{{ size }} plyr-Card-{{ player.color if not color else color }}{% if faded %} plyr-Card-faded{% endif %}"
+   {% if el == 'a' %}href="{{ player.get_absolute_url() }}"{% endif %}
    data-card-data="{{ player.card_json_data }}">
   <header class="plyr-Card_Header">
     <div class="plyr-Card_Meta">
@@ -48,4 +48,4 @@
       </p>
     </footer>
   {% endif %}
-</a>
+</{{ el }}>

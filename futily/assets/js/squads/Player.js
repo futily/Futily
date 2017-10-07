@@ -264,7 +264,7 @@ export class Player {
 }
 
 export class EditablePlayer extends Player {
-  constructor ({ index, el, isEditable, initialData = {} }) {
+  constructor ({ index, el, isEditable, initialCard, initialData = {} }) {
     super({ index, el, isEditable, initialData })
 
     this.els = Object.assign(this.els, {
@@ -276,6 +276,7 @@ export class EditablePlayer extends Player {
         toggleLoyalty: el.querySelector('.bld-Builder_Control-toggleLoyalty')
       }
     })
+    this._card = initialCard
 
     this.positionsCycle = null
 

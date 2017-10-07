@@ -60,18 +60,29 @@
 {% endblock %}
 
 {% block main %}
-  <form class="bld-Builder js-Builder" data-builder-formation="442" action="/squads/builder/save/">
+  <form class="bld-Builder js-Builder js-Builder-noAjax"
+        data-builder-formation="{{ squad.formation }}"
+        method="POST"
+        action="{{ request.path }}">
     <div class="bld-Builder_Body">
       <div class="bld-Builder_Team">
         <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
 
         <ul class="bld-Builder_Players">
-          {% for index in range(0, 11) %}
-            <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ loop.cycle('gk', 'rb', 'rcb', 'lcb', 'lb', 'rm', 'rcm', 'lcm', 'lm', 'rs', 'ls') }}"
-                data-builder-formation-index="{{ index }}"
-                data-builder-filled="false">
-              <div class="bld-Builder_Player"></div>
-              <span class="bld-Builder_Pedestal"></span>
+          {% for player in squad.get_players() %}
+            <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ FORMATION_POSITIONS.verbose[loop.index0] | lower() }}"
+                aria-grabbed="false"
+                data-builder-formation-index="{{ loop.index0 }}"
+                data-builder-filled="{{ 'true' if player else 'false' }}">
+              <div class="bld-Builder_Player"
+                {% if player %}
+                   data-builder-initial-data="{{ player.player.get_serializer_data() }}"
+                {% endif %}>
+                {% if player %}
+                  {{ player.player.render_card(chemistry=player.chemistry, has_link=False) }}
+                {% endif %}
+              </div>
+              <span class="bld-Builder_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[loop.index0] }}</span>
               <input type="hidden" name="players" class="bld-Builder_PlayerInput">
               <div class="bld-Builder_Controls">
                 <div class="bld-Builder_Control bld-Builder_Control-remove">
@@ -143,31 +154,9 @@
                       id="formation"
                       name="formation">
                 <option value="">Formations</option>
-                <option value="3412">3-4-1-2</option>
-                <option value="3421">3-4-2-1</option>
-                <option value="343">3-4-3</option>
-                <option value="352">3-5-2</option>
-                <option value="41212">4-1-2-1-2</option>
-                <option value="41212-2">4-1-2-1-2 (2)</option>
-                <option value="4141">4-1-4-1</option>
-                <option value="4231">4-2-3-1</option>
-                <option value="4231-2">4-2-3-1 (2)</option>
-                <option value="4222">4-2-2-2</option>
-                <option value="4312">4-3-1-2</option>
-                <option value="4321">4-3-2-1</option>
-                <option value="433">4-3-3</option>
-                <option value="433-2">4-3-3 (2)</option>
-                <option value="433-3">4-3-3 (3)</option>
-                <option value="433-4">4-3-3 (4)</option>
-                <option value="433-5">4-3-3 (5)</option>
-                <option value="4411">4-4-1-1</option>
-                <option value="442" selected>4-4-2</option>
-                <option value="442-2">4-4-2 (2)</option>
-                <option value="451">4-5-1</option>
-                <option value="451-2">4-5-1 (2)</option>
-                <option value="5212">5-2-1-2</option>
-                <option value="5221">5-2-2-1</option>
-                <option value="532">5-3-2</option>
+                {% for value, label in formations.items() %}
+                  <option value="{{ value }}"{% if squad.formation == value %} selected{% endif %}>{{ label }}</option>
+                {% endfor %}
               </select>
             </div>
 
@@ -180,6 +169,7 @@
                      class="frm-Form_Input js-FloatingLabel_Input"
                      placeholder="Name"
                      name="title"
+                     value="{{ squad.title }}"
                      id="title" />
             </div>
           </div>
@@ -190,15 +180,15 @@
             <div class="bld-Stats">
               <ul class="bld-Stats_Items">
                 <li class="bld-Stats_Item" data-builder-stat-name="rating">
-                  <input type="hidden" name="rating" value="0">
+                  <input type="hidden" name="rating" value="{{ squad.rating }}">
                   <span class="bld-Stats_Label">Rating:</span>
-                  <span class="bld-Stats_Value">0</span>
+                  <span class="bld-Stats_Value">{{ squad.rating }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="chemistry">
-                  <input type="hidden" name="chemistry" value="0">
+                  <input type="hidden" name="chemistry" value="{{ squad.chemistry }}">
                   <span class="bld-Stats_Label">Chemistry:</span>
-                  <span class="bld-Stats_Value">0</span>
+                  <span class="bld-Stats_Value">{{ squad.chemistry }}</span>
                 </li>
               </ul>
             </div>
@@ -206,6 +196,7 @@
 
           <div class="bld-Builder_Import">
             <input type="hidden" name="page" value="{{ pages.current.id }}" />
+            <input type="hidden" name="user" value="{{ user.id }}" />
 
             <button class="btn-Primary" type="submit">
               Save
@@ -218,57 +209,57 @@
             <div class="bld-Stats">
               <ul class="bld-Stats_Items">
                 <li class="bld-Stats_Item" data-builder-stat-name="attack">
-                  <input type="hidden" name="attack" value="0">
+                  <input type="hidden" name="attack" value="{{ squad.attack }}">
                   <span class="bld-Stats_Label">Attack</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.attack }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="midfield">
-                  <input type="hidden" name="midfield" value="0">
+                  <input type="hidden" name="midfield" value="{{ squad.midfield }}">
                   <span class="bld-Stats_Label">Midfield</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.midfield }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="defence">
-                  <input type="hidden" name="defence" value="0">
+                  <input type="hidden" name="defence" value="{{ squad.defence }}">
                   <span class="bld-Stats_Label">Defence</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.defence }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="pace">
-                  <input type="hidden" name="pace" value="0">
+                  <input type="hidden" name="pace" value="{{ squad.pace }}">
                   <span class="bld-Stats_Label">Pace</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.pace }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="shooting">
-                  <input type="hidden" name="shooting" value="0">
+                  <input type="hidden" name="shooting" value="{{ squad.shooting }}">
                   <span class="bld-Stats_Label">Shooting</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.shooting }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="passing">
-                  <input type="hidden" name="passing" value="0">
+                  <input type="hidden" name="passing" value="{{ squad.passing }}">
                   <span class="bld-Stats_Label">Passing</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.passing }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="dribbling">
-                  <input type="hidden" name="dribbling" value="0">
+                  <input type="hidden" name="dribbling" value="{{ squad.dribbling }}">
                   <span class="bld-Stats_Label">Dribbling</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.dribbling }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="defending">
-                  <input type="hidden" name="defending" value="0">
+                  <input type="hidden" name="defending" value="{{ squad.defending }}">
                   <span class="bld-Stats_Label">Defending</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.defending }}</span>
                 </li>
 
                 <li class="bld-Stats_Item" data-builder-stat-name="physical">
-                  <input type="hidden" name="physical" value="0">
+                  <input type="hidden" name="physical" value="{{ squad.physical }}">
                   <span class="bld-Stats_Label">Physical</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.physical }}</span>
                 </li>
               </ul>
             </div>
@@ -336,7 +327,8 @@
 
         <footer class="plyr-Card_Footer">
           <p class="plyr-Card_Chem">
-            Chem: <span class="plyr-Card_ChemValue"></span>
+            Chem:
+            <span class="plyr-Card_ChemValue"></span>
           </p>
         </footer>
       </div>

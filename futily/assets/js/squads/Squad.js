@@ -24,14 +24,18 @@ export class Squad {
         const initialData = playerEl.dataset['builderInitialData']
           ? JSON.parse(playerEl.dataset['builderInitialData'])
           : {}
+        const initialCard = playerEl.querySelector('.plyr-Card')
         const PlayerClass = this.isEditable ? EditablePlayer : Player
         const player = new PlayerClass({
           index,
           el,
           initialData,
+          initialCard,
           isEditable: this.isEditable
         })
-        player.setPosition(player.els.pedestal.innerText)
+        if (player.isFilled()) {
+          player.setPosition(player.els.pedestal.innerText)
+        }
 
         return player
       })

@@ -4,6 +4,7 @@
   {% for squad in object.squad_set.all() %}
     <p>
       <a href="{{ squad.get_absolute_url() }}">{{ squad }}</a>
+      <a href="{{ squad.get_update_url() }}">Edit squad</a>
     </p>
   {% endfor %}
 {% endblock %}

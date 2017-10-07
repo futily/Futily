@@ -2,10 +2,10 @@ import json
 import urllib
 from collections import OrderedDict
 
-from django.http import JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.text import slugify
-from django.views.generic import DetailView, FormView, ListView
-from django.views.generic.base import TemplateView, View
+from django.views.generic import DetailView, FormView, ListView, UpdateView
+from django.views.generic.base import ContextMixin, TemplateView, View
 
 from futily.apps.actions.utils import create_action
 from futily.apps.players.models import Player
@@ -15,19 +15,20 @@ from .forms import BuilderForm
 from .models import FORMATION_CHOICES, Squad, SquadPlayer
 
 
-class Builder(TemplateView):
+class BaseBuilder(ContextMixin):
     model = Squad
-    template_name = 'squads/squad_builder.html'
-
-    fields = ['players', 'formation', 'chemistry', 'rating', 'attack', 'midfield', 'defence',
-              'pace', 'shooting', 'passing', 'dribbling', 'defending', 'physical']
+    form_class = BuilderForm
 
     def get_context_data(self, **kwargs):
-        context = super(Builder, self).get_context_data(**kwargs)
+        context = super(BaseBuilder, self).get_context_data(**kwargs)
 
         context['formations'] = dict(OrderedDict(FORMATION_CHOICES))
 
         return context
+
+
+class Builder(BaseBuilder, TemplateView):
+    template_name = 'squads/squad_builder.html'
 
 
 class BuilderAjax(FormView):
@@ -41,7 +42,6 @@ class BuilderAjax(FormView):
 
         # If the form is invalid, fill response with errors
         if not form.is_valid():
-
             # Add error to response
             for key, value in form.errors.items():
                 response_data['errors'][key] = json.loads(value.as_json())
@@ -59,6 +59,9 @@ class BuilderAjax(FormView):
             squad = Squad(**data)
             squad.user = request.user if request.user.is_authenticated else None
             squad.save()
+
+            # Delete players that already exist on the squad
+            SquadPlayer.objects.filter(squad=squad).delete()
 
             if players:
                 for player in players:
@@ -154,7 +157,7 @@ class SquadList(ListView):
         return super(SquadList, self).get_queryset().filter(page__page=self.request.pages.current)
 
 
-class SquadDetail(DetailView):
+class SquadDetail(BaseBuilder, DetailView):
     model = Squad
 
     def get_context_data(self, **kwargs):
@@ -163,3 +166,49 @@ class SquadDetail(DetailView):
         context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
 
         return context
+
+
+class SquadUpdate(BaseBuilder, UpdateView):
+    model = Squad
+    template_name_suffix = '_update'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
+
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(SquadUpdate, self).get_form_kwargs()
+        kwargs.update({'instance': self.object})
+
+        return kwargs
+
+    def form_valid(self, form):
+        request = self.request
+        data = form.cleaned_data
+
+        players = data.pop('players')
+
+        squad = form.save()
+
+        # Delete players that already exist on the squad
+        SquadPlayer.objects.filter(squad=squad).delete()
+
+        if players:
+            for player in players:
+                try:
+                    squad_player = SquadPlayer.objects.get(index=player['index'], squad=squad)
+                except SquadPlayer.DoesNotExist:
+                    squad_player = SquadPlayer(index=player['index'], squad=squad)
+
+                squad_player.player = player['player']
+                squad_player.position = player['position']
+                squad_player.chemistry = player['chemistry']
+                squad_player.save()
+
+        if request.user.is_authenticated:
+            create_action(request.user, 'updated squad', squad)
+
+        return HttpResponseRedirect(self.get_success_url())

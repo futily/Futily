@@ -94,16 +94,30 @@ class Squad(SearchMetaBase):
     web_app_import = models.BooleanField(default=False)
     web_app_url = models.CharField(max_length=100, blank=True, null=True)
 
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return self.title or f'Squad {self.id}'
 
-    def _get_permalink_for_page(self, page):
-        return page.reverse('squad', kwargs={
+    def _get_permalink_for_page(self, name):
+        return self.page.page.reverse(name, kwargs={
             'pk': self.pk,
         })
 
     def get_absolute_url(self):
-        return self._get_permalink_for_page(self.page.page)
+        return self._get_permalink_for_page('squad')
+
+    def get_update_url(self):
+        return self._get_permalink_for_page('squad-update')
+
+    def get_players(self):
+        indexes = [index for index in range(0, 11)]
+
+        for player in self.players.all():
+            indexes[player.index] = player
+
+        return [None if isinstance(x, int) else x for x in indexes]
 
 
 def get_default_squads_page():

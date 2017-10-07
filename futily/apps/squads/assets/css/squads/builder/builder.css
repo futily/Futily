@@ -132,6 +132,7 @@
   height: calc(198px + 29px);
 
   cursor: pointer;
+  user-select: none;
 
   transform: translate(
     calc(-50% - var(--PlayerX)),

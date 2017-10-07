@@ -11,6 +11,7 @@ export class Builder extends Squad {
 
     const el = document.querySelector(`.${className}`)
 
+    this.ajaxSave = !el.classList.contains('js-Builder-noAjax')
     this.className = className
 
     this.els = Object.assign(this.els, {
@@ -37,19 +38,21 @@ export class Builder extends Squad {
   }
 
   setupListeners () {
-    this.els.el.addEventListener('submit', async e => {
-      e.preventDefault()
+    if (this.ajaxSave) {
+      this.els.el.addEventListener('submit', async e => {
+        e.preventDefault()
 
-      const data = new FormData(this.els.el)
+        const data = new FormData(this.els.el)
 
-      const res = await axios({
-        data,
-        method: 'POST',
-        url: this.els.el.action,
-        xsrfCookieName: 'csrftoken',
-        xsrfHeaderName: 'X-CSRFToken'
+        const res = await axios({
+          data,
+          method: 'POST',
+          url: this.els.el.action,
+          xsrfCookieName: 'csrftoken',
+          xsrfHeaderName: 'X-CSRFToken'
+        })
       })
-    })
+    }
 
     this.els.form.formation.addEventListener('change', e => {
       const { target } = e
@@ -260,6 +263,7 @@ export class Builder extends Squad {
     })
 
     this.updateChemistry()
+    this.updateStats()
   }
 
   updateChemistry () {
@@ -267,6 +271,8 @@ export class Builder extends Squad {
       player.calculateLinkChemistry(this.players.team)
       player.calculatePositionChemistry()
     })
+
+    console.log(this.players.team)
 
     this.initCanvas()
   }

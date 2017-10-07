@@ -60,18 +60,15 @@
 {% endblock %}
 
 {% block main %}
-  <form class="bld-Builder js-Detail"
-        data-builder-formation="{{ squad.formation }}"
-        action="/squads/builder/save/">
+  <form class="bld-Builder js-Detail" data-builder-formation="{{ squad.formation }}">
     <div class="bld-Builder_Body">
       <div class="bld-Builder_Team">
         <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
 
         <ul class="bld-Builder_Players">
-          {% for index in range(0, 11) %}
-            {% set player = squad.players.all()[index] or None %}
-            <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ FORMATION_POSITIONS.verbose[index] | lower() }}"
-                data-builder-formation-index="{{ index }}">
+          {% for player in squad.get_players() %}
+            <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ FORMATION_POSITIONS.verbose[loop.index0] | lower() }}"
+                data-builder-formation-index="{{ loop.index0 }}">
               <div class="bld-Builder_Player"
                 {% if player %}
                    data-builder-initial-data="{{ player.player.get_serializer_data() }}"
@@ -80,7 +77,7 @@
                   {{ player.player.render_card(chemistry=player.chemistry) }}
                 {% endif %}
               </div>
-              <span class="bld-Builder_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[index] }}</span>
+              <span class="bld-Builder_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[loop.index0] }}</span>
             </li>
           {% endfor %}
         </ul>
@@ -100,31 +97,9 @@
                       id="formation"
                       name="formation">
                 <option value="">Formations</option>
-                <option value="3412">3-4-1-2</option>
-                <option value="3421">3-4-2-1</option>
-                <option value="343">3-4-3</option>
-                <option value="352">3-5-2</option>
-                <option value="41212">4-1-2-1-2</option>
-                <option value="41212-2">4-1-2-1-2 (2)</option>
-                <option value="4141">4-1-4-1</option>
-                <option value="4231">4-2-3-1</option>
-                <option value="4231-2">4-2-3-1 (2)</option>
-                <option value="4222">4-2-2-2</option>
-                <option value="4312">4-3-1-2</option>
-                <option value="4321">4-3-2-1</option>
-                <option value="433">4-3-3</option>
-                <option value="433-2">4-3-3 (2)</option>
-                <option value="433-3">4-3-3 (3)</option>
-                <option value="433-4">4-3-3 (4)</option>
-                <option value="433-5">4-3-3 (5)</option>
-                <option value="4411">4-4-1-1</option>
-                <option value="442" selected>4-4-2</option>
-                <option value="442-2">4-4-2 (2)</option>
-                <option value="451">4-5-1</option>
-                <option value="451-2">4-5-1 (2)</option>
-                <option value="5212">5-2-1-2</option>
-                <option value="5221">5-2-2-1</option>
-                <option value="532">5-3-2</option>
+                {% for value, label in formations.items() %}
+                  <option value="{{ value }}"{% if squad.formation == value %} selected{% endif %}>{{ label }}</option>
+                {% endfor %}
               </select>
             </div>
 

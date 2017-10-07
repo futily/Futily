@@ -140,6 +140,8 @@
 }
 
 .plyr-Card_Club {
+  pointer-events: none;
+
   .plyr-Card-small & {
     width: 22px;
     margin-bottom: 2px;
@@ -156,6 +158,8 @@
 }
 
 .plyr-Card_Nation {
+  pointer-events: none;
+
   .plyr-Card-small & {
     width: 22px;
     margin-bottom: 3px;
