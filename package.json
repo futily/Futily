@@ -7,6 +7,7 @@
     "algoliasearch": "^3.24.3",
     "axios": "^0.16.2",
     "babel-polyfill": "6.23.0",
+    "commitizen": "^2.9.6",
     "es6-promise": "^4.1.0",
     "lodash": "^4.17.4",
     "pepjs": "^0.4.3"
@@ -96,6 +97,7 @@
     "webpack-hot-middleware": "2.18.0"
   },
   "scripts": {
+    "cm": "git-cz",
     "precommit": "if test -e /usr/local/bin/virtualenvwrapper.sh >/dev/null 2>&1; then export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python && source /usr/local/bin/virtualenvwrapper.sh && workon \"${PWD##*/}\"; else . .venv/bin/activate; fi; lint-staged",
     "dev": "gulp",
     "build": "gulp production",

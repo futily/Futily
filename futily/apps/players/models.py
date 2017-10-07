@@ -351,7 +351,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     def get_favourite_absolute_url(self):
         return self._get_permalink_for_page(name='player_favourite', cached=False)
 
-    def render_card(self, size='medium', faded=False, rpp=False, color=None):
+    def render_card(self, size='medium', faded=False, rpp=False, color=None, chemistry=None):
         if size not in ['small', 'medium', 'large']:
             raise TypeError('size argument should be 1 of "small", "normal" or "large"')
 
@@ -360,7 +360,8 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             'size': size,
             'faded': faded,
             'rpp': rpp,
-            'color': color
+            'color': color,
+            'chemistry': chemistry,
         })
 
     @property
@@ -525,6 +526,11 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             'strong': strong_chem,
             'weak': weak_chem,
         }
+
+    def get_serializer_data(self):
+        from .serializers import PlayerSerializer
+
+        return json.dumps(PlayerSerializer(self).data)
 
     def get_initial_chemistry_players(self, chem_type='perfect'):
         players = self.get_chemistry_players(18)

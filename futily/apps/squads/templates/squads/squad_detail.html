@@ -1,31 +1,285 @@
 {% extends "base.html" %}
 
-{% block main %}
-  <div class="bld-Builder">
-    {% if not squad.is_special %}
-      <ul>
-        <li>Chemistry: {{ squad.chemistry }}</li>
-        <li>Rating: {{ squad.rating }}</li>
-        <li>Attack: {{ squad.attack }}</li>
-        <li>Midfield: {{ squad.midfield }}</li>
-        <li>Defence: {{ squad.defence }}</li>
-        <li>Pace: {{ squad.pace }}</li>
-        <li>Shooting: {{ squad.shooting }}</li>
-        <li>Pass: {{ squad.passing }}</li>
-        <li>Dribbling: {{ squad.dribbling }}</li>
-        <li>Defending: {{ squad.defending }}</li>
-        <li>Physical: {{ squad.physical }}</li>
-      </ul>
-    {% endif %}
+{% block content_class %}lyt-Content-full{% endblock %}
 
-    <div class="bld-Builder_Players">
-      <ul>
-        {% for player in squad.squadplayer_set.all() %}
-          <li>
-            <a href="{{ player.player.get_absolute_url() }}">{{ player }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Squad Builder</h1>
+          <p class="pg-Strapline_Text">Create your Fifa 17 squad</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
     </div>
   </div>
+
+  {% block breadcrumbs %}
+    <div class="pg-Breadcrumbs">
+      <div class="pg-Breadcrumbs_Inner">
+        <div class="pg-Breadcrumbs_Body">
+          <nav class="bdc-Breadcrumb">
+            <div class="bdc-Breadcrumb_Items"
+                 itemscope=""
+                 itemtype="http://schema.org/BreadcrumbList">
+              <div class="bdc-Breadcrumb_Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                  <span itemprop="name">
+                    Home
+                  </span>
+                  <meta itemprop="position" content="1">
+                </a>
+              </div>
+
+              <div class="bdc-Breadcrumb_Divider">
+                {% include "angle-down.svg" %}
+              </div>
+
+              <div class="bdc-Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <span itemprop="name">
+                  Builder
+                </span>
+                <meta itemprop="position" content="2">
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endblock %}
+
+{% block main %}
+  <form class="bld-Builder js-Detail"
+        data-builder-formation="{{ squad.formation }}"
+        action="/squads/builder/save/">
+    <div class="bld-Builder_Body">
+      <div class="bld-Builder_Team">
+        <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
+
+        <ul class="bld-Builder_Players">
+          {% for index in range(0, 11) %}
+            {% set player = squad.players.all()[index] or None %}
+            <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ FORMATION_POSITIONS.verbose[index] | lower() }}"
+                data-builder-formation-index="{{ index }}">
+              <div class="bld-Builder_Player"
+                {% if player %}
+                   data-builder-initial-data="{{ player.player.get_serializer_data() }}"
+                {% endif %}>
+                {% if player %}
+                  {{ player.player.render_card(chemistry=player.chemistry) }}
+                {% endif %}
+              </div>
+              <span class="bld-Builder_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[index] }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <footer class="bld-Builder_Footer">
+      <div class="bld-Builder_Columns">
+        <div class="bld-Builder_Column">
+          <div class="frm-Form_Items">
+            <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel js-FloatingLabel-active">
+              <label class="frm-Form_Label js-FloatingLabel_Label" for="name">
+                Formation:
+              </label>
+
+              <select class="frm-Form_Select js-FloatingLabel_Input"
+                      id="formation"
+                      name="formation">
+                <option value="">Formations</option>
+                <option value="3412">3-4-1-2</option>
+                <option value="3421">3-4-2-1</option>
+                <option value="343">3-4-3</option>
+                <option value="352">3-5-2</option>
+                <option value="41212">4-1-2-1-2</option>
+                <option value="41212-2">4-1-2-1-2 (2)</option>
+                <option value="4141">4-1-4-1</option>
+                <option value="4231">4-2-3-1</option>
+                <option value="4231-2">4-2-3-1 (2)</option>
+                <option value="4222">4-2-2-2</option>
+                <option value="4312">4-3-1-2</option>
+                <option value="4321">4-3-2-1</option>
+                <option value="433">4-3-3</option>
+                <option value="433-2">4-3-3 (2)</option>
+                <option value="433-3">4-3-3 (3)</option>
+                <option value="433-4">4-3-3 (4)</option>
+                <option value="433-5">4-3-3 (5)</option>
+                <option value="4411">4-4-1-1</option>
+                <option value="442" selected>4-4-2</option>
+                <option value="442-2">4-4-2 (2)</option>
+                <option value="451">4-5-1</option>
+                <option value="451-2">4-5-1 (2)</option>
+                <option value="5212">5-2-1-2</option>
+                <option value="5221">5-2-2-1</option>
+                <option value="532">5-3-2</option>
+              </select>
+            </div>
+
+            <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">
+              <label class="frm-Form_Label js-FloatingLabel_Label" for="title">
+                Squad Name:
+              </label>
+
+              <input type="text"
+                     class="frm-Form_Input js-FloatingLabel_Input"
+                     placeholder="Name"
+                     name="title"
+                     value="{{ squad.title }}"
+                     id="title" />
+            </div>
+          </div>
+        </div>
+
+        <div class="bld-Builder_Column">
+          <div class="bld-Builder_Stats">
+            <div class="bld-Stats">
+              <ul class="bld-Stats_Items">
+                <li class="bld-Stats_Item" data-builder-stat-name="rating">
+                  <span class="bld-Stats_Label">Rating:</span>
+                  <span class="bld-Stats_Value">{{ squad.rating }}</span>
+               </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="chemistry">
+                  <span class="bld-Stats_Label">Chemistry:</span>
+                  <span class="bld-Stats_Value">{{ squad.chemistry }}</span>
+               </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bld-Builder_Column">
+          <div class="bld-Builder_Stats">
+            <div class="bld-Stats">
+              <ul class="bld-Stats_Items">
+                <li class="bld-Stats_Item" data-builder-stat-name="attack">
+                  <span class="bld-Stats_Label">Attack</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.attack }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="midfield">
+                  <span class="bld-Stats_Label">Midfield</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.midfield }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="defence">
+                  <span class="bld-Stats_Label">Defence</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.defence }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="pace">
+                  <span class="bld-Stats_Label">Pace</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.pace }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="shooting">
+                  <span class="bld-Stats_Label">Shooting</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.shooting }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="passing">
+                  <span class="bld-Stats_Label">Passing</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.passing }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="dribbling">
+                  <span class="bld-Stats_Label">Dribbling</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.dribbling }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="defending">
+                  <span class="bld-Stats_Label">Defending</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.defending }}</span>
+                </li>
+
+                <li class="bld-Stats_Item" data-builder-stat-name="physical">
+                  <span class="bld-Stats_Label">Physical</span>
+                  <span class="bld-Stats_Value" data-builder-stat-value>{{ squad.physical }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </form>
+
+  <template id="PlayerCardResult">
+    <li class="plyr-CardList_Item">
+      <div class="plyr-Card plyr-Card-medium">
+        <header class="plyr-Card_Header">
+          <div class="plyr-Card_Meta">
+            <span class="plyr-Card_Rating"></span>
+            <span class="plyr-Card_Position"></span>
+            <img alt="" class="plyr-Card_Club">
+            <img alt="" class="plyr-Card_Nation">
+          </div>
+
+          <img alt="" class="plyr-Card_Image">
+        </header>
+
+        <div class="plyr-Card_Body">
+          <p class="plyr-Card_Name"></p>
+
+          <div class="plyr-Card_Extra">
+            <p class="plyr-Card_Workrates"></p>
+            <p class="plyr-Card_Stars plyr-Card_Stars-skillMoves"></p>
+            <p class="plyr-Card_Stars plyr-Card_Stars-weakFoot"></p>
+          </div>
+
+          <div class="plyr-Card_Stats">
+            <div class="plyr-Card_Stat plyr-Card_Stat-1">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-2">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-3">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-4">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-5">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-6">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="plyr-Card_Footer">
+          <p class="plyr-Card_Chem">
+            Chem:
+            <span class="plyr-Card_ChemValue"></span>
+          </p>
+        </footer>
+      </div>
+    </li>
+  </template>
 {% endblock %}

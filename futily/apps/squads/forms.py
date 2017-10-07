@@ -5,7 +5,6 @@ from .models import Squad
 
 
 class BuilderForm(forms.ModelForm):
-
     class Meta:
         model = Squad
         exclude = ['players', 'slug']
@@ -27,4 +26,9 @@ class BuilderForm(forms.ModelForm):
 def setup_squad_player(player):
     split = player.split(',')
 
-    return Player.objects.get(id=split[0]), split[1], split[2]
+    return {
+        'player': Player.objects.get(id=split[0]),
+        'index': split[1],
+        'position': split[2],
+        'chemistry': split[3],
+    }

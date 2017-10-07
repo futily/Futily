@@ -20,13 +20,13 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
             'url': {'lookup_field': 'slug'}
         }
 
-    def get_field_names(self, declared_fields, info):
-        is_search = self.context['request'].query_params.get('is_search')
-
-        if is_search:
-            return ['id', 'ea_id', 'name', 'rating', 'position', 'color', 'absolute_url', 'club', 'nation']
-
-        return super().get_field_names(declared_fields, info)
+    # def get_field_names(self, declared_fields, info):
+    #     is_search = self.context['request'].query_params.get('is_search')
+    #
+    #     if is_search:
+    #         return ['id', 'ea_id', 'name', 'rating', 'position', 'color', 'absolute_url', 'club', 'nation']
+    #
+    #     return super().get_field_names(declared_fields, info)
 
     @staticmethod
     def get_absolute_url(obj):

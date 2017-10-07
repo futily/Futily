@@ -1,23 +1,16 @@
-import { goodChem, weakChem } from './chemPosition'
 import allowedPositions from './allowedPositions'
-import { Cycler } from '../utils'
 import formationData from './formationData'
+import { Cycler } from '../utils'
+import { goodChem, weakChem } from './chemPosition'
 
 export class Player {
-  constructor ({ index, el }) {
-    const _this = this
+  constructor ({ index, el, isEditable, initialData = {} }) {
+    this.isEditable = isEditable
 
     this.els = {
       el,
       player: el.querySelector('.bld-Builder_Player'),
-      pedestal: el.querySelector('.bld-Builder_Pedestal'),
-      input: el.querySelector('.bld-Builder_PlayerInput'),
-      controls: {
-        el: el.querySelector('.bld-Builder_Controls'),
-        remove: el.querySelector('.bld-Builder_Control-remove'),
-        changePosition: el.querySelector('.bld-Builder_Control-changePosition'),
-        toggleLoyalty: el.querySelector('.bld-Builder_Control-toggleLoyalty')
-      }
+      pedestal: el.querySelector('.bld-Builder_Pedestal')
     }
 
     this.index = index
@@ -26,112 +19,11 @@ export class Player {
     this.filledLinks = []
 
     this._card = null
-    this.data = {}
-    this.chemistry = {
-      _links: 0,
-      get links () {
-        return this._links
-      },
-
-      set links (val) {
-        this._links = val
-
-        _this.card.querySelector('.plyr-Card_ChemValue').innerText = this.total
-      },
-      _position: 0,
-      get position () {
-        return this._position
-      },
-
-      set position (val) {
-        this._position = val
-
-        _this.card.querySelector('.plyr-Card_ChemValue').innerText = this.total
-      },
-      _boost: 0,
-      get boost () {
-        return this._boost
-      },
-
-      set boost (val) {
-        this._boost = val
-
-        _this.card.querySelector('.plyr-Card_ChemValue').innerText = this.total
-      },
-
-      get total () {
-        const roundedChem = Math.round(this.links * this.position)
-
-        return Math.min(10, roundedChem + this.boost)
-      }
-    }
-
-    this.positions = {
-      _fromFormation: '',
-      get fromFormation () {
-        return this._fromFormation
-      },
-      set fromFormation (val) {
-        this._fromFormation = val
-
-        _this.els.pedestal.innerText = this._fromFormation
-      },
-
-      _inBuilder: '',
-      get inBuilder () {
-        return this._inBuilder
-      },
-      set inBuilder (val) {
-        this._inBuilder = val
-
-        if (this._inBuilder) {
-          _this.card.querySelector(
-            '.plyr-Card_Position'
-          ).innerText = this._inBuilder
-          _this.calculatePositionChemistry()
-        }
-      },
-
-      _verbose: '',
-      get verbose () {
-        return this._verbose
-      },
-      set verbose (val) {
-        this._verbose = val
-
-        _this.els.el.className = `bld-Builder_PlayersItem bld-Builder_PlayersItem-${this._verbose.toLowerCase()}`
-      }
-    }
-
-    this.positionsCycle = null
+    this.data = initialData
+    this.chemistry = this.constructChemistry()
+    this.positions = this.constructPositions()
 
     this.coords = this.getCoordinates()
-
-    this.setupListeners()
-  }
-
-  setupListeners () {
-    this.els.controls.el.addEventListener('pointerdown', e =>
-      e.stopPropagation()
-    )
-
-    this.els.controls.remove.addEventListener('pointerdown', () => {
-      const event = new CustomEvent('player:removed', {
-        detail: {
-          index: this.index
-        },
-        bubbles: true
-      })
-      this.els.el.dispatchEvent(event)
-    })
-
-    this.els.controls.toggleLoyalty.addEventListener('pointerdown', () => {
-      this.chemistry.boost = this.chemistry.boost === 1 ? 0 : 1
-    })
-
-    this.els.controls.changePosition.addEventListener('pointerdown', () => {
-      this.cyclePositions()
-    })
   }
 
   getCoordinates () {
@@ -257,12 +149,165 @@ export class Player {
     }
   }
 
-  cyclePositions () {
-    this.positions.inBuilder = this.positionsCycle.next()
-  }
-
   isFilled () {
     return Object.keys(this.data).length !== 0
+  }
+
+  constructChemistry () {
+    const _this = this
+
+    return {
+      _links: 0,
+      get links () {
+        return this._links
+      },
+
+      set links (val) {
+        this._links = val
+
+        if (_this.isEditable) {
+          _this.card.querySelector(
+            '.plyr-Card_ChemValue'
+          ).innerText = this.total
+          _this.setFormData()
+        }
+      },
+      _position: 0,
+      get position () {
+        return this._position
+      },
+
+      set position (val) {
+        this._position = val
+
+        if (_this.isEditable) {
+          _this.card.querySelector(
+            '.plyr-Card_ChemValue'
+          ).innerText = this.total
+          _this.setFormData()
+        }
+      },
+      _boost: 0,
+      get boost () {
+        return this._boost
+      },
+
+      set boost (val) {
+        this._boost = val
+
+        if (_this.isEditable) {
+          _this.card.querySelector(
+            '.plyr-Card_ChemValue'
+          ).innerText = this.total
+          _this.setFormData()
+        }
+      },
+
+      get total () {
+        const roundedChem = Math.round(this.links * this.position)
+
+        return Math.min(10, roundedChem + this.boost)
+      }
+    }
+  }
+
+  constructPositions () {
+    const _this = this
+
+    return {
+      _fromFormation: '',
+      get fromFormation () {
+        return this._fromFormation
+      },
+      set fromFormation (val) {
+        this._fromFormation = val
+
+        _this.els.pedestal.innerText = this._fromFormation
+      },
+
+      _inBuilder: '',
+      get inBuilder () {
+        return this._inBuilder
+      },
+      set inBuilder (val) {
+        this._inBuilder = val
+
+        if (this._inBuilder) {
+          _this.card.querySelector(
+            '.plyr-Card_Position'
+          ).innerText = this._inBuilder
+          _this.calculatePositionChemistry()
+        }
+      },
+
+      _verbose: '',
+      get verbose () {
+        return this._verbose
+      },
+      set verbose (val) {
+        this._verbose = val
+
+        _this.els.el.className = `bld-Builder_PlayersItem bld-Builder_PlayersItem-${this._verbose.toLowerCase()}`
+      }
+    }
+  }
+
+  setLinks ({ formation, team }) {
+    this.links = formationData[formation].positionLinks[this.index]
+    this.filledLinks = this.links.filter(link => team[link].isFilled())
+    this.coords = this.getCoordinates()
+  }
+
+  setPosition (key, position) {
+    this.positions[key] = position
+  }
+}
+
+export class EditablePlayer extends Player {
+  constructor ({ index, el, isEditable, initialData = {} }) {
+    super({ index, el, isEditable, initialData })
+
+    this.els = Object.assign(this.els, {
+      input: el.querySelector('.bld-Builder_PlayerInput'),
+      controls: {
+        el: el.querySelector('.bld-Builder_Controls'),
+        remove: el.querySelector('.bld-Builder_Control-remove'),
+        changePosition: el.querySelector('.bld-Builder_Control-changePosition'),
+        toggleLoyalty: el.querySelector('.bld-Builder_Control-toggleLoyalty')
+      }
+    })
+
+    this.positionsCycle = null
+
+    this.setupListeners()
+  }
+
+  setupListeners () {
+    this.els.controls.el.addEventListener('pointerdown', e =>
+      e.stopPropagation()
+    )
+
+    this.els.controls.remove.addEventListener('pointerdown', () => {
+      const event = new CustomEvent('player:removed', {
+        detail: {
+          index: this.index
+        },
+        bubbles: true
+      })
+      this.els.el.dispatchEvent(event)
+    })
+
+    this.els.controls.toggleLoyalty.addEventListener('pointerdown', () => {
+      this.chemistry.boost = this.chemistry.boost === 1 ? 0 : 1
+    })
+
+    this.els.controls.changePosition.addEventListener('pointerdown', () => {
+      this.cyclePositions()
+    })
+  }
+
+  cyclePositions () {
+    this.positions.inBuilder = this.positionsCycle.next()
   }
 
   constructPlayer ({ data, element }) {
@@ -276,8 +321,7 @@ export class Player {
         this.positions.inBuilder
       )
     })
-    this.els.input.value = `${this.data.id},${this.index},${this.positions
-      .inBuilder}`
+    this.setFormData()
   }
 
   cloneCard () {
@@ -291,13 +335,13 @@ export class Player {
     this.data = {}
     this.els.input.value = ''
     this.positions.inBuilder = ''
+    this.chemistry = this.constructChemistry()
     this.els.el.dataset.builderFilled = 'false'
   }
 
-  setLinks ({ formation, team }) {
-    this.links = formationData[formation].positionLinks[this.index]
-    this.filledLinks = this.links.filter(link => team[link].isFilled())
-    this.coords = this.getCoordinates()
+  setFormData () {
+    this.els.input.value = `${this.data.id},${this.index},${this.positions
+      .inBuilder},${this.chemistry.total}`
   }
 
   setInBuilderPosition () {

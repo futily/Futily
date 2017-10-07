@@ -6,7 +6,7 @@ import { externalLinks, iframeFix } from './utils'
 import { FloatingLabel } from './forms'
 import { CardSelector, Rating, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
-import { Builder } from './squads/Builder'
+import { SquadBuilder, SquadDetail } from './squads'
 import { Follow } from './users/follow'
 import {
   ComparePlayerSearch,
@@ -58,8 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
     new SectionPlayerSearch({ className: '.js-SectionPlayerSearch' })
   }
 
-  if (document.querySelector('.bld-Builder')) {
-    new Builder({ className: 'bld-Builder' })
+  if (document.querySelector('.js-Builder')) {
+    new SquadBuilder({ className: 'bld-Builder', isEditable: true })
+  }
+
+  if (document.querySelector('.js-Detail')) {
+    new SquadDetail({ className: 'bld-Builder' })
   }
 
   // If the browser isn't Safari, don't do anything

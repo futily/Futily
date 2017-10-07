@@ -40,4 +40,12 @@
       {% endfor %}
     </div>
   </div>
+
+  {% if chemistry %}
+    <footer class="plyr-Card_Footer">
+      <p class="plyr-Card_Chem">
+        Chem: <span class="plyr-Card_ChemValue">{{ chemistry }}</span>
+      </p>
+    </footer>
+  {% endif %}
 </a>

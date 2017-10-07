@@ -27,37 +27,6 @@
   .bld-Search_Results-loading & {
     opacity: 0.5;
   }
-
-  &:hover {
-    transform: translateY(-5px);
-
-    .bld-Builder & {
-      transform: none;
-    }
-
-    &::after {
-      opacity: 1;
-    }
-  }
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: -1;
-
-    background-image: inherit;
-    background-position: inherit;
-    background-size: inherit;
-    filter: drop-shadow(0 0 10px rgba(#000, 0.3));
-    opacity: 0;
-
-    transition: 0.2s opacity;
-  }
 }
 
 .plyr-Card-faded {

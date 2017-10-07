@@ -8,7 +8,7 @@ export class FloatingLabel {
       input: el.querySelector(`.${this.className}_Input`)
     }
 
-    this._shouldBeFloated = false
+    this.shouldBeFloated = this.els.input.value.length > 0
 
     this.setupListeners()
   }

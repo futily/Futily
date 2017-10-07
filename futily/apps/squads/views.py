@@ -9,6 +9,7 @@ from django.views.generic.base import TemplateView, View
 
 from futily.apps.actions.utils import create_action
 from futily.apps.players.models import Player
+from futily.apps.squads.constants import FORMATION_POSITIONS
 
 from .forms import BuilderForm
 from .models import FORMATION_CHOICES, Squad, SquadPlayer
@@ -61,7 +62,8 @@ class BuilderAjax(FormView):
 
             if players:
                 for player in players:
-                    p = SquadPlayer(player=player[0], squad=squad, index=player[1], position=player[2])
+                    p = SquadPlayer(player=player['player'], squad=squad, index=player['index'],
+                                    position=player['position'], chemistry=player['chemistry'])
                     p.save()
 
             if request.user.is_authenticated:
@@ -154,3 +156,10 @@ class SquadList(ListView):
 
 class SquadDetail(DetailView):
     model = Squad
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
+
+        return context

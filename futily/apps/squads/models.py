@@ -41,6 +41,12 @@ class Squads(ContentBase):
     def __str__(self):
         return self.page.title
 
+    @property
+    def navigation_items(self):
+        return [
+            ('Builder', self.page.reverse('builder')),
+        ]
+
 
 class SquadManager(PageBaseManager):
     def get_queryset(self):
@@ -126,6 +132,7 @@ class SquadPlayer(models.Model):
     squad = models.ForeignKey(Squad)
     index = models.PositiveIntegerField(blank=True, null=True)
     position = models.CharField(max_length=3)
+    chemistry = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
 
     def __str__(self):
         return self.player.__str__()
