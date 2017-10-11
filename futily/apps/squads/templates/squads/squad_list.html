@@ -1,12 +1,106 @@
 {% extends "base.html" %}
 
-{% block main %}
-  {{ pages.current.id }}
-  {{ object_list }}
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Squads</h1>
+          <p class="pg-Strapline_Text">Top rated Fifa 17 Squads</p>
+        </div>
 
-  {% for squad in squad_list %}
-    <div>
-      <a href="{{ squad.get_absolute_url() }}">{{ squad }}</a>
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
     </div>
-  {% endfor %}
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="ea-ObjectsTable">
+    <header class="ea-ObjectsTable_Header">
+      <div class="ea-ObjectsTable_Row">
+        <div class="ea-ObjectsTable_RowLeft">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">Squad</div>
+        </div>
+
+        <div class="ea-ObjectsTable_RowRight">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
+              Formation
+            </a>
+          </div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
+              User
+            </a>
+          </div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
+              Chem
+            </a>
+          </div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
+              Rating
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ea-ObjectsTable_Body">
+      {% for object in object_list %}
+        <a href="{{ object.get_absolute_url() }}" class="ea-ObjectsTable_Row">
+          <div class="ea-ObjectsTable_RowLeft">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">
+              <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
+            </div>
+          </div>
+
+          <div class="ea-ObjectsTable_RowRight">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.formation }}</span>
+                <span class="ea-ObjectRow_CellTitle">Formation</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.user }}</span>
+                <span class="ea-ObjectRow_CellTitle">User</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.chemistry }}</span>
+                <span class="ea-ObjectRow_CellTitle">Chemistry</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.rating }}</span>
+                <span class="ea-ObjectRow_CellTitle">Rating</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
