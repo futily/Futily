@@ -75,23 +75,46 @@
 {% endblock %}
 
 {% block main %}
-  {{ player_macros.card_list(players) }}
+  <div class="pck-Detail">
+    <div class="pck-Detail_Players">
+      {{ player_macros.card_list(players) }}
+    </div>
 
-  {% if request.user.is_authenticated %}
-    <form action="{{ object.get_absolute_url() }}" method="POST">
-      <input name="title" placeholder="title">
-      <input type="hidden" name="page" value="{{ pages.current.pk }}">
-      <input type="hidden" name="user" value="{{ request.user.pk }}">
-      <input type="hidden" name="type" value="{{ object.pk }}">
-      <input type="hidden" name="value" value="0">
+    <footer class="pck-Detail_Footer">
+      <div class="pck-Detail_Form">
+        {% if request.user.is_authenticated %}
+          <form action="{{ object.get_absolute_url() }}" class="frm-Form" method="POST">
+            <input type="hidden" name="page" value="{{ pages.current.pk }}">
+            <input type="hidden" name="user" value="{{ request.user.pk }}">
+            <input type="hidden" name="type" value="{{ object.pk }}">
+            <input type="hidden" name="value" value="0">
 
-      {% for player in players %}
-        <input type="hidden" name="players" value="{{ player.pk }}">
-      {% endfor %}
+            {% for player in players %}
+              <input type="hidden" name="players" value="{{ player.pk }}">
+            {% endfor %}
 
-      <button>submit</button>
-    </form>
-  {% endif %}
+            <div class="frm-Form_Items frm-Form_Items-tight">
+              <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">
+                <label class="frm-Form_Label js-FloatingLabel_Label" for="title">
+                  Squad Name:
+                </label>
+
+                <input type="text"
+                       class="frm-Form_Input js-FloatingLabel_Input"
+                       placeholder="Pack name"
+                       name="title"
+                       id="title" />
+              </div>
+            </div>
+
+            <div class="frm-Form_Actions">
+              <button type="submit" class="frm-Form_Submit btn-Primary">submit</button>
+            </div>
+          </form>
+        {% endif %}
+      </div>
+    </footer>
+  </div>
 {% endblock %}
 
 {% block aside %}
