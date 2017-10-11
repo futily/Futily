@@ -100,10 +100,6 @@
 */
 .lyt-Aside {
   .lyt-Content-mainAside & {
-    @apply --GridColumn;
-
-    flex-shrink: 0;
-
     width: 300px;
   }
 

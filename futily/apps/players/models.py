@@ -415,7 +415,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
 
     @property
     def similar_coefficient(self):
-        return self.total_ingame_stats / 100 / 2
+        return self.total_ingame_stats / 100 / 2.5
 
     def ingame_stat_group_average(self, group):
         schema = {
@@ -572,8 +572,6 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
                 )
             ) for val in schema[self.position]
         ]
-
-        print(q_objs)
 
         players = Player.cards \
             .filter(reduce(operator.and_, q_objs), position__in=self.get_similar_positions(self.position)) \
