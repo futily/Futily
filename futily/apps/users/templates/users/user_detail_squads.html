@@ -1,12 +1,85 @@
 {% extends "users/_base.html" %}
 
 {% block side_panel %}
-  {% for squad in object.squad_set.all() %}
-    <p>
-      <a href="{{ squad.get_absolute_url() }}">{{ squad }}</a>
-      <a href="{{ squad.get_update_url() }}">Edit squad</a>
-    </p>
-  {% endfor %}
+  <div class="ea-ObjectsTable">
+    <header class="ea-ObjectsTable_Header">
+      <div class="ea-ObjectsTable_Row">
+        <div class="ea-ObjectsTable_RowLeft">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">Squad</div>
+        </div>
+
+        <div class="ea-ObjectsTable_RowRight">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
+              Formation
+            </a>
+          </div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
+              Chem
+            </a>
+          </div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
+              Rating
+            </a>
+          </div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120"></div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ea-ObjectsTable_Body">
+      {% for object in object.squad_set.order_by('-created') %}
+        <a href="{{ object.get_update_url() }}" class="ea-ObjectsTable_Row">
+          <div class="ea-ObjectsTable_RowLeft">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">
+              <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
+            </div>
+          </div>
+
+          <div class="ea-ObjectsTable_RowRight">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.formation }}</span>
+                <span class="ea-ObjectRow_CellTitle">Formation</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.chemistry }}</span>
+                <span class="ea-ObjectRow_CellTitle">Chemistry</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.rating }}</span>
+                <span class="ea-ObjectRow_CellTitle">Rating</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">Edit</span>
+                <span class="ea-ObjectRow_CellTitle">Edit squad</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block aside_blocks %}

@@ -79,7 +79,7 @@
                    data-builder-initial-data="{{ player.player.get_serializer_data() }}"
                 {% endif %}>
                 {% if player %}
-                  {{ player.player.render_card(chemistry=player.chemistry, has_link=False) }}
+                  {{ player.player.render_card(chemistry=0, has_link=False) }}
                 {% endif %}
               </div>
               <span class="bld-Builder_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[loop.index0] }}</span>
