@@ -29,26 +29,7 @@
                   <label class="frm-Form_Label js-FloatingLabel_Label"
                          for="{{ field.id_for_label }}">{{ field.label }}</label>
 
-                  {% if field.field.__class__.__name__ == 'EmailField' or field.field.__class__.__name__ == 'UsernameField' %}
-                    <input type="email"
-                           class="frm-Form_Input js-FloatingLabel_Input"
-                           name="{{ field.name }}"
-                           id="{{ field.id_for_label }}">
-                  {% elif field.field.__class__.__name__ == 'CharField' %}
-                    <input class="frm-Form_Input js-FloatingLabel_Input"
-                           name="{{ field.name }}"
-                           type="password"
-                           id="{{ field.id_for_label }}">
-                  {% elif field.field.__class__.__name__ == 'TypedChoiceField' %}
-                    <select class="frm-Form_Select js-FloatingLabel_Input"
-                            name="{{ field.name }}"
-                            id="{{ field.id_for_label }}">
-                      <option value="">{{ field.label }}</option>
-                      {% for value, label in field.field.choices %}
-                        <option value="{{ value }}">{{ label }}</option>
-                      {% endfor %}
-                    </select>
-                  {% endif %}
+                  {{ field }}
                 </div>
               {% endfor %}
             </div>

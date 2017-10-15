@@ -111,7 +111,9 @@
     left: calc(var(--InputHoriPadding) - 10px);
 
     margin-bottom: 0;
-    padding: 2px 10px;
+    padding: 0 10px;
+
+    line-height: 1;
 
     background-color: #fff;
     color: #a1b1bc;
@@ -122,7 +124,7 @@
   }
 
   .js-FloatingLabel-active & {
-    transform: translateY(calc(-100% - 9px));
+    transform: translateY(calc(-100% - 13px));
   }
 }
 
