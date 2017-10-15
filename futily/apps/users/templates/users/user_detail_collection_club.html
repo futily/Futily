@@ -1,4 +1,4 @@
-{% extends "users/_base.html" %}
+{% extends "users/_collection_base.html" %}
 {% import "players/macros/players.html" as player_macros %}
 
 {% block content_above_text %}{{ object }}'s card collection - {{ club }}{% endblock %}
@@ -99,7 +99,9 @@
   </div>
 {% endblock %}
 
-{% block side_panel %}
+{% block collection_title_end %} - {{ club }}{% endblock %}
+
+{% block collection_main %}
   <div class="plyr-CardBlock">
     <header class="plyr-CardBlock_Header">
       <h2 class="plyr-CardBlock_Title">Collected</h2>

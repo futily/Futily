@@ -21,7 +21,7 @@
 }
 
 .usr-Index_PanelHeader {
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 
   display: flex;
