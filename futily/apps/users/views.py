@@ -181,6 +181,14 @@ class UserProfileView(UserMixin, DetailView):
         return context
 
 
+class UserFollowers(UserMixin, DetailView):
+    template_name = 'users/user_followers.html'
+
+
+class UserFollowing(UserMixin, DetailView):
+    template_name = 'users/user_following.html'
+
+
 class UserSettingsView(LoginRequiredMixin, UserMixin, UpdateView):
     form_class = UserSettingsForm
     template_name = 'users/user_settings.html'

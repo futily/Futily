@@ -1,0 +1,21 @@
+{% extends "users/_base.html" %}
+
+{% block side_panel %}
+  <div class="usr-Index usr-Index-full">
+    <div class="usr-Index_Panel">
+      <header class="usr-Index_PanelHeader">
+        <h3 class="usr-Index_PanelTitle">{{ object }}'s <strong class="usr-Index_Emphasis">followers</strong></h3>
+      </header>
+
+      <div class="usr-Index_PanelBody">
+        <ul>
+          {% for follower in object.get_followers %}
+            <li>
+              <a href="{{ follower.get_absolute_url() }}">{{ follower }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}

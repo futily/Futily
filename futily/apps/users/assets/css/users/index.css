@@ -12,6 +12,10 @@
   display: grid;
 }
 
+.usr-Index-full {
+  display: block;
+}
+
 .usr-Index_Right {
   grid-column: 2 / -1;
 }

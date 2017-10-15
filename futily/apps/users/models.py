@@ -122,6 +122,16 @@ class User(AbstractBaseUser, PermissionsMixin):
             'league_slug': league.slug,
         })
 
+    def get_following_url(self):
+        return reverse('users:following', kwargs={
+            'username': self.username
+        })
+
+    def get_followers_url(self):
+        return reverse('users:followers', kwargs={
+            'username': self.username
+        })
+
     def get_profile_url(self):
         return self.get_absolute_url()
 

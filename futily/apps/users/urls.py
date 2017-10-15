@@ -46,6 +46,8 @@ urlpatterns = [
 
     # Profile
     url(r'^(?P<username>[\w_\-]+)/$', views.UserProfileView.as_view(), name='profile'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/followers/$', views.UserFollowers.as_view(), name='followers'),
+    url(r'^(?P<username>[0-9A-Za-z_\-]+)/following/$', views.UserFollowing.as_view(), name='following'),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/players/$', views.UserFavouritePlayers.as_view(), name='favourite-players'),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/squads/$', views.UserSquadsView.as_view(), name='squads'),
     url(r'^(?P<username>[0-9A-Za-z_\-]+)/packs/$', views.UserPacksView.as_view(), name='packs'),

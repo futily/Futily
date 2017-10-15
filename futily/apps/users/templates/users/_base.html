@@ -60,8 +60,14 @@
 
           <hr>
 
-          <p class="typ-Text"><strong>Following:</strong> {{ object.get_following.count() }}</p>
-          <p class="typ-Text"><strong>Followers:</strong> <span class="js-UserFollow_Followers">{{ object.get_followers.count() }}</span></p>
+          <p class="typ-Text">
+            <strong>Following:</strong>
+            <a href="{{ object.get_following_url() }}">{{ object.get_following.count() }}</a>
+          </p>
+          <p class="typ-Text">
+            <strong>Followers:</strong>
+            <a class="js-UserFollow_Followers" href="{{ object.get_followers_url() }}">{{ object.get_followers.count() }}</a>
+          </p>
 
           {% if user.is_authenticated() %}
             <button class="btn-Primary js-UserFollow ut-SmallMarginTop"
