@@ -205,6 +205,8 @@
           <p class="asi-KeyValues_Key">Club</p>
           <a class="asi-KeyValues_Value" href="{{ player.club.get_absolute_url() }}">
             {{ player.club }}
+            <img src="{{ static('ea-images/clubs/{}.png'.format(player.club.ea_id)) }}"
+                 width="24">
           </a>
         </li>
 
@@ -212,6 +214,8 @@
           <p class="asi-KeyValues_Key">League</p>
           <a class="asi-KeyValues_Value" href="{{ player.league.get_absolute_url() }}">
             {{ player.league }}
+            <img src="{{ static('ea-images/leagues/{}.png'.format(player.league.ea_id)) }}"
+                 width="24">
           </a>
         </li>
 
@@ -219,6 +223,8 @@
           <p class="asi-KeyValues_Key">Nation</p>
           <a class="asi-KeyValues_Value" href="{{ player.nation.get_absolute_url() }}">
             {{ player.nation }}
+            <img src="{{ static('ea-images/nations/{}.png'.format(player.nation.ea_id)) }}"
+                 width="24">
           </a>
         </li>
 
