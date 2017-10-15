@@ -1,11 +1,11 @@
 /*
 |--------------------------------------------------------------------------
-| Links
+| LinkList
 |--------------------------------------------------------------------------
 | @namespace: asi-
 |
 */
-.asi-Links_Item {
+.asi-LinkList_Item {
   padding-top: 0.5vr;
   padding-bottom: @padding-top;
 
@@ -21,7 +21,7 @@
   }
 }
 
-.asi-Links_Link {
+.asi-LinkList_Link {
   align-items: center;
 
   display: flex;
@@ -32,24 +32,11 @@
 
   &:hover {
     color: var(--Color_Green);
-
-    &::before {
-      background-image: svg-load('angle-down.svg', fill=#16a287);
-    }
   }
 
-  &::before {
-    content: '';
+  &[aria-current='true'] {
+    text-decoration: underline;
 
-    display: block;
-    width: 10px;
-    height: @width;
-    margin-right: 5px;
-
-    background-image: svg-load('angle-down.svg');
-    background-size: @width @height;
-
-    transform: rotate(-90deg);
-    transition: background-image 0.2s;
+    color: var(--Color_Green);
   }
 }

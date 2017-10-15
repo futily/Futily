@@ -1,5 +1,12 @@
 from django_jinja import library
 
+from futily.apps.players.models import Players
+
+
+@library.global_function
+def get_players_page():
+    return Players.objects.first().page
+
 
 @library.global_function
 def stat_grade(val):

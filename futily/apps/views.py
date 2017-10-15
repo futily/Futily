@@ -4,9 +4,15 @@ from django.views import View
 from django.views.generic import ListView
 from django.views.generic.base import ContextMixin
 
-from .players.constants import (LEVEL_FILTER_MAP, LEVELS_GET_TO_LABEL,
-                                POSITION_FILTER_MAP, POSITION_GET_TO_LABEL,
-                                SORT_GET_TO_LABEL)
+from futily.apps.clubs.templatetags.clubs import get_clubs_page
+from futily.apps.leagues.templatetags.leagues import get_leagues_page
+from futily.apps.nations.templatetags.nations import get_nations_page
+from futily.apps.players.constants import (LEVEL_FILTER_MAP,
+                                           LEVELS_GET_TO_LABEL,
+                                           POSITION_FILTER_MAP,
+                                           POSITION_GET_TO_LABEL,
+                                           SORT_GET_TO_LABEL)
+from futily.apps.players.templatetags.players import get_players_page
 
 
 class PlayerFilterSorted(ContextMixin, View):
@@ -88,7 +94,17 @@ class PlayerFilterSorted(ContextMixin, View):
 
             players = players.order_by(f'{"-" if order != "asc" else ""}{sort}')
 
-            # defer = ['first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm', 'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full', 'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration', 'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve', 'dribbling', 'finishing', 'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping', 'long_passing', 'long_shots', 'marking', 'penalties', 'positioning', 'potential', 'reactions', 'short_passing', 'shot_power', 'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina', 'strength', 'vision', 'volleys', 'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning', 'gk_reflexes', 'total_stats', 'total_ingame_stats', 'foot', 'skill_moves', 'weak_foot', 'specialities', 'traits', 'work_rate_att', 'work_rate_def', 'player_type', 'item_type', 'model_name', 'source', 'is_special_type', 'pack_weight', 'created', 'modified']
+            # defer = ['first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
+            # 'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
+            # 'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',
+            # 'aggression', 'agility', 'balance', 'ball_control', 'crossing', 'curve', 'dribbling', 'finishing',
+            # 'free_kick_accuracy', 'heading_accuracy', 'interceptions', 'jumping', 'long_passing', 'long_shots',
+            # 'marking', 'penalties', 'positioning', 'potential', 'reactions', 'short_passing', 'shot_power',
+            # 'sliding_tackle', 'sprint_speed', 'standing_tackle', 'stamina', 'strength', 'vision', 'volleys',
+            # 'gk_diving', 'gk_handling', 'gk_kicking', 'gk_positioning', 'gk_reflexes', 'total_stats',
+            # 'total_ingame_stats', 'foot', 'skill_moves', 'weak_foot', 'specialities', 'traits', 'work_rate_att',
+            # 'work_rate_def', 'player_type', 'item_type', 'model_name', 'source', 'is_special_type', 'pack_weight',
+            # 'created', 'modified']
             # if sort in defer:
             #     defer.remove(sort)
 
@@ -105,21 +121,27 @@ class PlayerFilterSorted(ContextMixin, View):
                 {'key': 'gold', 'label': 'Gold', 'group': False},
                 {'key': 'silver', 'label': 'Silver', 'group': False},
                 {'key': 'bronze', 'label': 'Bronze', 'group': False},
-                {'key': '', 'label': 'TOTW', 'group': True, 'options': [
-                    {'key': 'totw-gold', 'label': 'TOTW Gold'},
-                    {'key': 'totw-silver', 'label': 'TOTW Silver'},
-                    {'key': 'totw-bronze', 'label': 'TOTW Bronze'},
-                ]},
-                {'key': '', 'label': 'Rares', 'group': True, 'options': [
-                    {'key': 'rare-gold', 'label': 'Rare Gold'},
-                    {'key': 'rare-silver', 'label': 'Rare Silver'},
-                    {'key': 'rare-bronze', 'label': 'Rare Bronze'},
-                ]},
-                {'key': '', 'label': 'Non rares', 'group': True, 'options': [
-                    {'key': 'nonrare-gold', 'label': 'Gold'},
-                    {'key': 'nonrare-silver', 'label': 'Silver'},
-                    {'key': 'nonrare-bronze', 'label': 'Bronze'},
-                ]},
+                {
+                    'key': '', 'label': 'TOTW', 'group': True, 'options': [
+                        {'key': 'totw-gold', 'label': 'TOTW Gold'},
+                        {'key': 'totw-silver', 'label': 'TOTW Silver'},
+                        {'key': 'totw-bronze', 'label': 'TOTW Bronze'},
+                    ]
+                },
+                {
+                    'key': '', 'label': 'Rares', 'group': True, 'options': [
+                        {'key': 'rare-gold', 'label': 'Rare Gold'},
+                        {'key': 'rare-silver', 'label': 'Rare Silver'},
+                        {'key': 'rare-bronze', 'label': 'Rare Bronze'},
+                    ]
+                },
+                {
+                    'key': '', 'label': 'Non rares', 'group': True, 'options': [
+                        {'key': 'nonrare-gold', 'label': 'Gold'},
+                        {'key': 'nonrare-silver', 'label': 'Silver'},
+                        {'key': 'nonrare-bronze', 'label': 'Bronze'},
+                    ]
+                },
                 {'key': 'legend', 'label': 'Legends'},
                 {'key': 'toty', 'label': 'TOTY'},
                 {'key': 'motm', 'label': 'MOTM'},
@@ -132,25 +154,27 @@ class PlayerFilterSorted(ContextMixin, View):
                 {'key': 'def', 'label': 'Defenders'},
                 {'key': 'mid', 'label': 'Midfielders'},
                 {'key': 'att', 'label': 'Attackers'},
-                {'key': '', 'label': 'Positions', 'group': True, 'options': [
-                    {'key': 'gk', 'label': 'GK'},
-                    {'key': 'rwb', 'label': 'RWB'},
-                    {'key': 'rb', 'label': 'RB'},
-                    {'key': 'cb', 'label': 'CB'},
-                    {'key': 'lb', 'label': 'LB'},
-                    {'key': 'lwb', 'label': 'LWB'},
-                    {'key': 'cdm', 'label': 'CDM'},
-                    {'key': 'cm', 'label': 'CM'},
-                    {'key': 'cam', 'label': 'CAM'},
-                    {'key': 'rm', 'label': 'RM'},
-                    {'key': 'rw', 'label': 'RW'},
-                    {'key': 'rf', 'label': 'RF'},
-                    {'key': 'lm', 'label': 'LM'},
-                    {'key': 'lw', 'label': 'LW'},
-                    {'key': 'lf', 'label': 'LF'},
-                    {'key': 'cf', 'label': 'CF'},
-                    {'key': 'st', 'label': 'ST'},
-                ]},
+                {
+                    'key': '', 'label': 'Positions', 'group': True, 'options': [
+                        {'key': 'gk', 'label': 'GK'},
+                        {'key': 'rwb', 'label': 'RWB'},
+                        {'key': 'rb', 'label': 'RB'},
+                        {'key': 'cb', 'label': 'CB'},
+                        {'key': 'lb', 'label': 'LB'},
+                        {'key': 'lwb', 'label': 'LWB'},
+                        {'key': 'cdm', 'label': 'CDM'},
+                        {'key': 'cm', 'label': 'CM'},
+                        {'key': 'cam', 'label': 'CAM'},
+                        {'key': 'rm', 'label': 'RM'},
+                        {'key': 'rw', 'label': 'RW'},
+                        {'key': 'rf', 'label': 'RF'},
+                        {'key': 'lm', 'label': 'LM'},
+                        {'key': 'lw', 'label': 'LW'},
+                        {'key': 'lf', 'label': 'LF'},
+                        {'key': 'cf', 'label': 'CF'},
+                        {'key': 'st', 'label': 'ST'},
+                    ]
+                },
                 {'key': 'gk', 'label': 'Goalkeepers'},
                 {'key': 'cbs', 'label': 'Center backs'},
                 {'key': 'rbs', 'label': 'Right backs'},
@@ -167,53 +191,67 @@ class PlayerFilterSorted(ContextMixin, View):
         return [
             {'key': 'likes', 'label': 'Likes'},
             {'key': 'rating', 'label': 'Rating'},
-            {'key': '', 'label': 'Pace', 'group': True, 'options': [
-                {'key': 'acceleration', 'label': 'Acceleration'},
-                {'key': 'sprint_speed', 'label': 'Sprint speed'},
-            ]},
-            {'key': '', 'label': 'Shooting', 'group': True, 'options': [
-                {'key': 'finishing', 'label': 'Finishing'},
-                {'key': 'long_shots', 'label': 'Long shots'},
-                {'key': 'penalties', 'label': 'Penalties'},
-                {'key': 'positioning', 'label': 'Positioning'},
-                {'key': 'shot_power', 'label': 'Shot power'},
-                {'key': 'volleys', 'label': 'Volleys'},
-            ]},
-            {'key': '', 'label': 'Passing', 'group': True, 'options': [
-                {'key': 'crossing', 'label': 'Crossing'},
-                {'key': 'curve', 'label': 'Curve'},
-                {'key': 'free_kick_accuracy', 'label': 'Free kick'},
-                {'key': 'long_passing', 'label': 'Long passing'},
-                {'key': 'short_passing', 'label': 'Short passing'},
-                {'key': 'vision', 'label': 'Vision'},
-            ]},
-            {'key': '', 'label': 'Dribbling', 'group': True, 'options': [
-                {'key': 'agility', 'label': 'Agility'},
-                {'key': 'balance', 'label': 'Balance'},
-                {'key': 'ball_control', 'label': 'Ball control'},
-                {'key': 'dribbling', 'label': 'Dribbling'},
-                {'key': 'reactions', 'label': 'Reactions'},
-            ]},
-            {'key': '', 'label': 'Defending', 'group': True, 'options': [
-                {'key': 'heading', 'label': 'Heading'},
-                {'key': 'interceptions', 'label': 'Interceptions'},
-                {'key': 'marking', 'label': 'Marking'},
-                {'key': 'sliding_tackle', 'label': 'Sliding tackle'},
-                {'key': 'standing_tackle', 'label': 'Standing tackle'},
-            ]},
-            {'key': '', 'label': 'Physical', 'group': True, 'options': [
-                {'key': 'aggression', 'label': 'Aggression'},
-                {'key': 'jumping', 'label': 'Jumping'},
-                {'key': 'stamina', 'label': 'Stamina'},
-                {'key': 'strength', 'label': 'Strength'},
-            ]},
-            {'key': '', 'label': 'Futily', 'group': True, 'options': [
-                {'key': 'rating_attacker', 'label': 'Attacker'},
-                {'key': 'rating_creator', 'label': 'Creator'},
-                {'key': 'rating_defender', 'label': 'Defender'},
-                {'key': 'rating_pirlo', 'label': 'Pirlo'},
-                {'key': 'rating_beast', 'label': 'Beast'},
-            ]},
+            {
+                'key': '', 'label': 'Pace', 'group': True, 'options': [
+                    {'key': 'acceleration', 'label': 'Acceleration'},
+                    {'key': 'sprint_speed', 'label': 'Sprint speed'},
+                ]
+            },
+            {
+                'key': '', 'label': 'Shooting', 'group': True, 'options': [
+                    {'key': 'finishing', 'label': 'Finishing'},
+                    {'key': 'long_shots', 'label': 'Long shots'},
+                    {'key': 'penalties', 'label': 'Penalties'},
+                    {'key': 'positioning', 'label': 'Positioning'},
+                    {'key': 'shot_power', 'label': 'Shot power'},
+                    {'key': 'volleys', 'label': 'Volleys'},
+                ]
+            },
+            {
+                'key': '', 'label': 'Passing', 'group': True, 'options': [
+                    {'key': 'crossing', 'label': 'Crossing'},
+                    {'key': 'curve', 'label': 'Curve'},
+                    {'key': 'free_kick_accuracy', 'label': 'Free kick'},
+                    {'key': 'long_passing', 'label': 'Long passing'},
+                    {'key': 'short_passing', 'label': 'Short passing'},
+                    {'key': 'vision', 'label': 'Vision'},
+                ]
+            },
+            {
+                'key': '', 'label': 'Dribbling', 'group': True, 'options': [
+                    {'key': 'agility', 'label': 'Agility'},
+                    {'key': 'balance', 'label': 'Balance'},
+                    {'key': 'ball_control', 'label': 'Ball control'},
+                    {'key': 'dribbling', 'label': 'Dribbling'},
+                    {'key': 'reactions', 'label': 'Reactions'},
+                ]
+            },
+            {
+                'key': '', 'label': 'Defending', 'group': True, 'options': [
+                    {'key': 'heading', 'label': 'Heading'},
+                    {'key': 'interceptions', 'label': 'Interceptions'},
+                    {'key': 'marking', 'label': 'Marking'},
+                    {'key': 'sliding_tackle', 'label': 'Sliding tackle'},
+                    {'key': 'standing_tackle', 'label': 'Standing tackle'},
+                ]
+            },
+            {
+                'key': '', 'label': 'Physical', 'group': True, 'options': [
+                    {'key': 'aggression', 'label': 'Aggression'},
+                    {'key': 'jumping', 'label': 'Jumping'},
+                    {'key': 'stamina', 'label': 'Stamina'},
+                    {'key': 'strength', 'label': 'Strength'},
+                ]
+            },
+            {
+                'key': '', 'label': 'Futily', 'group': True, 'options': [
+                    {'key': 'rating_attacker', 'label': 'Attacker'},
+                    {'key': 'rating_creator', 'label': 'Creator'},
+                    {'key': 'rating_defender', 'label': 'Defender'},
+                    {'key': 'rating_pirlo', 'label': 'Pirlo'},
+                    {'key': 'rating_beast', 'label': 'Beast'},
+                ]
+            },
             {'key': 'card_att_1', 'label': 'Pace'},
             {'key': 'card_att_2', 'label': 'Shooting'},
             {'key': 'card_att_3', 'label': 'Passing'},
@@ -227,7 +265,6 @@ class PlayerFilterSorted(ContextMixin, View):
 
 
 class EaObjectList(ListView):
-
     def is_sorted(self):
         return self.request.GET.get('sort')
 
@@ -283,5 +320,28 @@ class EaObjectList(ListView):
                 'key': key,
                 'current': current,
             })
+
+        context['aside_links'] = [
+            {
+                'title': 'Players',
+                'url': get_players_page().get_absolute_url(),
+                'here': str(self.request.path == get_players_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Clubs',
+                'url': get_clubs_page().get_absolute_url(),
+                'here': str(self.request.path == get_clubs_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Leagues',
+                'url': get_leagues_page().get_absolute_url(),
+                'here': str(self.request.path == get_leagues_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Nations',
+                'url': get_nations_page().get_absolute_url(),
+                'here': str(self.request.path == get_nations_page().get_absolute_url()).lower(),
+            },
+        ]
 
         return context
