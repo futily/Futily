@@ -468,11 +468,10 @@ TINYPNG_API_KEY = ''
 # 11. Edit settings
 # 12. Set authorized domain
 
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GooglePlusAuth',
-    'django.contrib.auth.backends.ModelBackend'
-)
-
+    'futily.apps.users.backends.EmailOrUsernameModelBackend',
+]
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'users.User'
