@@ -5,5 +5,11 @@
     <a class="act-Action_Link" href="{{ action.target.get_absolute_url() }}">{{ action.target }}</a>
   </p>
 
-  <time class="act-Action_Time">{{ action.created | naturaltime() }}</time>
+  <time class="act-Action_Time">
+    {% if action.created | is_older_than(hours=24)  %}
+      {{ action.created | naturaltime() }}
+    {% else %}
+      {{ action.created | date('g:ia jS N Y') }}
+    {% endif %}
+  </time>
 </div>

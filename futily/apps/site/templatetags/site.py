@@ -1,3 +1,4 @@
+import datetime
 import json
 import os
 from urllib.parse import urlencode
@@ -6,7 +7,7 @@ import jinja2
 import stringcase
 from django.conf import settings
 from django.urls import reverse
-from django.utils import six
+from django.utils import six, timezone
 from django.utils.safestring import mark_safe
 from django_jinja import library
 from sorl.thumbnail import get_thumbnail
@@ -251,3 +252,8 @@ def camel_case(value):
     camel_case_string = stringcase.camelcase(value).replace('_', '')
 
     return camel_case_string
+
+
+@library.filter
+def is_older_than(time, hours):
+    return time + datetime.timedelta(hours=hours) > timezone.now()
