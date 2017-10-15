@@ -125,7 +125,10 @@
   <li class="asi-KeyValues_Item">
     <p class="asi-KeyValues_Key">League</p>
     <p class="asi-KeyValues_Value">
-      <a href="{{ object.league.get_absolute_url() }}">{{ object.league }}</a>
+      <a href="{{ object.league.get_absolute_url() }}">
+        {{ object.league }}
+        <img src="{{ static('ea-images/leagues/{}.png'.format(object.league.ea_id)) }}" height="24">
+      </a>
     </p>
   </li>
 {% endblock %}

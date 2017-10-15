@@ -13,7 +13,13 @@
   color: currentColor;
 }
 
+.asi-Club_Title {
+  margin-top: 0.25vr;
+}
+
 .asi-Club_Image {
+  max-width: 75px;
+
   transition: filter 0.2s, transform 0.2s;
 
   .asi-Club:hover & {

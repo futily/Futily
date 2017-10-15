@@ -6,18 +6,8 @@
 |
 */
 .asi-Clubs_Items {
-  @apply --GridRow;
+  grid-gap: calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(2, 1fr);
 
-  flex-wrap: wrap;
-}
-
-.asi-Clubs_Item {
-  @apply --GridColumn;
-
-  width: calc(percentage(1, 2) - (var(--Grid_Gutter) * 2));
-  margin-top: 0.5vr;
-
-  &:nth-child(-n + 2) {
-    margin-top: 0;
-  }
+  display: grid;
 }

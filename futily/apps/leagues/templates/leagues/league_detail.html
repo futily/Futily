@@ -1,1 +1,23 @@
 {% extends "layouts/ea-object-detail.html" %}
+
+{% block aside_blocks_class %}asi-Blocks-noSticky{% endblock %}
+
+{% block aside_blocks %}
+  <div class="asi-Block">
+    <h4 class="asi-Block_Title">{{ object }} Clubs</h4>
+
+    <div class="asi-Clubs">
+      <ul class="asi-Clubs_Items">
+        {% for club in league.club_set.all() %}
+          <li class="asi-Clubs_Item">
+            <a href="{{ club.get_absolute_url() }}" class="asi-Club">
+              <img class="asi-Club_Image"
+                   src="{{ static('ea-images/clubs/{}.png'.format(club.ea_id)) }}">
+              <h4 class="asi-Club_Title typ-Title-small">{{ club }}</h4>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
