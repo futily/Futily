@@ -33,8 +33,6 @@ export class Builder extends Squad {
     }
 
     this.setupListeners()
-
-    console.log(this)
   }
 
   setupListeners () {

@@ -108,6 +108,7 @@
     "linters": {
       "*.js": [
         "prettier-standard",
+        "eslint --fix",
         "git add"
       ],
       "*.vue": [
