@@ -263,6 +263,13 @@
 
 {% block aside_blocks %}
   <div class="asi-Block">
+    <a class="btn-Primary" href="{{ build_url(
+      initial_url=get_squads_page().reverse('builder'),
+      get={'players': player.id}
+    ) }}">Build squad</a>
+  </div>
+
+  <div class="asi-Block">
     <h4 class="asi-Block_Title">Chemistry styles</h4>
 
     <div class="plyr-RPPChemStyles">

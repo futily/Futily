@@ -200,7 +200,7 @@ def build_url(context, *args, **kwargs):
     request = context['request']
     get = kwargs.pop('get', {})
     remove = kwargs.pop('remove', '')
-    return_url = f'{request.path}'
+    return_url = kwargs.pop('initial_url', f'{request.path}')
 
     # Sometimes no 'viewname' is passed i.e. building pagination links
     if args or kwargs:

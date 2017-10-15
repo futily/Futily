@@ -1,346 +1,230 @@
-{% extends "base.html" %}
+{% extends "squads/builder_base.html" %}
 
-{% block content_class %}lyt-Content-full{% endblock %}
+{% block strapline_text %}Create your Fifa 17 squad{% endblock %}
 
-{% block content_above %}
-  <div class="pg-Strapline">
-    <div class="pg-Strapline_Inner">
-      <div class="pg-Strapline_Body">
-        <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">Squad Builder</h1>
-          <p class="pg-Strapline_Text">Create your Fifa 17 squad</p>
+{% block builder_class %}js-Builder{% endblock %}
+
+{% block builder_formation %}442{% endblock %}
+
+{% block builder_action %}/squads/builder/save/{% endblock %}
+
+{% block builder_players %}
+  {% for index in range(0, 11) %}
+    {% set player = initial_players.get(index, None) %}
+    <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ loop.cycle('gk', 'rb', 'rcb', 'lcb', 'lb', 'rm', 'rcm', 'lcm', 'lm', 'rs', 'ls') }}"
+        data-builder-formation-index="{{ index }}"
+        data-builder-filled="{{ 'true' if player else 'false' }}">
+      <div class="bld-Builder_Player"
+        {% if player %}
+           data-builder-initial-data="{{ player.get_serializer_data() }}"
+        {% endif %}>
+        {% if player %}
+          {{ player.render_card(chemistry=0, has_link=False) }}
+        {% endif %}
+      </div>
+      <span class="bld-Builder_Pedestal"></span>
+      <input type="hidden" name="players" class="bld-Builder_PlayerInput">
+      <div class="bld-Builder_Controls">
+        <div class="bld-Builder_Control bld-Builder_Control-remove">
+          <span class="bld-Builder_ControlIcon">
+            {% include 'trash.svg' %}
+          </span>
+
+          <span class="bld-Builder_ControlText">Remove</span>
         </div>
 
-        <div class="pg-Strapline_Advert">
-          <img alt="" src="http://placehold.it/728x90">
+        <div class="bld-Builder_Control bld-Builder_Control-changePosition">
+          <span class="bld-Builder_ControlIcon">
+            {% include 'shuffle.svg' %}
+          </span>
+
+          <span class="bld-Builder_ControlText">Change position</span>
+        </div>
+
+        <div class="bld-Builder_Control bld-Builder_Control-toggleLoyalty">
+          <span class="bld-Builder_ControlIcon">
+            {% include 'heart.svg' %}
+          </span>
+
+          <span class="bld-Builder_ControlText">Toggle loyalty</span>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block builder_players_after %}
+  <div class="bld-Search" aria-current="false">
+    <header class="bld-Search_Header">
+      <input class="bld-Search_Input" type="search" placeholder="Search" />
+    </header>
+
+    <div class="bld-Search_Body">
+      <div class="bld-Search_Results">
+        <button rel="prev" class="bld-Search_Prev">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
+            <path d="M88.6 121.3c.8.8 1.8 1.2 2.9 1.2s2.1-.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8 0l-54 53.9c-1.6 1.6-1.6 4.2 0 5.8l54 53.9z" />
+          </svg>
+        </button>
+
+        <div class="bld-Search_Items">
+          <ul class="plyr-CardList_Items"></ul>
+        </div>
+
+        <button rel="next" class="bld-Search_Next">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
+            <path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block builder_footer %}
+  <div class="bld-Builder_Columns">
+    <div class="bld-Builder_Column">
+      <div class="frm-Form_Items">
+        <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel js-FloatingLabel-active">
+          <label class="frm-Form_Label js-FloatingLabel_Label" for="name">
+            Formation:
+          </label>
+
+          <select class="frm-Form_Select js-FloatingLabel_Input"
+                  id="formation"
+                  name="formation">
+            <option value="">Formations</option>
+            <option value="3412">3-4-1-2</option>
+            <option value="3421">3-4-2-1</option>
+            <option value="343">3-4-3</option>
+            <option value="352">3-5-2</option>
+            <option value="41212">4-1-2-1-2</option>
+            <option value="41212-2">4-1-2-1-2 (2)</option>
+            <option value="4141">4-1-4-1</option>
+            <option value="4231">4-2-3-1</option>
+            <option value="4231-2">4-2-3-1 (2)</option>
+            <option value="4222">4-2-2-2</option>
+            <option value="4312">4-3-1-2</option>
+            <option value="4321">4-3-2-1</option>
+            <option value="433">4-3-3</option>
+            <option value="433-2">4-3-3 (2)</option>
+            <option value="433-3">4-3-3 (3)</option>
+            <option value="433-4">4-3-3 (4)</option>
+            <option value="433-5">4-3-3 (5)</option>
+            <option value="4411">4-4-1-1</option>
+            <option value="442" selected>4-4-2</option>
+            <option value="442-2">4-4-2 (2)</option>
+            <option value="451">4-5-1</option>
+            <option value="451-2">4-5-1 (2)</option>
+            <option value="5212">5-2-1-2</option>
+            <option value="5221">5-2-2-1</option>
+            <option value="532">5-3-2</option>
+          </select>
+        </div>
+
+        <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">
+          <label class="frm-Form_Label js-FloatingLabel_Label" for="title">
+            Squad Name:
+          </label>
+
+          <input type="text"
+                 class="frm-Form_Input js-FloatingLabel_Input"
+                 placeholder="Name"
+                 name="title"
+                 id="title" />
+        </div>
+      </div>
+    </div>
+
+    <div class="bld-Builder_Column">
+      <div class="bld-Builder_Stats">
+        <div class="bld-Stats">
+          <ul class="bld-Stats_Items">
+            <li class="bld-Stats_Item" data-builder-stat-name="rating">
+              <input type="hidden" name="rating" value="0">
+              <span class="bld-Stats_Label">Rating:</span>
+              <span class="bld-Stats_Value">0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="chemistry">
+              <input type="hidden" name="chemistry" value="0">
+              <span class="bld-Stats_Label">Chemistry:</span>
+              <span class="bld-Stats_Value">0</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bld-Builder_Import">
+        <input type="hidden" name="page" value="{{ pages.current.id }}" />
+        <input type="hidden" name="user" value="{{ user.id }}" />
+
+        <button class="btn-Primary" type="submit">
+          Save
+        </button>
+      </div>
+    </div>
+
+    <div class="bld-Builder_Column">
+      <div class="bld-Builder_Stats">
+        <div class="bld-Stats">
+          <ul class="bld-Stats_Items">
+            <li class="bld-Stats_Item" data-builder-stat-name="attack">
+              <input type="hidden" name="attack" value="0">
+              <span class="bld-Stats_Label">Attack</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="midfield">
+              <input type="hidden" name="midfield" value="0">
+              <span class="bld-Stats_Label">Midfield</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="defence">
+              <input type="hidden" name="defence" value="0">
+              <span class="bld-Stats_Label">Defence</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="pace">
+              <input type="hidden" name="pace" value="0">
+              <span class="bld-Stats_Label">Pace</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="shooting">
+              <input type="hidden" name="shooting" value="0">
+              <span class="bld-Stats_Label">Shooting</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="passing">
+              <input type="hidden" name="passing" value="0">
+              <span class="bld-Stats_Label">Passing</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="dribbling">
+              <input type="hidden" name="dribbling" value="0">
+              <span class="bld-Stats_Label">Dribbling</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="defending">
+              <input type="hidden" name="defending" value="0">
+              <span class="bld-Stats_Label">Defending</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+
+            <li class="bld-Stats_Item" data-builder-stat-name="physical">
+              <input type="hidden" name="physical" value="0">
+              <span class="bld-Stats_Label">Physical</span>
+              <span class="bld-Stats_Value" data-builder-stat-value>0</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
-
-  {% block breadcrumbs %}
-    <div class="pg-Breadcrumbs">
-      <div class="pg-Breadcrumbs_Inner">
-        <div class="pg-Breadcrumbs_Body">
-          <nav class="bdc-Breadcrumb">
-            <div class="bdc-Breadcrumb_Items"
-                 itemscope=""
-                 itemtype="http://schema.org/BreadcrumbList">
-              <div class="bdc-Breadcrumb_Item"
-                   itemprop="itemListElement"
-                   itemscope=""
-                   itemtype="http://schema.org/ListItem">
-                <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
-                  <span itemprop="name">
-                    Home
-                  </span>
-                  <meta itemprop="position" content="1">
-                </a>
-              </div>
-
-              <div class="bdc-Breadcrumb_Divider">
-                {% include "angle-down.svg" %}
-              </div>
-
-              <div class="bdc-Item"
-                   itemprop="itemListElement"
-                   itemscope=""
-                   itemtype="http://schema.org/ListItem">
-                <span itemprop="name">
-                  Builder
-                </span>
-                <meta itemprop="position" content="2">
-              </div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-  {% endblock %}
-{% endblock %}
-
-{% block main %}
-  <form class="bld-Builder js-Builder" data-builder-formation="442" action="/squads/builder/save/">
-    <div class="bld-Builder_Body">
-      <div class="bld-Builder_Team">
-        <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
-
-        <ul class="bld-Builder_Players">
-          {% for index in range(0, 11) %}
-            <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ loop.cycle('gk', 'rb', 'rcb', 'lcb', 'lb', 'rm', 'rcm', 'lcm', 'lm', 'rs', 'ls') }}"
-                data-builder-formation-index="{{ index }}"
-                data-builder-filled="false">
-              <div class="bld-Builder_Player"></div>
-              <span class="bld-Builder_Pedestal"></span>
-              <input type="hidden" name="players" class="bld-Builder_PlayerInput">
-              <div class="bld-Builder_Controls">
-                <div class="bld-Builder_Control bld-Builder_Control-remove">
-                  <span class="bld-Builder_ControlIcon">
-                    {% include 'trash.svg' %}
-                  </span>
-
-                  <span class="bld-Builder_ControlText">Remove</span>
-                </div>
-
-                <div class="bld-Builder_Control bld-Builder_Control-changePosition">
-                  <span class="bld-Builder_ControlIcon">
-                    {% include 'shuffle.svg' %}
-                  </span>
-
-                  <span class="bld-Builder_ControlText">Change position</span>
-                </div>
-
-                <div class="bld-Builder_Control bld-Builder_Control-toggleLoyalty">
-                  <span class="bld-Builder_ControlIcon">
-                    {% include 'heart.svg' %}
-                  </span>
-
-                  <span class="bld-Builder_ControlText">Toggle loyalty</span>
-                </div>
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-
-        <div class="bld-Search" aria-current="false">
-          <header class="bld-Search_Header">
-            <input class="bld-Search_Input" type="search" placeholder="Search" />
-          </header>
-
-          <div class="bld-Search_Body">
-            <div class="bld-Search_Results">
-              <button rel="prev" class="bld-Search_Prev">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
-                  <path d="M88.6 121.3c.8.8 1.8 1.2 2.9 1.2s2.1-.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8 0l-54 53.9c-1.6 1.6-1.6 4.2 0 5.8l54 53.9z" />
-                </svg>
-              </button>
-
-              <div class="bld-Search_Items">
-                <ul class="plyr-CardList_Items"></ul>
-              </div>
-
-              <button rel="next" class="bld-Search_Next">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
-                  <path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer class="bld-Builder_Footer">
-      <div class="bld-Builder_Columns">
-        <div class="bld-Builder_Column">
-          <div class="frm-Form_Items">
-            <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel js-FloatingLabel-active">
-              <label class="frm-Form_Label js-FloatingLabel_Label" for="name">
-                Formation:
-              </label>
-
-              <select class="frm-Form_Select js-FloatingLabel_Input"
-                      id="formation"
-                      name="formation">
-                <option value="">Formations</option>
-                <option value="3412">3-4-1-2</option>
-                <option value="3421">3-4-2-1</option>
-                <option value="343">3-4-3</option>
-                <option value="352">3-5-2</option>
-                <option value="41212">4-1-2-1-2</option>
-                <option value="41212-2">4-1-2-1-2 (2)</option>
-                <option value="4141">4-1-4-1</option>
-                <option value="4231">4-2-3-1</option>
-                <option value="4231-2">4-2-3-1 (2)</option>
-                <option value="4222">4-2-2-2</option>
-                <option value="4312">4-3-1-2</option>
-                <option value="4321">4-3-2-1</option>
-                <option value="433">4-3-3</option>
-                <option value="433-2">4-3-3 (2)</option>
-                <option value="433-3">4-3-3 (3)</option>
-                <option value="433-4">4-3-3 (4)</option>
-                <option value="433-5">4-3-3 (5)</option>
-                <option value="4411">4-4-1-1</option>
-                <option value="442" selected>4-4-2</option>
-                <option value="442-2">4-4-2 (2)</option>
-                <option value="451">4-5-1</option>
-                <option value="451-2">4-5-1 (2)</option>
-                <option value="5212">5-2-1-2</option>
-                <option value="5221">5-2-2-1</option>
-                <option value="532">5-3-2</option>
-              </select>
-            </div>
-
-            <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">
-              <label class="frm-Form_Label js-FloatingLabel_Label" for="title">
-                Squad Name:
-              </label>
-
-              <input type="text"
-                     class="frm-Form_Input js-FloatingLabel_Input"
-                     placeholder="Name"
-                     name="title"
-                     id="title" />
-            </div>
-          </div>
-        </div>
-
-        <div class="bld-Builder_Column">
-          <div class="bld-Builder_Stats">
-            <div class="bld-Stats">
-              <ul class="bld-Stats_Items">
-                <li class="bld-Stats_Item" data-builder-stat-name="rating">
-                  <input type="hidden" name="rating" value="0">
-                  <span class="bld-Stats_Label">Rating:</span>
-                  <span class="bld-Stats_Value">0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="chemistry">
-                  <input type="hidden" name="chemistry" value="0">
-                  <span class="bld-Stats_Label">Chemistry:</span>
-                  <span class="bld-Stats_Value">0</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="bld-Builder_Import">
-            <input type="hidden" name="page" value="{{ pages.current.id }}" />
-            <input type="hidden" name="user" value="{{ user.id }}" />
-
-            <button class="btn-Primary" type="submit">
-              Save
-            </button>
-          </div>
-        </div>
-
-        <div class="bld-Builder_Column">
-          <div class="bld-Builder_Stats">
-            <div class="bld-Stats">
-              <ul class="bld-Stats_Items">
-                <li class="bld-Stats_Item" data-builder-stat-name="attack">
-                  <input type="hidden" name="attack" value="0">
-                  <span class="bld-Stats_Label">Attack</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="midfield">
-                  <input type="hidden" name="midfield" value="0">
-                  <span class="bld-Stats_Label">Midfield</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="defence">
-                  <input type="hidden" name="defence" value="0">
-                  <span class="bld-Stats_Label">Defence</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="pace">
-                  <input type="hidden" name="pace" value="0">
-                  <span class="bld-Stats_Label">Pace</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="shooting">
-                  <input type="hidden" name="shooting" value="0">
-                  <span class="bld-Stats_Label">Shooting</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="passing">
-                  <input type="hidden" name="passing" value="0">
-                  <span class="bld-Stats_Label">Passing</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="dribbling">
-                  <input type="hidden" name="dribbling" value="0">
-                  <span class="bld-Stats_Label">Dribbling</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="defending">
-                  <input type="hidden" name="defending" value="0">
-                  <span class="bld-Stats_Label">Defending</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-
-                <li class="bld-Stats_Item" data-builder-stat-name="physical">
-                  <input type="hidden" name="physical" value="0">
-                  <span class="bld-Stats_Label">Physical</span>
-                  <span class="bld-Stats_Value" data-builder-stat-value>0</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </form>
-
-  <template id="PlayerCardResult">
-    <li class="plyr-CardList_Item">
-      <div class="plyr-Card plyr-Card-medium">
-        <header class="plyr-Card_Header">
-          <div class="plyr-Card_Meta">
-            <span class="plyr-Card_Rating"></span>
-            <span class="plyr-Card_Position"></span>
-            <img alt="" class="plyr-Card_Club">
-            <img alt="" class="plyr-Card_Nation">
-          </div>
-
-          <img alt="" class="plyr-Card_Image">
-        </header>
-
-        <div class="plyr-Card_Body">
-          <p class="plyr-Card_Name"></p>
-
-          <div class="plyr-Card_Extra">
-            <p class="plyr-Card_Workrates"></p>
-            <p class="plyr-Card_Stars plyr-Card_Stars-skillMoves"></p>
-            <p class="plyr-Card_Stars plyr-Card_Stars-weakFoot"></p>
-          </div>
-
-          <div class="plyr-Card_Stats">
-            <div class="plyr-Card_Stat plyr-Card_Stat-1">
-              <span class="plyr-Card_StatValue"></span>
-              <span class="plyr-Card_StatKey"></span>
-            </div>
-
-            <div class="plyr-Card_Stat plyr-Card_Stat-2">
-              <span class="plyr-Card_StatValue"></span>
-              <span class="plyr-Card_StatKey"></span>
-            </div>
-
-            <div class="plyr-Card_Stat plyr-Card_Stat-3">
-              <span class="plyr-Card_StatValue"></span>
-              <span class="plyr-Card_StatKey"></span>
-            </div>
-
-            <div class="plyr-Card_Stat plyr-Card_Stat-4">
-              <span class="plyr-Card_StatValue"></span>
-              <span class="plyr-Card_StatKey"></span>
-            </div>
-
-            <div class="plyr-Card_Stat plyr-Card_Stat-5">
-              <span class="plyr-Card_StatValue"></span>
-              <span class="plyr-Card_StatKey"></span>
-            </div>
-
-            <div class="plyr-Card_Stat plyr-Card_Stat-6">
-              <span class="plyr-Card_StatValue"></span>
-              <span class="plyr-Card_StatKey"></span>
-            </div>
-          </div>
-        </div>
-
-        <footer class="plyr-Card_Footer">
-          <p class="plyr-Card_Chem">
-            Chem: <span class="plyr-Card_ChemValue"></span>
-          </p>
-        </footer>
-      </div>
-    </li>
-  </template>
 {% endblock %}

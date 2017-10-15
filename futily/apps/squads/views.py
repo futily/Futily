@@ -8,11 +8,17 @@ from django.views.generic import DetailView, FormView, ListView, UpdateView
 from django.views.generic.base import ContextMixin, TemplateView, View
 
 from futily.apps.actions.utils import create_action
+from futily.apps.players.constants import POSITION_TO_AVAILABLE_POSITIONS
 from futily.apps.players.models import Player
 from futily.apps.squads.constants import FORMATION_POSITIONS
+from futily.apps.squads.templatetags.squads import get_squads_page
 
 from .forms import BuilderForm
 from .models import FORMATION_CHOICES, Squad, SquadPlayer
+
+
+class Found(Exception):
+    pass
 
 
 class BaseBuilder(ContextMixin):
@@ -29,6 +35,56 @@ class BaseBuilder(ContextMixin):
 
 class Builder(BaseBuilder, TemplateView):
     template_name = 'squads/squad_builder.html'
+    initial_formation = '442'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        player_ids = self.request.GET.getlist('players', None)
+        players = Player.objects.filter(id__in=player_ids)
+        indexes_to_fill = [x for x in range(0, 11)]
+        indexes_to_fill.reverse()
+        initial_players = {}
+
+        for player in players:
+            try:
+                player_position = player.position
+                available_positions = POSITION_TO_AVAILABLE_POSITIONS[player_position]
+                # The index where the player gets placed initially
+                formation_positions = [
+                    (index, x, x == player_position)
+                    for (index, x) in FORMATION_POSITIONS[self.initial_formation]['positions'].items()
+                    if x in available_positions
+                ]
+                formation_positions.reverse()
+                wanted_positions = list(filter(lambda x: x[2] is True, formation_positions))
+                other_positions = list(filter(lambda x: x[2] is False, formation_positions))
+
+                for wanted_position in wanted_positions:
+                    index = wanted_position[0]
+
+                    if not initial_players.get(index, None):
+                        initial_players[index] = player
+                        indexes_to_fill.remove(index)
+
+                        raise Found
+
+                for other_position in other_positions:
+                    index = other_position[0]
+
+                    if not initial_players.get(index, None):
+                        initial_players[index] = player
+                        indexes_to_fill.remove(index)
+
+                        raise Found
+
+                initial_players[indexes_to_fill[0]] = player
+            except Found:
+                continue
+
+        context['initial_players'] = initial_players
+
+        return context
 
 
 class BuilderAjax(FormView):

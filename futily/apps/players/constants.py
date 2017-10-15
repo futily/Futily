@@ -186,6 +186,26 @@ POSITION_FILTER_MAP = {
     'STS': ['CF', 'ST'],
 }
 
+POSITION_TO_AVAILABLE_POSITIONS = {
+    'GK': ['GK'],
+    'RB': ['RB', 'RWB'],
+    'RWB': ['RB', 'RWB'],
+    'LB': ['LB', 'LWB'],
+    'LWB': ['LB', 'LWB'],
+    'CB': ['CB'],
+    'CDM': ['CDM', 'CM', 'CAM', 'CF', 'ST'],
+    'CM': ['CDM', 'CM', 'CAM', 'CF', 'ST'],
+    'CAM': ['CDM', 'CM', 'CAM', 'CF', 'ST'],
+    'RM': ['RM', 'RW', 'RF'],
+    'RW': ['RM', 'RW', 'RF'],
+    'RF': ['RM', 'RW', 'RF'],
+    'LM': ['LM', 'LW', 'LF'],
+    'LW': ['LM', 'LW', 'LF'],
+    'LF': ['LM', 'LW', 'LF'],
+    'CF': ['CDM', 'CM', 'CAM', 'CF', 'ST'],
+    'ST': ['CDM', 'CM', 'CAM', 'CF', 'ST'],
+}
+
 QUALITY_CHOICES = [
     ('bronze', 'bronze'),
     ('silver', 'silver'),

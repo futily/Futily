@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block content_class %}lyt-Content-full{% endblock %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Squad Builder</h1>
+          <p class="pg-Strapline_Text">{% block strapline_text %}{% endblock %}</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% block breadcrumbs %}
+    <div class="pg-Breadcrumbs">
+      <div class="pg-Breadcrumbs_Inner">
+        <div class="pg-Breadcrumbs_Body">
+          <nav class="bdc-Breadcrumb">
+            <div class="bdc-Breadcrumb_Items"
+                 itemscope=""
+                 itemtype="http://schema.org/BreadcrumbList">
+              <div class="bdc-Breadcrumb_Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                  <span itemprop="name">
+                    Home
+                  </span>
+                  <meta itemprop="position" content="1">
+                </a>
+              </div>
+
+              <div class="bdc-Breadcrumb_Divider">
+                {% include "angle-down.svg" %}
+              </div>
+
+              <div class="bdc-Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <span itemprop="name">
+                  Builder
+                </span>
+                <meta itemprop="position" content="2">
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+{% endblock %}
+
+{% block main %}
+  <form class="bld-Builder {% block builder_class %}{% endblock %}"
+        data-builder-formation="{% block builder_formation %}{% endblock %}"
+  {% if self.builder_action() %}action="{% block builder_action %}{% endblock %}"{% endif %}>
+    <div class="bld-Builder_Body">
+      <div class="bld-Builder_Team">
+        <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
+
+        <ul class="bld-Builder_Players">{% block builder_players %}{% endblock %}</ul>
+
+        {% block builder_players_after %}{% endblock %}
+      </div>
+    </div>
+
+    <footer class="bld-Builder_Footer">{% block builder_footer %}{% endblock %}</footer>
+  </form>
+{% endblock %}
+
+{% block content_below %}
+  <template id="PlayerCardResult">
+    <li class="plyr-CardList_Item">
+      <div class="plyr-Card plyr-Card-medium">
+        <header class="plyr-Card_Header">
+          <div class="plyr-Card_Meta">
+            <span class="plyr-Card_Rating"></span>
+            <span class="plyr-Card_Position"></span>
+            <img alt="" class="plyr-Card_Club">
+            <img alt="" class="plyr-Card_Nation">
+          </div>
+
+          <img alt="" class="plyr-Card_Image">
+        </header>
+
+        <div class="plyr-Card_Body">
+          <p class="plyr-Card_Name"></p>
+
+          <div class="plyr-Card_Extra">
+            <p class="plyr-Card_Workrates"></p>
+            <p class="plyr-Card_Stars plyr-Card_Stars-skillMoves"></p>
+            <p class="plyr-Card_Stars plyr-Card_Stars-weakFoot"></p>
+          </div>
+
+          <div class="plyr-Card_Stats">
+            <div class="plyr-Card_Stat plyr-Card_Stat-1">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-2">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-3">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-4">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-5">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+
+            <div class="plyr-Card_Stat plyr-Card_Stat-6">
+              <span class="plyr-Card_StatValue"></span>
+              <span class="plyr-Card_StatKey"></span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="plyr-Card_Footer">
+          <p class="plyr-Card_Chem">
+            Chem:
+            <span class="plyr-Card_ChemValue"></span>
+          </p>
+        </footer>
+      </div>
+    </li>
+  </template>
+{% endblock %}
