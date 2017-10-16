@@ -145,6 +145,17 @@
       </ul>
     </div>
 
+    <div class="asi-Block">
+      <h4 class="asi-Block_Title">{{ object }} actions</h4>
+
+      <div class="asi-Block_Body">
+        <a class="btn-Primary" href="{{ build_url(
+      initial_url=get_squads_page().reverse('builder'),
+      get={object._meta.model_name: object.id}
+    ) }}">Build squad</a>
+      </div>
+    </div>
+
     {% block aside_blocks %}{% endblock %}
   </div>
 {% endblock %}

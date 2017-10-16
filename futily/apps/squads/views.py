@@ -40,6 +40,18 @@ class Builder(BaseBuilder, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        context['initial_players'] = {}
+
+        if self.request.GET.get('players', None):
+            context['initial_players'] = self.initial_players_from_players()
+        elif self.request.GET.get('nation', None):
+            context['initial_players'] = self.initial_players_from_nation()
+        elif self.request.GET.get('league', None):
+            context['initial_players'] = self.initial_players_from_league()
+
+        return context
+
+    def initial_players_from_players(self):
         player_ids = self.request.GET.getlist('players', None)
         players = Player.objects.filter(id__in=player_ids)
         indexes_to_fill = [x for x in range(0, 11)]
@@ -82,9 +94,65 @@ class Builder(BaseBuilder, TemplateView):
             except Found:
                 continue
 
-        context['initial_players'] = initial_players
+        return initial_players
 
-        return context
+    def initial_players_from_nation(self):
+        nation = self.request.GET.get('nation')
+        initial_qs = Player.objects.filter(nation=nation).order_by('?')
+        gk = initial_qs.filter(position='GK')[:1][0]
+        rb = initial_qs.filter(position__in=['RB', 'RWB'])[:1][0]
+        rcb = initial_qs.filter(position='CB')[:1][0]
+        lcb = initial_qs.filter(position='CB').exclude(id=rcb.id)[:1][0]
+        lb = initial_qs.filter(position__in=['LB', 'LWB'])[:1][0]
+        rm = initial_qs.filter(position__in=['RM', 'RW', 'RF'])[:1][0]
+        rcm = initial_qs.filter(position__in=['CDM', 'CM', 'CAM'])[:1][0]
+        lcm = initial_qs.filter(position__in=['CDM', 'CM', 'CAM']).exclude(id=rcm.id)[:1][0]
+        lm = initial_qs.filter(position__in=['LM', 'LW', 'LF'])[:1][0]
+        rs = initial_qs.filter(position__in=['CF', 'ST'])[:1][0]
+        ls = initial_qs.filter(position__in=['CF', 'ST']).exclude(id=rs.id)[:1][0]
+
+        return {
+            0: gk,
+            1: rb,
+            2: rcb,
+            3: lcb,
+            4: lb,
+            5: rm,
+            6: rcm,
+            7: lcm,
+            8: lm,
+            9: rs,
+            10: ls
+        }
+
+    def initial_players_from_league(self):
+        league = self.request.GET.get('league')
+        initial_qs = Player.objects.filter(league=league).order_by('?')
+        gk = initial_qs.filter(position='GK')[:1][0]
+        rb = initial_qs.filter(position__in=['RB', 'RWB'])[:1][0]
+        rcb = initial_qs.filter(position='CB')[:1][0]
+        lcb = initial_qs.filter(position='CB').exclude(id=rcb.id)[:1][0]
+        lb = initial_qs.filter(position__in=['LB', 'LWB'])[:1][0]
+        rm = initial_qs.filter(position__in=['RM', 'RW', 'RF'])[:1][0]
+        rcm = initial_qs.filter(position__in=['CDM', 'CM', 'CAM'])[:1][0]
+        lcm = initial_qs.filter(position__in=['CDM', 'CM', 'CAM']).exclude(id=rcm.id)[:1][0]
+        lm = initial_qs.filter(position__in=['LM', 'LW', 'LF'])[:1][0]
+        rs = initial_qs.filter(position__in=['CF', 'ST'])[:1][0]
+        ls = initial_qs.filter(position__in=['CF', 'ST']).exclude(id=rs.id)[:1][0]
+
+        return {
+            0: gk,
+            1: rb,
+            2: rcb,
+            3: lcb,
+            4: lb,
+            5: rm,
+            6: rcm,
+            7: lcm,
+            8: lm,
+            9: rs,
+            10: ls
+        }
 
 
 class BuilderAjax(FormView):
