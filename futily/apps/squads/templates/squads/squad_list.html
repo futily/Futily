@@ -80,7 +80,7 @@
 
             <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
               <div class="ea-ObjectRow_Cell">
-                <span class="ea-ObjectRow_CellText">{{ object.user }}</span>
+                <span class="ea-ObjectRow_CellText">{{ object.user | default_if_none('n/a') }}</span>
                 <span class="ea-ObjectRow_CellTitle">User</span>
               </div>
             </div>
