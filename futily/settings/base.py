@@ -19,6 +19,8 @@ SITE_NAME = 'Futily'
 
 SITE_DOMAIN = 'futily.com'
 
+CURRENT_FIFA_VERSION = '18'
+
 PREPEND_WWW = True
 
 ALLOWED_HOSTS = [

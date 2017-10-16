@@ -6,7 +6,7 @@
       <div class="pg-Strapline_Body">
         <div class="pg-Strapline_Content">
           <h1 class="pg-Strapline_Title">{{ object_list[0]._meta.model_name | capitalize() }}s</h1>
-          <p class="pg-Strapline_Text">Fifa 17 {{ object_list[0]._meta.model_name | capitalize() }}s</p>
+          <p class="pg-Strapline_Text">Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ object_list[0]._meta.model_name | capitalize() }}s</p>
         </div>
 
         <div class="pg-Strapline_Advert">
@@ -115,14 +115,14 @@
     {% block aside_blocks_above %}{% endblock %}
 
     <div class="asi-Block">
-      <h4 class="asi-Block_Title">Fifa 17 Objects</h4>
+      <h4 class="asi-Block_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
 
       <ul class="asi-LinkList">
         {% for link in aside_links %}
           <li class="asi-LinkList_Item">
             <a class="asi-LinkList_Link"
                href="{{ link.url }}"
-               aria-current="{{ link.here }}">Fifa 17 {{ link.title }}</a>
+               aria-current="{{ link.here }}">Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
           </li>
         {% endfor %}
       </ul>
