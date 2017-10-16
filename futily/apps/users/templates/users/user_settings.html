@@ -1,4 +1,5 @@
 {% extends "users/_base.html" %}
+{% import "players/macros/search.html" as search %}
 
 {% block content_above_text %}Settings{% endblock %}
 
@@ -20,14 +21,61 @@
             {% for field in group.fields %}
               {% if field.label == 'Favourite player' or field.label == 'Favourite club' or field.label == 'Favourite nation' %}
                 <div class="frm-Form_Item">
-                  <select class="frm-Form_Select"
-                          name="{{ field.name }}_select"
-                          id="{{ field.id_for_label }}_select">
-                    <option value="">{{ field.label }}</option>
-                  </select>
+                  {% if field.label == 'Favourite player' %}
+                    {{ search.player_search(
+                      'sch-Settings',
+                      'js-SettingsPlayerSearch',
+                      'Find player',
+                      {'data-input-field': field.name }) }}
 
+                    <div class="frm-Form_Extra frm-Form_Extra-player">
+                      {% if user.favourite_player %}
+                        <div class="plyr-SearchResult plyr-SearchResult-{{ user.favourite_player.color }}" tabindex="-1">
+                          <img class="plyr-SearchResult_Nation" src="{{ static('ea-images/nations/{}.png'.format(user.favourite_player.nation.ea_id)) }}">
+                          <img class="plyr-SearchResult_Club" src="{{ static('ea-images/clubs/{}.png'.format(user.favourite_player.club.ea_id)) }}">
+                          <p class="plyr-SearchResult_Name">{{ user.favourite_player }}</p>
+                          <span class="plyr-SearchResult_Position">{{ user.favourite_player.position }}</span>
+                          <img class="plyr-SearchResult_Player" src="{{ static('ea-images/players/{}.png'.format(user.favourite_player.ea_id)) }}">
+
+                          <span class="plyr-SearchResult_Rating">{{ user.favourite_player.rating }}</span>
+                          <span class="plyr-SearchResult_RatingIcon"></span>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% elif field.label == 'Favourite club' %}
+                    {{ search.player_search(
+                      'sch-Settings',
+                      'js-SettingsClubSearch',
+                      'Find club',
+                      {'data-input-field': field.name }) }}
+
+                    <div class="frm-Form_Extra frm-Form_Extra-club">
+                      {% if user.favourite_club %}
+                        <div class="plyr-SearchResult plyr-SearchResult-object" tabindex="-1">
+                          <img class="plyr-SearchResult_Club" src="{{ static('ea-images/clubs/{}.png'.format(user.favourite_club.ea_id)) }}">
+                          <p class="plyr-SearchResult_Name">{{ user.favourite_club }}</p>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% elif field.label == 'Favourite nation' %}
+                    {{ search.player_search(
+                      'sch-Settings',
+                      'js-SettingsNationSearch',
+                      'Find nation',
+                      {'data-input-field': field.name }) }}
+
+                    <div class="frm-Form_Extra frm-Form_Extra-nation">
+                      {% if user.favourite_nation %}
+                        <div class="plyr-SearchResult plyr-SearchResult-object" tabindex="-1">
+                          <img class="plyr-SearchResult_Nation" src="{{ static('ea-images/nations/{}.png'.format(user.favourite_nation.ea_id)) }}">
+                          <p class="plyr-SearchResult_Name">{{ user.favourite_nation }}</p>
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
                   <input type="hidden"
                          name="{{ field.name }}"
+                         value="{{ user.favourite_player.id }}"
                          id="{{ field.id_for_label }}">
                 </div>
               {% else %}

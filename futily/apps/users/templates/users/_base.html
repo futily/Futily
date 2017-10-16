@@ -66,7 +66,8 @@
           </p>
           <p class="typ-Text">
             <strong>Followers:</strong>
-            <a class="js-UserFollow_Followers" href="{{ object.get_followers_url() }}">{{ object.get_followers.count() }}</a>
+            <a class="js-UserFollow_Followers"
+               href="{{ object.get_followers_url() }}">{{ object.get_followers.count() }}</a>
           </p>
 
           {% if user.is_authenticated() %}
@@ -157,9 +158,48 @@
           <div class="asi-Block">
             <h3 class="typ-Title typ-Title-small">{{ object }}'s favourites</h3>
 
-            <p>{{ object.favourite_player }}</p>
-            <p>{{ object.favourite_club }}</p>
-            <p>{{ object.favourite_nation }}</p>
+            <ul class="plyr-SearchResults" aria-hidden="false">
+              {% if object.favourite_player %}
+                <li class="plyr-SearchResults_Item">
+                  <a class="plyr-SearchResult plyr-SearchResult-{{ user.favourite_player.color }}"
+                     href="{{ object.favourite_player.get_absolute_url() }}">
+                    <img class="plyr-SearchResult_Nation"
+                         src="{{ static('ea-images/nations/{}.png'.format(user.favourite_player.nation.ea_id)) }}">
+                    <img class="plyr-SearchResult_Club"
+                         src="{{ static('ea-images/clubs/{}.png'.format(user.favourite_player.club.ea_id)) }}">
+                    <p class="plyr-SearchResult_Name">{{ user.favourite_player }}</p>
+                    <span class="plyr-SearchResult_Position">{{ user.favourite_player.position }}</span>
+                    <img class="plyr-SearchResult_Player"
+                         src="{{ static('ea-images/players/{}.png'.format(user.favourite_player.ea_id)) }}">
+
+                    <span class="plyr-SearchResult_Rating">{{ user.favourite_player.rating }}</span>
+                    <span class="plyr-SearchResult_RatingIcon"></span>
+                  </a>
+                </li>
+              {% endif %}
+
+              {% if object.favourite_club %}
+                <li class="plyr-SearchResults_Item">
+                  <a class="plyr-SearchResult plyr-SearchResult-object"
+                     href="{{ object.favourite_club.get_absolute_url() }}">
+                    <img class="plyr-SearchResult_Club"
+                         src="{{ static('ea-images/clubs/{}.png'.format(user.favourite_club.ea_id)) }}">
+                    <p class="plyr-SearchResult_Name">{{ user.favourite_club }}</p>
+                  </a>
+                </li>
+              {% endif %}
+
+              {% if object.favourite_nation %}
+                <li class="plyr-SearchResults_Item">
+                  <div class="plyr-SearchResult plyr-SearchResult-object"
+                       href="{{ object.favourite_nation.get_absolute_url() }}">
+                    <img class="plyr-SearchResult_Nation"
+                         src="{{ static('ea-images/nations/{}.png'.format(user.favourite_nation.ea_id)) }}">
+                    <p class="plyr-SearchResult_Name">{{ user.favourite_nation }}</p>
+                  </div>
+                </li>
+              {% endif %}
+            </ul>
           </div>
         {% endif %}
 

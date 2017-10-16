@@ -11,7 +11,10 @@ import { Follow } from './users/follow'
 import {
   ComparePlayerSearch,
   HeaderPlayerSearch,
-  SectionPlayerSearch
+  SectionPlayerSearch,
+  SettingsClubSearch,
+  SettingsNationSearch,
+  SettingsPlayerSearch
 } from './search'
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -56,6 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (document.querySelector('.js-SectionPlayerSearch')) {
     new SectionPlayerSearch({ className: '.js-SectionPlayerSearch' })
+  }
+
+  if (document.querySelector('.js-SettingsPlayerSearch')) {
+    new SettingsPlayerSearch({ className: '.js-SettingsPlayerSearch' })
+  }
+
+  if (document.querySelector('.js-SettingsClubSearch')) {
+    new SettingsClubSearch({ className: '.js-SettingsClubSearch' })
+  }
+
+  if (document.querySelector('.js-SettingsNationSearch')) {
+    new SettingsNationSearch({ className: '.js-SettingsNationSearch' })
   }
 
   if (document.querySelector('.js-Builder')) {

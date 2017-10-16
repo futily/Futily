@@ -23,6 +23,12 @@
     display: none;
   }
 
+  &.js-SettingsNationSearch_Results {
+    right: 0;
+
+    min-width: 0;
+  }
+
   .sch-Header & {
     left: -20px;
   }

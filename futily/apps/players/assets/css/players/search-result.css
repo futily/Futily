@@ -19,6 +19,7 @@
   border: 1px solid var(--Color_Border);
   border-top: 0;
   color: var(--Color_Body);
+  cursor: pointer;
 
   transition: border-color 0.2s;
 
@@ -46,6 +47,10 @@
     transform: translateX(-@width);
     transition: transform 0.2s;
   }
+}
+
+.plyr-SearchResult-object {
+  min-height: 40px;
 }
 
 .plyr-SearchResult_Nation {

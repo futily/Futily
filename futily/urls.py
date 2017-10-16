@@ -11,6 +11,8 @@ from django.contrib.sitemaps import views as sitemaps_views
 from django.views import generic
 from rest_framework.routers import DefaultRouter
 
+from futily.apps.clubs.views import ClubViewSet
+from futily.apps.nations.views import NationViewSet
 from futily.apps.players.views.api import PlayerViewSet
 
 from .apps.sections.models import sections_js
@@ -19,6 +21,8 @@ from .utils.views import FrontendView
 admin.autodiscover()
 
 router = DefaultRouter()
+router.register(r'clubs', ClubViewSet)
+router.register(r'nations', NationViewSet)
 router.register(r'players', PlayerViewSet)
 
 urlpatterns = [

@@ -110,10 +110,14 @@ class PlayerSearch {
         keyMap[keyCode] === 'up' ? this.activeResult - 1 : this.activeResult + 1
     }
 
-    if (!this.results.length || !Object.keys(keyMap).includes(String(keyCode))) { return }
+    if (
+      !this.results.length ||
+      !Object.keys(keyMap).includes(String(keyCode))
+    ) {
+      return
+    }
 
     this.currentEvent = 'keyboard'
-
     ;[38, 40].includes(keyCode) ? handleArrowKey() : handleEnterKey()
   }
 
@@ -221,7 +225,7 @@ class PlayerSearch {
 
     this.destroyResults()
 
-    const hasResult = val.length > 0
+    const hasResult = this._results.length > 0
     this.els.results.setAttribute('aria-hidden', String(!hasResult))
 
     if (hasResult) {
@@ -255,6 +259,171 @@ export class ComparePlayerSearch extends PlayerSearch {
     this.els.template.name.textContent = data.name
     this.els.template.position.textContent = `(${data.position})`
     this.els.template.rating.textContent = data.rating
+    const clone = document.importNode(this.els.template.el.content, true)
+
+    return clone
+  }
+}
+
+export class SettingsPlayerSearch extends PlayerSearch {
+  constructor ({ className }) {
+    super({ className })
+
+    this.input = document.querySelector(
+      `[name=${this.els.el.dataset.inputField}]`
+    )
+    this.playerEl = document.querySelector('.frm-Form_Extra-player')
+  }
+
+  createResult (data) {
+    const className = `plyr-SearchResult plyr-SearchResult-${data.color}`
+
+    this.els.template.nation.src = `/static/ea-images/nations/${data.nation
+      .ea_id}.png`
+    this.els.template.club.src = `/static/ea-images/clubs/${data.club
+      .ea_id}.png`
+    this.els.template.player.src = `/static/ea-images/players/${data.ea_id}.png`
+
+    this.els.template.result.dataset.playerId = data.id
+    this.els.template.result.className = className
+    this.els.template.name.textContent = data.name
+    this.els.template.position.textContent = `(${data.position})`
+    this.els.template.rating.textContent = data.rating
+    const clone = document.importNode(this.els.template.el.content, true)
+
+    return clone
+  }
+
+  get resultEls () {
+    return this._resultEls
+  }
+
+  set resultEls (val) {
+    this._resultEls = val
+
+    if (this._resultEls.length > 0) {
+      Array.from(this._resultEls).map(el => {
+        el.addEventListener('click', e => {
+          e.preventDefault()
+
+          const wantedTarget = e.target.closest('.plyr-SearchResult')
+          const wantedClone = wantedTarget.cloneNode(true)
+          this.input.value = wantedTarget.dataset.playerId
+          this.playerEl.innerHTML = ''
+          this.playerEl.appendChild(wantedClone)
+
+          this.els.input.value = ''
+          this.results = []
+        })
+      })
+    }
+  }
+}
+
+export class SettingsObjectSearch extends PlayerSearch {
+  constructor ({ className, object = '' }) {
+    super({ className })
+
+    this.getTemplate()
+
+    this.input = document.querySelector(
+      `[name=${this.els.el.dataset.inputField}]`
+    )
+    this.objectEl = document.querySelector(`.frm-Form_Extra-${object}`)
+  }
+
+  get resultEls () {
+    return this._resultEls
+  }
+
+  set resultEls (val) {
+    this._resultEls = val
+
+    if (this._resultEls.length > 0) {
+      Array.from(this._resultEls).map(el => {
+        el.addEventListener('click', e => {
+          e.preventDefault()
+
+          const wantedTarget = e.target.closest('.plyr-SearchResult')
+          const wantedClone = wantedTarget.cloneNode(true)
+          this.input.value = wantedTarget.dataset.objectId
+          this.objectEl.innerHTML = ''
+          this.objectEl.appendChild(wantedClone)
+
+          this.els.input.value = ''
+          this.results = []
+        })
+      })
+    }
+  }
+}
+
+export class SettingsClubSearch extends SettingsObjectSearch {
+  constructor ({ className }) {
+    super({ className, object: 'club' })
+  }
+
+  getApiUrl (query) {
+    return `/api/clubs/?query=${query}`
+  }
+
+  getTemplate () {
+    const template = document.getElementById('ClubSearchResult')
+
+    this.els.template = {
+      el: template,
+      result: template.content.querySelector('.plyr-SearchResult'),
+      club: template.content.querySelector('.plyr-SearchResult_Club'),
+      name: template.content.querySelector('.plyr-SearchResult_Name')
+    }
+
+    return template
+  }
+
+  createResult (data) {
+    const className = `plyr-SearchResult plyr-SearchResult-object`
+
+    this.els.template.club.src = `/static/ea-images/clubs/${data.ea_id}.png`
+
+    this.els.template.result.dataset.objectId = data.id
+    this.els.template.result.className = className
+    this.els.template.name.textContent = data.name
+    const clone = document.importNode(this.els.template.el.content, true)
+
+    return clone
+  }
+}
+
+export class SettingsNationSearch extends SettingsObjectSearch {
+  constructor ({ className }) {
+    super({ className, object: 'nation' })
+  }
+
+  getApiUrl (query) {
+    return `/api/nations/?query=${query}`
+  }
+
+  getTemplate () {
+    const template = document.getElementById('NationSearchResult')
+
+    this.els.template = {
+      el: template,
+      result: template.content.querySelector('.plyr-SearchResult'),
+      nation: template.content.querySelector('.plyr-SearchResult_Nation'),
+      name: template.content.querySelector('.plyr-SearchResult_Name')
+    }
+
+    return template
+  }
+
+  createResult (data) {
+    const className = `plyr-SearchResult plyr-SearchResult-object`
+
+    this.els.template.nation.src = `/static/ea-images/nations/${data.ea_id}.png`
+
+    this.els.template.result.dataset.objectId = data.id
+    this.els.template.result.className = className
+    this.els.template.name.textContent = data.name
     const clone = document.importNode(this.els.template.el.content, true)
 
     return clone
