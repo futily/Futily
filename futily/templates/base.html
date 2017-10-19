@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
           content="{% block meta_description %}{{ get_meta_description() }}{% endblock %}">
     <meta name="robots" content="{% block meta_robots %}{{ get_meta_robots() }}{% endblock %}">
     <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+          content="width=device-width, initial-scale=1, maximum-scale=1">
 
     {# TODO: Change this value #}
     <meta name="theme-color" content="#db5945">
@@ -62,28 +62,9 @@
       <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
     {% endcompress %}
 
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
-
     {% block css %}{% endblock %}
 
     {% include "base/_analytics.html" %}
-
-    {# Opbeat JS error tracking #}
-    {% if settings.OPBEAT %}
-      <script src="https://d3tvtfb6518e3e.cloudfront.net/3/opbeat.min.js"
-              data-org-id="{{ settings.OPBEAT.ORGANIZATION_ID }}"
-              data-app-id="{{ settings.OPBEAT.APP_ID }}">
-      </script>
-
-      {% if user.is_authenticated() %}
-        <script>
-          _opbeat('setUserContext', {
-            id: "{{ user.pk }}"
-          });
-        </script>
-      {% endif %}
-    {% endif %}
-
   </head>
 
   <body class="util-Preload {% block body_class %}{% endblock %}">
@@ -164,15 +145,31 @@
       </li>
     </template>
 
-    {{ render_bundle('vendor', 'js') }}
-    {{ render_bundle('app', 'js') }}
+    {{ render_bundle('vendor', 'js', attrs='async defer') }}
+    {{ render_bundle('app', 'js', attrs='async defer') }}
 
     {% compress js %}
       {% block compressed_js_first %}{% endblock %}
 
-      <script src="{{ static('flexible-images/flexible-images.js') }}"></script>
-
       {% block compressed_js_last %}{% endblock %}
     {% endcompress %}
+
+    {# Opbeat JS error tracking #}
+    {% if settings.OPBEAT %}
+      <script src="https://d3tvtfb6518e3e.cloudfront.net/3/opbeat.min.js"
+              async
+              defer
+              data-org-id="{{ settings.OPBEAT.ORGANIZATION_ID }}"
+              data-app-id="{{ settings.OPBEAT.APP_ID }}">
+      </script>
+
+      {% if user.is_authenticated() %}
+        <script>
+          _opbeat('setUserContext', {
+            id: "{{ user.pk }}"
+          });
+        </script>
+      {% endif %}
+    {% endif %}
   </body>
 </html>
