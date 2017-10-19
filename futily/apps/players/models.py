@@ -225,6 +225,15 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             .decode('utf-8')
             for x in ['name', 'first_name', 'last_name', 'common_name']
         ]
+        first_name = unicodedata\
+            .normalize('NFKD', self.first_name)\
+            .encode('ascii', 'ignore')\
+            .decode('utf-8')
+        last_name = unicodedata\
+            .normalize('NFKD', self.last_name)\
+            .encode('ascii', 'ignore')\
+            .decode('utf-8')
+        self.english_names.append(f'{first_name} {last_name}')
 
         self.total_stats = (self.card_att_1 + self.card_att_2 + self.card_att_3 + self.card_att_4 +
                             self.card_att_5 + self.card_att_6)
