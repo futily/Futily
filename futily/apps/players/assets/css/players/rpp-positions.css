@@ -55,11 +55,11 @@
   }
 
   &[data-rpp-position='RB'] {
-    margin-left: var(--Grid_Gutter);
+    margin-right: var(--Grid_Gutter);
   }
 
   &[data-rpp-position='LB'] {
-    margin-right: var(--Grid_Gutter);
+    margin-left: var(--Grid_Gutter);
   }
 
   &[data-rpp-position='RWB'],

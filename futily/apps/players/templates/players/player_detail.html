@@ -266,7 +266,7 @@
         <strong class="plyr-Detail_Emphasis">Perfect</strong> links
       </h3>
 
-      {% if player.get_initial_chemistry_players('perfect') %}
+      {% if player.get_initial_chemistry_players() %}
         <a class="plyr-Detail_Link"
            href="{{ player.get_chemistry_type_absolute_url('perfect') }}">View all perfect links
         </a>
@@ -274,8 +274,8 @@
     </header>
 
     <div class="plyr-Detail_SectionBody">
-      {% if player.get_initial_chemistry_players('perfect') %}
-        {{ player_macros.card_list(player.get_initial_chemistry_players('perfect')) }}
+      {% if player.get_initial_chemistry_players() %}
+        {{ player_macros.card_list(player.get_initial_chemistry_players()) }}
       {% else %}
         <p>There are no perfect links to {{ player.name }}.</p>
       {% endif %}
@@ -288,7 +288,7 @@
         <strong class="plyr-Detail_Emphasis">Strong</strong> links
       </h3>
 
-      {% if player.get_initial_chemistry_players('strong') %}
+      {% if player.get_initial_chemistry_players() %}
         <a class="plyr-Detail_Link"
            href="{{ player.get_chemistry_type_absolute_url('strong') }}">View all strong links
         </a>
@@ -296,8 +296,8 @@
     </header>
 
     <div class="plyr-Detail_SectionBody">
-      {% if player.get_initial_chemistry_players('strong') %}
-        {{ player_macros.card_list(player.get_initial_chemistry_players('strong')) }}
+      {% if player.get_initial_chemistry_players() %}
+        {{ player_macros.card_list(player.get_initial_chemistry_players()) }}
       {% else %}
         <p>There are no strong links to {{ player.name }}.</p>
       {% endif %}
@@ -358,16 +358,16 @@
 
         <li class="plyr-RPPPositions_Line">
           <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line5">
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RF">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RF</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LF">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LF</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
             <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CF">
               <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CF</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LF">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LF</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RF">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RF</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
           </ul>
@@ -384,16 +384,16 @@
 
         <li class="plyr-RPPPositions_Line">
           <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line3">
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RM">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RM</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LM">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LM</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
             <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CM">
               <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CM</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LM">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LM</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RM">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RM</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
           </ul>
@@ -401,16 +401,16 @@
 
         <li class="plyr-RPPPositions_Line">
           <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line2">
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RWB">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RWB</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LWB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LWB</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
             <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CDM">
               <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CDM</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LWB">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LWB</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RWB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RWB</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
           </ul>
@@ -418,16 +418,16 @@
 
         <li class="plyr-RPPPositions_Line">
           <ul class="plyr-RPPPositions_Positions plyr-RPPPositions_Positions-line1">
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RB">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RB</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LB</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
             <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="CB">
               <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">CB</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
-            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="LB">
-              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">LB</strong>
+            <li class="plyr-RPPPositions_Position js-RPP_Position" data-rpp-position="RB">
+              <strong class="plyr-RPPPositions_PositionLabel js-RPP_PositionLabel">RB</strong>
               <span class="plyr-RPPPositions_PositionValue js-RPP_PositionValue"></span>
             </li>
           </ul>
