@@ -52,7 +52,7 @@ oauthlib==2.0.2
 olefile==0.44
 onespacemedia-cms==3.0.0
 onespacemedia-cms-redirects==0.0.2
--e git://github.com/dan-gamble/server-management.git@a2a5cfac46a2b26ef406a74987813fe6d904c19e#egg=onespacemedia_server_management
+-e git://github.com/dan-gamble/server-management.git@master#egg=onespacemedia_server_management
 opbeat==3.5.2
 paramiko==2.3.0
 parse==1.8.2
