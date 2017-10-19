@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { debounce, map } from 'lodash'
+
+import { debounce } from '../utils'
 
 class PlayerSearch {
   constructor ({ className }) {
@@ -159,7 +160,7 @@ class PlayerSearch {
   createResults (results) {
     const resultsFragment = document.createDocumentFragment()
 
-    map(results, result =>
+    results.forEach(result =>
       resultsFragment.appendChild(this.createResult(result))
     )
 

@@ -9,7 +9,6 @@
     "babel-polyfill": "6.23.0",
     "commitizen": "^2.9.6",
     "es6-promise": "^4.1.0",
-    "lodash": "^4.17.4",
     "pepjs": "^0.4.3"
   },
   "devDependencies": {
@@ -92,6 +91,7 @@
     "stylelint": "~8.0.0",
     "stylelint-order": "^0.5.0",
     "webpack": "3.6.0",
+    "webpack-bundle-analyzer": "^2.9.0",
     "webpack-bundle-tracker": "0.2.0",
     "webpack-dev-middleware": "1.10.2",
     "webpack-hot-middleware": "2.18.0"
@@ -128,14 +128,12 @@
     }
   },
   "browserslist": [
-    "Android >= 4.4.4",
-    "Chrome >= 49",
-    "Edge >= 14",
+    "Chrome >= 57",
+    "Edge >= 15",
     "Firefox >= 52",
-    "ie >= 11",
-    "iOS >= 9.3",
-    "Opera >= 43",
-    "Safari >= 9.1"
+    "iOS >= 10.3",
+    "Opera >= 44",
+    "Safari >= 10.1"
   ],
   "babel": {
     "plugins": [
@@ -154,14 +152,12 @@
         {
           "targets": {
             "browsers": [
-              "Android >= 4.4.4",
-              "Chrome >= 49",
-              "Edge >= 14",
+              "Chrome >= 57",
+              "Edge >= 15",
               "Firefox >= 52",
-              "ie >= 11",
-              "iOS >= 9.3",
-              "Opera >= 43",
-              "Safari >= 9.1"
+              "iOS >= 10.3",
+              "Opera >= 44",
+              "Safari >= 10.1"
             ]
           },
           "useBuiltIns": true

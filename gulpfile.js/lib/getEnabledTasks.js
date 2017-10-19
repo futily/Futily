@@ -1,24 +1,23 @@
-var config  = require('../config')
-var compact = require('lodash/compact')
+const config = require('../config')
 
 // Grouped by what can run in parallel
-var assetTasks = ['fonts', 'iconFont', 'images', 'svgSprite']
-var codeTasks = ['html', 'css', 'js']
+const assetTasks = ['fonts', 'iconFont', 'images', 'svgSprite']
+const codeTasks = ['html', 'css', 'js']
 
-module.exports = function(env) {
-  var cssTasks = {
+module.exports = function (env) {
+  const cssTasks = {
     watch: 'css',
     development: 'css',
     production: 'css:production'
   }
 
-  function matchFilter(task) {
-    if(config.tasks[task]) {
-      if(task === 'js') {
+  function matchFilter (task) {
+    if (config.tasks[task]) {
+      if (task === 'js') {
         task = env === 'production' ? 'webpack:production' : false
       }
 
-      if(task === 'css') {
+      if (task === 'css') {
         task = cssTasks[env] || cssTasks.watch
       }
 
@@ -26,12 +25,12 @@ module.exports = function(env) {
     }
   }
 
-  function exists(value) {
+  function exists (value) {
     return !!value
   }
 
   return {
-    assetTasks: compact(assetTasks.map(matchFilter).filter(exists)),
-    codeTasks: compact(codeTasks.map(matchFilter).filter(exists))
+    assetTasks: assetTasks.map(matchFilter).filter(exists),
+    codeTasks: codeTasks.map(matchFilter).filter(exists)
   }
 }

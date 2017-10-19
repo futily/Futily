@@ -4,9 +4,7 @@ import './utils/class-list-polyfill'
 
 import { externalLinks, iframeFix } from './utils'
 import { FloatingLabel } from './forms'
-import { CardSelector, Rating, RPP } from './players/detail'
 import { PlayerFilterForm } from './players/list'
-import { SquadBuilder, SquadDetail } from './squads'
 import { Follow } from './users/follow'
 import {
   ComparePlayerSearch,
@@ -30,15 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (document.querySelector('.plyr-CardSelector')) {
-    new CardSelector()
+    import('./players/detail').then(players => {
+      new players.CardSelector()
+    })
   }
 
   if (document.querySelector('.js-PlayerRating')) {
-    new Rating({ className: '.js-PlayerRating' })
+    import('./players/detail').then(players => {
+      new players.Rating({ className: '.js-PlayerRating' })
+    })
   }
 
   if (document.querySelector('.js-RPP')) {
-    new RPP()
+    import('./players/detail').then(players => {
+      new players.RPP()
+    })
   }
 
   if (document.querySelector('.js-FloatingLabel')) {
@@ -74,11 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (document.querySelector('.js-Builder')) {
-    new SquadBuilder({ className: 'bld-Builder', isEditable: true })
+    import('./squads').then(squads => {
+      new squads.SquadBuilder({ className: 'bld-Builder', isEditable: true })
+    })
   }
 
   if (document.querySelector('.js-Detail')) {
-    new SquadDetail({ className: 'bld-Builder' })
+    import('./squads').then(squads => {
+      new squads.SquadDetail({ className: 'bld-Builder' })
+    })
   }
 
   // If the browser isn't Safari, don't do anything

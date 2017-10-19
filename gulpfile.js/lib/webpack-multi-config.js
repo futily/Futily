@@ -5,6 +5,7 @@ const path = require('path')
 const pathToUrl = require('./pathToUrl')
 const webpack = require('webpack')
 const webpackManifest = require('./webpackManifest')
+const BundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const BundleTracker = require('webpack-bundle-tracker')
 
 module.exports = function (env) {
@@ -62,6 +63,9 @@ module.exports = function (env) {
     }
 
     webpackConfig.plugins.push(
+      new BundleAnalyzer({
+        openAnalyzer: false
+      }),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('development')

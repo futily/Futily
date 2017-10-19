@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { debounce } from 'lodash'
+import { debounce } from '../utils'
 
 export default class {
   constructor ({ el }) {

@@ -19,7 +19,7 @@
       "dest": "js",
       "entries": {
         "app": ["./main.js"],
-        "vendor": ["es6-promise"]
+        "vendor": ["es6-promise", "@shopify/draggable", "pepjs"]
       },
       "extractSharedJs": true
     },

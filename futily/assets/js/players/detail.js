@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { map, reduce } from 'lodash'
 
 import {
   CARD_RATING_BREAKDOWN,
@@ -92,7 +91,7 @@ export class CardSelector {
       this.clearCard()
     })
 
-    map(this.els.actions, action => {
+    Array.from(this.els.actions).forEach(action => {
       const isUp = action.className.includes('-up')
 
       action.addEventListener('pointerdown', () => {
@@ -105,7 +104,7 @@ export class CardSelector {
 
   clearCard () {
     this.setCard(this.initialData)
-    map([1, 2, 3, 4, 5, 6], index => {
+    ;[1, 2, 3, 4, 5, 6].forEach(index => {
       const el = this.els.ratings[`att${index}Difference`]
 
       el.innerText = ''
@@ -137,31 +136,28 @@ export class CardSelector {
     const json = JSON.parse(data)
     const initialJson = JSON.parse(this.initialData)
 
-    map(
-      [
-        json.card_att_1,
-        json.card_att_2,
-        json.card_att_3,
-        json.card_att_4,
-        json.card_att_5,
-        json.card_att_6
-      ],
-      (val, index) => {
-        const differenceEl = this.els.ratings[`att${index + 1}Difference`]
-        const difference = val - initialJson[`card_att_${index + 1}`]
-        const isPositive = difference > 0
+    ;[
+      json.card_att_1,
+      json.card_att_2,
+      json.card_att_3,
+      json.card_att_4,
+      json.card_att_5,
+      json.card_att_6
+    ].forEach((val, index) => {
+      const differenceEl = this.els.ratings[`att${index + 1}Difference`]
+      const difference = val - initialJson[`card_att_${index + 1}`]
+      const isPositive = difference > 0
 
-        differenceEl.innerText = difference
-        differenceEl.classList.toggle(
-          'plyr-FutilyRatings_ValueDifference-positive',
-          isPositive
-        )
-        differenceEl.classList.toggle(
-          'plyr-FutilyRatings_ValueDifference-negative',
-          !isPositive
-        )
-      }
-    )
+      differenceEl.innerText = difference
+      differenceEl.classList.toggle(
+        'plyr-FutilyRatings_ValueDifference-positive',
+        isPositive
+      )
+      differenceEl.classList.toggle(
+        'plyr-FutilyRatings_ValueDifference-negative',
+        !isPositive
+      )
+    })
   }
 }
 
@@ -265,7 +261,7 @@ export class RPP {
     this.positions = this.getPositions(positionalRatings)
 
     // This will "run" the set stuff on rating
-    map(this.positions, obj => {
+    Object.values(this.positions).forEach(obj => {
       obj.rating = obj.rating
     })
   }
@@ -278,154 +274,139 @@ export class RPP {
   }
 
   getCardRatings () {
-    return reduce(
-      this.els.base.group,
-      (accumulator, el) => {
-        accumulator[el.dataset.rppField] = {
-          els: {
-            el,
-            difference: {
-              base: document.querySelector(
-                `.js-RPP_Base-base[data-rpp-field="${el.dataset
-                  .rppField}"] .js-RPP_BaseDifference`
-              ),
-              card: document.querySelector(
-                `.js-RPP_Base-card[data-rpp-field="${el.dataset
-                  .rppField}"] .js-RPP_CardDifference`
-              ),
-              group: el.querySelector('.js-RPP_GroupDifference')
-            },
-            value: {
-              base: document.querySelector(
-                `.js-RPP_Base-base[data-rpp-field="${el.dataset
-                  .rppField}"] .js-RPP_BaseValue`
-              ),
-              card: document.querySelector(
-                `.js-RPP_Base-card[data-rpp-field="${el.dataset
-                  .rppField}"] .js-RPP_CardValue`
-              ),
-              group: el.querySelector('.js-RPP_GroupValue'),
-              bar: el.querySelector('.js-RPP_Bar')
-            }
+    return Array.from(this.els.base.group).reduce((accumulator, el) => {
+      accumulator[el.dataset.rppField] = {
+        els: {
+          el,
+          difference: {
+            base: document.querySelector(
+              `.js-RPP_Base-base[data-rpp-field="${el.dataset
+                .rppField}"] .js-RPP_BaseDifference`
+            ),
+            card: document.querySelector(
+              `.js-RPP_Base-card[data-rpp-field="${el.dataset
+                .rppField}"] .js-RPP_CardDifference`
+            ),
+            group: el.querySelector('.js-RPP_GroupDifference')
           },
-          base: Number(el.dataset.rppBase),
-          _rating: Number(el.dataset.rppBase),
-          _previousRating: Number(el.dataset.rppBase),
-          get rating () {
-            return this._rating
-          },
-          set rating (val) {
-            this._previousRating = this._rating
-            this._rating = val < this.base ? this.base : val
-
-            // This is used for setting the rating colour via CSS variable
-            const statGrade = getRatingGradeVariable(this._rating)
-
-            map(this.els.difference, el => {
-              // Set the difference text on all our difference elements
-              el.innerText = this.difference ? `(+${this.difference})` : ''
-            })
-
-            map(this.els.value, el => {
-              // Set the grade colour variable
-              el.style.setProperty(statGrade.property, statGrade.value)
-
-              // If the element is the groups bar, we need to set the width, otherwise we change the
-              // rating text
-              if (el.nodeName === 'rect') {
-                el.setAttribute('width', `${this._rating}%`)
-              } else {
-                el.innerText = this._rating
-              }
-            })
-          },
-          get difference () {
-            return this.rating - this.base
+          value: {
+            base: document.querySelector(
+              `.js-RPP_Base-base[data-rpp-field="${el.dataset
+                .rppField}"] .js-RPP_BaseValue`
+            ),
+            card: document.querySelector(
+              `.js-RPP_Base-card[data-rpp-field="${el.dataset
+                .rppField}"] .js-RPP_CardValue`
+            ),
+            group: el.querySelector('.js-RPP_GroupValue'),
+            bar: el.querySelector('.js-RPP_Bar')
           }
-        }
+        },
+        base: Number(el.dataset.rppBase),
+        _rating: Number(el.dataset.rppBase),
+        _previousRating: Number(el.dataset.rppBase),
+        get rating () {
+          return this._rating
+        },
+        set rating (val) {
+          this._previousRating = this._rating
+          this._rating = val < this.base ? this.base : val
 
-        return accumulator
-      },
-      {}
-    )
+          // This is used for setting the rating colour via CSS variable
+          const statGrade = getRatingGradeVariable(this._rating)
+
+          Object.values(this.els.difference).forEach(el => {
+            // Set the difference text on all our difference elements
+            el.innerText = this.difference ? `(+${this.difference})` : ''
+          })
+
+          Object.values(this.els.value).forEach(el => {
+            // Set the grade colour variable
+            el.style.setProperty(statGrade.property, statGrade.value)
+
+            // If the element is the groups bar, we need to set the width, otherwise we change the
+            // rating text
+            if (el.nodeName === 'rect') {
+              el.setAttribute('width', `${this._rating}%`)
+            } else {
+              el.innerText = this._rating
+            }
+          })
+        },
+        get difference () {
+          return this.rating - this.base
+        }
+      }
+
+      return accumulator
+    }, {})
   }
 
   getIngameRatings () {
-    return reduce(
-      this.els.base.ingame,
-      (accumulator, el) => {
-        accumulator[el.dataset.rppField] = {
-          els: {
-            el,
-            difference: el.querySelector('.js-RPP_BaseDifference'),
-            value: el.querySelector('.js-RPP_BaseValue')
-          },
-          base: Number(el.dataset.rppBase),
-          _rating: Number(el.dataset.rppBase),
-          _previousRating: Number(el.dataset.rppBase),
-          get rating () {
-            return this._rating
-          },
-          set rating (val) {
-            this._previousRating = this._rating
-            this._rating = val
+    return Array.from(this.els.base.ingame).reduce((accumulator, el) => {
+      accumulator[el.dataset.rppField] = {
+        els: {
+          el,
+          difference: el.querySelector('.js-RPP_BaseDifference'),
+          value: el.querySelector('.js-RPP_BaseValue')
+        },
+        base: Number(el.dataset.rppBase),
+        _rating: Number(el.dataset.rppBase),
+        _previousRating: Number(el.dataset.rppBase),
+        get rating () {
+          return this._rating
+        },
+        set rating (val) {
+          this._previousRating = this._rating
+          this._rating = val
 
-            // This is used for setting the rating colour via CSS variable
-            const statGrade = getRatingGradeVariable(this._rating)
+          // This is used for setting the rating colour via CSS variable
+          const statGrade = getRatingGradeVariable(this._rating)
 
-            this.els.difference.innerText = this.difference
-              ? `(+${this.difference})`
-              : ''
-            this.els.value.innerText = val
-            this.els.value.style.setProperty(
-              statGrade.property,
-              statGrade.value
-            )
-          },
-          get difference () {
-            return this.rating - this.base
-          }
+          this.els.difference.innerText = this.difference
+            ? `(+${this.difference})`
+            : ''
+          this.els.value.innerText = val
+          this.els.value.style.setProperty(statGrade.property, statGrade.value)
+        },
+        get difference () {
+          return this.rating - this.base
         }
+      }
 
-        return accumulator
-      },
-      {}
-    )
+      return accumulator
+    }, {})
   }
 
   getPositions (positionalRatings) {
-    return reduce(
-      POSITIONS,
-      (accumulator, position) => {
-        const el = document.querySelector(
-          `.js-RPP_Position[data-rpp-position=${position}]`
-        )
+    return Array.from(POSITIONS).reduce((accumulator, position) => {
+      const el = document.querySelector(
+        `.js-RPP_Position[data-rpp-position=${position}]`
+      )
 
-        accumulator[position] = {
-          els: {
-            el,
-            label: el.querySelector('.js-RPP_PositionLabel'),
-            value: el.querySelector('.js-RPP_PositionValue')
-          },
-          _rating: positionalRatings[position],
-          base: positionalRatings[position],
-          get rating () {
-            return this._rating
-          },
-          set rating (val) {
-            this._rating = val
+      accumulator[position] = {
+        els: {
+          el,
+          label: el.querySelector('.js-RPP_PositionLabel'),
+          value: el.querySelector('.js-RPP_PositionValue')
+        },
+        _rating: positionalRatings[position],
+        base: positionalRatings[position],
+        get rating () {
+          return this._rating
+        },
+        set rating (val) {
+          this._rating = val
 
-            const statGrade = getPositionGradeVariable(this._rating)
+          const statGrade = getPositionGradeVariable(this._rating)
 
-            this.els.value.innerText = val
-            this.els.el.style.setProperty(statGrade.property, statGrade.value)
-          }
+          this.els.value.innerText = val
+          this.els.el.style.setProperty(statGrade.property, statGrade.value)
         }
+      }
 
-        return accumulator
-      },
-      {}
-    )
+      return accumulator
+    }, {})
   }
 
   // Delta based
@@ -453,61 +434,54 @@ export class RPP {
     const maximums =
       CHEM_STYLE_MAX_RATING_BOOST[style] || CHEM_STYLE_MAX_RATING_BOOST.basic
 
-    return reduce(
-      maximums,
-      (accumulator, val, position) => {
-        accumulator[position] = modify(val)
+    return Object.values(maximums).reduce((accumulator, val, position) => {
+      accumulator[position] = modify(val)
 
-        return accumulator
-      },
-      {}
-    )
+      return accumulator
+    }, {})
   }
 
   getBasePositionalRatings () {
-    return reduce(
-      this.positions,
-      (accumulator, obj, position) => {
-        accumulator[position] = obj.base
+    return Object.entries(this.positions).reduce((accumulator, tuple) => {
+      const [position, obj] = tuple
 
-        return accumulator
-      },
-      {}
-    )
+      accumulator[position] = obj.base
+
+      return accumulator
+    }, {})
   }
 
   getPositionalRatings () {
-    return reduce(
-      RATING_PER_POSITION,
-      (accumulator, ratings, position) => {
-        const rating = reduce(
-          INGAME_STATS,
-          (sum, stat) =>
-            (sum += ratings[stat] * this.ingameRatings[stat].rating), // eslint-disable-line no-return-assign
-          0
-        )
+    return Object.entries(RATING_PER_POSITION).reduce((accumulator, tuple) => {
+      const [position, stats] = tuple
+      const rating = Array.from(INGAME_STATS).reduce(
+        (sum, stat) => sum + stats[stat] * this.ingameRatings[stat].rating,
+        0
+      )
 
-        accumulator[position] = Math.round(rating)
+      accumulator[position] = Math.round(rating)
 
-        return accumulator
-      },
-      {}
-    )
+      return accumulator
+    }, {})
   }
 
   updateCardRatings (style) {
     if (style) {
-      map(CARD_RATING_BREAKDOWN, (obj, attr) => {
+      Object.entries(CARD_RATING_BREAKDOWN).forEach(tuple => {
+        const [attr, obj] = tuple
+
         let coreFinal = 0
 
-        map(obj, (weight, field) => {
+        Object.entries(obj).forEach(tuple => {
+          const [field, weight] = tuple
+
           coreFinal += this.ingameRatings[field].rating * weight
         })
 
         this.cardRatings[attr].rating = Math.round(coreFinal)
       })
     } else {
-      map(this.cardRatings, obj => {
+      Object.values(this.cardRatings).forEach(obj => {
         obj.rating = obj.base
       })
     }
@@ -517,18 +491,20 @@ export class RPP {
     if (style) {
       const deltas = this.getDeltas(style)
 
-      map(this.ingameRatings, (obj, key) => {
+      Object.values(this.ingameRatings).forEach((obj, key) => {
         obj.rating = this.normalize(obj.base + deltas[key])
       })
     } else {
-      map(this.ingameRatings, obj => {
+      Object.values(this.ingameRatings).forEach(obj => {
         obj.rating = obj.base
       })
     }
   }
 
   updatePositionalRatings (ratings) {
-    map(ratings, (val, position) => {
+    Object.entries(ratings).forEach(tuple => {
+      const [position, val] = tuple
+
       this.positions[position].rating = val
     })
   }
@@ -547,17 +523,17 @@ export class RPP {
   set activeStyle (val) {
     this._activeStyle = val
 
-    map(this.els.chemStyles.items, item => {
+    Array.from(this.els.chemStyles.items).forEach(item => {
       item.setAttribute(
         'aria-current',
         String(val === item.closest('.js-RPP_ChemStyle').dataset.rppChemStyle)
       )
     })
 
-    this.updateIngameRatings(val)
-    this.updateCardRatings(val)
+    this.updateIngameRatings(this._activeStyle)
+    this.updateCardRatings(this._activeStyle)
 
-    if (val) {
+    if (this._activeStyle) {
       this.updatePositionalRatings(this.getPositionalRatings())
     } else {
       this.updatePositionalRatings(this.getBasePositionalRatings())

@@ -336,14 +336,15 @@
   @apply --Font-12;
 
   position: absolute;
-  top: 2px;
-  right: -22px;
+  top: 0;
+  right: -20px;
 
   font-weight: 700;
 
+  color: var(--Card_Color-key);
+
   .plyr-Card_Stat:nth-child(-n + 3) & {
-    right: auto;
-    left: -22px;
+    right: -18px;
 
     .plyr-Card-body & {
       right: 0;
