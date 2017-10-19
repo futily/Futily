@@ -1,0 +1,59 @@
+/*
+|--------------------------------------------------------------------------
+| Chemistry styles
+|--------------------------------------------------------------------------
+| @namespace: tbl-
+|
+*/
+.tbl-ChemistryStyles {
+  margin-top: 1vr;
+  table-layout: auto;
+
+  text-align: left;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Colgroup
+|--------------------------------------------------------------------------
+|
+*/
+.tbl-ChemistryStyles_Col-1 {
+  width: 150px;
+}
+
+.tbl-ChemistryStyles_Col-3 {
+  width: 600px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Tr
+|--------------------------------------------------------------------------
+|
+*/
+.tbl-ChemistryStyles_Tr {
+  .tbl-ChemistryStyles_Tbody & {
+    &:nth-child(odd) {
+      background-color: #ececec;
+      border-bottom: 1px solid var(--Color_Border);
+    }
+  }
+}
+
+.tbl-ChemistryStyles_Th,
+.tbl-ChemistryStyles_Td {
+  padding: 0.5vr var(--Grid_Gutter);
+}
+
+.tbl-ChemistryStyles_Td {
+  text-align: center;
+
+  &:last-child {
+    text-align: left;
+  }
+}
+
+.tbl-ChemistryStyles_Th-center {
+  text-align: center;
+}

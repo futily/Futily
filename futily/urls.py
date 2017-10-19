@@ -9,6 +9,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
 from django.views import generic
+from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 
 from futily.apps.clubs.views import ClubViewSet
@@ -39,6 +40,7 @@ urlpatterns = [
     url(r'^comments/', include('django_comments_xtd.urls')),
 
     # Special cases
+    url(r'chemistry-styles/', TemplateView.as_view(template_name='misc/chemistry-styles.html')),
     url(r'users/', include('futily.apps.users.urls', namespace='users')),
 
     # Permalink redirection service.

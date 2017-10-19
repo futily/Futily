@@ -39,6 +39,17 @@
   }
 }
 
+.plyr-Card-body {
+  /* stylelint-disable declaration-no-important */
+  height: 129px !important;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 0 !important;
+
+  background-position: 0 -1106px !important;
+  /* stylelint-enable */
+}
+
 /*
 |--------------------------------------------------------------------------
 | Header
@@ -333,6 +344,21 @@
   .plyr-Card_Stat:nth-child(-n + 3) & {
     right: auto;
     left: -22px;
+
+    .plyr-Card-body & {
+      right: 0;
+      left: auto;
+    }
+  }
+
+  .plyr-Card-body & {
+    right: 0;
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: var(--Card_Color-key);
   }
 }
 
@@ -371,6 +397,10 @@
     font-size: 20px;
     line-height: 20px;
   }
+
+  .plyr-Card-body & {
+    padding-left: 7px;
+  }
 }
 
 /*
@@ -401,6 +431,20 @@
     padding-right: 28px;
     padding-left: 12px;
   }
+
+  .plyr-Card-body & {
+    align-items: center;
+    justify-content: center;
+
+    display: flex;
+    padding-left: 22px;
+
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    color: var(--Card_Color-key);
+  }
 }
 
 .plyr-Card_Chem {
@@ -419,4 +463,56 @@
 
 .plyr-Card_ChemValue {
   font-weight: 600;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Style chevrons
+|--------------------------------------------------------------------------
+|
+*/
+.plyr-Card_StyleChevrons {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: block;
+  width: 9px;
+  height: 20px;
+}
+
+.plyr-Card_StyleChevron {
+  position: absolute;
+  top: 3px;
+  left: -2px;
+
+  display: block;
+  width: 9px;
+  height: @width;
+
+  transform: rotate(180deg);
+
+  .plyr-Card_StyleChevrons-2 & {
+    top: 6px;
+  }
+
+  .plyr-Card_StyleChevrons-3 & {
+    top: 4px;
+  }
+
+  &:nth-child(2) {
+    transform: translateY(-4px) rotate(180deg);
+  }
+
+  &:nth-child(3) {
+    transform: translateY(4px) rotate(180deg);
+  }
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: 9px;
+    height: @width;
+  }
+  /* stylelint-enable */
 }

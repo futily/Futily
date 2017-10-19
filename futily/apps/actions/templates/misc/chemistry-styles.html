@@ -1,0 +1,506 @@
+{% extends "base.html" %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} chemistry styles</h1>
+          <p class="pg-Strapline_Text">Fifa {{ settings.CURRENT_FIFA_VERSION }} ingame boosts</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content_class %}lyt-Content-wide{% endblock %}
+
+{% block main %}
+  <h2 class="typ-Title-medium">Fifa {{ settings.CURRENT_FIFA_VERSION }} chemistry styles</h2>
+  <p>Chemistry Styles are consumables in FIFA Ultimate Team that alter boost the In Game Stats of your Players. Discover more on the EA Chemistry Styles article and check out the Chemistry tab on every FIFA 17 Ultimate Team Player on Futhead!</p>
+
+  <table class="tbl-ChemistryStyles">
+    <colgroup class="tbl-ChemistryStyles_Colgroup">
+      <col class="tbl-ChemistryStyles_Col tbl-ChemistryStyles_Col-1">
+      <col class="tbl-ChemistryStyles_Col tbl-ChemistryStyles_Col-2">
+      <col class="tbl-ChemistryStyles_Col tbl-ChemistryStyles_Col-3">
+    </colgroup>
+
+    <thead class="tbl-ChemistryStyles_Thead">
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">Name</th>
+        <th class="tbl-ChemistryStyles_Th tbl-ChemistryStyles_Th-center">Stats</th>
+        <th class="tbl-ChemistryStyles_Th">Stat boost @100 team chem & 10 player chem</th>
+      </tr>
+    </thead>
+
+    <tbody class="tbl-ChemistryStyles_Tbody">
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/basic.png') }}" width="20">
+          Basic
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('basic', 'basic', 1, 1, 1, 1, 1, 1) }}
+        </td>
+
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>N/A</strong></dd>
+            <dt>Normal</dt>
+            <dd>N/A</dd>
+            <dt>Weak</dt>
+            <dd>+5 Acceleration, +5 Positioning, +5 Finishing, +5 Shot Power, +5 Volleys, +5 Penalties, +5 Vision, +5 Long Passing, +5 Short Passing, +5 Curve, +5 Agility, +5 Ball Control, +5 Dribbling, +5 Marking, +5 Standing Tackle, +5 Sliding Tackle, +5 Jumping, +5 Strength</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/att.png') }}" width="20">
+          Sniper
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('sniper', 'att', 0, 3, 0, 3, 0, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Dribbling</strong>, <strong>+15 Finishing</strong>, <strong>+15 Penalties</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Balance, +10 Positioning, +10 Volleys</dd>
+            <dt>Weak</dt>
+            <dd>+5 Agility, +5 Ball Control, +5 Reactions</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/att.png') }}" width="20">
+          Finisher
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('finisher', 'att', 0, 3, 0, 0, 0, 3) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Shot Power</strong>, <strong>+15 Long Shots</strong>, <strong>+15 Jumping</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Volleys, +10 Penalties, +10 Strength, +10 Aggression</dd>
+            <dt>Weak</dt>
+            <dd>+5 Finishing</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/att.png') }}" width="20">
+          Deadeye
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('deadeye', 'att', 0, 3, 3, 0, 0, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Finishing</strong>, <strong>+15 Short Passing</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Positioning, +10 Shot Power, +10 Free Kicks, +10 Curve</dd>
+            <dt>Weak</dt>
+            <dd>+5 Long Shots, +5 Penalties, +5 Vision, +5 Long Passing</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/att.png') }}" width="20">
+          Marksman
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('marksman', 'att', 0, 2, 0, 2, 0, 2) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>N/A</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Positioning, +10 Shot Power, +10 Long Shots, +10 Volleys, +10 Jumping</dd>
+            <dt>Weak</dt>
+            <dd>+5 Finishing, +5 Penalties, +5 Agility, +5 Reactions, +5 Ball Control, +5 Dribbling, +5 Strength, +5 Aggression</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/att.png') }}" width="20">
+          Hawk
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('hawk', 'att', 2, 2, 0, 0, 0, 2) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>N/A</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Acceleration, +10 Positioning, +10 Shot Power, +10 Long Shots, +10 Volleys, +10 Jumping, +10 Aggression</dd>
+            <dt>Weak</dt>
+            <dd>+5 Sprint Speed, +5 Finishing, +5 Penalties, +5 Strength</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/mid.png') }}" width="20">
+          Artist
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('artist', 'mid', 2, 2, 0, 0, 0, 2) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Vision</strong>, <strong>+15 Long Passing</strong>, <strong>+15 Dribbling</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Short Passing, +10 Reactions</dd>
+            <dt>Weak</dt>
+            <dd>+5 Crossing, +5 Curve, +5 Agility, +5 Balance, +5 Ball Control</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/mid.png') }}" width="20">
+          Architect
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('architect', 'mid', 0, 0, 3, 3, 0, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Crossing</strong>, <strong>+15 Long Passing</strong>, <strong>+15 Strength</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Vision, +10 Short Passing, +10 Aggression</dd>
+            <dt>Weak</dt>
+            <dd>+5 Free Kicks, +5 Curve, +5 Jumping</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/mid.png') }}" width="20">
+          Powerhouse
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('powerhouse', 'mid', 0, 0, 3, 0, 3, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Short Passing</strong>, <strong>+15 Standing Tackle</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Vision, +10 Long Passing, +10 Curve, +10 Marking, +10 Sliding Tackle</dd>
+            <dt>Weak</dt>
+            <dd>+5 Crossing, +5 Interceptions</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/mid.png') }}" width="20">
+          Maestro
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('maestro', 'mid', 0, 2, 2, 2, 0, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>N/A</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Shot Power, +10 Long Passing, +10 Volleys, +10 Free Kicks, +10 Short Passing, +10 Dribbling</dd>
+            <dt>Weak</dt>
+            <dd>+5 Positioning, +5 Finishing, +5 Vision, +5 Long Passing, +5 Reactions, +5 Ball Control</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/mid.png') }}" width="20">
+          Engine
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('engine', 'mid', 2, 0, 2, 2, 0, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>N/A</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Acceleration, +10 Free Kicks, +10 Short Passing, +10 Balance, +10 Dribbling</dd>
+            <dt>Weak</dt>
+            <dd>+5 Sprint Speed, +5 Vision, +5 Crossing, +5 Long Passing, +5 Curve, +5 Agility, +5 Reactions, +5 Ball Control</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/def.png') }}" width="20">
+          Sentinel
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('sentinel', 'def', 0, 0, 0, 0, 3, 3) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Marking</strong>, <strong>+15 Standing Tackle</strong>, <strong>+15 Sliding Tackle</strong>, <strong>+15 Strength</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Heading, +10 Aggression</dd>
+            <dt>Weak</dt>
+            <dd>+5 Interceptions, +5 Jumping</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/def.png') }}" width="20">
+          Guardian
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('guardian', 'def', 0, 0, 0, 3, 3, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Dribbling</strong>, <strong>+15 Marking</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Balance, +10 Interceptions, +10 Standing Tackle, +10 Sliding Tackle</dd>
+            <dt>Weak</dt>
+            <dd>+5 Agility, +5 Reactions, +5 Ball Control, +5 Heading</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/def.png') }}" width="20">
+          Gladiator
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('gladiator', 'def', 0, 3, 0, 0, 3, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Positioning</strong>, <strong>+15 Heading</strong>, <strong>+15 Sliding Tackle</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Shot Power, +10 Interceptions, +10 Standing Tackle</dd>
+            <dt>Weak</dt>
+            <dd>+5 Finishing, +5 Long Shots, +5 Marking</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/def.png') }}" width="20">
+          Backbone
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('backbone', 'def', 0, 0, 2, 0, 2, 2) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>N/A</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Short Passing, +10 Marking, +10 Standing Tackle, +10 Sliding Tackle, +10 Strength</dd>
+            <dt>Weak</dt>
+            <dd>+5 Vision, +5 Crossing, +5 Long Passing, +5 Curve, +5 Interceptions, +5 Heading, +5 Jumping, +5 Aggression</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/def.png') }}" width="20">
+          Anchor
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('anchor', 'def', 2, 0, 0, 0, 2, 2) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Dribbling</strong>, <strong>+15 Finishing</strong>, <strong>+15 Penalties</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Acceleration, +10 Heading, +10 Marking, +10 Standing Tackle, +10 Sliding Tackle, +10 Jumping, +10 Strength, +10 Aggression</dd>
+            <dt>Weak</dt>
+            <dd>+5 Spring Speed, +5 Interceptions</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/skill.png') }}" width="20">
+          Hunter
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('hunter', 'skill', 3, 3, 0, 0, 0, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Acceleration</strong>, <strong>+15 Positioning</strong>, <strong>+15 Penalties</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Sprint Speed, +10 Finishing, +10 Shot Power, +10 Volleys</dd>
+            <dt>Weak</dt>
+            <dd>+5 Long Shots</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/skill.png') }}" width="20">
+          Catalyst
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('catalyst', 'skill', 3, 0, 3, 0, 0, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Acceleration</strong>, <strong>+15 Vision</strong>, <strong>+15 Curve</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Sprint Speed, +10 Crossing, +10 Free Kicks, +10 Short Passing</dd>
+            <dt>Weak</dt>
+            <dd>+5 Long Passing</dd>
+          </dl>
+        </td>
+      </tr>
+      <tr class="tbl-ChemistryStyles_Tr">
+        <th class="tbl-ChemistryStyles_Th">
+          <img src="{{ static('build/img/chemistry-styles/skill.png') }}" width="20">
+          Shadow
+        </th>
+        <td class="tbl-ChemistryStyles_Td">
+          {{ player_card('shadow', 'skill', 3, 0, 0, 0, 3, 0) }}
+        </td>
+        <td class="tbl-ChemistryStyles_Td">
+          <dl>
+            <dt>Strong</dt>
+            <dd><strong>+15 Acceleration</strong>, <strong>+15 Marking</strong>, <strong>+15 Standing Tackle</strong>, <strong>+15 Sliding Tackle</strong></dd>
+            <dt>Normal</dt>
+            <dd>+10 Sprint Speed, +10 Interceptions, +10 Heading</dd>
+            <dt>Weak</dt>
+            <dd>N/A</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
+
+{% macro player_card(style, line, pac, sho, pas, dri, def, phy) %}
+  <div class="plyr-Card plyr-Card-medium plyr-Card-rare_gold plyr-Card-body">
+    <div class="plyr-Card_Body">
+      <p class="plyr-Card_Name">Chemistry style</p>
+
+      <div class="plyr-Card_Stats">
+        <div class="plyr-Card_Stat plyr-Card_Stat-1">
+          <span class="plyr-Card_Difference">{{ pac }}</span>
+          <span class="plyr-Card_StatValue">
+            {% if pac %}
+              <span class="plyr-Card_StyleChevrons plyr-Card_StyleChevrons-{{ pac }}">
+                {% for x in range(0, pac) %}
+                  <span class="plyr-Card_StyleChevron">{% include 'chevron.svg' %}</span>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </span>
+          <span class="plyr-Card_StatKey">PAC</span>
+        </div>
+
+        <div class="plyr-Card_Stat plyr-Card_Stat-2">
+          <span class="plyr-Card_Difference">{{ sho }}</span>
+          <span class="plyr-Card_StatValue">
+            {% if sho %}
+              <span class="plyr-Card_StyleChevrons plyr-Card_StyleChevrons-{{ sho }}">
+                {% for x in range(0, sho) %}
+                  <span class="plyr-Card_StyleChevron">{% include 'chevron.svg' %}</span>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </span>
+          <span class="plyr-Card_StatKey">SHO</span>
+        </div>
+
+        <div class="plyr-Card_Stat plyr-Card_Stat-3">
+          <span class="plyr-Card_Difference">{{ pas }}</span>
+          <span class="plyr-Card_StatValue">
+            {% if pas %}
+              <span class="plyr-Card_StyleChevrons plyr-Card_StyleChevrons-{{ pas }}">
+                {% for x in range(0, pas) %}
+                  <span class="plyr-Card_StyleChevron">{% include 'chevron.svg' %}</span>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </span>
+          <span class="plyr-Card_StatKey">PAS</span>
+        </div>
+
+        <div class="plyr-Card_Stat plyr-Card_Stat-4">
+          <span class="plyr-Card_Difference">{{ dri }}</span>
+          <span class="plyr-Card_StatValue">
+            {% if dri %}
+              <span class="plyr-Card_StyleChevrons plyr-Card_StyleChevrons-{{ dri }}">
+                {% for x in range(0, dri) %}
+                  <span class="plyr-Card_StyleChevron">{% include 'chevron.svg' %}</span>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </span>
+          <span class="plyr-Card_StatKey">DRI</span>
+        </div>
+
+        <div class="plyr-Card_Stat plyr-Card_Stat-5">
+          <span class="plyr-Card_Difference">{{ def }}</span>
+          <span class="plyr-Card_StatValue">
+            {% if def %}
+              <span class="plyr-Card_StyleChevrons plyr-Card_StyleChevrons-{{ def }}">
+                {% for x in range(0, def) %}
+                  <span class="plyr-Card_StyleChevron">{% include 'chevron.svg' %}</span>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </span>
+          <span class="plyr-Card_StatKey">DEF</span>
+        </div>
+
+        <div class="plyr-Card_Stat plyr-Card_Stat-6">
+          <span class="plyr-Card_Difference">{{ phy }}</span>
+          <span class="plyr-Card_StatValue">
+            {% if phy %}
+              <span class="plyr-Card_StyleChevrons plyr-Card_StyleChevrons-{{ phy }}">
+                {% for x in range(0, phy) %}
+                  <span class="plyr-Card_StyleChevron">{% include 'chevron.svg' %}</span>
+                {% endfor %}
+              </span>
+            {% endif %}
+          </span>
+          <span class="plyr-Card_StatKey">PHY</span>
+        </div>
+      </div>
+    </div>
+
+    <footer class="plyr-Card_Footer">
+      <img src="{{ static('build/img/chemistry-styles/{}.png'.format(line)) }}" width="20">
+      {{ style | title() }}
+    </footer>
+  </div>
+{% endmacro %}
