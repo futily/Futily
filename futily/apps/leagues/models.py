@@ -45,7 +45,7 @@ class League(PageBase):
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-total_players', '-average_rating', 'name']
+        ordering = ['-average_rating', '-total_players', 'name']
         verbose_name = 'League'
         verbose_name_plural = 'Leagues'
 
