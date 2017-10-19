@@ -259,6 +259,50 @@
       {% endif %}
     </div>
   </div>
+
+  <div class="plyr-Detail_Section">
+    <header class="plyr-Detail_SectionHeader">
+      <h3 class="plyr-Detail_Title">
+        <strong class="plyr-Detail_Emphasis">Perfect</strong> links
+      </h3>
+
+      {% if player.get_initial_chemistry_players('perfect') %}
+        <a class="plyr-Detail_Link"
+           href="{{ player.get_chemistry_type_absolute_url('perfect') }}">View all perfect links
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="plyr-Detail_SectionBody">
+      {% if player.get_initial_chemistry_players('perfect') %}
+        {{ player_macros.card_list(player.get_initial_chemistry_players('perfect')) }}
+      {% else %}
+        <p>There are no perfect links to {{ player.name }}.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="plyr-Detail_Section">
+    <header class="plyr-Detail_SectionHeader">
+      <h3 class="plyr-Detail_Title">
+        <strong class="plyr-Detail_Emphasis">Strong</strong> links
+      </h3>
+
+      {% if player.get_initial_chemistry_players('strong') %}
+        <a class="plyr-Detail_Link"
+           href="{{ player.get_chemistry_type_absolute_url('strong') }}">View all strong links
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="plyr-Detail_SectionBody">
+      {% if player.get_initial_chemistry_players('strong') %}
+        {{ player_macros.card_list(player.get_initial_chemistry_players('strong')) }}
+      {% else %}
+        <p>There are no strong links to {{ player.name }}.</p>
+      {% endif %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block aside_blocks %}
