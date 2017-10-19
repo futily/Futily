@@ -22,13 +22,13 @@
 }
 
 .plyr-StatGroup_Title {
-  @apply --Font-22;
+  @apply --Font-20;
 
   font-weight: 500;
 }
 
 .plyr-StatGroup_GroupValue {
-  @apply --Font-30;
+  @apply --Font-22;
 
   font-weight: 700;
 
@@ -116,7 +116,7 @@
 }
 
 .plyr-StatGroup_Key {
-  @apply --Font-18;
+  @apply --Font-16;
 
   position: relative;
 
@@ -160,7 +160,7 @@
 }
 
 .plyr-StatGroup_Value {
-  @apply --Font-20;
+  @apply --Font-18;
 
   font-weight: 500;
 
