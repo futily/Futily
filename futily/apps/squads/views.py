@@ -8,8 +8,12 @@ from django.views.generic import DetailView, FormView, ListView, UpdateView
 from django.views.generic.base import ContextMixin, TemplateView, View
 
 from futily.apps.actions.utils import create_action
+from futily.apps.clubs.templatetags.clubs import get_clubs_page
+from futily.apps.leagues.templatetags.leagues import get_leagues_page
+from futily.apps.nations.templatetags.nations import get_nations_page
 from futily.apps.players.constants import POSITION_TO_AVAILABLE_POSITIONS
 from futily.apps.players.models import Player
+from futily.apps.players.templatetags.players import get_players_page
 from futily.apps.squads.constants import FORMATION_POSITIONS
 from futily.apps.squads.templatetags.squads import get_squads_page
 
@@ -279,6 +283,34 @@ class SquadList(ListView):
 
     def get_queryset(self):
         return super(SquadList, self).get_queryset().filter(page__page=self.request.pages.current)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['aside_links'] = [
+            {
+                'title': 'Players',
+                'url': get_players_page().get_absolute_url(),
+                'here': str(self.request.path == get_players_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Clubs',
+                'url': get_clubs_page().get_absolute_url(),
+                'here': str(self.request.path == get_clubs_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Leagues',
+                'url': get_leagues_page().get_absolute_url(),
+                'here': str(self.request.path == get_leagues_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Nations',
+                'url': get_nations_page().get_absolute_url(),
+                'here': str(self.request.path == get_nations_page().get_absolute_url()).lower(),
+            },
+        ]
+
+        return context
 
 
 class SquadDetail(BaseBuilder, DetailView):

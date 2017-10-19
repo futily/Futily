@@ -104,3 +104,29 @@
     </div>
   </div>
 {% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+
+    {% block aside_blocks_above %}{% endblock %}
+
+    <div class="asi-Block">
+      <h4 class="asi-Block_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
+
+      <ul class="asi-LinkList">
+        {% for link in aside_links %}
+          <li class="asi-LinkList_Item">
+            <a class="asi-LinkList_Link"
+               href="{{ link.url }}"
+               aria-current="{{ link.here }}">Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% block aside_blocks %}{% endblock %}
+  </div>
+{% endblock %}
