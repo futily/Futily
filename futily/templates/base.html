@@ -145,8 +145,8 @@
       </li>
     </template>
 
-    {{ render_bundle('vendor', 'js', attrs='async defer') }}
-    {{ render_bundle('app', 'js', attrs='async defer') }}
+    {{ render_bundle('vendor', 'js', attrs='defer') }}
+    {{ render_bundle('app', 'js', attrs='defer') }}
 
     {% compress js %}
       {% block compressed_js_first %}{% endblock %}
