@@ -75,19 +75,74 @@
 {% endblock %}
 
 {% block main %}
-  <div class="pck-Detail">
-    <div class="pck-Detail_Players">
-      {{ player_macros.card_list(players) }}
+  <div class="pg-Section">
+    <header class="pg-Section_Header">
+      <h2 class="pg-Section_Title">
+        {{ packtype.title }}
+      </h2>
+    </header>
+
+    <div class="pg-Section_Body">
+      <div class="pck-Detail">
+        <header class="pck-Detail_Header">
+          <div class="pck-Detail_Meta">
+            <ul class="pck-Detail_MetaItems">
+              <li class="pck-Detail_MetaItem">
+                <p class="pck-Detail_MetaKey">Value</p>
+                <p class="pck-Detail_MetaValue">{{ value | intcomma() }}</p>
+              </li>
+
+              <li class="pck-Detail_MetaItem">
+                <p class="pck-Detail_MetaKey">New</p>
+                <p class="pck-Detail_MetaValue">{{ new_players | length() }}</p>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pck-Detail_Actions">
+            {% if user.is_authenticated %}
+              <a class="pck-Detail_Action btn-Button" href="{{ user.get_collection_url() }}">
+                <span class="pck-Detail_ActionIcon">
+                  {% include 'card-collection.svg' %}
+                </span>
+
+                My Collection
+              </a>
+            {% endif %}
+
+            <a class="pck-Detail_Action btn-Secondary"
+               href="{{ get_packs_page().get_absolute_url() }}">Open another type
+            </a>
+            <a class="pck-Detail_Action btn-Primary" href="{{ build_url() }}">Open another</a>
+          </div>
+        </header>
+
+        <div class="pck-Detail_Players">
+          {% call(player) player_macros.card_list(players) %}
+            {{ player.render_card(new=player in new_players) }}
+
+            <p class="plyr-CardList_Text">Value: {{ player.pack_value }}</p>
+          {% endcall %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
     </div>
 
-    <footer class="pck-Detail_Footer">
-      <div class="pck-Detail_Form">
+    {% if user.is_authenticated %}
+      <div class="asi-Block">
         {% if request.user.is_authenticated %}
           <form action="{{ object.get_absolute_url() }}" class="frm-Form" method="POST">
             <input type="hidden" name="page" value="{{ pages.current.pk }}">
             <input type="hidden" name="user" value="{{ request.user.pk }}">
             <input type="hidden" name="type" value="{{ object.pk }}">
-            <input type="hidden" name="value" value="0">
+            <input type="hidden" name="value" value="{{ value }}">
 
             {% for player in players %}
               <input type="hidden" name="players" value="{{ player.pk }}">
@@ -108,19 +163,11 @@
             </div>
 
             <div class="frm-Form_Actions">
-              <button type="submit" class="frm-Form_Submit btn-Primary">submit</button>
+              <button type="submit" class="frm-Form_Submit btn-Primary">Save</button>
             </div>
           </form>
         {% endif %}
       </div>
-    </footer>
-  </div>
-{% endblock %}
-
-{% block aside %}
-  <div class="asi-Blocks">
-    <div class="asi-Block">
-      <img alt="" src="http://placehold.it/300x250">
-    </div>
+    {% endif %}
   </div>
 {% endblock %}

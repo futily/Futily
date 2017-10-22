@@ -135,8 +135,8 @@ class TypeDetail(FormMixin, DetailView):
                     'rating__range': (75, 83),
                 },
                 '5': {
-                    'color__in': ['rare_gold', 'totw_gold'],
-                    'rating__range': (81, 85),
+                    'color__in': ['rare_gold', 'totw_gold', 'legend'],
+                    'rating__range': (81, 90),
                 },
                 '6': {
                     'color__in': ['rare_silver', 'rare_gold', 'legend'] + [x[0] for x in SPECIAL_COLOR_CHOICES],
@@ -177,7 +177,8 @@ class TypeDetail(FormMixin, DetailView):
             **rare_schema[self.object.type][x]
         ).first() for x in rare_rolls]
 
-        type_left = getattr(self.object, f'{self.object.type}_count') - len([x for x in rare_players if self.object.type in x.color])
+        type_left = getattr(self.object, f'{self.object.type}_count') - \
+            len([x for x in rare_players if self.object.type in x.color])
         type_rolls = [map_rolls(random.randint(1, 1000)) for _ in
                       range(type_left)]
 
@@ -206,6 +207,8 @@ class TypeDetail(FormMixin, DetailView):
 
         context['form'] = PackCreationForm()
         context['players'] = self.roll_querysets()
+        context['value'] = sum([x.pack_value for x in context['players']])
+        context['new_players'] = []
 
         if self.request.user.is_authenticated:
             for player in context['players']:
@@ -215,6 +218,8 @@ class TypeDetail(FormMixin, DetailView):
                 if not created:
                     obj.count += 1
                     obj.save()
+                else:
+                    context['new_players'].append(player)
 
         return context
 

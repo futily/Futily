@@ -54,7 +54,7 @@
   line-height: 20px;
 
   border-bottom: 1px solid var(--Color_Border);
-  color: rgb(112, 119, 134);
+  color: var(--Color_Body-2);
 }
 
 .art-ArticleItem_MetaItems {

@@ -4,6 +4,8 @@ from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 from django.urls import reverse
 
+from futily.apps.actions.utils import create_action
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -202,6 +204,16 @@ class CollectionPlayer(models.Model):
 
     def __str__(self):
         return f"{self.collection.user}'s {self.player} ({self.player.rating})"
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        super().save(force_insert, force_update, using, update_fields)
+
+        club = self.player.club
+        collected_players = [x
+                             for x in self.collection.user.cardcollection.players(manager='cards').filter(club=club)]
+
+        if club.total_players == len(collected_players):
+            create_action(self.collection.user, 'completed collection for', club)
 
 
 class CardCollection(models.Model):

@@ -200,7 +200,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     likes = models.IntegerField(default=0)
     has_perfect_chem_links = models.PositiveIntegerField(default=False)
 
-    pack_weight = models.PositiveIntegerField(blank=True, null=True)
+    pack_value = models.PositiveIntegerField(default=0)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
@@ -360,7 +360,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     def get_favourite_absolute_url(self):
         return self._get_permalink_for_page(name='player_favourite', cached=False)
 
-    def render_card(self, size='medium', faded=False, rpp=False, color=None, chemistry=None, has_link=True):
+    def render_card(self, size='medium', faded=False, rpp=False, color=None, chemistry=None, has_link=True, new=False):
         if size not in ['small', 'medium', 'large']:
             raise TypeError('size argument should be 1 of "small", "normal" or "large"')
 
@@ -372,6 +372,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             'color': color,
             'chemistry': chemistry,
             'el': 'a' if has_link else 'div',
+            'new': new,
         })
 
     @property

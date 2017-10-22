@@ -84,6 +84,12 @@
   width: 120px;
 }
 
+.ea-ObjectsTable_Cell-160 {
+  flex: 0 0 160px;
+
+  width: 160px;
+}
+
 .ea-ObjectsTable_Cell-flex {
   flex: 1;
 }

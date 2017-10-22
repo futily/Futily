@@ -12,3 +12,102 @@
 .pck-Detail_Form {
   width: 50%;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.pck-Detail_Header {
+  align-items: center;
+
+  display: flex;
+  margin-bottom: 0.5vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Meta
+|--------------------------------------------------------------------------
+|
+*/
+.pck-Detail_MetaItems {
+  display: flex;
+}
+
+.pck-Detail_MetaItem {
+  position: relative;
+
+  padding-right: var(--Grid_Gutter);
+  padding-left: @padding-right;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:last-child {
+    padding-right: 0;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 4px;
+    right: 0;
+    bottom: @top;
+
+    display: block;
+    width: 1px;
+
+    background-color: rgba(#afc0cb, 0.5);
+  }
+}
+
+.pck-Detail_MetaValue {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+
+  color: var(--Color_Body);
+}
+
+.pck-Detail_MetaKey {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 20px;
+  text-transform: uppercase;
+
+  color: var(--Color_Body-2);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Actions
+|--------------------------------------------------------------------------
+|
+*/
+.pck-Detail_Actions {
+  display: flex;
+  margin-left: auto;
+}
+
+.pck-Detail_Action {
+  display: flex;
+  margin-right: 5px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.pck-Detail_ActionIcon {
+  width: 20px;
+  height: @width;
+  margin-right: 5px;
+}

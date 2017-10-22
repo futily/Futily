@@ -1,0 +1,53 @@
+/*
+|--------------------------------------------------------------------------
+| Section
+|--------------------------------------------------------------------------
+| @namespace: pg-
+|
+*/
+.pg-Section {
+  margin-bottom: 2vr;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.pg-Section_Header {
+  align-items: baseline;
+  justify-content: space-between;
+
+  display: flex;
+  margin-bottom: 1vr;
+  padding-bottom: 15px;
+
+  border-bottom: 2px solid var(--Color_Border);
+}
+
+.pg-Section_Title {
+  @apply --Font-30;
+
+  font-weight: 400;
+}
+
+.pg-Section_Name {
+  @apply --Font-18;
+
+  font-weight: 500;
+}
+
+.pg-Section_Emphasis {
+  font-weight: 500;
+}
+
+.pg-Section_TitleSmall {
+  @apply --Font-16;
+
+  margin-left: 10px;
+
+  font-weight: 400;
+}
+
+.pg-Section_Link {
+  font-weight: 500;
+}

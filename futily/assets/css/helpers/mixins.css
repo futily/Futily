@@ -5,7 +5,24 @@
 |
 */
 @mixin Button {
-  @apply --Button-base;
+  display: inline-block;
+  padding: 0.25vr 10px;
+
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  text-align: center;
+  text-transform: uppercase;
+
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+
+  /* Style reasons */
+  transition: background-color var(--Global_Transition),
+    border var(--Global_Transition), color var(--Global_Transition);
 }
 
 @mixin Button-primary {
@@ -14,6 +31,7 @@
   position: relative;
 
   background-color: var(--Color_Green);
+  color: #fff;
 }
 
 @mixin Button-secondary {

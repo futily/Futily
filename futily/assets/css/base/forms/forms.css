@@ -216,6 +216,10 @@
 */
 .frm-Form_Actions {
   margin-top: 1vr;
+
+  .asi-Block & {
+    margin-top: 0.5vr;
+  }
 }
 
 .frm-Form_Submit {

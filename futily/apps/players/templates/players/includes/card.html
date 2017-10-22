@@ -3,6 +3,9 @@
    data-card-data="{{ player.card_json_data }}">
   <header class="plyr-Card_Header">
     <div class="plyr-Card_Meta">
+      {% if new %}
+        <span class="plyr-Card_New">New</span>
+      {% endif %}
       <span class="plyr-Card_Rating">{{ player.rating }}</span>
       <span class="plyr-Card_Position">{{ player.position }}</span>
       <img alt=""

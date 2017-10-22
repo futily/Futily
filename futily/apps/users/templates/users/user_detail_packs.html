@@ -1,59 +1,65 @@
 {% extends "users/_base.html" %}
 
 {% block side_panel %}
-  <div class="ea-ObjectsTable">
-    <header class="ea-ObjectsTable_Header">
-      <div class="ea-ObjectsTable_Row">
-        <div class="ea-ObjectsTable_RowLeft">
-          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">Pack</div>
-        </div>
-
-        <div class="ea-ObjectsTable_RowRight">
-          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
-            <a class="ea-ObjectsTable_CellTitle"
-               aria-current="false"
-               href="#">
-              Type
-            </a>
-          </div>
-
-          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
-            <a class="ea-ObjectsTable_CellTitle"
-               aria-current="false"
-               href="#">
-              Value
-            </a>
-          </div>
-        </div>
-      </div>
+  <div class="pg-Section">
+    <header class="pg-Section_Header">
+      <h2 class="pg-Section_Title">{{ object }}'s packs</h2>
+      <a class="pg-Section_Link btn-Primary" href="{{ get_packs_page().get_absolute_url() }}">Open packs</a>
     </header>
 
-    <div class="ea-ObjectsTable_Body">
-      {% for object in object.pack_set.order_by('-created') %}
-        <a href="{{ object.get_absolute_url() }}" class="ea-ObjectsTable_Row">
-          <div class="ea-ObjectsTable_RowLeft">
-            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">
-              <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
-            </div>
-          </div>
-
-          <div class="ea-ObjectsTable_RowRight">
-            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
-              <div class="ea-ObjectRow_Cell">
-                <span class="ea-ObjectRow_CellText">{{ object.type }}</span>
-                <span class="ea-ObjectRow_CellTitle">Type</span>
-              </div>
+    <div class="pg-Section_Body">
+      <div class="ea-ObjectsTable">
+        <header class="ea-ObjectsTable_Header">
+          <div class="ea-ObjectsTable_Row">
+            <div class="ea-ObjectsTable_RowLeft">
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">Pack</div>
             </div>
 
-            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
-              <div class="ea-ObjectRow_Cell">
-                <span class="ea-ObjectRow_CellText">{{ object.value }}</span>
-                <span class="ea-ObjectRow_CellTitle">Value</span>
-              </div>
+            <div class="ea-ObjectsTable_RowRight">
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">Type</div>
+
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">Value</div>
+
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">Opened</div>
             </div>
           </div>
-        </a>
-      {% endfor %}
+        </header>
+
+        <div class="ea-ObjectsTable_Body">
+          {% for object in object.pack_set.order_by('-created') %}
+            <a href="{{ object.get_absolute_url() }}" class="ea-ObjectsTable_Row">
+              <div class="ea-ObjectsTable_RowLeft">
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">
+                  <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
+                </div>
+              </div>
+
+              <div class="ea-ObjectsTable_RowRight">
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.type }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Type</span>
+                  </div>
+                </div>
+
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.value | intcomma() }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Value</span>
+                  </div>
+                </div>
+
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.created | date("j F 'y") }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Opened</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

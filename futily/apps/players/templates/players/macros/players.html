@@ -3,16 +3,16 @@
     <ul class="plyr-CardList_Items{% if tight %} plyr-CardList_Items-tight{% endif %}">
       {% for player in players %}
         <li class="plyr-CardList_Item{% if sorts or caller %} plyr-CardList_Item-stacked{% endif %}">
-          {{ player.render_card(faded=card_collection) }}
+          {% if caller %}
+            {{ caller(player) }}
+          {% else %}
+            {{ player.render_card(faded=card_collection) }}
+          {% endif %}
 
           {% if sorts and sorts.current %}
             <p class="plyr-CardList_Text">
               {{ sorts.label }}: {{ player[sorts.current] }}
             </p>
-          {% endif %}
-
-          {% if caller %}
-            {{ caller(player) }}
           {% endif %}
         </li>
       {% endfor %}

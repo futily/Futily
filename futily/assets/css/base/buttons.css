@@ -5,12 +5,23 @@
 | @namespace: btn-
 |
 */
+.btn-Button {
+  @include Button;
+
+  text-transform: none;
+}
+
 .btn-Primary {
   @include Button-primary;
 }
 
 .btn-Secondary {
   @include Button-secondary;
+}
+
+.btn-Small {
+  font-size: 12px;
+  line-height: 20px;
 }
 
 .btn-Large {
