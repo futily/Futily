@@ -79,4 +79,8 @@ class Command(BaseCommand):
                         p = SquadPlayer(player=player, squad=squad, index=index, position=player.position)
                         p.save()
 
+                    ratings = [x.player.rating for x in squad.players.all()]
+                    squad.rating = round(sum(ratings) / len(ratings))
+                    squad.save()
+
                 print('{} created: {}'.format(squad.title, squad.get_absolute_url()))

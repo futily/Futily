@@ -111,7 +111,7 @@ class Squad(SearchMetaBase):
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-modified']
+        ordering = ['-created']
 
     def __str__(self):
         return self.title or f'Squad {self.id}'
