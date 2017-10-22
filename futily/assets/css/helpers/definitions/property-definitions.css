@@ -11,7 +11,8 @@
   --Color_Body-2: #707786;
   --Color_Dark: #222533;
   --Color_Green: #1abc9c;
-  --Color_Grey: #ecf0f1;
+  --Color_Grey: rgb(236, 240, 241);
+  --Color_Grey-dark: rgb(234, 238, 239);
   --Color_Grey-light: #f9fafb;
 
   --Color_Border: #e4e7e9;

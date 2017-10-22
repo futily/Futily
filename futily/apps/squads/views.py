@@ -4,7 +4,8 @@ from collections import OrderedDict
 
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.text import slugify
-from django.views.generic import DetailView, FormView, ListView, UpdateView
+from django.views.generic import (DeleteView, DetailView, FormView, ListView,
+                                  UpdateView)
 from django.views.generic.base import ContextMixin, TemplateView, View
 
 from futily.apps.actions.utils import create_action
@@ -359,6 +360,19 @@ class SquadDetail(BaseBuilder, DetailView):
         context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
 
         return context
+
+
+class SquadCopy(BaseBuilder, DeleteView):
+    model = Squad
+
+    def dispatch(self, request, *args, **kwargs):
+        obj = self.get_object()
+        obj.pk = None
+        obj.user = request.user
+        obj.save()
+        obj.players.all().update(squad=obj)
+
+        return HttpResponseRedirect(obj.get_update_url())
 
 
 class SquadUpdate(BaseBuilder, UpdateView):

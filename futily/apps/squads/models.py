@@ -133,6 +133,9 @@ class Squad(SearchMetaBase):
     def get_update_url(self):
         return self._get_permalink_for_page('squad-update')
 
+    def get_copy_url(self):
+        return self._get_permalink_for_page('squad-copy')
+
     def get_players(self):
         indexes = [index for index in range(0, 11)]
 

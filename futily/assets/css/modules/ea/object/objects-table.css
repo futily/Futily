@@ -20,17 +20,16 @@
   color: var(--Color_Body);
 
   .ea-ObjectsTable_Header & {
-    background-color: #ecf0f1;
+    background-color: var(--Color_Grey);
   }
 
   &:nth-child(even) {
-    background-color: #f9fafb;
+    background-color: var(--Color_Grey-light);
   }
 
   .ea-ObjectsTable_Body & {
     &:hover {
-      background-color: var(--Color_Dark);
-      color: #fff;
+      background-color: var(--Color_Grey-dark);
     }
   }
 }
@@ -56,6 +55,8 @@
 |
 */
 .ea-ObjectsTable_Cell {
+  justify-content: center;
+
   display: flex;
   padding: 0.5vr 10px;
 
@@ -77,6 +78,8 @@
 }
 
 .ea-ObjectsTable_Cell-left {
+  justify-content: flex-start;
+
   text-align: left;
 }
 

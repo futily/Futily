@@ -14,6 +14,8 @@
 */
 .ea-ObjectRow_Cell {
   position: relative;
+
+  width: 100%;
 }
 
 .ea-ObjectRow_CellTitle {
@@ -25,6 +27,7 @@
 
   font-weight: 700;
   text-transform: uppercase;
+  white-space: nowrap;
 
   opacity: 0;
   visibility: hidden;
@@ -34,5 +37,35 @@
   .ea-ObjectsTable_Row:hover & {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Actions
+|--------------------------------------------------------------------------
+|
+*/
+.ea-ObjectRow_Actions {
+  justify-content: center;
+
+  display: flex;
+
+  opacity: 0;
+
+  .ea-ObjectsTable_Row:hover & {
+    opacity: 1;
+  }
+}
+
+.ea-ObjectRow_Action {
+  margin-right: 8px;
+
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+
+  &:last-child {
+    margin-right: 0;
   }
 }
