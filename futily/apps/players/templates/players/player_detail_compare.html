@@ -129,7 +129,7 @@
         <div class="plyr-DetailCompare">
           <div class="plyr-DetailCompare_Player plyr-DetailCompare_Player-fixed">
             <h2 class="plyr-Detail_HeaderTitle">{{ player.name }}</h2>
-            <p class="plyr-Detail_Type">{{ player.player_type | capitalize() }}</p>
+            <p class="plyr-Detail_Text">{{ player.player_type | capitalize() }}</p>
 
             <div class="plyr-DetailCompare_Card">
               {{ player.render_card('large') }}
@@ -138,7 +138,7 @@
 
           <div class="plyr-DetailCompare_Player plyr-DetailCompare_Player-search">
             <h2 class="plyr-Detail_HeaderTitle">{{ other_player.name }}</h2>
-            <p class="plyr-Detail_Type">{{ other_player.player_type | capitalize() }}</p>
+            <p class="plyr-Detail_Text">{{ other_player.player_type | capitalize() }}</p>
 
             <div class="plyr-DetailCompare_Search">
               {{ search.player_search(

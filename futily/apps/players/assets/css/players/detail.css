@@ -37,11 +37,10 @@
   @apply --Font-24;
 }
 
-.plyr-Detail_Type {
+.plyr-Detail_Text {
   @apply --Font-14;
 
   font-weight: 500;
-  text-transform: uppercase;
 }
 
 .plyr-Detail_Ratings {

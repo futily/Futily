@@ -33,7 +33,9 @@
 
   <div class="plyr-Detail_HeaderContent">
     <h2 class="plyr-Detail_HeaderTitle">{{ player.name }}</h2>
-    <p class="plyr-Detail_Type">{{ player.player_type | capitalize() }}</p>
+    <p class="plyr-Detail_Text">
+      Is from <a href="{{ player.nation.get_absolute_url() }}">{{ player.nation }} <img src="{{ static('ea-images/nations/{}.png'.format(player.nation.ea_id)) }}" width="20"></a> and plays for <a href="{{ player.club.get_absolute_url() }}">{{ player.club }} <img src="{{ static('ea-images/clubs/{}.png'.format(player.club.ea_id)) }}" width="20"></a> in league <a href="{{ player.league.get_absolute_url() }}">{{ player.league }} <img src="{{ static('ea-images/leagues/{}.png'.format(player.league.ea_id)) }}" width="20"></a>
+    </p>
 
     <div class="plyr-Detail_Ratings">
       <div class="plyr-FutilyRatings">
