@@ -12,6 +12,12 @@ class Packs(ContentBase):
     def __str__(self):
         return self.page.title
 
+    @property
+    def navigation_items(self):
+        return [
+            ('Leaderboard', self.page.reverse('leaderboard')),
+        ]
+
 
 color_choices = [
     ('award_winner', 'Award winner'),

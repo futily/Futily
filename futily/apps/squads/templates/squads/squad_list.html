@@ -103,6 +103,10 @@
       {% endfor %}
     </div>
   </div>
+
+  <div class="pg-Pagination">
+    {{ render_pagination(page_obj) }}
+  </div>
 {% endblock %}
 
 {% block aside %}

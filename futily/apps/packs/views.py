@@ -12,6 +12,13 @@ from .forms import PackCreationForm
 from .models import Pack, PackType
 
 
+class PackLeaderboard(ListView):
+    model = Pack
+    ordering = ['-value']
+    paginate_by = 50
+    template_name = 'packs/pack_leaderboard.html'
+
+
 class TypeList(ListView):
     model = PackType
 

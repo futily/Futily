@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} pack simulator</h1>
+          <p class="pg-Strapline_Text">Leaderboard</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="ea-ObjectsTable">
+    <header class="ea-ObjectsTable_Header">
+      <div class="ea-ObjectsTable_Row">
+        <div class="ea-ObjectsTable_RowLeft">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120 ea-ObjectsTable_Cell-left">Value</div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex">Pack</div>
+        </div>
+
+        <div class="ea-ObjectsTable_RowRight">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">User</div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">Opened</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="ea-ObjectsTable_Body">
+      {% for object in object_list %}
+        <a href="{{ object.get_absolute_url() }}" class="ea-ObjectsTable_Row">
+          <div class="ea-ObjectsTable_RowLeft">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">{{ object.value }}</div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left ea-ObjectsTable_Cell-df">
+              <div class="pck-Pack pck-Pack-{{ object.type.type }}">
+                <div class="pck-Pack_Pack">
+                  {% set random_player = ['dele', 'griezemann', 'muller', 'ronaldo'] | random() %}
+                  {% set random_choice = [1, 2, 3] | random() %}
+                  <img class="pck-Pack_Player" src="{{ static('build/img/ea/packs/players/{}/{}.png'.format(random_player, random_choice)) }}">
+                </div>
+              </div>
+              <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
+            </div>
+          </div>
+
+          <div class="ea-ObjectsTable_RowRight">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.user }}</span>
+                <span class="ea-ObjectRow_CellTitle">User</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">
+              <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.created | date("j F 'y") }}</span>
+                <span class="ea-ObjectRow_CellTitle">Opened</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="pg-Pagination">
+    {{ render_pagination(page_obj) }}
+  </div>
+{% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+
+    {% block aside_blocks_above %}{% endblock %}
+
+    <div class="asi-Block">
+      <h4 class="asi-Block_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
+
+      <ul class="asi-LinkList">
+        {% for link in aside_links %}
+          <li class="asi-LinkList_Item">
+            <a class="asi-LinkList_Link"
+               href="{{ link.url }}"
+               aria-current="{{ link.here }}">Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% block aside_blocks %}{% endblock %}
+  </div>
+{% endblock %}

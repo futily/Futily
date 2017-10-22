@@ -24,6 +24,16 @@
   @media (--xlg) {
     padding: 0.5vr 40px 1vr;
   }
+
+  .ea-ObjectsTable_Cell & {
+    display: block;
+    width: auto;
+    margin-right: 8px;
+    padding: 0;
+
+    background-color: transparent;
+    border: 0;
+  }
 }
 
 /*
@@ -40,6 +50,23 @@
   height: 249px;
 
   background-size: 100%;
+
+  .pck-Pack-bronze & {
+    background-image: resolve('ea/packs/backgrounds/bronze.png');
+  }
+
+  .pck-Pack-silver & {
+    background-image: resolve('ea/packs/backgrounds/silver.png');
+  }
+
+  .pck-Pack-gold & {
+    background-image: resolve('ea/packs/backgrounds/gold.png');
+  }
+
+  .ea-ObjectsTable_Cell & {
+    width: 19px;
+    height: 30px;
+  }
 
   &::after {
     content: '';
@@ -63,18 +90,6 @@
     .pck-Pack-gold & {
       background-image: resolve('ea/packs/overlays/gold.png');
     }
-  }
-
-  .pck-Pack-bronze & {
-    background-image: resolve('ea/packs/backgrounds/bronze.png');
-  }
-
-  .pck-Pack-silver & {
-    background-image: resolve('ea/packs/backgrounds/silver.png');
-  }
-
-  .pck-Pack-gold & {
-    background-image: resolve('ea/packs/backgrounds/gold.png');
   }
 }
 
