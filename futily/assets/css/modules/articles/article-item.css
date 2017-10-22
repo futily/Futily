@@ -1,0 +1,82 @@
+/*
+|--------------------------------------------------------------------------
+| Article item
+|--------------------------------------------------------------------------
+| @namespace: art-
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.art-ArticleItem_Header {
+  margin-bottom: 0.75vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Body
+|--------------------------------------------------------------------------
+|
+*/
+.art-ArticleItem_Title {
+  margin-bottom: 0.25vr;
+
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.art-ArticleItem_TitleLink {
+  color: var(--Color_Dark);
+
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--Color_Anchor);
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Meta
+|--------------------------------------------------------------------------
+|
+*/
+.art-ArticleItem_Meta {
+  margin-bottom: 0.5vr;
+  padding-bottom: 0.5vr;
+
+  font-size: 14px;
+  line-height: 20px;
+
+  border-bottom: 1px solid var(--Color_Border);
+  color: rgb(112, 119, 134);
+}
+
+.art-ArticleItem_MetaItems {
+  flex-wrap: wrap;
+
+  display: flex;
+}
+
+.art-ArticleItem_MetaItem {
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+|
+*/
+.art-ArticleItem_Footer {
+  margin-top: 1vr;
+}

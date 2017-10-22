@@ -199,6 +199,24 @@
   .plyr-Card-large & {
     width: 134px;
   }
+
+  .plyr-Card-halloween & {
+    animation: HaloweenGlow 2.5s infinite linear;
+  }
+}
+
+@keyframes HaloweenGlow {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(0, 255, 10, 0));
+  }
+
+  50% {
+    filter: drop-shadow(0 -2px 8px rgba(0, 255, 10, 1));
+  }
+
+  100% {
+    filter: drop-shadow(0 0 0 rgba(0, 255, 10, 0));
+  }
 }
 
 /*
@@ -211,7 +229,9 @@
   display: grid;
 
   .plyr-Card-small & {
-    display: none;
+    display: block;
+
+    text-align: center;
   }
 
   .plyr-Card-medium & {
@@ -235,6 +255,12 @@
 
   color: var(--Card_Color-name);
   overflow-x: auto;
+
+  .plyr-Card-small & {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 20px;
+  }
 
   .plyr-Card-medium & {
     margin-top: 1px;
@@ -266,6 +292,10 @@
 
   color: var(--Card_Color-extra);
 
+  .plyr-Card-small & {
+    display: none;
+  }
+
   .plyr-Card-medium & {
     @apply --Font-14;
 
@@ -292,6 +322,10 @@
   grid-template-columns: repeat(2, 1fr);
 
   display: grid;
+
+  .plyr-Card-small & {
+    display: none;
+  }
 
   .plyr-Card-medium & {
     --RowHeight: 20px;

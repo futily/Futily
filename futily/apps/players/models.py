@@ -40,7 +40,7 @@ class Source(models.Model):
     title = models.CharField(max_length=255)
     short_title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    url = models.CharField(max_length=255, blank=True, null=True)
+    ea_url = models.CharField(max_length=255, blank=True, null=True)
 
     order = models.PositiveIntegerField(default=1)
 

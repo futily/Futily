@@ -1,0 +1,18 @@
+/*
+|--------------------------------------------------------------------------
+| Article
+|--------------------------------------------------------------------------
+| @namespace: pg-
+|
+*/
+.pg-Article_Header {
+  margin-bottom: 1vr;
+}
+
+.pg-Article_Title {
+  margin-bottom: 0.5vr;
+
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 42px;
+}

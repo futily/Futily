@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Prefetch
+from django.utils.text import slugify
 
 FORMATION_CHOICES = [
     ('3412', '3-4-1-2'),
@@ -43,9 +44,15 @@ class Squads(ContentBase):
 
     @property
     def navigation_items(self):
-        return [
+        regular_items = [
             ('Builder', self.page.reverse('builder')),
+            ("All TOTW's", self.page.reverse('totws')),
         ]
+
+        totws = [(squad.short_title, squad.get_absolute_url())
+                 for squad in self.squad_set.filter(is_special=True, short_title__icontains='totw')]
+
+        return regular_items + totws
 
 
 class SquadManager(PageBaseManager):
@@ -60,6 +67,9 @@ class Squad(SearchMetaBase):
     objects = SquadManager()
 
     title = models.CharField(max_length=255, blank=True, null=True)
+    short_title = models.CharField(max_length=255, blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
 
     page = models.ForeignKey('Squads', blank=False, null=True)
     user = models.ForeignKey('users.User', blank=True, null=True)
@@ -94,11 +104,23 @@ class Squad(SearchMetaBase):
     web_app_import = models.BooleanField(default=False)
     web_app_url = models.CharField(max_length=100, blank=True, null=True)
 
+    small_image_url = models.CharField(max_length=255, blank=True, null=True)
+    large_image_url = models.CharField(max_length=255, blank=True, null=True)
+
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ['-modified']
+
     def __str__(self):
         return self.title or f'Squad {self.id}'
+
+    def clean(self):
+        if self.is_special:
+            self.slug = slugify(self.short_title)
+
+        super(Squad, self).clean()
 
     def _get_permalink_for_page(self, name):
         return self.page.page.reverse(name, kwargs={
@@ -115,9 +137,15 @@ class Squad(SearchMetaBase):
         indexes = [index for index in range(0, 11)]
 
         for player in self.players.all():
-            indexes[player.index] = player
+            is_team = player.index <= 10
+
+            if is_team:
+                indexes[player.index] = player
 
         return [None if isinstance(x, int) else x for x in indexes]
+
+    def get_player_objects(self):
+        return sorted([x.player for x in self.players.all()], key=lambda x: x.rating, reverse=True)
 
 
 def get_default_squads_page():

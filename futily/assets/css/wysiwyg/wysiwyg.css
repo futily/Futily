@@ -14,6 +14,10 @@
 .wys-WYSIWYG {
   p {
     margin-bottom: 1vr;
+
+    .art-ArticleItem_Description & {
+      margin-bottom: 0.25vr;
+    }
   }
 
   ul {

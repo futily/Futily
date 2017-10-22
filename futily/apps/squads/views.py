@@ -313,6 +313,43 @@ class SquadList(ListView):
         return context
 
 
+class TotwList(ListView):
+    model = Squad
+    paginate_by = 10
+    template_name = 'squads/totw_list.html'
+
+    def get_queryset(self):
+        return super(TotwList, self).get_queryset().filter(page__page=self.request.pages.current, is_special=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['aside_links'] = [
+            {
+                'title': 'Players',
+                'url': get_players_page().get_absolute_url(),
+                'here': str(self.request.path == get_players_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Clubs',
+                'url': get_clubs_page().get_absolute_url(),
+                'here': str(self.request.path == get_clubs_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Leagues',
+                'url': get_leagues_page().get_absolute_url(),
+                'here': str(self.request.path == get_leagues_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Nations',
+                'url': get_nations_page().get_absolute_url(),
+                'here': str(self.request.path == get_nations_page().get_absolute_url()).lower(),
+            },
+        ]
+
+        return context
+
+
 class SquadDetail(BaseBuilder, DetailView):
     model = Squad
 

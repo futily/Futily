@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% import "players/macros/players.html" as player_macros %}
+
+{% block content_above %}
+  <div class="pg-Strapline">
+    <div class="pg-Strapline_Inner">
+      <div class="pg-Strapline_Body">
+        <div class="pg-Strapline_Content">
+          <h1 class="pg-Strapline_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Totw</h1>
+          <p class="pg-Strapline_Text">Latest Fifa {{ settings.CURRENT_FIFA_VERSION }} Team of the Week informs</p>
+        </div>
+
+        <div class="pg-Strapline_Advert">
+          <img alt="" src="http://placehold.it/728x90">
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block main %}
+  <div class="pg-Article_Header">
+    <h2 class="pg-Article_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Team of the Weeks</h2>
+    {# TODO: Get Tom to write this #}
+    <p class="pg-Article_Text">The FIFA Ultimate Team of the Week (TOTW) is released by EA each Wednesday, and represent players that have played well the previous week in real life. These cards are released as 'In Form' for that week only, and have boosted stats and altered card art.</p>
+  </div>
+
+  <div class="lst-Articles">
+    <ul class="lst-Articles_Items">
+      {% for squad in squad_list %}
+        <li class="lst-Articles_Item">
+          <article class="art-ArticleItem">
+            <header class="art-ArticleItem_Header">
+              <h2 class="art-ArticleItem_Title">
+                <a href="{{ squad.get_absolute_url }}" class="art-ArticleItem_TitleLink">
+                  {{ squad.title }}
+                </a>
+              </h2>
+
+              <div class="art-ArticleItem_Meta">
+                <ul class="art-ArticleItem_MetaItems">
+                  <li class="art-ArticleItem_MetaItem">{{ squad.rating }} Average Rating</li>
+                  <li class="art-ArticleItem_MetaItem">124 Likes</li>
+                  <li class="art-ArticleItem_MetaItem">
+                    <time datetime="{{ squad.created }}"></time>
+                    Created at {{ squad.created | date('D jS Y') }}
+                  </li>
+                </ul>
+              </div>
+
+              {% if squad.description %}
+                <div class="art-ArticleItem_Description">
+                  <div class="wys-WYSIWYG">
+                    {{ squad.description | html() }}
+                  </div>
+                </div>
+              {% endif %}
+            </header>
+
+            <div class="art-ArticleItem_Body">
+              {{ player_macros.small_card_list(squad.get_player_objects()[:11]) }}
+            </div>
+
+            <footer class="art-ArticleItem_Footer">
+              <a class="art-ArticleItem_Link btn-Primary" href="{{ squad.get_absolute_url() }}">
+                View squad
+              </a>
+            </footer>
+          </article>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  {% if page_obj.has_other_pages() %}
+    <div class="pg-Pagination">
+      {{ render_pagination(page_obj) }}
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block aside %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <img alt="" src="http://placehold.it/300x250">
+    </div>
+
+    {% block aside_blocks_above %}{% endblock %}
+
+    <div class="asi-Block">
+      <h4 class="asi-Block_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
+
+      <ul class="asi-LinkList">
+        {% for link in aside_links %}
+          <li class="asi-LinkList_Item">
+            <a class="asi-LinkList_Link"
+               href="{{ link.url }}"
+               aria-current="{{ link.here }}">Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    {% block aside_blocks %}{% endblock %}
+  </div>
+{% endblock %}

@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^builder/import/(?P<id>[A-Za-z0-9]+)$', views.BuilderImport.as_view(), name='builder_import'),
     url(r'^(?P<pk>[0-9]+)/$', views.SquadDetail.as_view(), name='squad'),
     url(r'^(?P<pk>[0-9]+)/update/$', views.SquadUpdate.as_view(), name='squad-update'),
+    url(r'^totw/$', views.TotwList.as_view(), name='totws'),
 ]

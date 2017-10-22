@@ -211,6 +211,7 @@
   &.plyr-Card-small {
     --Card_Color-rating: #000;
     --Card_Color-position: #000;
+    --Card_Color-name: #ff6f09;
   }
 }
 .plyr-Card-marquee {
@@ -405,6 +406,7 @@
   &.plyr-Card-small {
     --Card_Color-rating: #ca945f;
     --Card_Color-position: #ca945f;
+    --Card_Color-name: #301605;
   }
 }
 .plyr-Card-totw_gold {
@@ -419,6 +421,7 @@
   &.plyr-Card-small {
     --Card_Color-rating: #e1c775;
     --Card_Color-position: #e1c775;
+    --Card_Color-name: #1e1d1a;
   }
 }
 .plyr-Card-totw_silver {
@@ -433,6 +436,7 @@
   &.plyr-Card-small {
     --Card_Color-rating: #cdd9e1;
     --Card_Color-position: #cdd9e1;
+    --Card_Color-name: #1e1d1a;
   }
 }
 .plyr-Card-toty {

@@ -19,3 +19,15 @@
     </ul>
   </div>
 {% endmacro %}
+
+{% macro small_card_list(players) %}
+  <div class="plyr-SmallCardList">
+    <ul class="plyr-SmallCardList_Items">
+      {% for player in players %}
+        <li class="plyr-SmallCardList_Item">
+          {{ player.render_card(size='small') }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}

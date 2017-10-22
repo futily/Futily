@@ -14,10 +14,18 @@
         {% if entry.children %}
           <ul class="nav-Navigation_Dropdown">
             {% for sub_entry in entry.children %}
-              <li class="nav-Navigation_DropdownItem">
-                <a class="nav-Navigation_DropdownLink"
-                   href="{{ sub_entry.url }}">{{ sub_entry.title }}</a>
-              </li>
+              {% if not sub_entry.url %}
+                <li class="nav-Navigation_DropdownItem nav-Navigation_DropdownItem-separator">
+                  {{ sub_entry.title }}
+                </li>
+              {% else %}
+                <li class="nav-Navigation_DropdownItem">
+                  <a class="nav-Navigation_DropdownLink"
+                     href="{{ sub_entry.url }}">
+                    {{ sub_entry.title }}
+                  </a>
+                </li>
+              {% endif %}
             {% endfor %}
           </ul>
         {% endif %}

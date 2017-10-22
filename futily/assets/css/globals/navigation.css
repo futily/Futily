@@ -87,11 +87,16 @@
   }
 }
 
+.nav-Navigation_DropdownItem-separator {
+  padding-top: 0.25vr;
+  padding-bottom: @padding-top;
+}
+
 .nav-Navigation_DropdownLink {
   @apply --Font-14;
 
   display: block;
-  padding: 0.66666vr calc(var(--Grid_Gutter) * 2);
+  padding: 8px 20px;
 
   white-space: nowrap;
 

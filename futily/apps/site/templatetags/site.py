@@ -34,6 +34,7 @@ def _navigation_entries(context, pages, section=None, is_json=False):
                 'url': url,
                 'title': label,
                 'here': request.path.startswith(url),
+                'separator': label == '-',
                 'children': []
             } for (label, url) in navigation_items]
 
