@@ -12,6 +12,7 @@ export default class {
       input: el.querySelector('.bld-Search_Input'),
       results: el.querySelector('.bld-Search_Results'),
       items: el.querySelector('.plyr-CardList_Items'),
+      loading: el.querySelector('.bld-Search_Loading'),
       controls: {
         prev: el.querySelector('.bld-Search_Prev'),
         next: el.querySelector('.bld-Search_Next')
@@ -84,6 +85,7 @@ export default class {
 
     this.open = false
     this.term = ''
+    this.loading = false
     this.index = null
     this.results = []
     this.pages = {
@@ -100,6 +102,10 @@ export default class {
         this._next = val
 
         _this.els.controls.next.disabled = !this._next
+        _this.els.controls.next.classList.toggle(
+          'bld-Search_Next-hidden',
+          !this._next
+        )
       },
 
       get prev () {
@@ -110,6 +116,10 @@ export default class {
         this._prev = val
 
         _this.els.controls.prev.disabled = !this._prev
+        _this.els.controls.prev.classList.toggle(
+          'bld-Search_Prev-hidden',
+          !this._prev
+        )
       }
     }
 
@@ -122,10 +132,17 @@ export default class {
 
     this.els.input.addEventListener('pointerdown', e => e.stopPropagation())
     const searchHandler = async e => {
+      this.loading = true
       const { value } = e.target
       if (value.length <= 2) return
 
       this.term = value
+      Object.assign(this.pages, {
+        next: '',
+        prev: '',
+        current: 1,
+        total: 1
+      })
       this.results = await this.getResults(
         `/api/players?query=${this.term}&page=${this.pages.current}`
       )
@@ -137,7 +154,7 @@ export default class {
     this.els.controls.next.addEventListener('click', this.nextResults)
     this.els.controls.prev.addEventListener('click', this.prevResults)
 
-    this.els.results.addEventListener('pointerdown', e => {
+    this.els.results.addEventListener('click', e => {
       if (e.target.closest('.plyr-CardList_Item') === false) return
 
       const target = e.target.closest('.plyr-CardList_Item')
@@ -167,12 +184,12 @@ export default class {
     this.open = false
     this.term = ''
     this.results = []
-    this.pages = {
+    Object.assign(this.pages, {
       next: '',
       prev: '',
       current: 1,
       total: 1
-    }
+    })
   }
 
   async getResults (url) {
@@ -185,10 +202,16 @@ export default class {
       total: data.pages.total
     })
 
+    this.loading = false
+
     return data.results
   }
 
-  async nextResults () {
+  async nextResults (e) {
+    e.stopPropagation()
+
+    this.loading = true
+
     this.results = await this.getResults(
       `/api/players?query=${this.term}&page=${this.pages.next}`
     )
@@ -196,7 +219,11 @@ export default class {
     return this
   }
 
-  async prevResults () {
+  async prevResults (e) {
+    e.stopPropagation()
+
+    this.loading = true
+
     this.results = await this.getResults(
       `/api/players?query=${this.term}&page=${this.pages.prev}`
     )
@@ -255,6 +282,23 @@ export default class {
     this.els.items.parentNode.replaceChild(cNode, this.els.items)
     this.els.items = cNode
     this.els.resultEls = []
+  }
+
+  get loading () {
+    return this._loading
+  }
+
+  set loading (val) {
+    this._loading = val
+
+    this.els.loading.classList.toggle(
+      'bld-Search_Loading-visible',
+      this._loading
+    )
+    this.els.results.classList.toggle(
+      'bld-Search_Results-loading',
+      this._loading
+    )
   }
 
   get open () {

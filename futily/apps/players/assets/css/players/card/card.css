@@ -24,8 +24,12 @@
     margin-left: auto;
   }
 
+  .bld-Search_Results & {
+    cursor: pointer;
+  }
+
   .bld-Search_Results-loading & {
-    opacity: 0.5;
+    opacity: 0.8;
   }
 }
 
