@@ -248,7 +248,7 @@ class PlayerFilterSorted(ContextMixin, View):
                     {'key': 'rating_attacker', 'label': 'Attacker'},
                     {'key': 'rating_creator', 'label': 'Creator'},
                     {'key': 'rating_defender', 'label': 'Defender'},
-                    {'key': 'rating_pirlo', 'label': 'Pirlo'},
+                    {'key': 'rating_creative', 'label': 'Pirlo'},
                     {'key': 'rating_beast', 'label': 'Beast'},
                 ]
             },

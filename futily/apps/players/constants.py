@@ -256,7 +256,7 @@ SORT_GET_TO_LABEL = {
     'rating_attacker': 'Attacker',
     'rating_creator': 'Creator',
     'rating_defender': 'Defender',
-    'rating_pirlo': 'Pirlo',
+    'rating_creative': 'Pirlo',
     'rating_beast': 'Beast',
     'card_att_1': 'Pace',
     'card_att_2': 'Shooting',

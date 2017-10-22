@@ -155,9 +155,10 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     vision = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
     volleys = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
 
-    rating_vidic = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
-    rating_pirlo = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
-    rating_ibra = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
+    rating_defensive = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
+    rating_anchor = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
+    rating_creative = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
+    rating_attacking = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
 
     gk_diving = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
     gk_handling = models.PositiveIntegerField(default=0, null=True, blank=False, validators=STAT_VALIDATOR)
@@ -227,13 +228,13 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             .decode('utf-8')
             for x in ['name', 'first_name', 'last_name', 'common_name']
         ]
-        first_name = unicodedata\
-            .normalize('NFKD', self.first_name)\
-            .encode('ascii', 'ignore')\
+        first_name = unicodedata \
+            .normalize('NFKD', self.first_name) \
+            .encode('ascii', 'ignore') \
             .decode('utf-8')
-        last_name = unicodedata\
-            .normalize('NFKD', self.last_name)\
-            .encode('ascii', 'ignore')\
+        last_name = unicodedata \
+            .normalize('NFKD', self.last_name) \
+            .encode('ascii', 'ignore') \
             .decode('utf-8')
         self.english_names.append(f'{first_name} {last_name}')
 
@@ -250,55 +251,56 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
         )
 
         rating_schemas = {
-            'vidic': {
-                'acceleration': 0.08,
-                'positioning': 0.04,
-                'short_passing': 0.02,
-                'vision': 0.02,
-                'agility': 0.05,
-                'ball_control': 0.02,
+            'defensive': {
+                'ball_control': 0.09,
+                'reactions': 0.09,
                 'heading_accuracy': 0.1,
-                'interceptions': 0.1,
-                'marking': 0.1,
+                'interceptions': 0.09,
+                'marking': 0.09,
                 'sliding_tackle': 0.1,
-                'standing_tackle': 0.15,
-                'aggression': 0.02,
+                'standing_tackle': 0.09,
+                'aggression': 0.09,
                 'jumping': 0.1,
-                'strength': 0.1,
+                'stamina': 0.09,
+                'strength': 0.08,
             },
-            'pirlo': {
-                'finishing': 0.05,
-                'long_shots': 0.08,
+            'anchor': {
+                'acceleration': 0.09,
+                'short_passing': 0.1,
+                'agility': 0.09,
+                'balance': 0.1,
+                'reactions': 0.1,
+                'interceptions': 0.1,
+                'sliding_tackle': 0.1,
+                'standing_tackle': 0.1,
+                'aggression': 0.1,
+                'stamina': 0.11,
+            },
+            'creative': {
+                'long_shots': 0.1,
                 'positioning': 0.1,
-                'shot_power': 0.02,
-                'curve': 0.05,
-                'free_kick_accuracy': 0.08,
-                'long_passing': 0.15,
-                'short_passing': 0.17,
-                'vision': 0.13,
-                'balance': 0.05,
+                'shot_power': 0.1,
+                'crossing': 0.1,
+                'short_passing': 0.1,
+                'vision': 0.1,
                 'ball_control': 0.1,
-                'dribbling': 0.02,
+                'dribbling': 0.1,
+                'reactions': 0.1,
+                'stamina': 0.1,
             },
-            'ibra': {
-                'acceleration': 0.05,
-                'finishing': 0.15,
-                'long_shots': 0.05,
-                'penalties': 0.02,
-                'positioning': 0.08,
-                'shot_power': 0.07,
-                'volleys': 0.05,
-                'curve': 0.02,
-                'free_kick_accuracy': 0.02,
-                'short_passing': 0.05,
-                'agility': 0.06,
-                'balance': 0.06,
-                'ball_control': 0.1,
-                'reactions': 0.05,
-                'heading_accuracy': 0.05,
-                'aggression': 0.02,
-                'jumping': 0.05,
-                'strength': 0.05,
+            'attacking': {
+                'acceleration': 0.08,
+                'finishing': 0.09,
+                'long_shots': 0.08,
+                'positioning': 0.09,
+                'shot_power': 0.08,
+                'volleys': 0.08,
+                'curve': 0.08,
+                'agility': 0.08,
+                'ball_control': 0.09,
+                'dribbling': 0.08,
+                'reactions': 0.09,
+                'stamina': 0.08,
             },
         }
 
@@ -307,9 +309,10 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
 
             return acc
 
-        self.rating_vidic = reduce(reduceSchemas, rating_schemas['vidic'].items(), 0)
-        self.rating_pirlo = reduce(reduceSchemas, rating_schemas['pirlo'].items(), 0)
-        self.rating_ibra = reduce(reduceSchemas, rating_schemas['ibra'].items(), 0)
+        self.rating_defensive = reduce(reduceSchemas, rating_schemas['defensive'].items(), 0)
+        self.rating_anchor = reduce(reduceSchemas, rating_schemas['anchor'].items(), 0)
+        self.rating_creative = reduce(reduceSchemas, rating_schemas['creative'].items(), 0)
+        self.rating_attacking = reduce(reduceSchemas, rating_schemas['attacking'].items(), 0)
 
         self.has_perfect_chem_links = bool(self.get_chemistry_players(amount=1)['perfect'])
 
