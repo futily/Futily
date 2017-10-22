@@ -1,8 +1,6 @@
-{% extends "squads/builder_base.html" %}
+{% extends "squads/_builder_edit_base.html" %}
 
 {% block strapline_text %}Create your Fifa {{ settings.CURRENT_FIFA_VERSION }} squad{% endblock %}
-
-{% block builder_class %}js-Builder{% endblock %}
 
 {% block builder_formation %}442{% endblock %}
 
@@ -51,41 +49,6 @@
       </div>
     </li>
   {% endfor %}
-{% endblock %}
-
-{% block builder_players_after %}
-  <div class="bld-Search" aria-current="false">
-    <div class="bld-Search_Inner">
-      <header class="bld-Search_Header">
-        <span class="bld-Search_Icon">{% include 'search.svg' %}</span>
-        <input class="bld-Search_Input" type="search" placeholder="Search for player" />
-      </header>
-
-      <div class="bld-Search_Body">
-        <div class="bld-Search_Results">
-          <button rel="prev" class="bld-Search_Prev">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
-              <path d="M88.6 121.3c.8.8 1.8 1.2 2.9 1.2s2.1-.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8 0l-54 53.9c-1.6 1.6-1.6 4.2 0 5.8l54 53.9z" />
-            </svg>
-          </button>
-
-          <div class="bld-Search_Items">
-            <ul class="plyr-CardList_Items"></ul>
-          </div>
-
-          <button rel="next" class="bld-Search_Next">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
-              <path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z" />
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="bld-Search_Loading">
-        <span class="bld-Search_LoadingIcon">{% include 'loading.svg' %}</span>
-      </div>
-    </div>
-  </div>
 {% endblock %}
 
 {% block builder_footer %}

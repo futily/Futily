@@ -281,6 +281,7 @@ class BuilderImport(View):
 
 class SquadList(ListView):
     model = Squad
+    paginate_by = 50
 
     def get_queryset(self):
         return super(SquadList, self).get_queryset().filter(page__page=self.request.pages.current)

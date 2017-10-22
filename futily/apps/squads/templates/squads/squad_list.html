@@ -104,9 +104,11 @@
     </div>
   </div>
 
-  <div class="pg-Pagination">
-    {{ render_pagination(page_obj) }}
-  </div>
+  {% if page_obj.has_other_pages() %}
+    <div class="pg-Pagination">
+      {{ render_pagination(page_obj) }}
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block aside %}

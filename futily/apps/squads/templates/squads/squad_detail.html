@@ -1,7 +1,25 @@
-{% extends "squads/builder_base.html" %}
+{% extends "squads/_builder_base.html" %}
 
 {% block strapline_text %}
   {{ object.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}
+{% endblock %}
+
+{% block main %}
+  <div class="bld-Builder_Above">
+    <div class="bld-Builder_AboveInner">
+      <div class="pg-Section">
+        <header class="pg-Section_Header">
+          <h2 class="pg-Section_Title">{{ object.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}</h2>
+
+          {% if user.is_authenticated and squad.user != user %}
+            <a class="pg-Section_Link btn-Primary" href="{{ squad.get_copy_url() }}">Copy squad</a>
+          {% endif %}
+        </header>
+      </div>
+    </div>
+  </div>
+
+  {{ super() }}
 {% endblock %}
 
 {% block builder_class %}js-Detail{% endblock %}
