@@ -16,6 +16,8 @@ from django.utils.datetime_safe import date
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 
+from futily.apps.squads.models import Squad
+
 from .constants import (BASE_COLOR_CHOICES, POSITION_CHOICES,
                         POSITION_LINE_CHOICES, QUALITY_CHOICES,
                         SPECIAL_COLOR_CHOICES, WORKRATE_CHOICES)
@@ -359,6 +361,9 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
 
     def get_favourite_absolute_url(self):
         return self._get_permalink_for_page(name='player_favourite', cached=False)
+
+    def get_source_squad(self):
+        return Squad.objects.get(title=self.source.title, is_special=True)
 
     def render_card(self, size='medium', faded=False, rpp=False, color=None, chemistry=None, has_link=True, new=False):
         if size not in ['small', 'medium', 'large']:

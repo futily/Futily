@@ -236,7 +236,9 @@
         {% if player.source %}
           <li class="asi-KeyValues_Item">
             <p class="asi-KeyValues_Key">Source</p>
-            <p class="asi-KeyValues_Value">{{ player.source }}</p>
+            <a class="asi-KeyValues_Value" href="{{ player.get_source_squad().get_absolute_url() }}">
+              {{ player.source }}
+            </a>
           </li>
         {% endif %}
 
