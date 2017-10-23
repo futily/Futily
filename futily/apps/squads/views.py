@@ -371,7 +371,11 @@ class SquadCopy(BaseBuilder, DeleteView):
         obj.pk = None
         obj.user = request.user
         obj.save()
-        obj.players.all().update(squad=obj)
+
+        for player in obj.players.all():
+            player.pk = None
+            player.squad = obj
+            player.save()
 
         return HttpResponseRedirect(obj.get_update_url())
 
