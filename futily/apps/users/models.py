@@ -36,7 +36,8 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
     def get_by_natural_key(self, username):
-        return self.get(username__iexact=username)
+        case_insensitive_username_field = '{}__iexact'.format(self.model.USERNAME_FIELD)
+        return self.get(**{case_insensitive_username_field: username})
 
 
 class User(AbstractBaseUser, PermissionsMixin):

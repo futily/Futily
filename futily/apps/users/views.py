@@ -40,7 +40,7 @@ class RegisterView(AnonymousRequiredMixin, FormView):
 
 class UserMixin(View):
     model = User
-    slug_field = 'username'
+    slug_field = 'username__iexact'
     slug_url_kwarg = 'username'
 
     def get_context_data(self, **kwargs):
