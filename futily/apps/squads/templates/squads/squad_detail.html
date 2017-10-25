@@ -1,4 +1,5 @@
 {% extends "squads/_builder_base.html" %}
+{% import "macros/share.html" as share with context %}
 
 {% block strapline_text %}
   {{ object.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}
@@ -44,7 +45,13 @@
 {% endblock %}
 
 {% block builder_footer %}
-  <div class="bld-Builder_Columns">
+  <div class="bld-Builder_Columns bld-Builder_Columns-share">
+    <div class="bld-Builder_Column">
+      <div class="bld-Builder_Share">
+        {{ share.share_bar(squad.title) }}
+      </div>
+    </div>
+
     <div class="bld-Builder_Column">
       <div class="frm-Form_Items">
         <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel js-FloatingLabel-active">

@@ -30,6 +30,20 @@
   border-radius: 2px;
   color: #a1b1bc;
 
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+
+  .shr-Bar_Item-twitter:hover & {
+    background-color: twitter-color;
+    border-color: twitter-color;
+    color: #fff;
+  }
+
+  .shr-Bar_Item-facebook:hover & {
+    background-color: facebook-color;
+    border-color: facebook-color;
+    color: #fff;
+  }
+
   /* stylelint-disable selector-max-type */
   svg {
     width: 15px;

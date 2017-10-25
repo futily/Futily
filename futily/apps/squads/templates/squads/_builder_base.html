@@ -64,6 +64,7 @@
         data-builder-formation="{% block builder_formation %}{% endblock %}"
   {% if self.builder_action() %}action="{% block builder_action %}{% endblock %}"{% endif %}>
     <div class="bld-Builder_Body">
+      {% block builder_body_top %}{% endblock %}
       <div class="bld-Builder_Team">
         <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
 

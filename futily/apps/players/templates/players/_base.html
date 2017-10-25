@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/share.html" as share with context %}
 {% import "players/macros/players.html" as player_macros %}
 
 {% block og_title %}{% endblock %}
@@ -86,33 +87,7 @@
 {% block main %}
   <article class="plyr-Detail">
     <div class="plyr-Detail_Share">
-      {% with %}
-        {% set url_e = path_to_url(request.path)|urlencode %}
-        {% set title_e = title|urlencode %}
-
-        <div class="shr-Bar">
-          <ul class="shr-Bar_Items">
-            <li class="shr-Bar_Item shr-Bar_Item-twitter">
-              <a class="shr-Bar_Share"
-                 href="https://twitter.com/intent/tweet?url={{ url_e }}&amp;text=Check out {{ player.name }} on Futily! {{ title_e }}">
-                {% include "twitter.svg" %}
-
-                <span class="shr-Bar_ShareText">Share {{ player.name }} on Twitter</span>
-              </a>
-            </li>
-
-            <li class="shr-Bar_Item shr-Bar_Item-facebook">
-              <a class="shr-Bar_Share" href="https://www.facebook.com/sharer.php?u={{ url_e }}">
-                {% include "facebook.svg" %}
-
-                <span class="shr-Bar_ShareText">Share {{ player.name }} on Facebook</span>
-              </a>
-            </li>
-
-            <li class="shr-Bar_Item shr-Bar_Item-link"></li>
-          </ul>
-        </div>
-      {% endwith %}
+      {{ share.share_bar(player.name) }}
     </div>
 
     {% if self.header() %}

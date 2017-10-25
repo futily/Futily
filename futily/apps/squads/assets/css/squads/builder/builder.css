@@ -77,6 +77,10 @@
   display: grid;
 }
 
+.bld-Builder_Columns-share {
+  grid-template-columns: 30px repeat(3, 1fr);
+}
+
 .bld-Builder_StatsItem {
   margin-bottom: 0.5vr;
   padding-bottom: @margin-bottom;
