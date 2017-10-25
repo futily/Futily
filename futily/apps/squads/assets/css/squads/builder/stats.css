@@ -35,7 +35,10 @@
 }
 
 .bld-Stats_Label {
+  display: inline-block;
   margin-right: 10px;
+
+  font-weight: 500;
 }
 
 .bld-Stats_Value {
@@ -44,4 +47,20 @@
   font-weight: 500;
 
   color: var(--RatingColor);
+}
+
+.bld-Stats_Value-great {
+  --RatingColor: var(--Color_Great);
+}
+.bld-Stats_Value-good {
+  --RatingColor: var(--Color_Good);
+}
+.bld-Stats_Value-average {
+  --RatingColor: var(--Color_Average);
+}
+.bld-Stats_Value-fair {
+  --RatingColor: var(--Color_Fair);
+}
+.bld-Stats_Value-poor {
+  --RatingColor: var(--Color_Poor);
 }
