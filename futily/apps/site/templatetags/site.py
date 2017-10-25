@@ -1,6 +1,7 @@
 import datetime
 import json
 import os
+import re
 from urllib.parse import urlencode
 
 import jinja2
@@ -258,3 +259,10 @@ def camel_case(value):
 @library.filter
 def is_older_than(time, hours):
     return time + datetime.timedelta(hours=hours) > timezone.now()
+
+
+@library.filter
+def get_filename(bundle):
+    result = re.search('src="(.*)"', bundle)
+
+    print(result.group(1))

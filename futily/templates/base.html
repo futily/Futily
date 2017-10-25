@@ -13,6 +13,12 @@
     {# TODO: Change this value #}
     <meta name="theme-color" content="#db5945">
 
+    <link rel="preload" href="{{ render_bundle('vendor', 'js') | get_filename() }}">
+    <link rel="preload" href="{{ render_bundle('app', 'js') | get_filename() }}">
+
+    <link rel="prefetch" href="{{ render_bundle('vendor', 'js') | get_filename() }}">
+    <link rel="prefetch" href="{{ render_bundle('app', 'js') | get_filename() }}">
+
     {% block canonical %}
       <link rel="canonical" href="{{ get_canonical_url() }}" />
     {% endblock %}
@@ -145,8 +151,8 @@
       </li>
     </template>
 
-    {{ render_bundle('vendor', 'js', attrs='defer') }}
-    {{ render_bundle('app', 'js', attrs='defer') }}
+    {{ render_bundle('vendor', 'js') }}
+    {{ render_bundle('app', 'js') }}
 
     {% compress js %}
       {% block compressed_js_first %}{% endblock %}

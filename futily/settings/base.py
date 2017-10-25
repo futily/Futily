@@ -281,7 +281,8 @@ TEMPLATES = [
                 'getattr': getattr,
                 'set': set,
                 'abs': abs,
-                'datetime': datetime
+                'datetime': datetime,
+                'webpack_static': 'webpack_loader.utils.get_static'
             },
             'bytecode_cache': {
                 'name': 'default',
