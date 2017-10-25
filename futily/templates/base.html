@@ -13,11 +13,13 @@
     {# TODO: Change this value #}
     <meta name="theme-color" content="#db5945">
 
-    <link rel="preload" href="{{ render_bundle('vendor', 'js') | get_filename() }}">
-    <link rel="preload" href="{{ render_bundle('app', 'js') | get_filename() }}">
+    <link rel="preload" href="{{ render_bundle('vendor', 'js') | get_filename() }}" as="script">
+    <link rel="preload" href="{{ render_bundle('app', 'js') | get_filename() }}" as="script">
+    <link rel="preload" href="{{ static('build/css/app.css') }}" as="style">
 
     <link rel="prefetch" href="{{ render_bundle('vendor', 'js') | get_filename() }}">
     <link rel="prefetch" href="{{ render_bundle('app', 'js') | get_filename() }}">
+    <link rel="prefetch" href="{{ static('build/css/app.css') }}">
 
     {% block canonical %}
       <link rel="canonical" href="{{ get_canonical_url() }}" />
