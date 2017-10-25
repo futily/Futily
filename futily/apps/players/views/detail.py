@@ -51,7 +51,7 @@ class PlayerRate(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body.decode())
 
-        player = Player.objects.get(pk=data.get('player'))
+        player = Player.objects.get(pk=data.get('object'))
         user = User.objects.get(pk=data.get('user'))
         action = data.get('action')
 

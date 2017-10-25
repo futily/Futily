@@ -613,6 +613,17 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
         return players
 
 
+class Icon(models.Model):
+    player = models.ForeignKey('players.Player')
+
+    club_team_stats = JSONField(blank=True, null=True)
+    national_team_stats = JSONField(blank=True, null=True)
+    text = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.player
+
+
 class PlayerRating(models.Model):
     player = models.OneToOneField('players.Player', db_index=True, on_delete=models.CASCADE)
 
@@ -635,17 +646,6 @@ class PlayerRating(models.Model):
             'downvotes': self.downvotes,
             'score': self.score
         }
-
-
-class Icon(models.Model):
-    player = models.ForeignKey('players.Player')
-
-    club_team_stats = JSONField(blank=True, null=True)
-    national_team_stats = JSONField(blank=True, null=True)
-    text = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return self.player
 
 
 class VoteManager(models.Manager):

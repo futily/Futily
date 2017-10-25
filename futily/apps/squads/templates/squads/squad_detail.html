@@ -81,6 +81,23 @@
             </li>
           </ul>
         </div>
+
+        <div class="asi-Ratings js-ObjectRating"
+             data-url="{{ squad.get_absolute_url() }}"
+             data-user="{{ user.id }}"
+             data-object="{{ squad.id }}">
+          <button class="asi-Ratings_Control asi-Ratings_Control-up js-ObjectRating_Control"
+                  data-action="up">
+            <span class="asi-Ratings_Text">Up</span>
+            <span class="asi-Ratings_Icon">{% include 'like.svg' %}</span>
+          </button>
+          <p class="asi-Ratings_Value js-ObjectRating_Value">{{ squad.likes }}</p>
+          <button class="asi-Ratings_Control asi-Ratings_Control-down js-ObjectRating_Control"
+                  data-action="down">
+            <span class="asi-Ratings_Text">Down</span>
+            <span class="asi-Ratings_Icon">{% include 'dislike.svg' %}</span>
+          </button>
+        </div>
       </div>
     </div>
 

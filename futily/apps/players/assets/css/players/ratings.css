@@ -7,6 +7,10 @@
 */
 .asi-Ratings {
   display: flex;
+
+  .bld-Builder & {
+    margin-top: 1vr;
+  }
 }
 
 .asi-Ratings_Control {

@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import {
   CARD_RATING_BREAKDOWN,
   CHEM_STYLE_MAX_RATING_BOOST,
@@ -135,7 +133,6 @@ export class CardSelector {
   compareRatings (data) {
     const json = JSON.parse(data)
     const initialJson = JSON.parse(this.initialData)
-
     ;[
       json.card_att_1,
       json.card_att_2,
@@ -158,73 +155,6 @@ export class CardSelector {
         !isPositive
       )
     })
-  }
-}
-
-export class Rating {
-  constructor ({ className }) {
-    const el = document.querySelector(className)
-
-    this.className = className
-    this.els = {
-      el,
-      controls: {
-        down: el.querySelector(`${className}_Control[data-action='down']`),
-        up: el.querySelector(`${className}_Control[data-action='up']`)
-      },
-      value: el.querySelector(`${className}_Value`)
-    }
-
-    this.user = this.els.el.dataset.user
-    this.player = this.els.el.dataset.player
-    this.url = `${this.els.el.dataset.url}rate/`
-
-    this.sendVote = this.sendVote.bind(this)
-
-    this.setupListeners()
-  }
-
-  setupListeners () {
-    this.els.el.addEventListener('pointerdown', this.sendVote)
-  }
-
-  async sendVote (e) {
-    const target = e.target.closest(`${this.className}_Control`)
-
-    if (Object.values(this.els.controls).includes(target) === false) return
-
-    const { action } = target.dataset
-    const { player, user } = this
-
-    if (user === 'None') {
-      Rating.handleAnonUser()
-
-      return
-    }
-
-    try {
-      const { data } = await axios.post(
-        this.url,
-        {
-          action,
-          player,
-          user
-        },
-        {
-          headers: {
-            X_REQUESTED_WITH: 'XMLHttpRequest'
-          }
-        }
-      )
-
-      this.els.value.innerText = data.score
-    } catch (e) {
-      console.log(e) // eslint-disable-line no-console
-    }
-  }
-
-  static handleAnonUser () {
-    alert('Please log in to be able to rate players')
   }
 }
 

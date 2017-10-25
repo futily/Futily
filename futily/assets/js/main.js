@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  if (document.querySelector('.js-PlayerRating')) {
-    import('./players/detail').then(players => {
-      new players.Rating({ className: '.js-PlayerRating' })
+  if (document.querySelector('.js-ObjectRating')) {
+    import('./site/vote').then(vote => {
+      new vote.Vote({ className: '.js-ObjectRating' })
     })
   }
 

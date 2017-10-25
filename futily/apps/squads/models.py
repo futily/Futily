@@ -107,6 +107,8 @@ class Squad(SearchMetaBase):
     small_image_url = models.CharField(max_length=255, blank=True, null=True)
     large_image_url = models.CharField(max_length=255, blank=True, null=True)
 
+    likes = models.IntegerField(default=0)
+
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -151,6 +153,93 @@ class Squad(SearchMetaBase):
         return sorted([x.player for x in self.players.all()], key=lambda x: x.rating, reverse=True)
 
 
+class SquadPlayer(models.Model):
+    player = models.ForeignKey('players.Player')
+    squad = models.ForeignKey(Squad)
+    index = models.PositiveIntegerField(blank=True, null=True)
+    position = models.CharField(max_length=3)
+    chemistry = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
+
+    def __str__(self):
+        return self.player.__str__()
+
+
+class SquadRating(models.Model):
+    squad = models.OneToOneField('squads.Squad', db_index=True, on_delete=models.CASCADE)
+
+    score = models.IntegerField(default=0, db_index=True)
+    upvotes = models.PositiveIntegerField(default=0)
+    downvotes = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.squad}'s rating"
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.squad.likes = self.score
+        self.squad.save()
+
+        super().save(force_insert, force_update, using, update_fields)
+
+    def to_dict(self):
+        return {
+            'upvotes': self.upvotes,
+            'downvotes': self.downvotes,
+            'score': self.score
+        }
+
+
+class VoteManager(models.Manager):
+    def vote(self, squad, user, action):
+        rating, created = SquadRating.objects.get_or_create(squad=squad)  # pylint: disable=unused-variable
+        existing_vote = self.filter(rating__squad=squad, user=user).first()
+
+        if existing_vote:
+            old_action = existing_vote.action
+
+            if old_action == 'up':
+                rating.upvotes -= 1
+            else:
+                rating.downvotes -= 1
+
+            existing_vote.action = action
+            existing_vote.save()
+
+        if action == 'up':
+            rating.upvotes += 1
+        else:
+            rating.downvotes += 1
+
+        rating.score = rating.upvotes - rating.downvotes
+        rating.save()
+
+        vote, created = self.get_or_create(rating=rating, user=user, action=action)  # pylint: disable=unused-variable
+
+        return vote
+
+    def up(self, squad, user):
+        self.vote(squad, user, 'up')
+
+    def down(self, squad, user):
+        self.vote(squad, user, 'down')
+
+
+class Vote(models.Model):
+    votes = VoteManager()
+
+    user = models.ForeignKey('users.User', db_index=True, related_name='squad_vote')
+    rating = models.OneToOneField('squads.SquadRating', db_index=True)
+    action = models.CharField(max_length=5, choices=[('up', 'Up'), ('down', 'Down')])
+
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ['user', 'rating']
+
+    def __str__(self):
+        return f"{self.user}'s rating for {self.rating.squad}"
+
+
 def get_default_squads_page():
     """Returns the default nations page."""
     try:
@@ -170,14 +259,3 @@ def get_default_squad_page():
         return page.content
 
     return None
-
-
-class SquadPlayer(models.Model):
-    player = models.ForeignKey('players.Player')
-    squad = models.ForeignKey(Squad)
-    index = models.PositiveIntegerField(blank=True, null=True)
-    position = models.CharField(max_length=3)
-    chemistry = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(10)])
-
-    def __str__(self):
-        return self.player.__str__()

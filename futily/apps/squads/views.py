@@ -2,6 +2,8 @@ import json
 import urllib
 from collections import OrderedDict
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.text import slugify
 from django.views.generic import (DeleteView, DetailView, FormView, ListView,
@@ -17,9 +19,10 @@ from futily.apps.players.models import Player
 from futily.apps.players.templatetags.players import get_players_page
 from futily.apps.squads.constants import FORMATION_POSITIONS
 from futily.apps.squads.templatetags.squads import get_squads_page
+from futily.apps.users.models import User
 
 from .forms import BuilderForm
-from .models import FORMATION_CHOICES, Squad, SquadPlayer
+from .models import FORMATION_CHOICES, Squad, SquadPlayer, Vote
 
 
 class Found(Exception):
@@ -361,6 +364,37 @@ class SquadDetail(BaseBuilder, DetailView):
         context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
 
         return context
+
+
+class SquadRate(LoginRequiredMixin, View):
+    model = Vote
+
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body.decode())
+
+        squad = Squad.objects.get(pk=data.get('object'))
+        user = User.objects.get(pk=data.get('user'))
+        action = data.get('action')
+
+        try:
+            if action == 'up':
+                self.model.votes.up(squad, user)
+
+                create_action(request.user, 'liked squad', squad)
+            else:
+                self.model.votes.down(squad, user)
+
+                create_action(request.user, 'disliked squad', squad)
+
+            if request.is_ajax():
+                return JsonResponse(squad.squadrating.to_dict())
+
+            return HttpResponseRedirect('/')
+        except ValidationError as err:
+            if request.is_ajax():
+                return JsonResponse(data={'error': err.message}, status=400)
+
+            return HttpResponseRedirect('/')
 
 
 class SquadCopy(BaseBuilder, DeleteView):
