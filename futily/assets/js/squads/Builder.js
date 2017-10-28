@@ -50,6 +50,10 @@ export class Builder extends Squad {
           xsrfCookieName: 'csrftoken',
           xsrfHeaderName: 'X-CSRFToken'
         })
+
+        if (res.status === 200) {
+          window.location.href = res.data.url
+        }
       })
     }
 

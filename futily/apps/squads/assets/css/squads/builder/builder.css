@@ -106,6 +106,12 @@
   grid-template-columns: 30px repeat(3, 1fr);
 }
 
+.bld-Builder_Column-flex {
+  flex-direction: column;
+
+  display: flex;
+}
+
 .bld-Builder_StatsItem {
   margin-bottom: 0.5vr;
   padding-bottom: @margin-bottom;
@@ -210,7 +216,7 @@
     }
   }
 
-  .js-Builder & {
+  .js-Builder &[data-builder-filled='true'] {
     cursor: grab;
   }
 }
@@ -908,6 +914,10 @@
   }
 }
 
+.bld-Builder_Control {
+  cursor: pointer;
+}
+
 /* stylelint-disable selector-max-type */
 .bld-Builder_ControlIcon {
   display: block;
@@ -937,4 +947,18 @@
 
 .bld-Builder_ControlText {
   display: none;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Form
+|--------------------------------------------------------------------------
+|
+*/
+.bld-Builder_Form {
+  margin-top: 1vr;
+}
+
+.bld-Builder_Submit {
+  padding: 9px var(--Grid_Gutter);
 }

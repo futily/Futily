@@ -104,6 +104,15 @@
                  id="title" />
         </div>
       </div>
+
+      <div class="bld-Builder_Form">
+        <input type="hidden" name="page" value="{{ pages.current.id }}" />
+        <input type="hidden" name="user" value="{{ user.id }}" />
+
+        <button class="bld-Builder_Submit btn-Primary" type="submit">
+          Save squad
+        </button>
+      </div>
     </div>
 
     <div class="bld-Builder_Column">
@@ -123,15 +132,6 @@
             </li>
           </ul>
         </div>
-      </div>
-
-      <div class="bld-Builder_Import">
-        <input type="hidden" name="page" value="{{ pages.current.id }}" />
-        <input type="hidden" name="user" value="{{ user.id }}" />
-
-        <button class="btn-Primary" type="submit">
-          Save
-        </button>
       </div>
     </div>
 

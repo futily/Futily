@@ -18,7 +18,6 @@ from futily.apps.players.constants import POSITION_TO_AVAILABLE_POSITIONS
 from futily.apps.players.models import Player
 from futily.apps.players.templatetags.players import get_players_page
 from futily.apps.squads.constants import FORMATION_POSITIONS
-from futily.apps.squads.templatetags.squads import get_squads_page
 from futily.apps.users.models import User
 
 from .forms import BuilderForm
@@ -203,6 +202,8 @@ class BuilderAjax(FormView):
 
             if request.user.is_authenticated:
                 create_action(request.user, 'created squad', squad)
+
+        response_data['url'] = squad.get_absolute_url()
 
         return JsonResponse(response_data, status=200)
 
