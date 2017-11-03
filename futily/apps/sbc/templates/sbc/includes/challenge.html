@@ -1,0 +1,37 @@
+<a href="{{ challenge.get_builder_url() }}" class="sbc-Set">
+  <div class="sbc-Set_ImageContainer">
+    <img class="sbc-Set_Image"
+         src="{{ static('ea-images/sbc/challenges/{}.png'.format(challenge.trophy_id)) }}">
+  </div>
+
+  <div class="sbc-Set_Content">
+    <h3 class="sbc-Set_Title">{{ challenge.title }}</h3>
+    <p class="sbc-Set_Text">{{ challenge.description }}</p>
+  </div>
+
+  <div class="sbc-Set_Overlay">
+    <div class="sbc-Set_Requirements">
+      <p class="sbc-Set_RequirementsTitle">Requirements</p>
+
+      <ul class="sbc-Set_RequirementsItems">
+        {% for requirement in challenge.requirements.all() %}
+          <li class="sbc-Set_RequirementsItem">
+            {{ requirement.to_string }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="sbc-Set_Rewards">
+      <ul class="sbc-Set_RewardsItems">
+        {% for award in challenge.awards.all() %}
+          <li class="sbc-Set_RewardsItem">
+            {{ award.render() }}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <p class="sbc-Set_RewardsTitle">Rewards</p>
+    </div>
+  </div>
+</a>

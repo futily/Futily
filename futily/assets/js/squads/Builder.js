@@ -22,14 +22,20 @@ export class Builder extends Squad {
       search: {
         el: el.querySelector('.bld-Search'),
         input: el.querySelector('.bld-Search_Input')
+      },
+      stats: {
+        el: el.querySelector('.js-Builder_Stats')
       }
     })
     this.search = new Search({ el })
 
-    this.stats = this.constructStats()
     this.drag = {
       overIndex: null,
       startIndex: null
+    }
+
+    if (this.els.stats.el) {
+      this.stats = this.constructStats()
     }
 
     this.setupListeners()
@@ -199,9 +205,15 @@ export class Builder extends Squad {
   }
 
   updateStats () {
+    if (!this.els.stats.el) return
+
     const players = this.players.team
 
-    this.stats.rating.value = this.getAverageStat({ players, stat: 'rating' })
+    this.stats.rating.value = this.getAverageStat({
+      players,
+      stat: 'rating',
+      includeGk: true
+    })
     this.stats.chemistry.value = Math.min(
       Math.max(
         0,

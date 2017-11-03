@@ -1,0 +1,133 @@
+/*
+|--------------------------------------------------------------------------
+| Set
+|--------------------------------------------------------------------------
+| @namespace: sbc-
+|
+*/
+.sbc-Set {
+  position: relative;
+
+  flex-direction: column;
+
+  display: flex;
+  width: 100%;
+  padding: 0.5vr 30px 1.25vr;
+
+  text-align: center;
+
+  background-color: var(--Color_Grey-light);
+  border: 1px solid var(--Color_Border);
+  color: var(--Color_Body);
+
+  transition: color 0.2s;
+
+  @media (--xlg) {
+    padding: 0.5vr 20px 1vr;
+  }
+}
+
+.sbc-Set_ImageContainer {
+  margin-bottom: 0.5vr;
+}
+
+.sbc-Set_Title {
+  @apply --Font-24;
+
+  margin-bottom: 0.5vr;
+
+  font-weight: 400;
+}
+
+.sbc-Set_Text {
+  @apply --Font-14;
+}
+
+.sbc-Set_Footer {
+  margin-top: auto;
+
+  border-top: 0.75vr solid transparent;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Rewards
+|--------------------------------------------------------------------------
+|
+*/
+.sbc-Set_Overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  display: flex;
+  padding: inherit;
+
+  background-image: linear-gradient(
+    to top,
+    rgb(249, 250, 251) 0,
+    rgb(249, 250, 251) 75%,
+    rgba(249, 250, 251, 0) 100%
+  );
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s, visibility 0.3s;
+
+  .sbc-Set:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.sbc-Set_Rewards {
+  width: 100%;
+}
+
+.sbc-Set_RewardsTitle {
+  @apply --Font-24;
+
+  margin-top: 0.5vr;
+
+  font-weight: 500;
+}
+
+.sbc-Set_RewardsItems {
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  display: flex;
+}
+
+.sbc-Set_RewardsItem {
+  &:only-child {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.sbc-Set_Requirements {
+  width: 100%;
+  margin-bottom: 1vr;
+
+  text-align: left;
+}
+
+.sbc-Set_RequirementsTitle {
+  @apply --Font-24;
+
+  margin-bottom: 0.5vr;
+
+  font-weight: 500;
+}
+
+.sbc-Set_RequirementsItems {
+  @apply --Font-14;
+}

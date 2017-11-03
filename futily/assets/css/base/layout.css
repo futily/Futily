@@ -38,12 +38,16 @@
 }
 
 .lyt-Content-wide {
-  margin-top: 2vr;
-  margin-bottom: @margin-top;
+  padding-top: 2vr;
+  padding-bottom: @padding-top;
 
   .pg-Breadcrumbs + & {
     margin-top: 0.75vr;
   }
+}
+
+.lyt-Content-grey {
+  background-color: var(--Color_Grey-light);
 }
 
 .lyt-Content_Inner {

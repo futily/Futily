@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
+from django.db.models import Prefetch
 from django.http import HttpResponseRedirect, JsonResponse
 from django.utils.text import slugify
 from django.views.generic import (DeleteView, DetailView, FormView, ListView,
@@ -17,11 +18,12 @@ from futily.apps.nations.templatetags.nations import get_nations_page
 from futily.apps.players.constants import POSITION_TO_AVAILABLE_POSITIONS
 from futily.apps.players.models import Player
 from futily.apps.players.templatetags.players import get_players_page
+from futily.apps.sbc.models import FORMATION_CHOICES
 from futily.apps.squads.constants import FORMATION_POSITIONS
 from futily.apps.users.models import User
 
 from .forms import BuilderForm
-from .models import FORMATION_CHOICES, Squad, SquadPlayer, Vote
+from .models import Squad, SquadPlayer, Vote
 
 
 class Found(Exception):
@@ -358,6 +360,13 @@ class TotwList(ListView):
 
 class SquadDetail(BaseBuilder, DetailView):
     model = Squad
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+
+        return obj.prefetch_related(
+            Prefetch('players', queryset=SquadPlayer.objects.select_related('player'))
+        )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

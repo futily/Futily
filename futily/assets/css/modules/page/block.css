@@ -1,0 +1,32 @@
+/*
+|--------------------------------------------------------------------------
+| Block
+|--------------------------------------------------------------------------
+| @namespace: pg-
+|
+*/
+.pg-Block_Title {
+  @apply --Font-30;
+
+  margin-bottom: 0.75em;
+  padding-bottom: 15px;
+
+  font-weight: 400;
+
+  border-bottom: 2px solid var(--Color_Border);
+}
+
+.pg-Block_TitleEmphasis {
+  font-weight: 500;
+}
+
+.pg-Block_Items {
+  grid-column-gap: calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(2, 1fr);
+
+  display: grid;
+}
+
+.pg-Block_Item {
+  display: flex;
+}

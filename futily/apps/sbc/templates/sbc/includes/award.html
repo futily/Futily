@@ -1,0 +1,17 @@
+{% if award.type == 'item' %}
+  {% set player = award.get_item() %}
+  {% if player %}
+    {{ player.render_card(has_link=has_link) }}
+  {% else %}
+    Item {{ award.value }}
+  {% endif %}
+{% elif award.type == 'coin' %}
+  <div class="sbc-CoinsAward">
+    <img class="sbc-CoinsAward_Image" src="{{ static('ea-images/coins.png') }}">
+    <p class="sbc-CoinsAward_Text">
+      {{ award.value }} coins
+    </p>
+  </div>
+{% elif award.type == 'pack' %}
+  Pack {{ award.value }}
+{% endif %}

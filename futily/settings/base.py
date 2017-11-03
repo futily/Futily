@@ -164,6 +164,7 @@ INSTALLED_APPS = [
     'futily.apps.packs',
     'futily.apps.players',
     'futily.apps.redirects',
+    'futily.apps.sbc',
     'futily.apps.sections',
     'futily.apps.settings',
     'futily.apps.site',

@@ -1,0 +1,10 @@
+<div class="bld-Requirement js-Builder_Requirement"
+     data-passed="false"
+     data-requirement="{{ requirement.to_json_string }}">
+  <p class="bld-Requirement_Text">{{ requirement.to_string }}</p>
+  <p class="bld-Requirement_Data js-Builder_RequirementData">
+    <span class="bld-Requirement_Current js-Builder_RequirementCurrent">0</span> / <span class="bld-Requirement_Target">{{ requirement.type_value }}</span>
+  </p>
+
+  <span class="bld-Requirement_Completed"></span>
+</div>

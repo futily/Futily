@@ -1,0 +1,16 @@
+{% extends "sbc/_base.html" %}
+
+{% block strapline_title %}Squad building challenge sets{% endblock %}
+{% block strapline_text %}Top rated Fifa {{ settings.CURRENT_FIFA_VERSION }} Squads{% endblock %}
+
+{% block panel %}
+  <div class="sbc-SetList">
+    <ul class="sbc-List_Items">
+      {% for object in object_list %}
+        <li class="sbc-List_Item">
+          {{ object.render_card() }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

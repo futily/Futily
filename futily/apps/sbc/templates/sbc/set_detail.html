@@ -1,0 +1,27 @@
+{% extends "sbc/_base.html" %}
+
+{% block aside_under %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <h3 class="typ-Title typ-Title-small">{{ squadbuilderchallengeset }} rewards</h3>
+
+      <ul>
+        {% for award in squadbuilderchallengeset.awards.all() %}
+          <li>{{ award.render(has_link=True) }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block panel %}
+  <div class="sbc-List">
+    <ul class="sbc-List_Items">
+      {% for challenge in object.squadbuilderchallenge_set.all() %}
+        <li class="sbc-List_Item">
+          {{ challenge.render_card() }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
