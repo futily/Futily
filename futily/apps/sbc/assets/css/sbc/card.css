@@ -1,11 +1,11 @@
 /*
 |--------------------------------------------------------------------------
-| Set
+| Card
 |--------------------------------------------------------------------------
 | @namespace: sbc-
 |
 */
-.sbc-Set {
+.sbc-Card {
   position: relative;
 
   flex-direction: column;
@@ -27,11 +27,11 @@
   }
 }
 
-.sbc-Set_ImageContainer {
+.sbc-Card_ImageContainer {
   margin-bottom: 0.5vr;
 }
 
-.sbc-Set_Title {
+.sbc-Card_Title {
   @apply --Font-24;
 
   margin-bottom: 0.5vr;
@@ -39,11 +39,11 @@
   font-weight: 400;
 }
 
-.sbc-Set_Text {
+.sbc-Card_Text {
   @apply --Font-14;
 }
 
-.sbc-Set_Footer {
+.sbc-Card_Footer {
   margin-top: auto;
 
   border-top: 0.75vr solid transparent;
@@ -55,7 +55,7 @@
 |--------------------------------------------------------------------------
 |
 */
-.sbc-Set_Overlay {
+.sbc-Card_Overlay {
   position: absolute;
   top: 0;
   right: 0;
@@ -80,17 +80,17 @@
 
   transition: opacity 0.3s, visibility 0.3s;
 
-  .sbc-Set:hover & {
+  .sbc-Card:hover & {
     opacity: 1;
     visibility: visible;
   }
 }
 
-.sbc-Set_Rewards {
+.sbc-Card_Rewards {
   width: 100%;
 }
 
-.sbc-Set_RewardsTitle {
+.sbc-Card_RewardsTitle {
   @apply --Font-24;
 
   margin-top: 0.5vr;
@@ -98,29 +98,28 @@
   font-weight: 500;
 }
 
-.sbc-Set_RewardsItems {
-  align-items: center;
-  flex-wrap: wrap;
+.sbc-Card_RewardsItems {
+  align-items: flex-end;
   justify-content: space-between;
 
   display: flex;
 }
 
-.sbc-Set_RewardsItem {
+.sbc-Card_RewardsItem {
   &:only-child {
     margin-right: auto;
     margin-left: auto;
   }
 }
 
-.sbc-Set_Requirements {
+.sbc-Card_Requirements {
   width: 100%;
-  margin-bottom: 1vr;
+  margin-bottom: 0.5vr;
 
   text-align: left;
 }
 
-.sbc-Set_RequirementsTitle {
+.sbc-Card_RequirementsTitle {
   @apply --Font-24;
 
   margin-bottom: 0.5vr;
@@ -128,6 +127,6 @@
   font-weight: 500;
 }
 
-.sbc-Set_RequirementsItems {
+.sbc-Card_RequirementsItems {
   @apply --Font-14;
 }

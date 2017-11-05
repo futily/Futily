@@ -38,29 +38,15 @@ export class Builder extends Squad {
       this.stats = this.constructStats()
     }
 
+    this.handleSubmit = this.handleSubmit.bind(this)
+
     this.setupListeners()
     this.updateStats()
   }
 
   setupListeners () {
     if (this.ajaxSave) {
-      this.els.el.addEventListener('submit', async e => {
-        e.preventDefault()
-
-        const data = new FormData(this.els.el)
-
-        const res = await axios({
-          data,
-          method: 'POST',
-          url: this.els.el.action,
-          xsrfCookieName: 'csrftoken',
-          xsrfHeaderName: 'X-CSRFToken'
-        })
-
-        if (res.status === 200) {
-          window.location.href = res.data.url
-        }
-      })
+      this.els.el.addEventListener('submit', this.handleSubmit)
     }
 
     this.els.form.formation.addEventListener('change', e => {
@@ -74,7 +60,7 @@ export class Builder extends Squad {
       if (!wantedTarget) return
 
       const index = wantedTarget.dataset.builderFormationIndex
-      if (this.players.team[index].isFilled()) return
+      if (this.players.team[index].isFilled) return
 
       this.search.startSearch(index)
     })
@@ -104,6 +90,24 @@ export class Builder extends Squad {
       .on('drag:stop', this.handleDragStop)
   }
 
+  async handleSubmit (e) {
+    e.preventDefault()
+
+    const data = new FormData(this.els.el)
+
+    const res = await axios({
+      data,
+      method: 'POST',
+      url: this.els.el.action,
+      xsrfCookieName: 'csrftoken',
+      xsrfHeaderName: 'X-CSRFToken'
+    })
+
+    if (res.status === 200) {
+      window.location.href = res.data.url
+    }
+  }
+
   handleDragStart (evt) {
     this.drag.startIndex = Array.from(this.els.team.items).indexOf(evt.source)
   }
@@ -129,7 +133,7 @@ export class Builder extends Squad {
       }
 
       const targetPlayer = this.players.team[this.drag.overIndex]
-      const targetObj = targetPlayer.isFilled()
+      const targetObj = targetPlayer.isFilled
         ? {
           data: JSON.parse(JSON.stringify(targetPlayer.data)),
           element: targetPlayer.cloneCard(),
@@ -141,7 +145,7 @@ export class Builder extends Squad {
           index: this.drag.overIndex
         }
 
-      if (targetPlayer.isFilled()) {
+      if (targetPlayer.isFilled) {
         this.removePlayer({ index: sourceObj.index })
         this.removePlayer({ index: targetObj.index })
 
@@ -176,7 +180,7 @@ export class Builder extends Squad {
 
     const players = this.players.team.filter(
       player =>
-        player.isFilled() &&
+        player.isFilled &&
         POSITION_LINES[line].includes(player.positions.fromFormation)
     )
 
@@ -190,14 +194,12 @@ export class Builder extends Squad {
   getAverageStat ({ players, stat, includeGk = false }) {
     // We might not want the goalkeeper when calculating things like 'pace'
     if (!includeGk) {
-      players = players.filter(
-        player => player.index !== 0 && player.isFilled()
-      )
+      players = players.filter(player => player.index !== 0 && player.isFilled)
     }
 
     return Math.round(
       players.reduce((acc, player) => {
-        acc += player.isFilled() ? player.data[stat] : 0
+        acc += player.isFilled ? player.data[stat] : 0
 
         return acc
       }, 0) / players.length || 0
@@ -282,7 +284,7 @@ export class Builder extends Squad {
   }
 
   updateChemistry () {
-    this.players.team.filter(player => player.isFilled()).map(player => {
+    this.players.team.filter(player => player.isFilled).map(player => {
       player.calculateLinkChemistry(this.players.team)
       player.calculatePositionChemistry()
     })

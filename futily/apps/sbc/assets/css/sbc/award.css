@@ -1,20 +1,26 @@
 /*
 |--------------------------------------------------------------------------
-| Coins award
+| Award
 |--------------------------------------------------------------------------
 | @namespace: sbc-
 |
 */
-.sbc-CoinsAward {
+.sbc-Award {
   display: block;
 
   text-align: center;
 }
 
-.sbc-CoinsAward_Image {
-  max-width: 75px;
+.sbc-Award_Image {
+  .sbc-Award-coins & {
+    max-width: 75px;
+  }
 }
 
-.sbc-CoinsAward_Text {
+.sbc-Award_Text {
+  @apply --Font-14;
+
+  margin-top: 0.5vr;
+
   font-weight: 500;
 }

@@ -1,0 +1,21 @@
+/*
+|--------------------------------------------------------------------------
+| Awards
+|--------------------------------------------------------------------------
+| @namespace: sbc-
+|
+*/
+.sbc-Awards_Items {
+  align-items: flex-end;
+  flex-wrap: wrap;
+
+  display: flex;
+}
+
+.sbc-Awards_Item {
+  margin-right: calc(var(--Grid_Gutter) * 2);
+
+  &:last-child {
+    margin-right: 0;
+  }
+}

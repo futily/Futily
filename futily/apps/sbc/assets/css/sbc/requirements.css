@@ -1,0 +1,38 @@
+/*
+|--------------------------------------------------------------------------
+| Requirements
+|--------------------------------------------------------------------------
+| @namespace: bld-
+|
+*/
+.sbc-Requirements_Title {
+  @apply --Font-18;
+
+  margin-bottom: 0.5vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Items
+|--------------------------------------------------------------------------
+|
+*/
+.sbc-Requirements_Items {
+  flex-direction: column;
+
+  display: inline-flex;
+
+  .pg-Section & {
+    display: block;
+
+    list-style: square inside;
+  }
+}
+
+.sbc-Requirements_Item {
+  margin-bottom: 0.25vr;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

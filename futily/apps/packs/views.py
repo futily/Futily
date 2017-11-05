@@ -21,6 +21,7 @@ class PackLeaderboard(ListView):
 
 class TypeList(ListView):
     model = PackType
+    queryset = PackType.objects.filter(show_in_list=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

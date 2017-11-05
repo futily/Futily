@@ -9,6 +9,11 @@ from futily.apps.sbc.models import (SquadBuilderChallenge,
                                     SquadBuilderChallengeSet)
 
 
+@admin.register(SquadBuilderChallengeRequirement)
+class SquadBuilderChallengeRequirementAdmin(admin.ModelAdmin):
+    pass
+
+
 @admin.register(SquadBuilderChallengeCategory)
 class SquadBuilderChallengeCategoryAdmin(SortableModelAdmin, SearchMetaBaseAdmin):
     prepopulated_fields = {'slug': ['title']}

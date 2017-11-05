@@ -6,6 +6,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.template.loader import render_to_string
 
+from futily.apps.packs.models import PackType
 from futily.apps.players.models import Player
 from futily.apps.squads.models import FORMATION_CHOICES
 
@@ -198,6 +199,10 @@ class SquadBuilderChallengeRequirement(models.Model):
                 return f'{scope} {self.type_value} players from {self.league}'
             elif self.nation:
                 return f'{scope} {self.type_value} players from {self.nation}'
+            elif self.player_rarity:
+                return f'{scope} {self.type_value} {self.player_rarity} players'
+
+            return f'{scope} {self.type_value} players'
         elif self.type == 'SAME_NATION_COUNT':
             return f'{scope} {self.type_value} players from the same Nation'
         elif self.type == 'SAME_LEAGUE_COUNT':
@@ -232,10 +237,17 @@ class SquadBuilderChallengeRequirement(models.Model):
         elif self.type == 'PLAYER_COUNT':
             if self.club:
                 values['type'] = 'club'
+                values['clubId'] = self.club.ea_id
             elif self.league:
                 values['type'] = 'league'
+                values['leagueId'] = self.league.ea_id
             elif self.nation:
                 values['type'] = 'nation'
+                values['nationId'] = self.nation.ea_id
+            elif self.player_rarity:
+                values['type'] = 'rares'
+            else:
+                values['type'] = 'player_count'
         elif self.type == 'SAME_CLUB_COUNT':
             values['type'] = 'same_club'
         elif self.type == 'SAME_LEAGUE_COUNT':
@@ -243,11 +255,13 @@ class SquadBuilderChallengeRequirement(models.Model):
         elif self.type == 'SAME_NATION_COUNT':
             values['type'] = 'same_nation'
         elif self.type == 'NATION_COUNT':
-            values['type'] = 'min_nation'
+            values['type'] = 'unique_nation'
         elif self.type == 'LEAGUE_COUNT':
-            values['type'] = 'min_league'
+            values['type'] = 'unique_league'
         elif self.type == 'CLUB_COUNT':
-            values['type'] = 'min_club'
+            values['type'] = 'unique_club'
+
+        print(values, self.player_quality, self.player_rarity)
 
         return json.dumps(values)
 
@@ -330,6 +344,12 @@ class SquadBuilderChallengeAward(models.Model):
         try:
             return Player.objects.get(ea_id=self.value)
         except Player.DoesNotExist:
+            return None
+
+    def get_pack(self):
+        try:
+            return PackType.objects.get(ea_id=self.value)
+        except PackType.DoesNotExist:
             return None
 
     def render(self, has_link=False):

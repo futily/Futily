@@ -5,7 +5,7 @@
 |
 */
 @mixin Button {
-  display: inline-block;
+  display: block;
   padding: 0.25vr 10px;
 
   font-size: 13px;
@@ -23,6 +23,10 @@
   /* Style reasons */
   transition: background-color var(--Global_Transition),
     border var(--Global_Transition), color var(--Global_Transition);
+
+  @media (--sm) {
+    display: inline-flex;
+  }
 }
 
 @mixin Button-primary {

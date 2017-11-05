@@ -68,6 +68,7 @@ class Squad(SearchMetaBase):
     description = models.TextField(blank=True, null=True)
 
     page = models.ForeignKey('Squads', blank=False, null=True)
+    sbc = models.ForeignKey('sbc.SquadBuilderChallenge', blank=False, null=True)
     user = models.ForeignKey('users.User', blank=True, null=True)
 
     players = models.ManyToManyField('players.Player', through='SquadPlayer', blank=True)
@@ -94,6 +95,9 @@ class Squad(SearchMetaBase):
         MinValueValidator(0), MaxValueValidator(100)])
     physical = models.PositiveIntegerField(default=0, validators=[
         MinValueValidator(0), MaxValueValidator(100)])
+
+    loyalty = models.PositiveIntegerField(default=0)
+    position_changes = models.PositiveIntegerField(default=0)
 
     is_special = models.BooleanField(default=False)
 

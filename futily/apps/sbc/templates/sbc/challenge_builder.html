@@ -1,6 +1,8 @@
 {% extends "squads/_builder_edit_base.html" %}
 
-{% block strapline_text %}Create your Fifa {{ settings.CURRENT_FIFA_VERSION }} squad{% endblock %}
+{% block strapline_title %}{{ object.set }} - {{ object }}{% endblock %}
+
+{% block strapline_text %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Squad Building Challenge Builder{% endblock %}
 
 {% block builder_class %}{{ super() }} js-Builder-challenge{% endblock %}
 
@@ -56,7 +58,8 @@
 
           <select class="frm-Form_Select js-FloatingLabel_Input"
                   id="formation"
-                  name="formation">
+                  name="formation"
+                  disabled>
             <option value="">Formations</option>
             {% for value, label in formations.items() %}
               <option value="{{ value }}"{% if object.formation == value %} selected{% endif %}>{{ label }}</option>
@@ -78,8 +81,13 @@
       </div>
 
       <div class="bld-Builder_Form">
-        <input type="hidden" name="page" value="{{ pages.current.id }}" />
+        <input type="hidden" name="page" value="{{ squads_page_id }}" />
         <input type="hidden" name="user" value="{{ user.id }}" />
+        <input type="hidden" name="sbc" value="{{ object.pk }}" />
+        <input type="hidden" name="chemistry" />
+        <input type="hidden" name="rating" />
+        <input type="hidden" name="loyalty" />
+        <input type="hidden" name="position_changes" />
 
         <button class="bld-Builder_Submit btn-Primary" type="submit">
           Save squad
@@ -88,38 +96,28 @@
     </div>
 
     <div class="bld-Builder_Column">
-      <div class="bld-Builder_Stats">
-        <div class="bld-Stats">
-          <ul class="bld-Stats_Items">
-            <li class="bld-Stats_Item" data-builder-stat-name="rating">
-              <input type="hidden" name="rating" value="0">
-              <span class="bld-Stats_Label">Rating:</span>
-              <span class="bld-Stats_Value">0</span>
-            </li>
+      <div class="bld-Builder_Requirements js-Builder_Requirements">
+        <div class="sbc-Requirements">
+          <h4 class="sbc-Requirements_Title">Requirements</h4>
 
-            <li class="bld-Stats_Item" data-builder-stat-name="chemistry">
-              <input type="hidden" name="chemistry" value="0">
-              <span class="bld-Stats_Label">Chemistry:</span>
-              <span class="bld-Stats_Value">0</span>
-            </li>
+          <ul class="sbc-Requirements_Items">
+            {% for requirement in object.requirements.all() %}
+              <li class="sbc-Requirements_Item">
+                {{ requirement.render_builder() }}
+              </li>
+            {% endfor %}
           </ul>
         </div>
       </div>
     </div>
 
     <div class="bld-Builder_Column">
-      <div class="bld-Builder_Requirements js-Builder_Requirements">
-        <div class="bld-Requirements">
-          <h4 class="bld-Requirements_Title">Requirements</h4>
-
-          <ul class="bld-Requirements_Items">
-            {% for requirement in object.requirements.all() %}
-              <li class="bld-Requirements_Item">
-                {{ requirement.render_builder() }}
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
+      <div class="bld-Awards">
+        <ul class="bld-Awards_Items">
+          {% for award in object.awards.all() %}
+            <li class="bld-Awards_Item">{{ award.render() }}</li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </div>

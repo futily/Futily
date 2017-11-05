@@ -27,3 +27,25 @@
 .btn-Large {
   @include Button-large;
 }
+
+.btn-Red {
+  @include Button;
+
+  background-color: #d35642;
+  color: #fff;
+}
+
+.btn-Icon {
+  display: block;
+  width: 20px;
+  height: @width;
+  margin-left: var(--Grid_Gutter);
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+  /* stylelint-enable */
+}

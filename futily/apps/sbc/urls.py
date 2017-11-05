@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^set/(?P<slug>[-\w]+)/$', views.SquadBuilderChallengeSetDetail.as_view(), name='set'),
     url(r'^set/(?P<set_slug>[-\w]+)/(?P<slug>[-\w]+)/$', views.SquadBuilderChallengeDetail.as_view(), name='challenge'),
     url(r'^set/(?P<set_slug>[-\w]+)/(?P<slug>[-\w]+)/builder/$', views.SquadBuilderChallengeBuilder.as_view(), name='challenge_builder'),
+    url(r'^set/(?P<set_slug>[-\w]+)/(?P<slug>[-\w]+)/builder/save/$', views.SquadBuilderChallengeSave.as_view(), name='challenge_save'),
 ]

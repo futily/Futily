@@ -5,9 +5,28 @@
 | @namespace: pg-
 |
 */
+.pg-Block {
+  & + & {
+    margin-top: 2vr;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.pg-Block_Header {
+  justify-content: space-between;
+
+  display: flex;
+}
+
 .pg-Block_Title {
   @apply --Font-30;
 
+  width: 100%;
   margin-bottom: 0.75em;
   padding-bottom: 15px;
 

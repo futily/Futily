@@ -6,12 +6,18 @@
     Item {{ award.value }}
   {% endif %}
 {% elif award.type == 'coin' %}
-  <div class="sbc-CoinsAward">
-    <img class="sbc-CoinsAward_Image" src="{{ static('ea-images/coins.png') }}">
-    <p class="sbc-CoinsAward_Text">
+  <div class="sbc-Award sbc-Award-coins">
+    <img class="sbc-Award_Image" src="{{ static('ea-images/coins.png') }}">
+    <p class="sbc-Award_Text">
       {{ award.value }} coins
     </p>
   </div>
 {% elif award.type == 'pack' %}
-  Pack {{ award.value }}
+  <div class="sbc-Award sbc-Award-pack">
+    <div class="sbc-Award_Pack">
+      {{ award.get_pack().render_image(has_link=False) }}
+    </div>
+
+    <p class="sbc-Award_Text">{{ award.get_pack() }}</p>
+  </div>
 {% endif %}

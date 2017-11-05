@@ -2,6 +2,7 @@ from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.template.loader import render_to_string
 from django.utils.text import slugify
 
 
@@ -74,6 +75,8 @@ class PackType(PageBase):
     rare_count = models.PositiveIntegerField(default=0)
     total_count = models.PositiveIntegerField(default=0)
 
+    show_in_list = models.BooleanField(default=False)
+
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -90,6 +93,11 @@ class PackType(PageBase):
 
     def get_absolute_url(self):
         return self._get_permalink_for_page(self.page.page)
+
+    def render_image(self, has_link=True):
+        return render_to_string('packs/includes/pack-image.html', {
+            'pack': self,
+        })
 
 
 class Pack(models.Model):
