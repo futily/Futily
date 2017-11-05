@@ -51,21 +51,19 @@
 
   background-size: 100%;
 
-  .pck-Pack-bronze & {
-    background-image: resolve('ea/packs/backgrounds/bronze.png');
-  }
-
-  .pck-Pack-silver & {
-    background-image: resolve('ea/packs/backgrounds/silver.png');
-  }
-
-  .pck-Pack-gold & {
-    background-image: resolve('ea/packs/backgrounds/gold.png');
-  }
-
   .ea-ObjectsTable_Cell & {
     width: 19px;
     height: 30px;
+  }
+
+  .sbc-Card-challenge & {
+    width: 50px;
+    height: 78px;
+  }
+
+  .sbc-Award_Pack & {
+    margin-right: auto;
+    margin-left: auto;
   }
 
   &::after {
@@ -78,18 +76,38 @@
     left: 0;
 
     background-size: 100%;
+  }
+}
 
-    .pck-Pack-bronze & {
-      background-image: resolve('ea/packs/overlays/bronze.png');
-    }
+.pck-Pack_Pack-bronze {
+  background-image: resolve('ea/packs/backgrounds/bronze.png');
 
-    .pck-Pack-silver & {
-      background-image: resolve('ea/packs/overlays/silver.png');
-    }
+  &::after {
+    background-image: resolve('ea/packs/overlays/bronze.png');
+  }
+}
 
-    .pck-Pack-gold & {
-      background-image: resolve('ea/packs/overlays/gold.png');
-    }
+.pck-Pack_Pack-silver {
+  background-image: resolve('ea/packs/backgrounds/silver.png');
+
+  &::after {
+    background-image: resolve('ea/packs/overlays/silver.png');
+  }
+}
+
+.pck-Pack_Pack-gold {
+  background-image: resolve('ea/packs/backgrounds/gold.png');
+
+  &::after {
+    background-image: resolve('ea/packs/overlays/gold.png');
+  }
+}
+
+.pck-Pack_Pack-special {
+  background-image: resolve('ea/packs/backgrounds/special.png');
+
+  &::after {
+    background-image: resolve('ea/packs/overlays/special.png');
   }
 }
 

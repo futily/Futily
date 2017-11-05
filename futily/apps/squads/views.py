@@ -4,8 +4,10 @@ from collections import OrderedDict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect, JsonResponse
+from django.db.models import Prefetch
+from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.utils.text import slugify
+from django.utils.translation import ugettext as _
 from django.views.generic import (DeleteView, DetailView, FormView, ListView,
                                   UpdateView)
 from django.views.generic.base import ContextMixin, TemplateView, View
@@ -17,11 +19,12 @@ from futily.apps.nations.templatetags.nations import get_nations_page
 from futily.apps.players.constants import POSITION_TO_AVAILABLE_POSITIONS
 from futily.apps.players.models import Player
 from futily.apps.players.templatetags.players import get_players_page
+from futily.apps.sbc.models import FORMATION_CHOICES
 from futily.apps.squads.constants import FORMATION_POSITIONS
 from futily.apps.users.models import User
 
 from .forms import BuilderForm
-from .models import FORMATION_CHOICES, Squad, SquadPlayer, Vote
+from .models import Squad, SquadPlayer, Vote
 
 
 class Found(Exception):
@@ -358,6 +361,38 @@ class TotwList(ListView):
 
 class SquadDetail(BaseBuilder, DetailView):
     model = Squad
+
+    def get_object(self, queryset=None):
+        if queryset is None:
+            queryset = self.get_queryset()
+
+        # Next, try looking up by primary key.
+        pk = self.kwargs.get(self.pk_url_kwarg)
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        if pk is not None:
+            queryset = queryset.filter(pk=pk)
+
+        # Next, try looking up by slug.
+        if slug is not None and (pk is None or self.query_pk_and_slug):
+            slug_field = self.get_slug_field()
+            queryset = queryset.filter(**{slug_field: slug})
+
+        # If none of those are defined, it's an error.
+        if pk is None and slug is None:
+            raise AttributeError("Generic detail view %s must be called with "
+                                 "either an object pk or a slug."
+                                 % self.__class__.__name__)
+
+        try:
+            # Get the single item from the filtered queryset
+            obj = queryset.prefetch_related(
+                Prefetch('players', queryset=SquadPlayer.objects.select_related('player'))
+            ).get()
+        except queryset.model.DoesNotExist:
+            raise Http404(_("No %(verbose_name)s found matching the query") %
+                          {'verbose_name': queryset.model._meta.verbose_name})
+
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

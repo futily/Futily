@@ -1,0 +1,37 @@
+<a href="{{ challenge.get_absolute_url() }}" class="sbc-Card sbc-Card-challenge">
+  <div class="sbc-Card_ImageContainer">
+    <img class="sbc-Card_Image"
+         src="{{ static('ea-images/sbc/challenges/{}.png'.format(challenge.trophy_id)) }}">
+  </div>
+
+  <div class="sbc-Card_Content">
+    <h3 class="sbc-Card_Title">{{ challenge.title }}</h3>
+    <p class="sbc-Card_Text">{{ challenge.description }}</p>
+  </div>
+
+  <div class="sbc-Card_Overlay">
+    <div class="sbc-Card_Requirements">
+      <p class="sbc-Card_RequirementsTitle">Requirements</p>
+
+      <ul class="sbc-Card_RequirementsItems">
+        {% for requirement in challenge.requirements.all() %}
+          <li class="sbc-Card_RequirementsItem">
+            {{ requirement.to_string }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="sbc-Card_Rewards">
+      <ul class="sbc-Card_RewardsItems">
+        {% for award in challenge.awards.all() %}
+          <li class="sbc-Card_RewardsItem">
+            {{ award.render() }}
+          </li>
+        {% endfor %}
+      </ul>
+
+      <p class="sbc-Card_RewardsTitle">Rewards</p>
+    </div>
+  </div>
+</a>

@@ -70,11 +70,7 @@
                 {% for type in value.types %}
                   <li class="pck-Type_Item">
                     <div class="pck-Pack pck-Pack-{{ key }}">
-                      <a class="pck-Pack_Pack" href="{{ type.get_absolute_url() }}">
-                        {% set random_player = ['dele', 'griezemann', 'muller', 'ronaldo'] | random() %}
-                        {% set random_choice = [1, 2, 3] | random() %}
-                        <img class="pck-Pack_Player" src="{{ static('build/img/ea/packs/players/{}/{}.png'.format(random_player, random_choice)) }}">
-                      </a>
+                      {{ type.render_image() }}
 
                       <div class="pck-Pack_Summary">
                         <h3 class="pck-Pack_Title">{{ type.title }}</h3>

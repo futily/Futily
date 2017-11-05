@@ -49,22 +49,18 @@ class Squads(ContentBase):
             ("All TOTW's", self.page.reverse('totws')),
         ]
 
-        totws = [(squad.short_title, squad.get_absolute_url())
-                 for squad in self.squad_set.filter(is_special=True, short_title__icontains='totw')]
+        totws = [
+            (squad.short_title, squad.get_absolute_url())
+            for squad in self.squad_set.filter(
+                is_special=True,
+                short_title__icontains='totw'
+            ).only('is_special', 'short_title', 'page', 'pk')
+        ]
 
         return regular_items + totws
 
 
-class SquadManager(PageBaseManager):
-    def get_queryset(self):
-        return super(SquadManager, self).get_queryset().prefetch_related(
-            Prefetch('players', queryset=SquadPlayer.objects.select_related('player'))
-        )
-
-
 class Squad(SearchMetaBase):
-
-    objects = SquadManager()
 
     title = models.CharField(max_length=255, blank=True, null=True)
     short_title = models.CharField(max_length=255, blank=True, null=True)
@@ -72,6 +68,7 @@ class Squad(SearchMetaBase):
     description = models.TextField(blank=True, null=True)
 
     page = models.ForeignKey('Squads', blank=False, null=True)
+    sbc = models.ForeignKey('sbc.SquadBuilderChallenge', blank=False, null=True)
     user = models.ForeignKey('users.User', blank=True, null=True)
 
     players = models.ManyToManyField('players.Player', through='SquadPlayer', blank=True)
@@ -98,6 +95,9 @@ class Squad(SearchMetaBase):
         MinValueValidator(0), MaxValueValidator(100)])
     physical = models.PositiveIntegerField(default=0, validators=[
         MinValueValidator(0), MaxValueValidator(100)])
+
+    loyalty = models.PositiveIntegerField(default=0)
+    position_changes = models.PositiveIntegerField(default=0)
 
     is_special = models.BooleanField(default=False)
 

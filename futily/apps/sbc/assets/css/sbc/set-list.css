@@ -1,0 +1,17 @@
+/*
+|--------------------------------------------------------------------------
+| Set list
+|--------------------------------------------------------------------------
+| @namespace: sbc-
+|
+*/
+.sbc-List_Items {
+  grid-gap: 1vr calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(3, 1fr);
+
+  display: grid;
+}
+
+.sbc-List_Item {
+  display: flex;
+}

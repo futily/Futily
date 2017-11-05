@@ -1,0 +1,29 @@
+<a href="{{ set.get_absolute_url() }}" class="sbc-Card">
+  <div class="sbc-Card_ImageContainer">
+    <img class="sbc-Card_Image"
+         src="{{ static('ea-images/sbc/sets/{}.png'.format(set.trophy_id)) }}">
+  </div>
+
+  <div class="sbc-Card_Content">
+    <h3 class="sbc-Card_Title">{{ set.title }}</h3>
+    <p class="sbc-Card_Text">{{ set.description }}</p>
+  </div>
+
+  <footer class="sbc-Card_Footer">
+    <p class="sbc-Card_Length">
+      <strong>{{ set.squadbuilderchallenge_set.all() | length() }}</strong> challenges
+    </p>
+  </footer>
+
+  <div class="sbc-Card_Overlay">
+    <ul class="sbc-Card_RewardsItems">
+      {% for award in set.awards.all() %}
+        <li class="sbc-Card_RewardsItem">
+          {{ award.render() }}
+        </li>
+      {% endfor %}
+    </ul>
+
+    <p class="sbc-Card_RewardsTitle">Rewards</p>
+  </div>
+</a>

@@ -9,8 +9,8 @@ from .models import PackType
 @admin.register(PackType)
 class TypeAdmin(SortableModelAdmin, PageBaseAdmin):
     form = PackTypeAdmin
-    list_display = ['__str__', 'description', 'type', 'is_online', 'order']
-    list_editable = ['type', 'description', 'is_online', 'order']
+    list_display = ['__str__', 'description', 'type', 'ea_id', 'show_in_list', 'is_online', 'order']
+    list_editable = ['type', 'show_in_list', 'ea_id', 'is_online', 'order']
 
     fieldsets = [
         (None, {

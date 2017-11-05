@@ -149,10 +149,6 @@ export class Player {
     }
   }
 
-  isFilled () {
-    return Object.keys(this.data).length !== 0
-  }
-
   constructChemistry () {
     const _this = this
 
@@ -254,12 +250,16 @@ export class Player {
 
   setLinks ({ formation, team }) {
     this.links = formationData[formation].positionLinks[this.index]
-    this.filledLinks = this.links.filter(link => team[link].isFilled())
+    this.filledLinks = this.links.filter(link => team[link].isFilled)
     this.coords = this.getCoordinates()
   }
 
   setPosition (key, position) {
     this.positions[key] = position
+  }
+
+  get isFilled () {
+    return Object.keys(this.data).length !== 0
   }
 }
 
@@ -326,7 +326,7 @@ export class EditablePlayer extends Player {
   }
 
   cloneCard () {
-    return this.isFilled()
+    return this.isFilled
       ? this.els.el.querySelector('.plyr-Card').cloneNode(true)
       : null
   }

@@ -1,0 +1,39 @@
+/*
+|--------------------------------------------------------------------------
+| Requirement
+|--------------------------------------------------------------------------
+| @namespace: bld-
+|
+*/
+.bld-Requirement {
+  align-items: center;
+
+  display: flex;
+}
+
+.bld-Requirement_Text {
+  margin-right: auto;
+}
+
+.bld-Requirement_Data {
+  margin-left: calc(var(--Grid_Gutter) * 2);
+}
+
+.bld-Requirement_Current {
+  font-weight: 500;
+}
+
+.bld-Requirement_Completed {
+  display: block;
+  width: 20px;
+  height: @width;
+  margin-left: var(--Grid_Gutter);
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: 20px;
+    height: @width;
+  }
+  /* stylelint-enable */
+}

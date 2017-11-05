@@ -6,11 +6,7 @@ from ..players.models import Player
 from .models import Squad
 
 
-class BuilderForm(forms.ModelForm):
-    class Meta:
-        model = Squad
-        fields = ['title', 'page', 'user', 'players', 'formation', 'chemistry', 'rating', 'attack', 'midfield',
-                  'defence', 'pace', 'shooting', 'passing', 'dribbling', 'defending', 'physical']
+class BuilderFormBase(forms.Form):
 
     def clean_players(self):
         players = self.data.getlist('players', None)
@@ -45,6 +41,22 @@ class BuilderForm(forms.ModelForm):
                     self.cleaned_data[name] = value
             except ValidationError as e:
                 self.add_error(name, e)
+
+
+class BuilderForm(BuilderFormBase, forms.ModelForm):
+
+    class Meta:
+        model = Squad
+        fields = ['title', 'page', 'user', 'players', 'formation', 'chemistry', 'rating', 'attack', 'midfield',
+                  'defence', 'pace', 'shooting', 'passing', 'dribbling', 'defending', 'physical']
+
+
+class SBCBuilderForm(BuilderFormBase, forms.ModelForm):
+
+    class Meta:
+        model = Squad
+        fields = ['title', 'page', 'sbc', 'user', 'players', 'formation', 'chemistry', 'rating', 'loyalty',
+                  'position_changes']
 
 
 def setup_squad_player(player):

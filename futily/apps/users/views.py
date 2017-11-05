@@ -50,27 +50,27 @@ class UserMixin(View):
             {
                 'label': 'Profile',
                 'url': self.object.get_absolute_url(),
-                'current': str(self.request.path == self.object.get_absolute_url()).lower(),
+                'here': self.request.path == self.object.get_absolute_url(),
             },
             {
                 'label': 'Players',
                 'url': self.object.get_favourite_players_url(),
-                'current': str(self.request.path == self.object.get_favourite_players_url()).lower(),
+                'here': self.request.path == self.object.get_favourite_players_url(),
             },
             {
                 'label': 'Squads',
                 'url': self.object.get_squads_url(),
-                'current': str(self.request.path == self.object.get_squads_url()).lower(),
+                'here': self.request.path == self.object.get_squads_url(),
             },
             {
                 'label': 'Packs',
                 'url': self.object.get_packs_url(),
-                'current': str(self.request.path == self.object.get_packs_url()).lower(),
+                'here': self.request.path == self.object.get_packs_url(),
             },
             {
                 'label': 'Collection',
                 'url': self.object.get_collection_url(),
-                'current': str(self.request.path.startswith(self.object.get_collection_url())).lower(),
+                'here': self.request.path.startswith(self.object.get_collection_url()),
             },
         ]
 

@@ -1,0 +1,132 @@
+/*
+|--------------------------------------------------------------------------
+| Card
+|--------------------------------------------------------------------------
+| @namespace: sbc-
+|
+*/
+.sbc-Card {
+  position: relative;
+
+  flex-direction: column;
+
+  display: flex;
+  width: 100%;
+  padding: 0.5vr 30px 1.25vr;
+
+  text-align: center;
+
+  background-color: var(--Color_Grey-light);
+  border: 1px solid var(--Color_Border);
+  color: var(--Color_Body);
+
+  transition: color 0.2s;
+
+  @media (--xlg) {
+    padding: 0.5vr 20px 1vr;
+  }
+}
+
+.sbc-Card_ImageContainer {
+  margin-bottom: 0.5vr;
+}
+
+.sbc-Card_Title {
+  @apply --Font-24;
+
+  margin-bottom: 0.5vr;
+
+  font-weight: 400;
+}
+
+.sbc-Card_Text {
+  @apply --Font-14;
+}
+
+.sbc-Card_Footer {
+  margin-top: auto;
+
+  border-top: 0.75vr solid transparent;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Rewards
+|--------------------------------------------------------------------------
+|
+*/
+.sbc-Card_Overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  display: flex;
+  padding: inherit;
+
+  background-image: linear-gradient(
+    to top,
+    rgb(249, 250, 251) 0,
+    rgb(249, 250, 251) 75%,
+    rgba(249, 250, 251, 0) 100%
+  );
+  opacity: 0;
+  visibility: hidden;
+
+  transition: opacity 0.3s, visibility 0.3s;
+
+  .sbc-Card:hover & {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.sbc-Card_Rewards {
+  width: 100%;
+}
+
+.sbc-Card_RewardsTitle {
+  @apply --Font-24;
+
+  margin-top: 0.5vr;
+
+  font-weight: 500;
+}
+
+.sbc-Card_RewardsItems {
+  align-items: flex-end;
+  justify-content: space-between;
+
+  display: flex;
+}
+
+.sbc-Card_RewardsItem {
+  &:only-child {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.sbc-Card_Requirements {
+  width: 100%;
+  margin-bottom: 0.5vr;
+
+  text-align: left;
+}
+
+.sbc-Card_RequirementsTitle {
+  @apply --Font-24;
+
+  margin-bottom: 0.5vr;
+
+  font-weight: 500;
+}
+
+.sbc-Card_RequirementsItems {
+  @apply --Font-14;
+}

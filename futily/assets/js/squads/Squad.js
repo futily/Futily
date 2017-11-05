@@ -33,7 +33,7 @@ export class Squad {
           initialCard,
           isEditable: this.isEditable
         })
-        if (player.isFilled()) {
+        if (player.isFilled) {
           player.setPosition(player.els.pedestal.innerText)
         }
 
@@ -86,7 +86,7 @@ export class Squad {
   }
 
   updateChemistry () {
-    this.players.team.filter(player => player.isFilled()).map(player => {
+    this.players.team.filter(player => player.isFilled).map(player => {
       player.calculateLinkChemistry(this.players.team)
       player.calculatePositionChemistry()
     })
@@ -112,7 +112,7 @@ export class Squad {
       )
       player.setLinks({ formation: this._formation, team: this.players.team })
 
-      if (player.isFilled() && this.isEditable) {
+      if (player.isFilled && this.isEditable) {
         player.setInBuilderPosition()
       }
     })

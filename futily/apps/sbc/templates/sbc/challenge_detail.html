@@ -1,0 +1,173 @@
+{% extends "sbc/_base.html" %}
+
+{% block strapline_title %}{{ object.set }} - {{ object }}{% endblock %}
+
+{% block strapline_text %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Squad Building Challenge{% endblock %}
+
+{% block aside_under %}
+  <div class="asi-Blocks">
+    <div class="asi-Block">
+      <h3 class="typ-Title typ-Title-small">{{ object }} rewards</h3>
+
+      <ul>
+        {% for award in object.awards.all() %}
+          <li>{{ award.render(has_link=True) }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block panel %}
+  <div class="pg-Actions">
+    <ul class="pg-Actions_Items">
+      <li class="pg-Actions_Item">
+        <a class="btn-Red" href="{{ object.get_builder_url() }}">
+          Start challenge
+
+          <span class="btn-Icon">
+            {% include 'wrench.svg' %}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="pg-Section">
+    <header class="pg-Section_Header">
+      <h2 class="pg-Section_Title">
+        <strong class="pg-Section_Emphasis">{{ object }}</strong> Requirements
+      </h2>
+    </header>
+
+    <div class="pg-Section_Body">
+      <div class="sbc-Requirements">
+        <ul class="sbc-Requirements_Items">
+          {% for requirement in object.requirements.all() %}
+            <li class="sbc-Requirements_Item">
+              {{ requirement.to_string }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-Section">
+    <header class="pg-Section_Header">
+      <h2 class="pg-Section_Title"><strong class="pg-Section_Emphasis">{{ object }}</strong> Awards
+      </h2>
+    </header>
+
+    <div class="pg-Section_Body">
+      <div class="sbc-Awards">
+        <ul class="sbc-Awards_Items">
+          {% for award in object.awards.all() %}
+            <li class="sbc-Awards_Item">{{ award.render(has_link=True) }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-Section">
+    <header class="pg-Section_Header">
+      <h2 class="pg-Section_Title"><strong class="pg-Section_Emphasis">{{ object }}</strong> Squads
+      </h2>
+    </header>
+
+    <div class="pg-Section_Body">
+      <div class="ea-ObjectsTable">
+        <header class="ea-ObjectsTable_Header">
+          <div class="ea-ObjectsTable_Row">
+            <div class="ea-ObjectsTable_RowLeft ea-ObjectsTable_RowLeft-flexed">
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">Squad</div>
+            </div>
+
+            <div class="ea-ObjectsTable_RowRight">
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                <p class="ea-ObjectsTable_CellTitle">User</p>
+              </div>
+
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                <p class="ea-ObjectsTable_CellTitle">Chem</p>
+              </div>
+
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                <p class="ea-ObjectsTable_CellTitle">Rating</p>
+              </div>
+
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                <p class="ea-ObjectsTable_CellTitle">Loyalty</p>
+              </div>
+
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                <p class="ea-ObjectsTable_CellTitle">Position</p>
+              </div>
+
+              <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">
+                <p class="ea-ObjectsTable_CellTitle">Created</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="ea-ObjectsTable_Body">
+          {% for object in object.squad_set.all() %}
+            <a href="{{ object.get_absolute_url() }}" class="ea-ObjectsTable_Row">
+              <div class="ea-ObjectsTable_RowLeft ea-ObjectsTable_RowLeft-flexed">
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left">
+                  <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
+                </div>
+              </div>
+
+              <div class="ea-ObjectsTable_RowRight">
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.user | default_if_none('n/a') }}</span>
+                    <span class="ea-ObjectRow_CellTitle">User</span>
+                  </div>
+                </div>
+
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.chemistry }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Chemistry</span>
+                  </div>
+                </div>
+
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.rating }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Rating</span>
+                  </div>
+                </div>
+
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.loyalty }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Loyalty</span>
+                  </div>
+                </div>
+
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.position_changes }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Position</span>
+                  </div>
+                </div>
+
+                <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-160">
+                  <div class="ea-ObjectRow_Cell">
+                    <span class="ea-ObjectRow_CellText">{{ object.created | naturaltime() }}</span>
+                    <span class="ea-ObjectRow_CellTitle">Created</span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% macro pack_body(pack) %}
+  {% if pack.type != 'special' %}
+    {% set random_player = ['dele', 'griezemann', 'muller', 'ronaldo'] | random() %}
+    {% set random_choice = [1, 2, 3] | random() %}
+    <img class="pck-Pack_Player" src="{{ static('build/img/ea/packs/players/{}/{}.png'.format(random_player, random_choice)) }}">
+  {% else %}
+    <img class="pck-Pack_Player" src="{{ static('build/img/ea/packs/players/group/4.png') }}">
+  {% endif %}
+{% endmacro %}
+
+{% if has_link %}
+  <a class="pck-Pack_Pack pck-Pack_Pack-{{ pack.type }}" href="{{ pack.get_absolute_url() }}">
+    {{ pack_body(pack) }}
+  </a>
+{% else %}
+  <div class="pck-Pack_Pack pck-Pack_Pack-{{ pack.type }}">
+    {{ pack_body(pack) }}
+  </div>
+{% endif %}
