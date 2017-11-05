@@ -19,6 +19,16 @@
     <img alt=""
          src="{{ static('ea-images/players/{}.png'.format(player.ea_id)) }}"
          class="plyr-Card_Image">
+
+    {% if player.average_xbox_price %}
+      <p class="plyr-Card_Price">
+        <span class="plyr-Card_PriceIcon">
+          {% include 'xbox.svg' %}
+        </span>
+
+        {{ player.average_xbox_price | intcomma }}
+      </p>
+    {% endif %}
   </header>
 
   <div class="plyr-Card_Body">
