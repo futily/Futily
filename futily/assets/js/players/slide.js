@@ -10,7 +10,7 @@ export const Slide = {
       track: el.querySelector('.frm-Slide_Track'),
       slider: el.querySelector('.frm-Slide_Slider'),
       input: document.querySelector(`[data-slide-input=${this.slideKey}]`),
-      value: document.querySelector(`[data-slide-value=${this.slideKey}]`)
+      value: document.querySelector(`[data-slide-value=${this.slideKey}]`),
     };
 
     this._currentValue = this.els.el.classList.contains('frm-Slide-min')
@@ -160,11 +160,11 @@ export const Slide = {
       const evt = new CustomEvent('RangeUpdate', {
         detail: {
           value: this.currentValue,
-          key: this.slideKey
+          key: this.slideKey,
         },
-        bubbles: true
+        bubbles: true,
       });
       this.els.el.dispatchEvent(evt);
     }
-  }
+  },
 };

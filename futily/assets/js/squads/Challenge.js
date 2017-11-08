@@ -12,7 +12,7 @@ import {
   SameNationRequirement,
   UniqueClubRequirement,
   UniqueLeagueRequirement,
-  UniqueNationRequirement
+  UniqueNationRequirement,
 } from './requirements';
 
 export class Challenge extends Builder {
@@ -27,14 +27,14 @@ export class Challenge extends Builder {
     this.els = Object.assign(this.els, {
       requirements: {
         el: el.querySelector('.js-Builder_Requirements'),
-        items: el.querySelectorAll('.js-Builder_Requirement')
+        items: el.querySelectorAll('.js-Builder_Requirement'),
       },
       form: {
         chemistry: el.querySelector(`[name='chemistry']`),
         rating: el.querySelector(`[name='rating']`),
         loyalty: el.querySelector(`[name='loyalty']`),
-        positionChanges: el.querySelector(`[name='position_changes']`)
-      }
+        positionChanges: el.querySelector(`[name='position_changes']`),
+      },
     });
 
     this.requirements = {
@@ -50,7 +50,7 @@ export class Challenge extends Builder {
             return stat.passed;
           }).length === Object.keys(this.stats).length
         );
-      }
+      },
     };
 
     this.setupRequirements();
@@ -61,7 +61,7 @@ export class Challenge extends Builder {
       this.els.requirements.items
     ).map(item => ({
       el: item,
-      data: JSON.parse(item.dataset.requirement)
+      data: JSON.parse(item.dataset.requirement),
     }));
 
     requirementSchema.forEach(requirement =>
@@ -78,7 +78,7 @@ export class Challenge extends Builder {
         this.requirements.stats.chemistry = new ChemistryRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.chemistry.calculateValue.bind(
@@ -92,7 +92,7 @@ export class Challenge extends Builder {
         this.requirements.stats.rating = new RatingRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.rating.calculateValue.bind(
@@ -107,7 +107,7 @@ export class Challenge extends Builder {
           el,
           scope,
           value,
-          clubId: requirement.data.clubId
+          clubId: requirement.data.clubId,
         });
         this.requirements.fncs.push(
           this.requirements.stats.club.calculateValue.bind(
@@ -122,7 +122,7 @@ export class Challenge extends Builder {
           el,
           scope,
           value,
-          leagueId: requirement.data.leagueId
+          leagueId: requirement.data.leagueId,
         });
         this.requirements.fncs.push(
           this.requirements.stats.league.calculateValue.bind(
@@ -137,7 +137,7 @@ export class Challenge extends Builder {
           el,
           scope,
           value,
-          nationId: requirement.data.nationId
+          nationId: requirement.data.nationId,
         });
         this.requirements.fncs.push(
           this.requirements.stats.nation.calculateValue.bind(
@@ -151,7 +151,7 @@ export class Challenge extends Builder {
         this.requirements.stats.rares = new RareCountRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.rares.calculateValue.bind(
@@ -165,7 +165,7 @@ export class Challenge extends Builder {
         this.requirements.stats.playerCount = new PlayerCountRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.playerCount.calculateValue.bind(
@@ -179,7 +179,7 @@ export class Challenge extends Builder {
         this.requirements.stats.sameClub = new SameClubRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.sameClub.calculateValue.bind(
@@ -193,7 +193,7 @@ export class Challenge extends Builder {
         this.requirements.stats.sameLeague = new SameLeagueRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.sameLeague.calculateValue.bind(
@@ -207,7 +207,7 @@ export class Challenge extends Builder {
         this.requirements.stats.sameNation = new SameNationRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.sameNation.calculateValue.bind(
@@ -221,7 +221,7 @@ export class Challenge extends Builder {
         this.requirements.stats.sameClub = new UniqueClubRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.sameClub.calculateValue.bind(
@@ -235,7 +235,7 @@ export class Challenge extends Builder {
         this.requirements.stats.sameLeague = new UniqueLeagueRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.sameLeague.calculateValue.bind(
@@ -249,7 +249,7 @@ export class Challenge extends Builder {
         this.requirements.stats.sameNation = new UniqueNationRequirement({
           el,
           scope,
-          value
+          value,
         });
         this.requirements.fncs.push(
           this.requirements.stats.sameNation.calculateValue.bind(
@@ -281,7 +281,7 @@ export class Challenge extends Builder {
     this.els.form.rating.value = this.getAverageStat({
       players: this.players.team,
       stat: 'rating',
-      includeGk: true
+      includeGk: true,
     });
     this.els.form.loyalty.value = this.players.team.filter(
       player => player.isFilled && player.chemistry.boost === 1

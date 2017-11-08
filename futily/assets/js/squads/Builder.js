@@ -17,21 +17,21 @@ export class Builder extends Squad {
     this.els = Object.assign(this.els, {
       form: {
         formation: el.querySelector(`.${className} [name='formation']`),
-        name: el.querySelector(`.${className} [name='name']`)
+        name: el.querySelector(`.${className} [name='name']`),
       },
       search: {
         el: el.querySelector('.bld-Search'),
-        input: el.querySelector('.bld-Search_Input')
+        input: el.querySelector('.bld-Search_Input'),
       },
       stats: {
-        el: el.querySelector('.js-Builder_Stats')
-      }
+        el: el.querySelector('.js-Builder_Stats'),
+      },
     });
     this.search = new Search({ el });
 
     this.drag = {
       overIndex: null,
-      startIndex: null
+      startIndex: null,
     };
 
     if (this.els.stats.el) {
@@ -83,7 +83,7 @@ export class Builder extends Squad {
     this.handleDragMove = this.handleDragMove.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
     new Draggable(document.querySelectorAll('.bld-Builder_Players'), {
-      draggable: `.bld-Builder_PlayersItem[data-builder-filled='true']`
+      draggable: `.bld-Builder_PlayersItem[data-builder-filled='true']`,
     })
       .on('drag:start', this.handleDragStart)
       .on('drag:move', this.handleDragMove)
@@ -100,7 +100,7 @@ export class Builder extends Squad {
       method: 'POST',
       url: this.els.el.action,
       xsrfCookieName: 'csrftoken',
-      xsrfHeaderName: 'X-CSRFToken'
+      xsrfHeaderName: 'X-CSRFToken',
     });
 
     if (res.status === 200) {
@@ -129,7 +129,7 @@ export class Builder extends Squad {
       const sourceObj = {
         data: JSON.parse(JSON.stringify(sourcePlayer.data)),
         element: sourcePlayer.cloneCard(),
-        index: this.drag.startIndex
+        index: this.drag.startIndex,
       };
 
       const targetPlayer = this.players.team[this.drag.overIndex];
@@ -137,12 +137,12 @@ export class Builder extends Squad {
         ? {
           data: JSON.parse(JSON.stringify(targetPlayer.data)),
           element: targetPlayer.cloneCard(),
-          index: this.drag.overIndex
+          index: this.drag.overIndex,
         }
         : {
           data: null,
           element: null,
-          index: this.drag.overIndex
+          index: this.drag.overIndex,
         };
 
       if (targetPlayer.isFilled) {
@@ -152,12 +152,12 @@ export class Builder extends Squad {
         this.insertPlayer({
           data: sourceObj.data,
           element: sourceObj.element,
-          index: targetObj.index
+          index: targetObj.index,
         });
         this.insertPlayer({
           data: targetObj.data,
           element: targetObj.element,
-          index: sourceObj.index
+          index: sourceObj.index,
         });
 
         this.drag.startIndex = null;
@@ -167,7 +167,7 @@ export class Builder extends Squad {
         this.insertPlayer({
           data: sourceObj.data,
           element: sourceObj.element,
-          index: targetObj.index
+          index: targetObj.index,
         });
       }
     }
@@ -187,7 +187,7 @@ export class Builder extends Squad {
     return this.getAverageStat({
       players,
       stat: 'rating',
-      includeGk: line === 'DEF'
+      includeGk: line === 'DEF',
     });
   }
 
@@ -214,7 +214,7 @@ export class Builder extends Squad {
     this.stats.rating.value = this.getAverageStat({
       players,
       stat: 'rating',
-      includeGk: true
+      includeGk: true,
     });
     this.stats.chemistry.value = Math.min(
       Math.max(
@@ -234,27 +234,27 @@ export class Builder extends Squad {
 
     this.stats.pace.value = this.getAverageStat({
       players,
-      stat: 'card_att_1'
+      stat: 'card_att_1',
     });
     this.stats.shooting.value = this.getAverageStat({
       players,
-      stat: 'card_att_2'
+      stat: 'card_att_2',
     });
     this.stats.passing.value = this.getAverageStat({
       players,
-      stat: 'card_att_3'
+      stat: 'card_att_3',
     });
     this.stats.dribbling.value = this.getAverageStat({
       players,
-      stat: 'card_att_4'
+      stat: 'card_att_4',
     });
     this.stats.defending.value = this.getAverageStat({
       players,
-      stat: 'card_att_5'
+      stat: 'card_att_5',
     });
     this.stats.physical.value = this.getAverageStat({
       players,
-      stat: 'card_att_6'
+      stat: 'card_att_6',
     });
   }
 
@@ -277,7 +277,7 @@ export class Builder extends Squad {
     this.players.team.map(player => {
       if (player.links.includes(index)) {
         player.filledLinks = [
-          ...player.filledLinks.filter(link => link !== index)
+          ...player.filledLinks.filter(link => link !== index),
         ];
       }
     });
@@ -313,7 +313,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       rating: {
         el: this.els.el.querySelector(
@@ -331,7 +331,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       attack: {
         el: this.els.el.querySelector(
@@ -349,7 +349,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       midfield: {
         el: this.els.el.querySelector(
@@ -367,7 +367,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       defence: {
         el: this.els.el.querySelector(
@@ -385,7 +385,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       pace: {
         el: this.els.el.querySelector(
@@ -403,7 +403,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       shooting: {
         el: this.els.el.querySelector(
@@ -421,7 +421,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       passing: {
         el: this.els.el.querySelector(
@@ -439,7 +439,7 @@ export class Builder extends Squad {
 
           this.input.value = val;
           this.el.innerText = val;
-        }
+        },
       },
       dribbling: {
         el: this.els.el.querySelector(
@@ -457,7 +457,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       defending: {
         el: this.els.el.querySelector(
@@ -475,7 +475,7 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
+        },
       },
       physical: {
         el: this.els.el.querySelector(
@@ -493,8 +493,8 @@ export class Builder extends Squad {
 
           this.el.innerText = val;
           this.input.value = val;
-        }
-      }
+        },
+      },
     };
   }
 }

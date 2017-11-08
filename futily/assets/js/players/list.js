@@ -6,7 +6,7 @@ export const PlayerFilterForm = {
     this.els = {
       resetNames: document.querySelectorAll('.js-PlayerFilter_ResetName'),
       collapse: this.el.querySelectorAll('.js-PlayerFilter_Collapse'),
-      flyouts: this.el.querySelectorAll('.js-PlayerFilter_Flyout')
+      flyouts: this.el.querySelectorAll('.js-PlayerFilter_Flyout'),
     };
 
     this.hasFlyoutOpen = false;
@@ -73,13 +73,13 @@ export const PlayerFilterForm = {
     minSlideObj.init({
       el: minSlide,
       initialValue: this.el.querySelector('[data-slide-input=min]').value,
-      cappedValue: this.el.querySelector('[data-slide-input=max]').value
+      cappedValue: this.el.querySelector('[data-slide-input=max]').value,
     });
     maxSlideObj.init({
       el: maxSlide,
       initialValue: this.el.querySelector('[data-slide-input=max]').value,
       cappedValue: this.el.querySelector('[data-slide-input=min]').value,
-      reverse: true
+      reverse: true,
     });
   },
 
@@ -138,5 +138,5 @@ export const PlayerFilterForm = {
         });
       }
     });
-  }
+  },
 };

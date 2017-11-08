@@ -15,7 +15,7 @@ export default class {
       loading: el.querySelector('.bld-Search_Loading'),
       controls: {
         prev: el.querySelector('.bld-Search_Prev'),
-        next: el.querySelector('.bld-Search_Next')
+        next: el.querySelector('.bld-Search_Next'),
       },
       template: {
         el: template,
@@ -37,7 +37,7 @@ export default class {
           ),
           key: template.content.querySelector(
             '.plyr-Card_Stat-1 .plyr-Card_StatKey'
-          )
+          ),
         },
         stat2: {
           value: template.content.querySelector(
@@ -45,7 +45,7 @@ export default class {
           ),
           key: template.content.querySelector(
             '.plyr-Card_Stat-2 .plyr-Card_StatKey'
-          )
+          ),
         },
         stat3: {
           value: template.content.querySelector(
@@ -53,7 +53,7 @@ export default class {
           ),
           key: template.content.querySelector(
             '.plyr-Card_Stat-3 .plyr-Card_StatKey'
-          )
+          ),
         },
         stat4: {
           value: template.content.querySelector(
@@ -61,7 +61,7 @@ export default class {
           ),
           key: template.content.querySelector(
             '.plyr-Card_Stat-4 .plyr-Card_StatKey'
-          )
+          ),
         },
         stat5: {
           value: template.content.querySelector(
@@ -69,7 +69,7 @@ export default class {
           ),
           key: template.content.querySelector(
             '.plyr-Card_Stat-5 .plyr-Card_StatKey'
-          )
+          ),
         },
         stat6: {
           value: template.content.querySelector(
@@ -77,10 +77,10 @@ export default class {
           ),
           key: template.content.querySelector(
             '.plyr-Card_Stat-6 .plyr-Card_StatKey'
-          )
+          ),
         },
-        chemistry: template.content.querySelector('.plyr-Card_ChemValue')
-      }
+        chemistry: template.content.querySelector('.plyr-Card_ChemValue'),
+      },
     };
 
     this.open = false;
@@ -120,7 +120,7 @@ export default class {
           'bld-Search_Prev-hidden',
           !this._prev
         );
-      }
+      },
     };
 
     this.setupListeners();
@@ -141,7 +141,7 @@ export default class {
         next: '',
         prev: '',
         current: 1,
-        total: 1
+        total: 1,
       });
       this.results = await this.getResults(
         `/api/players?query=${this.term}&page=${this.pages.current}`
@@ -166,9 +166,9 @@ export default class {
           index: this.index,
           element: this.els.resultEls[index]
             .querySelector('.plyr-Card')
-            .cloneNode(true)
+            .cloneNode(true),
         },
-        bubbles: true
+        bubbles: true,
       });
       this.els.el.dispatchEvent(event);
       this.closeSearch();
@@ -188,7 +188,7 @@ export default class {
       next: '',
       prev: '',
       current: 1,
-      total: 1
+      total: 1,
     });
   }
 
@@ -199,7 +199,7 @@ export default class {
       next: data.links.next ? data.pages.current + 1 : null,
       prev: data.links.previous ? data.pages.current - 1 : null,
       current: data.pages.current,
-      total: data.pages.total
+      total: data.pages.total,
     });
 
     this.loading = false;

@@ -13,7 +13,7 @@ export function externalLinks () {
   const usePopupPrefixes = [
     'https://twitter.com/intent/tweet?',
     'https://www.facebook.com/sharer.php?',
-    'https://www.linkedin.com/shareArticle?'
+    'https://www.linkedin.com/shareArticle?',
   ];
 
   let thisDomain = window.location.hostname;
@@ -80,7 +80,7 @@ export const mediaBreakpoints = {
   sm: 600,
   md: 900,
   lg: 1200,
-  xlg: 1800
+  xlg: 1800,
 };
 
 /*
@@ -156,7 +156,7 @@ export function scrollToY (
         return 0.5 * Math.pow(pos, 5);
       }
       return 0.5 * (Math.pow(pos - 2, 5) + 2);
-    }
+    },
   };
 
   function tick () {

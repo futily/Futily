@@ -27,7 +27,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0,
     strength: 0.05,
     vision: 0,
-    volleys: 0.02
+    volleys: 0.02,
   },
   winger: {
     acceleration: 0.07,
@@ -57,7 +57,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0,
     strength: 0,
     vision: 0.06,
-    volleys: 0
+    volleys: 0,
   },
   forward: {
     acceleration: 0.05,
@@ -87,7 +87,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0,
     strength: 0,
     vision: 0.08,
-    volleys: 0
+    volleys: 0,
   },
   cam: {
     acceleration: 0.04,
@@ -117,7 +117,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0,
     strength: 0,
     vision: 0.14,
-    volleys: 0
+    volleys: 0,
   },
   centerMid: {
     acceleration: 0,
@@ -147,7 +147,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0.05,
     strength: 0,
     vision: 0.13,
-    volleys: 0
+    volleys: 0,
   },
   wideMid: {
     acceleration: 0.07,
@@ -177,7 +177,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0,
     strength: 0,
     vision: 0.07,
-    volleys: 0
+    volleys: 0,
   },
   cdm: {
     acceleration: 0,
@@ -207,7 +207,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0.12,
     strength: 0.04,
     vision: 0.04,
-    volleys: 0
+    volleys: 0,
   },
   cb: {
     acceleration: 0,
@@ -237,7 +237,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0.17,
     strength: 0,
     vision: 0,
-    volleys: 0
+    volleys: 0,
   },
   fullBack: {
     acceleration: 0.05,
@@ -267,7 +267,7 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0.11,
     strength: 0,
     vision: 0,
-    volleys: 0
+    volleys: 0,
   },
   wingBack: {
     acceleration: 0.04,
@@ -297,8 +297,8 @@ export const RATING_POSITION_GROUP = {
     standingTackle: 0.08,
     strength: 0,
     vision: 0,
-    volleys: 0
-  }
+    volleys: 0,
+  },
 };
 
 export const RATING_PER_POSITION = {
@@ -317,13 +317,13 @@ export const RATING_PER_POSITION = {
   LF: RATING_POSITION_GROUP.forward,
   CAM: RATING_POSITION_GROUP.cam,
   CF: RATING_POSITION_GROUP.forward,
-  ST: RATING_POSITION_GROUP.striker
+  ST: RATING_POSITION_GROUP.striker,
 };
 
 export const CARD_RATING_BREAKDOWN = {
   cardAtt1: {
     acceleration: 0.45,
-    sprintSpeed: 0.55
+    sprintSpeed: 0.55,
   },
   cardAtt2: {
     finishing: 0.45,
@@ -331,7 +331,7 @@ export const CARD_RATING_BREAKDOWN = {
     penalties: 0.05,
     positioning: 0.05,
     shotPower: 0.2,
-    volleys: 0.05
+    volleys: 0.05,
   },
   cardAtt3: {
     crossing: 0.2,
@@ -339,28 +339,28 @@ export const CARD_RATING_BREAKDOWN = {
     freeKickAccuracy: 0.05,
     longPassing: 0.15,
     shortPassing: 0.35,
-    vision: 0.2
+    vision: 0.2,
   },
   cardAtt4: {
     agility: 0.1,
     balance: 0.05,
     ballControl: 0.3,
     dribbling: 0.5,
-    reactions: 0.05
+    reactions: 0.05,
   },
   cardAtt5: {
     headingAccuracy: 0.1,
     interceptions: 0.2,
     marking: 0.3,
     slidingTackle: 0.1,
-    standingTackle: 0.3
+    standingTackle: 0.3,
   },
   cardAtt6: {
     aggression: 0.2,
     jumping: 0.05,
     stamina: 0.25,
-    strength: 0.5
-  }
+    strength: 0.5,
+  },
 };
 
 export const CHEM_STYLE_MAX_RATING_BOOST = {
@@ -392,7 +392,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 5,
     strength: 5,
     vision: 5,
-    volleys: 5
+    volleys: 5,
   },
   sniper: {
     acceleration: 0,
@@ -422,7 +422,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 0,
     vision: 0,
-    volleys: 10
+    volleys: 10,
   },
   finisher: {
     acceleration: 0,
@@ -452,7 +452,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 10,
     vision: 0,
-    volleys: 10
+    volleys: 10,
   },
   deadeye: {
     acceleration: 0,
@@ -482,7 +482,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 0,
     vision: 5,
-    volleys: 0
+    volleys: 0,
   },
   marksman: {
     acceleration: 0,
@@ -512,7 +512,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 5,
     vision: 0,
-    volleys: 10
+    volleys: 10,
   },
   hawk: {
     acceleration: 10,
@@ -542,7 +542,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 5,
     vision: 0,
-    volleys: 10
+    volleys: 10,
   },
   artist: {
     acceleration: 0,
@@ -572,7 +572,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 0,
     vision: 15,
-    volleys: 0
+    volleys: 0,
   },
   architect: {
     acceleration: 0,
@@ -602,7 +602,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 15,
     vision: 10,
-    volleys: 0
+    volleys: 0,
   },
   powerhouse: {
     acceleration: 0,
@@ -632,7 +632,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 15,
     strength: 0,
     vision: 10,
-    volleys: 0
+    volleys: 0,
   },
   maestro: {
     acceleration: 0,
@@ -662,7 +662,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 0,
     vision: 5,
-    volleys: 10
+    volleys: 10,
   },
   engine: {
     acceleration: 10,
@@ -692,7 +692,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 0,
     vision: 5,
-    volleys: 0
+    volleys: 0,
   },
   sentinel: {
     acceleration: 0,
@@ -722,7 +722,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 15,
     strength: 15,
     vision: 0,
-    volleys: 0
+    volleys: 0,
   },
   guardian: {
     acceleration: 0,
@@ -752,7 +752,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 10,
     strength: 0,
     vision: 0,
-    volleys: 0
+    volleys: 0,
   },
   gladiator: {
     acceleration: 0,
@@ -782,7 +782,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 10,
     strength: 0,
     vision: 0,
-    volleys: 0
+    volleys: 0,
   },
   backbone: {
     acceleration: 0,
@@ -812,7 +812,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 10,
     strength: 10,
     vision: 5,
-    volleys: 0
+    volleys: 0,
   },
   anchor: {
     acceleration: 10,
@@ -842,7 +842,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 10,
     strength: 10,
     vision: 0,
-    volleys: 0
+    volleys: 0,
   },
   hunter: {
     acceleration: 15,
@@ -872,7 +872,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 0,
     vision: 0,
-    volleys: 10
+    volleys: 10,
   },
   catalyst: {
     acceleration: 15,
@@ -902,7 +902,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 0,
     strength: 0,
     vision: 15,
-    volleys: 0
+    volleys: 0,
   },
   shadow: {
     acceleration: 15,
@@ -932,8 +932,8 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     standingTackle: 15,
     strength: 0,
     vision: 0,
-    volleys: 0
-  }
+    volleys: 0,
+  },
 };
 
 export const CHEM_STYLE_TYPES = {
@@ -941,7 +941,7 @@ export const CHEM_STYLE_TYPES = {
   att: ['sniper', 'finisher', 'deadeye', 'marksman', 'hawk'],
   mid: ['artist', 'architect', 'powerhouse', 'maestro', 'engine'],
   def: ['sentinel', 'guardian', 'gladiator', 'backbone', 'anchor'],
-  skill: ['hunter', 'catalyst', 'shadow']
+  skill: ['hunter', 'catalyst', 'shadow'],
 };
 
 export const POSITIONS = [
@@ -960,7 +960,7 @@ export const POSITIONS = [
   'RF',
   'CF',
   'LF',
-  'ST'
+  'ST',
 ];
 
 export const INGAME_STATS = [
@@ -991,5 +991,5 @@ export const INGAME_STATS = [
   'standingTackle',
   'strength',
   'vision',
-  'volleys'
+  'volleys',
 ];

@@ -18,7 +18,7 @@ const state = {
           fnc({ formation: this._formation })
         );
       }
-    }
+    },
   },
 
   subscribe (key, fnc) {
@@ -28,7 +28,7 @@ const state = {
 
     if (this.subscriptions.hasOwnProperty(key) === false) {
       this.subscriptions[key] = {
-        listeners: []
+        listeners: [],
       };
     }
 
@@ -38,7 +38,7 @@ const state = {
     ) {
       this.subscriptions[key].listeners.push(fnc);
     }
-  }
+  },
 };
 
 export default state;

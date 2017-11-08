@@ -25,7 +25,7 @@ export class Follow {
         {},
         {
           xsrfCookieName: 'csrftoken',
-          xsrfHeaderName: 'X-CSRFToken'
+          xsrfHeaderName: 'X-CSRFToken',
         }
       )
       .then(res => {

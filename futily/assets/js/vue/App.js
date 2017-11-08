@@ -21,7 +21,7 @@ export default {
     return {
       searchStore,
       searchEl: undefined,
-      shouldSearchShow: false
+      shouldSearchShow: false,
     };
   },
 
@@ -40,5 +40,5 @@ export default {
         this.shouldSearchShow = true;
       }
     });
-  }
+  },
 };

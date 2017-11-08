@@ -9,5 +9,5 @@ export default {
   FrontendSwitcher,
   LazyImage,
   MobileNav,
-  SquadBuilder: Builder
+  SquadBuilder: Builder,
 };

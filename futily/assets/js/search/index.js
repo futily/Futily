@@ -23,8 +23,8 @@ class PlayerSearch {
         rating: template.content.querySelector('.plyr-SearchResult_Rating'),
         ratingIcon: template.content.querySelector(
           '.plyr-SearchResult_RatingIcon'
-        )
-      }
+        ),
+      },
     };
     this._results = [];
     this._activeResult = -1;
@@ -99,7 +99,7 @@ class PlayerSearch {
     const keyMap = {
       13: 'enter',
       38: 'up',
-      40: 'down'
+      40: 'down',
     };
     const handleEnterKey = () => {
       this.resultEls[this.activeResult]
@@ -377,7 +377,7 @@ export class SettingsClubSearch extends SettingsObjectSearch {
       el: template,
       result: template.content.querySelector('.plyr-SearchResult'),
       club: template.content.querySelector('.plyr-SearchResult_Club'),
-      name: template.content.querySelector('.plyr-SearchResult_Name')
+      name: template.content.querySelector('.plyr-SearchResult_Name'),
     };
 
     return template;
@@ -413,7 +413,7 @@ export class SettingsNationSearch extends SettingsObjectSearch {
       el: template,
       result: template.content.querySelector('.plyr-SearchResult'),
       nation: template.content.querySelector('.plyr-SearchResult_Nation'),
-      name: template.content.querySelector('.plyr-SearchResult_Name')
+      name: template.content.querySelector('.plyr-SearchResult_Name'),
     };
 
     return template;

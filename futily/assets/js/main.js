@@ -12,7 +12,7 @@ import {
   SectionPlayerSearch,
   SettingsClubSearch,
   SettingsNationSearch,
-  SettingsPlayerSearch
+  SettingsPlayerSearch,
 } from './search';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (document.querySelector('.js-Builder-challenge')) {
         new squads.SquadChallenge({
           className: 'bld-Builder',
-          isEditable: true
+          isEditable: true,
         });
       } else {
         new squads.SquadBuilder({ className: 'bld-Builder', isEditable: true });

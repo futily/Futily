@@ -3,7 +3,7 @@ import {
   CHEM_STYLE_MAX_RATING_BOOST,
   INGAME_STATS,
   POSITIONS,
-  RATING_PER_POSITION
+  RATING_PER_POSITION,
 } from './constants';
 import { getRatingGradeVariable, getPositionGradeVariable } from './utils';
 
@@ -30,7 +30,7 @@ export class CardSelector {
         att5: document.querySelector('.plyr-Card_Stat-5 .plyr-Card_StatValue'),
         att6: document.querySelector('.plyr-Card_Stat-6 .plyr-Card_StatValue'),
         club: document.querySelector('.plyr-Card_Club'),
-        image: document.querySelector('.plyr-Card_Image')
+        image: document.querySelector('.plyr-Card_Image'),
       },
       ratings: {
         att1: document.querySelector(
@@ -68,8 +68,8 @@ export class CardSelector {
         ),
         att6Difference: document.querySelector(
           '.plyr-FutilyRatings_Item-6 .plyr-FutilyRatings_ValueDifference'
-        )
-      }
+        ),
+      },
     };
     this.baseCssClass = 'plyr-Card plyr-Card-large';
     this.initialData = this.els.card.container.dataset.cardData;
@@ -139,7 +139,7 @@ export class CardSelector {
       json.card_att_3,
       json.card_att_4,
       json.card_att_5,
-      json.card_att_6
+      json.card_att_6,
     ].forEach((val, index) => {
       const differenceEl = this.els.ratings[`att${index + 1}Difference`];
       const difference = val - initialJson[`card_att_${index + 1}`];
@@ -163,12 +163,12 @@ export class RPP {
     this.els = {
       base: {
         group: document.querySelectorAll('.js-RPP_Base-group'),
-        ingame: document.querySelectorAll('.js-RPP_Base-ingame')
+        ingame: document.querySelectorAll('.js-RPP_Base-ingame'),
       },
       chemStyles: {
         container: document.querySelector('.js-RPP_ChemStyles'),
-        items: document.querySelectorAll('.js-RPP_ChemStyle')
-      }
+        items: document.querySelectorAll('.js-RPP_ChemStyle'),
+      },
     };
 
     this.teamChem = 100;
@@ -217,7 +217,7 @@ export class RPP {
               `.js-RPP_Base-card[data-rpp-field="${el.dataset
                 .rppField}"] .js-RPP_CardDifference`
             ),
-            group: el.querySelector('.js-RPP_GroupDifference')
+            group: el.querySelector('.js-RPP_GroupDifference'),
           },
           value: {
             base: document.querySelector(
@@ -229,8 +229,8 @@ export class RPP {
                 .rppField}"] .js-RPP_CardValue`
             ),
             group: el.querySelector('.js-RPP_GroupValue'),
-            bar: el.querySelector('.js-RPP_Bar')
-          }
+            bar: el.querySelector('.js-RPP_Bar'),
+          },
         },
         base: Number(el.dataset.rppBase),
         _rating: Number(el.dataset.rppBase),
@@ -265,7 +265,7 @@ export class RPP {
         },
         get difference () {
           return this.rating - this.base;
-        }
+        },
       };
 
       return accumulator;
@@ -278,7 +278,7 @@ export class RPP {
         els: {
           el,
           difference: el.querySelector('.js-RPP_BaseDifference'),
-          value: el.querySelector('.js-RPP_BaseValue')
+          value: el.querySelector('.js-RPP_BaseValue'),
         },
         base: Number(el.dataset.rppBase),
         _rating: Number(el.dataset.rppBase),
@@ -301,7 +301,7 @@ export class RPP {
         },
         get difference () {
           return this.rating - this.base;
-        }
+        },
       };
 
       return accumulator;
@@ -318,7 +318,7 @@ export class RPP {
         els: {
           el,
           label: el.querySelector('.js-RPP_PositionLabel'),
-          value: el.querySelector('.js-RPP_PositionValue')
+          value: el.querySelector('.js-RPP_PositionValue'),
         },
         _rating: positionalRatings[position],
         base: positionalRatings[position],
@@ -332,7 +332,7 @@ export class RPP {
 
           this.els.value.innerText = val;
           this.els.el.style.setProperty(statGrade.property, statGrade.value);
-        }
+        },
       };
 
       return accumulator;

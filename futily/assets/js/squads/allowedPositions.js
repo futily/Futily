@@ -15,5 +15,5 @@ export default {
   LW: ['LM', 'LW', 'LF'],
   LF: ['LM', 'LW', 'LF'],
   CF: ['CDM', 'CM', 'CAM', 'CF', 'ST'],
-  ST: ['CDM', 'CM', 'CAM', 'CF', 'ST']
+  ST: ['CDM', 'CM', 'CAM', 'CF', 'ST'],
 };

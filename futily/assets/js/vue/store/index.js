@@ -9,7 +9,7 @@ const debug = process.env.NODE_ENV !== 'production';
 
 const store = new Vuex.Store({
   modules,
-  strict: debug
+  strict: debug,
 });
 
 export default store;

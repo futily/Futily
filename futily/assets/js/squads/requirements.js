@@ -7,7 +7,7 @@ class Requirement {
       el,
       data: el.querySelector('.js-Builder_RequirementData'),
       current: el.querySelector('.js-Builder_RequirementCurrent'),
-      completed: el.querySelector('.js-Builder_RequirementCompleted')
+      completed: el.querySelector('.js-Builder_RequirementCompleted'),
     };
 
     this.required = value;
@@ -69,7 +69,7 @@ export class RatingRequirement extends Requirement {
       getAverageStat({
         players,
         stat: 'rating',
-        includeGk: true
+        includeGk: true,
       })
     );
   }

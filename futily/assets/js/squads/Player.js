@@ -10,7 +10,7 @@ export class Player {
     this.els = {
       el,
       player: el.querySelector('.bld-Builder_Player'),
-      pedestal: el.querySelector('.bld-Builder_Pedestal')
+      pedestal: el.querySelector('.bld-Builder_Pedestal'),
     };
 
     this.index = index;
@@ -40,7 +40,7 @@ export class Player {
 
     return {
       x,
-      y
+      y,
     };
   }
 
@@ -129,7 +129,7 @@ export class Player {
       strong: 3,
       good: 2.5,
       weak: 1.5,
-      poor: 0.5
+      poor: 0.5,
     };
     const playerPosition = this.positions.inBuilder;
 
@@ -204,7 +204,7 @@ export class Player {
         const roundedChem = Math.round(this.links * this.position);
 
         return Math.min(10, roundedChem + this.boost);
-      }
+      },
     };
   }
 
@@ -245,7 +245,7 @@ export class Player {
         this._verbose = val;
 
         _this.els.el.className = `bld-Builder_PlayersItem bld-Builder_PlayersItem-${this._verbose.toLowerCase()}`;
-      }
+      },
     };
   }
 
@@ -274,8 +274,8 @@ export class EditablePlayer extends Player {
         el: el.querySelector('.bld-Builder_Controls'),
         remove: el.querySelector('.bld-Builder_Control-remove'),
         changePosition: el.querySelector('.bld-Builder_Control-changePosition'),
-        toggleLoyalty: el.querySelector('.bld-Builder_Control-toggleLoyalty')
-      }
+        toggleLoyalty: el.querySelector('.bld-Builder_Control-toggleLoyalty'),
+      },
     });
     this._card = initialCard;
 
@@ -292,9 +292,9 @@ export class EditablePlayer extends Player {
     this.els.controls.remove.addEventListener('pointerdown', () => {
       const event = new CustomEvent('player:removed', {
         detail: {
-          index: this.index
+          index: this.index,
         },
-        bubbles: true
+        bubbles: true,
       });
       this.els.el.dispatchEvent(event);
     });
@@ -321,7 +321,7 @@ export class EditablePlayer extends Player {
       items: allowedPositions[this.positions.inBuilder],
       currentPosition: allowedPositions[this.positions.inBuilder].indexOf(
         this.positions.inBuilder
-      )
+      ),
     });
     this.setFormData();
   }

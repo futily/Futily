@@ -14,8 +14,8 @@ export class Squad {
         el: el.querySelector(`.${className}_Team`),
         canvas: el.querySelector(`.${className}_Canvas`),
         players: el.querySelector(`.${className}_Players`),
-        items: el.querySelectorAll(`.${className}_PlayersItem`)
-      }
+        items: el.querySelectorAll(`.${className}_PlayersItem`),
+      },
     };
 
     this.players = {
@@ -31,14 +31,14 @@ export class Squad {
           el,
           initialData,
           initialCard,
-          isEditable: this.isEditable
+          isEditable: this.isEditable,
         });
         if (player.isFilled) {
           player.setPosition(player.els.pedestal.innerText);
         }
 
         return player;
-      })
+      }),
     };
     this.initialFormation = this.els.el.dataset['builderFormation'];
 

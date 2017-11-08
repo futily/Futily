@@ -82,7 +82,7 @@ export default function () {
         transformTemplate:
           element.dataset.parallaxTransformTemplate ||
           'translate3d([x][unit], [y][unit], 0)',
-        unit: element.dataset.parallaxUnit || 'px'
+        unit: element.dataset.parallaxUnit || 'px',
       };
 
       if (elemobj.middle < window.innerHeight / 2) {

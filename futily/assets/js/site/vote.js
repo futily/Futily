@@ -9,9 +9,9 @@ export class Vote {
       el,
       controls: {
         down: el.querySelector(`${className}_Control[data-action='down']`),
-        up: el.querySelector(`${className}_Control[data-action='up']`)
+        up: el.querySelector(`${className}_Control[data-action='up']`),
       },
-      value: el.querySelector(`${className}_Value`)
+      value: el.querySelector(`${className}_Value`),
     };
 
     this.user = this.els.el.dataset.user;
@@ -47,12 +47,12 @@ export class Vote {
         {
           action,
           object,
-          user
+          user,
         },
         {
           headers: {
-            X_REQUESTED_WITH: 'XMLHttpRequest'
-          }
+            X_REQUESTED_WITH: 'XMLHttpRequest',
+          },
         }
       );
 

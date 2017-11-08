@@ -5,7 +5,7 @@ export class FloatingLabel {
     this.els = {
       el,
       label: el.querySelector(`.${this.className}_Label`),
-      input: el.querySelector(`.${this.className}_Input`)
+      input: el.querySelector(`.${this.className}_Input`),
     };
 
     this.shouldBeFloated = this.els.input.value.length > 0;

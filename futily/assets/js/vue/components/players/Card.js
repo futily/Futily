@@ -7,30 +7,30 @@ import * as types from '../squads/types';
 @Component({
   props: {
     player: {
-      type: Object
+      type: Object,
     },
     size: {
       type: String,
-      default: 'small'
+      default: 'small',
     },
     position: {
-      type: String
+      type: String,
     },
     index: {
-      type: Number
+      type: Number,
     },
     showChemistry: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
 
   computed: {
     ...mapGetters({
       getPlayer: types.GET_PLAYER,
-      getPlayerChemistry: types.GET_PLAYER_CHEMISTRY
-    })
-  }
+      getPlayerChemistry: types.GET_PLAYER_CHEMISTRY,
+    }),
+  },
 })
 export class Card extends Vue {
   render () {
@@ -45,7 +45,7 @@ export class Card extends Vue {
         class={[
           'plyr-Card',
           `plyr-Card-${this.size}`,
-          `plyr-Card-${this.player.color}`
+          `plyr-Card-${this.player.color}`,
         ]}
         href={this.player.url}
       >
