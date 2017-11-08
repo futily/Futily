@@ -1,3 +1,3 @@
-import { Squad } from './Squad'
+import { Squad } from './Squad';
 
 export class Detail extends Squad {}

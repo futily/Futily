@@ -19,6 +19,7 @@ module.exports = {
     'prefer-const': [1],
     'prefer-template': [2],
     'no-console': [2],
-    'no-unused-vars': [1]
+    'no-unused-vars': [1],
+    'semi': [2, 'always']
   }
 }

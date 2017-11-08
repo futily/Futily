@@ -299,7 +299,7 @@ export const RATING_POSITION_GROUP = {
     vision: 0,
     volleys: 0
   }
-}
+};
 
 export const RATING_PER_POSITION = {
   RWB: RATING_POSITION_GROUP.wingBack,
@@ -318,7 +318,7 @@ export const RATING_PER_POSITION = {
   CAM: RATING_POSITION_GROUP.cam,
   CF: RATING_POSITION_GROUP.forward,
   ST: RATING_POSITION_GROUP.striker
-}
+};
 
 export const CARD_RATING_BREAKDOWN = {
   cardAtt1: {
@@ -361,7 +361,7 @@ export const CARD_RATING_BREAKDOWN = {
     stamina: 0.25,
     strength: 0.5
   }
-}
+};
 
 export const CHEM_STYLE_MAX_RATING_BOOST = {
   basic: {
@@ -934,7 +934,7 @@ export const CHEM_STYLE_MAX_RATING_BOOST = {
     vision: 0,
     volleys: 0
   }
-}
+};
 
 export const CHEM_STYLE_TYPES = {
   basic: ['basic'],
@@ -942,7 +942,7 @@ export const CHEM_STYLE_TYPES = {
   mid: ['artist', 'architect', 'powerhouse', 'maestro', 'engine'],
   def: ['sentinel', 'guardian', 'gladiator', 'backbone', 'anchor'],
   skill: ['hunter', 'catalyst', 'shadow']
-}
+};
 
 export const POSITIONS = [
   'RB',
@@ -961,7 +961,7 @@ export const POSITIONS = [
   'CF',
   'LF',
   'ST'
-]
+];
 
 export const INGAME_STATS = [
   'acceleration',
@@ -992,4 +992,4 @@ export const INGAME_STATS = [
   'strength',
   'vision',
   'volleys'
-]
+];

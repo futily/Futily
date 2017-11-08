@@ -2,7 +2,7 @@ export const POSITION_LINES = {
   DEF: ['GK', 'CB', 'LWB', 'LB', 'RWB', 'RB'],
   MID: ['CAM', 'CM', 'CDM', 'LM', 'RM'],
   ATT: ['ST', 'CF', 'LW', 'LF', 'RW', 'RF']
-}
+};
 
 export const RARE_COLOURS = [
   'rare_bronze',
@@ -43,4 +43,4 @@ export const RARE_COLOURS = [
   'totw_gold',
   'totw_silver',
   'toty'
-]
+];

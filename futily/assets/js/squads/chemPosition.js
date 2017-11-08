@@ -14,7 +14,7 @@ export const goodChem = {
   LWB: ['LB'],
   RB: ['RWB'],
   RWB: ['RB']
-}
+};
 
 export const weakChem = {
   LF: ['ST', 'CF', 'RF', 'LM'],
@@ -33,4 +33,4 @@ export const weakChem = {
   LWB: ['LM', 'LW', 'RWB'],
   RWB: ['RM', 'RW', 'LWB'],
   CB: ['RB', 'LB', 'CDM']
-}
+};

@@ -1,95 +1,96 @@
-import allowedPositions from './allowedPositions'
-import formationData from './formationData'
-import { Cycler } from '../utils'
-import { goodChem, weakChem } from './chemPosition'
+import allowedPositions from './allowedPositions';
+import formationData from './formationData';
+import { Cycler } from '../utils';
+import { goodChem, weakChem } from './chemPosition';
 
 export class Player {
   constructor ({ index, el, isEditable, initialData = {} }) {
-    this.isEditable = isEditable
+    this.isEditable = isEditable;
 
     this.els = {
       el,
       player: el.querySelector('.bld-Builder_Player'),
       pedestal: el.querySelector('.bld-Builder_Pedestal')
-    }
+    };
 
-    this.index = index
+    this.index = index;
 
-    this.links = []
-    this.filledLinks = []
+    this.links = [];
+    this.filledLinks = [];
 
-    this._card = null
-    this.data = initialData
-    this.chemistry = this.constructChemistry()
-    this.positions = this.constructPositions()
+    this._card = null;
+    this.data = initialData;
+    this.chemistry = this.constructChemistry();
+    this.positions = this.constructPositions();
 
-    this.coords = this.getCoordinates()
+    this.coords = this.getCoordinates();
   }
 
   getCoordinates () {
-    const style = window.getComputedStyle(this.els.el).transform
-    const match = style.match(/^matrix\((.+)\)$/)[1].split(',')
+    const style = window.getComputedStyle(this.els.el).transform;
+    const match = style.match(/^matrix\((.+)\)$/)[1].split(',');
     const x =
       this.els.el.offsetLeft +
       parseFloat(match[4]) +
-      this.els.el.offsetWidth / 2
+      this.els.el.offsetWidth / 2;
     const y =
       this.els.el.offsetTop +
       parseFloat(match[5]) +
-      (this.els.el.offsetHeight / 2 + 100)
+      (this.els.el.offsetHeight / 2 + 100);
 
     return {
       x,
       y
-    }
+    };
   }
 
   calculateLinkChemistry (team) {
     if (this.filledLinks.length <= 0) {
-      this.chemistry.links = 0.9
+      this.chemistry.links = 0.9;
 
-      return
+      return;
     }
 
-    let chemClub = 0
-    let chemLeague = 0
-    let chemNation = 0
+    let chemClub = 0;
+    let chemLeague = 0;
+    let chemNation = 0;
 
     for (const index of this.filledLinks) {
-      const linkedPlayer = team[index]
+      const linkedPlayer = team[index];
 
       if (this.data.club.title === linkedPlayer.data.club.title) {
-        chemClub++
+        chemClub++;
       }
 
       if (
         this.data.league.title === linkedPlayer.data.league.title ||
         [this.data.league.ea_id, linkedPlayer.data.league.ea_id].includes(2118)
       ) {
-        chemLeague++
+        chemLeague++;
       }
 
       if (this.data.nation.title === linkedPlayer.data.nation.title) {
-        chemNation++
+        chemNation++;
       }
     }
 
-    chemClub = this.filledLinks.length && chemClub / this.filledLinks.length * 3
+    chemClub =
+      this.filledLinks.length && chemClub / this.filledLinks.length * 3;
     chemLeague =
-      this.filledLinks.length && chemLeague / this.filledLinks.length * 3
+      this.filledLinks.length && chemLeague / this.filledLinks.length * 3;
     chemNation =
-      this.filledLinks.length && chemNation / this.filledLinks.length * 3
+      this.filledLinks.length && chemNation / this.filledLinks.length * 3;
 
-    const chemTotal = chemClub + chemLeague + chemNation
+    const chemTotal = chemClub + chemLeague + chemNation;
 
     if (chemTotal >= 5) {
-      this.chemistry.links = 3.5
+      this.chemistry.links = 3.5;
     } else if (chemTotal >= 3) {
-      this.chemistry.links = 3
+      this.chemistry.links = 3;
     } else if (chemTotal >= 1) {
-      this.chemistry.links = 2
+      this.chemistry.links = 2;
     } else {
-      this.chemistry.links = 0.9
+      this.chemistry.links = 0.9;
     }
   }
 
@@ -98,29 +99,29 @@ export class Player {
       Object.keys(target.data).length === 0 ||
       Object.keys(this.data).length === 0
     ) {
-      return 0
+      return 0;
     }
 
-    let chemClub = 0
-    let chemLeague = 0
-    let chemNation = 0
+    let chemClub = 0;
+    let chemLeague = 0;
+    let chemNation = 0;
 
     if (this.data.club.title === target.data.club.title) {
-      chemClub++
+      chemClub++;
     }
 
     if (
       this.data.league.title === target.data.league.title ||
       [this.data.league.ea_id, target.data.league.ea_id].includes(2118)
     ) {
-      chemLeague++
+      chemLeague++;
     }
 
     if (this.data.nation.title === target.data.nation.title) {
-      chemNation++
+      chemNation++;
     }
 
-    return chemClub + chemLeague + chemNation
+    return chemClub + chemLeague + chemNation;
   }
 
   calculatePositionChemistry () {
@@ -129,143 +130,143 @@ export class Player {
       good: 2.5,
       weak: 1.5,
       poor: 0.5
-    }
-    const playerPosition = this.positions.inBuilder
+    };
+    const playerPosition = this.positions.inBuilder;
 
     if (playerPosition === this.positions.fromFormation) {
-      this.chemistry.position = positionChemSchema.strong
+      this.chemistry.position = positionChemSchema.strong;
     } else if (
       goodChem.hasOwnProperty(this.positions.fromFormation) &&
       goodChem[this.positions.fromFormation].includes(playerPosition)
     ) {
-      this.chemistry.position = positionChemSchema.good
+      this.chemistry.position = positionChemSchema.good;
     } else if (
       weakChem.hasOwnProperty(this.positions.fromFormation) &&
       weakChem[this.positions.fromFormation].includes(playerPosition)
     ) {
-      this.chemistry.position = positionChemSchema.weak
+      this.chemistry.position = positionChemSchema.weak;
     } else {
-      this.chemistry.position = positionChemSchema.poor
+      this.chemistry.position = positionChemSchema.poor;
     }
   }
 
   constructChemistry () {
-    const _this = this
+    const _this = this;
 
     return {
       _links: 0,
       get links () {
-        return this._links
+        return this._links;
       },
 
       set links (val) {
-        this._links = val
+        this._links = val;
 
         if (_this.isEditable) {
           _this.card.querySelector(
             '.plyr-Card_ChemValue'
-          ).innerText = this.total
-          _this.setFormData()
+          ).innerText = this.total;
+          _this.setFormData();
         }
       },
       _position: 0,
       get position () {
-        return this._position
+        return this._position;
       },
 
       set position (val) {
-        this._position = val
+        this._position = val;
 
         if (_this.isEditable) {
           _this.card.querySelector(
             '.plyr-Card_ChemValue'
-          ).innerText = this.total
-          _this.setFormData()
+          ).innerText = this.total;
+          _this.setFormData();
         }
       },
       _boost: 0,
       get boost () {
-        return this._boost
+        return this._boost;
       },
 
       set boost (val) {
-        this._boost = val
+        this._boost = val;
 
         if (_this.isEditable) {
           _this.card.querySelector(
             '.plyr-Card_ChemValue'
-          ).innerText = this.total
-          _this.setFormData()
+          ).innerText = this.total;
+          _this.setFormData();
         }
       },
 
       get total () {
-        const roundedChem = Math.round(this.links * this.position)
+        const roundedChem = Math.round(this.links * this.position);
 
-        return Math.min(10, roundedChem + this.boost)
+        return Math.min(10, roundedChem + this.boost);
       }
-    }
+    };
   }
 
   constructPositions () {
-    const _this = this
+    const _this = this;
 
     return {
       _fromFormation: '',
       get fromFormation () {
-        return this._fromFormation
+        return this._fromFormation;
       },
       set fromFormation (val) {
-        this._fromFormation = val
+        this._fromFormation = val;
 
-        _this.els.pedestal.innerText = this._fromFormation
+        _this.els.pedestal.innerText = this._fromFormation;
       },
 
       _inBuilder: '',
       get inBuilder () {
-        return this._inBuilder
+        return this._inBuilder;
       },
       set inBuilder (val) {
-        this._inBuilder = val
+        this._inBuilder = val;
 
         if (this._inBuilder) {
           _this.card.querySelector(
             '.plyr-Card_Position'
-          ).innerText = this._inBuilder
-          _this.calculatePositionChemistry()
+          ).innerText = this._inBuilder;
+          _this.calculatePositionChemistry();
         }
       },
 
       _verbose: '',
       get verbose () {
-        return this._verbose
+        return this._verbose;
       },
       set verbose (val) {
-        this._verbose = val
+        this._verbose = val;
 
-        _this.els.el.className = `bld-Builder_PlayersItem bld-Builder_PlayersItem-${this._verbose.toLowerCase()}`
+        _this.els.el.className = `bld-Builder_PlayersItem bld-Builder_PlayersItem-${this._verbose.toLowerCase()}`;
       }
-    }
+    };
   }
 
   setLinks ({ formation, team }) {
-    this.links = formationData[formation].positionLinks[this.index]
-    this.filledLinks = this.links.filter(link => team[link].isFilled)
-    this.coords = this.getCoordinates()
+    this.links = formationData[formation].positionLinks[this.index];
+    this.filledLinks = this.links.filter(link => team[link].isFilled);
+    this.coords = this.getCoordinates();
   }
 
   setPosition (key, position) {
-    this.positions[key] = position
+    this.positions[key] = position;
   }
 
   get isFilled () {
-    return Object.keys(this.data).length !== 0
+    return Object.keys(this.data).length !== 0;
   }
 }
 
 export class EditablePlayer extends Player {
   constructor ({ index, el, isEditable, initialCard, initialData = {} }) {
-    super({ index, el, isEditable, initialData })
+    super({ index, el, isEditable, initialData });
 
     this.els = Object.assign(this.els, {
       input: el.querySelector('.bld-Builder_PlayerInput'),
@@ -275,18 +276,18 @@ export class EditablePlayer extends Player {
         changePosition: el.querySelector('.bld-Builder_Control-changePosition'),
         toggleLoyalty: el.querySelector('.bld-Builder_Control-toggleLoyalty')
       }
-    })
-    this._card = initialCard
+    });
+    this._card = initialCard;
 
-    this.positionsCycle = null
+    this.positionsCycle = null;
 
-    this.setupListeners()
+    this.setupListeners();
   }
 
   setupListeners () {
     this.els.controls.el.addEventListener('pointerdown', e =>
       e.stopPropagation()
-    )
+    );
 
     this.els.controls.remove.addEventListener('pointerdown', () => {
       const event = new CustomEvent('player:removed', {
@@ -294,55 +295,55 @@ export class EditablePlayer extends Player {
           index: this.index
         },
         bubbles: true
-      })
-      this.els.el.dispatchEvent(event)
-    })
+      });
+      this.els.el.dispatchEvent(event);
+    });
 
     this.els.controls.toggleLoyalty.addEventListener('pointerdown', () => {
-      this.chemistry.boost = this.chemistry.boost === 1 ? 0 : 1
-    })
+      this.chemistry.boost = this.chemistry.boost === 1 ? 0 : 1;
+    });
 
     this.els.controls.changePosition.addEventListener('pointerdown', () => {
-      this.cyclePositions()
-    })
+      this.cyclePositions();
+    });
   }
 
   cyclePositions () {
-    this.positions.inBuilder = this.positionsCycle.next()
+    this.positions.inBuilder = this.positionsCycle.next();
   }
 
   constructPlayer ({ data, element }) {
-    this.card = element
-    this.data = data
-    this.setInBuilderPosition()
-    this.els.el.dataset.builderFilled = 'true'
+    this.card = element;
+    this.data = data;
+    this.setInBuilderPosition();
+    this.els.el.dataset.builderFilled = 'true';
     this.positionsCycle = new Cycler({
       items: allowedPositions[this.positions.inBuilder],
       currentPosition: allowedPositions[this.positions.inBuilder].indexOf(
         this.positions.inBuilder
       )
-    })
-    this.setFormData()
+    });
+    this.setFormData();
   }
 
   cloneCard () {
     return this.isFilled
       ? this.els.el.querySelector('.plyr-Card').cloneNode(true)
-      : null
+      : null;
   }
 
   removePlayer () {
-    this.card = null
-    this.data = {}
-    this.els.input.value = ''
-    this.positions.inBuilder = ''
-    this.chemistry = this.constructChemistry()
-    this.els.el.dataset.builderFilled = 'false'
+    this.card = null;
+    this.data = {};
+    this.els.input.value = '';
+    this.positions.inBuilder = '';
+    this.chemistry = this.constructChemistry();
+    this.els.el.dataset.builderFilled = 'false';
   }
 
   setFormData () {
     this.els.input.value = `${this.data.id},${this.index},${this.positions
-      .inBuilder},${this.chemistry.total}`
+      .inBuilder},${this.chemistry.total}`;
   }
 
   setInBuilderPosition () {
@@ -353,24 +354,24 @@ export class EditablePlayer extends Player {
       )
         ? this.positions.fromFormation
         : this.data.position
-    )
+    );
   }
 
   setPosition (key, position) {
-    this.positions[key] = position
+    this.positions[key] = position;
   }
 
   get card () {
-    return this._card
+    return this._card;
   }
 
   set card (val) {
-    this._card = val
+    this._card = val;
 
-    this.els.player.innerHTML = ''
+    this.els.player.innerHTML = '';
 
     if (this._card) {
-      this.els.player.appendChild(this._card)
+      this.els.player.appendChild(this._card);
     }
   }
 }

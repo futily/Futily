@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { mapGetters } from 'vuex'
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import { mapGetters } from 'vuex';
 
-import * as types from '../squads/types'
+import * as types from '../squads/types';
 
 @Component({
   props: {
@@ -38,7 +38,7 @@ export class Card extends Vue {
     const position =
       this.index && this.index >= 0
         ? this.getPlayer({ index: this.index }).positions.actual
-        : this.player.position
+        : this.player.position;
 
     return (
       <a
@@ -51,12 +51,8 @@ export class Card extends Vue {
       >
         <header class='plyr-Card_Header'>
           <div class='plyr-Card_Meta'>
-            <span class='plyr-Card_Rating'>
-              {this.player.rating}
-            </span>
-            <span class='plyr-Card_Position'>
-              {position}
-            </span>
+            <span class='plyr-Card_Rating'>{this.player.rating}</span>
+            <span class='plyr-Card_Position'>{position}</span>
             <img
               alt=''
               src={`/static/ea-images/clubs/${this.player.club.ea_id}.png`}
@@ -76,39 +72,35 @@ export class Card extends Vue {
           />
         </header>
 
-        <p class='plyr-Card_Name'>
-          {this.player.name}
-        </p>
+        <p class='plyr-Card_Name'>{this.player.name}</p>
 
         <div class='plyr-Card_Body'>
           {this.player.stats.map((stat, index) => {
-            const key = stat[0]
-            const value = stat[1]
+            const key = stat[0];
+            const value = stat[1];
 
             return (
               <div class={['plyr-Card_Stat', `plyr-Card_Stat-${index}`]}>
-                <span class='plyr-Card_StatValue'>
-                  {value}
-                </span>
-                <span class='plyr-Card_StatKey'>
-                  {key}
-                </span>
+                <span class='plyr-Card_StatValue'>{value}</span>
+                <span class='plyr-Card_StatKey'>{key}</span>
               </div>
-            )
+            );
           })}
         </div>
 
-        {this.showChemistry
-          ? <footer class='plyr-Card_Footer'>
-              <div class='plyr-Card_Chemistry'>
-                <span class='plyr-Card_ChemistryLabel'>Chem:</span>
-                <span class='plyr-Card_ChemistryValue'>
-                  {this.getPlayerChemistry({ index: this.index })}
-                </span>
-              </div>
-            </footer>
-          : ''}
+        {this.showChemistry ? (
+          <footer class='plyr-Card_Footer'>
+            <div class='plyr-Card_Chemistry'>
+              <span class='plyr-Card_ChemistryLabel'>Chem:</span>
+              <span class='plyr-Card_ChemistryValue'>
+                {this.getPlayerChemistry({ index: this.index })}
+              </span>
+            </div>
+          </footer>
+        ) : (
+          ''
+        )}
       </a>
-    )
+    );
   }
 }
