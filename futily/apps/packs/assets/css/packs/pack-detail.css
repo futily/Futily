@@ -93,6 +93,8 @@
 |
 */
 .pck-Detail_Actions {
+  align-items: center;
+
   display: flex;
   margin-left: auto;
 }

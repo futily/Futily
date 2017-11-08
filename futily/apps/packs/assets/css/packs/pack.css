@@ -177,6 +177,8 @@
 }
 
 .pck-Pack_ShieldKey {
+  margin-top: 2px;
+
   font-size: 10px;
   font-weight: 700;
   line-height: 12px;
@@ -184,11 +186,11 @@
 }
 
 .pck-Pack_Description {
-  margin-top: 0.5vr;
+  @include Font_A;
 
-  font-weight: 400;
+  margin-top: 0.5vr;
 }
 
 .pck-Pack_Link {
-  margin-top: 0.5vr;
+  margin-top: 0.75vr;
 }

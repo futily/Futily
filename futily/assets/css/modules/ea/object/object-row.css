@@ -32,7 +32,7 @@
   @include Font_Tiny;
 
   position: absolute;
-  top: calc(50% + 5px);
+  top: calc(50% + 7px);
   left: 50%;
 
   font-weight: 700;

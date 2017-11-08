@@ -96,8 +96,9 @@
   @include Font_A;
 
   display: block;
-  padding: 8px 20px;
+  padding: 11px calc(var(--Grid_Gutter) * 2);
 
+  font-weight: 600;
   white-space: nowrap;
 
   color: currentColor;

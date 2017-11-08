@@ -4,6 +4,8 @@
 {% block side_panel %}
   {% if players %}
     {% call(player) player_macros.card_list(players) %}
+      {{ player.render_card() }}
+
       {% if user == object %}
         <a class="btn-Primary" href="{{ player.get_favourite_absolute_url() }}">Unfavourite</a>
       {% endif %}

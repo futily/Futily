@@ -24,7 +24,7 @@
 .asi-LinkList_Link {
   align-items: center;
 
-  display: flex;
+  display: inline-flex;
 
   color: currentColor;
 
@@ -35,8 +35,6 @@
   }
 
   &[aria-current='true'] {
-    text-decoration: underline;
-
     color: var(--Color_Green);
   }
 }

@@ -4,10 +4,14 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import FormMixin
 
 from futily.apps.actions.utils import create_action
+from futily.apps.clubs.templatetags.clubs import get_clubs_page
+from futily.apps.leagues.templatetags.leagues import get_leagues_page
+from futily.apps.nations.templatetags.nations import get_nations_page
 from futily.apps.players.constants import SPECIAL_COLOR_CHOICES
+from futily.apps.players.models import Player
+from futily.apps.players.templatetags.players import get_players_page
 from futily.apps.users.models import CollectionPlayer
 
-from ..players.models import Player
 from .forms import PackCreationForm
 from .models import Pack, PackType
 
@@ -17,6 +21,34 @@ class PackLeaderboard(ListView):
     ordering = ['-value']
     paginate_by = 50
     template_name = 'packs/pack_leaderboard.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['aside_links'] = [
+            {
+                'title': 'Players',
+                'url': get_players_page().get_absolute_url(),
+                'here': str(self.request.path == get_players_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Clubs',
+                'url': get_clubs_page().get_absolute_url(),
+                'here': str(self.request.path == get_clubs_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Leagues',
+                'url': get_leagues_page().get_absolute_url(),
+                'here': str(self.request.path == get_leagues_page().get_absolute_url()).lower(),
+            },
+            {
+                'title': 'Nations',
+                'url': get_nations_page().get_absolute_url(),
+                'here': str(self.request.path == get_nations_page().get_absolute_url()).lower(),
+            },
+        ]
+
+        return context
 
 
 class TypeList(ListView):

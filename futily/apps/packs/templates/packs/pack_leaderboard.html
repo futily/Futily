@@ -43,11 +43,7 @@
 
             <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-flex ea-ObjectsTable_Cell-left ea-ObjectsTable_Cell-df">
               <div class="pck-Pack pck-Pack-{{ object.type.type }}">
-                <div class="pck-Pack_Pack">
-                  {% set random_player = ['dele', 'griezemann', 'muller', 'ronaldo'] | random() %}
-                  {% set random_choice = [1, 2, 3] | random() %}
-                  <img class="pck-Pack_Player" src="{{ static('build/img/ea/packs/players/{}/{}.png'.format(random_player, random_choice)) }}">
-                </div>
+                {{ object.type.render_image() }}
               </div>
               <h3 class="ea-ObjectRow_Title">{{ object }}</h3>
             </div>

@@ -86,7 +86,7 @@
 
 .plyr-Card_New {
   position: absolute;
-  bottom: 0;
+  top: calc(100% + 105px);
   left: 50%;
 
   padding: 5px 8px;
