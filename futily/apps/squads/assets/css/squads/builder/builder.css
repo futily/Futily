@@ -19,7 +19,7 @@
 |
 */
 .bld-Builder_AboveInner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 /*
@@ -70,7 +70,7 @@
 }
 
 .bld-Builder_Key {
-  @apply --Font-14;
+  @include Font_A;
 
   display: block;
   margin-bottom: 5px;
@@ -868,7 +868,7 @@
 }
 
 .bld-Builder_PlayerRemove {
-  @apply --Font-14;
+  @include Font_A;
 
   position: absolute;
 

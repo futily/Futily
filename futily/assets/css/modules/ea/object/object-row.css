@@ -29,7 +29,7 @@
 }
 
 .ea-ObjectRow_CellTitle {
-  @apply --Font-12;
+  @include Font_Tiny;
 
   position: absolute;
   top: calc(50% + 5px);

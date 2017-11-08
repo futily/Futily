@@ -12,7 +12,7 @@
 }
 
 .sch-Settings_Input {
-  @apply --Font-14;
+  @include Font_A;
 
   width: 100%;
   padding: 9px calc(var(--Grid_Gutter) * 2) 9px 10px;

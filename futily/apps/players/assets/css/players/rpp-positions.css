@@ -78,7 +78,7 @@
 }
 
 .plyr-RPPPositions_PositionLabel {
-  @apply --Font-12;
+  @include Font_Tiny;
 
   order: 1;
 
@@ -87,8 +87,6 @@
 }
 
 .plyr-RPPPositions_PositionValue {
-  @apply --Font-16;
-
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1;
 }

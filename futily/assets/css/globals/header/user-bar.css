@@ -6,7 +6,7 @@
 |
 */
 .hd-UserBar {
-  @apply --Font-14;
+  @include Font_A;
 
   --BorderColor: #3f5060;
 
@@ -20,7 +20,7 @@
 }
 
 .hd-UserBar_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 .hd-UserBar_Body {
@@ -111,7 +111,7 @@
 }
 
 .hd-UserBar_AccountActionOverlay {
-  @apply --Font-14;
+  @include Font_A;
 
   position: absolute;
   top: calc(100% + 10px);

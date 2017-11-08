@@ -25,13 +25,13 @@
 }
 
 .pg-Section_Title {
-  @apply --Font-30;
+  @include Font_G;
 
   font-weight: 400;
 }
 
 .pg-Section_Name {
-  @apply --Font-18;
+  @include Font_C;
 
   font-weight: 600;
 }
@@ -41,11 +41,7 @@
 }
 
 .pg-Section_TitleSmall {
-  @apply --Font-16;
-
   margin-left: 10px;
-
-  font-weight: 400;
 }
 
 .pg-Section_Link {

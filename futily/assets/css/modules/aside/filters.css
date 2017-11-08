@@ -22,7 +22,7 @@
   width: 100%;
 
   .asi-FilterFlyout_Footer & {
-    @apply --GridColumn;
+    @include Grid_Column;
   }
 }
 
@@ -32,7 +32,7 @@
   width: 100%;
 
   .asi-FilterFlyout_Footer & {
-    @apply --GridColumn;
+    @include Grid_Column;
   }
 }
 

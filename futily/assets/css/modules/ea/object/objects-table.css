@@ -67,7 +67,7 @@
   text-align: center;
 
   .ea-ObjectsTable_Header & {
-    @apply --Font-12;
+    @include Font_Tiny;
 
     font-weight: 700;
     text-transform: uppercase;

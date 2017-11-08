@@ -6,7 +6,7 @@
 |
 */
 .plyr-SearchResult {
-  @apply --Font-14;
+  @include Font_A;
 
   position: relative;
 
@@ -87,7 +87,7 @@
 }
 
 .plyr-SearchResult_Rating {
-  @apply --Font-14;
+  @include Font_A;
 
   margin-right: 5px;
   margin-left: auto;

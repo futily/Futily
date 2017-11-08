@@ -23,7 +23,7 @@
 |
 */
 .fltr-Filter_Label {
-  @apply --Font-14;
+  @include Font_A;
 
   flex: 1;
 
@@ -106,7 +106,7 @@
 }
 
 .fltr-Filter_ItemLabel {
-  @apply --Font-14;
+  @include Font_A;
 
   align-items: center;
   justify-content: space-between;
@@ -127,7 +127,7 @@
 }
 
 .fltr-Filter_Link {
-  @apply --Font-14;
+  @include Font_A;
 
   justify-content: space-between;
 

@@ -42,7 +42,7 @@
 }
 
 .bld-Stats_Value {
-  @apply --Font-18;
+  @include Font_C;
 
   font-weight: 600;
 

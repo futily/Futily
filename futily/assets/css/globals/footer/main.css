@@ -16,7 +16,7 @@
 }
 
 .ft-Main_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 /*
@@ -27,13 +27,13 @@
 */
 .ft-Main_Columns {
   @media (--sm) {
-    @apply --GridRow;
+    @include Grid_Row;
   }
 }
 
 .ft-Main_Column {
   @media (--sm) {
-    @apply --GridColumn;
+    @include Grid_Column;
 
     flex: 1;
   }
@@ -69,13 +69,13 @@
 }
 
 .ft-Main_Text {
-  @apply --Font-14;
+  @include Font_A;
 
   color: #a1b1bc;
 }
 
 .ft-Main_SecondaryLink {
-  @apply --Font-14;
+  @include Font_A;
 
   display: inline-block;
   margin-top: 0.33333vr;
@@ -121,7 +121,7 @@
 }
 
 .ft-Main_LinkMeta {
-  @apply --Font-14;
+  @include Font_A;
 
   font-weight: 400;
 

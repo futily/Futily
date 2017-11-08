@@ -10,5 +10,5 @@
 }
 
 .pg-Breadcrumbs_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }

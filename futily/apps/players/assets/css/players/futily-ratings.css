@@ -34,7 +34,7 @@
 }
 
 .plyr-FutilyRatings_Key {
-  @include Font_C;
+  @include Font_B;
 }
 
 .plyr-FutilyRatings_Value {
@@ -62,7 +62,7 @@
 }
 
 .plyr-FutilyRatings_ValueDifference {
-  @apply --Font-14;
+  @include Font_A;
 
   margin-right: 5px;
   margin-left: auto;

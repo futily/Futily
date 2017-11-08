@@ -27,7 +27,7 @@
 }
 
 .bld-Search_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 /*

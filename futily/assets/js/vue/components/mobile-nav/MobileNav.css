@@ -33,7 +33,7 @@
 
 .mbn-Item_Link {
   display: flex;
-  padding: 13px var(--Grid_Inside);
+  padding: 13px var(--Grid_Gutter);
 
   font-weight: 700;
   letter-spacing: calc(40em / 1000);
@@ -53,7 +53,7 @@
     &::before {
       font-awesome: angle-left;
 
-      margin-right: var(--Grid_Inside);
+      margin-right: var(--Grid_Gutter);
     }
   }
 }

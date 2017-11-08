@@ -17,7 +17,7 @@
 }
 
 .sec-Section_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 /*
@@ -39,7 +39,7 @@
 }
 
 .sec-Section_Title {
-  @apply --Font-36;
+  @include Font_H;
 
   font-weight: 300;
 }

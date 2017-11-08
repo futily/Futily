@@ -32,15 +32,13 @@
 }
 
 .sbc-Card_Title {
-  @apply --Font-24;
+  @include Font_E;
 
   margin-bottom: 0.5vr;
-
-  font-weight: 400;
 }
 
 .sbc-Card_Text {
-  @apply --Font-14;
+  @include Font_A;
 }
 
 .sbc-Card_Footer {
@@ -91,11 +89,9 @@
 }
 
 .sbc-Card_RewardsTitle {
-  @apply --Font-24;
+  @include Font_E;
 
   margin-top: 0.5vr;
-
-  font-weight: 600;
 }
 
 .sbc-Card_RewardsItems {
@@ -120,13 +116,11 @@
 }
 
 .sbc-Card_RequirementsTitle {
-  @apply --Font-24;
+  @include Font_E;
 
   margin-bottom: 0.5vr;
-
-  font-weight: 600;
 }
 
 .sbc-Card_RequirementsItems {
-  @apply --Font-14;
+  @include Font_A;
 }

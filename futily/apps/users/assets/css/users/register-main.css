@@ -6,5 +6,5 @@
 |
 */
 .usr-EntryMain_Title {
-  @apply --Font-24;
+  @include Font_E;
 }

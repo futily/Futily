@@ -6,7 +6,7 @@
 |
 */
 .usr-EntryList {
-  @apply --Font-14;
+  @include Font_A;
 }
 
 .usr-EntryList_Item {

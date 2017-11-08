@@ -20,11 +20,9 @@
 }
 
 .plyr-Information_Title {
-  @apply --Font-24;
+  @include Font_E;
 
   margin-bottom: 0.5vr;
-
-  font-weight: 600;
 }
 
 .plyr-Information_Item {
@@ -51,7 +49,7 @@
 }
 
 .plyr-Information_ItemIdentifier {
-  @apply --Font-14;
+  @include Font_A;
 
   width: 100%;
 

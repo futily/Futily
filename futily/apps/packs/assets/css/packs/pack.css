@@ -122,11 +122,9 @@
 }
 
 .pck-Pack_Title {
-  @apply --Font-20;
+  @include Font_D;
 
   margin-top: 22px;
-
-  font-weight: 600;
 }
 
 .pck-Pack_Shields {

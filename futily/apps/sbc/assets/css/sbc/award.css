@@ -18,7 +18,7 @@
 }
 
 .sbc-Award_Text {
-  @apply --Font-14;
+  @include Font_A;
 
   margin-top: 0.5vr;
 

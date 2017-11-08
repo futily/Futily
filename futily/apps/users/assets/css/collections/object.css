@@ -65,11 +65,9 @@
 |
 */
 .clc-Object_Title {
-  @apply --Font-20;
+  @include Font_D;
 
   margin-bottom: 0.5vr;
-
-  font-weight: 600;
 
   color: var(--Color_Body);
 }

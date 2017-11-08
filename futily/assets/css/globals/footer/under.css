@@ -14,11 +14,11 @@
 }
 
 .ft-Under_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 .ft-Under_Body {
-  @apply --Font-14;
+  @include Font_A;
 
   align-items: center;
   justify-content: space-between;

@@ -93,7 +93,7 @@
 }
 
 .nav-Navigation_DropdownLink {
-  @apply --Font-14;
+  @include Font_A;
 
   display: block;
   padding: 8px 20px;

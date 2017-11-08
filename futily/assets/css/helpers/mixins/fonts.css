@@ -4,6 +4,11 @@
 |--------------------------------------------------------------------------
 |
 */
+@mixin Font_Tiny {
+  font-size: 12px;
+  line-height: 16px;
+}
+
 @mixin Font_A {
   font-size: 12px;
   font-weight: 400;
@@ -53,8 +58,8 @@
   }
 
   @media (min-width: 1650px) {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 18px;
+    line-height: 26px;
   }
 }
 

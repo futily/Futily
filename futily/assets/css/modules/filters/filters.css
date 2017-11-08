@@ -13,9 +13,9 @@
 |
 */
 .fltr-Filters_Items {
-  @apply --GridRow;
+  @include Grid_Row;
 }
 
 .fltr-Filters_Item {
-  @apply --GridColumn;
+  @include Grid_Column;
 }

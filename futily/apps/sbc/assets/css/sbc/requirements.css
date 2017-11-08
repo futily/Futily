@@ -6,7 +6,7 @@
 |
 */
 .sbc-Requirements_Title {
-  @apply --Font-18;
+  @include Font_C;
 
   margin-bottom: 0.5vr;
 }

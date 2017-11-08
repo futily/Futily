@@ -32,7 +32,7 @@
 }
 
 .usr-Index_PanelTitle {
-  @apply --Font-30;
+  @include Font_G;
 
   font-weight: 400;
 }

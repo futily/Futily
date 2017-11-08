@@ -367,7 +367,7 @@
   }
 
   .plyr-Card-medium & {
-    @apply --Font-14;
+    @include Font_A;
 
     padding-right: 2px;
     padding-left: 4px;
@@ -437,7 +437,7 @@
 }
 
 .plyr-Card_Difference {
-  @apply --Font-12;
+  @include Font_Tiny;
 
   position: absolute;
   top: 0;
@@ -553,7 +553,7 @@
 }
 
 .plyr-Card_Chem {
-  @apply --Font-14;
+  @include Font_A;
 
   grid-column: 2;
 

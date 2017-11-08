@@ -14,7 +14,7 @@
 }
 
 .pg-Strapline_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 .pg-Strapline_Body {
@@ -47,13 +47,13 @@
 }
 
 .pg-Strapline_Title {
-  @apply --Font-30;
+  @include Font_G;
 
   font-weight: 600;
 }
 
 .pg-Strapline_Text {
-  @apply --Font-18;
+  @include Font_C;
 
   margin-top: 0.25vr;
 }

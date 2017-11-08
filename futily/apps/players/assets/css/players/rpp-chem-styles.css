@@ -20,7 +20,7 @@
 }
 
 .plyr-RPPChemStyles_Button {
-  @apply --Font-14;
+  @include Font_A;
 
   padding: 4px 8px 5px 24px;
 
@@ -67,7 +67,7 @@
 }
 
 .plyr-RPPChemStyles_Overlay {
-  @apply --Font-14;
+  @include Font_A;
 
   position: absolute;
   top: calc(100% + 5px);

@@ -18,7 +18,7 @@
 }
 
 .sec-Search_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 /*
@@ -38,7 +38,7 @@
 }
 
 .sec-Search_Title {
-  @apply --Font-40;
+  @include Font_H;
 
   font-weight: 900;
   letter-spacing: calc(100em / 1000);
@@ -46,7 +46,7 @@
 }
 
 .sec-Search_Text {
-  @apply --Font-18;
+  @include Font_C;
 
   margin-top: 0.5vr;
 }
@@ -66,7 +66,7 @@
 }
 
 .sec-Search_Input {
-  @apply --Font-22;
+  @include Font_E;
 
   display: block;
   width: 100%;

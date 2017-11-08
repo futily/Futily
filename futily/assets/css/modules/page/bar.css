@@ -14,5 +14,5 @@
 }
 
 .pg-Bar_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }

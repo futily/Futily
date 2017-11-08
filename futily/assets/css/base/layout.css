@@ -52,11 +52,11 @@
 
 .lyt-Content_Inner {
   .lyt-Content-wide & {
-    @apply --GridContainer;
+    @include Grid_Container;
   }
 
   .lyt-Content-mainAside & {
-    @apply --GridContainer;
+    @include Grid_Container;
   }
 }
 

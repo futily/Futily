@@ -24,7 +24,7 @@
 }
 
 .pg-Block_Title {
-  @apply --Font-30;
+  @include Font_G;
 
   width: 100%;
   margin-bottom: 0.75em;

@@ -17,7 +17,5 @@
 }
 
 .usr-EntryForm_Title {
-  @apply --Font-20;
-
-  font-weight: 600;
+  @include Font_D;
 }

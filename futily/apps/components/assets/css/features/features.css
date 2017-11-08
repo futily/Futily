@@ -7,7 +7,7 @@
 */
 .ftr-Features_Items {
   @media (--sm) {
-    @apply --GridRow;
+    @include Grid_Row;
 
     flex-wrap: wrap;
   }
@@ -15,7 +15,7 @@
 
 .ftr-Features_Item {
   @media (--sm) {
-    @apply --GridColumn;
+    @include Grid_Column;
 
     width: calc(percentage(1, 2) - (var(--Grid_Gutter) * 2));
     margin-top: calc(var(--Grid_Gutter) * 2);

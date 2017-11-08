@@ -6,7 +6,7 @@
 |
 */
 .pck-Type_Title {
-  @apply --Font-30;
+  @include Font_G;
 
   margin-bottom: 0.75em;
   padding-bottom: 15px;

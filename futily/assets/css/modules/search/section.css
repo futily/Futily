@@ -10,7 +10,7 @@
 }
 
 .sch-Section_Input {
-  @apply --Font-22;
+  @include Font_E;
 
   display: block;
   width: 100%;

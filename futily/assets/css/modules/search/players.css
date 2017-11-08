@@ -12,7 +12,7 @@
 
 .ais-input {
   .sec-Search & {
-    @apply --Font-22;
+    @include Font_E;
 
     display: block;
     width: 100%;

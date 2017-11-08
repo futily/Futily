@@ -20,7 +20,7 @@
 }
 
 .hd-Header_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 .hd-Header_Body {

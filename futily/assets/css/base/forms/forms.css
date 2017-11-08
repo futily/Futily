@@ -37,15 +37,13 @@
 |
 */
 .frm-Form_Legend {
-  @apply --Font-24;
+  @include Font_E;
 
   display: block;
-
-  font-weight: 600;
 }
 
 .frm-Form_LegendHelp {
-  @apply --Font-14;
+  @include Font_A;
 }
 
 /*
@@ -98,7 +96,7 @@
 |
 */
 .frm-Form_Label {
-  @apply --Font-14;
+  @include Font_A;
 
   display: block;
   margin-bottom: 5px;
@@ -137,7 +135,7 @@
 .frm-Form_Input,
 .frm-Form_Select,
 .frm-Form_Textarea {
-  @apply --Font-14;
+  @include Font_A;
 
   display: block;
   width: 100%;

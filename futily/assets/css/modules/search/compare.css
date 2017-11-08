@@ -12,7 +12,7 @@
 }
 
 .sch-Compare_Input {
-  @apply --Font-14;
+  @include Font_A;
 
   width: 100%;
   padding: 4px calc(var(--Grid_Gutter) * 2) 4px 10px;

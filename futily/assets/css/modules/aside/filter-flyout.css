@@ -69,9 +69,7 @@
 }
 
 .asi-FilterFlyout_Title {
-  @apply --Font-22;
-
-  font-weight: 400;
+  @include Font_E;
 }
 
 .asi-FilterFlyout_Close {
@@ -113,11 +111,9 @@
 }
 
 .asi-FilterFlyout_GroupTitle {
-  @apply --Font-16;
-
   padding: 0.25vr;
 
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
 
@@ -154,7 +150,7 @@
 |
 */
 .asi-FilterFlyout_Footer {
-  @apply --GridRow;
+  @include Grid_Row;
 
   padding-top: 0.5vr;
 }

@@ -50,7 +50,7 @@
 }
 
 .soc-Social_Overlay {
-  @apply --Font-14;
+  @include Font_A;
 
   position: absolute;
   top: calc(100% + 5px);

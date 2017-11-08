@@ -11,7 +11,7 @@
 }
 
 .pg-BottomBanner_Inner {
-  @apply --GridContainer;
+  @include Grid_Container;
 }
 
 .pg-BottomBanner_Body {
