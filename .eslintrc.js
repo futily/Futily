@@ -21,6 +21,6 @@ module.exports = {
     'no-console': [2],
     'no-unused-vars': [1],
     'semi': [2, 'always'],
-    'comma-dangle': [2, 'always-multiline']
+    'comma-dangle': [2, 'always-multiline'],
   }
 }
