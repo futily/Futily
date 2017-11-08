@@ -6,12 +6,12 @@
 |
 */
 .bdc-Breadcrumb {
-  @apply --Font-14;
-
   color: #a1b1bc;
 }
 
 .bdc-Breadcrumb_Items {
+  @include Font_A;
+
   align-items: center;
 
   display: flex;

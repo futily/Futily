@@ -33,11 +33,11 @@
 .pg-Section_Name {
   @apply --Font-18;
 
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .pg-Section_Emphasis {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .pg-Section_TitleSmall {
@@ -49,5 +49,5 @@
 }
 
 .pg-Section_Link {
-  font-weight: 500;
+  font-weight: 600;
 }

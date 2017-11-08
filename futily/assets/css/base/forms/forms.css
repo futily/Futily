@@ -41,7 +41,7 @@
 
   display: block;
 
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .frm-Form_LegendHelp {
@@ -103,7 +103,7 @@
   display: block;
   margin-bottom: 5px;
 
-  font-weight: 500;
+  font-weight: 600;
 
   .frm-Form_Item-floatingLabel & {
     position: absolute;

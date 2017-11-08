@@ -63,21 +63,21 @@
               {% include 'angle-down.svg' %}
             </div>
 
-            <div class="bdc-Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item"
-                 class="bdc-Breadcrumb_Link"
-                 href="{{ player.get_compare_absolute_url() }}">
-                <span itemprop="name">
-                  Compare
-                </span>
-                <meta itemprop="position" content="4">
-              </a>
-            </div>
-
             {% if view.kwargs.other_pk %}
+              <div class="bdc-Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <a itemprop="item"
+                   class="bdc-Breadcrumb_Link"
+                   href="{{ player.get_compare_absolute_url() }}">
+                  <span itemprop="name">
+                    Compare
+                  </span>
+                  <meta itemprop="position" content="4">
+                </a>
+              </div>
+
               <div class="bdc-Breadcrumb_Divider">
                 {% include 'angle-down.svg' %}
               </div>
@@ -90,6 +90,16 @@
                   With {{ other_player }}
                 </span>
                 <meta itemprop="position" content="5">
+              </div>
+            {% else %}
+              <div class="bdc-Item"
+                   itemprop="itemListElement"
+                   itemscope=""
+                   itemtype="http://schema.org/ListItem">
+                <span itemprop="name">
+                  Compare
+                </span>
+                <meta itemprop="position" content="4">
               </div>
             {% endif %}
           </div>

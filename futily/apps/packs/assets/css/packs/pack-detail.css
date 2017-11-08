@@ -71,7 +71,7 @@
 
 .pck-Detail_MetaValue {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 20px;
 
   color: var(--Color_Body);
@@ -79,7 +79,7 @@
 
 .pck-Detail_MetaKey {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 20px;
   text-transform: uppercase;
 

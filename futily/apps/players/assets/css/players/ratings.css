@@ -43,7 +43,7 @@
   padding-right: var(--Grid_Gutter);
   padding-left: @padding-right;
 
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .asi-Ratings_Text {

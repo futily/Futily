@@ -24,7 +24,7 @@
 .plyr-StatGroup_Title {
   @apply --Font-20;
 
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .plyr-StatGroup_GroupValue {
@@ -129,7 +129,7 @@
   margin-right: 5px;
   margin-left: auto;
 
-  font-weight: 500;
+  font-weight: 600;
 
   color: var(--Color_Great);
 
@@ -162,7 +162,7 @@
 .plyr-StatGroup_Value {
   @apply --Font-18;
 
-  font-weight: 500;
+  font-weight: 600;
 
   color: var(--RatingColor);
 }

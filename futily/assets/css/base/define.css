@@ -40,7 +40,7 @@ html {
 }
 
 body {
-  @apply --Font-16;
+  @include Font_B;
 
   text-rendering: optimizeLegibility;
 
@@ -108,7 +108,7 @@ strong {
 |
 */
 a {
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
 
   color: var(--Color_Anchor);

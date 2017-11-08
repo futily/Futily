@@ -5,8 +5,11 @@
 | @namespace: plyr-
 |
 */
+
 .plyr-FutilyRatings_Title {
-  @apply --Font-22;
+  @include Font_D;
+
+  margin-bottom: 0.25vr;
 }
 
 /*
@@ -17,11 +20,10 @@
 */
 .plyr-FutilyRatings_Items {
   grid-auto-flow: column;
-  grid-gap: 0.5vr calc(var(--Grid_Gutter) * 2);
+  grid-gap: 0.25vr calc(var(--Grid_Gutter) * 2);
   grid-template: repeat(3, 1fr) / repeat(2, 1fr);
 
   display: grid;
-  margin-top: 0.5vr;
 }
 
 .plyr-FutilyRatings_Item {
@@ -32,17 +34,13 @@
 }
 
 .plyr-FutilyRatings_Key {
-  @apply --Font-18;
-
-  font-weight: 400;
+  @include Font_C;
 }
 
 .plyr-FutilyRatings_Value {
-  @apply --Font-18;
+  @include Font_D;
 
   --RatingColor: var(--Color_Body);
-
-  font-weight: 700;
 
   color: var(--RatingColor);
 }
@@ -69,7 +67,7 @@
   margin-right: 5px;
   margin-left: auto;
 
-  font-weight: 500;
+  font-weight: 600;
 
   color: var(--Color_Great);
 }

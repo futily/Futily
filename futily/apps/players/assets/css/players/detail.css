@@ -34,13 +34,9 @@
 }
 
 .plyr-Detail_HeaderTitle {
-  @apply --Font-24;
-}
+  @include Font_D;
 
-.plyr-Detail_Text {
-  @apply --Font-14;
-
-  font-weight: 500;
+  margin-bottom: 0.25vr;
 }
 
 .plyr-Detail_Ratings {
@@ -54,12 +50,14 @@
 |
 */
 .plyr-Detail_Navigation {
-  margin-bottom: 1vr;
+  margin-bottom: 0.5vr;
 
   border-bottom: 1px solid var(--Color_Border);
 }
 
 .plyr-Detail_NavigationItems {
+  @include Font_A;
+
   display: flex;
 }
 
@@ -91,6 +89,8 @@
   display: block;
   padding: 8px 20px;
 
+  font-weight: 400;
+
   color: var(--Color_Body);
 
   transition: color 0.2s;
@@ -102,7 +102,7 @@
   [aria-current='true'] & {
     padding-top: 13px;
 
-    font-weight: 700;
+    font-weight: 600;
 
     color: var(--Color_Green);
   }
@@ -127,26 +127,24 @@
   justify-content: space-between;
 
   display: flex;
-  margin-bottom: 0.75em;
+  margin-bottom: 1vr;
   padding-bottom: 15px;
 
   border-bottom: 2px solid var(--Color_Border);
 }
 
 .plyr-Detail_Title {
-  @apply --Font-30;
-
-  font-weight: 400;
+  @include Font_F;
 }
 
 .plyr-Detail_Name {
   @apply --Font-18;
 
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .plyr-Detail_Emphasis {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .plyr-Detail_TitleSmall {
@@ -158,5 +156,5 @@
 }
 
 .plyr-Detail_Link {
-  font-weight: 500;
+  font-weight: 600;
 }
