@@ -10,12 +10,13 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.postgres.fields import JSONField
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import Q
+from django.db.models import Avg, Q
 from django.template.loader import render_to_string
 from django.utils.datetime_safe import date
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 
+from futily.apps.prices.models import Price
 from futily.apps.squads.models import Squad
 
 from .constants import (BASE_COLOR_CHOICES, POSITION_CHOICES,
@@ -383,14 +384,14 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             'new': new,
         })
 
-    @property
+    @cached_property
     def age(self):
         born = self.birth_date
         today = date.today()
 
         return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
-    @property
+    @cached_property
     def card_json_data(self):
         return json.dumps({
             'rating': self.rating,
@@ -409,7 +410,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             }
         })
 
-    @property
+    @cached_property
     def card_stats(self):
         return [
             ('PAC' if not self.is_gk else 'DIV', self.card_att_1),
@@ -420,7 +421,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             ('PHY' if not self.is_gk else 'POS', self.card_att_6)
         ]
 
-    @property
+    @cached_property
     def card_stats_full(self):
         return [
             ('Pace' if not self.is_gk else 'Diving', self.card_att_1),
@@ -431,9 +432,23 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             ('Physical' if not self.is_gk else 'Positioning', self.card_att_6)
         ]
 
-    @property
+    @cached_property
     def similar_coefficient(self):
         return self.total_ingame_stats / 100 / 2.5
+
+    @cached_property
+    def average_ps_price(self):
+        try:
+            return int(Price.objects.filter(market='ps', player__pk=self.pk)[:10].aggregate(Avg('value'))['value__avg'])
+        except Exception as e:
+            return 0
+
+    @cached_property
+    def average_xbox_price(self):
+        try:
+            return int(Price.objects.filter(market='xb', player__pk=self.pk)[:10].aggregate(Avg('value'))['value__avg'])
+        except Exception as e:
+            return 0
 
     def ingame_stat_group_average(self, group):
         schema = {

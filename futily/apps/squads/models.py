@@ -150,7 +150,7 @@ class Squad(SearchMetaBase):
         return [None if isinstance(x, int) else x for x in indexes]
 
     def get_player_objects(self):
-        return sorted([x.player for x in self.players.all()], key=lambda x: x.rating, reverse=True)
+        return sorted([x for x in self.players.all()], key=lambda x: x.rating, reverse=True)
 
 
 class SquadPlayer(models.Model):

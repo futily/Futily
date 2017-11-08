@@ -61,6 +61,8 @@
 |
 */
 .plyr-Card_Header {
+  position: relative;
+
   align-items: flex-end;
 
   display: flex;
@@ -243,6 +245,48 @@
   100% {
     filter: drop-shadow(0 0 0 rgba(0, 255, 10, 0));
   }
+}
+
+.plyr-Card_Price {
+  position: absolute;
+  bottom: 0;
+
+  align-items: center;
+
+  display: flex;
+  padding: 0 35px 0 5px;
+
+  font-size: 17px;
+
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.6) 0,
+    rgba(0, 0, 0, 0.6) calc(100% - 30px),
+    rgba(0, 0, 0, 0) 100%
+  );
+
+  .plyr-Card-medium & {
+    left: 34px;
+  }
+
+  .plyr-Card-large & {
+    left: 42px;
+  }
+}
+
+.plyr-Card_PriceIcon {
+  display: block;
+  width: 16px;
+  height: @width;
+  margin-right: 5px;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+  /* stylelint-enable */
 }
 
 /*

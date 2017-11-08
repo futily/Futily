@@ -163,6 +163,7 @@ INSTALLED_APPS = [
     'futily.apps.nations',
     'futily.apps.packs',
     'futily.apps.players',
+    'futily.apps.prices',
     'futily.apps.redirects',
     'futily.apps.sbc',
     'futily.apps.sections',
