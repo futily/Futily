@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Prefetch
+from django.utils.functional import cached_property
 from django.utils.text import slugify
 
 FORMATION_CHOICES = [
@@ -137,6 +138,10 @@ class Squad(SearchMetaBase):
 
     def get_copy_url(self):
         return self._get_permalink_for_page('squad-copy')
+
+    @cached_property
+    def price(self):
+        return sum([x.average_xbox_price for x in self.get_player_objects()])
 
     def get_players(self):
         indexes = [index for index in range(0, 11)]

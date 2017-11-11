@@ -18,7 +18,7 @@ class Command(BaseCommand):
 
     def scrape_futhead(self):
         url = 'http://www.futhead.com/prices/api/?year=18&id={}'
-        current_totw = Source.objects.get(short_title='TOTW 6')
+        sources = Source.objects.all()
 
         prices = {
             'xbox': [],
@@ -26,7 +26,7 @@ class Command(BaseCommand):
             'pc': [],
         }
 
-        for player in Player.objects.filter(source=current_totw):
+        for player in Player.objects.filter(source__in=sources):
             req = Request(url.format(player.ea_id), headers={'User-Agent': 'Mozilla/5.0'})
             res = json.loads(urlopen(req).read())
 
@@ -56,7 +56,7 @@ class Command(BaseCommand):
 
     def scrape_futbin(self):
         url = 'https://www.futbin.com/18/playerPrices?player={}'
-        current_totw = Source.objects.get(short_title='TOTW 6')
+        sources = Source.objects.all()
 
         prices = {
             'xbox': [],
@@ -64,7 +64,7 @@ class Command(BaseCommand):
             'pc': [],
         }
 
-        for player in Player.objects.filter(source=current_totw):
+        for player in Player.objects.filter(source__in=sources):
             req = Request(url.format(player.ea_id), headers={'User-Agent': 'Mozilla/5.0'})
             res = json.loads(urlopen(req).read())
 
@@ -75,7 +75,7 @@ class Command(BaseCommand):
                             Price(
                                 market=console if console != 'xbox' else 'xb',
                                 player=player,
-                                value=int(value.replace(',', '')),
+                                value=int(value.replace(',', '') if value else value),
                                 source='futbin',
                                 last_update=dateparser.parse(res[str(player.ea_id)]['prices'][console]['updated'])
                             )

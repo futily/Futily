@@ -14,18 +14,11 @@
 }
 
 .asi-Ratings_Control {
-  padding: 0.25vr 10px;
+  padding: 7px 10px;
 
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
-
-  /* stylelint-disable selector-max-type */
-  svg {
-    width: 20px;
-    height: @width;
-  }
-  /* stylelint-enable */
 }
 
 .asi-Ratings_Control-down {
@@ -52,4 +45,15 @@
 
 .asi-Ratings_Icon {
   display: block;
+
+  width: 16px;
+  height: @width;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+  /* stylelint-enable */
 }

@@ -38,11 +38,19 @@
             <a class="ea-ObjectsTable_CellTitle"
                aria-current="false"
                href="#">
+              Price
+            </a>
+          </div>
+
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+            <a class="ea-ObjectsTable_CellTitle"
+               aria-current="false"
+               href="#">
               User
             </a>
           </div>
 
-          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
             <a class="ea-ObjectsTable_CellTitle"
                aria-current="false"
                href="#">
@@ -50,7 +58,7 @@
             </a>
           </div>
 
-          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
             <a class="ea-ObjectsTable_CellTitle"
                aria-current="false"
                href="#">
@@ -58,7 +66,7 @@
             </a>
           </div>
 
-          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+          <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
             <a class="ea-ObjectsTable_CellTitle"
                aria-current="false"
                href="#">
@@ -88,26 +96,33 @@
 
             <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
               <div class="ea-ObjectRow_Cell">
+                <span class="ea-ObjectRow_CellText">{{ object.price | intcomma() }}</span>
+                <span class="ea-ObjectRow_CellTitle">Price</span>
+              </div>
+            </div>
+
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
+              <div class="ea-ObjectRow_Cell">
                 <span class="ea-ObjectRow_CellText">{{ object.user | default_if_none('n/a') }}</span>
                 <span class="ea-ObjectRow_CellTitle">User</span>
               </div>
             </div>
 
-            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
               <div class="ea-ObjectRow_Cell">
                 <span class="ea-ObjectRow_CellText">{{ object.chemistry }}</span>
                 <span class="ea-ObjectRow_CellTitle">Chemistry</span>
               </div>
             </div>
 
-            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
               <div class="ea-ObjectRow_Cell">
                 <span class="ea-ObjectRow_CellText">{{ object.rating }}</span>
                 <span class="ea-ObjectRow_CellTitle">Rating</span>
               </div>
             </div>
 
-            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-120">
+            <div class="ea-ObjectsTable_Cell ea-ObjectsTable_Cell-80">
               <div class="ea-ObjectRow_Cell">
                 <span class="ea-ObjectRow_CellText">{{ object.likes }}</span>
                 <span class="ea-ObjectRow_CellTitle">Likes</span>
