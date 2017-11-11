@@ -11,7 +11,7 @@
   left: calc(100% + (var(--Grid_Gutter) * 2));
   z-index: 1;
 
-  max-width: 650px;
+  max-width: 750px;
   width: 50vw;
   padding: 0.5vr var(--Grid_Gutter);
 
@@ -38,7 +38,7 @@
 
     position: absolute;
     top: 41px;
-    right: calc(100% - (var(--Width, 0) / 2) + 1px);
+    right: calc(100% - (var(--Width, 0) / 2) - 10px);
 
     display: block;
     width: var(--Width);
@@ -111,11 +111,9 @@
 }
 
 .asi-FilterFlyout_GroupTitle {
-  padding: 0.25vr;
+  @include Font_D;
 
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  padding: 0.25vr;
 
   background-color: var(--Color_Grey-light);
 }
@@ -131,16 +129,38 @@
 |
 */
 .asi-FilterFlyout_Options {
-  @supports (display: grid) {
-    grid-column-gap: calc(var(--Grid_Gutter) * 2);
-    grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: calc(var(--Grid_Gutter) * 2);
+  grid-template-columns: repeat(3, 1fr);
 
-    display: grid;
-  }
+  display: grid;
 
   .asi-FilterFlyout_Groups-columned .asi-FilterFlyout_Group:not(:last-child) & {
     display: block;
   }
+}
+
+.asi-FilterFlyout_Option {
+  &:hover {
+    background-color: var(--Color_Grey);
+    cursor: pointer;
+  }
+}
+
+.asi-FilterFlyout_OptionLink {
+  @include Font_A;
+
+  display: block;
+
+  &[aria-selected='true'] {
+    padding-left: 4px;
+
+    border-left: 3px solid var(--Color_Green);
+  }
+}
+
+.asi-FilterFlyout_OptionImage {
+  width: 20px;
+  margin-right: 5px;
 }
 
 /*

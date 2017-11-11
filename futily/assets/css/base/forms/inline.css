@@ -1,19 +1,12 @@
 /*
 |--------------------------------------------------------------------------
-| Inline label
+| Inline
 |--------------------------------------------------------------------------
 | @namespace: frm-
 |
 */
-.frm-InlineLabel {
-  @include Font_A;
-
-  cursor: pointer;
-
-  .asi-FilterFlyout_Option & {
-    align-items: center;
-
-    display: flex;
-    width: 100%;
+.frm-Inline {
+  .frm-InlineLabel & {
+    margin-right: 8px;
   }
 }

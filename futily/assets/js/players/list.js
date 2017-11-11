@@ -7,6 +7,7 @@ export const PlayerFilterForm = {
       resetNames: document.querySelectorAll('.js-PlayerFilter_ResetName'),
       collapse: this.el.querySelectorAll('.js-PlayerFilter_Collapse'),
       flyouts: this.el.querySelectorAll('.js-PlayerFilter_Flyout'),
+      linkedOptions: this.el.querySelectorAll('.js-PlayerFilter_LinkedOption'),
     };
 
     this.hasFlyoutOpen = false;
@@ -27,7 +28,7 @@ export const PlayerFilterForm = {
   setupListeners () {
     this.el.addEventListener('submit', this.handleSubmit);
 
-    Array.from(this.els.resetNames).map(el => {
+    Array.from(this.els.resetNames).forEach(el => {
       el.addEventListener('change', evt => {
         const { name } = evt.target;
 
@@ -38,6 +39,22 @@ export const PlayerFilterForm = {
           });
 
         this.submitNeedsToBeChecked = true;
+      });
+    });
+    Array.from(this.els.linkedOptions).forEach(option => {
+      const { linkedId: id } = option.dataset;
+      const linkedInput = document.getElementById(id);
+
+      option.addEventListener('click', () => {
+        const selected = option.getAttribute('aria-selected') === 'true';
+        linkedInput.checked = !selected;
+        option.setAttribute('aria-selected', !selected);
+      });
+      linkedInput.closest('label').addEventListener('click', e => {
+        if (e.target.nodeName === 'LABEL') {
+          const selected = option.getAttribute('aria-selected') === 'true';
+          option.setAttribute('aria-selected', !selected);
+        }
       });
     });
   },
@@ -122,7 +139,13 @@ export const PlayerFilterForm = {
       );
 
       clear.addEventListener('click', () => {
-        inputEls.map(input => {
+        Array.from(this.els.linkedOptions).forEach(option => {
+          if (option.dataset.linkedName === name) {
+            option.setAttribute('aria-selected', false);
+          }
+        });
+
+        inputEls.forEach(input => {
           input.checked = false;
         });
       });

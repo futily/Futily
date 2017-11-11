@@ -1,0 +1,25 @@
+/*
+|--------------------------------------------------------------------------
+| Current filters
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-CurrentFilters {
+  margin-bottom: 0.5vr;
+  padding-bottom: @margin-bottom;
+
+  border-bottom: 1px solid var(--Color_Border);
+}
+
+.plyr-CurrentFilters_Items {
+  flex-wrap: wrap;
+
+  display: flex;
+  margin-top: -8px;
+}
+
+.plyr-CurrentFilters_Item {
+  margin-top: 8px;
+  margin-right: 8px;
+}

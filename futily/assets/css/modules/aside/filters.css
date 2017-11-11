@@ -18,6 +18,7 @@
 
 .asi-Filters_Submit {
   @include Button-primary;
+  @include Button-large;
 
   width: 100%;
 
@@ -28,6 +29,7 @@
 
 .asi-Filters_Clear {
   @include Button-secondary;
+  @include Button-large;
 
   width: 100%;
 
@@ -53,11 +55,18 @@
 |
 */
 .asi-Filters_Footer {
-  margin-top: 0.5vr;
+  margin-top: 1vr;
+}
+
+.asi-Filter_Actions {
+  grid-gap: 1vr;
+  grid-template-columns: repeat(2, 1fr);
+
+  display: grid;
 }
 
 .asi-Filter_Action {
-  margin-top: 0.25vr;
+  flex: 1;
 
   &:first-child {
     margin-top: 0;

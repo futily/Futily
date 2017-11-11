@@ -28,8 +28,8 @@
           {{ range_item() }}
           {{ flyout_item(form.position) }}
           {{ flyout_item(form.level, True) }}
-          {{ flyout_item(form.nation) }}
-          {{ flyout_item(form.league) }}
+          {{ flyout_with_popular_item(form.nation) }}
+          {{ flyout_with_popular_item(form.league) }}
           {{ link_item(form.skills, True) }}
           {{ link_item(form.weak_foot, True) }}
           {{ workrate_item() }}
@@ -57,6 +57,28 @@
 {% endblock %}
 
 {% block main %}
+  <section class="plyr-CurrentFilters">
+    <ul class="plyr-CurrentFilters_Items">
+      {% for filter in current_filters %}
+        <li class="plyr-CurrentFilters_Item">
+          <a class="plyr-CurrentFilter btn-Primary"
+             href="{{ build_url(remove={filter.key: filter.value}) }}">
+            {% if filter.get('object', None) %}
+              <img class="plyr-CurrentFilter_Image"
+                   src="{{ static('ea-images/{}s/{}.png'.format(filter.object._meta.model_name, filter.object.ea_id)) }}">
+            {% endif %}
+
+            {{ filter.label | title() }}
+
+            <span class="plyr-CurrentFilter_Icon">
+              {% include 'close.svg' %}
+            </span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
   {{ player_macros.card_list(player_list) }}
 
   {{ render_pagination(page_obj) }}
@@ -69,7 +91,7 @@
         <button type="button" class="asi-Filter_Button">
           <span class="asi-Filter_ButtonLabel">Rating</span>
           <span class="asi-Filter_ButtonCurrent">
-            {{ form.min_rating.value() | default(form.min_rating.field.min_value) }} - {{ form.max_rating.value() | default(form.max_rating.field.max_value) }}
+            {{ form.min_rating.value()[0] | default(form.min_rating.field.min_value) }} - {{ form.max_rating.value()[0] | default(form.max_rating.field.max_value) }}
           </span>
         </button>
       </header>
@@ -79,11 +101,13 @@
           <div class="frm-Range_Ranges">
             <div class="frm-Range_RangesItem">
               <span class="frm-Range_Value frm-Range_Value-min" data-slide-value="min">
-                {{ form.min_rating.value() | default(form.min_rating.field.initial) }}
+                {{ form.min_rating.value()[0] | default(form.min_rating.field.initial) }}
               </span>
 
               <div class="frm-Range_InputWrapper">
-                <div class="frm-Slide frm-Slide-loading frm-Slide-min js-Slide" data-color="bronze" data-slide="min">
+                <div class="frm-Slide frm-Slide-loading frm-Slide-min js-Slide"
+                     data-color="bronze"
+                     data-slide="min">
                   <div class="frm-Slide_Track">
                     <div class="frm-Slide_Groove">
                       <div class="frm-Slide_Slider">
@@ -96,7 +120,7 @@
                 <input type="hidden"
                        min="{{ form.min_rating.field.min_value }}"
                        max="{{ form.min_rating.field.max_value }}"
-                       value="{{ form.min_rating.value() | default(form.min_rating.field.initial) }}"
+                       value="{{ form.min_rating.value()[0] | default(form.min_rating.field.initial) }}"
                        step="1"
                        id="{{ form.min_rating.id_for_label }}"
                        name="{{ form.min_rating.html_name }}"
@@ -106,7 +130,9 @@
 
             <div class="frm-Range_RangesItem">
               <div class="frm-Range_InputWrapper">
-                <div class="frm-Slide frm-Slide-loading frm-Slide-max js-Slide" data-color="gold" data-slide="max">
+                <div class="frm-Slide frm-Slide-loading frm-Slide-max js-Slide"
+                     data-color="gold"
+                     data-slide="max">
                   <div class="frm-Slide_Track">
                     <div class="frm-Slide_Groove">
                       <div class="frm-Slide_Slider">
@@ -119,7 +145,7 @@
                 <input type="hidden"
                        min="{{ form.max_rating.field.min_value }}"
                        max="{{ form.max_rating.field.max_value }}"
-                       value="{{ form.max_rating.value() | default(form.max_rating.field.initial) }}"
+                       value="{{ form.max_rating.value()[0] | default(form.max_rating.field.initial) }}"
                        step="1"
                        id="{{ form.max_rating.id_for_label }}"
                        name="{{ form.max_rating.html_name }}"
@@ -127,7 +153,7 @@
               </div>
 
               <span class="frm-Range_Value frm-Range_Value-max" data-slide-value="max">
-                {{ form.max_rating.value() | default(form.max_rating.field.initial) }}
+                {{ form.max_rating.value()[0] | default(form.max_rating.field.initial) }}
               </span>
             </div>
           </div>
@@ -145,19 +171,6 @@
       <header class="asi-Filter_Header js-PlayerFilter_FlyoutToggle">
         <button type="button" class="asi-Filter_Button">
           <span class="asi-Filter_ButtonLabel">{{ field.label }}</span>
-
-          <span class="asi-Filter_ButtonCurrent">
-            {% if field.value() %}
-              {{ field.value() }}
-              {% if field.value() | length() > 1 %}
-                Multiple
-              {% else %}
-                {{ field.value()[0] }}
-              {% endif %}
-            {% else %}
-              Any
-            {% endif %}
-          </span>
         </button>
       </header>
 
@@ -178,44 +191,111 @@
 
                 <div class="asi-FilterFlyout_GroupBody">
                   <div class="asi-FilterFlyout_Options">
-                    {% set per_column = choices | length() / 3 | round(0, 'ceil') | int() %}
-                    {% for chunk in choices | batch(per_column | round(0, 'ceil') | int()) %}
-                      <div class="asi-FilterFlyout_OptionsColumn">
-                        {% for value, label in chunk %}
-                          <div class="asi-FilterFlyout_Option">
-                            {% if label is string %}
-                              <label class="frm-InlineLabel">
-                                <input type="checkbox"
-                                       class="frm-Inline{% if value == 'all' %} js-PlayerFilter_ResetName{% endif %}"
-                                       value="{{ value }}"
-                                       id="{{ '{}_{}'.format(field.id_for_label, value) }}"
-                                       name="{{ field.html_name }}"
-                                       {% if field.value() and value in field.value() %}checked{% endif %}>
+                    {% for value, label in choices %}
+                      <div class="asi-FilterFlyout_Option">
+                        {% if label is string %}
+                          <label class="frm-InlineLabel">
+                            <input type="checkbox"
+                                   class="frm-Inline{% if value == 'all' %} js-PlayerFilter_ResetName{% endif %}"
+                                   value="{{ value }}"
+                                   id="{{ '{}_{}'.format(field.id_for_label, value) }}"
+                                   name="{{ field.html_name }}"
+                                   {% if field.value() and value in field.value() %}checked{% endif %}>
 
-                                {{ label }}
-                              </label>
-                            {% else %}
-                              <h4 class="asi-FilterFlyout_GroupTitle">{{ value }}</h4>
+                            {{ label }}
+                          </label>
+                        {% else %}
+                          <h4 class="asi-FilterFlyout_GroupTitle">{{ value }}</h4>
 
-                              <ul class="asi-FilterFlyout_Options">
-                                {% for nested_value, nested_label in label %}
-                                  <li class="asi-FilterFlyout_Option">
-                                    <label class="frm-InlineLabel">
-                                      <input type="checkbox"
-                                             class="frm-Inline"
-                                             value="{{ nested_value }}"
-                                             id="{{ '{}_{}'.format(field.id_for_label, nested_value) }}"
-                                             name="{{ field.html_name }}"
-                                             {% if field.value() and nested_value in field.value() %}checked{% endif %}>
+                          <ul class="asi-FilterFlyout_Options">
+                            {% for nested_value, nested_label in label %}
+                              <li class="asi-FilterFlyout_Option">
+                                <label class="frm-InlineLabel">
+                                  <input type="checkbox"
+                                         class="frm-Inline"
+                                         value="{{ nested_value }}"
+                                         id="{{ '{}_{}'.format(field.id_for_label, nested_value) }}"
+                                         name="{{ field.html_name }}"
+                                         {% if field.value() and nested_value in field.value() %}checked{% endif %}>
 
-                                      {{ nested_label }}
-                                    </label>
-                                  </li>
-                                {% endfor %}
-                              </ul>
-                            {% endif %}
-                          </div>
-                        {% endfor %}
+                                  {{ nested_label }}
+                                </label>
+                              </li>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <footer class="asi-FilterFlyout_Footer">
+          <button class="asi-Filters_Submit" type="submit">Search</button>
+          <button class="asi-Filters_Clear js-PlayerFilter_Clear" type="button">Clear</button>
+        </footer>
+      </div>
+    </div>
+  </li>
+{% endmacro %}
+
+{% macro flyout_with_popular_item(field) %}
+  <li class="asi-Filters_Item">
+    <div class="asi-Filter asi-Filter-flyout js-PlayerFilter_Flyout"
+         aria-expanded="false"
+         data-form-name="{{ field.html_name }}">
+      <header class="asi-Filter_Header js-PlayerFilter_FlyoutToggle">
+        <button type="button" class="asi-Filter_Button">
+          <span class="asi-Filter_ButtonLabel">{{ field.label }}</span>
+        </button>
+      </header>
+
+      <div class="asi-FilterFlyout">
+        <header class="asi-FilterFlyout_Header">
+          <h3 class="asi-FilterFlyout_Title">Select {{ field.label }}</h3>
+
+          <button type="button" class="asi-FilterFlyout_Close js-PlayerFilter_Close">Close</button>
+        </header>
+
+        <div class="asi-FilterFlyout_Body">
+          <ul class="asi-FilterFlyout_Groups{% if nested_choices %} asi-FilterFlyout_Groups-columned{% endif %}">
+            {% for group_label, choices in field.field.choices %}
+              <li class="asi-FilterFlyout_Group">
+                <header class="asi-FilterFlyout_GroupHeader">
+                  <h4 class="asi-FilterFlyout_GroupTitle">{{ group_label }}</h4>
+                </header>
+
+                <div class="asi-FilterFlyout_GroupBody">
+                  <div class="asi-FilterFlyout_Options">
+                    {% for choice in choices %}
+                      <div class="asi-FilterFlyout_Option">
+                        {% if 'Top ' in group_label %}
+                          <span class="asi-FilterFlyout_OptionLink js-PlayerFilter_LinkedOption"
+                                data-linked-id="{{ '{}_{}'.format(field.id_for_label, choice.slug) }}"
+                                data-linked-name="{{ field.html_name }}"
+                                aria-selected="{{ '{}'.format(field.value() and choice.slug in field.value()) | lower() }}">
+                            <img class="asi-FilterFlyout_OptionImage"
+                                 src="{{ static('ea-images/{}s/{}.png'.format(choice._meta.model_name, choice.ea_id)) }}">
+                            {{ choice.title }}
+                          </span>
+                        {% else %}
+                          <label class="frm-InlineLabel">
+                            <input type="checkbox"
+                                   class="frm-Inline"
+                                   value="{{ choice.slug }}"
+                                   id="{{ '{}_{}'.format(field.id_for_label, choice.slug) }}"
+                                   name="{{ field.html_name }}"
+                                   {% if field.value() and choice.slug in field.value() %}checked{% endif %}>
+
+                            <img class="asi-FilterFlyout_OptionImage"
+                                 src="{{ static('ea-images/{}s/{}.png'.format(choice._meta.model_name, choice.ea_id)) }}">
+
+                            {{ choice.title }}
+                          </label>
+                        {% endif %}
                       </div>
                     {% endfor %}
                   </div>
@@ -236,18 +316,20 @@
 
 {% macro link_item(field, stars=False) %}
   <li class="asi-Filters_Item">
-    <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse" aria-expanded="false">
+    <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse"
+         aria-expanded="{{ 'true' if field.value() else 'false' }}">
       <header class="asi-Filter_Header js-PlayerFilter_CollapseToggle">
         <button type="button" class="asi-Filter_Button">
           <span class="asi-Filter_ButtonLabel">{{ field.label }}</span>
-          <span class="asi-Filter_ButtonCurrent">{{ field.value()[0] | default('All') }}</span>
         </button>
       </header>
 
       <div class="asi-Filter_Body js-PlayerFilter_CollapseBody">
         <div class="asi-Filter_Links{% if stars %} asi-Filter_Links-stars{% endif %}">
           {% for value, label in field.field.choices %}
-            <label class="asi-Filter_LinkLabel" onclick="this.closest('form').submit()" aria-current="{{ 'true' if field.value()[0] == value else 'false' }}">
+            <label class="asi-Filter_LinkLabel"
+                   onclick="this.closest('form').submit();"
+                   aria-current="{{ 'true' if field.value()[0] == value else 'false' }}">
               <input type="radio"
                      class="asi-Filter_LinkRadio"
                      name="{{ field.html_name }}"
@@ -258,6 +340,10 @@
               {{ label }}
             </label>
           {% endfor %}
+
+          {% if field.value() %}
+            <a class="asi-Filter_LinkLabel" href="{{ build_url(remove=[field.html_name]) }}">Any</a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -266,11 +352,11 @@
 
 {% macro workrate_item() %}
   <li class="asi-Filters_Item">
-    <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse" aria-expanded="false">
+    <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse"
+         aria-expanded="{{ 'true' if form.def_workrate.value() or form.att_workrate.value() else 'false' }}">
       <header class="asi-Filter_Header js-PlayerFilter_CollapseToggle">
         <button type="button" class="asi-Filter_Button">
           <span class="asi-Filter_ButtonLabel">Workrates</span>
-          <span class="asi-Filter_ButtonCurrent">{{ form.def_workrate.value()[0] | default('All') }} / {{ form.att_workrate.value()[0] | default('All') }}</span>
         </button>
       </header>
 
@@ -283,7 +369,7 @@
               {% for value, label in form.def_workrate.field.choices %}
                 {# This is needed so the form can track the state as well. If we don't have a form input that tracks the current value, when the form is submitted the "link" based items will get removed from the GET parameters #}
                 <label class="asi-Filter_LinkGroupLink"
-                       onclick="this.closest('form').submit()"
+                       onclick="this.closest('form').submit();"
                        aria-current="{{ 'true' if form.def_workrate.value() and value in form.def_workrate.value() else 'false' }}">
                   <input type="radio"
                          class="asi-Filter_LinkRadio"
@@ -295,6 +381,12 @@
                   {{ label }}
                 </label>
               {% endfor %}
+
+              {% if form.def_workrate.value() %}
+                <a class="asi-Filter_LinkGroupLink"
+                   href="{{ build_url(remove=[form.def_workrate.html_name]) }}">Any
+                </a>
+              {% endif %}
             </div>
           </div>
 
@@ -304,7 +396,7 @@
             <div class="asi-Filter_LinkGroup">
               {% for value, label in form.att_workrate.field.choices %}
                 <label class="asi-Filter_LinkGroupLink"
-                       onclick="this.closest('form').submit()"
+                       onclick="this.closest('form').submit();"
                        aria-current="{{ 'true' if form.att_workrate.value() and value in form.att_workrate.value() else 'false' }}">
                   <input type="radio"
                          class="asi-Filter_LinkRadio"
@@ -316,6 +408,12 @@
                   {{ label }}
                 </label>
               {% endfor %}
+
+              {% if form.att_workrate.value() %}
+                <a class="asi-Filter_LinkGroupLink"
+                   href="{{ build_url(remove=[form.att_workrate.html_name]) }}">Any
+                </a>
+              {% endif %}
             </div>
           </div>
         </div>

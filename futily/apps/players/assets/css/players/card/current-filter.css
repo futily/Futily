@@ -1,0 +1,30 @@
+/*
+|--------------------------------------------------------------------------
+| Current filter
+|--------------------------------------------------------------------------
+| @namespace: plyr-
+|
+*/
+.plyr-CurrentFilter {
+  align-items: center;
+}
+
+.plyr-CurrentFilter_Image {
+  height: 16px;
+  margin-right: 5px;
+}
+
+.plyr-CurrentFilter_Icon {
+  display: inline-block;
+  width: 10px;
+  height: @width;
+  margin-left: 5px;
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+  /* stylelint-enable */
+}

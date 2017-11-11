@@ -204,26 +204,35 @@ def build_url(context, *args, **kwargs):
     get = kwargs.pop('get', {})
     remove = kwargs.pop('remove', '')
     return_url = kwargs.pop('initial_url', f'{request.path}')
+    params = request.GET.copy()
 
     # Sometimes no 'viewname' is passed i.e. building pagination links
     if args or kwargs:
         return_url = reverse(*args, **kwargs)
 
     if hasattr(request.GET, 'dict'):
-        params = request.GET.dict()
-
         # If we want to change something more than likely we want to
         # reset the current page, so remove the page param
         if 'page' in params and get:
             params.pop('page')
 
-        if remove:
+        if isinstance(remove, dict):
+            for key, value in remove.items():
+                wanted = params.getlist(key)
+
+                print(value)
+
+                if len(wanted) == 1:
+                    params.pop(key)
+                else:
+                    params.setlist(key, [x for x in wanted if x != value])
+        elif isinstance(remove, list):
             for item in remove:
                 params.pop(item, None)
 
         params.update(**get)
 
-        return_url += '?{}'.format(urlencode(params))
+        return_url += '?{}'.format(params.urlencode())
 
     if return_url == f'{request.path}?':
         return request.path

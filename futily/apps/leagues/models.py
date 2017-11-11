@@ -2,6 +2,7 @@ from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.functional import cached_property
 
 
 class Leagues(ContentBase):
@@ -59,6 +60,10 @@ class League(PageBase):
 
     def get_absolute_url(self):
         return self._get_permalink_for_page(self.page.page)
+
+    @cached_property
+    def has_players(self):
+        return self.player_set.exists()
 
     def players(self):
         return self.player_set(manager='cards').all().select_related('club', 'league', 'nation')

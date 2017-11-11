@@ -70,25 +70,8 @@ LEVEL_FILTER_MAP = {
 }
 
 LEVELS_GET_TO_LABEL = {
-    'all': 'All',
-    'totw': 'TOTW',
-    'gold': 'Gold',
-    'silver': 'Silver',
-    'bronze': 'Bronze',
-    'totw-gold': 'TOTW Gold',
-    'totw-silver': 'TOTW Silver',
-    'totw-bronze': 'TOTW Bronze',
-    'rare-gold': 'Rare Gold',
-    'rare-silver': 'Rare Silver',
-    'rare-bronze': 'Rare Bronze',
-    'nonrare-gold': 'Gold',
-    'nonrare-silver': 'Silver',
-    'nonrare-bronze': 'Bronze',
-    'legend': 'Legends',
-    'toty': 'TOTY',
-    'motm': 'MOTM',
-    'transfers': 'Transfers',
-    'special': 'Special',
+    value: key
+    for (value, key) in BASE_COLOR_CHOICES + SPECIAL_COLOR_CHOICES
 }
 
 POSITION_CHOICES = [

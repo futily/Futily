@@ -5,8 +5,19 @@
 | @namespace: asi-
 |
 */
+.asi-Filter {
+  padding-right: 5px;
+  padding-left: @padding-right;
+}
+
 .asi-Filter-flyout {
   position: relative;
+}
+
+.asi-Filter-collapse {
+  &[aria-expanded='true'] {
+    background-color: var(--Color_Grey-light);
+  }
 }
 
 /*
@@ -68,7 +79,8 @@
 |
 */
 .asi-Filter_Body {
-  padding: 0.5vr 0;
+  padding-top: 0.25vr;
+  padding-bottom: 0.5vr;
 
   [aria-expanded='false'] & {
     display: none;
@@ -96,10 +108,10 @@
     .asi-Filter_Links-stars & {
       &::after {
         background-image: svg-load(
-          'star.svg',
-          fill=#16a287,
-          stroke=#16a287,
-          stroke-width=3
+        'star.svg',
+        fill=#16a287,
+        stroke=#16a287,
+        stroke-width=3
         );
       }
     }
@@ -109,10 +121,10 @@
     .asi-Filter_Links-stars & {
       &::after {
         background-image: svg-load(
-          'star.svg',
-          fill=#16a287,
-          stroke=#16a287,
-          stroke-width=3
+        'star.svg',
+        fill=#16a287,
+        stroke=#16a287,
+        stroke-width=3
         );
       }
     }
@@ -128,10 +140,10 @@
       margin-left: 5px;
 
       background-image: svg-load(
-        'star.svg',
-        fill=#fff,
-        stroke=#16a287,
-        stroke-width=3
+      'star.svg',
+      fill=#fff,
+      stroke=#16a287,
+      stroke-width=3
       );
       background-size: @width @height;
 
@@ -144,7 +156,17 @@
   display: none;
 }
 
+.asi-Filter_LinkGroup {
+  display: flex;
+}
+
 .asi-Filter_LinkGroupLink {
+  margin-right: 8px;
+
   color: var(--Color_Green);
   cursor: pointer;
+
+  &[aria-current='true'] {
+    font-weight: 600;
+  }
 }

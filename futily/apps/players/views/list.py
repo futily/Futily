@@ -19,16 +19,24 @@ class PlayerList(FormMixin, ListView):
     paginate_by = 30
     success_url = '/'
 
+    def get_filters(self):
+        current = self.request.GET.copy()
+
+        if current.get('page'):
+            current.pop('page')
+
+        return {
+            'current': current,
+            'allowed': [x.html_name for x in self.get_form()]
+        }
+
     def get_queryset(self):  # pylint: disable=too-complex, too-many-locals, too-many-branches
         qs = super(PlayerList, self).get_queryset()
 
-        current_filters = self.request.GET.copy()
-        allowed_filters = self.allowed_filters()
+        filters = self.get_filters()
+        current_filters = filters['current']
+        allowed_filters = filters['allowed']
 
-        if current_filters.get('page'):
-            current_filters.pop('page')
-
-        # Check if we have any filterable parameters
         if current_filters and set(current_filters.dict().keys()).issubset(set(allowed_filters)):
             if current_filters.get('min_rating') and current_filters.get('max_rating'):
                 qs = qs.filter(rating__range=(current_filters.get('min_rating'), current_filters.get('max_rating')))
@@ -79,12 +87,18 @@ class PlayerList(FormMixin, ListView):
                     'totw_gold': {'color__in': [x for x in gold_levels if 'totw' in x]},
                     'totw_silver': {'color__in': [x for x in silver_levels if 'totw' in x]},
                     'totw_bronze': {'color__in': [x for x in bronze_levels if 'totw' in x]},
-                    'gold_rare': {'color__in': [x for x in gold_levels if 'rare' in x]},
-                    'gold_common': {'color__in': ['gold']},
-                    'silver_rare': {'color__in': [x for x in silver_levels if 'rare' in x]},
-                    'silver_common': {'color__in': ['silver']},
-                    'bronze_rare': {'color__in': [x for x in bronze_levels if 'rare' in x]},
-                    'bronze_common': {'color__in': ['bronze']},
+                    'nif_all': {'color__in': [x for x in gold_levels + silver_levels + bronze_levels if 'totw' not in x]},
+                    'nif_gold': {'color__in': [x for x in gold_levels if 'totw' not in x]},
+                    'nif_silver': {'color__in': [x for x in silver_levels if 'totw' not in x]},
+                    'nif_bronze': {'color__in': [x for x in bronze_levels if 'totw' not in x]},
+                    'rare_all': {'color__in': [x for x in gold_levels + silver_levels + bronze_levels if 'rare' in x]},
+                    'rare_gold': {'color__in': [x for x in gold_levels if 'rare' in x]},
+                    'rare_silver': {'color__in': [x for x in silver_levels if 'rare' in x]},
+                    'rare_bronze': {'color__in': [x for x in bronze_levels if 'rare' in x]},
+                    'common_all': {'color__in': ['gold', 'silver', 'bronze']},
+                    'common_gold': {'color__in': ['gold']},
+                    'common_silver': {'color__in': ['silver']},
+                    'common_bronze': {'color__in': ['bronze']},
                     'award_winner': {'color__in': ['award_winner']},
                     'confederation_champions_motm': {'color__in': ['confederation_champions_motm']},
                     'fut_birthday': {'color__in': ['fut_birthday']},
@@ -130,10 +144,11 @@ class PlayerList(FormMixin, ListView):
         return qs
 
     def get_context_data(self, **kwargs):
-        if 'form' not in kwargs:
-            kwargs['form'] = self.get_form()
+        context = super(PlayerList, self).get_context_data(**kwargs)
 
-        return super(PlayerList, self).get_context_data(**kwargs)
+        context['current_filters'] = self.build_current_context()
+
+        return context
 
     def get_initial(self):
         current_filters = self.request.GET.copy()
@@ -141,12 +156,60 @@ class PlayerList(FormMixin, ListView):
         if current_filters.get('page'):
             current_filters.pop('page')
 
-        return current_filters
+        return dict(current_filters)
 
-    def allowed_filters(self):
-        form = self.get_form()
+    def build_current_context(self):
+        from django.apps import apps
 
-        return [x.html_name for x in form]
+        current_filters = self.get_filters()['current']
+        current = []
+        workrate_has_been_done = False
+
+        print(current_filters)
+
+        for key in current_filters.dict().keys():
+            items = current_filters.getlist(key)
+
+            for value in items:
+                if key in [
+                    'min_rating',
+                    'max_rating'] or (
+                    key in [
+                        'att_workrate',
+                        'def_workrate'] and workrate_has_been_done):
+                    continue
+
+                schema = {
+                    'key': key,
+                    'value': value,
+                    'label': value,
+                }
+
+                if key in ['def_workrate', 'att_workrate'] and not workrate_has_been_done:
+                    schema['label'] = f'{current_filters.get("att_workrate", "Any")} / {current_filters.get("def_workrate", "Any")}'
+                    workrate_has_been_done = True
+
+                if key == 'skill_moves':
+                    schema['label'] = f'{schema["value"]}+ skill moves'
+
+                if key == 'weak_foot':
+                    schema['label'] = f'{schema["value"]}+ weak foot'
+
+                if key == 'strong_foot':
+                    schema['label'] = f'{schema["value"]} footed'
+
+                if key == 'position':
+                    schema['label'] = POSITION_GET_TO_LABEL[value]
+
+                if key == 'level':
+                    schema['label'] = LEVELS_GET_TO_LABEL[value]
+
+                if key in ['nation', 'league']:
+                    schema['object'] = apps.get_model(f'{key}s', model_name=key).objects.get(slug=value)
+
+                current.append(schema)
+
+        return current
 
 
 class PlayerListLatest(ListView):

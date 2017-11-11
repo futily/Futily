@@ -1,6 +1,7 @@
 from django import forms
 
 from futily.apps.leagues.models import League
+from futily.apps.players.constants import SPECIAL_COLOR_CHOICES
 from futily.apps.players.models import Player
 
 from ..nations.models import Nation
@@ -19,7 +20,6 @@ class PlayerListForm(forms.Form):
     position = forms.MultipleChoiceField(choices=[
         ('Lines', [
             ('all', 'All positions'),
-            ('gk', 'Goalkeepers'),
             ('def', 'Defenders'),
             ('mid', 'Midfielders'),
             ('att', 'Attackers'),
@@ -44,7 +44,6 @@ class PlayerListForm(forms.Form):
             ('st', 'ST'),
         ]),
         ('Groups', [
-            ('gk', 'Goalkeepers'),
             ('cbs', 'Center backs'),
             ('rbs', 'Right backs'),
             ('lbs', 'Left backs'),
@@ -62,47 +61,30 @@ class PlayerListForm(forms.Form):
             ('silver', 'Silver'),
             ('bronze', 'Bronze'),
         ]),
-        ('In-Forms', [
-            ('if-all', 'All IF'),
-            ('if-gold', 'IF Gold'),
-            ('if-silver', 'IF Silver'),
-            ('if-bronze', 'IF Bronze'),
+        ('TOTW', [
+            ('totw_all', 'All TOTW'),
+            ('totw_gold', 'TOTW Gold'),
+            ('totw_silver', 'TOTW Silver'),
+            ('totw_bronze', 'TOTW Bronze'),
         ]),
         ('Non In-Forms', [
-            ('nif-all', 'All Non-IF'),
-            ('nif-gold', 'Non-IF Gold'),
-            ('nif-silver', 'Non-IF Silver'),
-            ('nif-bronze', 'Non-IF Bronze'),
+            ('nif_all', 'All Non-IF'),
+            ('nif_gold', 'Non-IF Gold'),
+            ('nif_silver', 'Non-IF Silver'),
+            ('nif_bronze', 'Non-IF Bronze'),
         ]),
         ('Rares', [
-            ('rare-all', 'All Rare'),
-            ('rare-gold', 'Rare Gold'),
-            ('rare-silver', 'Rare Silver'),
-            ('rare-bronze', 'Rare Bronze'),
+            ('rare_all', 'All Rare'),
+            ('rare_gold', 'Rare Gold'),
+            ('rare_silver', 'Rare Silver'),
+            ('rare_bronze', 'Rare Bronze'),
         ]),
         ('Non Rares', [
-            ('nonrare-all', 'All'),
-            ('nonrare-gold', 'Gold'),
-            ('nonrare-silver', 'Silver'),
-            ('nonrare-bronze', 'Bronze'),
+            ('common_all', 'All'),
+            ('common_gold', 'Gold'),
+            ('common_silver', 'Silver'),
+            ('common_bronze', 'Bronze'),
         ]),
-        ('Individuals', [
-            ('award_winner', 'Award Winner'),
-            ('confederation_champions_motm', 'Confederation Champions MOTM'),
-            ('fut_birthday', 'FUT Birthday'),
-            ('gotm', 'gotm'),
-            ('halloween', 'Halloween'),
-            ('imotm', 'iMOTM'),
-            ('motm', 'MOTM'),
-            ('movember', 'Movember'),
-            ('ones_to_watch', 'Ones to watch'),
-            ('purple', 'Purple'),
-            ('record_breaker', 'Record Breaker'),
-            ('sbc_base', 'SBC'),
-            ('st_patricks', 'St Patricks'),
-            ('tots', 'TOTS'),
-            ('toty', 'TOTY'),
-        ])
     ])
 
     # Choices are done in the __init__
@@ -124,20 +106,28 @@ class PlayerListForm(forms.Form):
         self.fields['max_rating'].min_value = lowest_player_rating
         self.fields['max_rating'].initial = 99
 
+        color_choices = Player.objects.only('color').values_list('color', flat=True).order_by('color').distinct('color')
+        self.fields['level'].choices += [
+            ('Individuals', [
+                (value, label) for (value, label) in SPECIAL_COLOR_CHOICES
+                if value in color_choices and 'totw' not in value
+            ])
+        ]
+
         self.fields['nation'].choices = [
             ('Top Nations', [
-                (x.slug, x.title) for x in Nation.objects.order_by('-total_players')[:10]
+                x for x in Nation.objects.order_by('-total_gold')[:10]
             ]),
             ('All Nations', [
-                (x.slug, x.title) for x in Nation.objects.order_by('title')
+                x for x in Nation.objects.order_by('title') if x.has_players
             ]),
         ]
 
         self.fields['league'].choices = [
             ('Top Leagues', [
-                (x.slug, x.title) for x in League.objects.order_by('-total_players')[:5]
+                x for x in League.objects.order_by('-total_gold')[:5]
             ]),
             ('All Leagues', [
-                (x.slug, x.title) for x in League.objects.order_by('title')
+                x for x in League.objects.order_by('title') if x.has_players
             ]),
         ]
