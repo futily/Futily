@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('django_comments_xtd', '0005_auto_20170828_2123'),
+        ('django_comments_xtd', '0005_auto_20170920_1247'),
     ]
 
     operations = [
