@@ -37,11 +37,11 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'social/', include('social_django.urls', namespace='social')),
-    url(r'^comments/', include('django_comments_xtd.urls')),
 
     # Special cases
     url(r'chemistry-styles/', TemplateView.as_view(template_name='misc/chemistry-styles.html')),
     url(r'users/', include('futily.apps.users.urls', namespace='users')),
+    url(r'^comments/', include('futily.apps.comments.urls')),
 
     # Permalink redirection service.
     url(r'^r/(?P<content_type_id>\d+)-(?P<object_id>[^/]+)/$', contenttypes_views.shortcut, name='permalink_redirect'),

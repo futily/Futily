@@ -159,7 +159,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         })
 
     def get_username(self):
-        return getattr(self, self.USERNAME_FIELD)
+        return self.username
 
     def get_short_name(self):
         return self.get_username()

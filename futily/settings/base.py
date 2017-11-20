@@ -109,6 +109,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+SESSION_COOKIE_HTTPONLY = False
+
 
 # Auto-discovery of project location.
 
@@ -184,8 +186,18 @@ INSTALLED_APPS = [
 ]
 
 COMMENTS_APP = 'django_comments_xtd'
-COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_MODEL = 'futily.apps.comments.models.FlyComment'
+COMMENTS_XTD_FORM_CLASS = 'futily.apps.comments.forms.FlyCommentForm'
+COMMENTS_XTD_APP_MODEL_OPTIONS = {
+    'default': {
+        'allow_flagging': True,
+        'allow_feedback': True,
+        'show_feedback': True,
+    }
+}
+COMMENTS_XTD_MAX_THREAD_LEVEL = 10
 COMMENTS_XTD_CONFIRM_EMAIL = False
+COMMENTS_XTD_LIST_ORDER = ['-flycomment__score', '-thread_id', 'level', 'submit_date']
 
 # Additional static file locations.
 

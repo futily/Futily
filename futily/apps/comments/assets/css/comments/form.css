@@ -1,0 +1,17 @@
+/*
+|--------------------------------------------------------------------------
+| Form
+|--------------------------------------------------------------------------
+| @namespace: cmm-
+|
+*/
+.cmm-Form_Preview {
+  @include Font_A;
+
+  margin-bottom: 0.5vr;
+  padding: 0.5vr;
+
+  background-color: #fff;
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+}

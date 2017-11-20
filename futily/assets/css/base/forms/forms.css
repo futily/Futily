@@ -142,6 +142,7 @@
   padding: 9px var(--InputHoriPadding, 15px);
 
   appearance: none;
+  background-color: #fff;
   border: 1px solid var(--Color_Border);
   border-radius: 4px;
 
@@ -208,6 +209,22 @@
 
 /*
 |--------------------------------------------------------------------------
+| Extra
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Extra {
+  margin-top: 0.5vr;
+}
+
+.frm-Form_Help {
+  @include Font_A;
+
+  color: var(--Color_Body-2);
+}
+
+/*
+|--------------------------------------------------------------------------
 | Actions
 |--------------------------------------------------------------------------
 |
@@ -216,6 +233,10 @@
   margin-top: 1vr;
 
   .asi-Block & {
+    margin-top: 0.5vr;
+  }
+
+  .cmm-Comments & {
     margin-top: 0.5vr;
   }
 }

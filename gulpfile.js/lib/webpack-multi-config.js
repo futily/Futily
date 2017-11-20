@@ -20,11 +20,34 @@ module.exports = function (env) {
     plugins: [new BundleTracker({ filename: './webpack-stats.json' })],
     resolve: {
       modules: [jsSrc, 'node_modules'],
-      extensions: ['.js', '.css', '.json']
+      extensions: ['.js', '.css', '.json', '.vue'],
+      alias: {
+        'vue$': 'vue/dist/vue.common.js'
+      }
     },
     module: {
       noParse: /es6-promise\.js$/, // avoid webpack shimming process
       rules: [
+        {
+          enforce: 'pre',
+          test: /\.vue$/,
+          loader: 'eslint-loader',
+          options: {
+            configFile: path.resolve('.eslintrc.dev.js'),
+            formatter: require('eslint-friendly-formatter')
+          },
+          include: jsSrc,
+          exclude: /(node_modules|bower_components|vendor)/
+        },
+        {
+          test: /\.vue$/,
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              js: 'babel-loader'
+            }
+          }
+        },
         {
           enforce: 'pre',
           test: /\.js$/,

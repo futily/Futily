@@ -18,6 +18,16 @@ import {
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks();
 
+  if (document.querySelector('.js-Comments')) {
+    import('./comments').then(comments => {
+      new comments.default( // eslint-disable-line
+        JSON.parse(
+          document.querySelector('.js-Comments').dataset.commentsConfig
+        )
+      );
+    });
+  }
+
   if (document.querySelector('.js-UserFollow')) {
     new Follow({ el: document.querySelector('.js-UserFollow') });
   }

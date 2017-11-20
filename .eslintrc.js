@@ -18,7 +18,7 @@ module.exports = {
     'object-shorthand': [2, 'always'],
     'prefer-const': [1],
     'prefer-template': [2],
-    'no-console': [2],
+    'no-console': [2, {'allow': ['error', 'warn']}],
     'no-unused-vars': [1],
     'semi': [2, 'always'],
     'comma-dangle': [2, 'always-multiline'],

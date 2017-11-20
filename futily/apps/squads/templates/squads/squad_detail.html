@@ -1,4 +1,5 @@
 {% extends "squads/_builder_base.html" %}
+{% import "comments/macros/comments.html" as comments with context %}
 {% import "macros/share.html" as share with context %}
 
 {% block strapline_text %}
@@ -154,4 +155,8 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block content_below %}
+  {{ comments.comments() }}
 {% endblock %}

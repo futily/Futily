@@ -1,0 +1,16 @@
+{% macro comments() %}
+  <div class="cmm-Comments js-Comments" data-comments-config="{{ get_commentbox_props(object) }}">
+    <div class="cmm-Comments_Inner">
+      <header class="cmm-Comments_Header">
+        <h2 class="cmm-Comments_Title">Comments</h2>
+        <button class="cmm-Comments_Link js-Comments_Post">Post comment</button>
+
+        <div class="cmm-Comments_Form js-Comments_Form"></div>
+      </header>
+
+      <div class="cmm-Comments_Body">
+        <ul class="cmm-Comments_Items js-Comments_Items"></ul>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

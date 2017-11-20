@@ -1,0 +1,131 @@
+/*
+|--------------------------------------------------------------------------
+| Comment
+|--------------------------------------------------------------------------
+| @namespace: cmm-
+|
+*/
+.cmm-Comment {
+  grid-gap: 0.5vr var(--Grid_Gutter);
+  grid-template-columns: 20px 1fr;
+
+  display: grid;
+}
+
+.cmm-Comment_Form,
+.cmm-Comment_ReportForm {
+  margin-top: 0.5vr;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.cmm-Comment_Header {
+  @include Font_A;
+
+  align-items: baseline;
+
+  grid-column: span 2;
+
+  display: flex;
+}
+
+.cmm-Comment_User {
+  margin-right: var(--Grid_Gutter);
+}
+
+.cmm-Comment_UserImage {
+  height: 18px;
+  margin-right: 4px;
+}
+
+.cmm-Comment_Time {
+  margin-right: var(--Grid_Gutter);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Controls
+|--------------------------------------------------------------------------
+|
+*/
+.cmm-Comment_Controls {
+  align-items: center;
+  flex-direction: column;
+
+  display: flex;
+}
+
+.cmm-Comment_Upvote,
+.cmm-Comment_Downvote {
+  width: 15px;
+  height: @width;
+  padding: 0;
+
+  cursor: pointer;
+
+  &:hover {
+    color: var(--Color_Green);
+  }
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+  /* stylelint-enable */
+}
+
+.cmm-Comment_Upvote {
+  transform: rotate(180deg);
+
+  &[aria-selected='true'] {
+    color: var(--Color_Good);
+  }
+}
+
+.cmm-Comment_Downvote {
+  &[aria-selected='true'] {
+    color: var(--Color_Fair);
+  }
+}
+
+.cmm-Comment_Score {
+  @include Font_D;
+}
+
+.cmm-Comment_Score-positive {
+  color: var(--Color_Great);
+}
+
+.cmm-Comment_Score-negative {
+  color: var(--Color_Poor);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+|
+*/
+.cmm-Comment_Footer {
+  grid-column: 2;
+}
+
+.cmm-Comment_Reply {
+  @include Button-secondary;
+
+  margin-right: 5px;
+}
+
+.cmm-Comment_Report {
+  @include Button;
+}
+
+.cmm-Comment_Report-active {
+  border-color: var(--Color_Green);
+}
