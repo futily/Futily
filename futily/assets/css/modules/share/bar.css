@@ -25,7 +25,7 @@
   width: 30px;
   height: @width;
 
-  background-color: var(--Color_Grey);
+  background-color: var(--Color_Light-3);
   border: 1px solid var(--Color_Border);
   border-radius: 2px;
   color: #a1b1bc;

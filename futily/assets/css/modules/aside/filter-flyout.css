@@ -73,7 +73,7 @@
 }
 
 .asi-FilterFlyout_Close {
-  color: var(--Color_Green);
+  color: var(--Color_Brand-1);
   cursor: pointer;
 }
 
@@ -113,9 +113,9 @@
 .asi-FilterFlyout_GroupTitle {
   @include Font_D;
 
-  padding: 0.25vr;
+  padding: 0.25vr 10px;
 
-  background-color: var(--Color_Grey-light);
+  background-color: var(--Color_Light-1);
 }
 
 .asi-FilterFlyout_GroupBody {
@@ -141,7 +141,7 @@
 
 .asi-FilterFlyout_Option {
   &:hover {
-    background-color: var(--Color_Grey);
+    background-color: var(--Color_Light-2);
     cursor: pointer;
   }
 }
@@ -154,7 +154,7 @@
   &[aria-selected='true'] {
     padding-left: 4px;
 
-    border-left: 3px solid var(--Color_Green);
+    border-left: 3px solid var(--Color_Brand-1);
   }
 }
 

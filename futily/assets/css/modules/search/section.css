@@ -21,7 +21,7 @@
   background-color: #fff;
   border: 0;
   border-radius: 3px;
-  color: var(--Color_Dark);
+  color: var(--Color_Dark-1);
 
   transition: background-image 0.3s;
 
@@ -48,7 +48,7 @@
   transition: color 0.2s;
 
   .sch-Section_Input:focus + & {
-    color: var(--Color_Dark);
+    color: var(--Color_Dark-1);
   }
 
   /* stylelint-disable selector-max-type */

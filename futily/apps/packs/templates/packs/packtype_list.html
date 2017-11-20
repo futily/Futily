@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/page.html" as page %}
 
 {% block content_above %}
   <div class="pg-Strapline">
@@ -16,43 +17,11 @@
     </div>
   </div>
 
-  <div class="pg-Breadcrumbs">
-    <div class="pg-Breadcrumbs_Inner">
-      <div class="pg-Breadcrumbs_Body">
-        <nav class="bdc-Breadcrumb">
-          <div class="bdc-Breadcrumb_Items"
-               itemscope=""
-               itemtype="http://schema.org/BreadcrumbList">
-            <div class="bdc-Breadcrumb_Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
-                <span itemprop="name">
-                  Home
-                </span>
-                <meta itemprop="position" content="1">
-              </a>
-            </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            <div class="bdc-Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <span itemprop="name">
-                Packs
-              </span>
-              <meta itemprop="position" content="2">
-            </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </div>
+  {{ page.breadcrumbs([
+    {
+      'label': 'Packs',
+    }
+  ]) }}
 {% endblock %}
 
 {% block main %}

@@ -26,7 +26,7 @@
     background-size: 24px 24px;
     border: 2px solid var(--Color_Border);
     border-radius: 3px;
-    color: var(--Color_Dark);
+    color: var(--Color_Dark-1);
 
     transition: background-image 0.3s;
 
@@ -56,7 +56,7 @@
   left: 0;
 
   border: 2px solid var(--Color_Border);
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 }
 
 .ais-result {

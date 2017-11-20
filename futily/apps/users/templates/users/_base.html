@@ -75,9 +75,9 @@
                     data-action="{{ url('users:follow', username=object.username) }}"
                     data-is-following="{{ 'true' if user.is_following(object) else 'false' }}">
               {% if user.is_following(object) %}
-                <span class="js-UserFollow_Term">Following</span> {{ object }}
+                <span class="js-UserFollow_Term">Following</span>&nbsp;{{ object }}
               {% else %}
-                <span class="js-UserFollow_Term">Follow</span> {{ object }}
+                <span class="js-UserFollow_Term">Follow</span>&nbsp;{{ object }}
               {% endif %}
             </button>
           {% endif %}

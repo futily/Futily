@@ -1,0 +1,50 @@
+{% macro breadcrumbs(breadcrumbs) %}
+  <div class="pg-Breadcrumbs">
+    <div class="pg-Breadcrumbs_Inner">
+      <div class="pg-Breadcrumbs_Body">
+        <nav class="bdc-Breadcrumb">
+          <div class="bdc-Breadcrumb_Items"
+               itemscope=""
+               itemtype="http://schema.org/BreadcrumbList">
+            <div class="bdc-Breadcrumb_Item"
+                 itemprop="itemListElement"
+                 itemscope=""
+                 itemtype="http://schema.org/ListItem">
+              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
+                <span itemprop="name">
+                  Home
+                </span>
+                <meta itemprop="position" content="1">
+              </a>
+            </div>
+            {% for breadcrumb in breadcrumbs %}
+              {% if not loop.last %}
+                <div class="bdc-Breadcrumb_Item"
+                     itemprop="itemListElement"
+                     itemscope=""
+                     itemtype="http://schema.org/ListItem">
+                  <a itemprop="item" class="bdc-Breadcrumb_Link" href="{{ breadcrumb.link }}">
+                    <span itemprop="name">
+                      {{ breadcrumb.label }}
+                    </span>
+                    <meta itemprop="position" content="{{ loop.index + 1 }}">
+                  </a>
+                </div>
+              {% else %}
+                <div class="bdc-Breadcrumb_Item"
+                     itemprop="itemListElement"
+                     itemscope=""
+                     itemtype="http://schema.org/ListItem">
+                  <span itemprop="name">
+                    {{ breadcrumb.label }}
+                  </span>
+                  <meta itemprop="position" content="{{ loop.index + 1 }}">
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+{% endmacro %}

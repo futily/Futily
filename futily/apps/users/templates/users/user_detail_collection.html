@@ -1,63 +1,22 @@
 {% extends "users/_collection_base.html" %}
+{% import "macros/page.html" as page %}
 
 {% block content_above %}
   {{ super() }}
 
-  <div class="pg-Breadcrumbs">
-    <div class="pg-Breadcrumbs_Inner">
-      <div class="pg-Breadcrumbs_Body">
-        <nav class="bdc-Breadcrumb">
-          <div class="bdc-Breadcrumb_Items"
-               itemscope=""
-               itemtype="http://schema.org/BreadcrumbList">
-            <div class="bdc-Breadcrumb_Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
-                <span itemprop="name">
-                  Home
-                </span>
-                <meta itemprop="position" content="1">
-              </a>
-            </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            <div class="bdc-Breadcrumb_Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item"
-                 class="bdc-Breadcrumb_Link"
-                 href="{{ object.get_absolute_url() }}">
-                <span itemprop="name">
-                  {{ object }}
-                </span>
-                <meta itemprop="position" content="2">
-              </a>
-            </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            <div class="bdc-Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <span itemprop="name">
-                Collection
-              </span>
-              <meta itemprop="position" content="3">
-            </div>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </div>
+  {{ page.breadcrumbs([
+    {
+      'label': object,
+      'link': object.get_absolute_url(),
+    },
+    {
+      'label': object,
+      'link': object.get_absolute_url(),
+    },
+    {
+      'label': 'Collection',
+    },
+  ]) }}
 {% endblock %}
 
 {% block collection_main %}

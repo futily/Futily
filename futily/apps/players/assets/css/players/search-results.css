@@ -14,7 +14,7 @@
   max-height: 400px;
   min-width: 310px;
 
-  background-color: var(--Color_Grey-light);
+  background-color: var(--Color_Light-1);
   border-top: 1px solid var(--Color_Border);
   overflow-x: hidden;
   overflow-y: auto;

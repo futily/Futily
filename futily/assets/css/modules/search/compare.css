@@ -21,7 +21,7 @@
   border-radius: 4px;
 
   &:focus {
-    border-color: var(--Color_Green);
+    border-color: var(--Color_Brand-1);
     outline: 0;
   }
 }

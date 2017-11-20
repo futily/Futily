@@ -25,7 +25,7 @@
     width: 14px;
     margin-right: 5px;
 
-    border-top: 7px solid var(--Color_Green);
+    border-top: 7px solid var(--Color_Brand-1);
     border-bottom: 7px solid #46d1ff;
   }
 }

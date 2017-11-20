@@ -18,12 +18,12 @@
 
   background-color: #fff;
   border: 1px solid var(--Color_Border);
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 
   transition: border-color 0.2s, box-shadow 0.2s;
 
   &:hover {
-    border-color: var(--Color_Green);
+    border-color: var(--Color_Brand-1);
   }
 }
 
@@ -54,7 +54,7 @@
   transition: border-color 0.2s;
 
   .clc-Object:hover & {
-    border-color: var(--Color_Green);
+    border-color: var(--Color_Brand-1);
   }
 }
 
@@ -69,7 +69,7 @@
 
   margin-bottom: 0.5vr;
 
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 }
 
 .clc-Object_Collection {
@@ -79,7 +79,7 @@
 .clc-Object_Collected {
   font-weight: 600;
 
-  color: var(--Color_Green);
+  color: var(--Color_Brand-1);
 }
 
 .clc-Object_Link {

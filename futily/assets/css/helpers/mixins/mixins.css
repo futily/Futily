@@ -36,15 +36,19 @@
 
   position: relative;
 
-  background-color: var(--Color_Green);
+  background-color: var(--Color_Brand-1);
   color: #fff;
+
+  &:hover {
+    background-color: var(--Color_Brand-2);
+  }
 }
 
 @mixin Button-secondary {
   @include Button;
 
-  background-color: var(--Color_Grey);
-  color: var(--Color_Body);
+  background-color: var(--Color_Light-3);
+  color: var(--Color_Dark-1);
 }
 
 @mixin Button-large {
@@ -90,11 +94,11 @@
   }
 
   @media (--lg) {
-    max-width: calc(var(--Grid_Container) + (var(--Grid_Gutter) * 2));
+    max-width: calc(var(--Grid_Container) + (@padding-right * 2));
     width: 100%;
     margin-right: auto;
     margin-left: @margin-right;
-    padding-right: calc(var(--Grid_Gutter) * 2);
+    padding-right: 5%;
     padding-left: @padding-right;
   }
 }

@@ -36,8 +36,8 @@
   transition: border-color 0.2s, background-color 0.2s;
 
   .plyr-RPPChemStyles_Style[aria-current='true'] & {
-    background-color: var(--Color_Green);
-    border-color: var(--Color_Green);
+    background-color: var(--Color_Brand-1);
+    border-color: var(--Color_Brand-1);
     color: #fff;
   }
 
@@ -46,7 +46,7 @@
   }
 
   &:hover {
-    border-color: var(--Color_Green);
+    border-color: var(--Color_Brand-1);
   }
 }
 
@@ -78,7 +78,7 @@
   font-weight: 600;
   white-space: nowrap;
 
-  background-color: var(--Color_Green);
+  background-color: var(--Color_Brand-1);
   border-radius: 4px;
   color: #fff;
   opacity: 0;
@@ -116,7 +116,7 @@
     width: 8px;
     height: @width;
 
-    background-color: var(--Color_Green);
+    background-color: var(--Color_Brand-1);
     border-top-left-radius: 2px;
 
     transform: translate(-50%, -3px) rotate(45deg);

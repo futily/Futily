@@ -49,7 +49,8 @@
   width: 100%;
   padding: 0;
 
-  background-color: var(--Color_Grey);
+  background-color: var(--Color_Light-3);
+  border-radius: 0;
   color: #a1b1bc;
   cursor: pointer;
 

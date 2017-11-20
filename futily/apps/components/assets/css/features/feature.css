@@ -11,7 +11,7 @@
   display: flex;
   padding: 1vr calc(var(--Grid_Gutter) * 2);
 
-  background-color: var(--Color_Grey-light);
+  background-color: var(--Color_Light-1);
   border: 1px solid var(--Color_Border);
   border-radius: 4px;
 }
@@ -35,7 +35,7 @@
 
   margin-bottom: 0.5vr;
 
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 }
 
 .ftr-Feature_Text {

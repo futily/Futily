@@ -153,7 +153,7 @@
   }
 
   &:focus {
-    border-color: #bec1c3;
+    border-color: var(--Color_Brand-2);
     outline: 0;
   }
 }
@@ -220,7 +220,7 @@
 .frm-Form_Help {
   @include Font_A;
 
-  color: var(--Color_Body-2);
+  color: var(--Color_Dark-2);
 }
 
 /*

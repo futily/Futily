@@ -68,7 +68,7 @@
   cursor: pointer;
 
   &:hover {
-    color: var(--Color_Green);
+    color: var(--Color_Brand-1);
   }
 
   /* stylelint-disable selector-max-type */
@@ -127,5 +127,5 @@
 }
 
 .cmm-Comment_Report-active {
-  border-color: var(--Color_Green);
+  border-color: var(--Color_Brand-1);
 }

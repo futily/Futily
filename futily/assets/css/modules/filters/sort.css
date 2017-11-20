@@ -17,7 +17,7 @@
     width: 20px;
     height: @width;
 
-    color: var(--Color_Body);
+    color: var(--Color_Dark-1);
   }
   /* stylelint-enable */
 }

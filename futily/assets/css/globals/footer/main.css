@@ -6,7 +6,7 @@
 |
 */
 .ft-Main {
-  background-color: var(--Color_Dark);
+  background-color: var(--Color_Dark-1);
   color: #fff;
 
   @media (--lg) {
@@ -60,7 +60,7 @@
     max-width: 70px;
     height: 3px;
 
-    background-color: var(--Color_Green);
+    background-color: var(--Color_Brand-1);
   }
 }
 
@@ -83,7 +83,7 @@
   font-weight: 900;
   text-transform: uppercase;
 
-  color: var(--Color_Green);
+  color: var(--Color_Brand-1);
 }
 
 /*
@@ -116,7 +116,7 @@
   transition: color 0.2s;
 
   &:hover {
-    color: var(--Color_Green);
+    color: var(--Color_Brand-1);
   }
 }
 

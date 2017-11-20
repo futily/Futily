@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/page.html" as page %}
 
 {% block content_class %}lyt-Content-full{% endblock %}
 
@@ -19,50 +20,18 @@
   </div>
 
   {% block breadcrumbs %}
-    <div class="pg-Breadcrumbs">
-      <div class="pg-Breadcrumbs_Inner">
-        <div class="pg-Breadcrumbs_Body">
-          <nav class="bdc-Breadcrumb">
-            <div class="bdc-Breadcrumb_Items"
-                 itemscope=""
-                 itemtype="http://schema.org/BreadcrumbList">
-              <div class="bdc-Breadcrumb_Item"
-                   itemprop="itemListElement"
-                   itemscope=""
-                   itemtype="http://schema.org/ListItem">
-                <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
-                  <span itemprop="name">
-                    Home
-                  </span>
-                  <meta itemprop="position" content="1">
-                </a>
-              </div>
-
-              <div class="bdc-Breadcrumb_Divider">
-                {% include "angle-down.svg" %}
-              </div>
-
-              <div class="bdc-Item"
-                   itemprop="itemListElement"
-                   itemscope=""
-                   itemtype="http://schema.org/ListItem">
-                <span itemprop="name">
-                  Builder
-                </span>
-                <meta itemprop="position" content="2">
-              </div>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
+    {{ page.breadcrumbs([
+      {
+        'label': 'Builder',
+      }
+    ]) }}
   {% endblock %}
 {% endblock %}
 
 {% block main %}
   <form class="bld-Builder {% block builder_class %}{% endblock %}"
         data-builder-formation="{% block builder_formation %}{% endblock %}"
-  {% if self.builder_action() %}action="{% block builder_action %}{% endblock %}"{% endif %}>
+        {% if self.builder_action() %}action="{% block builder_action %}{% endblock %}"{% endif %}>
     <div class="bld-Builder_Body">
       {% block builder_body_top %}{% endblock %}
       <div class="bld-Builder_Team">

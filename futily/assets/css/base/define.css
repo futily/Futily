@@ -46,7 +46,7 @@ body {
 
   /* By default, `<body>` has no `background-color` so we set one as a best practice. */
   background-color: #fff;
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;

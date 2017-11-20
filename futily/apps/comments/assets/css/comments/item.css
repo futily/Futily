@@ -12,7 +12,7 @@
   border-radius: 4px;
 
   &:hover {
-    border-color: var(--Color_Green);
+    border-color: var(--Color_Brand-1);
   }
 }
 

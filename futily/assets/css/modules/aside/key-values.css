@@ -13,7 +13,7 @@
   padding-bottom: @padding-top;
 
   border-bottom: 1px solid var(--Color_Border);
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 
   &:first-child {
     padding-top: 0;

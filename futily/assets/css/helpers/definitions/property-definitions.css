@@ -7,13 +7,23 @@
   |--------------------------------------------------------------------------
   |
   */
-  --Color_Body: #2c3e50;
-  --Color_Body-2: #707786;
-  --Color_Dark: #222533;
-  --Color_Green: #1abc9c;
-  --Color_Grey: rgb(236, 240, 241);
-  --Color_Grey-dark: rgb(234, 238, 239);
-  --Color_Grey-light: #f9fafb;
+  --Color_Brand-1: #3d70b2;
+  --Color_Brand-2: #5596e6;
+  --Color_Brand-3: #41d6c3;
+
+  --Color_Light-1: #f5f7fa;
+  --Color_Light-2: #f0f3f6;
+  --Color_Light-3: #dfe3e6;
+  --Color_Light-4: #8c9ba5;
+
+  --Color_Dark-1: #152934;
+  --Color_Dark-2: #5a6872;
+  --Color_Dark-3: #2c3e50;
+
+  --Color_Support-aware: #efc100;
+  --Color_Support-beware: #e71d32;
+  --Color_Support-good: #5aa700;
+  --Color_Support-supplement: #5aaafa;
 
   --Color_Border: #e4e7e9;
   --Color_Border-dark: #343b48;
@@ -36,7 +46,7 @@
   --Color_Twitch: #6441a5;
   --Color_Facebook: facebook-color;
 
-  --Color_Anchor: var(--Color_Green);
+  --Color_Anchor: var(--Color_Brand-1);
 
   --Card_Color: hsl(31, 100%, 7%);
 
@@ -159,7 +169,7 @@
   */
   --Grid_Constrained: 1600px;
   --Grid_Container: 1310px;
-  --Grid_Gutter: 15px;
+  --Grid_Gutter: 10px;
 
   /*
   |--------------------------------------------------------------------------

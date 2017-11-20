@@ -45,16 +45,16 @@
   color: #2c3e50;
 
   &:not([disabled]):hover {
-    background-color: var(--Color_Green);
+    background-color: var(--Color_Brand-1);
     color: #fff;
   }
 
   [aria-current='true'] & {
-    background-color: var(--Color_Green);
+    background-color: var(--Color_Brand-1);
     color: #fff;
 
     &:hover {
-      background-color: var(--Color_Green);
+      background-color: var(--Color_Brand-1);
     }
   }
 }
@@ -78,17 +78,17 @@
   font-family: inherit;
   font-weight: 600;
 
-  background-color: #34495e;
+  background-color: var(--Color_Support-supplement);
   border: 0;
   border-radius: 5px;
   color: #fff;
 
   &:hover {
-    background-color: #46d1ff;
+    background-color: var(--Color_Brand-1);
   }
 
   &[disabled] {
-    background-color: #a1b1bc;
+    background-color: var(--Color_Light-3);
   }
   &.pgn-Pagination_Control-prev {
     margin-right: var(--Grid_Gutter);

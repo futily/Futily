@@ -81,7 +81,7 @@
   transition: border-color 0.2s;
 
   &:focus {
-    border-bottom-color: var(--Color_Green);
+    border-bottom-color: var(--Color_Brand-1);
     outline: 0;
   }
 

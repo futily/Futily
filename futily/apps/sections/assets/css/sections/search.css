@@ -80,7 +80,7 @@
   background-size: 24px 24px;
   border: 0;
   border-radius: 3px;
-  color: var(--Color_Dark);
+  color: var(--Color_Dark-1);
 
   transition: background-image 0.3s;
 

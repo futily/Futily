@@ -26,16 +26,15 @@
 }
 
 .plyr-Information_Item {
+  align-items: baseline;
   flex-wrap: wrap;
   justify-content: space-between;
 
   display: flex;
   padding: 10px 0;
 
-  font-weight: 600;
-
   border-bottom: 1px solid var(--Color_Border);
-  color: #82919c;
+  color: var(--Color_Dark-2);
 
   &:first-child {
     padding-top: 0;
@@ -55,15 +54,17 @@
 
   font-weight: 600;
 
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 }
 
 .plyr-Information_Value {
+  @include Font_A;
+
   display: flex;
   /* This is for alignment on the compare page */
   min-width: 57px;
 
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 
   &:last-child {
     justify-content: flex-end;
@@ -74,6 +75,8 @@
 
 .plyr-Information_Icon {
   margin-left: 3px;
+
+  color: var(--Color_Brand-1);
 
   /* stylelint-disable selector-max-type */
   svg {

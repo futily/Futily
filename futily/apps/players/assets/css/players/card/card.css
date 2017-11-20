@@ -95,12 +95,12 @@
   font-weight: 700;
   letter-spacing: 0.75px;
   line-height: 1;
-  text-shadow: 1px 1px 0 rgba(var(--Color_Dark), 0.3);
+  text-shadow: 1px 1px 0 rgba(var(--Color_Dark-1), 0.3);
   text-transform: uppercase;
 
-  background-color: var(--Color_Green);
+  background-color: var(--Color_Brand-1);
   border-radius: 50px;
-  box-shadow: 2px 2px 7px rgba(var(--Color_Dark), 0.3);
+  box-shadow: 2px 2px 7px rgba(var(--Color_Dark-1), 0.3);
   color: #fff;
 
   transform: translateX(-50%);

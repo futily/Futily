@@ -91,12 +91,12 @@
 
   font-weight: 400;
 
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 
   transition: color 0.2s;
 
   &:hover {
-    color: var(--Color_Green);
+    color: var(--Color_Brand-1);
   }
 
   [aria-current='true'] & {
@@ -104,7 +104,7 @@
 
     font-weight: 600;
 
-    color: var(--Color_Green);
+    color: var(--Color_Brand-1);
   }
 }
 

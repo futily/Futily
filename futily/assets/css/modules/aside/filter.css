@@ -8,6 +8,10 @@
 .asi-Filter {
   padding-right: 5px;
   padding-left: @padding-right;
+
+  &:hover {
+    background-color: var(--Color_Light-1);
+  }
 }
 
 .asi-Filter-flyout {
@@ -16,7 +20,7 @@
 
 .asi-Filter-collapse {
   &[aria-expanded='true'] {
-    background-color: var(--Color_Grey-light);
+    background-color: var(--Color_Light-1);
   }
 }
 
@@ -39,10 +43,6 @@
 
   &:focus {
     outline: 0;
-  }
-
-  &:hover {
-    background-color: var(--Color_Grey-light);
   }
 
   &::after {
@@ -97,7 +97,7 @@
   display: flex;
   margin-right: var(--Grid_Gutter);
 
-  color: var(--Color_Green);
+  color: var(--Color_Brand-1);
   cursor: pointer;
 
   &:last-child {
@@ -109,8 +109,8 @@
       &::after {
         background-image: svg-load(
           'star.svg',
-          fill=#16a287,
-          stroke=#16a287,
+          fill=var(--Color_Brand-2),
+          stroke=var(--Color_Brand-2),
           stroke-width=3
         );
       }
@@ -122,8 +122,8 @@
       &::after {
         background-image: svg-load(
           'star.svg',
-          fill=#16a287,
-          stroke=#16a287,
+          fill=var(--Color_Brand-2),
+          stroke=var(--Color_Brand-2),
           stroke-width=3
         );
       }
@@ -142,7 +142,7 @@
       background-image: svg-load(
         'star.svg',
         fill=#fff,
-        stroke=#16a287,
+        stroke=var(--Color_Brand-2),
         stroke-width=3
       );
       background-size: @width @height;
@@ -160,10 +160,18 @@
   display: flex;
 }
 
+.asi-Filter_LinkGroupsItem {
+  margin-bottom: 0.25vr;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
 .asi-Filter_LinkGroupLink {
   margin-right: 8px;
 
-  color: var(--Color_Green);
+  color: var(--Color_Brand-1);
   cursor: pointer;
 
   &[aria-current='true'] {

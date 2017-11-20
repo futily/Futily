@@ -1,112 +1,23 @@
 {% extends "players/_base.html" %}
+{% import "macros/page.html" as page %}
 {% import "macros/share.html" as share with context %}
 {% import "players/macros/players.html" as player_macros %}
 {% import "players/macros/search.html" as search %}
 
 {% block breadcrumbs %}
-  <div class="pg-Breadcrumbs">
-    <div class="pg-Breadcrumbs_Inner">
-      <div class="pg-Breadcrumbs_Body">
-        <nav class="bdc-Breadcrumb">
-          <div class="bdc-Breadcrumb_Items"
-               itemscope=""
-               itemtype="http://schema.org/BreadcrumbList">
-            <div class="bdc-Breadcrumb_Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
-                <span itemprop="name">
-                  Home
-                </span>
-                <meta itemprop="position" content="1">
-              </a>
-            </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            <div class="bdc-Breadcrumb_Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item"
-                 class="bdc-Breadcrumb_Link"
-                 href="{{ pages.current.get_absolute_url() }}">
-                <span itemprop="name">
-                  {{ object._meta.app_label | capitalize() }}
-                </span>
-                <meta itemprop="position" content="2">
-              </a>
-            </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            <div class="bdc-Item"
-                 itemprop="itemListElement"
-                 itemscope=""
-                 itemtype="http://schema.org/ListItem">
-              <a itemprop="item"
-                 class="bdc-Breadcrumb_Link"
-                 href="{{ player.get_absolute_url() }}">
-                <span itemprop="name">
-                  {{ object }}
-                </span>
-                <meta itemprop="position" content="3">
-              </a>
-            </div>
-
-            <div class="bdc-Breadcrumb_Divider">
-              {% include 'angle-down.svg' %}
-            </div>
-
-            {% if view.kwargs.other_pk %}
-              <div class="bdc-Item"
-                   itemprop="itemListElement"
-                   itemscope=""
-                   itemtype="http://schema.org/ListItem">
-                <a itemprop="item"
-                   class="bdc-Breadcrumb_Link"
-                   href="{{ player.get_compare_absolute_url() }}">
-                  <span itemprop="name">
-                    Compare
-                  </span>
-                  <meta itemprop="position" content="4">
-                </a>
-              </div>
-
-              <div class="bdc-Breadcrumb_Divider">
-                {% include 'angle-down.svg' %}
-              </div>
-
-              <div class="bdc-Item"
-                   itemprop="itemListElement"
-                   itemscope=""
-                   itemtype="http://schema.org/ListItem">
-                <span itemprop="name">
-                  With {{ other_player }}
-                </span>
-                <meta itemprop="position" content="5">
-              </div>
-            {% else %}
-              <div class="bdc-Item"
-                   itemprop="itemListElement"
-                   itemscope=""
-                   itemtype="http://schema.org/ListItem">
-                <span itemprop="name">
-                  Compare
-                </span>
-                <meta itemprop="position" content="4">
-              </div>
-            {% endif %}
-          </div>
-        </nav>
-      </div>
-    </div>
-  </div>
+  {{ page.breadcrumbs([
+    {
+      'label': object._meta.app_label | capitalize(),
+      'link': pages.current.get_absolute_url(),
+    },
+    {
+      'label': object.name,
+      'link': object.get_absolute_url(),
+    },
+    {
+      'label': 'Chemistry',
+    }
+  ]) }}
 {% endblock %}
 
 {% block main %}

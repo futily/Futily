@@ -15,16 +15,16 @@
   display: flex;
   padding: 5px 10px;
 
-  background-color: var(--Color_Grey-light);
+  background-color: var(--Color_Light-1);
   border: 1px solid var(--Color_Border);
   border-top: 0;
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
   cursor: pointer;
 
   transition: border-color 0.2s;
 
   .plyr-SearchResults_Result-active & {
-    border-bottom-color: var(--Color_Green);
+    border-bottom-color: var(--Color_Brand-1);
 
     &::before {
       transform: none;
@@ -42,7 +42,7 @@
     display: block;
     width: 3px;
 
-    background-color: var(--Color_Green);
+    background-color: var(--Color_Brand-1);
 
     transform: translateX(-@width);
     transition: transform 0.2s;

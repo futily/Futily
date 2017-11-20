@@ -40,7 +40,7 @@
 .plyr-FutilyRatings_Value {
   @include Font_D;
 
-  --RatingColor: var(--Color_Body);
+  --RatingColor: var(--Color_Dark-1);
 
   color: var(--RatingColor);
 }

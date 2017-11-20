@@ -5,10 +5,6 @@
 | @namespace: bdc-
 |
 */
-.bdc-Breadcrumb {
-  color: #a1b1bc;
-}
-
 .bdc-Breadcrumb_Items {
   @include Font_A;
 
@@ -17,11 +13,31 @@
   display: flex;
 }
 
+.bdc-Breadcrumb_Item {
+  margin-right: 12px;
+
+  &:last-child {
+    &::after {
+      display: none;
+    }
+  }
+
+  &::after {
+    content: '/';
+
+    margin-left: 10px;
+
+    color: var(--Color_Dark-2);
+  }
+}
+
 .bdc-Breadcrumb_Link {
-  color: currentColor;
+  font-weight: 400;
+
+  color: var(--Color_Brand-2);
 
   &:hover {
-    color: var(--Color_Green);
+    color: var(--Color_Brand-1);
   }
 }
 

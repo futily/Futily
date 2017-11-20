@@ -16,9 +16,9 @@
 
   text-align: center;
 
-  background-color: var(--Color_Grey-light);
+  background-color: var(--Color_Light-1);
   border: 1px solid var(--Color_Border);
-  color: var(--Color_Body);
+  color: var(--Color_Dark-1);
 
   transition: color 0.2s;
 
