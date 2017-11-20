@@ -108,10 +108,10 @@
     .asi-Filter_Links-stars & {
       &::after {
         background-image: svg-load(
-        'star.svg',
-        fill=#16a287,
-        stroke=#16a287,
-        stroke-width=3
+          'star.svg',
+          fill=#16a287,
+          stroke=#16a287,
+          stroke-width=3
         );
       }
     }
@@ -121,10 +121,10 @@
     .asi-Filter_Links-stars & {
       &::after {
         background-image: svg-load(
-        'star.svg',
-        fill=#16a287,
-        stroke=#16a287,
-        stroke-width=3
+          'star.svg',
+          fill=#16a287,
+          stroke=#16a287,
+          stroke-width=3
         );
       }
     }
@@ -140,10 +140,10 @@
       margin-left: 5px;
 
       background-image: svg-load(
-      'star.svg',
-      fill=#fff,
-      stroke=#16a287,
-      stroke-width=3
+        'star.svg',
+        fill=#fff,
+        stroke=#16a287,
+        stroke-width=3
       );
       background-size: @width @height;
 
