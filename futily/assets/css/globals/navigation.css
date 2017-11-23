@@ -53,7 +53,6 @@
   min-width: 200px;
 
   background-color: #fff;
-  border: 1px solid var(--Color_Light-3);
   border-bottom: 2px solid var(--Color_Brand-1);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
   color: var(--Color_Dark-1);
@@ -95,10 +94,13 @@
   line-height: 1;
   white-space: nowrap;
 
+  border-right: 1px solid var(--Color_Light-3);
+  border-left: @border-right;
   color: currentColor;
 
   .nav-Navigation_DropdownItem:hover & {
     background-color: var(--Color_Brand-1);
+    border-color: var(--Color_Brand-1);
     color: #fff;
   }
 }

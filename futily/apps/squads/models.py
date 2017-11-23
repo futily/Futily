@@ -55,7 +55,7 @@ class Squads(ContentBase):
             for squad in self.squad_set.filter(
                 is_special=True,
                 short_title__icontains='totw'
-            ).only('is_special', 'short_title', 'page', 'pk')
+            ).only('is_special', 'short_title', 'page', 'pk')[:5]
         ]
 
         return regular_items + totws
