@@ -1,17 +1,15 @@
 {% extends "base.html" %}
+{% import "macros/page.html" as page with context %}
 
-{% block content_above %}
-  <div class="pg-Strapline">
-    <div class="pg-Strapline_Inner">
-      <div class="pg-Strapline_Body">
-        <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">Login</h1>
-          <p class="pg-Strapline_Text">Login to your {{ settings.SITE_NAME }} account</p>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
+{% set breadcrumbs = [
+  {
+    'label': 'Login',
+    'link': url('users:login'),
+  }
+] %}
+
+{% block strapline_title %}Login{% endblock %}
+{% block strapline_text %}Login to your {{ settings.SITE_NAME }} account{% endblock %}
 
 {% block content_class %}{{ super() }} lyt-Content-mainTight{% endblock %}
 

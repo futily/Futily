@@ -2,6 +2,7 @@
 {% import "comments/macros/comments.html" as comments with context %}
 {% import "macros/share.html" as share with context %}
 
+{% block strapline_title %}Squad{% endblock %}
 {% block strapline_text %}
   {{ object.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}
 {% endblock %}

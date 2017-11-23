@@ -1,23 +1,9 @@
 {% extends "players/_base.html" %}
-{% import "macros/page.html" as page %}
+{% import "macros/page.html" as page with context %}
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
 
-{% block breadcrumbs %}
-  {{ page.breadcrumbs([
-    {
-      'label': object._meta.app_label | capitalize(),
-      'link': pages.current.get_absolute_url(),
-    },
-    {
-      'label': object.name,
-      'link': object.get_absolute_url(),
-    },
-    {
-      'label': 'Similar players',
-    }
-  ]) }}
-{% endblock %}
+{% block strapline_text %}Similar players{% endblock %}
 
 {% block body %}
   {{ filters_macros.filters(filters, sorts) }}

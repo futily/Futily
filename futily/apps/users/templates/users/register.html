@@ -1,19 +1,9 @@
 {% extends "base.html" %}
 
-{% block content_above %}
-  <div class="pg-Strapline">
-    <div class="pg-Strapline_Inner">
-      <div class="pg-Strapline_Body">
-        <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">Register</h1>
-          <p class="pg-Strapline_Text">Register for a {{ settings.SITE_NAME }} account</p>
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
-
 {% block content_class %}{{ super() }} lyt-Content-mainTight{% endblock %}
+
+{% block strapline_title %}Register{% endblock %}
+{% block strapline_text %}Register for a {{ settings.SITE_NAME }} account{% endblock %}
 
 {% block main %}
   <div class="usr-Entry">

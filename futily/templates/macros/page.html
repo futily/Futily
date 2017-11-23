@@ -12,7 +12,7 @@
                  itemtype="http://schema.org/ListItem">
               <a itemprop="item" class="bdc-Breadcrumb_Link" href="/">
                 <span itemprop="name">
-                  Home
+                  Futily
                 </span>
                 <meta itemprop="position" content="1">
               </a>
@@ -47,4 +47,22 @@
       </div>
     </div>
   </div>
+{% endmacro %}
+
+{% macro breadcrumbs_structured(breadcrumbs) %}
+  <script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{% for breadcrumb in breadcrumbs %}{
+      "@type": "ListItem",
+      "position": {{ loop.index }},
+      "item": {
+        "@id": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ breadcrumb.link }}",
+        "name": "{{ breadcrumb.label }}"{% if breadcrumb.image %},
+        "image": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ breadcrumb.image }}"{% endif %}
+      }
+    }{% if not loop.last %},{% endif %}{% endfor %}]
+  }
+  </script>
 {% endmacro %}

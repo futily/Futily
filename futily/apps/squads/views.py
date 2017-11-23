@@ -22,6 +22,7 @@ from futily.apps.players.templatetags.players import get_players_page
 from futily.apps.sbc.models import FORMATION_CHOICES
 from futily.apps.squads.constants import FORMATION_POSITIONS
 from futily.apps.users.models import User
+from futily.apps.views import BreadcrumbsMixin
 
 from .forms import BuilderForm
 from .models import Squad, SquadPlayer, Vote
@@ -43,9 +44,21 @@ class BaseBuilder(ContextMixin):
         return context
 
 
-class Builder(BaseBuilder, TemplateView):
+class Builder(BreadcrumbsMixin, BaseBuilder, TemplateView):
     template_name = 'squads/squad_builder.html'
     initial_formation = '442'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Squads',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': 'Builder',
+                'link': self.request.pages.current.reverse('builder'),
+            },
+        ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -286,9 +299,17 @@ class BuilderImport(View):
         }[formation]
 
 
-class SquadList(ListView):
+class SquadList(BreadcrumbsMixin, ListView):
     model = Squad
     paginate_by = 50
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Squads',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+        ]
 
     def get_queryset(self):
         return super(SquadList, self).get_queryset().filter(page__page=self.request.pages.current)
@@ -322,10 +343,22 @@ class SquadList(ListView):
         return context
 
 
-class TotwList(ListView):
+class TotwList(BreadcrumbsMixin, ListView):
     model = Squad
     paginate_by = 10
     template_name = 'squads/totw_list.html'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Squads',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': 'TOTW List',
+                'link': self.request.pages.current.reverse('totw_list'),
+            },
+        ]
 
     def get_queryset(self):
         return super(TotwList, self).get_queryset().filter(page__page=self.request.pages.current, is_special=True)
@@ -359,8 +392,20 @@ class TotwList(ListView):
         return context
 
 
-class SquadDetail(BaseBuilder, DetailView):
+class SquadDetail(BreadcrumbsMixin, BaseBuilder, DetailView):
     model = Squad
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Squads',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': self.object,
+                'link': self.object.get_absolute_url(),
+            },
+        ]
 
     def get_object(self, queryset=None):
         if queryset is None:
@@ -450,9 +495,25 @@ class SquadCopy(BaseBuilder, DeleteView):
         return HttpResponseRedirect(obj.get_update_url())
 
 
-class SquadUpdate(BaseBuilder, UpdateView):
+class SquadUpdate(BreadcrumbsMixin, BaseBuilder, UpdateView):
     model = Squad
     template_name_suffix = '_update'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Squads',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': self.object,
+                'link': self.object.get_absolute_url(),
+            },
+            {
+                'label': 'Update',
+                'link': self.object.get_update_url(),
+            },
+        ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

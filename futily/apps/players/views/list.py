@@ -10,14 +10,22 @@ from futily.apps.players.constants import (LEVEL_FILTER_MAP,
 from futily.apps.players.forms import PlayerListForm
 from futily.apps.players.models import Player
 from futily.apps.players.views.detail import construct_query_dict
-from futily.apps.views import PlayerFilterSorted
+from futily.apps.views import BreadcrumbsMixin, PlayerFilterSorted
 
 
-class PlayerList(FormMixin, ListView):
+class PlayerList(BreadcrumbsMixin, FormMixin, ListView):
     form_class = PlayerListForm
     model = Player
     paginate_by = 30
     success_url = '/'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': f'{self.object_list[0]._meta.model_name.title()}s',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+        ]
 
     def get_filters(self):
         current = self.request.GET.copy()
@@ -165,8 +173,6 @@ class PlayerList(FormMixin, ListView):
         current = []
         workrate_has_been_done = False
 
-        print(current_filters)
-
         for key in current_filters.dict().keys():
             items = current_filters.getlist(key)
 
@@ -212,11 +218,19 @@ class PlayerList(FormMixin, ListView):
         return current
 
 
-class PlayerListLatest(ListView):
+class PlayerListLatest(BreadcrumbsMixin, ListView):
     model = Player
     paginate_by = 30
     ordering = '-created'
     template_name = 'players/player_list_latest.html'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': f'Latest {self.object_list[0]._meta.model_name}s'.title(),
+                'link': self.request.pages.current.reverse('latest_players'),
+            },
+        ]
 
     def is_filtered(self):
         return self.request.GET.get('position') or self.request.GET.get('level')
@@ -343,11 +357,19 @@ class PlayerListLatest(ListView):
         }
 
 
-class PlayerPerfectChemistry(TemplateView, PlayerFilterSorted):
+class PlayerPerfectChemistry(BreadcrumbsMixin, TemplateView, PlayerFilterSorted):
     always_filters = {'has_perfect_chem_links': True}
     model = Player
     players_per_page = 15
     template_name = 'players/player_perfect_chem.html'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Perfect chemistry players',
+                'link': self.request.pages.current.reverse('perfect_chemistry'),
+            },
+        ]
 
     def initial_players(self):
         return Player.objects.filter(**self.always_filters)

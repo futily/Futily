@@ -1,7 +1,7 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import F
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import ContextMixin
 
 from futily.apps.clubs.templatetags.clubs import get_clubs_page
@@ -13,6 +13,19 @@ from futily.apps.players.constants import (LEVEL_FILTER_MAP,
                                            POSITION_GET_TO_LABEL,
                                            SORT_GET_TO_LABEL)
 from futily.apps.players.templatetags.players import get_players_page
+from futily.utils.functions import static
+
+
+class BreadcrumbsMixin(ContextMixin):
+    def set_breadcrumbs(self):
+        raise NotImplementedError()
+
+    def get_context_data(self, **kwargs):
+        context = super(BreadcrumbsMixin, self).get_context_data()
+
+        context['breadcrumbs'] = self.set_breadcrumbs()
+
+        return context
 
 
 class PlayerFilterSorted(ContextMixin, View):
@@ -264,7 +277,15 @@ class PlayerFilterSorted(ContextMixin, View):
         ]
 
 
-class EaObjectList(ListView):
+class EaObjectList(BreadcrumbsMixin, ListView):
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': f'{self.object_list[0]._meta.model_name.title()}s',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+        ]
+
     def is_sorted(self):
         return self.request.GET.get('sort')
 
@@ -345,3 +366,18 @@ class EaObjectList(ListView):
         ]
 
         return context
+
+
+class EaObjectDetail(BreadcrumbsMixin, DetailView):
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': self.object._meta.app_label.title(),
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': self.object,
+                'link': self.object.get_absolute_url(),
+                'image': static(f'ea-images/{self.object._meta.app_label}/{self.object.ea_id}.png'),
+            },
+        ]

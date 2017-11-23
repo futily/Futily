@@ -1,0 +1,6 @@
+{
+  "@context": "http://schema.org",
+  "@type": "WebPage",
+  "description": "{{ get_meta_description() }}",
+  "headline": "{{ render_title() }}"
+}

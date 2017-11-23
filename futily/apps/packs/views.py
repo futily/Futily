@@ -11,16 +11,29 @@ from futily.apps.players.constants import SPECIAL_COLOR_CHOICES
 from futily.apps.players.models import Player
 from futily.apps.players.templatetags.players import get_players_page
 from futily.apps.users.models import CollectionPlayer
+from futily.apps.views import BreadcrumbsMixin
 
 from .forms import PackCreationForm
 from .models import Pack, PackType
 
 
-class PackLeaderboard(ListView):
+class PackLeaderboard(BreadcrumbsMixin, ListView):
     model = Pack
     ordering = ['-value']
     paginate_by = 50
     template_name = 'packs/pack_leaderboard.html'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Packs',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': 'Leaderboard',
+                'link': self.request.pages.current.reverse('leaderboard'),
+            },
+        ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -51,29 +64,37 @@ class PackLeaderboard(ListView):
         return context
 
 
-class TypeList(ListView):
+class TypeList(BreadcrumbsMixin, ListView):
     model = PackType
     queryset = PackType.objects.filter(show_in_list=True)
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Packs',
+                'link': self.request.pages.current.get_absolute_url(),
+            }
+        ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         context['object_list'] = {
-            'bronze': {
-                'title': 'Bronze',
-                'types': self.get_queryset().filter(type='bronze'),
-            },
-            'silver': {
-                'title': 'Silver',
-                'types': self.get_queryset().filter(type='silver'),
+            'special': {
+                'title': 'Special',
+                'types': self.get_queryset().filter(type='special'),
             },
             'gold': {
                 'title': 'Gold',
                 'types': self.get_queryset().filter(type='gold'),
             },
-            'special': {
-                'title': 'Special',
-                'types': self.get_queryset().filter(type='special'),
+            'silver': {
+                'title': 'Silver',
+                'types': self.get_queryset().filter(type='silver'),
+            },
+            'bronze': {
+                'title': 'Bronze',
+                'types': self.get_queryset().filter(type='bronze'),
             },
         }
         context['type_list'] = context['object_list']
@@ -81,13 +102,25 @@ class TypeList(ListView):
         return context
 
 
-class TypeDetail(FormMixin, DetailView):
+class TypeDetail(BreadcrumbsMixin, FormMixin, DetailView):
     model = PackType
     form_class = PackCreationForm
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.pack_object = None
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Packs',
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': self.object,
+                'link': self.object.get_absolute_url(),
+            },
+        ]
 
     def roll_querysets(self):
         def map_rolls(roll):
@@ -279,5 +312,17 @@ class TypeDetail(FormMixin, DetailView):
         return super(TypeDetail, self).form_valid(form)
 
 
-class PackDetail(DetailView):
+class PackDetail(BreadcrumbsMixin, DetailView):
     model = Pack
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': self.request.pages.current,
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': f'{self.object} by {self.object.user}',
+                'link': self.object.get_absolute_url(),
+            },
+        ]

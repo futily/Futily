@@ -12,7 +12,7 @@
 
   display: flex;
   width: 100%;
-  padding: 0.5vr 30px 1.25vr;
+  padding: 0.5vr calc(var(--Grid_Gutter) * 2) 1.25vr;
 
   text-align: center;
 

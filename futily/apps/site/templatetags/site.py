@@ -220,8 +220,6 @@ def build_url(context, *args, **kwargs):
             for key, value in remove.items():
                 wanted = params.getlist(key)
 
-                print(value)
-
                 if len(wanted) == 1:
                     params.pop(key)
                 else:

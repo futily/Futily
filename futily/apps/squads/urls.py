@@ -11,5 +11,5 @@ urlpatterns = [
     url(r'^(?P<pk>[0-9]+)/rate/$', views.SquadRate.as_view(), name='squad_rate'),
     url(r'^(?P<pk>[0-9]+)/copy/$', views.SquadCopy.as_view(), name='squad-copy'),
     url(r'^(?P<pk>[0-9]+)/update/$', views.SquadUpdate.as_view(), name='squad-update'),
-    url(r'^totw/$', views.TotwList.as_view(), name='totws'),
+    url(r'^totw/$', views.TotwList.as_view(), name='totw_list'),
 ]

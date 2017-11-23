@@ -261,8 +261,6 @@ class SquadBuilderChallengeRequirement(models.Model):
         elif self.type == 'CLUB_COUNT':
             values['type'] = 'unique_club'
 
-        print(values, self.player_quality, self.player_rarity)
-
         return json.dumps(values)
 
     @property

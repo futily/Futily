@@ -6,12 +6,12 @@
 |
 */
 .pck-Pack {
-  grid-column-gap: var(--Grid_Gutter);
+  grid-column-gap: calc(var(--Grid_Gutter) * 2);
   grid-template-columns: 160px 1fr;
 
   display: grid;
   width: 100%;
-  padding: 13px 30px;
+  padding: 13px calc(var(--Grid_Gutter) * 2);
 
   font-weight: 700;
 
@@ -22,7 +22,7 @@
   transition: color 0.2s;
 
   @media (--xlg) {
-    padding: 0.5vr 40px 1vr;
+    padding: 0.5vr 30px 1vr;
   }
 
   .ea-ObjectsTable_Cell & {
@@ -179,7 +179,7 @@
 .pck-Pack_ShieldKey {
   margin-top: 2px;
 
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   line-height: 12px;
   text-transform: uppercase;

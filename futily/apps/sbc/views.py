@@ -14,9 +14,19 @@ from futily.apps.squads.constants import FORMATION_POSITIONS
 from futily.apps.squads.forms import SBCBuilderForm
 from futily.apps.squads.models import (FORMATION_CHOICES, Squad, SquadPlayer,
                                        get_default_squad_page)
+from futily.apps.views import BreadcrumbsMixin
+from futily.utils.functions import static
 
 
-class SquadBuilderChallengeBase(object):
+class SquadBuilderChallengeBase(BreadcrumbsMixin):
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': 'Squad building challenges',
+                'link': self.request.pages.current.get_absolute_url(),
+            }
+        ]
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -42,17 +52,24 @@ class SquadBuilderChallengeSetList(SquadBuilderChallengeBase, ListView):
     template_name = 'sbc/set_list.html'
 
 
-class SquadBuilderChallengeCategoryView(SquadBuilderChallengeBase, ListView):
-    model = SquadBuilderChallengeSet
-    template_name = 'sbc/set_list.html'
-
-    def get_queryset(self):
-        return super().get_queryset().filter(category__slug=self.kwargs.get('category'))
-
-
 class SquadBuilderChallengeSetDetail(SquadBuilderChallengeBase, DetailView):
     model = SquadBuilderChallengeSet
     template_name = 'sbc/set_detail.html'
+
+    def set_breadcrumbs(self):
+        category = SquadBuilderChallengeCategory.objects.get(slug=self.object.category.slug)
+
+        return super(SquadBuilderChallengeSetDetail, self).set_breadcrumbs() + [
+            {
+                'label': category.title,
+                'link': category.get_absolute_url(),
+            },
+            {
+                'label': self.object,
+                'link': self.object.get_absolute_url(),
+                'image': static(f'ea-images/sbc/sets/{self.object.trophy_id}.png')
+            }
+        ]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,9 +85,47 @@ class SquadBuilderChallengeSetDetail(SquadBuilderChallengeBase, DetailView):
         return context
 
 
+class SquadBuilderChallengeCategoryView(SquadBuilderChallengeBase, ListView):
+    model = SquadBuilderChallengeSet
+    template_name = 'sbc/set_list.html'
+
+    def set_breadcrumbs(self):
+        category = SquadBuilderChallengeCategory.objects.get(slug=self.kwargs.get('category'))
+
+        return super(SquadBuilderChallengeCategoryView, self).set_breadcrumbs() + [
+            {
+                'label': category.title,
+                'link': category.get_absolute_url(),
+            }
+        ]
+
+    def get_queryset(self):
+        return super().get_queryset().filter(category__slug=self.kwargs.get('category'))
+
+
 class SquadBuilderChallengeDetail(SquadBuilderChallengeBase, DetailView):
     model = SquadBuilderChallenge
     template_name = 'sbc/challenge_detail.html'
+
+    def set_breadcrumbs(self):
+        category = SquadBuilderChallengeCategory.objects.get(slug=self.object.set.category.slug)
+
+        return super(SquadBuilderChallengeDetail, self).set_breadcrumbs() + [
+            {
+                'label': category.title,
+                'link': category.get_absolute_url(),
+            },
+            {
+                'label': self.object.set,
+                'link': self.object.set.get_absolute_url(),
+                'image': static(f'ea-images/sbc/sets/{self.object.set.trophy_id}.png'),
+            },
+            {
+                'label': self.object,
+                'link': self.object.get_absolute_url(),
+                'image': static(f'ea-images/sbc/challenges/{self.object.trophy_id}.png'),
+            },
+        ]
 
     def get_object(self, queryset=None):
         return self.model.objects.prefetch_related(
@@ -99,6 +154,33 @@ class SquadBuilderChallengeDetail(SquadBuilderChallengeBase, DetailView):
 class SquadBuilderChallengeBuilder(SquadBuilderChallengeBase, DetailView):
     model = SquadBuilderChallenge
     template_name = 'sbc/challenge_builder.html'
+
+    def set_breadcrumbs(self):
+        category = SquadBuilderChallengeCategory.objects.get(slug=self.object.set.category.slug)
+
+        return super(SquadBuilderChallengeBuilder, self).set_breadcrumbs() + [
+            {
+                'label': category.title,
+                'link': category.get_absolute_url(),
+            },
+            {
+                'label': self.object.set,
+                'link': self.object.set.get_absolute_url(),
+                'image': static(f'ea-images/sbc/sets/{self.object.set.trophy_id}.png'),
+            },
+            {
+                'label': self.object,
+                'link': self.object.get_absolute_url(),
+                'image': static(f'ea-images/sbc/challenges/{self.object.trophy_id}.png'),
+            },
+            {
+                'label': 'Builder',
+                'link': self.request.pages.current.reverse('challenge_builder', kwargs={
+                    'set_slug': self.object.set.slug,
+                    'slug': self.object.slug,
+                }),
+            },
+        ]
 
     def get_object(self, queryset=None):
         return self.model.objects.prefetch_related('awards', 'requirements').get(
@@ -146,8 +228,6 @@ class SquadBuilderChallengeSave(FormView):
             data['robots_index'] = True
             data['robots_follow'] = True
             data['robots_archive'] = True
-
-            print(form.cleaned_data)
 
             players = data.pop('players')
 

@@ -124,7 +124,6 @@ def perform_like(request, comment):
     if created:
         already_voted = CommentFlag.objects.filter(comment=comment, user=request.user, flag=DISLIKEDIT_FLAG)
 
-        print(already_voted)
         if already_voted:
             fly_comment.score += 2
             already_voted.delete()

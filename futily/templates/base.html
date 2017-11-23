@@ -1,3 +1,5 @@
+{% import "macros/page.html" as page with context %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,6 +73,31 @@
     {% block css %}{% endblock %}
 
     {% include "base/_analytics.html" %}
+
+    <script type="application/ld+json">
+    {% include "schema/organisation.json" %}
+    </script>
+
+    <script type="application/ld+json">
+    {% include "schema/webpage.json" %}
+    </script>
+
+    {% if pages.is_homepage %}
+      <script type="application/ld+json">
+      {
+        "@context" : "http://schema.org",
+        "@type" : "WebSite",
+        "name" : "{{ settings.SITE_NAME }}",
+        "url" : "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}",
+      }
+      </script>
+    {% endif %}
+
+    {% if breadcrumbs %}
+      {{ page.breadcrumbs_structured(breadcrumbs) }}
+    {% endif %}
+
+    {% block schema_org %}{% endblock %}
   </head>
 
   <body class="util-Preload {% block body_class %}{% endblock %}">
@@ -81,7 +108,37 @@
         {% include "base/_header.html" %}
 
         {% block content_outer %}
-          {% block content_above %}{% endblock %}
+          {% block content_above %}
+            {% block strapline %}
+              <div class="pg-Strapline">
+                <div class="pg-Strapline_Inner">
+                  <div class="pg-Strapline_Body">
+                    {% if self.strapline_image() %}
+                      <div class="pg-Strapline_ImageContainer">{% block strapline_image %}{% endblock %}</div>
+                    {% endif %}
+
+                    <div class="pg-Strapline_Content">
+                      {% if self.strapline_title() %}
+                        <h1 class="pg-Strapline_Title">{% block strapline_title %}{% endblock %}</h1>
+                      {% endif %}
+
+                      {% if self.strapline_text() %}
+                        <p class="pg-Strapline_Text">{% block strapline_text %}{% endblock %}</p>
+                      {% endif %}
+                    </div>
+
+                    <div class="pg-Strapline_Advert">
+                      <img alt="" src="http://placehold.it/728x90">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endblock %}
+
+            {% block breadcrumbs %}
+              {% if breadcrumbs %}{{ page.breadcrumbs(breadcrumbs) }}{% endif %}
+            {% endblock %}
+          {% endblock %}
 
           {% block content %}
             <div class="lyt-Content {% block content_class %}lyt-Content-mainAside{% endblock %}">

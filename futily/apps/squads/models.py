@@ -1,9 +1,14 @@
+from datetime import timedelta
+
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBaseManager, SearchMetaBase
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import Prefetch
+from django.template.defaultfilters import date
+from django.utils import timezone
 from django.utils.functional import cached_property
 from django.utils.text import slugify
 
@@ -47,7 +52,7 @@ class Squads(ContentBase):
     def navigation_items(self):
         regular_items = [
             ('Builder', self.page.reverse('builder')),
-            ("All TOTW's", self.page.reverse('totws')),
+            ("All TOTW's", self.page.reverse('totw_list')),
         ]
 
         totws = [
@@ -125,6 +130,17 @@ class Squad(SearchMetaBase):
 
         super(Squad, self).clean()
 
+    @cached_property
+    def price(self):
+        return sum([x.average_xbox_price for x in self.get_player_objects()])
+
+    @property
+    def created_date(self):
+        if self.created > timezone.now() - timedelta(days=1):
+            return naturaltime(self.created)
+
+        return date(self.created, 'jS M Y')
+
     def _get_permalink_for_page(self, name):
         return self.page.page.reverse(name, kwargs={
             'pk': self.pk,
@@ -139,18 +155,14 @@ class Squad(SearchMetaBase):
     def get_copy_url(self):
         return self._get_permalink_for_page('squad-copy')
 
-    @cached_property
-    def price(self):
-        return sum([x.average_xbox_price for x in self.get_player_objects()])
-
     def get_players(self):
         indexes = [index for index in range(0, 11)]
 
-        for player in self.players.all():
-            is_team = player.index <= 10
+        for squad_player in self.squadplayer_set.all():
+            is_team = squad_player.index <= 10
 
             if is_team:
-                indexes[player.index] = player
+                indexes[squad_player.index] = squad_player
 
         return [None if isinstance(x, int) else x for x in indexes]
 

@@ -2,22 +2,6 @@
 {% import "macros/page.html" as page %}
 {% import "players/macros/players.html" as player_macros %}
 
-{% block breadcrumbs %}
-  {{ page.breadcrumbs([
-    {
-      'label': object._meta.app_label | capitalize(),
-      'link': pages.current.get_absolute_url(),
-    },
-    {
-      'label': object.name,
-      'link': object.get_absolute_url(),
-    },
-    {
-      'label': 'Chemistry',
-    }
-  ]) }}
-{% endblock %}
-
 {% block body %}
   {% set perfect_players = player.get_initial_chemistry_players('perfect') %}
   {% set strong_players = player.get_initial_chemistry_players('strong') %}

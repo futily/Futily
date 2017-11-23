@@ -4,22 +4,6 @@
 {% import "players/macros/players.html" as player_macros %}
 {% import "players/macros/search.html" as search %}
 
-{% block breadcrumbs %}
-  {{ page.breadcrumbs([
-    {
-      'label': object._meta.app_label | capitalize(),
-      'link': pages.current.get_absolute_url(),
-    },
-    {
-      'label': object.name,
-      'link': object.get_absolute_url(),
-    },
-    {
-      'label': 'Chemistry',
-    }
-  ]) }}
-{% endblock %}
-
 {% block main %}
   <article class="plyr-Detail">
     <div class="plyr-Detail_Share">

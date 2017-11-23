@@ -469,6 +469,9 @@ ADOBE_CREATIVE_SDK_CLIENT_ID = ''
 
 TINYPNG_API_KEY = ''
 
+TWITTER_URL = 'https://twitter.com/futilysite'
+FACEBOOK_URL = 'https://www.facebook.com/futilysite/'
+
 # Google Apps authentication.
 
 # SETUP:

@@ -1,5 +1,6 @@
 {% extends "squads/_builder_edit_base.html" %}
 
+{% block strapline_title %}Update squad{% endblock %}
 {% block strapline_text %}
   {{ object.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}
 {% endblock %}

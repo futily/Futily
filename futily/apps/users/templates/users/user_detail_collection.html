@@ -1,23 +1,4 @@
 {% extends "users/_collection_base.html" %}
-{% import "macros/page.html" as page %}
-
-{% block content_above %}
-  {{ super() }}
-
-  {{ page.breadcrumbs([
-    {
-      'label': object,
-      'link': object.get_absolute_url(),
-    },
-    {
-      'label': object,
-      'link': object.get_absolute_url(),
-    },
-    {
-      'label': 'Collection',
-    },
-  ]) }}
-{% endblock %}
 
 {% block collection_main %}
   <div class="clc-Objects">

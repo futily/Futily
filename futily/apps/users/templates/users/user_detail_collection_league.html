@@ -1,25 +1,6 @@
 {% extends "users/_collection_base.html" %}
-{% import "macros/page.html" as page %}
 
-{% block content_above_text %}{{ object }}'s card collection - {{ league }}{% endblock %}
-
-{% block content_above %}
-  {{ super() }}
-
-  {{ page.breadcrumbs([
-    {
-      'label': object,
-      'link': object.get_absolute_url(),
-    },
-    {
-      'label': "{}'s card collection".format(object),
-      'link': object.get_collection_url(),
-    },
-    {
-      'label': league,
-    }
-  ]) }}
-{% endblock %}
+{% block strapline_text %}{{ object }}'s card collection - {{ league }}{% endblock %}
 
 {% block collection_title_end %} - {{ league }}{% endblock %}
 

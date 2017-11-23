@@ -1,9 +1,8 @@
-from django.views.generic import DetailView
 from rest_framework import filters, viewsets
 
 from futily.apps.nations.serializers import NationSerializer
+from futily.apps.views import EaObjectDetail, EaObjectList, PlayerFilterSorted
 
-from ..views import EaObjectList, PlayerFilterSorted
 from .models import Nation
 
 
@@ -12,7 +11,7 @@ class NationList(EaObjectList):
     model = Nation
 
 
-class NationDetail(DetailView, PlayerFilterSorted):
+class NationDetail(EaObjectDetail, PlayerFilterSorted):
     model = Nation
 
     def initial_players(self):

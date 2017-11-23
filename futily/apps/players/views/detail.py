@@ -9,10 +9,26 @@ from django.views.generic import DetailView
 from futily.apps.actions.utils import create_action
 from futily.apps.players.models import Player, Vote
 from futily.apps.users.models import FavouritePlayers, User
-from futily.apps.views import PlayerFilterSorted
+from futily.apps.views import BreadcrumbsMixin, PlayerFilterSorted
+from futily.utils.functions import static
 
 
-class PlayerDetail(DetailView):
+class PlayerDetailBase(BreadcrumbsMixin, DetailView):
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': self.object._meta.app_label.title(),
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': self.object.name,
+                'link': self.object.get_absolute_url(),
+                'image': static(f'ea-images/players/{self.object.ea_id}.png'),
+            },
+        ]
+
+
+class PlayerDetail(PlayerDetailBase):
     model = Player
 
     def get_context_data(self, **kwargs):
@@ -95,22 +111,59 @@ class PlayerFavourite(LoginRequiredMixin, View):
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
 
-class PlayerDetailChemistry(DetailView):
+class PlayerDetailChemistry(PlayerDetailBase):
     model = Player
     template_name = 'players/player_detail_chemistry.html'
 
+    def set_breadcrumbs(self):
+        return super(PlayerDetailChemistry, self).set_breadcrumbs() + [
+            {
+                'label': 'Chemistry players',
+                'link': self.object.get_chemistry_absolute_url(),
+            },
+        ]
 
-class PlayerDetailChemistryType(DetailView, PlayerFilterSorted):
+
+class PlayerDetailChemistryType(PlayerDetailBase, PlayerFilterSorted):
     model = Player
     template_name = 'players/player_detail_chemistry_type.html'
+
+    def set_breadcrumbs(self):
+        return super(PlayerDetailChemistryType, self).set_breadcrumbs() + [
+            {
+                'label': 'Chemistry players',
+                'link': self.object.get_chemistry_absolute_url(),
+            },
+            {
+                'label': self.kwargs.get('chem_type').title(),
+                'link': self.object.get_chemistry_type_absolute_url(self.kwargs.get('chem_type')),
+            },
+        ]
 
     def initial_players(self):
         return self.object.get_chemistry_players()[self.kwargs['chem_type']]
 
 
-class PlayerDetailSimilar(DetailView, PlayerFilterSorted):
+class PlayerDetailSimilar(PlayerDetailBase, PlayerFilterSorted):
     model = Player
     template_name = 'players/player_detail_similar.html'
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': self.object._meta.app_label.title(),
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': self.object.name,
+                'link': self.object.get_absolute_url(),
+                'image': static(f'ea-images/players/{self.object.ea_id}.png'),
+            },
+            {
+                'label': 'Similar players',
+                'link': self.object.get_similar_absolute_url(),
+            },
+        ]
 
     def initial_players(self):
         if self.is_sorted():
@@ -119,17 +172,28 @@ class PlayerDetailSimilar(DetailView, PlayerFilterSorted):
         return self.object.get_similar_players()
 
 
-class PlayerDetailCompare(DetailView):
+class PlayerDetailCompare(PlayerDetailBase):
     model = Player
     template_name = 'players/player_detail_compare.html'
+
+    def set_breadcrumbs(self):
+        return super(PlayerDetailCompare, self).set_breadcrumbs() + [
+            {
+                'label': f'Compared with {self.get_other_player().common_name}',
+                'link': self.object.get_compare_absolute_url(),
+            },
+        ]
+
+    def get_other_player(self):
+        if self.kwargs.get('other_pk'):
+            return Player.objects.get(pk=self.kwargs.get('other_pk'))
+
+        return Player.objects.last()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        if self.kwargs.get('other_pk'):
-            context['other_player'] = Player.objects.get(pk=self.kwargs.get('other_pk'))
-        else:
-            context['other_player'] = Player.objects.last()
+        context['other_player'] = self.get_other_player()
 
         return context
 

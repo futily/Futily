@@ -98,7 +98,7 @@
     width: 100%;
     margin-right: auto;
     margin-left: @margin-right;
-    padding-right: 5%;
+    padding-right: calc(var(--Grid_Gutter) * 3);
     padding-left: @padding-right;
   }
 }

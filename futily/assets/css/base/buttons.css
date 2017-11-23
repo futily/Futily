@@ -37,7 +37,7 @@
 
 .btn-Icon {
   display: block;
-  width: 20px;
+  width: 16px;
   height: @width;
   margin-left: var(--Grid_Gutter);
 

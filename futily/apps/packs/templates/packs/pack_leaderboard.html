@@ -1,21 +1,7 @@
 {% extends "base.html" %}
 
-{% block content_above %}
-  <div class="pg-Strapline">
-    <div class="pg-Strapline_Inner">
-      <div class="pg-Strapline_Body">
-        <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} pack simulator</h1>
-          <p class="pg-Strapline_Text">Leaderboard</p>
-        </div>
-
-        <div class="pg-Strapline_Advert">
-          <img alt="" src="http://placehold.it/728x90">
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
+{% block strapline_title %}Fifa {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}
+{% block strapline_text %}Leaderboard{% endblock %}
 
 {% block main %}
   <div class="ea-ObjectsTable">

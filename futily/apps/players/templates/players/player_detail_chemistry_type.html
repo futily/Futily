@@ -3,26 +3,6 @@
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
 
-{% block breadcrumbs %}
-  {{ page.breadcrumbs([
-    {
-      'label': object._meta.app_label | capitalize(),
-      'link': pages.current.get_absolute_url(),
-    },
-    {
-      'label': object.name,
-      'link': object.get_absolute_url(),
-    },
-    {
-      'label': 'Chemistry',
-      'link': player.get_chemistry_absolute_url(),
-    },
-    {
-      'label': view.kwargs.chem_type | title(),
-    }
-  ]) }}
-{% endblock %}
-
 {% block body %}
   {{ filters_macros.filters(filters, sorts) }}
 
