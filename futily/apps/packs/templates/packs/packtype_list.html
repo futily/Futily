@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/adverts.html" as adverts %}
 {% import "macros/page.html" as page %}
 
 {% block strapline_title %}{{ pages.current }}{% endblock %}
@@ -60,7 +61,7 @@
 {% block aside %}
   <div class="asi-Blocks">
     <div class="asi-Block">
-      <img alt="" src="http://placehold.it/300x250">
+      {{ adverts.aside() }}
     </div>
   </div>
 {% endblock %}

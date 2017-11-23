@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "comments/macros/comments.html" as comments with context %}
+{% import "macros/adverts.html" as adverts %}
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
 
@@ -23,7 +24,7 @@
 {% block aside %}
   <div class="asi-Blocks{% block aside_blocks_class %}{% endblock %}">
     <div class="asi-Block">
-      <img alt="" src="http://placehold.it/300x250">
+      {{ adverts.aside() }}
     </div>
 
     {% block aside_blocks_above %}{% endblock %}

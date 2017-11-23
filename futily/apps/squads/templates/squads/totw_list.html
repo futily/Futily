@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/adverts.html" as adverts %}
 {% import "players/macros/players.html" as player_macros %}
 
 {% block strapline_title %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Totw{% endblock %}
@@ -68,7 +69,7 @@
 {% block aside %}
   <div class="asi-Blocks">
     <div class="asi-Block">
-      <img alt="" src="http://placehold.it/300x250">
+      {{ adverts.aside() }}
     </div>
 
     {% block aside_blocks_above %}{% endblock %}

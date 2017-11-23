@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/adverts.html" as adverts %}
 
 {% block content_class %}lyt-Content-wide{% endblock %}
 
@@ -10,7 +11,7 @@
     <aside class="nav-Side_Aside">
       <div class="asi-Blocks">
         <div class="asi-Block">
-          <img alt="" src="http://placehold.it/300x250">
+          {{ adverts.aside() }}
         </div>
       </div>
 

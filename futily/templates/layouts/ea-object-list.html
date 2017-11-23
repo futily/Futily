@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "macros/adverts.html" as adverts %}
 
 {% block strapline_title %}{{ object_list[0]._meta.model_name | capitalize() }}s{% endblock %}
 {% block strapline_text %}Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ object_list[0]._meta.model_name | capitalize() }}s{% endblock %}
@@ -95,7 +96,7 @@
 {% block aside %}
   <div class="asi-Blocks">
     <div class="asi-Block">
-      <img alt="" src="http://placehold.it/300x250">
+      {{ adverts.aside() }}
     </div>
 
     {% block aside_blocks_above %}{% endblock %}

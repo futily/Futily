@@ -3,7 +3,7 @@ from rest_framework import filters, viewsets
 
 from futily.apps.clubs.serializers import ClubSerializer
 
-from ..views import EaObjectList
+from ..views import BreadcrumbsMixin, EaObjectList
 from .models import Club
 
 
@@ -12,8 +12,19 @@ class ClubList(EaObjectList):
     paginate_by = 50
 
 
-class ClubDetail(DetailView):
+class ClubDetail(BreadcrumbsMixin, DetailView):
     model = Club
+
+    def set_breadcrumbs(self):
+        return [
+            {
+                'label': self.object._meta.app_label.title(),
+                'link': self.request.pages.current.get_absolute_url(),
+            },
+            {
+                'label': self.object,
+            },
+        ]
 
 
 class ClubViewSet(viewsets.ModelViewSet):

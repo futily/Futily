@@ -3,22 +3,8 @@
 
 {% block content_class %}{% endblock %}
 
-{% block content_above %}
-  <div class="pg-Strapline">
-    <div class="pg-Strapline_Inner">
-      <div class="pg-Strapline_Body">
-        <div class="pg-Strapline_Content">
-          <h1 class="pg-Strapline_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Player Database</h1>
-          <p class="pg-Strapline_Text">Top Fifa {{ settings.CURRENT_FIFA_VERSION }} players</p>
-        </div>
-
-        <div class="pg-Strapline_Advert">
-          <img alt="" src="http://placehold.it/728x90">
-        </div>
-      </div>
-    </div>
-  </div>
-{% endblock %}
+{% block strapline_title %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Player Database{% endblock %}
+{% block strapline_text %}Top Fifa {{ settings.CURRENT_FIFA_VERSION }} players{% endblock %}
 
 {% block main %}
   <div class="plyr-CardList">

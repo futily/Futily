@@ -39,7 +39,7 @@ urlpatterns = [
     url(r'social/', include('social_django.urls', namespace='social')),
 
     # Special cases
-    url(r'chemistry-styles/', TemplateView.as_view(template_name='misc/chemistry-styles.html')),
+    url(r'chemistry-styles/', TemplateView.as_view(template_name='misc/chemistry-styles.html'), name='chemistry-styles'),
     url(r'users/', include('futily.apps.users.urls', namespace='users')),
     url(r'^comments/', include('futily.apps.comments.urls')),
 
