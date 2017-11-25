@@ -58,9 +58,13 @@
 .plyr-StatGroup_BarOverlay {
   fill: var(--RatingColor);
 
-  transform: skew(-45deg);
+  transform: skew(-45deg) translateX(-100%);
 
-  transition: width 0.3s, fill 0.3s;
+  transition: width 0.3s, transform 0.6s ease, fill 0.3s;
+
+  .plyr-StatGroup_Bar-active & {
+    transform: skew(-45deg);
+  }
 }
 
 .plyr-StatGroup_BarOverlay-great {

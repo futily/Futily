@@ -159,9 +159,6 @@ export class Builder extends Squad {
           element: targetObj.element,
           index: sourceObj.index,
         });
-
-        this.drag.startIndex = null;
-        this.drag.overIndex = null;
       } else {
         this.removePlayer({ index: this.drag.startIndex });
         this.insertPlayer({
@@ -171,6 +168,9 @@ export class Builder extends Squad {
         });
       }
     }
+
+    this.drag.startIndex = null;
+    this.drag.overIndex = null;
   }
 
   getAverageLine (line) {

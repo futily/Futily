@@ -43,11 +43,11 @@
 
         <ul class="plyr-FutilyRatings_Items">
           {% for key, stat in player.card_stats_full %}
-            <li class="[ plyr-FutilyRatings_Item plyr-FutilyRatings_Item-{{ loop.index }} ] [ js-RPP_Base js-RPP_Base-base ]"
+            <li class="plyr-FutilyRatings_Item plyr-FutilyRatings_Item-{{ loop.index }} js-RPP_Base js-RPP_Base-base"
                 data-rpp-field="cardAtt{{ loop.index }}">
               <p class="plyr-FutilyRatings_Key">{{ key }}:</p>
               <span class="plyr-FutilyRatings_ValueDifference js-RPP_BaseDifference"></span>
-              <p class="[ plyr-FutilyRatings_Value ] [ js-RPP_BaseValue ]"
+              <p class="plyr-FutilyRatings_Value js-RPP_BaseValue"
                  style="--RatingColor: var(--Color_{{ stat_grade(stat).title() }})">
                 {{ stat }}
               </p>

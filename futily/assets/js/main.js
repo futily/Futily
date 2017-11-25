@@ -52,6 +52,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.querySelector('.js-RPP')) {
     import('./players/detail').then(players => {
       new players.RPP();
+
+      const bars = document.querySelectorAll('.plyr-StatGroup_Bar');
+      const callback = (entries, observer) => {
+        Array.from(entries).forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            window.setTimeout(() => {
+              entry.target.classList.add('plyr-StatGroup_Bar-active');
+              observer.unobserve(entry.target);
+            }, 150 * index);
+          }
+        });
+      };
+      /* eslint-disable compat/compat */
+      const observer = new IntersectionObserver(callback, {
+        threshold: 0.2,
+      });
+      Array.from(bars).forEach(image => observer.observe(image));
     });
   }
 

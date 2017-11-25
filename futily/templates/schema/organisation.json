@@ -9,17 +9,8 @@
     "url": "http{{ 's' if request.is_secure else '' }}://{{ request.META.HTTP_HOST }}{{ static('img/temp/logo.png') }}",
     "name": "{{ settings.SITE_NAME }} logo"
   },
-  "sameAs" : [
-    {% set facebook = settings.FACEBOOK_URL %}
-    {% set twitter = settings.TWITTER_URL %}
-
-    {% if facebook %}
-    "{{ facebook }}"{% if twitter %},{% endif %}
-    {% endif %}
-
-    {% if twitter %}
-    "{{ twitter }}"
-    {% endif %}
+  "sameAs" : [{% set facebook = settings.FACEBOOK_URL %}{% set twitter = settings.TWITTER_URL %}
+    {% if facebook %}"{{ facebook }}"{% if twitter %},{% endif %}{% endif %}
+    {% if twitter %}"{{ twitter }}"{% endif %}
   ]
 }
-

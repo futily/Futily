@@ -27,7 +27,7 @@
 }
 
 .plyr-FutilyRatings_Item {
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 
   display: flex;
