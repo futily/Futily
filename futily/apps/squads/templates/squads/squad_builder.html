@@ -2,56 +2,7 @@
 
 {% block strapline_text %}Create your Fifa {{ settings.CURRENT_FIFA_VERSION }} squad{% endblock %}
 
-{% block builder_formation %}442{% endblock %}
-
-{% block builder_action %}/squads/builder/save/{% endblock %}
-
-{% block builder_players %}
-  {% for index in range(0, 11) %}
-    {% set player = initial_players.get(index, None) %}
-    <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ loop.cycle('gk', 'rb', 'rcb', 'lcb', 'lb', 'rm', 'rcm', 'lcm', 'lm', 'rs', 'ls') }}"
-        data-builder-formation-index="{{ index }}"
-        data-builder-filled="{{ 'true' if player else 'false' }}">
-      <div class="bld-Builder_Player"
-        {% if player %}
-           data-builder-initial-data="{{ player.get_serializer_data() }}"
-        {% endif %}>
-        {% if player %}
-          {{ player.render_card(chemistry=0, has_link=False) }}
-        {% endif %}
-      </div>
-      <span class="bld-Builder_Pedestal"></span>
-      <input type="hidden" name="players" class="bld-Builder_PlayerInput">
-      <div class="bld-Builder_Controls">
-        <div class="bld-Builder_Control bld-Builder_Control-remove">
-          <span class="bld-Builder_ControlIcon">
-            {% include 'trash.svg' %}
-          </span>
-
-          <span class="bld-Builder_ControlText">Remove</span>
-        </div>
-
-        <div class="bld-Builder_Control bld-Builder_Control-changePosition">
-          <span class="bld-Builder_ControlIcon">
-            {% include 'shuffle.svg' %}
-          </span>
-
-          <span class="bld-Builder_ControlText">Change position</span>
-        </div>
-
-        <div class="bld-Builder_Control bld-Builder_Control-toggleLoyalty">
-          <span class="bld-Builder_ControlIcon">
-            {% include 'heart.svg' %}
-          </span>
-
-          <span class="bld-Builder_ControlText">Toggle loyalty</span>
-        </div>
-      </div>
-    </li>
-  {% endfor %}
-{% endblock %}
-
-{% block builder_footer %}
+{% block builder_header %}
   <div class="bld-Builder_Columns">
     <div class="bld-Builder_Column">
       <div class="frm-Form_Items">
@@ -175,4 +126,109 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block builder_formation %}442{% endblock %}
+
+{% block builder_action %}/squads/builder/save/{% endblock %}
+
+{% block builder_players %}
+  {% for index in range(0, 11) %}
+    {% set player = initial_players.get(index, None) %}
+    <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ loop.cycle('gk', 'rb', 'rcb', 'lcb', 'lb', 'rm', 'rcm', 'lcm', 'lm', 'rs', 'ls') }} js-Builder_PlayersItem"
+        data-builder-formation-index="{{ index }}"
+        data-builder-filled="{{ 'true' if player else 'false' }}">
+      <div class="bld-Slot"
+        {% if player %}
+           data-builder-initial-data="{{ player.get_serializer_data() }}"
+        {% endif %}>
+        {% if player %}
+          {{ player.render_card(chemistry=0, has_link=False) }}
+        {% endif %}
+      </div>
+      <span class="bld-Slot_Pedestal"></span>
+      <input type="hidden" name="players" class="bld-Builder_PlayerInput">
+      <div class="bld-Slot_Controls">
+        <div class="bld-Slot_Control bld-Slot_Control-remove">
+          <span class="bld-Slot_ControlIcon">
+            {% include 'trash.svg' %}
+          </span>
+
+          <span class="bld-Slot_ControlText">Remove</span>
+        </div>
+
+        <div class="bld-Slot_Control bld-Slot_Control-changePosition">
+          <span class="bld-Slot_ControlIcon">
+            {% include 'shuffle.svg' %}
+          </span>
+
+          <span class="bld-Slot_ControlText">Change position</span>
+        </div>
+
+        <div class="bld-Slot_Control bld-Slot_Control-toggleLoyalty">
+          <span class="bld-Slot_ControlIcon">
+            {% include 'heart.svg' %}
+          </span>
+
+          <span class="bld-Slot_ControlText">Toggle loyalty</span>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block builder_bench %}
+  {% for index in range(11, 18) %}
+    {% set player = initial_players.get(index, None) %}
+    <li class="bld-ExtraPlayers_Item js-Builder_PlayersItem"
+        data-builder-formation-index="{{ index }}"
+        data-builder-filled="{{ 'true' if player else 'false' }}">
+      <div class="bld-Slot"
+        {% if player %}
+           data-builder-initial-data="{{ player.get_serializer_data() }}"
+        {% endif %}>
+        {% if player %}
+          {{ player.render_card(has_link=False) }}
+        {% endif %}
+      </div>
+      <input type="hidden" name="players" class="bld-Builder_PlayerInput">
+      <div class="bld-Slot_Controls">
+        <div class="bld-Slot_Control bld-Slot_Control-remove">
+          <span class="bld-Slot_ControlIcon">
+            {% include 'trash.svg' %}
+          </span>
+
+          <span class="bld-Slot_ControlText">Remove</span>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block builder_reserves %}
+  {% for index in range(18, 23) %}
+    {% set player = initial_players.get(index, None) %}
+    <li class="bld-ExtraPlayers_Item js-Builder_PlayersItem"
+        data-builder-formation-index="{{ index }}"
+        data-builder-filled="{{ 'true' if player else 'false' }}">
+      <div class="bld-Slot"
+        {% if player %}
+           data-builder-initial-data="{{ player.get_serializer_data() }}"
+        {% endif %}>
+        {% if player %}
+          {{ player.render_card(has_link=False) }}
+        {% endif %}
+      </div>
+      <input type="hidden" name="players" class="bld-Builder_PlayerInput">
+      <div class="bld-Slot_Controls">
+        <div class="bld-Slot_Control bld-Slot_Control-remove">
+          <span class="bld-Slot_ControlIcon">
+            {% include 'trash.svg' %}
+          </span>
+
+          <span class="bld-Slot_ControlText">Remove</span>
+        </div>
+      </div>
+    </li>
+  {% endfor %}
 {% endblock %}

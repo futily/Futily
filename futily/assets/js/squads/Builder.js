@@ -56,7 +56,7 @@ export class Builder extends Squad {
     });
 
     this.els.team.el.addEventListener('pointerdown', e => {
-      const wantedTarget = e.target.closest('.bld-Builder_PlayersItem');
+      const wantedTarget = e.target.closest('.js-Builder_PlayersItem');
       if (!wantedTarget) return;
 
       const index = wantedTarget.dataset.builderFormationIndex;
@@ -83,7 +83,7 @@ export class Builder extends Squad {
     this.handleDragMove = this.handleDragMove.bind(this);
     this.handleDragStart = this.handleDragStart.bind(this);
     new Draggable(document.querySelectorAll('.bld-Builder_Players'), {
-      draggable: `.bld-Builder_PlayersItem[data-builder-filled='true']`,
+      draggable: `.js-Builder_PlayersItem[data-builder-filled='true']`,
     })
       .on('drag:start', this.handleDragStart)
       .on('drag:move', this.handleDragMove)
@@ -113,7 +113,7 @@ export class Builder extends Squad {
   }
 
   handleDragMove (evt) {
-    const target = evt.sensorEvent.target.closest('.bld-Builder_PlayersItem');
+    const target = evt.sensorEvent.target.closest('.js-Builder_PlayersItem');
 
     this.drag.overIndex = Array.from(this.els.team.items).includes(target)
       ? Array.from(this.els.team.items).indexOf(target)

@@ -2,11 +2,12 @@
   "name": "futily",
   "main": "gulpfile.js",
   "dependencies": {
-    "@shopify/draggable": "^1.0.0-beta",
+    "@shopify/draggable": "^1.0.0-beta.3",
     "@types/algoliasearch": "^3.18.1",
     "algoliasearch": "^3.24.3",
     "axios": "^0.16.2",
     "babel-polyfill": "6.23.0",
+    "clone": "^2.1.1",
     "commitizen": "^2.9.6",
     "es6-promise": "^4.1.0",
     "pepjs": "^0.4.3",

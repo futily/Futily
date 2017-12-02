@@ -194,6 +194,25 @@ class SquadBuilderChallengeBuilder(SquadBuilderChallengeBase, DetailView):
         context['squads_page_id'] = get_default_squad_page().pk
         context['formations'] = dict(OrderedDict(FORMATION_CHOICES))
         context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
+        context['awards_json'] = json.dumps([
+            x.to_json_string for x in self.object.awards.all()
+        ])
+        context['requirements_json'] = json.dumps([
+            x.to_json_string for x in self.object.requirements.all()
+        ])
+        context['user_data'] = json.dumps({
+            'id': self.request.user.id,
+            'username': self.request.user.username,
+            'link': self.request.user.get_absolute_url(),
+        }) if self.request.user.is_authenticated else json.dumps({
+            'id': self.object.user.id,
+            'username': self.object.user.username,
+            'link': self.object.user.get_absolute_url(),
+        }) if self.object else json.dumps({
+            'id': None,
+            'username': None,
+            'link': None
+        })
 
         return context
 

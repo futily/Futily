@@ -9,8 +9,8 @@ export class Player {
 
     this.els = {
       el,
-      player: el.querySelector('.bld-Builder_Player'),
-      pedestal: el.querySelector('.bld-Builder_Pedestal'),
+      player: el.querySelector('.bld-Slot'),
+      pedestal: el.querySelector('.bld-Slot_Pedestal'),
     };
 
     this.index = index;
@@ -244,7 +244,7 @@ export class Player {
       set verbose (val) {
         this._verbose = val;
 
-        _this.els.el.className = `bld-Builder_PlayersItem bld-Builder_PlayersItem-${this._verbose.toLowerCase()}`;
+        _this.els.el.className = `js-Builder_PlayersItem bld-Builder_PlayersItem bld-Builder_PlayersItem-${this._verbose.toLowerCase()}`;
       },
     };
   }
@@ -271,10 +271,10 @@ export class EditablePlayer extends Player {
     this.els = Object.assign(this.els, {
       input: el.querySelector('.bld-Builder_PlayerInput'),
       controls: {
-        el: el.querySelector('.bld-Builder_Controls'),
-        remove: el.querySelector('.bld-Builder_Control-remove'),
-        changePosition: el.querySelector('.bld-Builder_Control-changePosition'),
-        toggleLoyalty: el.querySelector('.bld-Builder_Control-toggleLoyalty'),
+        el: el.querySelector('.bld-Slot_Controls'),
+        remove: el.querySelector('.bld-Slot_Control-remove'),
+        changePosition: el.querySelector('.bld-Slot_Control-changePosition'),
+        toggleLoyalty: el.querySelector('.bld-Slot_Control-toggleLoyalty'),
       },
     });
     this._card = initialCard;

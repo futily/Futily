@@ -1,0 +1,117 @@
+/*
+|--------------------------------------------------------------------------
+| Slot
+|--------------------------------------------------------------------------
+| @namespace: bld-
+|
+*/
+.bld-Slot {
+  flex-direction: column;
+
+  display: flex;
+  width: 158px;
+  height: 247px;
+
+  text-align: center;
+
+  background-image: resolve('ea/cards/18/medium/base.png');
+  background-position: 0 -494px;
+  cursor: pointer;
+
+  transform: scale(0.8);
+
+  .bld-Builder_Team & {
+    position: absolute;
+    top: -25px;
+    right: -16px;
+    bottom: @top;
+    left: @right;
+  }
+
+  .bld-ExtraPlayers & {
+    transform: scale(0.8) translate(-15px, -25px);
+  }
+}
+
+.bld-Slot_Pedestal {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 50%;
+
+  display: block;
+  width: 59px;
+  height: 29px;
+  padding-top: 16px;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+
+  background-image: resolve('ea/pedestal.png');
+  color: #fff;
+
+  transform: translateX(-50%);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Controls
+|--------------------------------------------------------------------------
+|
+*/
+.bld-Slot_Controls {
+  position: absolute;
+  top: 28px;
+  bottom: 57px;
+  left: calc(100% - 8px);
+  z-index: -1;
+
+  width: 40px;
+
+  background-color: rgba(#000, 0.5);
+  border-radius: 4px;
+  color: #fff;
+
+  transform: translateX(calc(-100% - 6px));
+  transition: transform 0.4s var(--Transition_EaseOutBack);
+
+  .bld-Slot:hover & {
+    transform: none;
+  }
+}
+
+.bld-Slot_Control {
+  cursor: pointer;
+}
+
+/* stylelint-disable selector-max-type */
+.bld-Slot_ControlIcon {
+  display: block;
+
+  svg {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+
+    .bld-Slot_Control-remove & {
+      width: 25px;
+      height: 25px;
+    }
+
+    .bld-Slot_Control-changePosition & {
+      width: 25px;
+      height: 25px;
+    }
+
+    .bld-Slot_Control-toggleLoyalty & {
+      width: 25px;
+      height: 25px;
+    }
+  }
+  /* stylelint-enable */
+}
+
+.bld-Slot_ControlText {
+  display: none;
+}

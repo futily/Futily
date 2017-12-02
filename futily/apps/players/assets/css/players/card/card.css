@@ -555,6 +555,8 @@
 .plyr-Card_Chem {
   @include Font_A;
 
+  position: relative;
+
   grid-column: 2;
 
   padding-left: 20px;
@@ -568,6 +570,28 @@
 
 .plyr-Card_ChemValue {
   font-weight: 600;
+}
+
+.plyr-Card_ChemBoost {
+  position: absolute;
+  top: 2px;
+  left: 0;
+
+  display: block;
+  width: 13px;
+  height: @width;
+
+  &[aria-hidden] {
+    display: none;
+  }
+
+  /* stylelint-disable selector-max-type */
+  svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+  }
+  /* stylelint-enable */
 }
 
 /*

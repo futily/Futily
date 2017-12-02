@@ -6,7 +6,6 @@ from futily.apps.players.serializers import PlayerSerializer
 
 
 class PlayerViewSet(viewsets.ModelViewSet):
-    lookup_field = 'slug'
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
     filter_backends = [filters.DjangoFilterBackend]

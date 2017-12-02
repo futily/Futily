@@ -28,6 +28,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const builderEl = document.getElementById('js-Builder');
+  if (builderEl) {
+    import('./builder').then(builder => {
+      const formation = builderEl.dataset.formation;
+      const initial = builderEl.dataset.initial
+        ? JSON.parse(builderEl.dataset.initial).map(([_, str]) => [
+          _,
+          JSON.parse(str),
+        ])
+        : [];
+      const isEditable = builderEl.dataset.editable === 'true';
+      const isSbc = builderEl.dataset.isSbc === 'true';
+      const page = Number(builderEl.dataset.page);
+      const awards = builderEl.dataset.awards
+        ? JSON.parse(builderEl.dataset.awards).map(i => JSON.parse(i))
+        : undefined;
+      const requirements = builderEl.dataset.requirements
+        ? JSON.parse(builderEl.dataset.requirements).map(i => {
+          const json = JSON.parse(i);
+          json['passed'] = false;
+
+          return json;
+        })
+        : undefined;
+      const saveUrl = builderEl.dataset.saveUrl;
+      const sbcId = Number(builderEl.dataset.sbcId);
+      const share = JSON.parse(builderEl.dataset.share);
+      const title = builderEl.dataset.title;
+      const user = JSON.parse(builderEl.dataset.user);
+
+      builder.default({
+        // eslint-disable-line
+        awards,
+        formation,
+        initial,
+        isEditable,
+        isSbc,
+        page,
+        requirements,
+        saveUrl,
+        sbcId,
+        share,
+        title,
+        user,
+      });
+    });
+  }
+
   if (document.querySelector('.js-UserFollow')) {
     new Follow({ el: document.querySelector('.js-UserFollow') });
   }
@@ -111,8 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
           className: 'bld-Builder',
           isEditable: true,
         });
-      } else {
-        new squads.SquadBuilder({ className: 'bld-Builder', isEditable: true });
       }
     });
   }

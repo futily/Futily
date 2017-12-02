@@ -228,6 +228,7 @@ class SquadBuilderChallengeRequirement(models.Model):
         values = {
             'scope': self.scope,
             'value': self.type_value,
+            'string': self.to_string,
         }
 
         if self.type == 'TEAM_CHEMISTRY':
@@ -337,6 +338,24 @@ class SquadBuilderChallengeAward(models.Model):
 
     def __str__(self):
         return f'{self.type} {self.value}'
+
+    @property
+    def to_json_string(self):
+        data = {
+            'type': self.type,
+            'value': self.value,
+            'isPlayer': self.type == 'player',
+            'isPack': self.type == 'pack',
+        }
+
+        if data['isPack']:
+            pack = self.get_pack()
+            data['pack'] = {
+                'title': pack.title,
+                'type': pack.type,
+            }
+
+        return json.dumps(data)
 
     def get_item(self):
         try:

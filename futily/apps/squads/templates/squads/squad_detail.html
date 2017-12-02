@@ -2,51 +2,15 @@
 {% import "comments/macros/comments.html" as comments with context %}
 {% import "macros/share.html" as share with context %}
 
-{% block strapline_title %}Squad{% endblock %}
-{% block strapline_text %}
-  {{ object.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}
-{% endblock %}
+{% block strapline_title %}{{ object.title }}{% endblock %}
+{% block strapline_text %}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}{% endblock %}
 
-{% block main %}
-  <div class="bld-Builder_Above">
-    <div class="bld-Builder_AboveInner">
-      <div class="pg-Section">
-        <header class="pg-Section_Header">
-          <h2 class="pg-Section_Title">{{ object.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}</h2>
+{% block builder_data %}data-initial="{{ initial_data }}"{% endblock %}
+{% block builder_editable %}false{% endblock %}
+{% block builder_share %}{"url": "{{ path_to_url(request.path) | urlencode() }}", "title": "{{ squad.title | urlencode() }}"}{% endblock %}
+{% block builder_title %}{{ object.title }}{% endblock %}
 
-          {% if user.is_authenticated and squad.user != user %}
-            <a class="pg-Section_Link btn-Primary" href="{{ squad.get_copy_url() }}">Copy squad</a>
-          {% endif %}
-        </header>
-      </div>
-    </div>
-  </div>
-
-  {{ super() }}
-{% endblock %}
-
-{% block builder_class %}js-Detail{% endblock %}
-
-{% block builder_formation %}{{ squad.formation }}{% endblock %}
-
-{% block builder_players %}
-  {% for player in squad.get_players() %}
-    <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ FORMATION_POSITIONS.verbose[loop.index0] | lower() }}"
-        data-builder-formation-index="{{ loop.index0 }}">
-      <div class="bld-Builder_Player"
-        {% if player %}
-           data-builder-initial-data="{{ player.player.get_serializer_data() }}"
-        {% endif %}>
-        {% if player %}
-          {{ player.player.render_card(chemistry=player.chemistry) }}
-        {% endif %}
-      </div>
-      <span class="bld-Builder_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[loop.index0] }}</span>
-    </li>
-  {% endfor %}
-{% endblock %}
-
-{% block builder_footer %}
+{% block builder_header %}
   <div class="bld-Builder_Columns bld-Builder_Columns-share">
     <div class="bld-Builder_Column">
       <div class="bld-Builder_Share">
@@ -58,7 +22,7 @@
       <div class="bld-Builder_KeyValues">
         <div class="bld-Builder_KeyValue">
           <p class="bld-Builder_Key">Name</p>
-          <h3 class="bld-Builder_Value">{{ squad.title }}</h3>
+          <h3 class="bld-Builder_Value">{{ squad.title }}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}</h3>
         </div>
 
         <div class="bld-Builder_KeyValue">
@@ -84,21 +48,29 @@
           </ul>
         </div>
 
-        <div class="asi-Ratings js-ObjectRating"
-             data-url="{{ squad.get_absolute_url() }}"
-             data-user="{{ user.id }}"
-             data-object="{{ squad.id }}">
-          <button class="asi-Ratings_Control asi-Ratings_Control-up js-ObjectRating_Control"
-                  data-action="up">
-            <span class="asi-Ratings_Text">Up</span>
-            <span class="asi-Ratings_Icon">{% include 'like.svg' %}</span>
-          </button>
-          <p class="asi-Ratings_Value js-ObjectRating_Value">{{ squad.likes }}</p>
-          <button class="asi-Ratings_Control asi-Ratings_Control-down js-ObjectRating_Control"
-                  data-action="down">
-            <span class="asi-Ratings_Text">Down</span>
-            <span class="asi-Ratings_Icon">{% include 'dislike.svg' %}</span>
-          </button>
+        <div class="bld-Builder_Ratings">
+          <div class="asi-Ratings js-ObjectRating"
+               data-url="{{ squad.get_absolute_url() }}"
+               data-user="{{ user.id }}"
+               data-object="{{ squad.id }}">
+            <button class="asi-Ratings_Control asi-Ratings_Control-up js-ObjectRating_Control"
+                    data-action="up">
+              <span class="asi-Ratings_Text">Up</span>
+              <span class="asi-Ratings_Icon">{% include 'like.svg' %}</span>
+            </button>
+            <p class="asi-Ratings_Value js-ObjectRating_Value">{{ squad.likes }}</p>
+            <button class="asi-Ratings_Control asi-Ratings_Control-down js-ObjectRating_Control"
+                    data-action="down">
+              <span class="asi-Ratings_Text">Down</span>
+              <span class="asi-Ratings_Icon">{% include 'dislike.svg' %}</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bld-Builder_Copy">
+          {% if user.is_authenticated and squad.user != user %}
+            <a class="btn-Primary" href="{{ squad.get_copy_url() }}">Copy squad</a>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -156,6 +128,56 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block builder_class %}bld-Builder-{{ squad.formation }}{% endblock %}
+{% block builder_formation %}{{ squad.formation }}{% endblock %}
+
+{% block builder_players %}
+  {% for player in squad.get_players()['team'] %}
+    <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ FORMATION_POSITIONS.verbose[loop.index0] | lower() }}"
+        data-builder-formation-index="{{ loop.index0 }}">
+      <div class="bld-Slot"
+        {% if player.player %}
+           data-builder-initial-data="{{ player.player.get_serializer_data() }}"
+        {% endif %}>
+        {% if player.player %}
+          {{ player.player.render_card(chemistry=player.chemistry) }}
+        {% endif %}
+      </div>
+      <span class="bld-Slot_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[loop.index0] }}</span>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block builder_bench %}
+  {% for player in squad.get_players()['bench'] %}
+    <li class="bld-ExtraPlayers_Item" data-builder-formation-index="{{ loop.index + 10 }}">
+      <div class="bld-Slot"
+        {% if player.player %}
+           data-builder-initial-data="{{ player.player.get_serializer_data() }}"
+        {% endif %}>
+        {% if player.player %}
+          {{ player.player.render_card() }}
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block builder_reserves %}
+  {% for player in squad.get_players()['reserve'] %}
+    <li class="bld-ExtraPlayers_Item" data-builder-formation-index="{{ loop.index + 10 }}">
+      <div class="bld-Slot"
+        {% if player.player %}
+           data-builder-initial-data="{{ player.player.get_serializer_data() }}"
+        {% endif %}>
+        {% if player.player %}
+          {{ player.player.render_card() }}
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
 {% endblock %}
 
 {% block content_below %}

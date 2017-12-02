@@ -26,7 +26,7 @@ module.exports = function (env) {
       }
     },
     module: {
-      noParse: /es6-promise\.js$/, // avoid webpack shimming process
+      noParse: /es6-promise\.js|clone$/, // avoid webpack shimming process
       rules: [
         {
           enforce: 'pre',

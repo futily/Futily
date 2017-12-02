@@ -4,22 +4,23 @@
 
 {% block strapline_text %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Squad Building Challenge Builder{% endblock %}
 
-{% block builder_class %}{{ super() }} js-Builder-challenge{% endblock %}
-
+{% block builder_action %}{{ request.path }}save/{% endblock %}
+{% block builder_class %}{{ super() }} bld-Builder-{{ object.formation }}{% endblock %}
+{% block builder_data %}data-awards="{{ awards_json }}" data-requirements="{{ requirements_json }}" data-sbc-id="{{ object.id }}"{% endblock %}
 {% block builder_formation %}{{ object.formation }}{% endblock %}
-
-{% block builder_action %}{{ request.path }}/save/{% endblock %}
+{% block builder_is_sbc %}true{% endblock %}
+{% block builder_page_id %}{{ squads_page_id }}{% endblock %}
 
 {% block builder_players %}
   {% for index in range(0, 11) %}
     <li class="bld-Builder_PlayersItem bld-Builder_PlayersItem-{{ FORMATION_POSITIONS.verbose[loop.index0] | lower() }}"
         data-builder-formation-index="{{ index }}"
         data-builder-filled="false">
-      <div class="bld-Builder_Player"></div>
-      <span class="bld-Builder_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[loop.index0] }}</span>
+      <div class="bld-Slot"></div>
+      <span class="bld-Slot_Pedestal">{{ player.position if player else FORMATION_POSITIONS.positions[loop.index0] }}</span>
       <input type="hidden" name="players" class="bld-Builder_PlayerInput">
-      <div class="bld-Builder_Controls">
-        <div class="bld-Builder_Control bld-Builder_Control-remove">
+      <div class="bld-Slot_Controls">
+        <div class="bld-Slot_Control bld-Builder_Control-remove">
           <span class="bld-Builder_ControlIcon">
             {% include 'trash.svg' %}
           </span>
@@ -27,7 +28,7 @@
           <span class="bld-Builder_ControlText">Remove</span>
         </div>
 
-        <div class="bld-Builder_Control bld-Builder_Control-changePosition">
+        <div class="bld-Slot_Control bld-Builder_Control-changePosition">
           <span class="bld-Builder_ControlIcon">
             {% include 'shuffle.svg' %}
           </span>
@@ -35,7 +36,7 @@
           <span class="bld-Builder_ControlText">Change position</span>
         </div>
 
-        <div class="bld-Builder_Control bld-Builder_Control-toggleLoyalty">
+        <div class="bld-Slot_Control bld-Builder_Control-toggleLoyalty">
           <span class="bld-Builder_ControlIcon">
             {% include 'heart.svg' %}
           </span>

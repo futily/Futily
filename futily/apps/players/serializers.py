@@ -15,10 +15,8 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
         model = Player
         fields = ['id', 'stats', 'club', 'absolute_url', 'league', 'nation', 'ea_id', 'ea_id_base', 'color', 'rating',
                   'position', 'name', 'card_att_1', 'card_att_2', 'card_att_3', 'card_att_4', 'card_att_5',
-                  'card_att_6', 'work_rate_att', 'work_rate_def', 'skill_moves', 'weak_foot']
-        extra_kwargs = {
-            'url': {'lookup_field': 'slug'}
-        }
+                  'card_att_6', 'work_rate_att', 'work_rate_def', 'skill_moves', 'weak_foot', 'is_gk',
+                  'rating_defensive', 'rating_anchor', 'rating_creative', 'rating_attacking']
 
     # def get_field_names(self, declared_fields, info):
     #     is_search = self.context['request'].query_params.get('is_search')

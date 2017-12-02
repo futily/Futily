@@ -56,11 +56,11 @@ class Squads(ContentBase):
         ]
 
         totws = [
-            (squad.short_title, squad.get_absolute_url())
+            (squad.title, squad.get_absolute_url())
             for squad in self.squad_set.filter(
                 is_special=True,
-                short_title__icontains='totw'
-            ).only('is_special', 'short_title', 'page', 'pk')[:5]
+                title__icontains='totw'
+            ).only('is_special', 'page', 'pk')[:5]
         ]
 
         return regular_items + totws
@@ -68,8 +68,7 @@ class Squads(ContentBase):
 
 class Squad(SearchMetaBase):
 
-    title = models.CharField(max_length=255, blank=True, null=True)
-    short_title = models.CharField(max_length=255, blank=True, null=True)
+    title = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
     description = models.TextField(blank=True, null=True)
 
@@ -126,7 +125,7 @@ class Squad(SearchMetaBase):
 
     def clean(self):
         if self.is_special:
-            self.slug = slugify(self.short_title)
+            self.slug = slugify(self.title)
 
         super(Squad, self).clean()
 
@@ -156,15 +155,11 @@ class Squad(SearchMetaBase):
         return self._get_permalink_for_page('squad-copy')
 
     def get_players(self):
-        indexes = [index for index in range(0, 11)]
-
-        for squad_player in self.squadplayer_set.all():
-            is_team = squad_player.index <= 10
-
-            if is_team:
-                indexes[squad_player.index] = squad_player
-
-        return [None if isinstance(x, int) else x for x in indexes]
+        return {
+            'team': [x for x in self.squadplayer_set.all() if x.index <= 10],
+            'bench': [x for x in self.squadplayer_set.all() if 11 <= x.index <= 17],
+            'reserve': [x for x in self.squadplayer_set.all() if 18 <= x.index <= 22],
+        }
 
     def get_player_objects(self):
         return sorted([x for x in self.players.all()], key=lambda x: x.rating, reverse=True)

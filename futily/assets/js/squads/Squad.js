@@ -20,7 +20,7 @@ export class Squad {
 
     this.players = {
       team: Array.from(this.els.team.items).map((el, index) => {
-        const playerEl = el.querySelector('.bld-Builder_Player');
+        const playerEl = el.querySelector('.bld-Slot');
         const initialData = playerEl.dataset['builderInitialData']
           ? JSON.parse(playerEl.dataset['builderInitialData'])
           : {};

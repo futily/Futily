@@ -6,7 +6,7 @@
 |
 */
 .bld-Builder {
-  grid-column-gap: calc(var(--Grid_Gutter) * 2);
+  grid-column-gap: calc(var(--Grid_Gutter) * 3);
   grid-template-columns: 1fr minmax(auto, var(--Grid_Container)) 1fr;
 
   display: grid;
@@ -18,31 +18,10 @@
 |--------------------------------------------------------------------------
 |
 */
-.bld-Builder_AboveInner {
-  @include Grid_Container;
-}
-
-/*
-|--------------------------------------------------------------------------
-| Header
-|--------------------------------------------------------------------------
-|
-*/
 .bld-Builder_Header {
-  align-items: center;
+  grid-column: 2;
 
-  display: flex;
-  margin-bottom: 0.5vr;
-}
-
-.bld-Builder_Chemistry {
-  margin-left: auto;
-}
-
-.bld-Builder_ChemistryValue {
-  margin-left: 5px;
-
-  font-weight: 600;
+  margin-bottom: 1vr;
 }
 
 /*
@@ -82,6 +61,17 @@
 
 /*
 |--------------------------------------------------------------------------
+| Extra players
+|--------------------------------------------------------------------------
+|
+*/
+.bld-Builder_ExtraPlayers {
+  margin-top: 1vr;
+  margin-bottom: @margin-top;
+}
+
+/*
+|--------------------------------------------------------------------------
 | Footer
 |--------------------------------------------------------------------------
 |
@@ -114,6 +104,11 @@
   flex-direction: column;
 
   display: flex;
+}
+
+.bld-Builder_Ratings {
+  margin-top: 0.5vr;
+  margin-bottom: 0.5vr;
 }
 
 .bld-Builder_StatsItem {
@@ -172,9 +167,6 @@
   position: absolute;
   top: 50%;
   left: 50%;
-
-  flex-direction: column;
-  justify-content: flex-end;
 
   display: flex;
   width: 127px;
@@ -235,138 +227,138 @@
 }
 
 .bld-Builder_PlayersItem-rb {
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] &,
-  .bld-Builder[data-builder-formation='4222'] &,
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] &,
-  .bld-Builder[data-builder-formation='4312'] &,
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] &,
-  .bld-Builder[data-builder-formation='451'] &,
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
     --PlayerX: -340%;
     --PlayerY: -80%;
   }
 }
 
 .bld-Builder_PlayersItem-rcb {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] &,
-  .bld-Builder[data-builder-formation='352'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
     --PlayerX: -240%;
     --PlayerY: -45%;
   }
 
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] &,
-  .bld-Builder[data-builder-formation='4222'] &,
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] &,
-  .bld-Builder[data-builder-formation='4312'] &,
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] &,
-  .bld-Builder[data-builder-formation='451'] &,
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
     --PlayerX: -165%;
     --PlayerY: -95%;
   }
 
-  .bld-Builder[data-builder-formation='5212'] &,
-  .bld-Builder[data-builder-formation='5221'] &,
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 &,
+  .bld-Builder-532 & {
     --PlayerX: -245%;
     --PlayerY: -35%;
   }
 }
 
 .bld-Builder_PlayersItem-cb {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] &,
-  .bld-Builder[data-builder-formation='352'] &,
-  .bld-Builder[data-builder-formation='5212'] &,
-  .bld-Builder[data-builder-formation='5221'] &,
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 &,
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 &,
+  .bld-Builder-532 & {
     --PlayerY: -25%;
   }
 }
 
 .bld-Builder_PlayersItem-lcb {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] &,
-  .bld-Builder[data-builder-formation='352'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
     --PlayerX: 240%;
     --PlayerY: -45%;
   }
 
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] &,
-  .bld-Builder[data-builder-formation='4222'] &,
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] &,
-  .bld-Builder[data-builder-formation='4312'] &,
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] &,
-  .bld-Builder[data-builder-formation='451'] &,
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
     --PlayerX: 165%;
     --PlayerY: -95%;
   }
 
-  .bld-Builder[data-builder-formation='5212'] &,
-  .bld-Builder[data-builder-formation='5221'] &,
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 &,
+  .bld-Builder-532 & {
     --PlayerX: 245%;
     --PlayerY: -35%;
   }
 }
 
 .bld-Builder_PlayersItem-lb {
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] &,
-  .bld-Builder[data-builder-formation='4222'] &,
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] &,
-  .bld-Builder[data-builder-formation='4312'] &,
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] &,
-  .bld-Builder[data-builder-formation='451'] &,
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4222 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
     --PlayerX: 340%;
     --PlayerY: -80%;
   }
@@ -378,579 +370,457 @@
 }
 
 .bld-Builder_PlayersItem-rdm {
-  .bld-Builder[data-builder-formation='352'] & {
+  .bld-Builder-352 & {
     --PlayerX: -115%;
   }
 
-  .bld-Builder[data-builder-formation='4222'] & {
+  .bld-Builder-4222 & {
     --PlayerX: -115%;
     --PlayerY: 15%;
   }
 
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] & {
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 & {
     --PlayerX: -235%;
     --PlayerY: 15%;
   }
 
-  .bld-Builder[data-builder-formation='433-3'] & {
+  .bld-Builder-433-3 & {
     --PlayerX: -200%;
     --PlayerY: 5%;
   }
 
-  .bld-Builder[data-builder-formation='442-2'] & {
+  .bld-Builder-442-2 & {
     --PlayerX: -155%;
     --PlayerY: 10%;
   }
 }
 
 .bld-Builder_PlayersItem-cdm {
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4141'] & {
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 & {
     --PlayerY: -20%;
   }
 
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-5'] & {
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-5 & {
     --PlayerY: -25%;
   }
 }
 
 .bld-Builder_PlayersItem-ldm {
-  .bld-Builder[data-builder-formation='352'] & {
+  .bld-Builder-352 & {
     --PlayerX: 115%;
   }
 
-  .bld-Builder[data-builder-formation='4222'] & {
+  .bld-Builder-4222 & {
     --PlayerX: 115%;
     --PlayerY: 15%;
   }
 
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] & {
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 & {
     --PlayerX: 235%;
     --PlayerY: 15%;
   }
 
-  .bld-Builder[data-builder-formation='433-3'] & {
+  .bld-Builder-433-3 & {
     --PlayerX: 200%;
     --PlayerY: 5%;
   }
 
-  .bld-Builder[data-builder-formation='442-2'] & {
+  .bld-Builder-442-2 & {
     --PlayerX: 155%;
     --PlayerY: 10%;
   }
 }
 
 .bld-Builder_PlayersItem-rm {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] &,
-  .bld-Builder[data-builder-formation='352'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
     --PlayerX: -350%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder[data-builder-formation='41212'] & {
+  .bld-Builder-41212 & {
     --PlayerX: -270%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] &,
-  .bld-Builder[data-builder-formation='4231-2'] &,
-  .bld-Builder[data-builder-formation='451'] &,
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
     --PlayerX: -320%;
     --PlayerY: 40%;
   }
 
-  .bld-Builder[data-builder-formation='4231-2'] & {
+  .bld-Builder-4231-2 & {
     --PlayerX: -350%;
     --PlayerY: 50%;
   }
 }
 
 .bld-Builder_PlayersItem-rw {
-  .bld-Builder[data-builder-formation='343'] & {
+  .bld-Builder-343 & {
     --PlayerX: -240%;
     --PlayerY: 110%;
   }
 
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] & {
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 & {
     --PlayerX: -250%;
     --PlayerY: 105%;
   }
 }
 
 .bld-Builder_PlayersItem-rf {
-  .bld-Builder[data-builder-formation='3421'] & {
+  .bld-Builder-3421 & {
     --PlayerX: -180%;
     --PlayerY: 105%;
   }
 
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='5221'] & {
+  .bld-Builder-4321 &,
+  .bld-Builder-5221 & {
     --PlayerX: -165%;
     --PlayerY: 115%;
   }
 }
 
 .bld-Builder_PlayersItem-rcm {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 & {
     --PlayerX: -125%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='41212-2'] & {
+  .bld-Builder-41212-2 & {
     --PlayerX: -200%;
     --PlayerY: 20%;
   }
 
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] & {
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 & {
     --PlayerX: -155%;
     --PlayerY: 15%;
   }
 
-  .bld-Builder[data-builder-formation='4312'] &,
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] & {
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 & {
     --PlayerX: -200%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-451-2 & {
     --PlayerX: -170%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='5212'] &,
-  .bld-Builder[data-builder-formation='5221'] & {
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 & {
     --PlayerX: -130%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-532 & {
     --PlayerX: -250%;
     --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-cm {
-  .bld-Builder[data-builder-formation='4312'] &,
-  .bld-Builder[data-builder-formation='4321'] & {
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 & {
     --PlayerY: -15%;
   }
 
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='451'] & {
+  .bld-Builder-433 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-451 & {
     --PlayerY: -15%;
   }
 
-  .bld-Builder[data-builder-formation='433-3'] & {
+  .bld-Builder-433-3 & {
     --PlayerY: 40px;
   }
 
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-451-2 & {
     --PlayerY: -5%;
   }
 
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-532 & {
     --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-lcm {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 & {
     --PlayerX: 125%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='41212-2'] & {
+  .bld-Builder-41212-2 & {
     --PlayerX: 200%;
     --PlayerY: 20%;
   }
 
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] & {
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 & {
     --PlayerX: 155%;
     --PlayerY: 15%;
   }
 
-  .bld-Builder[data-builder-formation='4312'] &,
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] & {
+  .bld-Builder-4312 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 & {
     --PlayerX: 200%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-451-2 & {
     --PlayerX: 170%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='5212'] &,
-  .bld-Builder[data-builder-formation='5221'] & {
+  .bld-Builder-5212 &,
+  .bld-Builder-5221 & {
     --PlayerX: 130%;
     --PlayerY: 10%;
   }
 
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-532 & {
     --PlayerX: 250%;
     --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-lm {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] &,
-  .bld-Builder[data-builder-formation='352'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-3421 &,
+  .bld-Builder-343 &,
+  .bld-Builder-352 & {
     --PlayerX: 350%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder[data-builder-formation='41212'] & {
+  .bld-Builder-41212 & {
     --PlayerX: 270%;
     --PlayerY: 30%;
   }
 
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] &,
-  .bld-Builder[data-builder-formation='451'] &,
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
     --PlayerX: 320%;
     --PlayerY: 40%;
   }
 
-  .bld-Builder[data-builder-formation='4231-2'] & {
+  .bld-Builder-4231-2 & {
     --PlayerX: 350%;
     --PlayerY: 50%;
   }
 }
 
 .bld-Builder_PlayersItem-lw {
-  .bld-Builder[data-builder-formation='343'] & {
+  .bld-Builder-343 & {
     --PlayerX: 240%;
     --PlayerY: 110%;
   }
 
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='433-5'] & {
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-433-5 & {
     --PlayerX: 250%;
     --PlayerY: 105%;
   }
 }
 
 .bld-Builder_PlayersItem-lf {
-  .bld-Builder[data-builder-formation='3421'] & {
+  .bld-Builder-3421 & {
     --PlayerX: 180%;
     --PlayerY: 105%;
   }
 
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='5221'] & {
+  .bld-Builder-4321 &,
+  .bld-Builder-5221 & {
     --PlayerX: 165%;
     --PlayerY: 115%;
   }
 }
 
 .bld-Builder_PlayersItem-ram {
-  .bld-Builder[data-builder-formation='4222'] & {
+  .bld-Builder-4222 & {
     --PlayerX: -245%;
     --PlayerY: 60%;
   }
 
-  .bld-Builder[data-builder-formation='4231'] & {
+  .bld-Builder-4231 & {
     --PlayerX: -125%;
     --PlayerY: 60%;
   }
 
-  .bld-Builder[data-builder-formation='451'] & {
+  .bld-Builder-451 & {
     --PlayerX: -160%;
     --PlayerY: 70%;
   }
 }
 
 .bld-Builder_PlayersItem-cam {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='352'] &,
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4312'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-352 &,
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4141 &,
+  .bld-Builder-4312 & {
     --PlayerY: 85%;
   }
 
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] &,
-  .bld-Builder[data-builder-formation='433-4'] & {
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-433-4 & {
     --PlayerY: 30%;
   }
 
-  .bld-Builder[data-builder-formation='5212'] & {
+  .bld-Builder-5212 & {
     --PlayerY: 75%;
   }
 }
 
 .bld-Builder_PlayersItem-lam {
-  .bld-Builder[data-builder-formation='4222'] & {
+  .bld-Builder-4222 & {
     --PlayerX: 245%;
     --PlayerY: 60%;
   }
 
-  .bld-Builder[data-builder-formation='4231'] & {
+  .bld-Builder-4231 & {
     --PlayerX: 125%;
     --PlayerY: 60%;
   }
 
-  .bld-Builder[data-builder-formation='451'] & {
+  .bld-Builder-451 & {
     --PlayerX: 160%;
     --PlayerY: 70%;
   }
 }
 
 .bld-Builder_PlayersItem-cf {
-  .bld-Builder[data-builder-formation='433-5'] & {
+  .bld-Builder-433-5 & {
     --PlayerY: 85%;
   }
 
-  .bld-Builder[data-builder-formation='4411'] & {
+  .bld-Builder-4411 & {
     --PlayerY: 30%;
   }
 }
 
 .bld-Builder_PlayersItem-st {
-  .bld-Builder[data-builder-formation='3421'] &,
-  .bld-Builder[data-builder-formation='343'] & {
+  .bld-Builder-3421 &,
+  .bld-Builder-343 & {
     --PlayerY: 295px;
   }
 
-  .bld-Builder[data-builder-formation='4141'] &,
-  .bld-Builder[data-builder-formation='4411'] &,
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] &,
-  .bld-Builder[data-builder-formation='4231'] &,
-  .bld-Builder[data-builder-formation='4231-2'] &,
-  .bld-Builder[data-builder-formation='4321'] &,
-  .bld-Builder[data-builder-formation='433'] &,
-  .bld-Builder[data-builder-formation='433-2'] &,
-  .bld-Builder[data-builder-formation='433-3'] &,
-  .bld-Builder[data-builder-formation='433-4'] &,
-  .bld-Builder[data-builder-formation='451'] &,
-  .bld-Builder[data-builder-formation='451-2'] & {
+  .bld-Builder-4141 &,
+  .bld-Builder-4411 &,
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 &,
+  .bld-Builder-4231 &,
+  .bld-Builder-4231-2 &,
+  .bld-Builder-4321 &,
+  .bld-Builder-433 &,
+  .bld-Builder-433-2 &,
+  .bld-Builder-433-3 &,
+  .bld-Builder-433-4 &,
+  .bld-Builder-451 &,
+  .bld-Builder-451-2 & {
     --PlayerY: 295px;
   }
 
-  .bld-Builder[data-builder-formation='5221'] & {
+  .bld-Builder-5221 & {
     --PlayerY: 295px;
   }
 }
 
 .bld-Builder_PlayersItem-rs {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='352'] &,
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4312'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-352 &,
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4312 & {
     --PlayerX: -150%;
     --PlayerY: 130%;
   }
 
-  .bld-Builder[data-builder-formation='4222'] & {
+  .bld-Builder-4222 & {
     --PlayerX: -130%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] & {
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 & {
     --PlayerX: -140%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder[data-builder-formation='5212'] &,
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-5212 &,
+  .bld-Builder-532 & {
     --PlayerX: -140%;
     --PlayerY: 120%;
   }
 }
 
 .bld-Builder_PlayersItem-ls {
-  .bld-Builder[data-builder-formation='3412'] &,
-  .bld-Builder[data-builder-formation='352'] &,
-  .bld-Builder[data-builder-formation='41212'] &,
-  .bld-Builder[data-builder-formation='41212-2'] &,
-  .bld-Builder[data-builder-formation='4312'] & {
+  .bld-Builder-3412 &,
+  .bld-Builder-352 &,
+  .bld-Builder-41212 &,
+  .bld-Builder-41212-2 &,
+  .bld-Builder-4312 & {
     --PlayerX: 150%;
     --PlayerY: 130%;
   }
 
-  .bld-Builder[data-builder-formation='4222'] & {
+  .bld-Builder-4222 & {
     --PlayerX: 130%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder[data-builder-formation='442'] &,
-  .bld-Builder[data-builder-formation='442-2'] & {
+  .bld-Builder-442 &,
+  .bld-Builder-442-2 & {
     --PlayerX: 140%;
     --PlayerY: 120%;
   }
 
-  .bld-Builder[data-builder-formation='5212'] &,
-  .bld-Builder[data-builder-formation='532'] & {
+  .bld-Builder-5212 &,
+  .bld-Builder-532 & {
     --PlayerX: 140%;
     --PlayerY: 120%;
   }
-}
-
-.bld-Builder_Player {
-  position: absolute;
-  top: -25px;
-  right: -16px;
-  bottom: @top;
-  left: @right;
-
-  display: block;
-  width: 158px;
-  height: 247px;
-
-  text-align: center;
-
-  background-image: resolve('ea/cards/18/medium/base.png');
-  background-position: 0 -494px;
-
-  transform: scale(0.8);
-}
-
-.bld-Builder_Pedestal {
-  display: block;
-  width: 59px;
-  height: 29px;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 16px;
-
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1;
-  text-align: center;
-
-  background-image: resolve('ea/pedestal.png');
-  color: #fff;
-}
-
-.bld-Builder_PlayerRemove {
-  @include Font_A;
-
-  position: absolute;
-
-  display: inline-block;
-  margin-right: auto;
-  margin-left: auto;
-  text-shadow: 1px 1px 1px rgba(#000, 0.2);
-
-  background-color: var(--Color_Brand-1);
-  border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  opacity: 0;
-
-  transform: translateY(-20px);
-  transition: opacity 0.2s;
-
-  .bld-Builder_Player:hover & {
-    opacity: 1;
-  }
-}
-
-/*
-|--------------------------------------------------------------------------
-| Controls
-|--------------------------------------------------------------------------
-|
-*/
-.bld-Builder_Controls {
-  position: absolute;
-  top: 28px;
-  bottom: 57px;
-  left: calc(100% - 8px);
-  z-index: -1;
-
-  width: 40px;
-
-  background-color: rgba(#000, 0.5);
-  border-radius: 4px;
-  color: #fff;
-
-  transform: translateX(calc(-100% - 6px));
-  transition: transform 0.4s var(--Transition_EaseOutBack);
-
-  [data-builder-filled='true'][aria-grabbed='false']:hover & {
-    transform: none;
-  }
-}
-
-.bld-Builder_Control {
-  cursor: pointer;
-}
-
-/* stylelint-disable selector-max-type */
-.bld-Builder_ControlIcon {
-  display: block;
-
-  svg {
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-
-    .bld-Builder_Control-remove & {
-      width: 25px;
-      height: 25px;
-    }
-
-    .bld-Builder_Control-changePosition & {
-      width: 25px;
-      height: 25px;
-    }
-
-    .bld-Builder_Control-toggleLoyalty & {
-      width: 25px;
-      height: 25px;
-    }
-  }
-  /* stylelint-enable */
-}
-
-.bld-Builder_ControlText {
-  display: none;
 }
 
 /*
@@ -965,4 +835,9 @@
 
 .bld-Builder_Submit {
   padding: 9px var(--Grid_Gutter);
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 }

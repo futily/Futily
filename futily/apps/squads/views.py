@@ -40,6 +40,19 @@ class BaseBuilder(ContextMixin):
         context = super(BaseBuilder, self).get_context_data(**kwargs)
 
         context['formations'] = dict(OrderedDict(FORMATION_CHOICES))
+        context['user_data'] = json.dumps({
+            'id': self.request.user.id,
+            'username': self.request.user.username,
+            'link': self.request.user.get_absolute_url(),
+        }) if self.request.user.is_authenticated else json.dumps({
+            'id': self.object.user.id,
+            'username': self.object.user.username,
+            'link': self.object.user.get_absolute_url(),
+        }) if self.object else json.dumps({
+            'id': None,
+            'username': None,
+            'link': None
+        })
 
         return context
 
@@ -443,6 +456,9 @@ class SquadDetail(BreadcrumbsMixin, BaseBuilder, DetailView):
         context = super().get_context_data(**kwargs)
 
         context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
+        context['initial_data'] = json.dumps([
+            [x.index, x.player.get_serializer_data()] for x in self.object.squadplayer_set.all() if x.player
+        ])
 
         return context
 
@@ -519,6 +535,9 @@ class SquadUpdate(BreadcrumbsMixin, BaseBuilder, UpdateView):
         context = super().get_context_data(**kwargs)
 
         context['FORMATION_POSITIONS'] = FORMATION_POSITIONS[self.object.formation]
+        context['initial_data'] = json.dumps([
+            [x.index, x.player.get_serializer_data()] for x in self.object.squadplayer_set.all() if x.player
+        ])
 
         return context
 
@@ -554,4 +573,4 @@ class SquadUpdate(BreadcrumbsMixin, BaseBuilder, UpdateView):
         if request.user.is_authenticated:
             create_action(request.user, 'updated squad', squad)
 
-        return HttpResponseRedirect(self.get_success_url())
+        return JsonResponse({'url': squad.get_absolute_url()}, status=200)

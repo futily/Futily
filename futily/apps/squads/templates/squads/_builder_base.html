@@ -6,22 +6,70 @@
 {% block strapline_title %}Squad Builder{% endblock %}
 
 {% block main %}
-  <form class="bld-Builder {% block builder_class %}{% endblock %}"
-        data-builder-formation="{% block builder_formation %}{% endblock %}"
-        {% if self.builder_action() %}action="{% block builder_action %}{% endblock %}"{% endif %}>
-    <div class="bld-Builder_Body">
-      {% block builder_body_top %}{% endblock %}
-      <div class="bld-Builder_Team">
-        <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
+  <div id="js-Builder"
+       {% block builder_data %}{% endblock %}
+       data-editable="{% block builder_editable %}true{% endblock %}"
+       data-formation="{% block builder_formation %}442{% endblock %}"
+       data-is-sbc="{% block builder_is_sbc %}false{% endblock %}"
+       data-page="{% block builder_page_id %}{{ pages.current.id }}{% endblock %}"
+       data-save-url="{% block builder_action %}/squads/builder/save/{% endblock %}"
+       data-share='{% block builder_share %}{"url": "", "title": ""}{% endblock %}'
+       data-title="{% block builder_title %}{% endblock %}"
+       data-user="{{ user_data }}">
+    <form class="bld-Builder {% block builder_class %}{% endblock %}"
+          {% if self.builder_action() %}action=""{% endif %}>
+      <header class="bld-Builder_Header">{% block builder_header %}{% endblock %}</header>
 
-        <ul class="bld-Builder_Players">{% block builder_players %}{% endblock %}</ul>
+      <div class="bld-Builder_Body">
+        {% block builder_body_top %}{% endblock %}
+        <div class="bld-Builder_Team">
+          <canvas class="bld-Builder_Canvas" ref="canvas"></canvas>
 
-        {% block builder_players_after %}{% endblock %}
+          <ul class="bld-Builder_Players">{% block builder_players %}{% endblock %}</ul>
+
+          {% block builder_players_after %}{% endblock %}
+        </div>
+
+        <div class="bld-Builder_ExtraPlayers">
+          <div class="bld-ExtraPlayers">
+            <div class="bld-ExtraPlayers_Inner">
+              <div class="bld-ExtraPlayers_Body">
+                <div class="bld-ExtraPlayers_Bench">
+                  <p class="bld-ExtraPlayers_Title">Bench</p>
+
+                  <ul class="bld-ExtraPlayers_Items">
+                    {% block builder_bench %}
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="11"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="12"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="13"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="14"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="15"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="16"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="17"></li>
+                    {% endblock %}
+                  </ul>
+                </div>
+
+                <div class="bld-ExtraPlayers_Reserves">
+                  <p class="bld-ExtraPlayers_Title">Reserves</p>
+
+                  <ul class="bld-ExtraPlayers_Items">
+                    {% block builder_reserves %}
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="18"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="19"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="20"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="21"></li>
+                      <li class="bld-ExtraPlayers_Item" data-builder-formation-index="22"></li>
+                    {% endblock %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <footer class="bld-Builder_Footer">{% block builder_footer %}{% endblock %}</footer>
-  </form>
+    </form>
+  </div>
 {% endblock %}
 
 {% block content_below %}

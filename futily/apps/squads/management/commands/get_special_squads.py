@@ -33,10 +33,9 @@ class Command(BaseCommand):
                 data_json = json.loads(data)
 
                 title = data_json['displayName']
-                short_title = data_json['name']
                 players = data_json['players']
 
-                source, created = Source.objects.get_or_create(title=title, short_title=short_title, ea_url=url)
+                source, created = Source.objects.get_or_create(title=title, ea_url=url)
                 player_data = list(map(serialize_player, players))
                 player_objects = []
 
@@ -64,7 +63,6 @@ class Command(BaseCommand):
                 except Squad.DoesNotExist:
                     squad = Squad.objects.create(
                         title=title,
-                        short_title=short_title,
                         page=Squads.objects.first(),
                         formation=data_json['formationId'].replace('f', ''),
                         is_special=True,

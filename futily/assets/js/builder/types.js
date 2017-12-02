@@ -1,0 +1,38 @@
+export const GET_CHEMLINKS = 'GET_CHEMLINKS';
+export const GET_FORMATION = 'GET_FORMATION';
+export const GET_IS_EDITABLE = 'GET_IS_EDITABLE';
+export const GET_IS_SBC = 'GET_IS_SBC';
+export const GET_PAGE = 'GET_PAGE';
+export const GET_PLAYERS = 'GET_PLAYERS';
+export const GET_SBC_AWARDS = 'GET_SBC_AWARDS';
+export const GET_SBC_ID = 'GET_SBC_ID';
+export const GET_SBC_PASSED = 'GET_SBC_PASSED';
+export const GET_SBC_REQUIREMENTS = 'GET_SBC_REQUIREMENTS';
+export const GET_SHARE = 'GET_SHARE';
+export const GET_STATS = 'GET_STATS';
+export const GET_TITLE = 'GET_TITLE';
+export const GET_SEARCH = 'GET_SEARCH';
+export const GET_USER = 'GET_USER';
+
+export const CLOSE_SEARCH = 'CLOSE_SEARCH';
+export const OPEN_SEARCH = 'OPEN_SEARCH';
+
+export const INITIALISE = 'INITIALISE';
+export const SETUP = 'SETUP';
+
+export const INSERT_PLAYER = 'INSERT_PLAYER';
+export const REMOVE_PLAYER = 'REMOVE_PLAYER';
+export const RESET_SEARCH_PAGES = 'RESET_SEARCH_PAGES';
+export const TOGGLE_PLAYER_BOOST = 'TOGGLE_PLAYER_BOOST';
+
+export const SET_CHEMLINKS = 'SET_CHEMLINKS';
+export const SET_ELEMENTS = 'SET_ELEMENTS';
+export const SET_FORMATION = 'SET_FORMATION';
+export const SET_PLAYER_POSITION = 'SET_PLAYER_POSITION';
+export const SET_SBC_REQUIREMENT_PASSED = 'SET_SBC_REQUIREMENT_PASSED';
+export const SET_SEARCH_PAGES = 'SET_SEARCH_PAGES';
+export const SET_SEARCH_RESULTS = 'SET_SEARCH_RESULTS';
+export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';
+export const SET_TITLE = 'SET_TITLE';
+
+export const UPDATE_PLAYERS = 'UPDATE_PLAYERS';
