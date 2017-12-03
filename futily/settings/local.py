@@ -9,13 +9,13 @@ from .base import *  # pylint: disable=unused-wildcard-import,wildcard-import
 DEBUG = True
 
 TEMPLATES[0]['OPTIONS']['auto_reload'] = DEBUG
-# WHITENOISE_AUTOREFRESH = DEBUG
 
 # Save media files to the user's Sites folder.
 
-# INSTALLED_APPS = [
-#     'whitenoise.runserver_nostatic',
-# ] + INSTALLED_APPS
+MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
+STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
+NODE_MODULES_ROOT = os.path.expanduser(os.path.join('~/Workspace/futily', 'node_modules'))
+
 
 # INSTALLED_APPS += [
 #     'debug_toolbar'

@@ -4,9 +4,6 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 CSRF_COOKIE_SECURE = True
 
-MEDIA_ROOT = os.path.join(BASE_ROOT, '../futily_media')
-STATIC_ROOT = os.path.join(BASE_ROOT, '../futily_static')
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 INSTALLED_APPS += [
