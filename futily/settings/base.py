@@ -133,7 +133,7 @@ INSTALLED_APPS = [
     'django_comments',
     'flexible_images',
     'sorl.thumbnail',
-    'compressor',
+    # 'compressor',
     'rest_framework',
 
     'algoliasearch_django',
@@ -207,10 +207,10 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
+    # 'compressor.finders.CompressorFinder',
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 WEBPACK_LOADER = {
     'DEFAULT': {
@@ -219,9 +219,9 @@ WEBPACK_LOADER = {
     }
 }
 
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.css_default.CssAbsoluteFilter',
-]
+# COMPRESS_CSS_FILTERS = [
+#     'compressor.filters.css_default.CssAbsoluteFilter',
+# ]
 
 THUMBNAIL_PRESERVE_FORMAT = True
 
@@ -290,7 +290,7 @@ TEMPLATES = [
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
                 'webpack_loader.contrib.jinja2ext.WebpackExtension',
-                'compressor.contrib.jinja2ext.CompressorExtension'
+                # 'compressor.contrib.jinja2ext.CompressorExtension'
             ],
             'globals': {
                 'getattr': getattr,
