@@ -46,16 +46,14 @@ DATABASES = {
 
 # Absolute path to the directory where all uploaded media files are stored.
 
-MEDIA_ROOT = '/var/www/futily_media'
-
 MEDIA_URL = '/media/'
 
 FILE_UPLOAD_PERMISSIONS = 0o644
 
-
 # Absolute path to the directory where static files will be collected.
 
-STATIC_ROOT = '/var/www/futily_static'
+MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
+STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 
 STATIC_URL = '/static/'
 
