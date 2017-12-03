@@ -212,6 +212,8 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'build/',
@@ -229,6 +231,7 @@ THUMBNAIL_PRESERVE_FORMAT = True
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'cms.middleware.LocalisationMiddleware',
     'futily.apps.redirects.middleware.RedirectFallbackMiddleware',

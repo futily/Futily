@@ -66,10 +66,7 @@
     {% endif %}
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i" rel="stylesheet">
-
-    {% compress css %}
-      <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
-    {% endcompress %}
+    <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
 
     {% block css %}{% endblock %}
 
@@ -212,11 +209,7 @@
     {{ render_bundle('vendor', 'js') }}
     {{ render_bundle('app', 'js') }}
 
-    {% compress js %}
-      {% block compressed_js_first %}{% endblock %}
-
-      {% block compressed_js_last %}{% endblock %}
-    {% endcompress %}
+    {% block js %}{% endblock %}
 
     {# Opbeat JS error tracking #}
     {% if settings.OPBEAT %}
