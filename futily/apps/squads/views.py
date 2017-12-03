@@ -48,7 +48,7 @@ class BaseBuilder(ContextMixin):
             'id': self.object.user.id,
             'username': self.object.user.username,
             'link': self.object.user.get_absolute_url(),
-        }) if self.object else json.dumps({
+        }) if hasattr(self, 'object') else json.dumps({
             'id': None,
             'username': None,
             'link': None

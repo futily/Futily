@@ -150,6 +150,7 @@ const mutations = {
     index = index === undefined ? state.search.index : index;
     const player = getPlayer(state, index);
     player.data = data;
+    player.positions.inBuilder = player.data.position;
     player.isFilled = true;
   },
 
