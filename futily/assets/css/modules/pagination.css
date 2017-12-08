@@ -26,6 +26,16 @@
 .pgn-Pagination_Item {
   margin-right: 2px;
   margin-left: @margin-right;
+
+  @media (--xxs-viewport) {
+    display: none;
+  }
+
+  &[aria-current='true'] {
+    @media (--xxs-viewport) {
+      display: block;
+    }
+  }
 }
 
 .pgn-Pagination_Link {

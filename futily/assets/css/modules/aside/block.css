@@ -7,14 +7,14 @@
 */
 .asi-Block {
   & + & {
-    margin-top: 1vr;
+    margin-top: 2vr;
   }
 }
 
 .asi-Block_Title {
   @include Font_C;
 
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 
   font-weight: 700;
 

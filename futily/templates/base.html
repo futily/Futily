@@ -10,8 +10,7 @@
     <meta name="description"
           content="{% block meta_description %}{{ get_meta_description() }}{% endblock %}">
     <meta name="robots" content="{% block meta_robots %}{{ get_meta_robots() }}{% endblock %}">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
 
     {# TODO: Change this value #}
     <meta name="theme-color" content="#db5945">
@@ -101,7 +100,7 @@
     {% block schema_org %}{% endblock %}
   </head>
 
-  <body class="util-Preload {% block body_class %}{% endblock %}">
+  <body class="util-Preload {% block body_class %}{% endblock %}" ontouchstart="">
     {% include "base/_browser-update.html" %}
 
     {% block site %}

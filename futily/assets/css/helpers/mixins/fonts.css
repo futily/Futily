@@ -5,8 +5,13 @@
 |
 */
 @mixin Font_Tiny {
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 11px;
+  line-height: 12px;
+
+  @media (--sm) {
+    font-size: 12px;
+    line-height: 16px;
+  }
 }
 
 @mixin Font_A {
