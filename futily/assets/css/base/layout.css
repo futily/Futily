@@ -95,6 +95,10 @@
 |
 */
 .lyt-Main {
+  @media (--xxs-viewport) {
+    width: calc(100vw - (var(--Grid_Gutter) * 2));
+  }
+
   .lyt-Content-mainTight & {
     grid-column: 2;
   }
@@ -108,7 +112,9 @@
 */
 .lyt-Aside {
   .lyt-Content-mainAside & {
-    width: 300px;
+    @media (--lg) {
+      width: 300px;
+    }
   }
 
   .lyt-Content-asideSwap & {

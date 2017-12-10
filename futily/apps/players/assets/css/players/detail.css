@@ -10,9 +10,15 @@
 }
 
 .plyr-Detail_Share {
-  position: absolute;
-  top: 0;
-  right: calc(100% + 20px);
+  display: none;
+
+  @media (--lg) {
+    position: absolute;
+    top: 0;
+    right: calc(100% + 20px);
+
+    display: block;
+  }
 }
 
 /*
@@ -22,11 +28,17 @@
 |
 */
 .plyr-Detail_Header {
-  grid-column-gap: 30px;
-  grid-template-columns: 470px 1fr;
+  grid-row-gap: 2vr;
 
   display: grid;
-  margin-bottom: 1vr;
+  margin-bottom: 2vr;
+
+  @media (--lg) {
+    grid-column-gap: 30px;
+    grid-template-columns: 470px 1fr;
+
+    margin-bottom: 3vr;
+  }
 }
 
 .plyr-Detail_Header-full {
@@ -40,7 +52,11 @@
 }
 
 .plyr-Detail_Ratings {
-  margin-top: 1vr;
+  margin-top: 2vr;
+
+  @media (--md) {
+    margin-top: 3vr;
+  }
 }
 
 /*
@@ -50,15 +66,21 @@
 |
 */
 .plyr-Detail_Navigation {
-  margin-bottom: 0.5vr;
+  margin-bottom: 2vr;
 
   border-bottom: 1px solid var(--Color_Border);
+  overflow-x: auto;
+
+  @media (--md) {
+    margin-bottom: 1vr;
+  }
 }
 
 .plyr-Detail_NavigationItems {
   @include Font_A;
 
   display: flex;
+  padding-top: 5px;
 }
 
 .plyr-Detail_NavigationItem {
@@ -90,6 +112,7 @@
   padding: 8px 20px;
 
   font-weight: 400;
+  white-space: nowrap;
 
   color: var(--Color_Dark-1);
 
@@ -115,7 +138,15 @@
 |
 */
 .plyr-Detail_Section {
-  margin-bottom: 2vr;
+  margin-bottom: 3vr;
+
+  @media (--md) {
+    margin-bottom: 4vr;
+  }
+
+  @media (--lg) {
+    margin-bottom: 6vr;
+  }
 
   &:last-child {
     margin-bottom: 0;
@@ -128,9 +159,13 @@
 
   display: flex;
   margin-bottom: 1vr;
-  padding-bottom: 15px;
+  padding-bottom: 1vr;
 
   border-bottom: 2px solid var(--Color_Border);
+
+  @media (--md) {
+    padding-bottom: 2vr;
+  }
 }
 
 .plyr-Detail_Title {

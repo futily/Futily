@@ -1,18 +1,12 @@
 /*
 |--------------------------------------------------------------------------
-| Bar
+| Aside
 |--------------------------------------------------------------------------
-| @namespace: pg-
+| @namespace: adv-
 |
 */
-.pg-Bar {
-  margin-bottom: 2vr;
-
-  .plyr-Detail & {
-    margin-bottom: 1vr;
-  }
-}
-
-.pg-Bar_Inner {
-  @include Grid_Container;
+.adv-Aside {
+  width: 300px;
+  margin-right: auto;
+  margin-left: auto;
 }

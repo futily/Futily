@@ -7,7 +7,7 @@
 */
 .asi-Block {
   & + & {
-    margin-top: 2vr;
+    margin-top: 3vr;
   }
 }
 

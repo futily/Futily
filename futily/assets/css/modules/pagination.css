@@ -31,7 +31,7 @@
     display: none;
   }
 
-  &[aria-current='true'] {
+  &[aria-current='page'] {
     @media (--xxs-viewport) {
       display: block;
     }
@@ -54,18 +54,33 @@
   border-radius: 5px;
   color: #2c3e50;
 
+  @media (--xxs-viewport) {
+    width: auto;
+    padding-right: var(--Grid_Gutter);
+    padding-left: @padding-right;
+  }
+
   &:not([disabled]):hover {
     background-color: var(--Color_Brand-1);
     color: #fff;
   }
 
-  [aria-current='true'] & {
+  [aria-current='page'] & {
     background-color: var(--Color_Brand-1);
     color: #fff;
 
     &:hover {
       background-color: var(--Color_Brand-1);
     }
+  }
+}
+
+.pgn-Pagination_LinkOf {
+  display: none;
+
+  @media (--xxs-viewport) {
+    display: block;
+    margin-left: 3px;
   }
 }
 

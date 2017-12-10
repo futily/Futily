@@ -1,4 +1,5 @@
 import 'babel-polyfill';
+import 'intersection-observer';
 import 'pepjs';
 import './utils/class-list-polyfill';
 

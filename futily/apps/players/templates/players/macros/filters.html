@@ -61,7 +61,7 @@
                 </div>
               </li>
 
-              <li class="fltr-Filters_Item">
+              <li class="fltr-Filters_Item fltr-Filters_Item-sort">
                 {% set current_order = request.GET.get('order') %}
                 <a class="fltr-Sort"
                    href="{{ build_url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">

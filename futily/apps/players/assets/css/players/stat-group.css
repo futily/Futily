@@ -18,7 +18,7 @@
   justify-content: space-between;
 
   display: flex;
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 }
 
 .plyr-StatGroup_Title {
@@ -58,9 +58,13 @@
 .plyr-StatGroup_BarOverlay {
   fill: var(--RatingColor);
 
-  transform: skew(-45deg) translateX(-100%);
+  transform: skew(-45deg);
 
   transition: width 0.3s, transform 0.6s ease, fill 0.3s;
+
+  @media (--md) {
+    transform: skew(-45deg) translateX(-100%);
+  }
 
   .plyr-StatGroup_Bar-active & {
     transform: skew(-45deg);
@@ -98,10 +102,14 @@
   justify-content: space-between;
 
   display: flex;
-  margin-bottom: 0.25vr;
-  padding: 8px 0;
+  padding: 0.5vr 0;
 
   border-bottom: 1px solid var(--Color_Border);
+
+  @media (--sm) {
+    padding-top: 1vr;
+    padding-bottom: @padding-top;
+  }
 
   &:first-child {
     padding-top: 0;

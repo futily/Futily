@@ -10,6 +10,7 @@
     "clone": "^2.1.1",
     "commitizen": "^2.9.6",
     "es6-promise": "^4.1.0",
+    "intersection-observer": "^0.5.0",
     "pepjs": "^0.4.3",
     "remarkable": "^1.7.1",
     "vue": "^2.5.4",

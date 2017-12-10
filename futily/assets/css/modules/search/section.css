@@ -10,7 +10,7 @@
 }
 
 .sch-Section_Input {
-  @include Font_E;
+  @include Font_D;
 
   display: block;
   width: 100%;
@@ -24,6 +24,11 @@
   color: var(--Color_Dark-1);
 
   transition: background-image 0.3s;
+
+  @media (--md) {
+    padding-right: calc(var(--Grid_Gutter) * 2);
+    padding-left: @padding-right;
+  }
 
   &:focus {
     outline: 0;

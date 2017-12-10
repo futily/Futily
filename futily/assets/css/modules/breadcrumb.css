@@ -5,6 +5,10 @@
 | @namespace: bdc-
 |
 */
+.bdc-Breadcrumb {
+  overflow-x: auto;
+}
+
 .bdc-Breadcrumb_Items {
   @include Font_A;
 
@@ -14,7 +18,10 @@
 }
 
 .bdc-Breadcrumb_Item {
+  display: flex;
   margin-right: 12px;
+
+  white-space: nowrap;
 
   &:last-child {
     &::after {

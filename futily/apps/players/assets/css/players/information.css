@@ -13,10 +13,25 @@
 |
 */
 .plyr-Information_Columns {
-  grid-column-gap: calc(var(--Grid_Gutter) * 2);
-  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2vr var(--Grid_Gutter);
+  grid-template-columns: repeat(2, 1fr);
 
   display: grid;
+
+  @media (--sm) {
+    grid-column-gap: calc(var(--Grid_Gutter) * 2);
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.plyr-Information_Column {
+  &:last-child {
+    grid-column: 1 / -1;
+
+    @media (--sm) {
+      grid-column: auto;
+    }
+  }
 }
 
 .plyr-Information_Title {

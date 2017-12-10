@@ -10,6 +10,10 @@
 
   display: flex;
   max-height: 400px;
+
+  @media (--xxs-viewport) {
+    width: calc(100vw - (var(--Grid_Gutter) * 2));
+  }
 }
 
 /*
@@ -215,7 +219,11 @@
   justify-content: center;
 
   display: flex;
-  padding-top: 30px;
+  padding-top: 2vr;
 
   border: 1px solid var(--Color_Border);
+
+  @media (--md) {
+    padding-top: 4vr;
+  }
 }

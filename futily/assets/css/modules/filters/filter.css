@@ -14,6 +14,16 @@
   border: 1px solid var(--Color_Border);
   color: #a1b1bc;
   cursor: pointer;
+
+  @media (--xs-viewport) {
+    border-top: 0;
+  }
+
+  .fltr-Filters_Item:first-child & {
+    @media (--xs-viewport) {
+      border-top: 1px solid var(--Color_Border);
+    }
+  }
 }
 
 /*

@@ -11,6 +11,13 @@
 
   border: 1px solid var(--Color_Border);
 
+  @media (--xs-viewport) {
+    width: 41px;
+    margin-left: auto;
+
+    border-top: 0;
+  }
+
   /* stylelint-disable selector-max-type */
   svg {
     display: block;

@@ -6,12 +6,15 @@
 |
 */
 .plyr-Card {
+  --CardWidth: 110px;
+  --CardHeight: 139px;
+
   position: relative;
 
   display: block;
-  width: 158px;
-  height: 247px;
-  padding: 21px 23px 23px;
+  width: var(--CardWidth);
+  height: var(--CardHeight);
+  padding: 25px 8px 25px 13px;
 
   font-family: var(--Font_Family-dinCond);
 
@@ -63,24 +66,34 @@
 .plyr-Card_Header {
   position: relative;
 
-  align-items: flex-end;
+  grid-template-columns: 22px 1fr;
 
-  display: flex;
+  display: grid;
 
   font-family: var(--Font_Family-dinCond);
   font-weight: 700;
 
   .plyr-Card-small & {
-    grid-column-gap: 10px;
-    grid-template-columns: 22px 1fr;
-
-    display: grid;
+    height: 74px;
   }
 
   .plyr-Card-medium & {
-    grid-template-columns: 33px 1fr;
+    @media (--xxs-viewport) {
+      grid-column-gap: 10px;
 
-    display: grid;
+      height: 74px;
+    }
+
+    @media (--sm) {
+      grid-template-columns: 33px 1fr;
+
+      display: grid;
+    }
+  }
+
+  .plyr-Card-large & {
+    align-items: end;
+    grid-template-columns: 40px 1fr;
   }
 }
 
@@ -116,28 +129,37 @@
 
   color: var(--Card_Color);
 
+  @media (--xxs-viewport) {
+    margin-left: 0;
+  }
+
   .plyr-Card-small & {
     margin-left: 0;
   }
 }
 
 .plyr-Card_Rating {
+  font-size: 18px;
   font-weight: 700;
+  letter-spacing: -0.4px;
+  line-height: 16px;
 
   color: var(--Card_Color-rating);
 
+  @media (--xxs-viewport) {
+    margin-bottom: 0;
+  }
+
   .plyr-Card-small & {
     margin-bottom: 1px;
-
-    font-size: 18px;
-    letter-spacing: -0.4px;
-    line-height: 16px;
   }
 
   .plyr-Card-medium & {
-    font-size: 22px;
-    letter-spacing: -0.55px;
-    line-height: 18px;
+    @media (--sm) {
+      font-size: 22px;
+      letter-spacing: -0.55px;
+      line-height: 18px;
+    }
   }
 
   .plyr-Card-large & {
@@ -148,29 +170,25 @@
 }
 
 .plyr-Card_Position {
+  margin-bottom: 1px;
+
+  font-size: 14px;
   font-weight: 700;
+  letter-spacing: -0.35px;
+  line-height: 16px;
 
   color: var(--Card_Color-position);
 
-  .plyr-Card-small & {
-    margin-bottom: 1px;
-
-    font-size: 14px;
-    letter-spacing: -0.35px;
-    line-height: 16px;
-  }
-
   .plyr-Card-medium & {
-    margin-bottom: 1px;
-
-    font-size: 14px;
-    letter-spacing: -0.35px;
-    line-height: 16px;
+    @media (--sm) {
+      font-size: 14px;
+      letter-spacing: -0.35px;
+      line-height: 16px;
+    }
   }
 
   .plyr-Card-large & {
     margin-top: 2px;
-    margin-bottom: 1px;
 
     font-size: 15px;
     letter-spacing: -0.45px;
@@ -179,15 +197,16 @@
 }
 
 .plyr-Card_Club {
+  width: 22px;
+  margin-bottom: 2px;
+
   pointer-events: none;
 
-  .plyr-Card-small & {
-    width: 22px;
-    margin-bottom: 2px;
-  }
-
   .plyr-Card-medium & {
-    width: 25px;
+    @media (--sm) {
+      width: 25px;
+      margin-bottom: 0;
+    }
   }
 
   .plyr-Card-large & {
@@ -197,31 +216,37 @@
 }
 
 .plyr-Card_Nation {
+  width: 22px;
+  margin-bottom: 3px;
+
   pointer-events: none;
 
-  .plyr-Card-small & {
-    width: 22px;
-    margin-bottom: 3px;
-  }
-
   .plyr-Card-medium & {
-    width: 25px;
+    @media (--sm) {
+      width: 25px;
+      margin-bottom: 0;
+    }
   }
 
   .plyr-Card-large & {
     width: 40px;
+    margin-bottom: 0;
   }
 }
 
 .plyr-Card_Image {
+  width: 60px;
+
   pointer-events: none;
 
-  .plyr-Card-small & {
-    width: 60px;
+  @media (--xxs-viewport) {
+    align-self: end;
   }
 
   .plyr-Card-medium & {
-    height: 105px;
+    @media (--sm) {
+      height: 105px;
+    }
   }
 
   .plyr-Card-large & {
@@ -248,25 +273,31 @@
 }
 
 .plyr-Card_Price {
-  position: absolute;
-  bottom: 0;
+  display: none;
 
-  align-items: center;
+  @media (--sm) {
+    position: absolute;
+    bottom: 0;
 
-  display: flex;
-  padding: 0 35px 0 5px;
+    align-items: center;
 
-  font-size: 17px;
+    display: flex;
+    padding: 0 35px 0 5px;
 
-  background-image: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.6) 0,
-    rgba(0, 0, 0, 0.6) calc(100% - 30px),
-    rgba(0, 0, 0, 0) 100%
-  );
+    font-size: 17px;
+
+    background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.6) 0,
+      rgba(0, 0, 0, 0.6) calc(100% - 30px),
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
 
   .plyr-Card-medium & {
-    left: 34px;
+    @media (--sm) {
+      left: 34px;
+    }
   }
 
   .plyr-Card-large & {
@@ -275,10 +306,14 @@
 }
 
 .plyr-Card_PriceIcon {
-  display: block;
-  width: 16px;
-  height: @width;
-  margin-right: 5px;
+  display: none;
+
+  @media (--sm) {
+    display: block;
+    width: 16px;
+    height: @width;
+    margin-right: 5px;
+  }
 
   /* stylelint-disable selector-max-type */
   svg {
@@ -296,29 +331,33 @@
 |
 */
 .plyr-Card_Body {
-  display: grid;
+  display: block;
 
-  .plyr-Card-small & {
-    display: block;
-
-    text-align: center;
-  }
+  text-align: center;
 
   .plyr-Card-medium & {
-    grid-template-rows: 22px 1fr;
-    grid-template-columns: 33px 1fr;
+    @media (--sm) {
+      grid-template-rows: 22px 1fr;
+      grid-template-columns: 33px 1fr;
+
+      display: grid;
+    }
   }
 
   .plyr-Card-large & {
     grid-template-rows: 28px 1fr;
     grid-template-columns: 42px 1fr;
+
+    display: grid;
   }
 }
 
 .plyr-Card_Name {
   grid-column: 2;
 
+  font-size: 14px;
   font-weight: 600;
+  line-height: 20px;
   text-align: center;
   text-transform: uppercase;
   white-space: nowrap;
@@ -326,19 +365,16 @@
   color: var(--Card_Color-name);
   overflow-x: auto;
 
-  .plyr-Card-small & {
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 20px;
-  }
-
   .plyr-Card-medium & {
-    margin-top: 1px;
-    margin-bottom: @margin-top;
+    @media (--sm) {
+      margin-top: 1px;
+      margin-bottom: @margin-top;
 
-    font-size: 16px;
-    letter-spacing: -0.4px;
-    line-height: 20px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      line-height: 20px;
+    }
   }
 
   .plyr-Card-large & {
@@ -346,6 +382,7 @@
     margin-bottom: @margin-top;
 
     font-size: 21px;
+    font-weight: 700;
     letter-spacing: -0.5px;
     line-height: 24px;
   }
@@ -373,6 +410,10 @@
     padding-left: 4px;
 
     letter-spacing: -0.2px;
+
+    @media (--xxs-viewport) {
+      display: none;
+    }
   }
 
   .plyr-Card-large & {
@@ -405,6 +446,10 @@
     margin-top: 4px;
     padding-right: 22px;
     padding-left: 9px;
+
+    @media (--xxs-viewport) {
+      display: none;
+    }
   }
 
   .plyr-Card-large & {
@@ -516,6 +561,10 @@
 */
 .plyr-Card_Footer {
   display: grid;
+
+  @media (--xs-viewport) {
+    display: none;
+  }
 
   .plyr-Card-small & {
     display: none;
