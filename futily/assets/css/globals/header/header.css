@@ -37,15 +37,10 @@
 */
 .hd-Header_Logo {
   display: block;
-  width: width('logo.png');
-  height: height('logo.png');
+  width: 74px;
+  height: 36px;
 
-  background-image: resolve('logo.png');
   background-size: @width @height;
-
-  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    background-image: resolve('logo@2x.png');
-  }
 }
 
 /*

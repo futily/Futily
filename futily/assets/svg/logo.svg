@@ -1,30 +1,18 @@
-<svg viewBox="0 0 66 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg viewBox="0 0 74 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <path d="M5 26.3H.2V.3H17v4H5v6.8h10.8v4H5v11.2zm34.2 0H22.8V.3h4.9v22h11.5v4zm15.5 0h-4.8v-9.5L41.4.4H47l3 6.2 2.3 5.3h.3l2.3-5.3 3-6.2h5.3l-8.4 16.4v9.5z" id="b"/>
-    <filter x="-1.6%" y="-3.9%" width="104.8%" height="111.6%" filterUnits="objectBoundingBox" id="a">
-      <feMorphology radius=".5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"/>
-      <feOffset dx="1" dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
-      <feComposite in="shadowOffsetOuter1" in2="SourceAlpha" operator="out" result="shadowOffsetOuter1"/>
-      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" in="shadowOffsetOuter1"/>
+    <path d="M4.1 21.4h-4V.4H14v3.2H4.1V9H13v3.2H4v9.1zm27.8 0H18.6V.4h4V18h9.3v3.3zm12.7 0h-4v-7.7L33.8.3h4.4l2.4 5 2 4.4h.1l2-4.3 2.5-5h4.2l-6.8 13.3v7.7z" id="logo-b"/>
+    <filter x="-1%" y="-2.4%" width="103.9%" height="109.5%" filterUnits="objectBoundingBox" id="logo-a">
+      <feOffset dx="1" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feColorMatrix values="0 0 0 0 0.333333333 0 0 0 0 0.588235294 0 0 0 0 0.901960784 0 0 0 0.2 0" in="shadowOffsetOuter1"/>
     </filter>
-    <path d="M.8 31.7h61.8" id="d"/>
-    <filter x="-1.6%" y="-21.6%" width="104.7%" height="164.7%" filterUnits="objectBoundingBox" id="c">
-      <feMorphology radius=".5" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"/>
-      <feOffset dx="1" dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"/>
-      <feMorphology radius="1" in="SourceAlpha" result="shadowInner"/>
-      <feOffset dx="1" dy="1" in="shadowInner" result="shadowInner"/>
-      <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"/>
-      <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0" in="shadowOffsetOuter1"/>
-    </filter>
+    <path id="logo-c" d="M0 0h74v36H0z"/>
   </defs>
   <g fill="none" fill-rule="evenodd">
-    <g transform="translate(1 1)">
-      <use fill="#000" filter="url(#a)" xlink:href="#b"/>
-      <use fill="#FFF" xlink:href="#b"/>
+    <g transform="translate(11 7)">
+      <use fill="#000" filter="url(#logo-a)" xlink:href="#logo-b"/>
+      <use fill="#FFF" xlink:href="#logo-b"/>
     </g>
-    <g stroke-linecap="square" transform="translate(1 1)">
-      <use fill="#000" filter="url(#c)" xlink:href="#d"/>
-      <use stroke="#5596E6" xlink:href="#d"/>
-    </g>
+    <use fill-opacity="0" fill="#D8D8D8" xlink:href="#logo-c"/>
+    <path stroke="#FFF" d="M.5.5h73v35H.5z"/>
   </g>
 </svg>

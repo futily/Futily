@@ -10,7 +10,7 @@
   color: #fff;
 
   @media (--lg) {
-    padding-top: 4vr;
+    padding-top: 10vr;
     padding-bottom: @padding-top;
   }
 }
@@ -42,7 +42,7 @@
 .ft-Main_Title {
   position: relative;
 
-  padding-bottom: 7px;
+  padding-bottom: 1vr;
 
   font-weight: 900;
   letter-spacing: calc(300em / 1000);

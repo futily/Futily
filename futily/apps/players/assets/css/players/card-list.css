@@ -26,11 +26,15 @@
 }
 
 .plyr-CardList_Items-large {
-  grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
+  --Size: 202px;
 }
 
 .plyr-CardList_Items-tight {
-  grid-template-columns: repeat(auto-fit, 175px);
+  --Size: 175px;
+}
+
+.plyr-CardList_Items-small {
+  --Size: var(--Card_Size-small);
 }
 
 .plyr-CardList_Item {

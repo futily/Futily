@@ -7,9 +7,9 @@
   <div class="sec-Search_Inner">
     {% if section.title or section.text %}
       <header class="sec-Search_Header">
-        {% if section.title %}
-          <h2 class="sec-Search_Title">{{ section.title }}</h2>
-        {% endif %}
+        <div class="sec-Search_Logo">
+          {% include 'logo-full.svg' %}
+        </div>
 
         {% if section.text %}
           <p class="sec-Search_Text">{{ section.text }}</p>

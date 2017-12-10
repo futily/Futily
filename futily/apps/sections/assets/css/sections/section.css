@@ -7,7 +7,7 @@
 */
 .sec-Section {
   @media (--lg) {
-    margin-top: 4vr;
+    margin-top: 10vr;
     margin-bottom: @margin-top;
   }
 }
@@ -36,6 +36,12 @@
     margin-right: auto;
     margin-left: auto;
   }
+
+  .sec-Section_Footer + & {
+    @media (--lg) {
+      margin-top: 4vr;
+    }
+  }
 }
 
 .sec-Section_Title {
@@ -50,4 +56,16 @@
   .sec-Section_Header & {
     margin-top: 1vr;
   }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+|
+*/
+.sec-Section_Footer {
+  margin-top: 4vr;
+
+  text-align: center;
 }

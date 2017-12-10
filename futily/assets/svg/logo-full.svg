@@ -1,0 +1,16 @@
+<svg viewBox="0 0 130 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <path d="M10.4 29.6H6V6h15.4v3.7h-11v6.1h10v3.7h-10v10zM25.4 6h4.4v14.7c0 3.5.2 5.7 3.6 5.7s3.6-2.2 3.6-5.7V6h4.5v14c0 6.7-1.4 10-8 10-6.8 0-8.1-3.3-8.1-10V6zm37.4 3.7h-7.1v19.9h-4.4v-20h-7.1V6h18.6v3.7zM81 29.6H66v-3.3h5.2v-17H66V6h15v3.3h-5.3v17h5.4v3.3zm20.6 0H87V6h4.4v20h10.4v3.6zm14.2 0h-4.4V21l-7.7-15h5l2.7 5.7 2.1 4.8h.3l2.1-4.8 2.8-5.7h4.8l-7.7 15v8.6z" id="full-logo-b"/>
+    <filter x="-.4%" y="-2.1%" width="101.7%" height="108.3%" filterUnits="objectBoundingBox" id="full-logo-a">
+      <feOffset dx="1" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feColorMatrix values="0 0 0 0 0.333333333 0 0 0 0 0.588235294 0 0 0 0 0.901960784 0 0 0 0.2 0" in="shadowOffsetOuter1"/>
+    </filter>
+    <path id="full-logo-c" d="M0 0h130v36H0z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <use fill="#000" filter="url(#full-logo-a)" xlink:href="#full-logo-b"/>
+    <use fill="#FFF" xlink:href="#full-logo-b"/>
+    <use fill-opacity="0" fill="#full-logo-D8D8D8" xlink:href="#full-logo-c"/>
+    <path stroke="#FFF" d="M.5.5h129v35H.5z"/>
+  </g>
+</svg>

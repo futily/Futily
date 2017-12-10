@@ -9,7 +9,7 @@
 .plyr-Card-medium {
   color: #f8fcff;
 
-  @media (--xxs-viewport) {
+  @media (--xs-viewport) {
     background-size: 100%;
   }
 
@@ -24,7 +24,7 @@
   }
 
   &.plyr-Card-bronze {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/bronze.png');
     }
 
@@ -33,7 +33,7 @@
     }
   }
   &.plyr-Card-gold {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/gold.png');
     }
 
@@ -42,7 +42,7 @@
     }
   }
   &.plyr-Card-silver {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/silver.png');
     }
 
@@ -51,7 +51,7 @@
     }
   }
   &.plyr-Card-legend {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/legend.png');
     }
 
@@ -60,7 +60,7 @@
     }
   }
   &.plyr-Card-rare_bronze {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/rare_bronze.png');
     }
 
@@ -69,7 +69,7 @@
     }
   }
   &.plyr-Card-rare_gold {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/rare_gold.png');
     }
 
@@ -78,7 +78,7 @@
     }
   }
   &.plyr-Card-rare_silver {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/rare_silver.png');
     }
 
@@ -88,7 +88,7 @@
   }
 
   &.plyr-Card-award_winner {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/award_winner.png');
     }
 
@@ -97,7 +97,7 @@
     }
   }
   &.plyr-Card-europe_motm {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/europe_motm.png');
     }
 
@@ -106,7 +106,7 @@
     }
   }
   &.plyr-Card-fut_champions_bronze {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/fut_champions_bronze.png');
     }
 
@@ -115,7 +115,7 @@
     }
   }
   &.plyr-Card-fut_champions_gold {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/fut_champions_gold.png');
     }
 
@@ -124,7 +124,7 @@
     }
   }
   &.plyr-Card-fut_champions_silver {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/fut_champions_silver.png');
     }
 
@@ -133,7 +133,7 @@
     }
   }
   &.plyr-Card-fut_united {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/fut_united.png');
     }
 
@@ -142,7 +142,7 @@
     }
   }
   &.plyr-Card-futties_winner {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/futties_winner.png');
     }
 
@@ -151,7 +151,7 @@
     }
   }
   &.plyr-Card-gotm {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/gotm.png');
     }
 
@@ -160,7 +160,7 @@
     }
   }
   &.plyr-Card-halloween {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/halloween.png');
     }
 
@@ -169,7 +169,7 @@
     }
   }
   &.plyr-Card-marquee {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/marquee.png');
     }
 
@@ -178,7 +178,7 @@
     }
   }
   &.plyr-Card-motm {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/motm.png');
     }
 
@@ -187,7 +187,7 @@
     }
   }
   &.plyr-Card-ones_to_watch {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/ones_to_watch.png');
     }
 
@@ -196,7 +196,7 @@
     }
   }
   &.plyr-Card-pink {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/pink.png');
     }
 
@@ -205,7 +205,7 @@
     }
   }
   &.plyr-Card-purple {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/purple.png');
     }
 
@@ -214,7 +214,7 @@
     }
   }
   &.plyr-Card-record_breaker {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/record_breaker.png');
     }
 
@@ -223,7 +223,7 @@
     }
   }
   &.plyr-Card-rtr_gold {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/rtr_gold.png');
     }
 
@@ -232,7 +232,7 @@
     }
   }
   &.plyr-Card-sbc_base {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/sbc_base.png');
     }
 
@@ -241,7 +241,7 @@
     }
   }
   &.plyr-Card-sbc_premium {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/sbc_premium.png');
     }
 
@@ -250,7 +250,7 @@
     }
   }
   &.plyr-Card-st_patricks {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/st_patricks.png');
     }
 
@@ -259,7 +259,7 @@
     }
   }
   &.plyr-Card-teal {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/teal.png');
     }
 
@@ -268,7 +268,7 @@
     }
   }
   &.plyr-Card-tots_bronze {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/tots_bronze.png');
     }
 
@@ -277,7 +277,7 @@
     }
   }
   &.plyr-Card-tots_gold {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/tots_gold.png');
     }
 
@@ -286,7 +286,7 @@
     }
   }
   &.plyr-Card-tots_silver {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/tots_silver.png');
     }
 
@@ -295,7 +295,7 @@
     }
   }
   &.plyr-Card-totw_bronze {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/totw_bronze.png');
     }
 
@@ -304,7 +304,7 @@
     }
   }
   &.plyr-Card-totw_gold {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/totw_gold.png');
     }
 
@@ -313,7 +313,7 @@
     }
   }
   &.plyr-Card-totw_silver {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/totw_silver.png');
     }
 
@@ -322,7 +322,7 @@
     }
   }
   &.plyr-Card-toty {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       background-image: resolve('ea/cards/18/small/toty.png');
     }
 

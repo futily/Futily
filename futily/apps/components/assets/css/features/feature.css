@@ -9,7 +9,7 @@
   align-items: flex-start;
 
   display: flex;
-  padding: 1vr calc(var(--Grid_Gutter) * 2);
+  padding: 3vr calc(var(--Grid_Gutter) * 2);
 
   background-color: var(--Color_Light-1);
   border: 1px solid var(--Color_Border);

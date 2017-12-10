@@ -4,34 +4,46 @@
 {% block section_class %}sec-Section{% endblock %}
 
 {% block section_content %}
-{#  {% set specials_teams = section.get_special_teams() %}#}
+  {% set specials_teams = section.get_special_teams() %}
 
-{#  <div class="sec-Section_Inner">#}
-{#    <header class="sec-Section_Header">#}
-{#      <a href="{{ specials_teams.totw.link.get_absolute_url() }}"#}
-{#         class="sec-Section_Text">{{ specials_teams.totw.link.title }}</a>#}
-{#    </header>#}
-{##}
-{#    <div class="sec-Section_Body">#}
-{#      {{ player_macros.card_list(specials_teams.totw.players) }}#}
-{#    </div>#}
-{##}
-{#    <header class="sec-Section_Header">#}
-{#      <a href="{{ specials_teams.tots.link.get_absolute_url() }}"#}
-{#         class="sec-Section_Text">{{ specials_teams.tots.link.title }}</a>#}
-{#    </header>#}
-{##}
-{#    <div class="sec-Section_Body">#}
-{#      {{ player_macros.card_list(specials_teams.tots.players) }}#}
-{#    </div>#}
-{##}
-{#    <header class="sec-Section_Header">#}
-{#      <a href="{{ specials_teams.latest.link }}"#}
-{#         class="sec-Section_Text">Latest players</a>#}
-{#    </header>#}
-{##}
-{#    <div class="sec-Section_Body">#}
-{#      {{ player_macros.card_list(specials_teams.latest.players) }}#}
-{#    </div>#}
-{#  </div>#}
+  <div class="sec-Section_Inner">
+    <header class="sec-Section_Header">
+      <h2 class="sec-Section_Title">{{ specials_teams.totw.title }}</h2>
+    </header>
+
+    <div class="sec-Section_Body">
+      {{ player_macros.card_list(specials_teams.totw.players[:8]) }}
+
+      <hr>
+
+      {% call (player) player_macros.card_list(specials_teams.totw.players[8:], small=True) %}
+        {{ player.render_card(size='small') }}
+      {% endcall %}
+    </div>
+
+    <footer class="sec-Section_Footer">
+      <a class="sec-Section_Link btn-Primary" href="{{ specials_teams.totw.link }}">View squad</a>
+    </footer>
+
+    {#    <header class="sec-Section_Header">#}
+    {#      <a href="{{ specials_teams.tots.link.get_absolute_url() }}"#}
+    {#         class="sec-Section_Text">{{ specials_teams.tots.link.title }}</a>#}
+    {#    </header>#}
+    {##}
+    {#    <div class="sec-Section_Body">#}
+    {#      {{ player_macros.card_list(specials_teams.tots.players) }}#}
+    {#    </div>#}
+
+    <header class="sec-Section_Header">
+      <h2 class="sec-Section_Title">{{ specials_teams.latest.title }}</h2>
+    </header>
+
+    <div class="sec-Section_Body">
+      {{ player_macros.card_list(specials_teams.latest.players) }}
+    </div>
+
+    <footer class="sec-Section_Footer">
+      <a class="sec-Section_Link btn-Primary" href="{{ specials_teams.latest.link }}">View players</a>
+    </footer>
+  </div>
 {% endblock %}

@@ -7,7 +7,9 @@ from django.db import models
 from django.shortcuts import render_to_response
 from django.utils.text import slugify
 
-from ..players.models import Player, Source
+from futily.apps.squads.models import Squad
+
+from ..players.models import Player, Players, Source
 
 SECTION_TYPES = (
     ('Adverts', {
@@ -60,7 +62,8 @@ def sections_js(request):
 
             for field in fields:
                 if field not in model_fields:
-                    print(f"NOTE: Field `{field}` is referenced by section type `{section_type[0]}`, but doesn't exist.")
+                    print(
+                        f"NOTE: Field `{field}` is referenced by section type `{section_type[0]}`, but doesn't exist.")
 
     return render_to_response('admin/pages/page/sections.js', {
         'types': sections,
@@ -114,21 +117,24 @@ class SectionBase(models.Model):
 
     @staticmethod
     def get_special_teams():
-        latest_totw = Source.objects.filter(short_title__contains='34')[0]
-        latest_tots = Source.objects.filter(short_title__contains='TOTS Gold')[0]
+        latest_totw = Source.objects.first()
+        print(latest_totw)
+        # latest_tots = Source.objects.filter(short_title__contains='TOTS Gold')[0]
 
         return {
             'latest': {
+                'title': 'Latest players',
                 'players': Player.objects.order_by('-created')[:8],
-                'link': '#'
+                'link': Players.objects.first().page.reverse('latest_players'),
             },
             'tots': {
-                'players': Player.objects.filter(source=latest_tots)[:8],
+                # 'players': Player.objects.filter(source=latest_tots)[:8],
                 # 'link': Squad.objects.get(title=latest_tots.title, is_special=True)
             },
             'totw': {
-                'players': Player.objects.filter(source=latest_totw)[:8],
-                # 'link': Squad.objects.get(title=latest_totw.title, is_special=True)
+                'title': latest_totw.title,
+                'players': Player.objects.filter(source=latest_totw),
+                'link': Squad.objects.get(title=latest_totw.title, is_special=True).get_absolute_url(),
             },
         }
 

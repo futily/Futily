@@ -65,7 +65,9 @@
 <header class="hd-Header">
   <div class="hd-Header_Inner">
     <div class="hd-Header_Body">
-      <a class="hd-Header_Logo" href="/"></a>
+      <a class="hd-Header_Logo" href="/">
+        {% include 'logo.svg' %}
+      </a>
 
       <div class="hd-Header_Nav">
         {{ render_navigation(pages.homepage.navigation) }}

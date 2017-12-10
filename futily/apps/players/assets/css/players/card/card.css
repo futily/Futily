@@ -79,7 +79,7 @@
   }
 
   .plyr-Card-medium & {
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       grid-column-gap: 10px;
 
       height: 74px;
@@ -130,7 +130,7 @@
 
   color: var(--Card_Color);
 
-  @media (--xxs-viewport) {
+  @media (--xs-viewport) {
     margin-left: 0;
   }
 
@@ -147,7 +147,7 @@
 
   color: var(--Card_Color-rating);
 
-  @media (--xxs-viewport) {
+  @media (--xs-viewport) {
     margin-bottom: 0;
   }
 
@@ -240,7 +240,7 @@
 
   pointer-events: none;
 
-  @media (--xxs-viewport) {
+  @media (--xs-viewport) {
     align-self: end;
   }
 
@@ -295,6 +295,10 @@
     );
   }
 
+  .plyr-Card-small & {
+    display: none;
+  }
+
   .plyr-Card-medium & {
     @media (--sm) {
       left: 34px;
@@ -311,7 +315,7 @@
 
   @media (--sm) {
     display: block;
-    width: 16px;
+    width: 14px;
     height: @width;
     margin-right: 5px;
   }
@@ -412,7 +416,7 @@
 
     letter-spacing: -0.2px;
 
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       display: none;
     }
   }
@@ -448,7 +452,7 @@
     padding-right: 22px;
     padding-left: 9px;
 
-    @media (--xxs-viewport) {
+    @media (--xs-viewport) {
       display: none;
     }
   }

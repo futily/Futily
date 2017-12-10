@@ -8,7 +8,7 @@ class Price(models.Model):
         ('xb', 'Xbox'),
     ])
     player = models.ForeignKey('players.Player')
-    value = models.CharField(max_length=100)
+    value = models.IntegerField()
     source = models.CharField(max_length=255, choices=[
         ('futbin', 'Futbin'),
         ('futhead', 'Futhead'),

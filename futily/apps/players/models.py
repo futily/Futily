@@ -47,8 +47,11 @@ class Source(models.Model):
 
     order = models.PositiveIntegerField(default=1)
 
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
     class Meta:
-        ordering = ['order']
+        ordering = ['-created', 'order']
 
     def __str__(self):
         return self.title

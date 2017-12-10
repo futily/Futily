@@ -37,6 +37,13 @@
   }
 }
 
+.sec-Search_Logo {
+  width: 250px;
+  margin-right: auto;
+  margin-bottom: 3vr;
+  margin-left: auto;
+}
+
 .sec-Search_Title {
   @include Font_H;
 
