@@ -77,10 +77,11 @@ export function externalLinks () {
  Media breakpoints
  */
 export const mediaBreakpoints = {
-  sm: 600,
+  sm: 768,
   md: 900,
   lg: 1200,
-  xlg: 1800,
+  xlg: 1440,
+  xxlg: 1600,
 };
 
 /*
@@ -104,29 +105,21 @@ export function iframeFix () {
 }
 
 export function getOffsetTop (el, parent = document.body) {
-  let offsetTop = 0;
+  let offsetTop = el.offsetTop;
 
-  do {
-    if (!isNaN(el.offsetTop)) {
-      offsetTop += el.offsetTop;
-    }
-
-    el = el.offsetParent;
-  } while (el !== parent || el !== document.body);
+  if (el.offsetParent !== parent && el.offsetParent !== null) {
+    offsetTop += getOffsetTop(el.offsetParent, parent);
+  }
 
   return offsetTop;
 }
 
 export function getOffsetLeft (el, parent = document.body) {
-  let offsetLeft = 0;
+  let offsetLeft = el.offsetLeft;
 
-  do {
-    if (!isNaN(el.offsetLeft)) {
-      offsetLeft += el.offsetLeft;
-    }
-
-    el = el.offsetParent;
-  } while (el !== parent || el !== document.body);
+  if (el.offsetParent !== parent && el.offsetParent !== null) {
+    offsetLeft += getOffsetLeft(el.offsetParent, parent);
+  }
 
   return offsetLeft;
 }

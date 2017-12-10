@@ -70,17 +70,16 @@ def _navigation_entries(context, pages, section=None, is_json=False):
 @library.global_function
 @library.render_with('pages/navigation.html')
 @jinja2.contextfunction
-def render_navigation(context, pages, section=None):
+def render_navigation(context, pages, section=None, recursive=False):
     """
     Renders a navigation list for the given pages.
-
     The pages should all be a subclass of PageBase, and possess a get_absolute_url() method.
-
     You can also specify an alias for the navigation, at which point it will be set in the
     context rather than rendered.
     """
     return {
-        "navigation": _navigation_entries(context, pages, section),
+        'navigation': _navigation_entries(context, pages, section),
+        'recursive': recursive,
     }
 
 

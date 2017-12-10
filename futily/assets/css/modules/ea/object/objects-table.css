@@ -5,6 +5,40 @@
 | @namespace: ea-
 |
 */
+.ea-ObjectsTable {
+  @media (--xxs-viewport) {
+    margin-right: -var(--Grid_Gutter);
+    margin-left: @margin-right;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Header
+|--------------------------------------------------------------------------
+|
+*/
+.ea-ObjectsTable_Header {
+  display: none;
+
+  @media (--sm) {
+    display: block;
+  }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Body
+|--------------------------------------------------------------------------
+|
+*/
+.ea-ObjectsTable_Body {
+  @media (--xxs-viewport) {
+    grid-gap: 1vr;
+
+    display: grid;
+  }
+}
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +47,22 @@
 |
 */
 .ea-ObjectsTable_Row {
-  justify-content: space-between;
+  grid-gap: 1.5vr;
+  grid-template-rows: repeat(min-content, 2);
 
-  display: flex;
+  display: grid;
 
   color: var(--Color_Dark-1);
+
+  @media (--xxs-viewport) {
+    padding: 1vr var(--Grid_Gutter);
+  }
+
+  @media (--sm) {
+    justify-content: space-between;
+
+    display: flex;
+  }
 
   .ea-ObjectsTable_Header & {
     background-color: var(--Color_Light-2);
@@ -37,20 +82,36 @@
 
 .ea-ObjectsTable_RowLeft,
 .ea-ObjectsTable_RowRight {
-  align-items: center;
-
   display: flex;
+
+  @media (--sm) {
+    align-items: center;
+  }
 }
 
 .ea-ObjectsTable_RowLeft {
-  flex-basis: 330px;
-  flex-shrink: 0;
-
   display: flex;
+
+  @media (--xxs-viewport) {
+    align-items: flex-end;
+  }
+
+  @media (--sm) {
+    flex-basis: 330px;
+    flex-shrink: 0;
+  }
 }
 
 .ea-ObjectsTable_RowLeft-flexed {
   flex: auto;
+}
+
+.ea-ObjectsTable_RowRight {
+  @media (--xxs-viewport) {
+    justify-content: space-between;
+
+    display: flex;
+  }
 }
 
 /*
@@ -60,12 +121,14 @@
 |
 */
 .ea-ObjectsTable_Cell {
-  justify-content: center;
+  @media (--sm) {
+    justify-content: center;
 
-  display: flex;
-  padding: 0.5vr 10px;
+    display: flex;
+    padding: 0.5vr 10px;
 
-  text-align: center;
+    text-align: center;
+  }
 
   .ea-ObjectsTable_Header & {
     @include Font_Tiny;
@@ -76,44 +139,58 @@
 }
 
 .ea-ObjectsTable_Cell-df {
-  align-items: center;
-  justify-content: flex-start;
+  @media (--sm) {
+    align-items: center;
+    justify-content: flex-start;
 
-  display: flex;
+    display: flex;
+  }
 }
 
 .ea-ObjectsTable_Cell-left {
-  justify-content: flex-start;
+  @media (--sm) {
+    justify-content: flex-start;
 
-  text-align: left;
+    text-align: left;
+  }
 }
 
 .ea-ObjectsTable_Cell-80 {
-  flex: 0 0 80px;
+  @media (--sm) {
+    flex: 0 0 80px;
 
-  width: 80px;
+    width: 80px;
+  }
 }
 
 .ea-ObjectsTable_Cell-120 {
-  flex: 0 0 120px;
+  @media (--sm) {
+    flex: 0 0 120px;
 
-  width: 120px;
+    width: 120px;
+  }
 }
 
 .ea-ObjectsTable_Cell-160 {
-  flex: 0 0 160px;
+  @media (--sm) {
+    flex: 0 0 160px;
 
-  width: 160px;
+    width: 160px;
+  }
 }
 
 .ea-ObjectsTable_Cell-200 {
-  flex: 0 0 200px;
+  @media (--sm) {
+    flex: 0 0 200px;
 
-  width: 200px;
+    width: 200px;
+  }
 }
 
 .ea-ObjectsTable_Cell-flex {
-  flex: 1;
+  @media (--sm) {
+    flex: 1;
+  }
 }
 
 .ea-ObjectsTable_CellTitle {

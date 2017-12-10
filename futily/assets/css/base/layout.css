@@ -33,7 +33,7 @@
   margin-bottom: @margin-top;
 
   .pg-Breadcrumbs + & {
-    margin-top: 0.75vr;
+    margin-top: 1.5vr;
   }
 }
 
@@ -42,7 +42,7 @@
   margin-bottom: @margin-top;
 
   .pg-Breadcrumbs + & {
-    margin-top: 0.75vr;
+    margin-top: 1.5vr;
   }
 }
 
@@ -68,10 +68,14 @@
 */
 .lyt-Content_Body {
   .lyt-Content-mainAside & {
-    grid-column-gap: calc(var(--Grid_Gutter) * 2);
-    grid-template-columns: 1fr 300px;
+    grid-row-gap: 2vr;
 
     display: grid;
+
+    @media (--md) {
+      grid-column-gap: calc(var(--Grid_Gutter) * 2);
+      grid-template-columns: 1fr 300px;
+    }
   }
 
   .lyt-Content-asideSwap & {
@@ -91,6 +95,10 @@
 |
 */
 .lyt-Main {
+  @media (--xxs-viewport) {
+    width: calc(100vw - (var(--Grid_Gutter) * 2));
+  }
+
   .lyt-Content-mainTight & {
     grid-column: 2;
   }
@@ -104,7 +112,9 @@
 */
 .lyt-Aside {
   .lyt-Content-mainAside & {
-    width: 300px;
+    @media (--lg) {
+      width: 300px;
+    }
   }
 
   .lyt-Content-asideSwap & {

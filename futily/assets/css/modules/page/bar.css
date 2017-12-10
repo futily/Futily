@@ -6,10 +6,10 @@
 |
 */
 .pg-Bar {
-  margin-bottom: 0.75vr;
+  margin-bottom: 2vr;
 
   .plyr-Detail & {
-    margin-bottom: 0.5vr;
+    margin-bottom: 1vr;
   }
 }
 

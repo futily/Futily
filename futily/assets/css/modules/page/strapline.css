@@ -6,7 +6,7 @@
 |
 */
 .pg-Strapline {
-  padding-top: 1.25vr;
+  padding-top: 2vr;
   padding-bottom: @padding-top;
 
   background-color: var(--Color_Light-1);
@@ -18,9 +18,11 @@
 }
 
 .pg-Strapline_Body {
-  align-items: center;
+  @media (--sm) {
+    align-items: center;
 
-  display: flex;
+    display: flex;
+  }
 }
 
 /*
@@ -30,10 +32,15 @@
 |
 */
 .pg-Strapline_ImageContainer {
-  flex-basis: 80px;
-  flex-shrink: 0;
+  display: none;
 
-  margin-right: var(--Grid_Gutter);
+  @media (--sm) {
+    flex-basis: 80px;
+    flex-shrink: 0;
+
+    display: block;
+    margin-right: var(--Grid_Gutter);
+  }
 }
 
 /*
@@ -61,5 +68,9 @@
 .pg-Strapline_Advert {
   flex-shrink: 0;
 
-  margin-left: calc(var(--Grid_Gutter) * 2);
+  margin-top: 1vr;
+
+  @media (--md) {
+    margin-left: calc(var(--Grid_Gutter) * 2);
+  }
 }

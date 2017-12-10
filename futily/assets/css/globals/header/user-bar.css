@@ -6,17 +6,23 @@
 |
 */
 .hd-UserBar {
-  @include Font_A;
+  @media (--xxs-viewport) {
+    display: none;
+  }
 
-  --BorderColor: #3f5060;
+  @media (--sm) {
+    @include Font_A;
 
-  position: relative;
-  z-index: 11;
+    --BorderColor: #3f5060;
 
-  background-color: var(--Color_Dark-3);
-  border-top: 2px solid var(--Color_Brand-1);
-  border-bottom: 1px solid var(--BorderColor);
-  color: #fff;
+    position: relative;
+    z-index: 11;
+
+    background-color: var(--Color_Dark-3);
+    border-top: 2px solid var(--Color_Brand-1);
+    border-bottom: 1px solid var(--BorderColor);
+    color: #fff;
+  }
 }
 
 .hd-UserBar_Inner {

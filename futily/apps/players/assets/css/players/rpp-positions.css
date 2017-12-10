@@ -6,24 +6,34 @@
 |
 */
 .plyr-RPPPositions {
+  --Height: 350px;
+
   position: relative;
 
   flex-direction: column;
   justify-content: space-around;
 
   display: flex;
-  height: 400px;
-  padding: 0.5vr var(--Grid_Gutter);
+  height: var(--Height);
+  padding: 1vr var(--Grid_Gutter);
 
   background-image: resolve('rpp-pitch.jpg');
-  background-size: 300px 400px;
+  background-size: 300px var(--Height);
+
+  @media (--md) {
+    --Height: 400px;
+  }
 }
 
 .plyr-RPPPositions_Positions {
   justify-content: space-between;
 
   display: flex;
-  height: 56px;
+  height: 50px;
+
+  @media (--md) {
+    height: 56px;
+  }
 }
 
 .plyr-RPPPositions_Positions-line5 {

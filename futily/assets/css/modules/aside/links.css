@@ -6,7 +6,7 @@
 |
 */
 .asi-LinkList_Item {
-  padding-top: 0.5vr;
+  padding-top: 1vr;
   padding-bottom: @padding-top;
 
   border-bottom: 1px solid var(--Color_Border);

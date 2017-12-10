@@ -13,9 +13,13 @@
 |
 */
 .fltr-Filters_Items {
-  @include Grid_Row;
+  @media (--md) {
+    @include Grid_Row;
+  }
 }
 
 .fltr-Filters_Item {
-  @include Grid_Column;
+  @media (--md) {
+    @include Grid_Column;
+  }
 }

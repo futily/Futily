@@ -6,16 +6,18 @@
 |
 */
 .plyr-DetailCompare {
-  grid-column-gap: 20px;
+  grid-column-gap: calc(var(--Grid_Gutter) * 2);
   grid-template-columns: repeat(2, 1fr);
 
   display: grid;
+
+  overflow-x: auto;
 }
 
 .plyr-DetailCompare_Player {
   position: relative;
 
-  padding: 1vr 30px 0.5vr;
+  padding: 3vr calc(var(--Grid_Gutter) * 3) 1vr;
 
   text-align: center;
 

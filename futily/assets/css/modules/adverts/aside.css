@@ -1,14 +1,12 @@
 /*
 |--------------------------------------------------------------------------
-| Breadcrumbs
+| Aside
 |--------------------------------------------------------------------------
-| @namespace: pg-
+| @namespace: adv-
 |
 */
-.pg-Breadcrumbs {
-  margin-top: 2vr;
-}
-
-.pg-Breadcrumbs_Inner {
-  @include Grid_Container;
+.adv-Aside {
+  width: 300px;
+  margin-right: auto;
+  margin-left: auto;
 }

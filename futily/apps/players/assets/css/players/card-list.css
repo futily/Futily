@@ -13,10 +13,16 @@
 |
 */
 .plyr-CardList_Items {
-  grid-row-gap: 0.5vr;
-  grid-template-columns: repeat(auto-fit, minmax(158px, 1fr));
+  --Size: var(--Card_Size-small);
+
+  grid-row-gap: 1vr;
+  grid-template-columns: repeat(auto-fit, minmax(var(--Size), 1fr));
 
   display: grid;
+
+  @media (--md) {
+    --size: var(--Card_Size-medium);
+  }
 }
 
 .plyr-CardList_Items-large {

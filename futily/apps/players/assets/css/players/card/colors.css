@@ -73,6 +73,13 @@
     --Card_Color-rating: #c8ba94;
     --Card_Color-position: #c8ba94;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #c8ba94;
+      --Card_Color-position: #c8ba94;
+    }
+  }
 }
 
 .plyr-Card-award_winner {
@@ -88,6 +95,13 @@
     --Card_Color-rating: #f1dd7c;
     --Card_Color-position: #f1dd7c;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #f1dd7c;
+      --Card_Color-position: #f1dd7c;
+    }
+  }
 }
 .plyr-Card-europe_motm {
   --Card_Color-rating: #003482;
@@ -101,6 +115,13 @@
   &.plyr-Card-small {
     --Card_Color-rating: #e6e6e6;
     --Card_Color-position: #e6e6e6;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #e6e6e6;
+      --Card_Color-position: #e6e6e6;
+    }
   }
 }
 .plyr-Card-fut_birthday {
@@ -125,6 +146,13 @@
     --Card_Color-rating: #fff;
     --Card_Color-position: #fff;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #fff;
+      --Card_Color-position: #fff;
+    }
+  }
 }
 .plyr-Card-fut_champions_gold {
   --Card_Color-rating: #6d0e10;
@@ -139,6 +167,13 @@
     --Card_Color-rating: #fff;
     --Card_Color-position: #fff;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #fff;
+      --Card_Color-position: #fff;
+    }
+  }
 }
 .plyr-Card-fut_champions_silver {
   --Card_Color-rating: #6d0e10;
@@ -152,6 +187,13 @@
   &.plyr-Card-small {
     --Card_Color-rating: #fff;
     --Card_Color-position: #fff;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #fff;
+      --Card_Color-position: #fff;
+    }
   }
 }
 .plyr-Card-fut_championship {
@@ -213,6 +255,14 @@
     --Card_Color-position: #000;
     --Card_Color-name: #ff6f09;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #000;
+      --Card_Color-position: #000;
+      --Card_Color-name: #ff6f09;
+    }
+  }
 }
 .plyr-Card-marquee {
   --Card_Color-rating: #201d55;
@@ -227,6 +277,13 @@
     --Card_Color-rating: #e6e6e6;
     --Card_Color-position: #e6e6e6;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #e6e6e6;
+      --Card_Color-position: #e6e6e6;
+    }
+  }
 }
 .plyr-Card-motm {
   --Card_Color-rating: #381a01;
@@ -240,6 +297,13 @@
   &.plyr-Card-small {
     --Card_Color-rating: #ffe2ca;
     --Card_Color-position: #ffe2ca;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #ffe2ca;
+      --Card_Color-position: #ffe2ca;
+    }
   }
 }
 .plyr-Card-ones_to_watch {
@@ -264,6 +328,13 @@
     --Card_Color-rating: #fff;
     --Card_Color-position: #fff;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #fff;
+      --Card_Color-position: #fff;
+    }
+  }
 }
 .plyr-Card-purple {
   --Card_Color-rating: #111124;
@@ -278,6 +349,14 @@
     --Card_Color-rating: #d4c0fc;
     --Card_Color-position: #d4c0fc;
     --Card_Color-name: #111124;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #d4c0fc;
+      --Card_Color-position: #d4c0fc;
+      --Card_Color-name: #111124;
+    }
   }
 }
 .plyr-Card-record_breaker {
@@ -310,6 +389,13 @@
   &.plyr-Card-small {
     --Card_Color-rating: #fff;
     --Card_Color-position: #fff;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #fff;
+      --Card_Color-position: #fff;
+    }
   }
 }
 .plyr-Card-sbc_base {
@@ -352,6 +438,13 @@
     --Card_Color-rating: #c3ffff;
     --Card_Color-position: #c3ffff;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #c3ffff;
+      --Card_Color-position: #c3ffff;
+    }
+  }
 }
 .plyr-Card-tots_bronze {
   --Card_Color-rating: #071336;
@@ -365,6 +458,13 @@
   &.plyr-Card-small {
     --Card_Color-rating: #e7b378;
     --Card_Color-position: #e7b378;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #e7b378;
+      --Card_Color-position: #e7b378;
+    }
   }
 }
 .plyr-Card-tots_gold {
@@ -380,6 +480,13 @@
     --Card_Color-rating: #f2d780;
     --Card_Color-position: #f2d780;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #f2d780;
+      --Card_Color-position: #f2d780;
+    }
+  }
 }
 .plyr-Card-tots_silver {
   --Card_Color-rating: #071336;
@@ -393,6 +500,13 @@
   &.plyr-Card-small {
     --Card_Color-rating: #e4edf1;
     --Card_Color-position: #e4edf1;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #e4edf1;
+      --Card_Color-position: #e4edf1;
+    }
   }
 }
 .plyr-Card-totw_bronze {
@@ -409,6 +523,14 @@
     --Card_Color-position: #ca945f;
     --Card_Color-name: #301605;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #ca945f;
+      --Card_Color-position: #ca945f;
+      --Card_Color-name: #301605;
+    }
+  }
 }
 .plyr-Card-totw_gold {
   --Card_Color-rating: #1e1d1a;
@@ -423,6 +545,14 @@
     --Card_Color-rating: #e1c775;
     --Card_Color-position: #e1c775;
     --Card_Color-name: #1e1d1a;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #e1c775;
+      --Card_Color-position: #e1c775;
+      --Card_Color-name: #1e1d1a;
+    }
   }
 }
 .plyr-Card-totw_silver {
@@ -439,6 +569,14 @@
     --Card_Color-position: #cdd9e1;
     --Card_Color-name: #1e1d1a;
   }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #cdd9e1;
+      --Card_Color-position: #cdd9e1;
+      --Card_Color-name: #1e1d1a;
+    }
+  }
 }
 .plyr-Card-toty {
   --Card_Color-rating: #d0b361;
@@ -452,5 +590,12 @@
   &.plyr-Card-small {
     --Card_Color-rating: #ffee9d;
     --Card_Color-position: #ffee9d;
+  }
+
+  &.plyr-Card-medium {
+    @media (--xxs-viewport) {
+      --Card_Color-rating: #ffee9d;
+      --Card_Color-position: #ffee9d;
+    }
   }
 }

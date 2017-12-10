@@ -1,10 +1,12 @@
 import 'babel-polyfill';
+import 'intersection-observer';
 import 'pepjs';
 import './utils/class-list-polyfill';
 
 import { externalLinks, iframeFix } from './utils';
 import { FloatingLabel } from './forms';
 import { PlayerFilterForm } from './players/list';
+import { Navigation } from './site';
 import { Follow } from './users/follow';
 import {
   ComparePlayerSearch,
@@ -17,6 +19,7 @@ import {
 
 document.addEventListener('DOMContentLoaded', () => {
   externalLinks();
+  new Navigation();
 
   if (document.querySelector('.js-Comments')) {
     import('./comments').then(comments => {

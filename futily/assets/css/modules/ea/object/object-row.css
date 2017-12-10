@@ -14,6 +14,12 @@
 */
 .ea-ObjectRow_Image {
   align-self: flex-start;
+
+  width: 20px;
+
+  @media (--sm) {
+    width: 40px;
+  }
 }
 
 /*
@@ -22,31 +28,52 @@
 |--------------------------------------------------------------------------
 |
 */
+.ea-ObjectRow_Title {
+  margin-left: var(--Grid_Gutter);
+
+  @media (--xxs-viewport) {
+    @include Font_C;
+
+    line-height: 1;
+  }
+}
+
 .ea-ObjectRow_Cell {
   position: relative;
 
   width: 100%;
+
+  @media (--xxs-viewport) {
+    align-items: center;
+    flex-direction: column;
+
+    display: flex;
+  }
 }
 
 .ea-ObjectRow_CellTitle {
   @include Font_Tiny;
 
-  position: absolute;
-  top: calc(50% + 7px);
-  left: 50%;
-
   font-weight: 700;
   text-transform: uppercase;
   white-space: nowrap;
 
-  opacity: 0;
-  visibility: hidden;
+  @media (--sm) {
+    position: absolute;
+    top: calc(50% + 7px);
+    left: 50%;
 
-  transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(-50%);
+  }
 
   .ea-ObjectsTable_Row:hover & {
-    opacity: 1;
-    visibility: visible;
+    @media (--sm) {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
 

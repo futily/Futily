@@ -6,7 +6,7 @@
 */
 @mixin Button {
   display: block;
-  padding: 0.25vr 10px;
+  padding: 1vr var(--Grid_Gutter);
 
   font-size: 12px;
   font-weight: 600;

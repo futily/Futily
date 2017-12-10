@@ -13,8 +13,19 @@
 |
 */
 .plyr-IngameStats_Items {
-  grid-gap: 1.5vr calc(var(--Grid_Gutter) * 2);
-  grid-template: auto auto / repeat(3, 1fr);
+  grid-gap: 2vr calc(var(--Grid_Gutter) * 2);
+  grid-template: repeat(3, auto) / repeat(2, 1fr);
 
   display: grid;
+
+  @media (--md) {
+    grid-gap: 4vr calc(var(--Grid_Gutter) * 2);
+    grid-template: repeat(2, auto) / repeat(3, 1fr);
+  }
+
+  .plyr-Detail-compare & {
+    @media (--xxs-viewport) {
+      grid-template-columns: auto;
+    }
+  }
 }

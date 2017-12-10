@@ -24,8 +24,8 @@
     <div class="pgn-Pagination_Items">
       {% macro item(loop, page) %}
         <div class="pgn-Pagination_Item"
-             aria-current="{% if loop.index == page_obj.number %}true{% else %}false{% endif %}">
-          <a class="pgn-Pagination_Link" href="{{ get_pagination_url(page) }}">{{ page }}</a>
+             {% if loop.index == page_obj.number %}aria-current="page"{% endif %}>
+          <a class="pgn-Pagination_Link" href="{{ get_pagination_url(page) }}">{{ page }} <span class="pgn-Pagination_LinkOf">of {{ page_obj.paginator.num_pages }}</span></a>
         </div>
       {% endmacro %}
 
