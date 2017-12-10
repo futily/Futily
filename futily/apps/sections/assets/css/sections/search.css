@@ -28,7 +28,7 @@
 |
 */
 .sec-Search_Header {
-  margin-bottom: 1.5vr;
+  margin-bottom: 4vr;
 
   @media (--lg) {
     width: percentage(8, 12);
@@ -48,7 +48,7 @@
 .sec-Search_Text {
   @include Font_C;
 
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 }
 
 /*

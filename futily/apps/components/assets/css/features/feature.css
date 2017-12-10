@@ -33,7 +33,7 @@
 .ftr-Feature_Title {
   @include Font_C;
 
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 
   color: var(--Color_Dark-1);
 }

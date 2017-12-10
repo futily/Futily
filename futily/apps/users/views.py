@@ -163,6 +163,8 @@ class UserCollectionLeagueView(UserMixin, DetailView):
         self.league = None
 
     def set_breadcrumbs(self):
+        self.league = self.get_league()
+
         return super(UserCollectionLeagueView, self).set_breadcrumbs() + [
             {
                 'label': 'Card collection',

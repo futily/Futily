@@ -6,7 +6,7 @@
 |
 */
 .plyr-CardBlock {
-  margin-bottom: 2vr;
+  margin-bottom: 4vr;
 
   &:last-child {
     margin-bottom: 0;
@@ -18,7 +18,7 @@
 
   position: relative;
 
-  margin-bottom: 1vr;
+  margin-bottom: 3vr;
   padding-bottom: 10px;
 
   letter-spacing: calc(100em / 1000);

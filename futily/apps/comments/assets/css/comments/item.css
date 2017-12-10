@@ -6,7 +6,7 @@
 |
 */
 .cmm-Item {
-  padding: 0.5vr var(--Grid_Gutter);
+  padding: 1vr var(--Grid_Gutter);
 
   border: 1px solid var(--Color_Border);
   border-radius: 4px;
@@ -17,5 +17,5 @@
 }
 
 .cmm-Item_Children {
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 }

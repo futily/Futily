@@ -43,7 +43,7 @@
 
 .tbl-ChemistryStyles_Th,
 .tbl-ChemistryStyles_Td {
-  padding: 0.5vr var(--Grid_Gutter);
+  padding: 1vr var(--Grid_Gutter);
 }
 
 .tbl-ChemistryStyles_Td {

@@ -13,7 +13,7 @@
 
   max-width: 750px;
   width: 50vw;
-  padding: 0.5vr var(--Grid_Gutter);
+  padding: 1vr var(--Grid_Gutter);
 
   background-color: #fff;
   border: 1px solid var(--Color_Border);
@@ -63,7 +63,7 @@
   justify-content: space-between;
 
   display: flex;
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 
   border-bottom: 1px solid var(--Color_Border);
 }
@@ -113,13 +113,13 @@
 .asi-FilterFlyout_GroupTitle {
   @include Font_D;
 
-  padding: 0.25vr 10px;
+  padding: 1vr 10px;
 
   background-color: var(--Color_Light-1);
 }
 
 .asi-FilterFlyout_GroupBody {
-  margin: 0.5vr 0;
+  margin: 1vr 0;
 }
 
 /*
@@ -172,5 +172,5 @@
 .asi-FilterFlyout_Footer {
   @include Grid_Row;
 
-  padding-top: 0.5vr;
+  padding-top: 1vr;
 }

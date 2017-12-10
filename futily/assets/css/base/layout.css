@@ -24,7 +24,7 @@
   margin-bottom: @margin-top;
 
   .pg-Breadcrumbs + & {
-    margin-top: 0.75vr;
+    margin-top: 2vr;
   }
 }
 

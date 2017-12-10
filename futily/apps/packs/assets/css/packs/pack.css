@@ -11,7 +11,7 @@
 
   display: grid;
   width: 100%;
-  padding: 13px calc(var(--Grid_Gutter) * 2);
+  padding: 2vr calc(var(--Grid_Gutter) * 2);
 
   font-weight: 700;
 
@@ -22,13 +22,13 @@
   transition: color 0.2s;
 
   @media (--xlg) {
-    padding: 0.5vr 30px 1vr;
+    padding: 1vr 30px 3vr;
   }
 
   .ea-ObjectsTable_Cell & {
     display: block;
     width: auto;
-    margin-right: 8px;
+    margin-right: var(--Grid_Gutter);
     padding: 0;
 
     background-color: transparent;
@@ -134,7 +134,7 @@
 
 .pck-Pack_Shields {
   display: flex;
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 }
 
 .pck-Pack_Shield {
@@ -193,9 +193,9 @@
 .pck-Pack_Description {
   @include Font_A;
 
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 }
 
 .pck-Pack_Link {
-  margin-top: 0.75vr;
+  margin-top: 2vr;
 }

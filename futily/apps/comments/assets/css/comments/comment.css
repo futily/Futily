@@ -6,7 +6,7 @@
 |
 */
 .cmm-Comment {
-  grid-gap: 0.5vr var(--Grid_Gutter);
+  grid-gap: 1vr var(--Grid_Gutter);
   grid-template-columns: 20px 1fr;
 
   display: grid;
@@ -14,7 +14,7 @@
 
 .cmm-Comment_Form,
 .cmm-Comment_ReportForm {
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 }
 
 /*

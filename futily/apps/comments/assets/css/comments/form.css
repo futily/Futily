@@ -8,8 +8,8 @@
 .cmm-Form_Preview {
   @include Font_A;
 
-  margin-bottom: 0.5vr;
-  padding: 0.5vr;
+  margin-bottom: 1vr;
+  padding: 1vr;
 
   background-color: #fff;
   border: 1px solid var(--Color_Border);

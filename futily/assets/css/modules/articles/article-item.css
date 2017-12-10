@@ -13,7 +13,7 @@
 |
 */
 .art-ArticleItem_Header {
-  margin-bottom: 0.75vr;
+  margin-bottom: 2vr;
 }
 
 /*
@@ -23,7 +23,7 @@
 |
 */
 .art-ArticleItem_Title {
-  margin-bottom: 0.25vr;
+  margin-bottom: 1vr;
 
   font-size: 30px;
   font-weight: 600;
@@ -47,8 +47,8 @@
 |
 */
 .art-ArticleItem_Meta {
-  margin-bottom: 0.5vr;
-  padding-bottom: 0.5vr;
+  margin-bottom: 1vr;
+  padding-bottom: @margin-top;
 
   font-size: 14px;
   line-height: 20px;
@@ -64,7 +64,7 @@
 }
 
 .art-ArticleItem_MetaItem {
-  margin-right: 10px;
+  margin-right: var(--Grid_Gutter);
 
   &:last-child {
     margin-right: 0;
@@ -78,5 +78,5 @@
 |
 */
 .art-ArticleItem_Footer {
-  margin-top: 1vr;
+  margin-top: 3vr;
 }

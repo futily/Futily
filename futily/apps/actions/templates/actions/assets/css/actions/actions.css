@@ -6,7 +6,7 @@
 |
 */
 .act-Actions_Item {
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
   padding-bottom: @margin-bottom;
 
   border-bottom: 1px solid var(--Color_Border);

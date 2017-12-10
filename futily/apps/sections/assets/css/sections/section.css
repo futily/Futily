@@ -27,7 +27,7 @@
 |
 */
 .sec-Section_Header {
-  margin-bottom: 1.5vr;
+  margin-bottom: 4vr;
 
   text-align: center;
 
@@ -48,6 +48,6 @@
   color: #a1b1bc;
 
   .sec-Section_Header & {
-    margin-top: 0.5vr;
+    margin-top: 1vr;
   }
 }

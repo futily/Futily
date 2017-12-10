@@ -20,7 +20,7 @@
 .sbc-Award_Text {
   @include Font_A;
 
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 
   font-weight: 600;
 }

@@ -21,7 +21,7 @@
   display: grid;
 
   @media (--md) {
-    --size: var(--Card_Size-medium);
+    --Size: var(--Card_Size-medium);
   }
 }
 

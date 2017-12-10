@@ -79,8 +79,8 @@
 |
 */
 .asi-Filter_Body {
-  padding-top: 0.25vr;
-  padding-bottom: 0.5vr;
+  padding-top: 1vr;
+  padding-bottom: 1vr;
 
   [aria-expanded='false'] & {
     display: none;
@@ -161,7 +161,7 @@
 }
 
 .asi-Filter_LinkGroupsItem {
-  margin-bottom: 0.25vr;
+  margin-bottom: 1vr;
 
   &:last-child {
     margin-bottom: 0;

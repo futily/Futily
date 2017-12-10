@@ -13,10 +13,10 @@
 /* stylelint-disable selector-max-type */
 .wys-WYSIWYG {
   p {
-    margin-bottom: 1vr;
+    margin-bottom: 3vr;
 
     .art-ArticleItem_Description & {
-      margin-bottom: 0.25vr;
+      margin-bottom: 1vr;
     }
   }
 
@@ -31,11 +31,11 @@
   |
   */
   .wys-Button-primary {
-    @include Button-primary();
+    @include Button-primary;
   }
 
   .wys-Button-secondary {
-    @include Button-secondary();
+    @include Button-secondary;
   }
 
   /*
@@ -45,7 +45,7 @@
   |
   */
   .wys-Intrinsic {
-    @include Intrinsic();
+    @include Intrinsic;
   }
 
   /*

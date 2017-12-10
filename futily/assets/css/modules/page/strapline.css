@@ -62,7 +62,7 @@
 .pg-Strapline_Text {
   @include Font_C;
 
-  margin-top: 0.25vr;
+  margin-top: 1vr;
 }
 
 .pg-Strapline_Advert {

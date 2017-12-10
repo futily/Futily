@@ -125,7 +125,7 @@
     justify-content: center;
 
     display: flex;
-    padding: 0.5vr 10px;
+    padding: 1.5vr var(--Grid_Gutter);
 
     text-align: center;
   }

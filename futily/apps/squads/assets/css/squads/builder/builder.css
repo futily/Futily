@@ -21,7 +21,7 @@
 .bld-Builder_Header {
   grid-column: 2;
 
-  margin-bottom: 1vr;
+  margin-bottom: 3vr;
 }
 
 /*
@@ -41,7 +41,7 @@
 |
 */
 .bld-Builder_KeyValue {
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 
   &:first-child {
     margin-top: 0;
@@ -66,7 +66,7 @@
 |
 */
 .bld-Builder_ExtraPlayers {
-  margin-top: 1vr;
+  margin-top: 3vr;
   margin-bottom: @margin-top;
 }
 
@@ -107,12 +107,12 @@
 }
 
 .bld-Builder_Ratings {
-  margin-top: 0.5vr;
-  margin-bottom: 0.5vr;
+  margin-top: 1vr;
+  margin-bottom: @margin-top;
 }
 
 .bld-Builder_StatsItem {
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
   padding-bottom: @margin-bottom;
 
   border-bottom: 1px solid var(--Color_Border);
@@ -830,7 +830,7 @@
 |
 */
 .bld-Builder_Form {
-  margin-top: 1vr;
+  margin-top: 3vr;
 }
 
 .bld-Builder_Submit {

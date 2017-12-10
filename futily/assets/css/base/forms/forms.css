@@ -6,7 +6,7 @@
 |
 */
 .frm-Form_Text {
-  margin-bottom: 1vr;
+  margin-bottom: 3vr;
 }
 
 /*
@@ -16,7 +16,7 @@
 |
 */
 .frm-Form_Fieldset {
-  margin: 0 0 1.5vr;
+  margin: 0 0 4vr;
   padding: 0;
 
   border: 0;
@@ -27,7 +27,7 @@
 }
 
 .frm-Form_FieldsetHeader {
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 }
 
 /*
@@ -53,14 +53,14 @@
 |
 */
 .frm-Form_Items {
-  grid-gap: 1vr calc(var(--Grid_Gutter) * 2);
+  grid-gap: 3vr calc(var(--Grid_Gutter) * 2);
   grid-template-columns: repeat(2, 1fr);
 
   display: grid;
 }
 
 .frm-Form_Items-tight {
-  grid-row-gap: 0.75vr;
+  grid-row-gap: 2vr;
 }
 
 .frm-Form_Items-3col {
@@ -99,7 +99,7 @@
   @include Font_A;
 
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 1vr;
 
   font-weight: 600;
 
@@ -109,7 +109,7 @@
     left: calc(var(--InputHoriPadding) - 10px);
 
     margin-bottom: 0;
-    padding: 0 10px;
+    padding: 0 var(--Grid_Gutter);
 
     line-height: 1;
 
@@ -214,7 +214,7 @@
 |
 */
 .frm-Form_Extra {
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 }
 
 .frm-Form_Help {
@@ -230,14 +230,14 @@
 |
 */
 .frm-Form_Actions {
-  margin-top: 1vr;
+  margin-top: 3vr;
 
   .asi-Block & {
-    margin-top: 0.5vr;
+    margin-top: 1vr;
   }
 
   .cmm-Comments & {
-    margin-top: 0.5vr;
+    margin-top: 1vr;
   }
 }
 

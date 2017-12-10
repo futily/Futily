@@ -12,7 +12,7 @@
 
   display: flex;
   width: 100%;
-  padding: 0.5vr calc(var(--Grid_Gutter) * 2) 1.25vr;
+  padding: 1vr calc(var(--Grid_Gutter) * 2) 4vr;
 
   text-align: center;
 
@@ -23,18 +23,18 @@
   transition: color 0.2s;
 
   @media (--xlg) {
-    padding: 0.5vr 20px 1vr;
+    padding: 1vr 20px 3vr;
   }
 }
 
 .sbc-Card_ImageContainer {
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 }
 
 .sbc-Card_Title {
   @include Font_E;
 
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 }
 
 .sbc-Card_Text {
@@ -44,7 +44,7 @@
 .sbc-Card_Footer {
   margin-top: auto;
 
-  border-top: 0.75vr solid transparent;
+  border-top: 2vr solid transparent;
 }
 
 /*
@@ -91,7 +91,7 @@
 .sbc-Card_RewardsTitle {
   @include Font_E;
 
-  margin-top: 0.5vr;
+  margin-top: 1vr;
 }
 
 .sbc-Card_RewardsItems {
@@ -110,7 +110,7 @@
 
 .sbc-Card_Requirements {
   width: 100%;
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 
   text-align: left;
 }
@@ -118,7 +118,7 @@
 .sbc-Card_RequirementsTitle {
   @include Font_E;
 
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 }
 
 .sbc-Card_RequirementsItems {

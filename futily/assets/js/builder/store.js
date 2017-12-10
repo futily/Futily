@@ -348,13 +348,12 @@ function updatePlayers ({ formation, players }) {
     player.isFilled = Object.keys(player.data).length > 0;
     player.positions.fromFormation =
       formationData[formation]['positions'][player.index];
-    player.positions.inBuilder = player.positions.inBuilder
-      ? player.positions.inBuilder
-      : allowedPositions[player.positions.fromFormation].includes(
-        player.data.position
-      )
+    // prettier-ignore
+    player.positions.inBuilder =
+      allowedPositions[player.positions.fromFormation]
+        .includes(player.data.position)
         ? player.positions.fromFormation
-        : player.data.position;
+        : player.positions.inBuilder;
     player.positions.verbose =
       formationData[formation]['verbose'][player.index];
 

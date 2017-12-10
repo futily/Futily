@@ -39,7 +39,7 @@
 .bld-Search_Header {
   position: relative;
 
-  margin-bottom: 1vr;
+  margin-bottom: 3vr;
 }
 
 .bld-Search_Icon {
@@ -67,7 +67,7 @@
 .bld-Search_Input {
   display: block;
   width: 100%;
-  padding: 0.25vr 0 0.25vr 28px;
+  padding: 1vr 0 1vr 28px;
 
   font-size: 16px;
   font-weight: 600;

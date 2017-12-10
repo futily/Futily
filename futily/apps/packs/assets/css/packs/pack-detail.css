@@ -6,7 +6,7 @@
 |
 */
 .pck-Detail_Players {
-  margin-bottom: 1vr;
+  margin-bottom: 3vr;
 }
 
 .pck-Detail_Form {
@@ -23,7 +23,7 @@
   align-items: center;
 
   display: flex;
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 }
 
 /*

@@ -66,6 +66,7 @@
 .plyr-Card_Header {
   position: relative;
 
+  align-items: end;
   grid-template-columns: 22px 1fr;
 
   display: grid;
@@ -245,7 +246,7 @@
 
   .plyr-Card-medium & {
     @media (--sm) {
-      height: 105px;
+      width: 105px;
     }
   }
 

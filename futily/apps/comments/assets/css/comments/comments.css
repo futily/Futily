@@ -26,7 +26,7 @@
 |
 */
 .cmm-Comments_Items {
-  grid-gap: 0.5vr;
+  grid-gap: 1vr;
 
   display: grid;
 }

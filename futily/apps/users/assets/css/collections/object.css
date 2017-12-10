@@ -12,7 +12,7 @@
 
   display: flex;
   width: 100%;
-  padding: 60px 20px 1vr;
+  padding: 7vr calc(var(--Grid_Gutter) * 2) 3vr;
 
   text-align: center;
 
@@ -44,7 +44,7 @@
   display: flex;
   width: 100px;
   height: @width;
-  padding: 20px;
+  padding: 2vr calc(var(--Grid_Gutter) * 2);
 
   background-color: #fff;
   border: 1px solid var(--Color_Border);
@@ -67,13 +67,13 @@
 .clc-Object_Title {
   @include Font_D;
 
-  margin-bottom: 0.5vr;
+  margin-bottom: 1vr;
 
   color: var(--Color_Dark-1);
 }
 
 .clc-Object_Collection {
-  border-bottom: 0.5vr solid transparent;
+  border-bottom: 1vr solid transparent;
 }
 
 .clc-Object_Collected {

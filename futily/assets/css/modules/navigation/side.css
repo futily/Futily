@@ -22,11 +22,11 @@
   flex-basis: 300px;
   flex-shrink: 0;
 
-  margin-right: 30px;
+  margin-right: calc(var(--Grid_Gutter) * 3);
 }
 
 .nav-Side_Items {
-  margin-top: 1vr;
+  margin-top: 3vr;
   margin-bottom: @margin-top;
 
   border: 1px solid var(--Color_Border);

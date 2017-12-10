@@ -13,7 +13,7 @@
 |
 */
 .plyr-SmallCardList_Items {
-  grid-row-gap: 0.5vr;
+  grid-row-gap: 1vr;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
 
   display: grid;

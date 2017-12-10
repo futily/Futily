@@ -72,6 +72,9 @@ body {
 |
 */
 hr {
+  margin-top: 2vr;
+  margin-bottom: @margin-top;
+
   border: 0;
   border-top: 1px solid var(--Color_Border);
 }

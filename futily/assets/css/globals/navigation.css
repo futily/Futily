@@ -177,7 +177,7 @@
 }
 
 .nav-Header_Item-separator {
-  padding-top: 0.25vr;
+  padding-top: 1vr;
   padding-bottom: @padding-top;
 }
 
@@ -428,7 +428,7 @@
 
 .nav-Header_DropdownLink {
   display: flex;
-  padding: 0.5vr calc(var(--Grid_Gutter) * 2);
+  padding: 1vr calc(var(--Grid_Gutter) * 2);
 
   white-space: nowrap;
 

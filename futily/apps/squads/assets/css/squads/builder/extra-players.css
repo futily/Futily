@@ -28,7 +28,7 @@
 }
 
 .bld-ExtraPlayers_Items {
-  grid-row-gap: 0.5vr;
+  grid-row-gap: 1vr;
   grid-template-columns: repeat(auto-fit, 128px);
   grid-template-rows: repeat(2, 197px);
 
