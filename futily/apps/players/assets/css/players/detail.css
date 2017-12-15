@@ -72,7 +72,7 @@
   overflow-x: auto;
 
   @media (--md) {
-    margin-bottom: 1vr;
+    margin-bottom: 3vr;
   }
 }
 

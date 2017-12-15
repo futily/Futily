@@ -29,20 +29,20 @@
 }
 
 .lyt-Content-mainAside {
-  margin-top: 2vr;
+  margin-top: 6vr;
   margin-bottom: @margin-top;
 
   .pg-Breadcrumbs + & {
-    margin-top: 1.5vr;
+    margin-top: 2vr;
   }
 }
 
 .lyt-Content-wide {
-  margin-top: 2vr;
+  margin-top: 6vr;
   margin-bottom: @margin-top;
 
   .pg-Breadcrumbs + & {
-    margin-top: 1.5vr;
+    margin-top: 2vr;
   }
 }
 
@@ -73,7 +73,7 @@
     display: grid;
 
     @media (--md) {
-      grid-column-gap: calc(var(--Grid_Gutter) * 2);
+      grid-column-gap: calc(var(--Grid_Gutter) * 3);
       grid-template-columns: 1fr 300px;
     }
   }

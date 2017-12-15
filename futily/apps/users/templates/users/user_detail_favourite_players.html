@@ -1,6 +1,8 @@
 {% extends "users/_base.html" %}
 {% import "players/macros/players.html" as player_macros %}
 
+{% block title %}{{ object }}'s favourite players{% endblock %}
+
 {% block side_panel %}
   {% if players %}
     {% call(player) player_macros.card_list(players) %}

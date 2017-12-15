@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
 
-{% block strapline_title %}Fifa {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}
+{% block title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack leaderboard{% endblock %}
+
+{% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}
 {% block strapline_text %}Leaderboard{% endblock %}
 
 {% block main %}
@@ -70,14 +72,14 @@
     {% block aside_blocks_above %}{% endblock %}
 
     <div class="asi-Block">
-      <h4 class="asi-Block_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
+      <h4 class="asi-Block_Title">FIFA {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
 
       <ul class="asi-LinkList">
         {% for link in aside_links %}
           <li class="asi-LinkList_Item">
             <a class="asi-LinkList_Link"
                href="{{ link.url }}"
-               aria-current="{{ link.here }}">Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
+               aria-current="{{ link.here }}">FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
           </li>
         {% endfor %}
       </ul>

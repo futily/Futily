@@ -2,12 +2,14 @@
 {% import "macros/adverts.html" as adverts %}
 {% import "macros/page.html" as page %}
 
+{% block title %}{{ object }} | Top rated {{ object }} players and ratings in FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team{% endblock %}
+
 {% block strapline_image %}<img class="pg-Strapline_Image"
                                 alt=""
                                 src="{{ static('ea-images/clubs/{}.png'.format(club.ea_id)) }}">{% endblock %}
 
 {% block strapline_title %}{{ object }}{% endblock %}
-{% block strapline_text %}Highest rated Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ object }} players{% endblock %}
+{% block strapline_text %}Highest rated FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ object }} players{% endblock %}
 
 {% block main %}
   <div class="plyr-CardBlock">

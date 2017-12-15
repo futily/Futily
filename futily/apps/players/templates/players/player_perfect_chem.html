@@ -3,8 +3,10 @@
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
 
-{% block strapline_title %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Perfect chemistry{% endblock %}
-{% block strapline_text %}Top Fifa {{ settings.CURRENT_FIFA_VERSION }} players with perfect chemistry{% endblock %}
+{% block title %}FIFA 18 perfect chemistry players{% endblock %}
+
+{% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} Perfect chemistry{% endblock %}
+{% block strapline_text %}Top FIFA {{ settings.CURRENT_FIFA_VERSION }} players with perfect chemistry{% endblock %}
 
 {% block main %}
   {{ filters_macros.filters(filters, sorts) }}

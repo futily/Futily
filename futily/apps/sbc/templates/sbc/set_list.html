@@ -1,7 +1,9 @@
 {% extends "sbc/_base.html" %}
 
+{% block title %}{% if view.kwargs.get('category', None) %}{{ view.kwargs.get('category', None) | title() }} {% endif %}Squad Building Challenges FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team{% endblock %}
+
 {% block strapline_title %}Squad building challenge sets{% endblock %}
-{% block strapline_text %}Top rated Fifa {{ settings.CURRENT_FIFA_VERSION }} Squads{% endblock %}
+{% block strapline_text %}Top rated FIFA {{ settings.CURRENT_FIFA_VERSION }} Squads{% endblock %}
 
 {% block panel %}
   <div class="sbc-CardList">

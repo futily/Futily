@@ -4,6 +4,8 @@
 {% import "players/macros/players.html" as player_macros %}
 {% import "players/macros/search.html" as search %}
 
+{% block sub_title %}Compare {{ object }} with {{ other_player }}{% endblock %}
+
 {% block main %}
   <article class="plyr-Detail plyr-Detail-compare">
     <div class="plyr-Detail_Share">

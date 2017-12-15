@@ -26,7 +26,7 @@
 
 .plyr-DetailCompare_Search {
   position: absolute;
-  bottom: calc(316px - 10px + 1vr);
+  bottom: calc(316px - 10px + 3vr);
   left: 50%;
   z-index: 10;
 
@@ -40,5 +40,5 @@
   justify-content: center;
 
   display: flex;
-  margin-top: 40px;
+  margin-top: 5vr;
 }

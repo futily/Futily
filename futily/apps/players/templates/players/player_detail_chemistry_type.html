@@ -3,6 +3,8 @@
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
 
+{% block sub_title %}{{ object }} - {{ view.kwargs.chem_type | title() }} chemistry linked players{% endblock %}
+
 {% block body %}
   {{ filters_macros.filters(filters, sorts) }}
 

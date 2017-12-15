@@ -2,6 +2,8 @@
 {% import "comments/macros/comments.html" as comments with context %}
 {% import "macros/share.html" as share with context %}
 
+{% block title %}{{ object }} FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team squad{% endblock %}
+
 {% block strapline_title %}{{ object.title }}{% endblock %}
 {% block strapline_text %}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}{% endblock %}
 

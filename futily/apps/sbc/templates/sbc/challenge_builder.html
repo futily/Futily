@@ -1,8 +1,9 @@
 {% extends "squads/_builder_edit_base.html" %}
 
-{% block strapline_title %}{{ object.set }} - {{ object }}{% endblock %}
+{% block title %}{{ object }} Squad Building Challenge Builder FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team{% endblock %}
 
-{% block strapline_text %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Squad Building Challenge Builder{% endblock %}
+{% block strapline_title %}{{ object.set }} - {{ object }}{% endblock %}
+{% block strapline_text %}FIFA {{ settings.CURRENT_FIFA_VERSION }} Squad Building Challenge Builder{% endblock %}
 
 {% block builder_action %}{{ request.path }}save/{% endblock %}
 {% block builder_class %}{{ super() }} bld-Builder-{{ object.formation }}{% endblock %}

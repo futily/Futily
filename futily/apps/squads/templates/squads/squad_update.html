@@ -1,5 +1,7 @@
 {% extends "squads/_builder_edit_base.html" %}
 
+{% block title %}Update {{ object }} FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team squad{% endblock %}
+
 {% block strapline_title %}Update squad{% endblock %}
 {% block strapline_text %}
   {{ object.title }}{% if object.user %} by

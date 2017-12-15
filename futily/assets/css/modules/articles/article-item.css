@@ -48,7 +48,7 @@
 */
 .art-ArticleItem_Meta {
   margin-bottom: 1vr;
-  padding-bottom: @margin-top;
+  padding-bottom: @margin-bottom;
 
   font-size: 14px;
   line-height: 20px;

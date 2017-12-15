@@ -3,7 +3,9 @@
 {% import "macros/page.html" as page %}
 {% import "players/macros/players.html" as player_macros %}
 
-{% block strapline_title %}Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ pages.current }}{% endblock %}
+{% block title %}{{ object }} - FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ object.type }}{% endblock %}
+
+{% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ pages.current }}{% endblock %}
 {% block strapline_text %}{{ object }} by <a class="pg-Strapline_TextLink" href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endblock %}
 
 {% block main %}

@@ -4,6 +4,8 @@
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
 
+{% block title %}{{ object }} | Top rated {{ object }} players and ratings in FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team{% endblock %}
+
 {% block strapline_image %}
   <img class="pg-Strapline_Image"
        alt=""
@@ -11,7 +13,7 @@
 {% endblock %}
 
 {% block strapline_title %}{{ object }}{% endblock %}
-{% block strapline_text %}Highest rated Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ object }} players{% endblock %}
+{% block strapline_text %}Highest rated FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ object }} players{% endblock %}
 
 {% block main %}
   {{ filters_macros.filters(filters, sorts) }}

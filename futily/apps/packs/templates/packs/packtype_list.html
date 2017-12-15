@@ -2,8 +2,10 @@
 {% import "macros/adverts.html" as adverts %}
 {% import "macros/page.html" as page %}
 
+{% block title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}
+
 {% block strapline_title %}{{ pages.current }}{% endblock %}
-{% block strapline_text %}Fifa {{ settings.CURRENT_FIFA_VERSION }} pack opener{% endblock %}
+{% block strapline_text %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}
 
 {% block main %}
   <div class="pck-TypeList">

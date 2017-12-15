@@ -2,12 +2,14 @@
 {% import "macros/adverts.html" as adverts %}
 {% import "players/macros/players.html" as player_macros %}
 
-{% block strapline_title %}Fifa {{ settings.CURRENT_FIFA_VERSION }} Totw{% endblock %}
-{% block strapline_text %}Latest Fifa {{ settings.CURRENT_FIFA_VERSION }} Team of the Week informs{% endblock %}
+{% block title %}All FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team Team of the Weeks{% endblock %}
+
+{% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} Totw{% endblock %}
+{% block strapline_text %}Latest FIFA {{ settings.CURRENT_FIFA_VERSION }} Team of the Week informs{% endblock %}
 
 {% block main %}
   <div class="pg-Article_Header">
-    <h2 class="pg-Article_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Team of the Weeks</h2>
+    <h2 class="pg-Article_Title">FIFA {{ settings.CURRENT_FIFA_VERSION }} Team of the Weeks</h2>
     {# TODO: Get Tom to write this #}
     <p class="pg-Article_Text">The FIFA Ultimate Team of the Week (TOTW) is released by EA each Wednesday, and represent players that have played well the previous week in real life. These cards are released as 'In Form' for that week only, and have boosted stats and altered card art.</p>
   </div>
@@ -75,14 +77,14 @@
     {% block aside_blocks_above %}{% endblock %}
 
     <div class="asi-Block">
-      <h4 class="asi-Block_Title">Fifa {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
+      <h4 class="asi-Block_Title">FIFA {{ settings.CURRENT_FIFA_VERSION }} Objects</h4>
 
       <ul class="asi-LinkList">
         {% for link in aside_links %}
           <li class="asi-LinkList_Item">
             <a class="asi-LinkList_Link"
                href="{{ link.url }}"
-               aria-current="{{ link.here }}">Fifa {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
+               aria-current="{{ link.here }}">FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ link.title }}</a>
           </li>
         {% endfor %}
       </ul>

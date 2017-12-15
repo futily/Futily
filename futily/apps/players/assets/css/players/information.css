@@ -37,10 +37,12 @@
 .plyr-Information_Title {
   @include Font_E;
 
-  margin-bottom: 0.5vr;
+  margin-bottom: 1.5vr;
 }
 
 .plyr-Information_Item {
+  @include Font_A;
+
   align-items: baseline;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -48,8 +50,10 @@
   display: flex;
   padding: 10px 0;
 
+  font-weight: 600;
+
   border-bottom: 1px solid var(--Color_Border);
-  color: var(--Color_Dark-2);
+  color: var(--Color_Dark-1);
 
   &:first-child {
     padding-top: 0;
@@ -67,7 +71,7 @@
 
   width: 100%;
 
-  font-weight: 600;
+  font-weight: 400;
 
   color: var(--Color_Dark-1);
 }
@@ -78,6 +82,8 @@
   display: flex;
   /* This is for alignment on the compare page */
   min-width: 57px;
+
+  text-transform: none;
 
   color: var(--Color_Dark-1);
 

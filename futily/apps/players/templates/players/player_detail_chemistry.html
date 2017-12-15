@@ -2,6 +2,8 @@
 {% import "macros/page.html" as page %}
 {% import "players/macros/players.html" as player_macros %}
 
+{% block sub_title %}{{ object }} - Chemistry linked players{% endblock %}
+
 {% block body %}
   {% set perfect_players = player.get_initial_chemistry_players('perfect') %}
   {% set strong_players = player.get_initial_chemistry_players('strong') %}

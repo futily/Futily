@@ -205,10 +205,6 @@ class SquadBuilderChallengeBuilder(SquadBuilderChallengeBase, DetailView):
             'username': self.request.user.username,
             'link': self.request.user.get_absolute_url(),
         }) if self.request.user.is_authenticated else json.dumps({
-            'id': self.object.user.id,
-            'username': self.object.user.username,
-            'link': self.object.user.get_absolute_url(),
-        }) if self.object else json.dumps({
             'id': None,
             'username': None,
             'link': None
