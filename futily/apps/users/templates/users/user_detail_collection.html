@@ -1,6 +1,5 @@
 {% extends "users/_collection_base.html" %}
-
-{% block title %}{{ object }}'s card collection{% endblock %}
+{% set title = "{}'s card collection".format(object) %}
 
 {% block collection_main %}
   <div class="clc-Objects">

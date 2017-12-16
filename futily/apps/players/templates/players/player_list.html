@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
 {% import "players/macros/players.html" as player_macros %}
+{% set title = 'Highest rated FIFA {} players'.format(settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'Find the highest rated FIFA {} Ultimate Team players. Check their prices and stats'.format(settings.CURRENT_FIFA_VERSION) %}
 
-{% block title %}Highest rated FIFA 18 players{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} Player Database{% endblock %}
 {% block strapline_text %}Top FIFA {{ settings.CURRENT_FIFA_VERSION }} players{% endblock %}

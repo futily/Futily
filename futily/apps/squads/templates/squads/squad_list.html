@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
+{% set title = 'FIFA {} Ultimate Team squads'.format(settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'Find the latest squads built with the {} squad builder'.format(settings.SITE_NAME) %}
 
-{% block title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team squads{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}Squads{% endblock %}
 {% block strapline_text %}Top rated FIFA {{ settings.CURRENT_FIFA_VERSION }} Squads{% endblock %}

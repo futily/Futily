@@ -1,6 +1,5 @@
 {% extends "users/_base.html" %}
-
-{% block title %}{{ object }}'s following{% endblock %}
+{% set title = "{}'s following".format(object) %}
 
 {% block side_panel %}
   <div class="usr-Index usr-Index-full">

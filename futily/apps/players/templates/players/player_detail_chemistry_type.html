@@ -2,8 +2,7 @@
 {% import "macros/page.html" as page %}
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
-
-{% block sub_title %}{{ object }} - {{ view.kwargs.chem_type | title() }} chemistry linked players{% endblock %}
+{% set title = '{} - {} chemistry linked players | {} rated {}'.format(object, view.kwargs.chem_type | title(), object.rating, object.position) %}
 
 {% block body %}
   {{ filters_macros.filters(filters, sorts) }}

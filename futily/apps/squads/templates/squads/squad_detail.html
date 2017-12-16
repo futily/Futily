@@ -1,8 +1,12 @@
 {% extends "squads/_builder_base.html" %}
 {% import "comments/macros/comments.html" as comments with context %}
 {% import "macros/share.html" as share with context %}
+{% set title = '{} FIFA {} Ultimate Team squad'.format(object, settings.CURRENT_FIFA_VERSION) %}
+{% set description = '{} a FIFA {} Ultimate Team squad built with the {} squad builder. Come and build your own'.format(object, settings.CURRENT_FIFA_VERSION, settings.SITE_NAME) %}
 
-{% block title %}{{ object }} FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team squad{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}{{ object.title }}{% endblock %}
 {% block strapline_text %}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}{% endblock %}

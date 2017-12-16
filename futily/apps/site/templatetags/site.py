@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 
 import jinja2
 import stringcase
+from cms.apps.pages.templatetags.pages import absolute_domain_url
 from django.conf import settings
 from django.urls import reverse
 from django.utils import six, timezone
@@ -272,3 +273,9 @@ def get_filename(bundle):
     result = re.search('src="(.*)"', bundle)
 
     print(result.group(1))
+
+
+@library.global_function
+@jinja2.contextfunction
+def get_absolute_domain_url(context):
+    return absolute_domain_url(context)

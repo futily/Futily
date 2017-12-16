@@ -1,6 +1,5 @@
 {% extends "users/_base.html" %}
-
-{% block title %}{{ object }}'s packs{% endblock %}
+{% set title = "{}'s packs".format(object) %}
 
 {% block side_panel %}
   <div class="pg-Section">

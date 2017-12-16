@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
-
-{% block title %}{{ object }}{% endblock %}
+{% set title = object %}
 
 {% block content_class %}lyt-Content-wide{% endblock %}
 
@@ -59,11 +58,11 @@
                href="{{ object.get_followers_url() }}">{{ object.get_followers.count() }}</a>
           </p>
 
-          {% if user.is_authenticated() %}
+          {% if object.is_authenticated() %}
             <button class="btn-Primary js-UserFollow ut-SmallMarginTop"
                     data-action="{{ url('users:follow', username=object.username) }}"
-                    data-is-following="{{ 'true' if user.is_following(object) else 'false' }}">
-              {% if user.is_following(object) %}
+                    data-is-following="{{ 'true' if object.is_following(object) else 'false' }}">
+              {% if object.is_following(object) %}
                 <span class="js-UserFollow_Term">Following</span>&nbsp;{{ object }}
               {% else %}
                 <span class="js-UserFollow_Term">Follow</span>&nbsp;{{ object }}
@@ -150,18 +149,18 @@
             <ul class="plyr-SearchResults" aria-hidden="false">
               {% if object.favourite_player %}
                 <li class="plyr-SearchResults_Item">
-                  <a class="plyr-SearchResult plyr-SearchResult-{{ user.favourite_player.color }}"
+                  <a class="plyr-SearchResult plyr-SearchResult-{{ object.favourite_player.color }}"
                      href="{{ object.favourite_player.get_absolute_url() }}">
                     <img class="plyr-SearchResult_Nation"
-                         src="{{ static('ea-images/nations/{}.png'.format(user.favourite_player.nation.ea_id)) }}">
+                         src="{{ static('ea-images/nations/{}.png'.format(object.favourite_player.nation.ea_id)) }}">
                     <img class="plyr-SearchResult_Club"
-                         src="{{ static('ea-images/clubs/{}.png'.format(user.favourite_player.club.ea_id)) }}">
-                    <p class="plyr-SearchResult_Name">{{ user.favourite_player }}</p>
-                    <span class="plyr-SearchResult_Position">{{ user.favourite_player.position }}</span>
+                         src="{{ static('ea-images/clubs/{}.png'.format(object.favourite_player.club.ea_id)) }}">
+                    <p class="plyr-SearchResult_Name">{{ object.favourite_player }}</p>
+                    <span class="plyr-SearchResult_Position">{{ object.favourite_player.position }}</span>
                     <img class="plyr-SearchResult_Player"
-                         src="{{ static('ea-images/players/{}.png'.format(user.favourite_player.ea_id)) }}">
+                         src="{{ static('ea-images/players/{}.png'.format(object.favourite_player.ea_id)) }}">
 
-                    <span class="plyr-SearchResult_Rating">{{ user.favourite_player.rating }}</span>
+                    <span class="plyr-SearchResult_Rating">{{ object.favourite_player.rating }}</span>
                     <span class="plyr-SearchResult_RatingIcon"></span>
                   </a>
                 </li>
@@ -172,8 +171,8 @@
                   <a class="plyr-SearchResult plyr-SearchResult-object"
                      href="{{ object.favourite_club.get_absolute_url() }}">
                     <img class="plyr-SearchResult_Club"
-                         src="{{ static('ea-images/clubs/{}.png'.format(user.favourite_club.ea_id)) }}">
-                    <p class="plyr-SearchResult_Name">{{ user.favourite_club }}</p>
+                         src="{{ static('ea-images/clubs/{}.png'.format(object.favourite_club.ea_id)) }}">
+                    <p class="plyr-SearchResult_Name">{{ object.favourite_club }}</p>
                   </a>
                 </li>
               {% endif %}
@@ -183,8 +182,8 @@
                   <div class="plyr-SearchResult plyr-SearchResult-object"
                        href="{{ object.favourite_nation.get_absolute_url() }}">
                     <img class="plyr-SearchResult_Nation"
-                         src="{{ static('ea-images/nations/{}.png'.format(user.favourite_nation.ea_id)) }}">
-                    <p class="plyr-SearchResult_Name">{{ user.favourite_nation }}</p>
+                         src="{{ static('ea-images/nations/{}.png'.format(object.favourite_nation.ea_id)) }}">
+                    <p class="plyr-SearchResult_Name">{{ object.favourite_nation }}</p>
                   </div>
                 </li>
               {% endif %}

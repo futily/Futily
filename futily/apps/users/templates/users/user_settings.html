@@ -1,7 +1,6 @@
 {% extends "users/_base.html" %}
 {% import "players/macros/search.html" as search %}
-
-{% block title %}{{ object }}'s settings{% endblock %}
+{% set title = "{}'s settings".format(object) %}
 
 {% block strapline_text %}Settings{% endblock %}
 

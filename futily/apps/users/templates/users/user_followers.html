@@ -1,6 +1,5 @@
 {% extends "users/_base.html" %}
-
-{% block title %}{{ object }}'s followers{% endblock %}
+{% set title = "{}'s followers".format(object) %}
 
 {% block side_panel %}
   <div class="usr-Index usr-Index-full">

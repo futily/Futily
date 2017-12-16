@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
+{% set title = 'Top FIFA {} {}s'.format(settings.CURRENT_FIFA_VERSION, object_list[0]._meta.model_name | capitalize()) %}
+{% set description = 'Find your FIFA {} {} players and up to date stats'.format(settings.CURRENT_FIFA_VERSION, object_list[0]._meta.model_name | capitalize()) %}
 
-{% block title %}Top FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ super() }}{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+
+{% block og_description %}{{ description }}{% endblock %}
+
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}{{ object_list[0]._meta.model_name | capitalize() }}s{% endblock %}
 {% block strapline_text %}FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ object_list[0]._meta.model_name | capitalize() }}s{% endblock %}

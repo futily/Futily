@@ -3,8 +3,7 @@
 {% import "macros/share.html" as share with context %}
 {% import "players/macros/players.html" as player_macros %}
 {% import "players/macros/search.html" as search %}
-
-{% block sub_title %}Compare {{ object }} with {{ other_player }}{% endblock %}
+{% set title = 'Compare {} with {} | {} rated {}'.format(object, other_player, object.rating, object.position) %}
 
 {% block main %}
   <article class="plyr-Detail plyr-Detail-compare">

@@ -2,8 +2,7 @@
 {% import "macros/page.html" as page with context %}
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
-
-{% block sub_title %}Similar players to {{ object }}{% endblock %}
+{% set title = 'Similar players to {} | {} rated {}'.format(object, object.rating, object.position) %}
 
 {% block strapline_text %}Similar players{% endblock %}
 

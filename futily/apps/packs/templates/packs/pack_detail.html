@@ -2,8 +2,12 @@
 {% import "macros/adverts.html" as adverts %}
 {% import "macros/page.html" as page %}
 {% import "players/macros/players.html" as player_macros %}
+{% set title = '{} - FIFA {} {}'.format(object, settings.CURRENT_FIFA_VERSION, object.type) %}
+{% set description = 'Check out {}. A FIFA {} Ultimate Team {} opened with the {} pack simulator'.format(object, settings.CURRENT_FIFA_VERSION, object.type.title, settings.SITE_NAME) %}
 
-{% block title %}{{ object }} - FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ object.type }}{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} {{ pages.current }}{% endblock %}
 {% block strapline_text %}{{ object }} by <a class="pg-Strapline_TextLink" href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endblock %}

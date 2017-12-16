@@ -1,7 +1,6 @@
 {% extends "users/_collection_base.html" %}
 {% import "players/macros/players.html" as player_macros %}
-
-{% block title %}{{ object }}'s card collection - {{ club }}{% endblock %}
+{% set title = "{}'s card collection - {}".forma(object, club) %}
 
 {% block strapline_text %}{{ object }}'s card collection - {{ club }}{% endblock %}
 

@@ -3,12 +3,10 @@
 {% import "macros/adverts.html" as adverts %}
 {% import "macros/share.html" as share with context %}
 {% import "players/macros/players.html" as player_macros %}
+{% set title = '{} FIFA 18 Ratings and Prices | {} rated {}'.format(object, object.rating, object.position) %}
 
-{% block title %}{% block sub_title %}{{ object }} FIFA 18 Ratings and Prices{% endblock %} | {{ object.rating }} rated {{ object.position }}{% endblock %}
-
-{% block og_title %}{% endblock %}
 {% block og_image %}{% endblock %}
-{% block twitter_title %}{% endblock %}
+
 {% block twitter_image %}{% endblock %}
 
 {% block strapline_title %}{{ player.first_name }} {{ player.last_name }}{% endblock %}

@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
 {% import "macros/page.html" as page %}
+{% set title = 'FIFA {} pack simulator'.format(settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'Open FIFA {} Ultimate Team packs with the {} pack simulator'.format(settings.CURRENT_FIFA_VERSION, settings.SITE_NAME) %}
 
-{% block title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}{{ pages.current }}{% endblock %}
 {% block strapline_text %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}

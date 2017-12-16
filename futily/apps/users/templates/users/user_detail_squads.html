@@ -1,6 +1,5 @@
 {% extends "users/_base.html" %}
-
-{% block title %}{{ object }}'s squads{% endblock %}
+{% set title = "{}'s squads".format(object) %}
 
 {% block side_panel %}
   <div class="ea-ObjectsTable">

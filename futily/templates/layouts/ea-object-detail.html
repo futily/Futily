@@ -3,8 +3,16 @@
 {% import "macros/adverts.html" as adverts %}
 {% import "players/macros/filters.html" as filters_macros with context %}
 {% import "players/macros/players.html" as player_macros %}
+{% set title = '{} | Top rated {} players and ratings in FIFA {} Ultimate Team'.format(object, object, settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'Find all of the FIFA {} players and stats from {}'.format(settings.CURRENT_FIFA_VERSION, object) %}
 
-{% block title %}{{ object }} | Top rated {{ object }} players and ratings in FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+
+{% block og_description %}{{ description }}{% endblock %}
+{% block og_image %}{{ get_absolute_domain_url() }}{{ static('ea-images/{}/{}.png'.format(object._meta.app_label, object.ea_id)) }}{% endblock %}
+
+{% block twitter_description %}{{ description }}{% endblock %}
+{% block twitter_image %}{{ get_absolute_domain_url() }}{{ static('ea-images/{}/{}.png'.format(object._meta.app_label, object.ea_id)) }}{% endblock %}
 
 {% block strapline_image %}
   <img class="pg-Strapline_Image"

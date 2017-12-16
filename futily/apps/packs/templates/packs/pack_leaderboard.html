@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
+{% set title = 'FIFA {} pack leaderboard'.format(settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'The highest valued FIFA {} Ultimate Team packs opened with the {} pack simulator'.format(settings.CURRENT_FIFA_VERSION, settings.SITE_NAME) %}
 
-{% block title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack leaderboard{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} pack simulator{% endblock %}
 {% block strapline_text %}Leaderboard{% endblock %}

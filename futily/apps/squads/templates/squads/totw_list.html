@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% import "macros/adverts.html" as adverts %}
 {% import "players/macros/players.html" as player_macros %}
+{% set title = 'All FIFA {} Ultimate Team Team of the Weeks'.format(settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'Discover all of the FIFA {} team of the weeks. Find all the upgraded players'.format(settings.CURRENT_FIFA_VERSION) %}
 
-{% block title %}All FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team Team of the Weeks{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} Totw{% endblock %}
 {% block strapline_text %}Latest FIFA {{ settings.CURRENT_FIFA_VERSION }} Team of the Week informs{% endblock %}

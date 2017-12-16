@@ -15,10 +15,6 @@
     {# TODO: Change this value #}
     <meta name="theme-color" content="#db5945">
 
-    <link rel="preload" href="{{ static('build/css/app.css') }}" as="style">
-
-    <link rel="prefetch" href="{{ static('build/css/app.css') }}">
-
     {% block canonical %}
       <link rel="canonical" href="{{ get_canonical_url() }}" />
     {% endblock %}
@@ -44,7 +40,7 @@
     <!-- Twitter card data -->
     <meta name="twitter:card"
           content="{% block twitter_card %}{{ get_twitter_card() }}{% endblock %}" />
-    <meta name="twitter:site" content="" />
+    <meta name="twitter:site" content="futilysite" />
     <meta name="twitter:title"
           content="{% block twitter_title %}{{ get_twitter_title() }}{% endblock %}" />
     <meta name="twitter:description"
@@ -61,6 +57,8 @@
 
     {# Project #}
     {% compress css %}
+      <link rel="preload" href="{{ static('build/css/app.css') }}" as="style">
+      <link rel="prefetch" href="{{ static('build/css/app.css') }}">
       <link rel="stylesheet" href="{{ static('build/css/app.css') }}">
     {% endcompress %}
 

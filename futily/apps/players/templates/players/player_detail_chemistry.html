@@ -1,8 +1,7 @@
 {% extends "players/_base.html" %}
 {% import "macros/page.html" as page %}
 {% import "players/macros/players.html" as player_macros %}
-
-{% block sub_title %}{{ object }} - Chemistry linked players{% endblock %}
+{% set title = '{} - Chemistry linked players | {} rated {}'.format(object, object.rating, object.position) %}
 
 {% block body %}
   {% set perfect_players = player.get_initial_chemistry_players('perfect') %}

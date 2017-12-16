@@ -1,6 +1,10 @@
 {% extends "sbc/_base.html" %}
+{% set title = '{} Squad Building Challenges FIFA {} Ultimate Team'.format(object, settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'Give the FIFA {} {} Squad Building Challenges a go. View the top rated and lowest priced submissions. Keep up to date with the latest Challenges!'.format(settings.CURRENT_FIFA_VERSION, squadbuilderchallengeset) %}
 
-{% block title %}{{ object }} Squad Building Challenges FIFA {{ settings.CURRENT_FIFA_VERSION }} Ultimate Team{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block aside_under %}
   <div class="asi-Blocks">

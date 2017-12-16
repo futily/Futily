@@ -1,6 +1,10 @@
 {% extends "squads/_builder_edit_base.html" %}
+{% set title = 'FIFA {} Squad Builder'.format(settings.CURRENT_FIFA_VERSION) %}
+{% set description = 'Build and share your own FIFA {} Ultimate Team Squad. Build it from any FIFA {} player'.format(settings.CURRENT_FIFA_VERSION, settings.CURRENT_FIFA_VERSION) %}
 
-{% block title %}FIFA {{ settings.CURRENT_FIFA_VERSION }} Squad Builder{% endblock %}
+{% block meta_description %}{{ description }}{% endblock %}
+{% block og_description %}{{ description }}{% endblock %}
+{% block twitter_description %}{{ description }}{% endblock %}
 
 {% block strapline_text %}Create your FIFA {{ settings.CURRENT_FIFA_VERSION }} squad{% endblock %}
 
