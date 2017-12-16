@@ -13,8 +13,18 @@ class Nations(ContentBase):
         return self.page.title
 
 
+class NationManager(models.Manager):
+    def get_queryset(self):
+        qs = super(NationManager, self).get_queryset().select_related('page')
+
+        return qs
+
+
 class Nation(PageBase):
+    objects = NationManager()
+
     page = models.ForeignKey('Nations', null=True, blank=False)
+    cached_url = models.CharField(max_length=255, blank=True, null=True)
 
     ea_id = models.PositiveIntegerField()
 
@@ -43,13 +53,26 @@ class Nation(PageBase):
     def __str__(self):
         return self.name
 
-    def _get_permalink_for_page(self, page):
-        return page.reverse('nation', kwargs={
+    def _get_permalink_for_page(self, cached=True):
+        if self.cached_url and cached:
+            return self.cached_url
+
+        url = self.page.page.reverse('nation', kwargs={
             'slug': self.slug,
         })
 
+        if url != self.cached_url:
+            self.cached_url = url
+            self.save()
+
+        return url
+
+    @cached_property
+    def _get_absolute_url(self):
+        return self._get_permalink_for_page()
+
     def get_absolute_url(self):
-        return self._get_permalink_for_page(self.page.page)
+        return self._get_absolute_url
 
     @cached_property
     def has_players(self):

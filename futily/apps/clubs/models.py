@@ -17,7 +17,7 @@ class ClubManager(models.Manager):
     def get_queryset(self):
         qs = super(ClubManager, self).get_queryset()
 
-        qs = qs.select_related('league')
+        qs = qs.select_related('page', 'league')
 
         return qs
 
@@ -27,6 +27,7 @@ class Club(PageBase):
 
     page = models.ForeignKey('Clubs', null=True, blank=False)
     league = models.ForeignKey('leagues.League', null=True, blank=True)
+    cached_url = models.CharField(max_length=255, blank=True, null=True)
 
     ea_id = models.PositiveIntegerField()
 
@@ -53,20 +54,33 @@ class Club(PageBase):
     def __str__(self):
         return self.name
 
-    def _get_permalink_for_page(self, page):
-        return page.reverse('club', kwargs={
+    def _get_permalink_for_page(self, cached=True):
+        if self.cached_url and cached:
+            return self.cached_url
+
+        url = self.page.page.reverse('club', kwargs={
             'slug': self.slug,
         })
 
+        if url != self.cached_url:
+            self.cached_url = url
+            self.save()
+
+        return url
+
+    @cached_property
+    def _get_absolute_url(self):
+        return self._get_permalink_for_page()
+
     def get_absolute_url(self):
-        return self._get_permalink_for_page(self.page.page)
+        return self._get_absolute_url
 
     @cached_property
     def has_players(self):
         return self.player_set.exists()
 
     def players(self):
-        return self.player_set.all().select_related('club', 'league', 'nation')
+        return self.player_set(manager='cards').all().select_related('club', 'league', 'nation')
 
     def attackers(self):
         return self.players().filter(position_line='ATT')
