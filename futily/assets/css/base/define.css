@@ -72,11 +72,16 @@ body {
 |
 */
 hr {
-  margin-top: 2vr;
+  margin-top: 3vr;
   margin-bottom: @margin-top;
 
   border: 0;
   border-top: 1px solid var(--Color_Border);
+
+  .frm-Form_Item & {
+    margin-top: 1vr;
+    margin-bottom: @margin-top;
+  }
 }
 
 /*

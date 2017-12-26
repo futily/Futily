@@ -105,7 +105,7 @@
 
   .frm-Form_Item-floatingLabel & {
     position: absolute;
-    top: 50%;
+    top: 19px;
     left: calc(var(--InputHoriPadding) - 10px);
 
     margin-bottom: 0;
@@ -221,6 +221,18 @@
   @include Font_A;
 
   color: var(--Color_Dark-2);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Errors
+|--------------------------------------------------------------------------
+|
+*/
+.frm-Form_Errors {
+  @include Font_A;
+
+  color: var(--Color_Support-beware);
 }
 
 /*

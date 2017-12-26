@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "forms/macros/forms.html" as forms %}
 {% import "macros/page.html" as page with context %}
 {% set title = 'Login' %}
 
@@ -23,14 +24,8 @@
             {% csrf_token %}
 
             <div class="frm-Form_Items frm-Form_Items-tight">
-              {% for field in form %}
-                <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">
-                  <label class="frm-Form_Label js-FloatingLabel_Label"
-                         for="{{ field.id_for_label }}">{{ field.label }}</label>
-
-                  {{ field }}
-                </div>
-              {% endfor %}
+              {{ forms.input(form.username) }}
+              {{ forms.input(form.password) }}
             </div>
 
             <div class="frm-Form_Actions">

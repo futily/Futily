@@ -1,0 +1,18 @@
+{% macro input(field) %}
+  <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel{% if field.field.widget.attrs.autofocus %} js-FloatingLabel-active{% endif %}">
+    <label class="frm-Form_Label js-FloatingLabel_Label"
+           for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+    {{ field }}
+
+    {% if field.errors %}
+      <div class="frm-Form_Extra">
+        <ul class="frm-Form_Errors">
+          {% for error in field.errors %}
+            <li class="frm-Form_Error">{{ error | escape() }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+{% endmacro %}

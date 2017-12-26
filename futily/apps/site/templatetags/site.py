@@ -197,7 +197,7 @@ def path_to_url(context, path):
 #         return None
 
 
-@jinja2.contextfunction
+@jinja2.contextfunction  # pylint: disable=too-complex
 @library.global_function
 def build_url(context, *args, **kwargs):
     request = context['request']
@@ -228,7 +228,8 @@ def build_url(context, *args, **kwargs):
             for item in remove:
                 params.pop(item, None)
 
-        params.update(**get)
+        for key, value in get.items():
+            params[key] = value
 
         return_url += '?{}'.format(params.urlencode())
 

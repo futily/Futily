@@ -14,7 +14,10 @@
   justify-content: space-around;
 
   display: flex;
+  width: 300px;
   height: var(--Height);
+  margin-right: auto;
+  margin-left: auto;
   padding: 1vr var(--Grid_Gutter);
 
   background-image: resolve('rpp-pitch.jpg');

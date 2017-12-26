@@ -147,6 +147,11 @@
                         <p class="plyr-StatGroup_Value plyr-StatGroup_Value-{{ stat_grade(value) }} js-RPP_BaseValue">
                           {{ value }}
                         </p>
+                        <svg class="plyr-StatGroup_Bar">
+                          <rect class="plyr-StatGroup_BarOverlay plyr-StatGroup_BarOverlay-{{ stat_grade(value) }} js-RPP_Bar"
+                                height="100%"
+                                width="{{ value }}%"></rect>
+                        </svg>
                       </li>
                     {% endfor %}
                   </ul>

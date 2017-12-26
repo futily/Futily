@@ -49,10 +49,20 @@
 
 .plyr-StatGroup_Bar {
   width: 100%;
-  height: 7px;
-  margin-top: 0.25vr;
+  height: 5px;
+  margin-top: 1vr;
 
   background-color: #eaeaea;
+
+  .plyr-StatGroup_Item & {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    height: 1px;
+    margin-top: 0;
+  }
 }
 
 .plyr-StatGroup_BarOverlay {
@@ -94,17 +104,17 @@
 |
 */
 .plyr-StatGroup_Item {
+  position: relative;
+
   align-items: center;
   justify-content: space-between;
 
   display: flex;
   padding: 0.5vr 0;
 
-  border-bottom: 1px solid var(--Color_Border);
-
   @media (--sm) {
     padding-top: 1vr;
-    padding-bottom: @padding-top;
+    padding-bottom: calc(@padding-top + 1px);
   }
 
   &:first-child {
@@ -113,9 +123,6 @@
 
   &:last-child {
     margin-bottom: 0;
-    padding-bottom: 0;
-
-    border-bottom: 0;
   }
 }
 

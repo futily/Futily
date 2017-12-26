@@ -42,7 +42,8 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['preferred_platform']
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
+    EMAIL_FIELD = 'email'
 
     objects = UserManager()
 

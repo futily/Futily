@@ -17,22 +17,22 @@ STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 NODE_MODULES_ROOT = os.path.expanduser(os.path.join('~/Workspace/futily', 'node_modules'))
 
 
-INSTALLED_APPS += [
-    'debug_toolbar'
-]
-
-MIDDLEWARE_CLASSES = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-] + MIDDLEWARE_CLASSES
-
-
-def show_toolbar(request):
-    return True
-
-
-DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": show_toolbar,
-}
+# INSTALLED_APPS += [
+#     'debug_toolbar'
+# ]
+#
+# MIDDLEWARE_CLASSES = [
+#     'debug_toolbar.middleware.DebugToolbarMiddleware',
+# ] + MIDDLEWARE_CLASSES
+#
+#
+# def show_toolbar(request):
+#     return True
+#
+#
+# DEBUG_TOOLBAR_CONFIG = {
+#     "SHOW_TOOLBAR_CALLBACK": show_toolbar,
+# }
 
 
 # Use local server.
@@ -63,8 +63,8 @@ DATABASES = {
 
 # Mailtrap SMTP
 EMAIL_HOST = 'smtp.mailtrap.io'
-EMAIL_HOST_USER = '94a4b4d4e3b0ee'
-EMAIL_HOST_PASSWORD = '96c5a97f3f6cfa'
+EMAIL_HOST_USER = '07b911a306a53c'
+EMAIL_HOST_PASSWORD = '6d8da85e5fb4c8'
 EMAIL_PORT = '2525'
 EMAIL_USE_TLS = True
 

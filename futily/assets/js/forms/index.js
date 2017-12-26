@@ -8,7 +8,9 @@ export class FloatingLabel {
       input: el.querySelector(`.${this.className}_Input`),
     };
 
-    this.shouldBeFloated = this.els.input.value.length > 0;
+    this.shouldBeFloated =
+      this.els.input.value.length > 0 ||
+      this.els.el.classList.contains(`${this.className}-active`);
 
     this.setupListeners();
   }

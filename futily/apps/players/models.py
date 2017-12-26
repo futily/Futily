@@ -74,36 +74,9 @@ class PlayerManager(models.Manager):
 
 class PlayerCardManager(models.Manager):
     def get_queryset(self):
-        qs = super(
-            PlayerCardManager,
-            self) .get_queryset() .select_related(
-            'club',
-            'league',
-            'nation',
-            'page',
-            'page__page') .only(
-            'id',
-            'page',
-            'cached_url',
-            'club',
-            'league',
-            'nation',
-            'color',
-            'rating',
-            'position',
-            'ea_id',
-            'name',
-            'work_rate_att',
-            'work_rate_def',
-            'skill_moves',
-            'weak_foot',
-            'card_att_1',
-            'card_att_2',
-            'card_att_3',
-            'card_att_4',
-            'card_att_5',
-            'card_att_6',
-            'is_gk')
+        qs = super(PlayerCardManager, self).get_queryset().select_related(
+            'club', 'league', 'nation', 'page', 'page__page'
+        )
         # .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
         #        'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
         #        'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',

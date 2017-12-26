@@ -123,14 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (document.querySelector('.js-FloatingLabel')) {
-    const labels = document.querySelectorAll('.js-FloatingLabel');
-
-    Array.from(labels).map(label => {
-      new FloatingLabel({ el: label });
-    });
-  }
-
   if (document.querySelector('.js-HeaderPlayerSearch')) {
     new HeaderPlayerSearch({ className: '.js-HeaderPlayerSearch' });
   }
@@ -193,3 +185,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('util-Preload');
   }, 500);
 });
+
+if (document.querySelector('.js-FloatingLabel')) {
+  const labels = document.querySelectorAll('.js-FloatingLabel');
+
+  Array.from(labels).map(label => {
+    new FloatingLabel({ el: label });
+  });
+}

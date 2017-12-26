@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-{% set title = 'Register' %}
+{% import "forms/macros/forms.html" as forms %}
+{% set title = "Register" %}
 
 {% block content_class %}{{ super() }} lyt-Content-mainTight{% endblock %}
 
@@ -15,14 +16,36 @@
             {% csrf_token %}
 
             <div class="frm-Form_Items frm-Form_Items-tight">
-              {% for field in form %}
-                <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">
-                  <label class="frm-Form_Label js-FloatingLabel_Label"
-                         for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {{ forms.input(form.email) }}
+              {{ forms.input(form.username) }}
 
-                  {{ field }}
-                </div>
-              {% endfor %}
+              {{ forms.input(form.password1) }}
+              {{ forms.input(form.password2) }}
+
+              <div class="frm-Form_Item frm-Form_Item-full">
+                <hr>
+              </div>
+
+              {{ forms.input(form.preferred_platform) }}
+
+{#              {% for field in form %}#}
+{#                <div class="frm-Form_Item frm-Form_Item-full frm-Form_Item-floatingLabel js-FloatingLabel">#}
+{#                  <label class="frm-Form_Label js-FloatingLabel_Label"#}
+{#                         for="{{ field.id_for_label }}">{{ field.label }}</label>#}
+{##}
+{#                  {{ field }}#}
+{##}
+{#                  {% if field.errors %}#}
+{#                    <div class="frm-Form_Extra">#}
+{#                      <ul class="frm-Form_Errors">#}
+{#                        {% for error in field.errors %}#}
+{#                          <li class="frm-Form_Error">{{ error | escape() }}</li>#}
+{#                        {% endfor %}#}
+{#                      </ul>#}
+{#                    </div>#}
+{#                  {% endif %}#}
+{#                </div>#}
+{#              {% endfor %}#}
             </div>
 
             <div class="frm-Form_Actions">
