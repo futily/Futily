@@ -44,7 +44,7 @@ docutils==0.14
 ecdsa==0.13
 Fabric3==1.13.1.post1
 fabric3-virtualenv==0.3.1
-fut==0.3.5
+fut==0.3.10
 idna==2.6
 ipython==6.1.0
 ipython-genutils==0.2.0
@@ -84,6 +84,7 @@ pylint-plugin-utils==0.2.6
 PyNaCl==1.2.0
 pyOpenSSL==17.2.0
 pyotp==2.2.6
+python-anticaptcha==0.1.1
 python-dateutil==2.6.1
 python-dotenv==0.7.1
 python-memcached==1.58
