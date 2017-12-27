@@ -353,7 +353,9 @@ function updatePlayers ({ formation, players }) {
       allowedPositions[player.positions.fromFormation]
         .includes(player.data.position)
         ? player.positions.fromFormation
-        : player.positions.inBuilder;
+        : player.positions.inBuilder
+          ? player.positions.inBuilder
+          : player.data.position;
     player.positions.verbose =
       formationData[formation]['verbose'][player.index];
 

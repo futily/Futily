@@ -76,14 +76,14 @@ class Builder(BreadcrumbsMixin, BaseBuilder, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['initial_players'] = {}
+        context['initial_data'] = []
 
         if self.request.GET.get('players', None):
-            context['initial_players'] = self.initial_players_from_players()
+            context['initial_data'] = self.initial_players_from_players()
         elif self.request.GET.get('nation', None):
-            context['initial_players'] = self.initial_players_from_nation()
+            context['initial_data'] = self.initial_players_from_nation()
         elif self.request.GET.get('league', None):
-            context['initial_players'] = self.initial_players_from_league()
+            context['initial_data'] = self.initial_players_from_league()
 
         return context
 
@@ -130,7 +130,9 @@ class Builder(BreadcrumbsMixin, BaseBuilder, TemplateView):
             except Found:
                 continue
 
-        return initial_players
+        return json.dumps([
+            [index, player.get_serializer_data()] for index, player in initial_players.items()
+        ])
 
     def initial_players_from_nation(self):
         nation = self.request.GET.get('nation')

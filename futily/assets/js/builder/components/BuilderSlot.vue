@@ -80,6 +80,12 @@
       };
     },
 
+    mounted () {
+      if (this.isFilled) {
+        this.positionsCycle = this.getPositionsCycle();
+      }
+    },
+
     computed: {
       ...mapGetters({
         'formation': types.GET_FORMATION,

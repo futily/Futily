@@ -184,8 +184,6 @@
     calc(-50% - var(--PlayerY))
   );
 
-  perspective: 1;
-
   @media (--xlg) {
     --PlayerScale: 0.8;
   }

@@ -6,6 +6,8 @@
 |
 */
 .bld-Slot {
+  --PlayerScale: 0.8;
+
   flex-direction: column;
 
   display: flex;

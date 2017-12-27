@@ -11,7 +11,6 @@
 {% block strapline_title %}{{ object.title }}{% endblock %}
 {% block strapline_text %}{% if object.user %} by <a href="{{ object.user.get_absolute_url() }}">{{ object.user }}</a>{% endif %}{% endblock %}
 
-{% block builder_data %}data-initial="{{ initial_data }}"{% endblock %}
 {% block builder_editable %}false{% endblock %}
 {% block builder_share %}{"url": "{{ path_to_url(request.path) | urlencode() }}", "title": "{{ squad.title | urlencode() }}"}{% endblock %}
 {% block builder_title %}{{ object.title }}{% endblock %}

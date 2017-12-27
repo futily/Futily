@@ -8,6 +8,7 @@
 {% block main %}
   <div id="js-Builder"
        {% block builder_data %}{% endblock %}
+       data-initial="{{ initial_data }}"
        data-editable="{% block builder_editable %}true{% endblock %}"
        data-formation="{% block builder_formation %}442{% endblock %}"
        data-is-sbc="{% block builder_is_sbc %}false{% endblock %}"

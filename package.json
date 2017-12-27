@@ -134,12 +134,7 @@
     }
   },
   "browserslist": [
-    "Chrome >= 57",
-    "Edge >= 15",
-    "Firefox >= 52",
-    "iOS >= 10.3",
-    "Opera >= 44",
-    "Safari >= 10.1"
+    "last 2 versions"
   ],
   "babel": {
     "plugins": [
