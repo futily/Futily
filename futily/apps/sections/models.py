@@ -118,7 +118,6 @@ class SectionBase(models.Model):
     @staticmethod
     def get_special_teams():
         latest_totw = Source.objects.first()
-        print(latest_totw)
         # latest_tots = Source.objects.filter(short_title__contains='TOTS Gold')[0]
 
         return {

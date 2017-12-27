@@ -14,8 +14,7 @@
 
   text-align: center;
 
-  background-image: resolve('ea/cards/18/medium/base.png');
-  background-position: 0 -494px;
+  background-image: resolve('builder-bg.png');
   cursor: pointer;
 
   transform: scale(0.8);
