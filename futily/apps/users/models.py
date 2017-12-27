@@ -1,4 +1,5 @@
 from annoying.fields import AutoOneToOneField
+from cms import sitemaps
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -181,6 +182,9 @@ class User(AbstractBaseUser, PermissionsMixin):
             to_user=follower).delete()
 
         return
+
+
+sitemaps.register(User)
 
 
 class UserFollowers(models.Model):

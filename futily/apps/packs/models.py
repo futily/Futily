@@ -1,3 +1,4 @@
+from cms import sitemaps
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
@@ -100,6 +101,9 @@ class PackType(PageBase):
         })
 
 
+sitemaps.register(PackType)
+
+
 class Pack(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(blank=True, null=True)
@@ -130,6 +134,9 @@ class Pack(models.Model):
 
     def get_absolute_url(self):
         return self._get_permalink_for_page(self.page.page)
+
+
+sitemaps.register(Pack)
 
 
 def get_default_packs_page():

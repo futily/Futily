@@ -1,5 +1,6 @@
 import json
 
+from cms import sitemaps
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import SearchMetaBase
 from django.contrib.contenttypes.models import ContentType
@@ -38,6 +39,9 @@ class SquadBuilderChallengeCategory(SearchMetaBase):
 
     def get_absolute_url(self):
         return f'{get_default_sbcs_page().get_absolute_url()}{self.slug}'
+
+
+sitemaps.register(SquadBuilderChallengeCategory)
 
 
 class SquadBuilderChallengeSet(SearchMetaBase):
@@ -79,6 +83,9 @@ class SquadBuilderChallengeSet(SearchMetaBase):
             'set': self,
             'has_link': has_link,
         })
+
+
+sitemaps.register(SquadBuilderChallengeSet)
 
 
 class SquadBuilderChallenge(SearchMetaBase):
@@ -129,6 +136,9 @@ class SquadBuilderChallenge(SearchMetaBase):
         return render_to_string('sbc/includes/challenge.html', {
             'challenge': self,
         })
+
+
+sitemaps.register(SquadBuilderChallenge)
 
 
 class SquadBuilderChallengeRequirement(models.Model):

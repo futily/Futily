@@ -4,6 +4,7 @@ import random
 import unicodedata
 from functools import reduce
 
+from cms import sitemaps
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
@@ -629,6 +630,9 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             return random.sample(list(players), 6)
 
         return players
+
+
+sitemaps.register(Player)
 
 
 class Icon(models.Model):

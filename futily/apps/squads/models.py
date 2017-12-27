@@ -1,12 +1,12 @@
 from datetime import timedelta
 
+from cms import sitemaps
 from cms.apps.pages.models import ContentBase, Page
-from cms.models import PageBaseManager, SearchMetaBase
+from cms.models import SearchMetaBase
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from django.db.models import Prefetch
 from django.template.defaultfilters import date
 from django.utils import timezone
 from django.utils.functional import cached_property
@@ -163,6 +163,9 @@ class Squad(SearchMetaBase):
 
     def get_player_objects(self):
         return sorted([x for x in self.players.all()], key=lambda x: x.rating, reverse=True)
+
+
+sitemaps.register(Squad)
 
 
 class SquadPlayer(models.Model):

@@ -1,3 +1,4 @@
+from cms import sitemaps
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
@@ -87,6 +88,9 @@ class League(PageBase):
 
     def collected_count(self, user):
         return user.cardcollection.players.filter(league__id=self.id).count()
+
+
+sitemaps.register(League)
 
 
 def get_default_leagues_page():

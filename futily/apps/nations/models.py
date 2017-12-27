@@ -1,3 +1,4 @@
+from cms import sitemaps
 from cms.apps.pages.models import ContentBase, Page
 from cms.models import PageBase
 from django.contrib.contenttypes.models import ContentType
@@ -83,6 +84,9 @@ class Nation(PageBase):
 
     def list_informs(self):
         return self.total_special + self.total_totw
+
+
+sitemaps.register(Nation)
 
 
 def get_default_nations_page():
