@@ -16,20 +16,18 @@
 
   background-image: resolve('builder-bg.png');
   cursor: pointer;
+  perspective: 1;
 
-  transform: scale(0.8);
-
-  .bld-Builder_Team & {
-    position: absolute;
-    top: -25px;
-    right: -16px;
-    bottom: @top;
-    left: @right;
-  }
+  transform: scale(var(--PlayerScale));
 
   .bld-ExtraPlayers & {
-    transform: scale(0.8) translate(-15px, -25px);
+    transform: scale(var(--PlayerScale)) translate(-15px, -25px);
   }
+}
+
+.bld-Slot_Card {
+  backface-visibility: hidden;
+  filter: blur(0);
 }
 
 .bld-Slot_Pedestal {
@@ -61,16 +59,22 @@
 */
 .bld-Slot_Controls {
   position: absolute;
-  top: 28px;
+  top: 38px;
   bottom: 57px;
   left: calc(100% - 8px);
   z-index: -1;
 
+  flex-direction: column;
+  justify-content: space-around;
+
+  display: flex;
   width: 40px;
+  padding: 20px 0;
 
   background-color: rgba(#000, 0.5);
   border-radius: 4px;
   color: #fff;
+  will-change: transform;
 
   transform: translateX(calc(-100% - 6px));
   transition: transform 0.4s var(--Transition_EaseOutBack);

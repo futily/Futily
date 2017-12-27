@@ -168,9 +168,13 @@
   top: 50%;
   left: 50%;
 
+  align-items: center;
+  justify-content: center;
+
   display: flex;
-  width: 127px;
-  height: calc(198px + 29px);
+  width: 158px;
+  height: 247px;
+  padding-bottom: 25px;
 
   cursor: pointer;
   user-select: none;
@@ -183,7 +187,7 @@
   perspective: 1;
 
   @media (--xlg) {
-    --PlayerScale: 0.9;
+    --PlayerScale: 0.8;
   }
 
   /* This brings our cards in, the class gets removed 500ms after changing formation */

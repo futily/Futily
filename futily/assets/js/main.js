@@ -164,6 +164,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (document.querySelector('.js-FloatingLabel')) {
+    const labels = document.querySelectorAll('.js-FloatingLabel');
+
+    Array.from(labels).map(label => {
+      new FloatingLabel({ el: label });
+    });
+  }
+
   // If the browser isn't Safari, don't do anything
   if (
     document.querySelector('iframe') &&
@@ -185,11 +193,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('util-Preload');
   }, 500);
 });
-
-if (document.querySelector('.js-FloatingLabel')) {
-  const labels = document.querySelectorAll('.js-FloatingLabel');
-
-  Array.from(labels).map(label => {
-    new FloatingLabel({ el: label });
-  });
-}
