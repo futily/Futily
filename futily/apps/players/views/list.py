@@ -6,7 +6,8 @@ from django.views.generic.edit import FormMixin
 from futily.apps.players.constants import (LEVEL_FILTER_MAP,
                                            LEVELS_GET_TO_LABEL,
                                            POSITION_FILTER_MAP,
-                                           POSITION_GET_TO_LABEL)
+                                           POSITION_GET_TO_LABEL, SORT_CHOICES,
+                                           SORT_GET_TO_LABEL)
 from futily.apps.players.forms import PlayerListForm
 from futily.apps.players.models import Player
 from futily.apps.players.views.detail import construct_query_dict
@@ -149,12 +150,22 @@ class PlayerList(BreadcrumbsMixin, FormMixin, ListView):
             if current_filters.get('strong_foot'):
                 qs = qs.filter(foot=current_filters.get('strong_foot').title())
 
+            if current_filters.get('sort'):
+                sort = self.request.GET.get('sort')
+                order = self.request.GET.get('order')
+
+                qs = qs.order_by(f'{"-" if order != "asc" else ""}{sort}')
+
         return qs
 
     def get_context_data(self, **kwargs):
         context = super(PlayerList, self).get_context_data(**kwargs)
 
         context['current_filters'] = self.build_current_context()
+        context['sort'] = {
+            'choices': SORT_CHOICES,
+            'current': self.request.GET.get('sort', None),
+        }
 
         return context
 
@@ -212,6 +223,9 @@ class PlayerList(BreadcrumbsMixin, FormMixin, ListView):
 
                 if key in ['nation', 'league']:
                     schema['object'] = apps.get_model(f'{key}s', model_name=key).objects.get(slug=value)
+
+                if key == 'sort':
+                    schema['label'] = SORT_GET_TO_LABEL[value]
 
                 current.append(schema)
 

@@ -27,6 +27,46 @@
           {{ link_item(form.weak_foot, True) }}
           {{ workrate_item() }}
           {{ link_item(form.strong_foot) }}
+
+          <li class="asi-Filters_Item">
+            <div class="asi-Filter asi-Filter-collapse js-PlayerFilter_Collapse"
+                 aria-expanded="false">
+              <header class="asi-Filter_Header js-PlayerFilter_CollapseToggle">
+                <button type="button" class="asi-Filter_Button">
+                  <span class="asi-Filter_ButtonLabel">Sort</span>
+                </button>
+              </header>
+
+              <div class="asi-Filter_Body js-PlayerFilter_CollapseBody">
+                <div class="asi-Filter_Sort">
+                  <select class="asi-Filter_Select" name="sort">
+                    <option value="">Sort</option>
+
+                    {% for choice in sort.choices %}
+                      {% if choice.group %}
+                        <optgroup label="{{ choice.label }}">
+                          {% for option in choice.options %}
+                            <option value="{{ option.key }}"{% if choice.key == sort.current %}
+                                    selected{% endif %}>{{ option.label }}</option>
+                          {% endfor %}
+                        </optgroup>
+                      {% else %}
+                        <option value="{{ choice.key }}"{% if choice.key == sort.current %}
+                                selected{% endif %}>{{ choice.label }}</option>
+                      {% endif %}
+                    {% endfor %}
+                  </select>
+
+                  <div class="asi-Filter_SortOrder">
+                    <a class="fltr-Sort"
+                       href="{{ build_url(get={'order': 'asc' if current_order != 'asc' else 'desc'}) }}">
+                      {% include "sort.svg" %}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
         </ul>
 
         <footer class="asi-Filters_Footer">

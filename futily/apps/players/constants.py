@@ -252,6 +252,81 @@ SORT_GET_TO_LABEL = {
     'birth_date': 'Age',
 }
 
+SORT_CHOICES = [
+    {'key': 'likes', 'label': 'Likes'},
+    {'key': 'rating', 'label': 'Rating'},
+    {
+        'key': '', 'label': 'Pace', 'group': True, 'options': [
+            {'key': 'acceleration', 'label': 'Acceleration'},
+            {'key': 'sprint_speed', 'label': 'Sprint speed'},
+        ]
+    },
+    {
+        'key': '', 'label': 'Shooting', 'group': True, 'options': [
+            {'key': 'finishing', 'label': 'Finishing'},
+            {'key': 'long_shots', 'label': 'Long shots'},
+            {'key': 'penalties', 'label': 'Penalties'},
+            {'key': 'positioning', 'label': 'Positioning'},
+            {'key': 'shot_power', 'label': 'Shot power'},
+            {'key': 'volleys', 'label': 'Volleys'},
+        ]
+    },
+    {
+        'key': '', 'label': 'Passing', 'group': True, 'options': [
+            {'key': 'crossing', 'label': 'Crossing'},
+            {'key': 'curve', 'label': 'Curve'},
+            {'key': 'free_kick_accuracy', 'label': 'Free kick'},
+            {'key': 'long_passing', 'label': 'Long passing'},
+            {'key': 'short_passing', 'label': 'Short passing'},
+            {'key': 'vision', 'label': 'Vision'},
+        ]
+    },
+    {
+        'key': '', 'label': 'Dribbling', 'group': True, 'options': [
+            {'key': 'agility', 'label': 'Agility'},
+            {'key': 'balance', 'label': 'Balance'},
+            {'key': 'ball_control', 'label': 'Ball control'},
+            {'key': 'dribbling', 'label': 'Dribbling'},
+            {'key': 'reactions', 'label': 'Reactions'},
+        ]
+    },
+    {
+        'key': '', 'label': 'Defending', 'group': True, 'options': [
+            {'key': 'heading', 'label': 'Heading'},
+            {'key': 'interceptions', 'label': 'Interceptions'},
+            {'key': 'marking', 'label': 'Marking'},
+            {'key': 'sliding_tackle', 'label': 'Sliding tackle'},
+            {'key': 'standing_tackle', 'label': 'Standing tackle'},
+        ]
+    },
+    {
+        'key': '', 'label': 'Physical', 'group': True, 'options': [
+            {'key': 'aggression', 'label': 'Aggression'},
+            {'key': 'jumping', 'label': 'Jumping'},
+            {'key': 'stamina', 'label': 'Stamina'},
+            {'key': 'strength', 'label': 'Strength'},
+        ]
+    },
+    {
+        'key': '', 'label': 'Futily', 'group': True, 'options': [
+            {'key': 'rating_attacker', 'label': 'Attacker'},
+            {'key': 'rating_creator', 'label': 'Creator'},
+            {'key': 'rating_defender', 'label': 'Defender'},
+            {'key': 'rating_creative', 'label': 'Pirlo'},
+            {'key': 'rating_beast', 'label': 'Beast'},
+        ]
+    },
+    {'key': 'card_att_1', 'label': 'Pace'},
+    {'key': 'card_att_2', 'label': 'Shooting'},
+    {'key': 'card_att_3', 'label': 'Passing'},
+    {'key': 'card_att_4', 'label': 'Dribbling'},
+    {'key': 'card_att_5', 'label': 'Defending'},
+    {'key': 'card_att_6', 'label': 'Physical'},
+    {'key': 'total_stats', 'label': 'Total stats'},
+    {'key': 'total_ingame_stats', 'label': 'Total ingame stats'},
+    {'key': 'birth_date', 'label': 'Age'},
+]
+
 WORKRATE_CHOICES = [
     ('Low', 'Low'),
     ('Medium', 'Medium'),

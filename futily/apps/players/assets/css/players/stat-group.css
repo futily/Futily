@@ -28,6 +28,8 @@
 .plyr-StatGroup_GroupValue {
   @include Font_E;
 
+  font-weight: 600;
+
   color: var(--RatingColor);
 }
 

@@ -178,3 +178,30 @@
     font-weight: 600;
   }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Sort
+|--------------------------------------------------------------------------
+|
+*/
+.asi-Filter_Select {
+  flex: 1 1 auto;
+
+  margin-right: calc(var(--Grid_Gutter) * 2);
+  padding: 5px var(--Grid_Gutter);
+
+  appearance: none;
+  background-color: #fff;
+  background-image: svg-load('angle-down.svg');
+  background-position: right var(--Grid_Gutter) center;
+  background-size: 12px auto;
+  border: 1px solid var(--Color_Border);
+  border-radius: 4px;
+}
+
+.asi-Filter_Sort {
+  justify-content: space-between;
+
+  display: flex;
+}

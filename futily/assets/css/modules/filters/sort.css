@@ -9,6 +9,7 @@
   display: block;
   padding: 10px var(--Grid_Gutter);
 
+  background-color: #fff;
   border: 1px solid var(--Color_Border);
 
   @media (--xs-viewport) {

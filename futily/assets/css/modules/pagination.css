@@ -114,6 +114,7 @@
 
   &[disabled] {
     background-color: var(--Color_Light-3);
+    cursor: not-allowed;
   }
   &.pgn-Pagination_Control-prev {
     margin-right: var(--Grid_Gutter);

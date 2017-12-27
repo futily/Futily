@@ -95,6 +95,8 @@ class PlayerListForm(forms.Form):
     def_workrate = forms.ChoiceField(choices=WORKRATE_CHOICES, widget=forms.RadioSelect)
     att_workrate = forms.ChoiceField(choices=WORKRATE_CHOICES, widget=forms.RadioSelect)
     strong_foot = forms.ChoiceField(choices=[('right', 'Right'), ('left', 'Left')], widget=forms.RadioSelect)
+    sort = forms.ChoiceField()
+    order = forms.ChoiceField(choices=[['asc', 'Asc'], ['desc', 'Desc']])
 
     def __init__(self, *args, **kwargs):
         super(PlayerListForm, self).__init__(*args, **kwargs)
