@@ -2,9 +2,8 @@ import 'babel-polyfill';
 import 'intersection-observer';
 import 'pepjs';
 import './utils/class-list-polyfill';
-import camelCase from 'camelcase';
 
-import { externalLinks, iframeFix } from './utils';
+import { camelCase, externalLinks, iframeFix } from './utils';
 import { FloatingLabel } from './forms';
 import { PlayerFilterForm } from './players/list';
 import { Navigation } from './site';

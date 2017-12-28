@@ -131,16 +131,8 @@ module.exports = function (env) {
       new webpack.LoaderOptionsPlugin({
         minimize: true
       }),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings: false
-        },
-        output: {
-          comments: false
-        }
-      }),
-      new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin(),
+      new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.ModuleConcatenationPlugin()
     )
