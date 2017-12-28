@@ -1,4 +1,5 @@
 export const GET_CHEMLINKS = 'GET_CHEMLINKS';
+export const GET_FILLED_TEAM_INDEXES = 'GET_FILLED_TEAM_INDEXES';
 export const GET_FORMATION = 'GET_FORMATION';
 export const GET_IS_EDITABLE = 'GET_IS_EDITABLE';
 export const GET_IS_SBC = 'GET_IS_SBC';

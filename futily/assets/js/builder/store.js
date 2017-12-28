@@ -250,6 +250,8 @@ const actions = {
 
 const getters = {
   [types.GET_CHEMLINKS]: state => state.chemLinks,
+  [types.GET_FILLED_TEAM_INDEXES]: state =>
+    state.players.team.filter(player => player.isFilled),
   [types.GET_FORMATION]: state => state.formation,
   [types.GET_IS_EDITABLE]: state => state.isEditable,
   [types.GET_IS_SBC]: state => state.isSbc,

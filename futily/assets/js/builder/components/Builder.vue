@@ -102,6 +102,7 @@
     computed: {
       ...mapGetters({
         'chemLinks': types.GET_CHEMLINKS,
+        'filledTeamIndexes': types.GET_FILLED_TEAM_INDEXES,
         'formation': types.GET_FORMATION,
         'isEditable': types.GET_IS_EDITABLE,
         'players': types.GET_PLAYERS,
@@ -116,7 +117,7 @@
         });
       },
 
-      'stats.chemistry' (val) {
+      'filledTeamIndexes' (val) {
         this.$nextTick(() => {
           this.initCanvas();
         });
