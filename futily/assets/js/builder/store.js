@@ -206,8 +206,12 @@ const mutations = {
     Object.assign(state.search.pages, pages);
   },
 
-  [types.SET_SEARCH_RESULTS] (state, { results }) {
-    state.search.results = results;
+  [types.SET_SEARCH_RESULTS] (state, { results, append = false }) {
+    if (append) {
+      state.search.results = [...state.search.results, ...results];
+    } else {
+      state.search.results = results;
+    }
   },
 
   [types.SET_SEARCH_TERM] (state, { term }) {
@@ -250,6 +254,8 @@ const actions = {
 
 const getters = {
   [types.GET_CHEMLINKS]: state => state.chemLinks,
+  [types.GET_FILLED_TEAM_INDEXES]: state =>
+    state.players.team.filter(player => player.isFilled),
   [types.GET_FORMATION]: state => state.formation,
   [types.GET_IS_EDITABLE]: state => state.isEditable,
   [types.GET_IS_SBC]: state => state.isSbc,
@@ -284,17 +290,17 @@ const getters = {
       midfield: getAverageLine({ players, line: 'MID' }),
       defence: getAverageLine({ players, line: 'DEF' }),
 
-      defensive: getAverageStat({ players, stat: 'rating_defensive' }),
-      anchor: getAverageStat({ players, stat: 'rating_anchor' }),
-      creative: getAverageStat({ players, stat: 'rating_creative' }),
-      attacking: getAverageStat({ players, stat: 'rating_attacking' }),
+      defensive: getAverageStat({ players, stat: 'ratingDefensive' }),
+      anchor: getAverageStat({ players, stat: 'ratingAnchor' }),
+      creative: getAverageStat({ players, stat: 'ratingCreative' }),
+      attacking: getAverageStat({ players, stat: 'ratingAttacking' }),
 
-      pace: getAverageStat({ players, stat: 'card_att_1' }),
-      shooting: getAverageStat({ players, stat: 'card_att_2' }),
-      passing: getAverageStat({ players, stat: 'card_att_3' }),
-      dribbling: getAverageStat({ players, stat: 'card_att_4' }),
-      defending: getAverageStat({ players, stat: 'card_att_5' }),
-      physical: getAverageStat({ players, stat: 'card_att_6' }),
+      pace: getAverageStat({ players, stat: 'cardAtt1' }),
+      shooting: getAverageStat({ players, stat: 'cardAtt2' }),
+      passing: getAverageStat({ players, stat: 'cardAtt3' }),
+      dribbling: getAverageStat({ players, stat: 'cardAtt4' }),
+      defending: getAverageStat({ players, stat: 'cardAtt5' }),
+      physical: getAverageStat({ players, stat: 'cardAtt6' }),
     };
   },
 };

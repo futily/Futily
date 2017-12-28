@@ -5,7 +5,7 @@ from .models import Player
 
 class PlayerSerializer(serializers.HyperlinkedModelSerializer):
     id = serializers.ReadOnlyField()
-    absolute_url = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
     stats = serializers.SerializerMethodField()
     club = serializers.SerializerMethodField()
     league = serializers.SerializerMethodField()
@@ -13,7 +13,7 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Player
-        fields = ['id', 'stats', 'club', 'absolute_url', 'league', 'nation', 'ea_id', 'ea_id_base', 'color', 'rating',
+        fields = ['id', 'stats', 'club', 'url', 'league', 'nation', 'ea_id', 'ea_id_base', 'color', 'rating',
                   'position', 'name', 'card_att_1', 'card_att_2', 'card_att_3', 'card_att_4', 'card_att_5',
                   'card_att_6', 'work_rate_att', 'work_rate_def', 'skill_moves', 'weak_foot', 'is_gk',
                   'rating_defensive', 'rating_anchor', 'rating_creative', 'rating_attacking']
@@ -22,12 +22,12 @@ class PlayerSerializer(serializers.HyperlinkedModelSerializer):
     #     is_search = self.context['request'].query_params.get('is_search')
     #
     #     if is_search:
-    #         return ['id', 'ea_id', 'name', 'rating', 'position', 'color', 'absolute_url', 'club', 'nation']
+    #         return ['id', 'ea_id', 'name', 'rating', 'position', 'color', 'url', 'club', 'nation']
     #
     #     return super().get_field_names(declared_fields, info)
 
     @staticmethod
-    def get_absolute_url(obj):
+    def get_url(obj):
         return obj.get_absolute_url()
 
     @staticmethod

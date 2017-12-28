@@ -9,7 +9,9 @@ from django.contrib.auth import views as auth_views
 from django.contrib.contenttypes import views as contenttypes_views
 from django.contrib.sitemaps import views as sitemaps_views
 from django.views import generic
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView
+from graphene_django.views import GraphQLView
 from rest_framework.routers import DefaultRouter
 
 from futily.apps.clubs.views import ClubViewSet
@@ -35,6 +37,8 @@ urlpatterns = [
 
     url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    url(r'^api/graphql', csrf_exempt(GraphQLView.as_view())),
 
     url(r'social/', include('social_django.urls', namespace='social')),
 
@@ -70,6 +74,7 @@ if settings.DEBUG:
         ] + urlpatterns
 
     urlpatterns += [
+        url(r'^api/graphiql', csrf_exempt(GraphQLView.as_view(graphiql=True, pretty=True))),
         url(r'^404/$', generic.TemplateView.as_view(template_name='404.html')),
         url(r'^500/$', generic.TemplateView.as_view(template_name='500.html')),
         url(r'^frontend/$', FrontendView.as_view()),

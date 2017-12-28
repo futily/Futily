@@ -1,6 +1,27 @@
 import Vue from '../vue';
+import { ApolloClient } from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import VueApollo from 'vue-apollo';
+
 import Builder from './components/Builder.vue';
 import { setupStore } from './store';
+
+Vue.use(VueApollo);
+
+const httpLink = new HttpLink({
+  uri: '/api/graphql',
+});
+
+const apolloClient = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
+  connectToDevTools: true,
+});
+
+const apolloProvider = new VueApollo({
+  defaultClient: apolloClient,
+});
 
 export default ({
   awards,
@@ -17,6 +38,7 @@ export default ({
   user,
 }) => {
   return new Vue({
+    apolloProvider,
     store: setupStore({
       awards,
       formation,

@@ -12,6 +12,8 @@
   bottom: 0;
   left: 0;
 
+  padding-bottom: 4vr;
+
   background-color: rgba(#000, 0.76);
   opacity: 0;
   overflow-y: auto;
@@ -88,6 +90,18 @@
   &::placeholder {
     opacity: 1;
   }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer
+|--------------------------------------------------------------------------
+|
+*/
+.bld-Search_Footer {
+  margin-top: 3vr;
+
+  text-align: center;
 }
 
 /*
@@ -188,15 +202,7 @@
 }
 
 .bld-Search_Next {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-
-  padding: 0;
-
-  color: #fff;
-  cursor: pointer;
+  @include Button-primary;
 
   &[disabled] {
     cursor: not-allowed;

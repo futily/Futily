@@ -19,16 +19,6 @@
 
       <div class="bld-Search_Body">
         <div :class="['bld-Search_Results', {'bld-Search_Results-loading': this.loading}]">
-          <button rel="prev"
-                  type="button"
-                  :class="['bld-Search_Prev', {'bld-Search_Prev-hidden': hasPrev === false}]"
-                  @click.stop="handlePrev"
-                  :disabled="hasPrev === false">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
-              <path d="M88.6 121.3c.8.8 1.8 1.2 2.9 1.2s2.1-.4 2.9-1.2c1.6-1.6 1.6-4.2 0-5.8l-51-51 51-51c1.6-1.6 1.6-4.2 0-5.8s-4.2-1.6-5.8 0l-54 53.9c-1.6 1.6-1.6 4.2 0 5.8l54 53.9z" />
-            </svg>
-          </button>
-
           <div class="bld-Search_Items">
             <ul class="plyr-CardList_Items">
               <li class="plyr-CardList_Item"
@@ -38,18 +28,18 @@
               </li>
             </ul>
           </div>
-
-          <button rel="next"
-                  type="button"
-                  :class="['bld-Search_Next', {'bld-Search_Next-hidden': hasNext === false}]"
-                  @click.stop="handleNext"
-                  :disabled="hasNext === false">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129">
-              <path d="M40.4 121.3c-.8.8-1.8 1.2-2.9 1.2s-2.1-.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8 1.6-1.6 4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z" />
-            </svg>
-          </button>
         </div>
       </div>
+
+      <footer class="bld-Search_Footer">
+        <button rel="next"
+                type="button"
+                :class="['bld-Search_Next', {'bld-Search_Next-hidden': hasNext === false}]"
+                @click.stop="handleNext"
+                :disabled="hasNext === false">
+          Load more
+        </button>
+      </footer>
 
       <div :class="['bld-Search_Loading', {'bld-Search_Loading-visible': this.loading}]">
         <span class="bld-Search_LoadingIcon">
@@ -63,6 +53,7 @@
 </template>
 
 <script>
+  import gql from 'graphql-tag';
   import { mapActions, mapGetters, mapMutations } from 'vuex';
 
   import PlayerCard from './PlayerCard.vue';
@@ -74,9 +65,97 @@
       PlayerCard,
     },
 
+    apollo: {
+      players () {
+        return {
+          manual: true,
+          skip () {
+            return this.loading === false;
+          },
+          query: gql`query SearchPlayers ($afterCursor: String!, $query: String!) {
+            players(first:28, after: $afterCursor, englishNames: $query) {
+              pageInfo {
+                hasNextPage,
+                endCursor,
+                startCursor
+              },
+              edges {
+                node {
+                  pk,
+                  name,
+                  position,
+                  eaId,
+                  rating,
+                  url,
+                  stats,
+                  workRateAtt,
+                  workRateDef,
+                  color,
+                  skillMoves,
+                  weakFoot,
+                  cardAtt1,
+                  cardAtt2,
+                  cardAtt3,
+                  cardAtt4,
+                  cardAtt5,
+                  cardAtt6,
+                  ratingDefensive,
+                  ratingAnchor,
+                  ratingCreative,
+                  ratingAttacking,
+                  nation {
+                    title,
+                    eaId
+                  },
+                  league {
+                    title,
+                    eaId
+                  },
+                  club {
+                    title,
+                    eaId
+                  }
+                }
+              }
+            }
+          }`,
+          result ({ data, loading }) {
+            if (!loading) {
+              this.pageInfo = data.players.pageInfo;
+              this.players = data.players.edges;
+              this.loading = false;
+              this.lastSearchTerm = this.search.term;
+
+              this.setResults({
+                results: data.players.edges.map(node => node.node),
+                append: this.append,
+              });
+
+              this.append = false;
+            }
+          },
+          variables () {
+            return {
+              afterCursor: this.afterCursor,
+              query: this.search.term,
+            };
+          },
+        };
+      },
+    },
+
     data () {
       return {
+        append: false,
         loading: false,
+        pageInfo: {
+          endCursor: '',
+          hasNextPage: false,
+          hasPreviousPage: false,
+          startCursor: '',
+        },
+        players: [],
+        lastSearchTerm: '',
       };
     },
 
@@ -86,11 +165,17 @@
       }),
 
       hasNext () {
-        return this.search.pages.next !== null && this.search.pages.next > this.search.pages.current;
+        return this.pageInfo.hasNextPage && this.search.term !== '';
       },
 
       hasPrev () {
-        return this.search.pages.prev !== null && this.search.pages.prev < this.search.pages.current;
+        return this.pageInfo.hasPreviousPage;
+      },
+
+      afterCursor () {
+        return this.pageInfo.hasNextPage && this.search.term === this.lastSearchTerm
+          ? this.pageInfo.endCursor
+          : '';
       },
     },
 
@@ -133,13 +218,13 @@
 
         this.loading = true;
         this.setTerm({ term: value });
-
-        this.resetPages();
-        this.setResults({
-          results: await this.getResults(
-            `/api/players?query=${this.search.term}&page=${this.search.pages.current}`,
-          ),
-        });
+        //
+        // this.resetPages();
+        // this.setResults({
+        //   results: await this.getResults(
+        //     `/api/players?query=${this.search.term}&page=${this.search.pages.current}`,
+        //   ),
+        // });
       }, 300),
 
       async getResults (url) {
@@ -165,22 +250,7 @@
 
       async handleNext () {
         this.loading = true;
-
-        this.setResults({
-          results: await this.getResults(
-            `/api/players?query=${this.search.term}&page=${this.search.pages.next}`,
-          ),
-        });
-      },
-
-      async handlePrev () {
-        this.loading = true;
-
-        this.setResults({
-          results: await this.getResults(
-            `/api/players?query=${this.search.term}&page=${this.search.pages.prev}`,
-          ),
-        });
+        this.append = true;
       },
     },
   };

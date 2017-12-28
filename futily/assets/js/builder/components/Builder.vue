@@ -56,8 +56,9 @@
 </template>
 
 <script>
+  import gql from 'graphql-tag';
   import Draggable from '@shopify/draggable/lib/draggable';
-  import { mapActions, mapGetters, mapMutations } from 'vuex';
+  import { mapActions, mapGetters } from 'vuex';
 
   import BuilderSearch from './BuilderSearch.vue';
   import BuilderSlot from './BuilderSlot.vue';
@@ -102,6 +103,7 @@
     computed: {
       ...mapGetters({
         'chemLinks': types.GET_CHEMLINKS,
+        'filledTeamIndexes': types.GET_FILLED_TEAM_INDEXES,
         'formation': types.GET_FORMATION,
         'isEditable': types.GET_IS_EDITABLE,
         'players': types.GET_PLAYERS,
@@ -116,7 +118,7 @@
         });
       },
 
-      'stats.chemistry' (val) {
+      'filledTeamIndexes' (val) {
         this.$nextTick(() => {
           this.initCanvas();
         });

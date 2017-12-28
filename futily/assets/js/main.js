@@ -2,6 +2,7 @@ import 'babel-polyfill';
 import 'intersection-observer';
 import 'pepjs';
 import './utils/class-list-polyfill';
+import camelCase from 'camelcase';
 
 import { externalLinks, iframeFix } from './utils';
 import { FloatingLabel } from './forms';
@@ -36,10 +37,24 @@ document.addEventListener('DOMContentLoaded', () => {
     import('./builder').then(builder => {
       const formation = builderEl.dataset.formation;
       const initial = builderEl.dataset.initial
-        ? JSON.parse(builderEl.dataset.initial).map(([_, str]) => [
-          _,
-          JSON.parse(str),
-        ])
+        ? JSON.parse(builderEl.dataset.initial).map(([_, str]) => {
+          return [
+            _,
+            Object.entries(JSON.parse(str)).reduce((acc, [key, value]) => {
+              if (['club', 'league', 'nation'].includes(key)) {
+                value = Object.entries(value).reduce((acc, [key, value]) => {
+                  acc[camelCase(key)] = value;
+
+                  return acc;
+                }, {});
+              }
+
+              acc[camelCase(key)] = value;
+
+              return acc;
+            }, {}),
+          ];
+        })
         : [];
       const isEditable = builderEl.dataset.editable === 'true';
       const isSbc = builderEl.dataset.isSbc === 'true';

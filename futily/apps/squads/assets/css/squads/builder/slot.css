@@ -27,11 +27,6 @@
   }
 }
 
-.bld-Slot_Card {
-  backface-visibility: hidden;
-  filter: blur(0);
-}
-
 .bld-Slot_Pedestal {
   position: absolute;
   top: calc(100% + 5px);

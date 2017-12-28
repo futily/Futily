@@ -51,7 +51,7 @@
     </span>
     <input type="hidden"
            name="players"
-           :value="`${player.data.id},${player.index},${player.positions.inBuilder},${player.chemistry.total}`"
+           :value="`${player.data.pk},${player.index},${player.positions.inBuilder},${player.chemistry.total}`"
            v-if="isFilled">
   </div>
 </template>

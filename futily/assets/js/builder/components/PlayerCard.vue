@@ -1,6 +1,6 @@
 <template>
   <PotentialLink :class="['plyr-Card', 'plyr-Card-medium', `plyr-Card-${data.color}`]"
-                 :href="isLinked ? data.absolute_url : null"
+                 :href="isLinked ? data.url : null"
                  :isLink="isLinked"
                  @click="handleClick">
     <header class="plyr-Card_Header">
@@ -8,15 +8,15 @@
         <span class="plyr-Card_Rating">{{ data.rating }}</span>
         <span class="plyr-Card_Position">{{ position }}</span>
         <img alt=""
-             :src="`/static/ea-images/clubs/${data.club.ea_id}.png`"
+             :src="`/static/ea-images/clubs/${data.club.eaId}.png`"
              class="plyr-Card_Club">
         <img alt=""
-             :src="`/static/ea-images/nations/${data.nation.ea_id}.png`"
+             :src="`/static/ea-images/nations/${data.nation.eaId}.png`"
              class="plyr-Card_Nation">
       </div>
 
       <img alt=""
-           :src="`/static/ea-images/players/${data.ea_id}.png`"
+           :src="`/static/ea-images/players/${data.eaId}.png`"
            class="plyr-Card_Image">
     </header>
 
@@ -25,15 +25,15 @@
 
       <div class="plyr-Card_Extra">
         <p class="plyr-Card_Workrates">
-          {{ data.work_rate_att[0] }} / {{ data.work_rate_def[0] }}
+          {{ data.workRateAtt[0] }} / {{ data.workRateDef[0] }}
         </p>
-        <p class="plyr-Card_Stars">{{ data.skill_moves }}* SM</p>
-        <p class="plyr-Card_Stars">{{ data.weak_foot }}* WF</p>
+        <p class="plyr-Card_Stars">{{ data.skillMoves }}* SM</p>
+        <p class="plyr-Card_Stars">{{ data.weakFoot }}* WF</p>
       </div>
 
       <div class="plyr-Card_Stats">
         <div :class="['plyr-Card_Stat', `plyr-Card_Stat-${index}`]"
-             v-for="([key, value], index) in cardStats">
+             v-for="([key, value], index) in data.stats">
           <span class="plyr-Card_StatValue">{{ value }}</span>
           <span class="plyr-Card_StatKey">{{ key }}</span>
         </div>
@@ -89,21 +89,6 @@
         if (this.isLinked === false) {
           evt.preventDefault();
         }
-      },
-    },
-
-    computed: {
-      cardStats () {
-        const isGk = this.data.is_gk;
-
-        return [
-          [isGk ? 'DIV' : 'PAC', this.data.card_att_1],
-          [isGk ? 'HAN' : 'SHO', this.data.card_att_2],
-          [isGk ? 'KIC' : 'PAS', this.data.card_att_3],
-          [isGk ? 'REF' : 'DRI', this.data.card_att_4],
-          [isGk ? 'SPD' : 'DEF', this.data.card_att_5],
-          [isGk ? 'POS' : 'PHY', this.data.card_att_6],
-        ];
       },
     },
   };

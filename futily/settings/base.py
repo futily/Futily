@@ -142,6 +142,8 @@ INSTALLED_APPS = [
     'annoying',
     'django_jinja',
     'django_jinja.contrib._humanize',
+    'graphene_django',
+    'corsheaders',
 
     'django.forms',
 
@@ -157,6 +159,7 @@ INSTALLED_APPS = [
     'cms.apps.media',
 
     'futily.apps.actions',
+    'futily.apps.api',
     'futily.apps.clubs',
     'futily.apps.comments',
     'futily.apps.components',
@@ -232,6 +235,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'cms.middleware.LocalisationMiddleware',
     'futily.apps.redirects.middleware.RedirectFallbackMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -363,6 +367,24 @@ CACHES = {
     }
 }
 
+GRAPHENE = {
+    'SCHEMA': 'futily.apps.api.schema.schema',
+    'SCHEMA_INDENT': 2,
+    'MIDDLEWARE': [
+        'graphene_django_extras.ExtraGraphQLDirectiveMiddleware'
+    ]
+}
+GRAPHENE_DJANGO_EXTRAS = {
+    'DEFAULT_PAGINATION_CLASS': 'graphene_django_extras.paginations.LimitOffsetGraphqlPagination',
+    'DEFAULT_PAGE_SIZE': 20,
+    'MAX_PAGE_SIZE': 50,
+}
+
+CORS_ORIGIN_WHITELIST = [
+    'localhost:3000',
+    '127.0.0.1:3000',
+    '0.0.0.0',
+]
 
 # A secret key used for cryptographic algorithms.
 
