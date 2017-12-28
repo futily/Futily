@@ -128,10 +128,15 @@ module.exports = function (env) {
           NODE_ENV: JSON.stringify('production')
         }
       }),
+      new webpack.optimize.UglifyJsPlugin({
+        sourceMap: true,
+        compress: {
+          warnings: false
+        }
+      }),
       new webpack.LoaderOptionsPlugin({
         minimize: true
       }),
-      new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.OccurrenceOrderPlugin(),
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.ModuleConcatenationPlugin()
