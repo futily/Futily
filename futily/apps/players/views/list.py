@@ -162,9 +162,11 @@ class PlayerList(BreadcrumbsMixin, FormMixin, ListView):
         context = super(PlayerList, self).get_context_data(**kwargs)
 
         context['current_filters'] = self.build_current_context()
+        current_sort = self.request.GET.get('sort', None)
         context['sort'] = {
             'choices': SORT_CHOICES,
-            'current': self.request.GET.get('sort', None),
+            'current': current_sort,
+            'label': SORT_GET_TO_LABEL[current_sort] if current_sort else 'Rating',
         }
 
         return context
@@ -188,6 +190,9 @@ class PlayerList(BreadcrumbsMixin, FormMixin, ListView):
             items = current_filters.getlist(key)
 
             for value in items:
+                if not value:
+                    continue
+
                 if key in [
                     'min_rating',
                     'max_rating'] or (

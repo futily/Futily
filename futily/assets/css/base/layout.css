@@ -111,6 +111,9 @@
 |
 */
 .lyt-Aside {
+  position: relative;
+  z-index: 1;
+
   .lyt-Content-mainAside & {
     @media (--lg) {
       width: 300px;

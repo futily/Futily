@@ -90,29 +90,31 @@
 {% endblock %}
 
 {% block main %}
-  <section class="plyr-CurrentFilters">
-    <ul class="plyr-CurrentFilters_Items">
-      {% for filter in current_filters %}
-        <li class="plyr-CurrentFilters_Item">
-          <a class="plyr-CurrentFilter btn-Primary"
-             href="{{ build_url(remove={filter.key: filter.value}) }}">
-            {% if filter.get('object', None) %}
-              <img class="plyr-CurrentFilter_Image"
-                   src="{{ static('ea-images/{}s/{}.png'.format(filter.object._meta.model_name, filter.object.ea_id)) }}">
-            {% endif %}
+  {% if current_filters %}
+    <section class="plyr-CurrentFilters">
+      <ul class="plyr-CurrentFilters_Items">
+        {% for filter in current_filters %}
+          <li class="plyr-CurrentFilters_Item">
+            <a class="plyr-CurrentFilter btn-Primary"
+               href="{{ build_url(remove={filter.key: filter.value}) }}">
+              {% if filter.get('object', None) %}
+                <img class="plyr-CurrentFilter_Image"
+                     src="{{ static('ea-images/{}s/{}.png'.format(filter.object._meta.model_name, filter.object.ea_id)) }}">
+              {% endif %}
 
-            {{ filter.label | title() }}
+              {{ filter.label | title() }}
 
-            <span class="plyr-CurrentFilter_Icon">
-              {% include 'close.svg' %}
-            </span>
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </section>
+              <span class="plyr-CurrentFilter_Icon">
+                {% include 'close.svg' %}
+              </span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endif %}
 
-  {{ player_macros.card_list(player_list) }}
+  {{ player_macros.card_list(player_list, sorts=sort) }}
 
   {{ render_pagination(page_obj) }}
 {% endblock %}

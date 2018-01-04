@@ -9,7 +9,7 @@
   position: absolute;
   top: -35px;
   left: calc(100% + (var(--Grid_Gutter) * 2));
-  z-index: 1;
+  z-index: 10;
 
   max-width: 750px;
   width: 50vw;
