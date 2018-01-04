@@ -11,7 +11,7 @@
 
           {% if sorts and sorts.current %}
             <p class="plyr-CardList_Text">
-              {{ sorts.label }}: {{ player[sorts.current] }}
+              {{ sorts.label }}: {{ player[sorts.current] if sorts.current != 'birth_date' else player.age }}
             </p>
           {% endif %}
         </li>

@@ -16,6 +16,16 @@ MEDIA_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'media'))
 STATIC_ROOT = os.path.expanduser(os.path.join('~/Sites', SITE_DOMAIN, 'static'))
 NODE_MODULES_ROOT = os.path.expanduser(os.path.join('~/Workspace/futily', 'node_modules'))
 
+INSTALLED_APPS += [
+    'silk',
+]
+
+MIDDLEWARE_CLASSES = [
+    'silk.middleware.SilkyMiddleware',
+] + MIDDLEWARE_CLASSES
+
+SILKY_PYTHON_PROFILER = True
+
 
 # INSTALLED_APPS += [
 #     'debug_toolbar'

@@ -75,9 +75,170 @@ class PlayerManager(models.Manager):
 
 class PlayerCardManager(models.Manager):
     def get_queryset(self):
-        qs = super(PlayerCardManager, self).get_queryset().select_related(
-            'club', 'league', 'nation', 'page', 'page__page'
-        )
+        qs = super(
+            PlayerCardManager,
+            self) .get_queryset() .select_related(
+            'club',
+            'league',
+            'nation',
+            'page',
+            'page__page') .prefetch_related('price_set') .defer(
+            'has_perfect_chem_links',
+            'rating_defensive',
+            'rating_anchor',
+            'rating_creative',
+            'rating_attacking',
+            'play_style',
+            'play_style_id',
+            'player_type',
+            'twitter_card',
+            'twitter_description',
+            'twitter_image',
+            'twitter_title',
+            'og_description',
+            'og_image',
+            'og_title',
+            'created',
+            'modified',
+            'likes',
+            'is_online',
+            'browser_title',
+            'meta_description',
+            'sitemap_changefreq',
+            'sitemap_priority',
+            'robots_archive',
+            'robots_follow',
+            'robots_index',
+            'title',
+            'short_title',
+            'image',
+            'image_sm',
+            'image_md',
+            'image_lg',
+            'image_special_md_totw',
+            'image_special_lg_totw',
+            'height',
+            'weight',
+            'nation__page',
+            'nation__cached_url',
+            'nation__average_rating',
+            'nation__total_players',
+            'nation__total_bronze',
+            'nation__total_silver',
+            'nation__total_gold',
+            'nation__total_legends',
+            'nation__total_totw',
+            'nation__total_special',
+            'nation__pack_weight',
+            'nation__created',
+            'nation__modified',
+            'nation__browser_title',
+            'nation__is_online',
+            'nation__meta_description',
+            'nation__sitemap_priority',
+            'nation__sitemap_changefreq',
+            'nation__robots_index',
+            'nation__robots_follow',
+            'nation__robots_archive',
+            'nation__og_title',
+            'nation__og_description',
+            'nation__og_image_id',
+            'nation__twitter_card',
+            'nation__twitter_title',
+            'nation__twitter_description',
+            'nation__twitter_image_id',
+            'nation__slug',
+            'nation__title',
+            'nation__short_title',
+            'league__page',
+            'league__cached_url',
+            'league__average_rating',
+            'league__total_players',
+            'league__total_bronze',
+            'league__total_silver',
+            'league__total_gold',
+            'league__total_legends',
+            'league__total_totw',
+            'league__total_special',
+            'league__created',
+            'league__modified',
+            'league__browser_title',
+            'league__is_online',
+            'league__meta_description',
+            'league__sitemap_priority',
+            'league__sitemap_changefreq',
+            'league__robots_index',
+            'league__robots_follow',
+            'league__robots_archive',
+            'league__og_title',
+            'league__og_description',
+            'league__og_image_id',
+            'league__twitter_card',
+            'league__twitter_title',
+            'league__twitter_description',
+            'league__twitter_image_id',
+            'league__slug',
+            'league__title',
+            'league__short_title',
+            'league__nation',
+            'club__page',
+            'club__cached_url',
+            'club__average_rating',
+            'club__total_players',
+            'club__total_bronze',
+            'club__total_silver',
+            'club__total_gold',
+            'club__total_legends',
+            'club__total_totw',
+            'club__total_special',
+            'club__created',
+            'club__modified',
+            'club__browser_title',
+            'club__is_online',
+            'club__meta_description',
+            'club__sitemap_priority',
+            'club__sitemap_changefreq',
+            'club__robots_index',
+            'club__robots_follow',
+            'club__robots_archive',
+            'club__og_title',
+            'club__og_description',
+            'club__og_image_id',
+            'club__twitter_card',
+            'club__twitter_title',
+            'club__twitter_description',
+            'club__twitter_image_id',
+            'club__slug',
+            'club__title',
+            'club__short_title',
+            'club__league',
+            'page__page__is_online',
+            'page__page__browser_title',
+            'page__page__meta_description',
+            'page__page__sitemap_priority',
+            'page__page__sitemap_changefreq',
+            'page__page__robots_index',
+            'page__page__robots_follow',
+            'page__page__robots_archive',
+            'page__page__og_title',
+            'page__page__og_description',
+            'page__page__og_image_id',
+            'page__page__twitter_card',
+            'page__page__twitter_title',
+            'page__page__twitter_description',
+            'page__page__twitter_image_id',
+            'page__page__title',
+            'page__page__short_title',
+            'page__page__left',
+            'page__page__right',
+            'page__page__is_content_object',
+            'page__page__country_group_id',
+            'page__page__owner_id',
+            'page__page__publication_date',
+            'page__page__expiry_date',
+            'page__page__in_navigation',
+            'page__page__requires_authentication',
+            'page__page__hide_from_anonymous')
         # .defer('first_name', 'last_name', 'common_name', 'english_names', 'ea_id_base', 'image', 'image_sm',
         #        'image_md', 'image_lg', 'image_special_md_totw', 'image_special_lg_totw', 'position_full',
         #        'position_line', 'play_style', 'play_style_id', 'height', 'weight', 'birth_date', 'acceleration',
@@ -214,6 +375,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
     modified = models.DateTimeField(auto_now=True)
 
     class Meta:
+        default_manager_name = 'objects'
         ordering = ['-rating', 'name']
         verbose_name = 'Player'
         verbose_name_plural = 'Players'
@@ -514,10 +676,10 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
 
     def get_variants(self):
         if self.color == 'legend':
-            return Player.objects.filter(color='legend', slug=self.slug)
+            return Player.cards.filter(color='legend', slug=self.slug)
 
         # Get all the different versions of the base card
-        return Player.objects.filter(ea_id_base=self.ea_id_base).exclude(id=self.id)
+        return Player.cards.filter(ea_id_base=self.ea_id_base).exclude(id=self.id)
 
     def get_chemistry_players(self, amount=None):
         # We only need to get certain positions as not all positions can link with other positions
@@ -542,7 +704,7 @@ class Player(PageBase):  # pylint: disable=too-many-public-methods, too-many-ins
             'LF': ['CB', 'LB', 'LWB', 'CDM', 'CM', 'CAM', 'CF', 'ST', 'LM', 'LW', 'LF'],
         }
 
-        initial_qs = Player.objects.filter(position__in=position_schema[self.position])
+        initial_qs = Player.cards.filter(position__in=position_schema[self.position])
 
         perfect_chem = initial_qs.filter(club=self.club, nation=self.nation).exclude(ea_id_base=self.ea_id_base)
         strong_chem = initial_qs.filter(
@@ -654,7 +816,7 @@ class PlayerRating(models.Model):
     downvotes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return f"{self.player}'s rating"
+        return f"'{self.player}'s rating'"
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         self.player.likes = self.score
@@ -719,11 +881,11 @@ class Vote(models.Model):
         unique_together = ['user', 'rating']
 
     def __str__(self):
-        return f"{self.user}'s rating for {self.rating.player}"
+        return f"'{self.user}'s rating for {self.rating.player}'"
 
 
 def get_default_players_page():
-    """Returns the default players page."""
+    '''Returns the default players page.'''
     try:
         return Page.objects.filter(
             content_type=ContentType.objects.get_for_model(Players),
@@ -733,7 +895,7 @@ def get_default_players_page():
 
 
 def get_default_player_page():
-    """Returns the default player page for the site."""
+    '''Returns the default player page for the site.'''
     page = get_default_players_page()
 
     if page:

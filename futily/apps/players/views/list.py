@@ -17,6 +17,7 @@ from futily.apps.views import BreadcrumbsMixin, PlayerFilterSorted
 class PlayerList(BreadcrumbsMixin, FormMixin, ListView):
     form_class = PlayerListForm
     model = Player
+    queryset = Player.cards.all()
     paginate_by = 30
     success_url = '/'
 

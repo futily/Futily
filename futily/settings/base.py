@@ -290,7 +290,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'match_extension': '.html',
-            'match_regex': r'^(?!admin/|django_comments_xtd/|reversion/|registration/|debug_toolbar/).*',
+            'match_regex': r'^(?!admin/|django_comments_xtd/|reversion/|registration/|silk/|debug_toolbar/).*',
             'app_dirname': 'templates',
             'newstyle_gettext': True,
             'extensions': DEFAULT_EXTENSIONS + [
